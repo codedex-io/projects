@@ -19,7 +19,9 @@ _**Prereq:** Python fundamentals._
 
 So you want to learn about making data visualizations, huh? Well, you’re in the right spot!
 
-Data visualization is translating data into a visual representation to make it easier on the human eye. It is super important in our current world as it makes data more accessible and digestible. [Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. In this tutorial, we will be looking at YouTube data. We will be looking at subscriber counts and types of video categories. Let’s get into it (yuh)!
+Data visualization is translating data into a visual representation to make it easier on the human eye. It is super important in our current world as it makes data more accessible and digestible. [Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. In this tutorial, we will be looking at YouTube data. We will be looking at subscriber counts and types of video categories. 
+
+Let’s get into it (yuh)!
 
 ## [#](#-50-ideas) Setting Up
 
@@ -71,7 +73,9 @@ After we do this, we will use `fig.show`, and you should see something like this
 
 We are going to do the same thing we did before, but this time we are going to create a pie chart. For this pie chart, we are going to analyze the different video categories the top channel belong to.
 
-All we need to do is replace fig = px.histogram(df, x="total_bill") with fig=px.pie(df2, values='subscribers\xa0', names='category\xa0', title="YouTube Categories")We have the same situation where we declare our dataframe. However, this time we need to declare our values and names. For this part, you would use the variable with numeric values for the values variable and a string for the names variable. Finally, you need to name your graph. Obviously! You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories” You should end up with something like this!
+All we need to do is replace `fig = px.histogram(df, x="total_bill")` with `fig=px.pie(df2, values='subscribers\xa0', names='category\xa0', title="YouTube Categories")`. We have the same situation where we declare our dataframe. However, this time we need to declare our values and names. For this part, you would use the variable with numeric values for the values variable and a string for the names variable. Finally, you need to name your graph. Obviously! You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories”. 
+
+You should end up with something like this!
 
 ![pie-chart](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/pie-chart.png)
 
