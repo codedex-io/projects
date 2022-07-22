@@ -31,7 +31,7 @@ Once you have checked this, pull up the Plotly Express docs page. It will come i
 
 First things first (I’m the realest), we are going to import our data into our notebook. To do this, you will type in `from google.colab import files`. We do this because we are not using a standard Jupyter Notebook. Then, we will put in `uploaded=files.upload()`. This function lets our notebook know that we are preparing to bring in our data. You should have something like this!
 
-![import data](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-data.png?token=GHSAT0AAAAAABJ4ZJPMZQNZJDIB7PIORC6SYW2IENA)
+![import data](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-data.png)
 
 After that, you will need to do `import io`. This allows us to work with file related imports and output operations.
 
@@ -41,7 +41,7 @@ To do data analytics in Python, we need to import Pandas. After importing io, we
 
 You should have the following after completing the steps above:
 
-![import pandas](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-pandas.png?token=GHSAT0AAAAAABJ4ZJPNEFXY2MUZD3UN2RBGYW2IEXA)
+![import pandas](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-pandas.png)
 
 ## [#](#-50-ideas) Make a Histogram!
 
@@ -65,7 +65,7 @@ Alright, let’s break this down. First, we need to declare to variable fig. fig
 
 After we do this, we will use `fig.show`, and you should see something like this!
 
-![histogram](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/histogram.png?token=GHSAT0AAAAAABJ4ZJPMX54QPLNJHQ5UL5CSYW2IFFA)
+![histogram](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/histogram.png)
 
 ## [#](#-50-ideas) Make a Pie Chart!
 
@@ -73,7 +73,7 @@ We are going to do the same thing we did before, but this time we are going to c
 
 All we need to do is replace fig = px.histogram(df, x="total_bill") with fig=px.pie(df2, values='subscribers\xa0', names='category\xa0', title="YouTube Categories")We have the same situation where we declare our dataframe. However, this time we need to declare our values and names. For this part, you would use the variable with numeric values for the values variable and a string for the names variable. Finally, you need to name your graph. Obviously! You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories” You should end up with something like this!
 
-![pie-chart](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/pie-chart.png?token=GHSAT0AAAAAABJ4ZJPMUMIL2A54JAZ6MUQAYW2IFOQ)
+![pie-chart](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/pie-chart.png)
 
 ## [#](#-50-ideas) Wrapping Up
 
