@@ -51,13 +51,13 @@ Let’s kick things off with our histogram.
 
 Normally, others will import their library during setup. However, I like to have my imports and graph code together. Therefore, we are going to input `import plotly express as px`. `px` will serve as the alias we will use in this portion of the process. After you have imported Plotly Express, we will be ready to start on our histogram!
 
-```py
+```python
 import plotly.express as px
 ```
 
 Creating a histogram in Plotly Express is so easy. You know how we create them? Drum roll please…
 
-```py
+```python
 fig = px.histogram(df2, x="subscribers\xa0")
 ```
 
