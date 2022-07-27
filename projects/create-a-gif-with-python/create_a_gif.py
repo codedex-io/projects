@@ -3,7 +3,7 @@
 
 import imageio
 
-filenames = ["team-pic1.png", "team-pic2.png"]
+filenames = ['team-pic1.png', 'team-pic2.png']
 images = [ ]
 
 for filename in filenames:
