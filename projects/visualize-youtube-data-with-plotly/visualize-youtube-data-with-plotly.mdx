@@ -14,44 +14,70 @@ tags:
 
 ![Title Image](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/header.png)
 
-_**Prereq:** Python fundamentals._  
-_**Versions:** Python 3.10._  
-_**Time:** 1 Hour_  
+**Prerequisites:** Python fundamentals, Microsoft Excel  
+**Versions:** Python 3.10, Plotly 5.9  
+**Time:** 1 Hour  
 
 
 ## [#](#-introduction) Introduction
 
-So you want to learn about making data visualizations, huh? Well, you’re in the right spot!
+So you want to learn about making data visualizations, huh? Well, you’re in the right spot! 
 
-Data visualization is translating data into a visual representation to make it easier on the human eye. It is super important in our current world as it makes data more accessible and digestible. [Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. In this tutorial, we will be looking at YouTube data. We will be looking at subscriber counts and types of video categories. 
+Data visualization is translating data into a visual representation to make it easier on the human eye. It makes communication of complex ideas more effective, quick and easy to follow. It is super important as it makes data more accessible and digestible.
+
+[Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. Plotly Express is an easy-to-use, high level module that makes visualizing data simple. Plotly was actually the first library I used when I started my journey in data!
+
+In this tutorial, we will be creating data visualizations of YouTube data using Python and Plotly Express. We will be looking at subscriber counts, types of video categories, and the different years creators start YouTubing. 
 
 Let’s get into it (yuh)!
 
+
 ## [#](#-50-ideas) Setting Up
 
-First, visit colab.google.com and start a new notebook. After that, make sure you have the latest version of Python on your machine. You can check this by typing `$ python --version` in Windows or the terminal on Mac and Linux. At the time of this article, you should be running Python version 3.10.
+First, visit [colab.research.google.com](https://research.google.com/colaboratory) and start a new notebook. 
 
-Once you have checked this, pull up the Plotly Express docs page. It will come in handy while working. Finally, download the dataset used for this tutorial down below. It would not be a data visualization without your data, obviously!
+After that, make sure you have the latest version of Python on your machine. You can check this by typing `$ python --version` in Windows command prompt or the terminal on Mac and Linux. At the time this article was written, you should be running Python version 3.10. 
 
-Dataset: [https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data)
+Once you have checked this, pull up the [Plotly Express docs page](https://plotly.com/python/plotly-express). It will come in handy while working. Finally, download the dataset used for this tutorial from down below. It would not be a data visualization without your data, obviously!
+
+### About Our Data
+
+For this tutorial, we will be using a dataset from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data)! It contains data about the top YouTube channels. There are seven columns in this dataset. Lucky us! 
+
+The columns are as follows:
+
+- `rank`: Rank of the channel as per number of subscribers they have
+- `youtuber`: Channel name
+- `subscribers`: Number of subscribers
+- `video views`: Number for which all videos have been watched collectively
+- `video count`: Number of videos uploaded
+- `category`: Channel genre
+- `started`: Year when the channel was started
+
+We have made acquaintance with our dataset. Now, let’s jump into some visualizations!
+
 
 ### [##](##-level-1) Importing Your Data
 
-First things first (I’m the realest), we are going to import our data into our notebook. To do this, you will type in `from google.colab import files`. We do this because we are not using a standard Jupyter Notebook. Then, we will put in `uploaded=files.upload()`. This function lets our notebook know that we are preparing to bring in our data. You should have something like this!
+First things first (I’m the realest), we are going to import our data into our notebook. After downloading your dataset, you should return to your handy dandy Google Colab notebook. Once you make it back, go ahead and input `from google.colab import files`. After that, type in `uploaded=files.upload()`. You will be prompted to upload files from your computer. Look in your local drive for the dataset and upload the file. 
+
+You should have something like this!
 
 ![import data](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-data.png)
 
-After that, you will need to do `import io`. This allows us to work with file related imports and output operations.
+After that, you will need to do `import io`. Doing this will let us import our data into a dataframe and work with file related input/output operations.
 
 ### [##](##-level-2) Importing Pandas and Declaring Our Dataframe
 
-To do data analytics in Python, we need to import Pandas. After importing io, we will `import pandas as pd`. `pd` serves as the alias we are working under. Once you have done that, we need to declare our dataframe. As analysts, we want to be quick creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to declare our dataframe to accomplish this goal. You can use any shorthand name, but for this example we will use df2. When we declared df2, we will ask pd, our alias, to read the dataset we uploaded. To do that, you would put in `df2=pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`
+Pandas is the most widely used open source Python package to perform data analytics. After importing io, we will `import pandas as pd`. pd serves as the alias for referring to the pandas package in our program. 
+
+Once you have done that, we need to create a pandas dataframe. A pandas dataframe stores the data as a 2-dimensional table in Python. As analysts, we want to be quick creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to create a dataframe to structure our data and easily report findings by converting them to a visualization. You can use any shorthand name for the dataframe variable, but for this example we will use `df2`. `df2` variable will store the dataframe returned from the `pd.read_excel()` method. To do that, you would put in `df2=pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`.
 
 You should have the following after completing the steps above:
 
 ![import pandas](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-pandas.png)
 
-## [#](#-50-ideas) Make a Histogram!
+## [#](#-50-ideas) Section 1: Make a Histogram
 
 For this exercise, we are going to be looking at two different graphs: a histogram to look at subscriber count and a pie chart to analyze video categories.
 
