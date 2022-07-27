@@ -27,12 +27,12 @@ Data visualization is translating data into a visual representation to make it e
 
 [Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. Plotly Express is an easy-to-use, high level module that makes visualizing data simple. Plotly was actually the first library I used when I started my journey in data!
 
-In this tutorial, we will be creating data visualizations of YouTube data using Python and Plotly Express. We will be looking at subscriber counts, types of video categories, and the different years creators start YouTubing. 
+In this tutorial, we will be creating data visualizations of YouTube data using Python and Plotly Express. We will be looking at subscriber counts, types of video categories, and the different years creators started YouTubing. 
 
 Let’s get into it (yuh)!
 
 
-## [#](#-50-ideas) Setting Up
+## [##](##-setting-up) Setting Up
 
 First, visit [colab.research.google.com](https://research.google.com/colaboratory) and start a new notebook. 
 
@@ -40,7 +40,7 @@ After that, make sure you have the latest version of Python on your machine. You
 
 Once you have checked this, pull up the [Plotly Express docs page](https://plotly.com/python/plotly-express). It will come in handy while working. Finally, download the dataset used for this tutorial from down below. It would not be a data visualization without your data, obviously!
 
-### About Our Data
+### [###](###-about-the-data) About the Data
 
 For this tutorial, we will be using a dataset from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data)! It contains data about the top YouTube channels. There are seven columns in this dataset. Lucky us! 
 
@@ -57,7 +57,7 @@ The columns are as follows:
 We have made acquaintance with our dataset. Now, let’s jump into some visualizations!
 
 
-### [##](##-level-1) Importing Your Data
+### [###](###-importing-your-data) Importing Your Data
 
 First things first (I’m the realest), we are going to import our data into our notebook. After downloading your dataset, you should return to your handy dandy Google Colab notebook. Once you make it back, go ahead and input `from google.colab import files`. After that, type in `uploaded=files.upload()`. You will be prompted to upload files from your computer. Look in your local drive for the dataset and upload the file. 
 
@@ -67,9 +67,9 @@ You should have something like this!
 
 After that, you will need to do `import io`. Doing this will let us import our data into a dataframe and work with file related input/output operations.
 
-### [##](##-level-2) Importing Pandas and Declaring Our Dataframe
+### [###](###-importing-pandas) Importing Pandas and Declaring Our DataFrame
 
-Pandas is the most widely used open source Python package to perform data analytics. After importing io, we will `import pandas as pd`. pd serves as the alias for referring to the pandas package in our program. 
+[Pandas](https://pandas.pydata.org) is the most widely used open source Python package to perform data analytics. After importing io, we will `import pandas as pd`. pd serves as the alias for referring to the pandas package in our program. 
 
 Once you have done that, we need to create a pandas dataframe. A pandas dataframe stores the data as a 2-dimensional table in Python. As analysts, we want to be quick creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to create a dataframe to structure our data and easily report findings by converting them to a visualization. You can use any shorthand name for the dataframe variable, but for this example we will use `df2`. `df2` variable will store the dataframe returned from the `pd.read_excel()` method. To do that, you would put in `df2=pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`.
 
@@ -77,39 +77,96 @@ You should have the following after completing the steps above:
 
 ![import pandas](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-pandas.png)
 
-## [#](#-50-ideas) Section 1: Make a Histogram
+## [##](##-make-a-histogram) Section 1: Make a Histogram
 
-For this exercise, we are going to be looking at two different graphs: a histogram to look at subscriber count and a pie chart to analyze video categories.
+For this section, we will be creating three different graphs: 
 
+- A histogram to look at subscriber count
+- A pie chart to analyze video categories
+- A box plot to analyze the different years people start YouTube.
+- 
 Let’s kick things off with our histogram.
 
-Normally, others will import their library during setup. However, I like to have my imports and graph code together. Therefore, we are going to input `import plotly express as px`. `px` will serve as the alias we will use in this portion of the process. After you have imported Plotly Express, we will be ready to start on our histogram!
+Normally, others will import their library during setup. However, I like to have my imports and graph code together. Therefore, we are going to import the Plotly Python package by writing `import plotly.express as px`. `px` will serve as the alias for the package in this portion of the process. After you have imported Plotly Express, we will be ready to start on our histogram!
+
+The import statement should be as follows:
 
 ```python
 import plotly.express as px
 ```
 
-Creating a histogram in Plotly Express is so easy. You know how we create them? Drum roll please…
+Creating a histogram in Plotly Express is so much easier than you think. Do you know how we create them? Drum roll please… 🥁
 
 ```python
-fig = px.histogram(df2, x="subscribers\xa0")
+fig = px.histogram(df2, x="subscribers\xa0", title="Subscriber Count")
 ```
 
-Alright, let’s break this down. First, we need to declare to variable `fig`. `fig` will allow us to work with the Plotly Express library. Remember `px` from earlier? We use it to let our notebook what type of graph we want shown. For example, we typed out px.histogram because we needed a histogram. Inside the parentheses, we have our dataframe (df2) and our x value we want to display. We are looking at subscriber count in this exercise.
+Alright, let’s break down this line of code.
 
-After we do this, we will use `fig.show`, and you should see something like this!
+First, we need to declare a variable `fig`. `fig` will allow us to work with the Plotly Express library that is accessible using the `px` alias. Remember `px` from earlier? We use it to determine the type of graph we want shown. For example, we typed out `px.histogram()` because we wanted to plot a histogram.
+
+The arguments passed in the method call are the dataframe `df2` and the `x` value that needs to be displayed in the histogram. The `x` value is the name of a column inside the dataframe `df2` whose histogram will be created in the notebook. Since, we are looking at subscriber count in this exercise, the `x` value will be the name of the column that contains the subscribers data in the DataFrame. 
+
+Finally, we need a name for our graph obviously. We do this through our `title` variable. Make sure you put quotation marks around them since they are considered a string. After we do this, we will use `fig.show()`, and the notebook should display something like this!
+
+```py
+import plotly.express as px
+
+fig = px.histogram(df2, x="subscribers\xa0", title="Subscriber Count")
+fig.show()
+```
 
 ![histogram](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/histogram.png)
 
-## [#](#-50-ideas) Make a Pie Chart!
+There is so much going on right now in the histogram, so let’s take it step by step.
 
-We are going to do the same thing we did before, but this time we are going to create a pie chart. For this pie chart, we are going to analyze the different video categories the top channel belong to.
+The first thing we want to do is pay attention to our x and y axes. On the x axis, we have our variable subscribers. In addition to our variables, we see that our number ranges are going up by 40M. In histograms, the bars show us frequency rather than a solid number of things. For our example, we can see there is a high frequency of YouTubers who have between 0 and 40 million subscribers. 
 
-All we need to do is replace `fig = px.histogram(df, x="total_bill")` with `fig=px.pie(df2, values='subscribers\xa0', names='category\xa0', title="YouTube Categories")`. We have the same situation where we declare our dataframe. However, this time we need to declare our values and names. For this part, you would use the variable with numeric values for the values variable and a string for the names variable. Finally, you need to name your graph. Obviously! You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories”. 
+Also, quick shout out to that channel all the way at the end who made it to 200 million ([T-Series](https://www.youtube.com/aashiqui2)). We already know their fan base is grinding.
+
+
+## [##](##-make-a-pie-chart) Section 2: Make a Pie Chart
+
+We are going to do the same thing we did before, but this time we are going to create a pie chart. For this pie chart, we are going to analyze the different video categories and the top channel they belong to. 
+
+All we need to do is replace `fig = px.histogram(df, x="subscribers\xa0")` with `fig=px.pie(df2, values="subscribers\xa0" names="category\xa", title="YouTube Categories")`. However, this time we need to pass the following arguments to our method call: `values` from our data that will represent a portion of the pie chart and `names` that will represent the names for those regions of the pie chart. For this part, you would need to use a column with numeric values for the values argument and a column with string values for the names variable.
+
+Finally, you need to name your graph. Obviously! You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories”. 
+
+That’s it. All that’s left now is to display the pie chart using the `fig.show()` method.
 
 You should end up with something like this!
 
+```py
+import plotly.express as px
+
+fig = px.pie(df2, values=”subscribers\xa0”, names=”category\xa”, title=”YouTube Categories”)
+fig.show()
+```
+
 ![pie-chart](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/pie-chart.png)
+
+Pie charts are very straightforward to read. The bigger the chuck, the greater quantity we have. We can see here that the top category in our dataset is Music. Coming in at number two is Entertainment.
+
+## [##](##-make-a-pie-chart) Section 3: Make a Pie Chart
+
+I hope you all aren’t too square to make a box plot. Box plots can show us how spread out our data is. For this example, we are going to use a box plot to analyze the different years people start YouTube. 
+
+Staying on the theme of keeping things simple. All we have to do to create our box plot is input the following: `px.box(df2, y="started\xa0", title= "Years Started")`
+
+This line follows the convention we have been using in this tutorial. First, we called our dataframe, `df2`. Then, we declared out `y` variable, `started\xa0`. Finishing things off, we name our graph “Years Started”. 
+
+And like before, the graph is complete but isn’t shown on the notebook page. So, to show the graph, we use `fig.show()` method.
+
+It should look something like this!
+
+```py
+import plotly.express as px
+
+fig = px.box(df2, y="started\xa0", title="Years Started")
+fig.show()
+```
+
 
 ## [#](#-50-ideas) Wrapping Up
 
