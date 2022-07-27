@@ -1,3 +1,6 @@
+# Create a GIF with Python 🎬
+# Sonny Li
+
 import imageio
 
 filenames = ["team-pic1.png", "team-pic2.png"]
