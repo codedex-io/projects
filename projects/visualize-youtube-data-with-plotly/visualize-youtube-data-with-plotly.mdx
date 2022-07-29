@@ -71,7 +71,7 @@ After that, you will need to do `import io`. Doing this will let us import our d
 
 [Pandas](https://pandas.pydata.org) is the most widely used open source Python package to perform data analytics. After importing io, we will `import pandas as pd`. pd serves as the alias for referring to the pandas package in our program. 
 
-Once you have done that, we need to create a pandas dataframe. A pandas dataframe stores the data as a 2-dimensional table in Python. As analysts, we want to be quick creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to create a dataframe to structure our data and easily report findings by converting them to a visualization. You can use any shorthand name for the dataframe variable, but for this example we will use `df2`. `df2` variable will store the dataframe returned from the `pd.read_excel()` method. To do that, you would put in `df2=pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`.
+Once you have done that, we need to create a pandas dataframe. A pandas dataframe stores the data as a 2-dimensional table in Python. As analysts, we want to be quick creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to create a dataframe to structure our data and easily report findings by converting them to a visualization. You can use any shorthand name for the dataframe variable, but for this example we will use `df2`. `df2` variable will store the dataframe returned from the `pd.read_excel()` method. To do that, you would put in `df2=pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`. This line reads our Excel sheet and returns it as a DataFrame.
 
 You should have the following after completing the steps above:
 
