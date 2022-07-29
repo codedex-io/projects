@@ -105,7 +105,7 @@ Alright, let’s break down this line of code.
 
 First, we need to declare a variable `fig`. `fig` will allow us to work with the Plotly Express library that is accessible using the `px` alias. Remember `px` from earlier? We use it to determine the type of graph we want shown. For example, we typed out `px.histogram()` because we wanted to plot a histogram.
 
-The arguments passed in the method call are the dataframe `df2` and the `x` value that needs to be displayed in the histogram. The `x` value is the name of a column inside the dataframe `df2` whose histogram will be created in the notebook. Since, we are looking at subscriber count in this exercise, the `x` value will be the name of the column that contains the subscribers data in the DataFrame. 
+The arguments passed in the method call are the dataframe `df2` and the `x` value that needs to be displayed in the histogram. Since, we are looking at subscriber count in this exercise, the `x` value will be the name of the column that contains the subscribers data in the DataFrame. 
 
 Finally, we need a name for our graph obviously. We do this through our `title` variable. Make sure you put quotation marks around them since they are considered a string. After we do this, we will use `fig.show()`, and the notebook should display something like this!
 
