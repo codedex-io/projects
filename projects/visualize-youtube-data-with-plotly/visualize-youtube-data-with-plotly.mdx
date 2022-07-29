@@ -150,9 +150,13 @@ Pie charts are very straightforward to read. The bigger the chuck, the greater q
 
 ## [##](##-make-a-pie-chart) Section 3: Make a Box Plot
 
-I hope you all aren’t too square to make a box plot. Box plots can show us how spread out our data is. For this example, we are going to use a box plot to analyze the different years people start YouTube. 
+I hope you all aren’t too square to make a box plot. Box plots can show us how spread out our data is. For this example, we are going to use a box plot to analyze the different years people start YouTube.
 
-Staying on the theme of keeping things simple. All we have to do to create our box plot is input the following: `px.box(df2, y="started\xa0", title= "Years Started")`
+Sticking to the theme of simplicity, all we have to do to create our box plot is input the following: 
+
+```py
+px.box(df2, y="started\xa0", title= "Years Started")
+```
 
 This line follows the convention we have been using in this tutorial. First, we called our dataframe, `df2`. Then, we declared out `y` variable, `started\xa0`. Finishing things off, we name our graph “Years Started”. 
 
