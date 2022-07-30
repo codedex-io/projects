@@ -133,7 +133,7 @@ We are going to do the same thing we did before, but this time we are going to c
 
 All we need to do is replace `fig = px.histogram(df, x="subscribers\xa0")` with `fig=px.pie(df2, values="subscribers\xa0" names="category\xa", title="YouTube Categories")`. However, this time we need to pass the following arguments to our method call: `values` from our data that will represent a portion of the pie chart and `names` that will represent the names for those regions of the pie chart. For this part, you would need to use a column with numeric values for the values argument and a column with string values for the names variable.
 
-Finally, you need to name your graph. Obviously! You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories”. 
+Finally, you need to name your graph. You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories”. 
 
 That’s it. All that’s left now is to display the pie chart using the `fig.show()` method.
 
@@ -148,7 +148,7 @@ fig.show()
 
 ![pie-chart](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/pie-chart.png)
 
-Pie charts are very straightforward to read. The bigger the chuck, the greater quantity we have. We can see here that the top category in our dataset is Music. Coming in at number two is Entertainment.
+Pie charts are very straightforward to read. The bigger the chunk, the greater quantity we have. We can see here that the top category in our dataset is Music. Coming in at number two is Entertainment.
 
 ## [##](##-make-a-pie-chart) Section 3: Make a Box Plot
 
