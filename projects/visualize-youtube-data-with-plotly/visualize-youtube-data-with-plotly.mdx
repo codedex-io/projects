@@ -23,28 +23,28 @@ tags:
 
 So you want to learn about making data visualizations, huh? Well, you’re in the right spot! 
 
-Data visualization is translating data into a visual representation to make it easier on the human eye. It makes communication of complex ideas more effective, quick and easy to follow. It is super important as it makes data more accessible and digestible.
+Data visualization is translating data into a visual representation to make it easier on the human eye. It makes communicating complex ideas more effective, quick, and easy to follow. It is super important as it makes data more accessible and digestible.
 
-[Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. Plotly Express is an easy-to-use, high level module that makes visualizing data simple. Plotly was actually the first library I used when I started my journey in data!
+[Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. It is an easy-to-use, high-level module that makes visualizing data simple. Plotly was actually the first library I used when I started my journey in data!
 
-In this tutorial, we will be creating data visualizations of YouTube data using Python and Plotly Express. We will be looking at subscriber counts, types of video categories, and the different years creators started YouTubing. 
+In this tutorial, we will create data visualizations of YouTube data using Python and Plotly Express. We will look at subscriber counts, types of video categories, and the different years that creators started YouTubing. 
 
 Let’s get into it (yuh)!
 
 
 ## [##](##-setting-up) Setting Up
 
-First, visit [colab.research.google.com](https://research.google.com/colaboratory) and start a new notebook. 
+First, visit [colab.research.google.com](https://research.google.com/colaboratory) and start a "New notebook". 
 
-After that, make sure you have the latest version of Python on your machine. You can check this by typing `$ python --version` in Windows command prompt or the terminal on Mac and Linux. At the time this article was written, you should be running Python version 3.10. 
+After that, make sure you have the latest version of Python on your machine. You can check this by typing `$ python --version` in the Windows command prompt or the terminal on Mac and Linux. You should be running Python version 3.10 or above.
 
 Once you have checked this, pull up the [Plotly Express docs page](https://plotly.com/python/plotly-express). It will come in handy while working. Finally, download the dataset used for this tutorial from down below. It would not be a data visualization without your data, obviously!
 
 ### [###](###-about-the-data) About the Data
 
-For this tutorial, we will be using a dataset from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data)! It contains data about the top YouTube channels. There are seven columns in this dataset. Lucky us! 
+For this tutorial, we will be using a dataset called "Most Subscribed YouTube Channels" from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data). As the name suggests, it contains data about the top YouTube channels. 
 
-The columns are as follows:
+There are seven columns:
 
 - `rank`: Rank of the channel as per number of subscribers they have
 - `youtuber`: Channel name
@@ -59,20 +59,24 @@ We have made acquaintance with our dataset. Now, let’s jump into some visualiz
 
 ### [###](###-importing-your-data) Importing Your Data
 
-First things first (I’m the realest), we are going to import our data into our notebook. After downloading your dataset, you should return to your handy dandy Google Colab notebook. Once you make it back, go ahead and input `from google.colab import files`. After that, type in `uploaded=files.upload()`. You will be prompted to upload files from your computer. Look in your local drive for the dataset and upload the file. 
+First things first (I’m the realest), we are going to import our data into our notebook. After downloading your dataset, you should return to your handy dandy Google Colab notebook. 
+
+Once you make it back, go ahead and input `from google.colab import files`. 
+
+After that, type in `uploaded = files.upload()`. You will be prompted to upload files from your computer. Look in your local drive for the dataset and upload the file. 
 
 You should have something like this!
 
 ![import data](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-data.png)
 
-After that, you will need to do `import io`. Doing this will let us import our data into a dataframe and work with file related input/output operations.
+After that, you will need to do `import io`. Doing this will let us import our data into a DataFrame and work with file-related input/output operations.
 
 
 ### [###](###-importing-pandas) Importing Pandas and Declaring Our DataFrame
 
-[Pandas](https://pandas.pydata.org) is the most widely used open source Python package to perform data analytics. After importing io, we will `import pandas as pd`. pd serves as the alias for referring to the pandas package in our program. 
+[Pandas](https://pandas.pydata.org) is the most widely used open source Python package to perform data analytics. After importing `io`, we will `import pandas as pd`. `pd` serves as the alias (nickname) for referring to the Pandas package in our program. 
 
-Once you have done that, we need to create a pandas dataframe. A pandas dataframe stores the data as a 2-dimensional table in Python. As analysts, we want to be quick creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to create a dataframe to structure our data and easily report findings by converting them to a visualization. You can use any shorthand name for the dataframe variable, but for this example we will use `df2`. `df2` variable will store the dataframe returned from the `pd.read_excel()` method. To do that, you would put in `df2=pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`. This line reads our Excel sheet and returns it as a DataFrame.
+Once you have done that, we need to create a pandas dataframe. A pandas dataframe stores the data as a 2-dimensional table in Python. As analysts, we want to be quick creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to create a dataframe to structure our data and easily report findings by converting them to a visualization. You can use any shorthand name for the dataframe variable, but for this example we will use `df2`. `df2` variable will store the dataframe returned from the `pd.read_excel()` method. To do that, you would put in `df2 = pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`. This line reads our Excel sheet and returns it as a DataFrame.
 
 You should have the following after completing the steps above:
 
@@ -105,9 +109,9 @@ fig = px.histogram(df2, x="subscribers\xa0", title="Subscriber Count")
 
 Alright, let’s break down this line of code.
 
-First, we need to declare a variable `fig`. `fig` will allow us to work with the Plotly Express library that is accessible using the `px` alias. Remember `px` from earlier? We use it to determine the type of graph we want shown. For example, we typed out `px.histogram()` because we wanted to plot a histogram.
+First, we need to declare a variable `fig`. `fig` will allow us to work with the Plotly Express library that is accessible using the `px` alias. Remember `px` from earlier? We use it to determine the type of graph we want to be shown. For example, we typed out `px.histogram()` because we wanted to plot a histogram.
 
-The arguments passed in the method call are the dataframe `df2` and the `x` value that needs to be displayed in the histogram. Since, we are looking at subscriber count in this exercise, the `x` value will be the name of the column that contains the subscribers data in the DataFrame. 
+The arguments passed in the method call are the DataFrame `df2` and the `x` value that needs to be displayed in the histogram. Since, we are looking at subscriber count in this exercise, the `x` value will be the name of the column that contains the subscribers data in the DataFrame. 
 
 Finally, we need a name for our graph obviously. We do this through our `title` variable. Make sure you put quotation marks around them since they are considered a string. After we do this, we will use `fig.show()`, and the notebook should display something like this!
 
