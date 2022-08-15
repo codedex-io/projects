@@ -1,7 +1,7 @@
 ---
 title: Visualize YouTube Data with Plotly
 author: miracle
-datePublished: 2022-07-01
+datePublished: 2022-08-15
 description: Learn how to create data visualizations by making graphs from YouTube data with Plotly Express in Python
 tags:
   - beginner
@@ -16,7 +16,7 @@ tags:
 
 **Prerequisites:** Python fundamentals, Microsoft Excel  
 **Versions:** Python 3.10, Plotly 5.9  
-**Time:** 1 Hour  
+**Time:** 60 minutes
 
 
 ## [#](#-introduction) Introduction
@@ -27,7 +27,7 @@ Data visualization is translating data into a visual representation to make it e
 
 [Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. It is an easy-to-use, high-level module that creates common figures such as line graphs and scatter plots. Plotly was actually the first library I used when I started my journey in data!
 
-In this tutorial, we will create data visualizations of YouTube data using Python and Plotly Express. We will use a histogram to look at subscriber counts, a pie chart to compare video categories, and a box plot to find patterns in the years that creators started YouTubing. 
+In this tutorial, we will create data visualizations of YouTube data using Python, Plotly Express, and Google Colab. We will use a histogram to look at subscriber counts, a pie chart to compare video categories, and a box plot to find patterns in the years that creators started YouTubing. 
 
 Let’s get into it (yuh)!
 
@@ -42,7 +42,7 @@ Once you have checked this, pull up the [Plotly Express docs page](https://plotl
 
 ### [###](###-about-the-data) About the Data
 
-For this tutorial, we will be using a dataset called "Most Subscribed YouTube Channels" from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data).
+For this tutorial, we will be using a dataset named "Most Subscribed YouTube Channels" from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data). The file is called **most_subscribed_youtube_channels.csv**.
 
 As the name suggests, it contains data about the top 1000 YouTube channels. 
 
@@ -67,9 +67,15 @@ We have made acquaintance with our dataset. Now, let’s jump into some visualiz
 
 First things first (I’m the realest), we are going to import our data into our notebook. After downloading your dataset, you should return to your handy dandy Google Colab notebook. 
 
-Once you make it back, go ahead and input `from google.colab import files`. 
+Inside the notebook, go ahead and input the following:
 
-After that, type in `uploaded = files.upload()`. You will be prompted to upload files from your computer. Look in your local drive for the dataset and upload the file. 
+```py
+from google.colab import files
+
+uploaded = files.upload()
+```
+
+Press the play button and you will be prompted to upload files from your computer. Look in your local drive for the dataset (**most_subscribed_youtube_channels.csv**) and upload the file. 
 
 You should have something like this!
 
