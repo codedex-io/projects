@@ -25,9 +25,9 @@ So you want to learn about making data visualizations, huh? Well, you’re in th
 
 Data visualization is translating data into a visual representation to make it easier on the human eye. It makes communicating complex ideas more effective, quick, and easy to follow. It is super important as it makes data more accessible and digestible.
 
-[Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. It is an easy-to-use, high-level module that makes visualizing data simple. Plotly was actually the first library I used when I started my journey in data!
+[Plotly Express](https://plotly.com/python/plotly-express) makes it easy to begin learning this process. It is an easy-to-use, high-level module that creates common figures such as line graphs and scatter plots. Plotly was actually the first library I used when I started my journey in data!
 
-In this tutorial, we will create data visualizations of YouTube data using Python and Plotly Express. We will look at subscriber counts, types of video categories, and the different years that creators started YouTubing. 
+In this tutorial, we will create data visualizations of YouTube data using Python and Plotly Express. We will use a histogram to look at subscriber counts, a pie chart to compare video categories, and a box plot to find patterns in the years that creators started YouTubing. 
 
 Let’s get into it (yuh)!
 
@@ -38,21 +38,27 @@ First, visit [colab.research.google.com](https://research.google.com/colaborator
 
 After that, make sure you have the latest version of Python on your machine. You can check this by typing `$ python --version` in the Windows command prompt or the terminal on Mac and Linux. You should be running Python version 3.10 or above.
 
-Once you have checked this, pull up the [Plotly Express docs page](https://plotly.com/python/plotly-express). It will come in handy while working. Finally, download the dataset used for this tutorial from down below. It would not be a data visualization without your data, obviously!
+Once you have checked this, pull up the [Plotly Express docs page](https://plotly.com/python/plotly-express). It will come in handy while working. Finally, download the dataset used for this tutorial from down below. There would not be a data visualization without some data, obviously!
 
 ### [###](###-about-the-data) About the Data
 
-For this tutorial, we will be using a dataset called "Most Subscribed YouTube Channels" from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data). As the name suggests, it contains data about the top YouTube channels. 
+For this tutorial, we will be using a dataset called "Most Subscribed YouTube Channels" from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data).
+
+As the name suggests, it contains data about the top 1000 YouTube channels. 
 
 There are seven columns:
 
-- `rank`: Rank of the channel as per number of subscribers they have
+- `rank`: Rank of the channel as per number of subscribers they have (1-1000)
 - `youtuber`: Channel name
-- `subscribers`: Number of subscribers
+- `subscribers`: Number of followers
 - `video views`: Number for which all videos have been watched collectively
 - `video count`: Number of videos uploaded
 - `category`: Channel genre
 - `started`: Year when the channel was started
+
+It looks something like:
+
+![Dataset](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/dataset-screenshot.png)
 
 We have made acquaintance with our dataset. Now, let’s jump into some visualizations!
 
@@ -76,7 +82,7 @@ After that, you will need to do `import io`. Doing this will let us import our d
 
 [Pandas](https://pandas.pydata.org) is the most widely used open source Python package to perform data analytics. After importing `io`, we will `import pandas as pd`. `pd` serves as the alias (nickname) for referring to the Pandas package in our program. 
 
-Once you have done that, we need to create a pandas dataframe. A pandas dataframe stores the data as a 2-dimensional table in Python. As analysts, we want to be quick creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to create a dataframe to structure our data and easily report findings by converting them to a visualization. You can use any shorthand name for the dataframe variable, but for this example we will use `df2`. `df2` variable will store the dataframe returned from the `pd.read_excel()` method. To do that, you would put in `df2 = pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`. This line reads our Excel sheet and returns it as a DataFrame.
+Once you have done that, we need to create a Pandas DataFrame. A Pandas DataFrame stores the data as a 2-dimensional table in Python. As analysts, we want to be quick in creating the graphs, so we can take our time analyzing and reporting our findings. Therefore, we have to create a DataFrame to structure our data and easily report findings by converting them into a visualization. You can use any shorthand name for the DataFrame variable, but for this example, we will use `df2`. `df2` variable will store the dataframe returned from the `pd.read_excel()` method. To do that, you would put in `df2 = pd.read_excel(io.BytesIO(uploaded['YouTube Data.xlsx']))`. This line reads our Excel sheet and returns it as a DataFrame.
 
 You should have the following after completing the steps above:
 
@@ -87,9 +93,9 @@ You should have the following after completing the steps above:
 
 For this section, we will be creating three different graphs: 
 
-- A histogram to look at subscriber count
-- A pie chart to analyze video categories
-- A box plot to analyze the different years people start YouTube.
+- A histogram to look at subscriber count.
+- A pie chart to analyze video categories.
+- A box plot to explore the different years people start YouTubing.
 
 Let’s kick things off with our histogram.
 
@@ -111,9 +117,9 @@ Alright, let’s break down this line of code.
 
 First, we need to declare a variable `fig`. `fig` will allow us to work with the Plotly Express library that is accessible using the `px` alias. Remember `px` from earlier? We use it to determine the type of graph we want to be shown. For example, we typed out `px.histogram()` because we wanted to plot a histogram.
 
-The arguments passed in the method call are the DataFrame `df2` and the `x` value that needs to be displayed in the histogram. Since, we are looking at subscriber count in this exercise, the `x` value will be the name of the column that contains the subscribers data in the DataFrame. 
+The arguments passed in the method call are the DataFrame `df2` and the `x` value that needs to be displayed in the histogram. Since we are looking at subscriber count in this exercise, the `x` value will be the name of the column that contains the subscribers data in the DataFrame. 
 
-Finally, we need a name for our graph obviously. We do this through our `title` variable. Make sure you put quotation marks around them since they are considered a string. After we do this, we will use `fig.show()`, and the notebook should display something like this!
+Finally, we need a name for our graph. We do this through our `title` variable. Make sure you put quotation marks around them since they are considered a string. After we do this, we will use `fig.show()`, and the notebook should display something like this!
 
 ```py
 import plotly.express as px
@@ -126,9 +132,9 @@ fig.show()
 
 There is so much going on right now in the histogram, so let’s take it step by step.
 
-The first thing we want to do is pay attention to our x and y axes. On the x axis, we have our variable subscribers. In addition to our variables, we see that our number ranges are going up by 40M. In histograms, the bars show us frequency rather than a solid number of things. For our example, we can see there is a high frequency of YouTubers who have between 0 and 40 million subscribers. 
+The first thing we want to do is pay attention to our x and y axes. On the x axis, we have our variable subscribers. In addition to our variables, we see that our number ranges are going up by 40M. In histograms, the bars show us frequency rather than a solid number of things. For our example, we can see a high frequency of YouTubers with between 0 and 40 million subscribers. 
 
-Also, quick shout out to that channel all the way at the end who made it to 200 million ([T-Series](https://www.youtube.com/aashiqui2)). We already know their fan base is grinding.
+Also, quick shout out to the channel all the way at the end that made it to 200 million ([T-Series](https://www.youtube.com/aashiqui2)). We already know their fan base is grinding.
 
 
 ## [##](##-make-a-pie-chart) Section 2: Make a Pie Chart
@@ -164,7 +170,7 @@ Sticking to the theme of simplicity, all we have to do to create our box plot is
 px.box(df2, y="started\xa0", title= "Years Started")
 ```
 
-This line follows the convention we have been using in this tutorial. First, we called our dataframe, `df2`. Then, we declared out `y` variable, `started\xa0`. Finishing things off, we name our graph “Years Started”. 
+This line follows the convention we have been using in this tutorial. First, we called our DataFrame, `df2`. Then, we declared out `y` variable, `started\xa0`. Finishing things off, we name our graph “Years Started”. 
 
 And like before, the graph is complete but isn’t shown on the notebook page. So, to show the graph, we use `fig.show()` method.
 
@@ -183,14 +189,15 @@ Like that one Tegan and Sara song, let’s get a little bit closer with our grap
 
 - In the lower fence, we have the year 2005. This conveys that the earliest top channels got started in 2005. Talk about being there from the very start! 
 - The median, 2012, represents the average year our top channels started their career. Ah, 2012. What a time to be alive.
-- Our maximum value was 2018. This was the latest year a top channel in our dataset started. As they always say, it's never too late to start your journey to the top!
+- Our maximum value was 2018. This was the latest year a top channel in our dataset started. As they always say, it's never too late to begin your journey to the top!
 
 ## [##](##-wrapping-up) Wrapping Up
 
 Congrats, you just created a data visualization analyzing the top dogs on YouTube! 
-Many people assume data visualization is such a complex thing, but it can be as easy as running a few lines of code. One piece of advice I would give to you is to practice using one type of library for your first few months of learning data visualizations. It will give you the opportunity to get the hang of things and learn about your preferences.
+Many people assume data visualization is such a complex thing, but it can be as easy as running a few lines of code. One piece of advice I would give you is to practice using one type of library for your first few months of learning data visualizations. It will give you the opportunity to get the hang of things and learn about your preferences.
 
 ### [###](###-additional-resources) Additional Resources:
 
 - Solution Code: https://colab.research.google.com/drive/10X7qNLzXYhr2rIUaG1rkC5NHKB31TYXf?usp=sharing
-- Dataset: https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data
+- Dataset on Kaggle: https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data
+- Dataset on GitHub: https://github.com/codedex-io/projects/blob/main/projects/visualize-youtube-data-with-plotly/most_subscribed_youtube_channels.csv
