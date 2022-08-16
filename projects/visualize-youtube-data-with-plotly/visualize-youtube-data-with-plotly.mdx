@@ -16,7 +16,7 @@ tags:
 
 **Prerequisites:** Python fundamentals, Microsoft Excel  
 **Versions:** Python 3.10, Plotly 5.9  
-**Read Time:** 60 minutes
+**Read Time:** 45 minutes
 
 ## [#](#-introduction) Introduction
 
@@ -39,7 +39,7 @@ After that, make sure you have the latest version of Python on your machine. You
 
 Once you have checked this, pull up the [Plotly Express docs page](https://plotly.com/python/plotly-express). It will come in handy while working. Finally, download the dataset used for this tutorial from down below. There would not be a data visualization without some data, obviously!
 
-### [##](##-about-the-data) About the Data
+### [##](##-about-the-data) About the Dataset
 
 For this tutorial, we will be using a dataset named "Most Subscribed YouTube Channels" from [Kaggle](https://www.kaggle.com). You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data). The file is called **most_subscribed_youtube_channels.csv**.
 
@@ -62,7 +62,7 @@ It looks something like:
 We have made acquaintance with our dataset. Now, let’s jump into some visualizations!
 
 
-### [##](##-importing-your-data) Importing Your Data
+### [##](##-importing-your-data) Importing the Data to Google Colab
 
 First things first (I’m the realest), we are going to import our data into our notebook. After downloading your dataset, you should return to your handy dandy Google Colab notebook. 
 
@@ -81,7 +81,7 @@ You should have something like this!
 ![import data](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-data.png)
 
 
-### [##](##-importing-pandas) Importing Pandas and Declaring Our DataFrame
+### [##](##-importing-pandas) Importing Pandas and Declaring a DataFrame
 
 [Pandas](https://pandas.pydata.org) is the most widely used open source Python package to perform data analytics. To use it, we will `import pandas as pd`. `pd` serves as the alias (nickname) for referring to the Pandas package in our program. 
 
@@ -118,10 +118,10 @@ For the next section, we will be creating three different graphs:
 2. A pie chart to analyze video categories.
 3. A box plot to explore the different years people start YouTubing.
 
-Let’s kick things off with our histogram!
+Let’s kick things off with the histogram!
 
 
-## [#](#-make-a-histogram) 1: Make a Histogram
+## [#](#section-1-make-a-histogram) Section 1: Make a Histogram
 
 Normally, people will import their library during setup. However, I like to have my imports and graph code together. Therefore, we are going to import the Plotly Python package by writing `import plotly.express as px`. `px` will serve as the alias for the package in this portion of the process. After you have imported Plotly Express, we will be ready to start on our histogram!
 
@@ -161,7 +161,7 @@ The first thing we want to do is pay attention to our axes. On the x-axis, we ha
 Also, quick shout out to the channel all the way at the end that made it to 200 million ([T-Series](https://www.youtube.com/aashiqui2)). We already know their fan base is grinding.
 
 
-## [#](#-make-a-pie-chart) 2: Make a Pie Chart
+## [#](#-section-2-make-a-pie-chart) Section 2: Make a Pie Chart
 
 We are going to do the same thing we did before, but this time we are going to create a pie chart. For this pie chart, we are going to analyze the different video categories and the top channel they belong to. 
 
@@ -184,7 +184,7 @@ fig.show()
 
 Pie charts are very straightforward to read. The bigger the chunk, the greater quantity we have. We can see here that the top category in our dataset is Music. Coming in at number two is Entertainment.
 
-## [#](#-make-a-box-plot) 3: Make a Box Plot
+## [#](#-section-3-make-a-box-plot) Section 3: Make a Box Plot
 
 I hope you all aren’t too square to make a box plot. Box plots can show us how spread out our data is. For this example, we are going to use a box plot to analyze the different years people start YouTube.
 
