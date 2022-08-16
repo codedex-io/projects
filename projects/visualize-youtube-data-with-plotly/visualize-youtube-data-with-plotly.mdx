@@ -94,7 +94,7 @@ import io
 
 Once you have done that, we need to create a Pandas DataFrame. A [Pandas DataFrame](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) stores data as a 2-dimensional table in Python. As analysts, we want to be quick in generating graphs, so we can take our time analyzing and reporting our findings. And DataFrames are a great way to structure our data; they are fast, easy to use, and integral to the Python data science ecosystem. You can use any shorthand name for the DataFrame variable, but for this example, we will use `df`. 
 
-The `df` variable will store the DataFrame returned from the `pd.read_csv()` method. To do that, you would put in `df = pd.read_csv(io.BytesIO(uploaded[file_name.csv]))`. This line reads our CSV (comma-separated value) file and returns it as a DataFrame.
+The `df` variable will store the DataFrame returned from the `pd.read_csv()` method. To do that, you would put in `pd.read_csv(io.BytesIO(uploaded[file_name.csv]))`. This line reads our CSV (comma-separated value) file and returns it as a DataFrame.
 
 And lastly, use the `display()` function to show the `df` DataFrame.
 
@@ -172,7 +172,7 @@ Also, a quick shoutout to the channel all the way at the end that made it to 200
 
 We are going to do the same thing we did before, but this time we will create a pie chart. For this pie chart, we are going to analyze the different video categories and the top channel they belong to. 
 
-All we need to do is replace `fig = px.histogram(df, x="subscribers")` with `fig = px.pie(df, values="subscribers" names="category", title="YouTube Categories")`:
+All we need to do is replace `px.histogram(df, x="subscribers")` with `px.pie(df, values="subscribers" names="category", title="YouTube Categories")`:
 
 ```py
 import plotly.express as px
