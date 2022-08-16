@@ -143,7 +143,7 @@ import plotly.express as px
 Creating a histogram in Plotly Express is so much easier than you think. Do you know how we create them? Drum roll please… 🥁
 
 ```python
-fig = px.histogram(df, x="subscribers\xa0", title="Subscriber Count")
+fig = px.histogram(df, x="subscribers", title="Subscriber Count")
 fig.show()
 ```
 
@@ -172,12 +172,12 @@ Also, quick shout out to the channel all the way at the end that made it to 200 
 
 We are going to do the same thing we did before, but this time we are going to create a pie chart. For this pie chart, we are going to analyze the different video categories and the top channel they belong to. 
 
-All we need to do is replace `fig = px.histogram(df, x="subscribers\xa0")` with `fig = px.pie(df, values="subscribers\xa0" names="category\xa", title="YouTube Categories")`:
+All we need to do is replace `fig = px.histogram(df, x="subscribers")` with `fig = px.pie(df, values="subscribers" names="category", title="YouTube Categories")`:
 
 ```py
 import plotly.express as px
 
-fig = px.pie(df, values="subscribers\xa0", names="category\xa", title="YouTube Categories")
+fig = px.pie(df, values="subscribers", names="category", title="YouTube Categories")
 fig.show()
 ```
 
@@ -211,7 +211,7 @@ fig.show()
 The `px.box()` method follows the convention we have been using in this tutorial:
 
 - First, we passed in our DataFrame, `df`. 
-- Then, we passed in our `y` variable, `started\xa0`. 
+- Then, we passed in our `y` variable, `started`. 
 - Finishing things off, we named our graph “Years Started”. 
 
 And like before, the graph is complete but isn’t shown on the notebook page. So, to show the graph, we use `fig.show()` method.
