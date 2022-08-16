@@ -165,13 +165,7 @@ Also, quick shout out to the channel all the way at the end that made it to 200 
 
 We are going to do the same thing we did before, but this time we are going to create a pie chart. For this pie chart, we are going to analyze the different video categories and the top channel they belong to. 
 
-All we need to do is replace `fig = px.histogram(df, x="subscribers\xa0")` with `fig = px.pie(df, values="subscribers\xa0" names="category\xa", title="YouTube Categories")`. However, this time we need to pass the following arguments to our method call: `values` from our data that will represent a portion of the pie chart and `names` that will represent the names for those regions of the pie chart. For this part, you would need to use a column with numeric values for the values argument and a column with string values for the names variable.
-
-Finally, you need to name your graph. You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories”. 
-
-That’s it. All that’s left now is to display the pie chart using the `fig.show()` method.
-
-You should end up with something like this!
+All we need to do is replace `fig = px.histogram(df, x="subscribers\xa0")` with `fig = px.pie(df, values="subscribers\xa0" names="category\xa", title="YouTube Categories")`:
 
 ```py
 import plotly.express as px
@@ -180,9 +174,19 @@ fig = px.pie(df, values="subscribers\xa0", names="category\xa", title="YouTube C
 fig.show()
 ```
 
+However, this time we need to pass the following arguments to our method call: 
+
+- `values` from our data that will represent a portion of the pie chart.
+- `names` that will represent the names for those regions of the pie chart. For this part, you would need to use a column with numeric values for the values argument and a column with string values for the names variable.
+- `title` to name the graph. You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories”. 
+
+That’s it. All that’s left now is to display the pie chart using the `fig.show()` method.
+
+You should end up with something like this:
+
 ![pie-chart](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/pie-chart.png)
 
-Pie charts are very straightforward to read. The bigger the chunk, the greater quantity we have. We can see here that the top category in our dataset is Music. Coming in at number two is Entertainment.
+Pie charts are very straightforward to read. The bigger the chunk, the greater quantity we have. We can see here that the top category in our dataset is Music (34.4%). Coming in at number two is Entertainment (16.2%).
 
 ## [#](#-section-3-make-a-box-plot) Section 3: Make a Box Plot
 
@@ -191,21 +195,21 @@ I hope you all aren’t too square to make a box plot. Box plots can show us how
 Sticking to the theme of simplicity, all we have to do to create our box plot is input the following: 
 
 ```py
-px.box(df, y="started\xa0", title= "Years Started")
-```
-
-This line follows the convention we have been using in this tutorial. First, we called our DataFrame, `df`. Then, we declared out `y` variable, `started\xa0`. Finishing things off, we name our graph “Years Started”. 
-
-And like before, the graph is complete but isn’t shown on the notebook page. So, to show the graph, we use `fig.show()` method.
-
-It should look something like this!
-
-```py
 import plotly.express as px
 
 fig = px.box(df, y="started\xa0", title="Years Started")
 fig.show()
 ```
+
+The `px.box()` methods follows the convention we have been using in this tutorial:
+
+- First, we called our DataFrame, `df`. 
+- Then, we declared out `y` variable, `started\xa0`. 
+- Finishing things off, we name our graph “Years Started”. 
+
+And like before, the graph is complete but isn’t shown on the notebook page. So, to show the graph, we use `fig.show()` method.
+
+It should look something like this:
 
 ![box-plot](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/box-plot.jpg)
 
