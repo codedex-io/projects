@@ -49,7 +49,7 @@ First, let's zoom out a bit and think about this question: "What does it mean to
 
 Because Discord wants bots to be able to do useful things, they have allowed developers to access parts of its system in their code, such as automatically responding to messages or helping with the server's admin functions (e.g. check out these [popular Discord Bots](https://top.gg/list/top)). Today, we're focused on getting our bot to read and write messages, so let's see how that works.
 
-[TODO: Drawing of server diagram]
+![Drawing of server diagram](https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/sketch.png)
 
 From the crude drawing above (I'm an engineer, not an artist), we can see how users and bots connect to the Discord backend. Each user interacts with the Discord backend to write and read messages. Then, the Discord backend servers will broadcast an event to any program listening that a new message has been posted. All we have to do is write our program to respond to message events (named `bot.py` here) and connect it to the Discord backend by using their API.
 
