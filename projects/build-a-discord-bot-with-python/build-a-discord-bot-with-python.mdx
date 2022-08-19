@@ -18,6 +18,8 @@ tags:
 **Versions:** Python 3.10,  
 **Read Time:** 45 minutes
 
+## [#](#-introduction) Introduction
+
 In this tutorial, we'll learn how to set up your Python programming environment, create and register a bot using [Discord Developer Portal](https://discord.com/developers/), and write a few lines of Python code to respond to users' messages in Discord. We'll also provide a breakdown of each line of code for those who want to get a deeper understanding of how it all works.
 
 The Discord bot that we are going to build will listen for the keyword `$meme` and responds with a random meme from Reddit. 
@@ -28,19 +30,20 @@ The final result will look like this:
 
 Let's dive in!
 
-## Requirements
+## [#](#-requirements) Requirements
 
-### Set up Python coding environment
+### [##](##-set-up-python-coding-environment) Set up Python coding environment
 
 1. Install [Python 3](https://www.python.org/downloads/)
 2. Install [pip](https://pip.pypa.io/en/stable/installation/)
 
-### Set up Discord account
+### [##](##-set-up-discord-account) Set up Discord account
 
-2. Have a Discord account
-3. Make sure you have a Discord server with "Manager Server" permissions
+1. Have a Discord account
+2. Make sure you have a Discord server with "Manager Server" permissions
 
-## How does a Discord bot work?
+
+## [#](#-how-does-a-discord-bot-work) How does a Discord bot work?
 
 First, let's zoom out a bit and think about this question: "What does it mean to code a Discord Bot?" Simply put, **a bot is nothing more than a computer program that performs some useful actions.** Because Discord wants bots to be able to do useful things, they have allowed developers to access parts of its system in their code, such as automatically responding to messages or helping with the server's admin functions (e.g. check out these [popular Discord Bots](https://top.gg/list/top)). Today, we're focused on getting our bot to read and write messages, so let's see how that works.
 
@@ -52,7 +55,8 @@ From the crude drawing above (I'm an engineer, not an artist), we can see how us
 
 First, we'll have to create and register our bot from Discord's Developer Portal.
 
-## Setting up Discord Developer Portal
+
+## [#](#-setting-up-discord-developer-portal) Setting up Discord Developer Portal
 
 We'll be creating and registering our Discord Application inside the Developer Portal. Then, we will create a Bot for the Application and get the required permissions.
 
