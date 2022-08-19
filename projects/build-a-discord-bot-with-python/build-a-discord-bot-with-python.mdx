@@ -51,7 +51,7 @@ Because Discord wants bots to be able to do useful things, they have allowed dev
 
 ![Drawing of server diagram](https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/sketch.png)
 
-From the crude drawing above (I'm an engineer, not an artist), we can see how users and bots connect to the Discord backend. Each user interacts with the Discord backend to write and read messages. Then, the Discord backend servers will broadcast an event to any program listening that a new message has been posted. All we have to do is write our program to respond to message events (named `bot.py` here) and connect it to the Discord backend by using their API.
+From the crude drawing above (I'm an engineer, not an artist), we can see how users and bots connect to the Discord backend. Each user interacts with the Discord backend to write and read messages. Then, the Discord backend servers will broadcast an event to any program listening that a new message has been posted. All we have to do is write our program to respond to message events (named **bot.py** here) and connect it to the Discord backend by using their API.
 
 > API (Application Programming Interface) is just a fancy terminology to define how one program talks to another program. In our case, Discord's API allows us to read and send messages to its backend servers.
 
@@ -62,23 +62,23 @@ First, we'll have to create and register our bot from Discord's Developer Portal
 
 We'll be creating and registering our Discord Application inside the Developer Portal. Then, we will create a Bot for the Application and get the required permissions.
 
-### Step 1. Go to Developer Portal
+### [##](##-go-to-developer-portal) Step 1. Go to Developer Portal
 
 Visit [https://discord.com/developers/applications](https://discord.com/developers/applications) and sign in if you haven't already.
 
-### Step 2. Create a new Application
+### [##](##-create-a-new-application) Step 2. Create a new Application
 
 To let Discord know we're going to be connecting to their backend servers, we need to register an Application and set up the required permissions.
 
 ![Create Application](https://imgur.com/pvjFmDB.png)
 ![Create new bot](https://imgur.com/IXbC5RB.png)
 
-### Step 3. Add a Bot to your Application
+### [##](##-add-a-bot-to-your-application) Step 3. Add a Bot to your Application
 
 ![Add Bot](https://imgur.com/F2t6hQh.png)
 ![Add Bot 2](https://imgur.com/MGGg2bP.png)
 
-### Step 4. Get the Token for your Application
+### [##](##-get-a-token-for-your-application) Step 4. Get the Token for your Application
 
 This step is important because we'll need this Token for later. This Token is similar to a password for your Application. Anybody who has this can control it. (So make sure to never share your bot token with anyone, or upload it on GitHub by mistake!)
 
@@ -86,7 +86,7 @@ Click "Reset Token", write it down somewhere safe and definitely don't put it in
 
 ![Reset Token](https://imgur.com/dJ3OhpB.png)
 
-### Step 5. Invite your Application to your Discord server
+### [##](##-invite-your-application-to-your-discord-server) Step 5. Invite your Application to your Discord server
 
 Now that we've set up our first Application, we have to create an invite, to get our bot into our Discord server. To do that we can click URL Generator and select the following permissions. In the screenshot below, we are telling Discord to create an invitation link for our application with the scope "Bot" and that bot should be able to "Send Messages." (Note: Be careful with granting the all-powerful "Administrator" permission to your bot).
 
@@ -103,9 +103,10 @@ You can confirm if this worked by checking for this message in your Discord serv
 
 Alright, now that we’ve set up our coding environment and got the necessary permissions from Discord for our new application, let’s write some code.
 
-## Writing the Python Code
 
-### Installing discord.py
+## [#](#-writing-the-python-code) Writing the Python Code
+
+### [##](##-installing-discord-py) Installing discord.py
 
 The complicated part about writing our program for the bot is how we're going to interact with the Discord API. While we can read the [API documentation](https://discord.com/developers/docs/intro) and send HTTP requests directly to Discord, we have an easier way.
 
@@ -125,7 +126,7 @@ py -3 -m pip install -U discord.py
 
 What did we just do here? We just installed a Python package from pip, which is just another way of saying we downloaded code that someone kindly wrote and uploaded to a public repository.
 
-### Log into the Discord server with your bot
+### [##](##-log-into-the-discord-server) Log into the Discord server with your bot
 
 Let’s create a new file called `bot.py` in a new directory. This is the main file where we'll code the logic to make our Discord bot. Now paste the following code into it:
 
@@ -163,7 +164,7 @@ client = MyClient()
 client.run('Your Token Here') # Replace with your own token.
 ```
 
-### Running the bot
+### [##](##-running-the-bot) Running the bot
 
 You can run this code by typing in the following in your terminal.
 
@@ -179,7 +180,7 @@ If you see this output in your terminal, then your Discord bot has successfully 
 Logged on as MemeBot#3995!
 ```
 
-### Responding to messages
+### [##](##-responding-to-messages) Responding to messages
 
 Next, we want our bot to read messages in a Discord channel and respond to them.
 
@@ -203,7 +204,7 @@ Let's add Memebot to any channel and type the word `$hello` and see what happens
 
 We've successfully programmed our bot to log into Discord and respond to our messages. But can we go further?
 
-### How to Respond with Memes
+### [##](##-how-to-respond-with-memes) How to Respond with Memes
 
 What if instead of responding with a text message, the bot responds with memes? Well that sounds like a lot of work.. buuut the cool thing about programming is that we can reuse other people’s work (yay for open source).
 
@@ -233,7 +234,7 @@ Here is the response that I got:
 
 It looks like the `url` field here contains the link for the meme's image. How about we have our bot respond to user's messages with this image?
 
-### Integrating the Meme API
+### [##](##-integrating-the-meme-api) Integrating the Meme API
 
 Let's paste these lines of code to the top of the file.
 
@@ -296,13 +297,13 @@ The moment of truth..
 
 Success!
 
-## Final Words
+## [#](#-final-words) Final Words
 
 That's all it takes to set up and code a Discord bot in Python! Just a note: the bot will respond to you as long as the program is kept running. If you close your terminal or turn off your computer, it will no longer be running. If you want to keep the program running forever, we’ll have to deploy it to another computer in the cloud. However, that is a lesson for another day.
 
 Hope you enjoyed the tutorial. If you have any questions, you can DM me on twitter at [@hongjjeon](https://twitter.com/hongjjeon).
 
-### Additional Resources:
+### [##](##-more-resources) More Resources
 
 - **Solution code**: https://github.com/codedex-io/projects/tbd.py
 - **Discord Developer Portal**: https://discord.com/developers/docs/intro
