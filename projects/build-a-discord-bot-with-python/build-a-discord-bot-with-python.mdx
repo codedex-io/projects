@@ -45,7 +45,7 @@ Let's dive in!
 
 ## [#](#-how-does-a-discord-bot-work) How Does a Discord Bot Work
 
-First, let's zoom out a bit and think about this question: "What does it mean to code a Discord Bot?" Simply put, a **bot** is nothing more than a computer program that performs some useful actions. 
+First, let's zoom out a bit and think about this question: "What does it mean to code a Discord Bot?" Simply put, a bot is nothing more than a computer program that performs some useful actions. 
 
 Because Discord wants bots to be able to do useful things, they have allowed developers to access parts of its system in their code, such as automatically responding to messages or helping with the server's admin functions (e.g. check out these [popular Discord Bots](https://top.gg/list/top)). Today, we're focused on getting our bot to read and write messages, so let's see how that works.
 
@@ -90,7 +90,7 @@ And click "Add Bot":
 
 This step is important because we'll need this Token for later. This Token is similar to a password for your application. Anybody who has this can control it. (So make sure to never share your bot token with anyone, or upload it on GitHub by mistake!)
 
-Click "Reset Token", write it down somewhere safe and definitely don't put it in any public place and definitely don't put it in any public place.
+Click "Reset Token", write it down somewhere safe and definitely don't put it in any public place.
 
 ![Reset Token](https://imgur.com/dJ3OhpB.png)
 
@@ -116,7 +116,9 @@ Alright, now that we’ve set up our coding environment and got the necessary pe
 
 ### [##](##-installing-discord-py) Installing discord.py
 
-The complicated part about writing our program for the bot is how we're going to interact with the Discord API. While we can read the [API documentation](https://discord.com/developers/docs/intro) and send HTTP requests directly to Discord, we have an easier way.
+The code that we will write, will be responsible for the creation of the bot that will connect to the Discord backend using Discord APIs.
+
+The complicated part about writing this program is how we're going to interact with the Discord API. While we can read the [API documentation](https://discord.com/developers/docs/intro) and send HTTP requests directly to Discord, we have an easier way.
 
 We'll be using a Python package called [discord.py](https://discordpy.readthedocs.io/en/stable/) which is a simple wrapper around the Discord API. A wrapper provides a way to access an API through a particular programming language, in this case, Python!
 
@@ -136,7 +138,7 @@ What did we just do here? We just installed a Python package from [pip](https://
 
 ### [##](##-log-into-the-discord-server) Log Into the Discord Server with the Bot
 
-Let’s create a new file called `bot.py` in a new directory. This is the main file where we'll code the logic to make our Discord bot. Now paste the following code into it:
+Let’s create a new file called **bot.py** in a new directory. This is the main file where we'll code the logic to make our Discord bot. Now paste the following code into it:
 
 ```python
 import discord
@@ -203,10 +205,14 @@ async def on_message(self, message):
         await message.channel.send('Hello World!')
 ```
 
-`on_message()` gets called anytime there is a new message in a channel where our bot is located. In our method, we are first checking if we were the ones who sent the message, because those should be ignored. Then we have some code to respond to a special keyword `$hello`.
+The `.on_message()` method gets called automatically anytime there is a new message in a channel where our bot is located. In our method:
+
+- We are first checking `if message.author == self.user`, if the bot is the one sending the message in the chat. We don’t want the bot to keep responding to its own messages.
+- Then, we have some code to respond to a special keyword `$hello`.
 
 Let's try it out. Run the command `python3 bot.py` to start our program.
-Let's add Memebot to any channel and type the word `$hello` and see what happens.
+
+Now, add Memebot to any channel and type the word `$hello` in that channel and see what happens:
 
 ![Discord example](https://imgur.com/GMfqJ8g.png)
 
@@ -251,7 +257,7 @@ import requests
 import json
 
 def get_meme():
-    response = requests.get("https://meme-api.herokuapp.com/gimme")
+    response = requests.get('https://meme-api.herokuapp.com/gimme')
     json_data = json.loads(response.text)
     return json_data['url']
 ```
@@ -263,7 +269,7 @@ def get_meme():
 We need to install the `requests` package to import it. Run the following command:
 
 ```sh
-python -m pip install requests
+python3 -m pip install requests
 ```
 
 Now all we need to do is call `get_meme()` inside our bot's `on_message()` method. Let's also change the keyword from `$hello` to `$meme` since it's more fitting. Your code should look like this:
@@ -275,7 +281,7 @@ import json
 
 
 def get_meme():
-    response = requests.get("https://meme-api.herokuapp.com/gimme")
+    response = requests.get('https://meme-api.herokuapp.com/gimme')
     json_data = json.loads(response.text)
     return json_data['url']
 
