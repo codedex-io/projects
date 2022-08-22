@@ -91,7 +91,7 @@ You should have something like this!
 
 ![import data](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-data.png)
 
-The `files.upload()` returns a dictionary of the uploaded files. The dictionary's keys are the file names, and the dictionary's values are the file data.
+The `files.upload()` returns a dictionary of the uploaded files. The dictionary's keys are the file names, and the dictionary's values are the file data, based on [Google Colab's documentation](https://colab.research.google.com/notebooks/io.ipynb#scrollTo=BaCkyg5CV5jF) on how to upload files to colab for analysis.
 
 In our case, we only uploaded one file. And we are storing this dictionary in the variable `uploaded`, which we will use in a bit!
 
@@ -122,6 +122,14 @@ import io
 df = pd.read_csv(io.BytesIO(uploaded["most_subscribed_youtube_channels.csv"]))
 display(df)
 ```
+
+Let’s break down and understand what the `df = pd.read_csv(io.BytesIO(uploaded["most_subscribed_youtube_channels.csv"]))` piece of code is doing.
+
+We know that `uploaded` is a dictionary with file names as keys and file data as values. So, `uploaded["most_subscribed_youtube_channels.csv"]` is simply getting the binary data inside the file named `most_subscribed_youtube_channels.csv` that we uploaded to Google Colab.
+
+Python's `io` module manages file-related input and output operations. So, `io.BytesIO()` receives all the binary data and creates a stream of data. `pd.read_csv()` can't directly process binary data so we need to convert it into a stream before we can make a DataFrame from this data.
+
+This stream of data is finally read by `pd.read_csv()` method and turned into a DataFrame. We store this DataFrame in the `df` variable.
 
 Your notebook should now look like this:
 
@@ -182,6 +190,8 @@ The first thing we want to do is pay attention to our axes. On the x-axis, we ha
 
 Also, a quick shoutout to the channel all the way at the end that made it to 200 million ([T-Series](https://www.youtube.com/aashiqui2)). We already know their fan base is grinding.
 
+Plotly Express allows us to create much more customizable histograms by inputting a variety of arguments. Here's a link to [histogram documentation](https://plotly.com/python/histograms/) for further reference. In this section, we only used the base version with numerical data. But other histograms can also be created based on other columns in the YouTube data.
+
 
 ## [#](#-section-2-make-a-pie-chart) Section 2: Make a Pie Chart
 
@@ -209,6 +219,8 @@ You should end up with something like this:
 ![pie-chart](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/pie-chart.png)
 
 Pie charts are very straightforward to read. The bigger the chunk, the greater quantity we have. We can see here that the top category in our dataset is Music (24.9%). Coming in at number two is Entertainment (22.1%).
+
+[Pie chart](https://plotly.com/python/pie-charts/) documentation provides more information about further personalizing the pie charts by changing the colors of sectors and more.
 
 ## [#](#-section-3-make-a-box-plot) Section 3: Make a Box Plot
 
@@ -240,6 +252,8 @@ Like that one Tegan and Sara song, let’s get a little bit closer with our grap
 - In the lower fence, we have the year 2005. This conveys that the earliest top channels got started in 2005. Talk about being there from the very start! 
 - The median, 2013, represents the average year our top channels started their career. Ah, 2013. What a time to be alive.
 - Our maximum value was 2021. This was the latest year a top channel in our dataset started. As they always say, it's never too late to begin your journey to the top!
+
+Similar to histograms and pie charts, Plotly Express also provides [documentation for box plots](https://plotly.com/python/box-plots/). By passing `point="all"` argument to the `px.box()`, we can also look at all the data points used to make the box plot.
 
 ## [#](#-wrapping-up) Wrapping Up
 
