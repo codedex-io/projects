@@ -91,7 +91,7 @@ You should have something like this!
 
 ![import data](https://raw.githubusercontent.com/codedex-io/projects/main/projects/visualize-youtube-data-with-plotly/import-data.png)
 
-The `files.upload()` returns a dictionary of the uploaded files. The dictionary's keys are the file names, and the dictionary's values are the file data, based on [Google Colab's documentation](https://colab.research.google.com/notebooks/io.ipynb#scrollTo=BaCkyg5CV5jF) on how to upload files to colab for analysis.
+The `files.upload()` returns a dictionary of the uploaded files. The dictionary's keys are the file names, and the dictionary's values are the file data, based on [Google Colab's documentation](https://colab.research.google.com/notebooks/io.ipynb#scrollTo=BaCkyg5CV5jF) on how to upload files to Colab.
 
 In our case, we only uploaded one file. And we are storing this dictionary in the variable `uploaded`, which we will use in a bit!
 
@@ -125,11 +125,11 @@ display(df)
 
 Let’s break down and understand what the `df = pd.read_csv(io.BytesIO(uploaded["most_subscribed_youtube_channels.csv"]))` piece of code is doing.
 
-We know that `uploaded` is a dictionary with file names as keys and file data as values. So, `uploaded["most_subscribed_youtube_channels.csv"]` is simply getting the binary data inside the file named `most_subscribed_youtube_channels.csv` that we uploaded to Google Colab.
+We know that `uploaded` is a dictionary with file names as keys and file data as values. So, `uploaded["most_subscribed_youtube_channels.csv"]` is simply getting the binary data inside the file named **most_subscribed_youtube_channels.csv** that we uploaded to Google Colab.
 
 Python's `io` module manages file-related input and output operations. So, `io.BytesIO()` receives all the binary data and creates a stream of data. `pd.read_csv()` can't directly process binary data so we need to convert it into a stream before we can make a DataFrame from this data.
 
-This stream of data is finally read by `pd.read_csv()` method and turned into a DataFrame. We store this DataFrame in the `df` variable.
+This stream of data is finally read by the `pd.read_csv()` method and turned into a DataFrame. We store this DataFrame in the `df` variable.
 
 Your notebook should now look like this:
 
@@ -190,7 +190,7 @@ The first thing we want to do is pay attention to our axes. On the x-axis, we ha
 
 Also, a quick shoutout to the channel all the way at the end that made it to 200 million ([T-Series](https://www.youtube.com/aashiqui2)). We already know their fan base is grinding.
 
-Plotly Express allows us to create much more customizable histograms by inputting a variety of arguments. Here's a link to [histogram documentation](https://plotly.com/python/histograms/) for further reference. In this section, we only used the base version with numerical data. But other histograms can also be created based on other columns in the YouTube data.
+Plotly Express allows us to create much more customizable histograms by inputting a variety of arguments. Here's a link to [histogram documentation](https://plotly.com/python/histograms/) for further reference. In this section, we only used the base version with numerical data. But other histograms can also be created using other columns in the YouTube data.
 
 
 ## [#](#-section-2-make-a-pie-chart) Section 2: Make a Pie Chart
