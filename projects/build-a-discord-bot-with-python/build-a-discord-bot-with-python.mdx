@@ -144,8 +144,8 @@ Let’s create a new file called **bot.py** in a new directory. This is the main
 import discord
 
 class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
+  async def on_ready(self):
+    print('Logged on as {0}!'.format(self.user))
 
 client = MyClient()
 client.run('Your Token Here') # Replace with your own token.
@@ -157,8 +157,8 @@ Let’s go over this block of code line by line.
 import discord
 
 class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
+  async def on_ready(self):
+    print('Logged on as {0}!'.format(self.user))
 ```
 
 First, we've imported the `discord.py` package that we just installed and created our own class `MyClient` which we will use to interact with the Discord API. We create this class by extending from the base class `discord.Client`. This base class already has methods to respond to common events. For example, the `on_ready()` function above will be called when the Discord bot's login is successful.
@@ -198,11 +198,11 @@ Add the `.on_message()` method to the `MyClient` class like the following:
 
 ```python
 async def on_message(self, message):
-    if message.author == self.user:
-        return
+  if message.author == self.user:
+    return
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello World!')
+  if message.content.startswith('$hello'):
+    await message.channel.send('Hello World!')
 ```
 
 The `.on_message()` method gets called automatically anytime there is a new message in a channel where our bot is located. In our method:
@@ -257,9 +257,9 @@ import requests
 import json
 
 def get_meme():
-    response = requests.get('https://meme-api.herokuapp.com/gimme')
-    json_data = json.loads(response.text)
-    return json_data['url']
+  response = requests.get('https://meme-api.herokuapp.com/gimme')
+  json_data = json.loads(response.text)
+  return json_data['url']
 ```
 
 `requests` package allows us to make HTTP requests to any URL. In this case we're calling the GET method to the URL that will give us the meme data.
@@ -279,24 +279,20 @@ import discord
 import requests
 import json
 
-
 def get_meme():
-    response = requests.get('https://meme-api.herokuapp.com/gimme')
-    json_data = json.loads(response.text)
-    return json_data['url']
-
+  response = requests.get('https://meme-api.herokuapp.com/gimme')
+  json_data = json.loads(response.text)
+  return json_data['url']
 
 class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
+  async def on_ready(self):
+    print('Logged on as {0}!'.format(self.user))
 
-    async def on_message(self, message):
-        if message.author == self.user:
-            return
-
-        if message.content.startswith('$meme'):
-            await message.channel.send(get_meme())
-
+  async def on_message(self, message):
+    if message.author == self.user:
+      return
+    if message.content.startswith('$meme'):
+      await message.channel.send(get_meme())
 
 client = MyClient()
 client.run('Your Token Here') # Replace with your own token
