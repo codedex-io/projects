@@ -15,7 +15,6 @@ class MyClient(discord.Client):
   async def on_message(self, message):
     if message.author == self.user:
       return
-
     if message.content.startswith('$meme'):
       await message.channel.send(get_meme())
 
