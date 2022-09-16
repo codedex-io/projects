@@ -26,19 +26,21 @@ In this quick tutorial, we will learn how to create a QR code in Python with [qr
 
 Let's jump in!
 
+![QR example](https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-qr-code-with-python/codedex_qr.png)
+
 
 ## What is a QR Code? 
 
-A QR code, or a Quick Response code, is a 2D barcode containing black patterns on a white background. However, this is no ordinary scribble: QR codes are capable of storing huge amounts of data in a deceivingly small amount of space. These black rectangles can store links, text, basically anything you want... and can be accessed simply by scanning from any mobile device! 
+The Quick Response code, also known as the QR code, is a 2D barcode containing black patterns on a white background. However, this is no ordinary scribble: QR codes are capable of storing huge amounts of data in a deceivingly small amount of space. These black rectangles can store links, text, basically anything you want... and can be accessed simply by scanning from any mobile device! It was originally invented in 1994 by a Japanese tech company. 
 
-A QR code is important since it gives users a simple way to access something on a non-conventional source (e.g. on a piece of paper). For example, putting your QR code on a piece of paper is way better than putting the link on paper. QR codes are now being used on restaurant menus, business cards, and even [Superbowl ads](https://www.youtube.com/watch?v=1zLsUhOCqyU)!
+A QR code is important since it gives users a simple way to access something on a non-conventional source (e.g., on a piece of paper). For example, putting a QR code on a piece of paper is a faster and better experience for the user than placing a link on the paper. QR codes are now becoming more commonly used than [UPC barcodes](https://en.wikipedia.org/wiki/Universal_Product_Code) and are being used on restaurant menus, business cards, and even [Superbowl ads](https://www.youtube.com/watch?v=1zLsUhOCqyU)!
 
 
 ## Setting Up
 
-First, go to the Python code editor of your choice (we recommend [VS Code](https://code.visualstudio.com/)), then create and open a new file called `createqrcode.py`. This is where we will be writing our code.
+First, go to the Python code editor of your choice (we recommend [VS Code](https://code.visualstudio.com/)), then create and open a new file called **qr_code.py**. This is where we will be writing our code.
 
-**Note:** You can call your file any name except `qrcode.py`. This is because `qrcode.py` is a file that already exists as part of the `qrcode` library, and calling your file `qrcode.py` will overwrite the library functions. 
+**Note:** You can call your file any name except **qrcode.py**. This is because **qrcode.py** is a file that already exists as part of the `qrcode` library, and calling your file that will overwrite the library functions. 
 
 To start, we need to install two libraries. 
 
@@ -122,7 +124,9 @@ img = qr.make_image(fill_color="black", back_color="white")
 img.save('codedex_qr.png')
 ```
 
-You should see the `codedex.png` image pop up on the left-hand side of VS Code, and you can open it to see what it looks like. 
+You should see the **codedex_qr.png** image pop up on the left-hand side of VS Code, and you can open it to see what it looks like.
+
+![QR example](https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-qr-code-with-python/codedex_qr.png)
 
 You can add this QR code to anywhere you like, including your website or portfolio! 
 
