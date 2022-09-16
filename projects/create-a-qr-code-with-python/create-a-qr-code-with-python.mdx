@@ -18,7 +18,6 @@ tags:
 **Versions:** Python 3.10, Pillow 9.2.0, qrcode 7.3.1  
 **Read Time:** 40 minutes  
 
-
 ## [#](#-introduction) Introduction
 
 Have you ever wondered how [QR codes](https://en.wikipedia.org/wiki/QR_code) work or how procedural images are generated? Have you ever wanted to send someone a link in a much cooler way? If you said yes to any of these questions, you're in luck! 
@@ -100,14 +99,11 @@ img = qr.make_image(fill_color = "black", back_color = "white")
 
 Finally, we have to store and save the file. We can do this using pillow's `save()` command. We specify the file name inside the brackets, which is `codedex_qr.png` in our case. 
 
-
 ```py
 img.save('codedex_qr.png')
 ```
 
-Now we are done! 
-
-Here’s the whole code:
+Now we are done! Here’s the whole code:
 
 ```py
 import qrcode
@@ -139,7 +135,7 @@ To improve this, we could do a couple of things:
 
 ## Additional Resources:
 
-- [Solution Code]()
-[qrcode](https://pypi.org/project/qrcode/)
-[pyqrcode](https://pypi.org/project/PyQRCode/)
-[Pillow](https://pypi.org/project/Pillow/)
+- [Solution on GitHub](https://github.com/codedex-io/projects/blob/main/projects/create-a-qr-code-with-python/qr_code.py)
+- [qrcode](https://pypi.org/project/qrcode/)
+- [pyqrcode](https://pypi.org/project/PyQRCode/)
+- [Pillow](https://pypi.org/project/Pillow/)
