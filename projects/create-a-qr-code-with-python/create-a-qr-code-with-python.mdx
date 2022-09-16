@@ -1,6 +1,6 @@
 ---
 title: Create a QR Code with Python
-author: Bobliuuu
+author: Jerry Zhu
 datePublished: 2022-09-19
 description: Learn how to make a QR code using the qrcode library in this project tutorial
 tags: 
@@ -83,9 +83,9 @@ qr = qrcode.QRCode(version = 1, box_size = 5, border = 5)
 
 As an exercise, try taking in these parameters as input, and explaining to the user how to set this up, so they can create the QR code to their own specifications. 
 
-Visit https://github.com/lincolnloop/python-qrcode for more information about the parameters in `qrcode.QRCode(...)`. 
+Visit [documentation](https://github.com/lincolnloop/python-qrcode) for more information about the parameters in `qrcode.QRCode(...)`. 
 
-Then, the data (specifically, the link we specified before) is added to the QR code, using `.add_data()`. We also use the `fit` parameter to make sure the qrcode is forced to fit inside the image we created: 
+Then, the data (specifically, the link we specified before) is added to the QR code, using `.add_data()`. The QR code is then generated using `.make()`
 
 ```py
 qr.add_data(link_to_qrcode)
@@ -133,7 +133,7 @@ To improve this, we could do a couple of things:
 - Allow the link of the qrcode to be taken in as input
 - Automate the process to create multiple QR codes (or allow users to customize the qrcode generated)
 - Include more functions (or object parameters) of the `qrcode` library: https://pypi.org/project/qrcode/
-- Try changing the colors and styles of the generated QR codes using different drawer modules and fill colors.
+- Try changing the colors and styles of the generated QR codes using different drawer modules and fill colors
 - Use a application library (like [Tkinter](https://docs.python.org/3/library/tkinter.html)) to add a user interface
 - Check out other QR code libraries like `pyqrcode`
 
