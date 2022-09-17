@@ -20,7 +20,7 @@ tags:
 
 ## [#](#-introduction) Introduction
 
-Have you ever wondered how [QR codes](https://en.wikipedia.org/wiki/QR_code) work or how procedural images are generated? Have you ever wanted to send someone a link in a much cooler way? If you said yes to any of these questions, you're in luck! 
+Have you ever wondered how [QR codes](https://en.wikipedia.org/wiki/QR_code) work or how procedural images are generated? Have you ever wanted to send someone a website link in a much cooler way? If you said yes to any of these questions, you're in luck! 
 
 In this quick tutorial, we will learn how to create a QR code in Python with [qrcode](https://pypi.org/project/qrcode) and [pillow](https://pypi.org/project/Pillow) with only five lines of code. 
 
@@ -33,34 +33,33 @@ Let's jump in!
 
 The Quick Response code, also known as the QR code, is a 2D barcode containing black patterns on a white background. However, this is no ordinary scribble: QR codes are capable of storing huge amounts of data in a deceivingly small amount of space. These black rectangles can store links, text, basically anything you want... and can be accessed simply by scanning from any mobile device! It was originally invented in 1994 by a Japanese tech company. 
 
-A QR code is important since it gives users a simple way to access something on a non-conventional source (e.g., on a piece of paper). For example, putting a QR code on a piece of paper is a faster and better experience for the user than placing a link on the paper. QR codes are now becoming more commonly used than [UPC barcodes](https://en.wikipedia.org/wiki/Universal_Product_Code) and are being used on restaurant menus, business cards, and even [Superbowl ads](https://www.youtube.com/watch?v=1zLsUhOCqyU)!
+A QR code is important since it gives users a simple way to access something on a non-conventional source (e.g., on a piece of paper). For example, putting a QR code on a piece of paper is a far better and faster experience for the user than placing a website link. Due to this, QR codes are now becoming more commonly used than [UPC barcodes](https://en.wikipedia.org/wiki/Universal_Product_Code) and are seen on restaurant menus, business cards, and even [Superbowl ads](https://www.youtube.com/watch?v=1zLsUhOCqyU)!
 
 
 ## Setting Up
 
-First, go to the Python code editor of your choice (we recommend [VS Code](https://code.visualstudio.com/)), then create and open a new file called **qr_code.py**. This is where we will be writing our code.
+First, go to the Python code editor of your choice (we recommend [VS Code](https://code.visualstudio.com/)), and create a new file called **qr_code.py**. This is where we will be writing our code.
 
 **Note:** You can call your file any name except **qrcode.py**. This is because **qrcode.py** is a file that already exists as part of the `qrcode` library, and calling your file that will overwrite the library functions. 
 
 To start, we need to install two libraries. 
 
-We first need to install the `qrcode` library. This library lets us perform all of our QR code related operations. 
+- We first need to install the `qrcode` library. This library lets us perform all of our QR code related operations.
+- We also need to install the `pillow` library. The pillow library is a great library (that you will see in other projects as well) that helps us process and save images. 
 
-We also need to install the `pillow` library. The pillow library is a great library (that you will see in other projects as well) that helps us process and save images. 
-
-In your VS Code terminal, run this command: 
+To install `qrcode` and `pillow`, run this command inside the VS Code terminal:
 
 ```bash
-pip install qrcode pillow
+% pip install qrcode pillow
 ```
 
-After this, we can import our two libraries. Add this line of code (`pillow` is implicitly imported). 
+After this, we can import our two libraries. Add this line of code to line 1 of **qr_code.py**:
 
 ```py
 import qrcode
 ```
-
-This makes sure that the two libraries can be used in the rest of our code, since Python code runs from top to bottom in a file.
+This line of code makes sure that the two libraries can be used in the rest of our code, since Python code runs from top to bottom in a file. 
+We just need to import `qrcode`, because `pillow` is implicitly imported. 
 
 
 ## Creating the QR Code
