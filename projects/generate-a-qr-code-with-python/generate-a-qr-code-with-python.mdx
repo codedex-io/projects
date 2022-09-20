@@ -1,5 +1,5 @@
 ---
-title: Generate a QR Code with Python
+title: Create a QR Code with Python
 author: Jerry Zhu
 datePublished: 2022-09-19
 description: Learn how to make a QR code using the qrcode library in this project tutorial
@@ -8,11 +8,11 @@ tags:
   - python
 ---
 
-# Generate a QR Code With Python
+# Generate QR Code with Python
 
 <AuthorAvatar author_name="Jerry Zhu" author_avatar="/images/projects/authors/jerry_zhu.jpg" />
 
-![Header image](https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-qr-code-with-python/header.png)
+![Header image](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-qr-code-with-python/header.png)
 
 **Prerequisites:** Python fundamentals  
 **Versions:** Python 3.10, Pillow 9.2.0, qrcode 7.3.1  
@@ -28,30 +28,40 @@ Let's jump in!
 
 ![QR example](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-qr-code-with-python/youtube_qr.png)
 
-## What is a QR Code?
+## [#](#-what-is-a-qr-code) What Is a QR Code?
 
 The Quick Response code, also known as the QR code, is a 2D barcode containing black patterns on a white background. However, this is no ordinary scribble: QR codes are capable of storing huge amounts of data in a deceivingly small amount of space. These black rectangles can store links, text, basically anything you want... and can be accessed simply by scanning from any mobile device! It was originally invented in 1994 by a Japanese tech company.
 
 A QR code is important since it gives users a simple way to access something on a non-conventional source (e.g., on a piece of paper). For example, putting a QR code on a piece of paper is a far better and faster experience for the user than placing a website link. Due to this, QR codes are now becoming more commonly used than [UPC barcodes](https://en.wikipedia.org/wiki/Universal_Product_Code) and are seen on restaurant menus, business cards, and even [Superbowl ads](https://www.youtube.com/watch?v=1zLsUhOCqyU)!
 
-## Setting Up
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/eIUD_NE1BDo?controls=0"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+## [#](#-setting-up) Setting Up
 
 First, go to the Python code editor of your choice (we recommend [VS Code](https://code.visualstudio.com/)), and create a new file called **qr_code.py**. This is where we will be writing our code.
 
 **Note:** You can call your file any name except **qrcode.py**. This is because **qrcode.py** is a file that already exists as part of the `qrcode` library, and calling your file that will overwrite the library functions.
 
-To start, we need to install two libraries.
+To start, we need to install two libraries:
 
-- We first need to install the `qrcode` library. This library lets us perform all of our QR code related operations.
-- We also need to install the `pillow` library. The pillow library is a great library (that you will see in other projects as well) that helps us process and save images.
+- The `qrcode` library: This library lets us perform all of our QR code related operations.
+- The `pillow` library: This library helps us process and save images.
 
 To install `qrcode` and `pillow`, run this command inside the VS Code terminal:
 
 ```bash
-pip install qrcode pillow
+% pip install qrcode pillow
 ```
 
-After this, we can import our two libraries. Add this line of code to line 1 of **qr_code.py**:
+After this, we can import our two libraries. Add this line of code to the first line of **qr_code.py**:
 
 ```py
 import qrcode
@@ -60,14 +70,14 @@ import qrcode
 This line of code makes sure that the two libraries can be used in the rest of our code, since Python code runs from top to bottom in a file.
 We just need to import `qrcode`, because `pillow` is implicitly imported.
 
-## Creating the QR Code
+## [#](#-creating-the-qr-code) Creating the QR Code
 
-First, we want a link that we want to showcase. For this tutorial, we will use a [YouTube video](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+First, we want a link that we want to showcase. For this tutorial, we will use a [classic YouTube video](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
 We can take in this link as input:
 
 ```py
-link_to_qrcode = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+link_to_qrcode = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 ```
 
 Next, we want to create an instance of qrcode. Since qrcode is a Python library, we can call the package constructor to create a qrcode object, customized to our specifications. In this example, we will create a QR code with a version of 1, and a box size and border size of 5.
@@ -94,7 +104,7 @@ qr.make()
 Finally, we save this created QR code in an `img` pillow object using `qr.make_image()`:
 
 ```py
-img = qr.make_image(fill_color = "black", back_color = "white")
+img = qr.make_image(fill_color = 'black', back_color = 'white')
 ```
 
 - Setting the line color `fill_color` to black.
@@ -103,7 +113,7 @@ img = qr.make_image(fill_color = "black", back_color = "white")
 Finally, we have to store and save the file. We can do this using pillow's `save()` command. We specify the file name inside the brackets, which is `codedex_qr.png` in our case.
 
 ```py
-img.save('youtube_qr.png')
+img.save('codedex_qr.png')
 ```
 
 Now we are done! Here’s the whole code:
@@ -111,24 +121,23 @@ Now we are done! Here’s the whole code:
 ```py
 import qrcode
 
-link_to_qrcode = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-# link_to_qrcode = input("Please enter the link you want to change into a QRCode: ")
+link_to_qrcode = input('Please enter the link you want to change into a QRCode: ')
 
 qr = qrcode.QRCode(version = 1, box_size = 5, border = 5)
 qr.add_data(link_to_qrcode)
 qr.make()
 
-img = qr.make_image(fill_color="black", back_color="white")
-img.save('youtube_qr.png')
+img = qr.make_image(fill_color='black', back_color='white')
+img.save('codedex_qr.png')
 ```
 
-You should see the **youtube_qr.png** image pop up on the left-hand side of VS Code, and you can open it to see what it looks like.
+You should see the **codedex_qr.png** image pop up on the left-hand side of VS Code, and you can open it to see what it looks like.
 
 ![QR example](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-qr-code-with-python/youtube_qr.png)
 
 You can add this QR code to anywhere you like, including your website or portfolio!
 
-## Improvements
+## [#](#-improvements) Improvements
 
 To improve this, we could do a couple of things:
 
@@ -139,9 +148,9 @@ To improve this, we could do a couple of things:
 - Use an application library (like [Tkinter](https://docs.python.org/3/library/tkinter.html)) to add a user interface
 - Check out other QR code libraries like `pyqrcode`
 
-## Additional Resources:
+## [#](#-more-resources) More Resources
 
-- [Solution on GitHub](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-qr-code-with-python/youtube_qr.png)
+- [Solution on GitHub](https://github.com/codedex-io/projects/blob/main/projects/create-a-qr-code-with-python/qr_code.py)
 - [qrcode](https://pypi.org/project/qrcode/)
 - [pyqrcode](https://pypi.org/project/PyQRCode/)
 - [Pillow](https://pypi.org/project/Pillow/)
