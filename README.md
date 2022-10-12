@@ -17,3 +17,10 @@ Here are some of examples of Codédex project tutorials:
 ## Contributing
 
 Want to add your own project tutorial? Learn more by reading our [contributing guidelines](https://www.codedex.io/projects/CONTRIBUTING.md)! 
+
+## Content Team
+
+- [@sonnynonom](https://github.com/sonnynomnom)
+- [@dharma](https://github.com/Goku-kun)
+- [@bobliuuu](https://github.com/Bobliuuu)
+- [@asiqur](https://github.com/asiqurrahman)
