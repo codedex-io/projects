@@ -3,13 +3,20 @@ title: Create a Blog Generator with OpenAI
 author: Asiqur Rahman
 datePublished: 2022-10-12
 description: Learn how to create a blog generator with Python and OpenAI in a few lines of code.
-header: ?
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-blog-generator-with-openai/header.png
 tags:
   - intermediate
   - python
 ---
 
 # Create a Blog Generator with OpenAI
+
+<AuthorAvatar
+  author_name="Asiqur Rahman"
+  author_avatar="/images/projects/authors/asiqur_rahman.jpg"
+/>
+
+![Title Image](https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-blog-generator-with-openai/header.png)
 
 **Prerequisites:** Python fundamentals  
 **Versions:** Python 3.10, python-dotenv 0.21.0, openai 0.23.0  
@@ -32,7 +39,7 @@ The final project will look like this:
 
 ![generator demo](./generator-demo.gif)
 
-*Who knows, maybe this entire article was written by this generator were about to create 👀*
+_Who knows, maybe this entire article was written by this generator were about to create 👀_
 
 ## [#](#-What-is-GPT-3) What is GPT-3?
 
@@ -92,7 +99,7 @@ We can set our API key by extending a method in the `openai` module called `api_
 openai.api_key = 'Your_API_Key'
 ```
 
-The method will take in our API key as a string. Remember, our API key is located in our OpenAI account.  
+The method will take in our API key as a string. Remember, our API key is located in our OpenAI account.
 
 So far our code looks like this:
 
@@ -114,7 +121,7 @@ def generate_blog(paragraph_topic):
    max_tokens = 400,
    temperature = 0.3
  )
- 
+
  retrieve_blog = response.choices[0].text
 
  return retrieve_blog
@@ -143,13 +150,12 @@ Now that we have access to the completion endpoint, we need to specify a few thi
 
 `model`: The model parameter will take in the model that we want to use. **GPT-3** has four models that we can use:
 
-* `text-davinci-002`
-* `text-curie-001`
-* `text-babbage-001`
-* `text-ada-001`
+- `text-davinci-002`
+- `text-curie-001`
+- `text-babbage-001`
+- `text-ada-001`
 
 These models perform the same task but at a different power level. More power equals better and coherent responses. With `text-davinci-002` being the most powerful and `text-babbage-001` being the least powerful. You can think of it like a bike vs a car. They both perform the same task of taking you from one place to another but the car will perform that task better. You can read more about the models in the [documentation](https://beta.openai.com/docs/models/gpt-3).
-
 
 ```py
 prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
@@ -173,9 +179,9 @@ temperature = 0.3
 
 There are plenty of other fields that we can specify to fine-tune the model even more, which you can read in the [documentation](https://beta.openai.com/docs/api-reference/completions/create), but for now, these are the four fields we need concern ourselves with.
 
-Now that we have our model setup, we can run our function and the following things will happen. 
+Now that we have our model setup, we can run our function and the following things will happen.
 
-1. First, the openai module will take our API key, along with the fields we specified in the `response` variable, and make a request to the **completion** endpoint. 
+1. First, the openai module will take our API key, along with the fields we specified in the `response` variable, and make a request to the **completion** endpoint.
 
 2. OpenAI will then verify that were allowed to use GPT-3 by verifying our API key.
 
@@ -213,7 +219,7 @@ We can access the value in the `text` field like so:
 
 ```
 retrieve_blog = response.choices[0].text
-``` 
+```
 
 Finally, we return the `retrieve_blog` variable which holds the paragraph we just dug out of the dictionary.
 
@@ -235,7 +241,7 @@ Right now if we run our code we'll only be able to generate one paragraph worth 
 
 Let's add additional code so that we can generate as many paragraphs as we want, with each paragraph discussing a different topic.
 
-That additional code will be as simple as: 
+That additional code will be as simple as:
 
 ```py
 keep_writing = True
@@ -246,7 +252,7 @@ while keep_writing:
     paragraph_topic = input('What should this paragraph talk about?')
     print(generate_blog(paragraph_topic))
   else:
-    keep_writing = False	
+    keep_writing = False
 ```
 
 Let's do some dissection!
@@ -292,7 +298,7 @@ If the input from the user is `Y`, then we will continue the loop and ask the us
 
 Otherwise, if the user enters anything but `Y`, we want to stop the loop. We can accomplish this by assigning the `keep_writing` variable to `False`.
 
-With that complete, we can now write as many paragraphs as we want by running the program once! 
+With that complete, we can now write as many paragraphs as we want by running the program once!
 
 ### Rate Limitation
 
@@ -316,7 +322,7 @@ In order to protect ourselves, we need to hide the API key in our code but still
 
 ### [##](##-Installing-python-dotenv) Installing `python-dotenv`
 
-`python-dotenv` is a package that allows us to create and use environment variables without having to set them in the operating system manually. 
+`python-dotenv` is a package that allows us to create and use environment variables without having to set them in the operating system manually.
 
 > environment variables are variables whose values are set outside the program, typically in the operating system.
 
@@ -329,7 +335,6 @@ pip install python-dotenv
 Then in the root directory of our project, let's create a file called **.env**. This file will hold our environment variable.
 
 Open up the **.env** file and create a variable like so:
-
 
 ```
 API_KEY=Your_Api_Key
@@ -353,11 +358,11 @@ Now, all we have to do is replace the exposed API key with the environment varia
 
 ```py
 openai.api_key = config[‘API_KEY’]
-``` 
+```
 
 That's it! Our API key is now safe and hidden from the main code.
 
-**Note**: If you want to push your code to **GitHub**, you don't want to push the **.env** file as well. In the root directory of your project, create a  file called **.gitignore**, and in the Git ignore file, type in `.env`. This will prevent the file from being tracked by Git and ultimately pushed to Github. 
+**Note**: If you want to push your code to **GitHub**, you don't want to push the **.env** file as well. In the root directory of your project, create a file called **.gitignore**, and in the Git ignore file, type in `.env`. This will prevent the file from being tracked by Git and ultimately pushed to Github.
 
 With all that set and done, we’re finished!! Our code should now look like this!
 
@@ -376,7 +381,7 @@ def generate_blog(paragraph_topic):
    max_tokens = 400,
    temperature = 0.3
  )
- 
+
  retrieve_blog = response.choices[0].text
 
  return retrieve_blog
