@@ -4,7 +4,7 @@ Welcome to the Codédex Projects Github repo! Thank you for your interest in con
 
 ## Why Contribute?
 
-First of all, why should you contribute to Codédex? Contributing will get you: 
+Why should you contribute to Codédex? Contributing will get you: 
 
 - Valuable article writing and real world coding experience
 - Mentorship from the Codédex team to support your project tutorial
