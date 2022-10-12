@@ -7,7 +7,7 @@
 
 ## What are Projects?
 
-[Codédex Projects](https://www.codedex.io/projects) is a catalog of insanely fun, beginner-friendly, and real-world programming tutorials available to developers all over the world. Our goal is to create a mountain of top-notch coding content on the web, from Python to Web Development, VR/AR to Machine Learning.
+[Codédex Projects](https://www.codedex.io/projects) is a catalog of fun, beginner-friendly, and real-world programming tutorials available to developers all over the world. Our goal is to create a mountain of top-notch coding content on the web, from Python to Web Development, VR/AR to Machine Learning.
 
 Here are some examples of Codédex Projects:
 
@@ -23,7 +23,7 @@ Ready to add your own project tutorial? Learn more by reading our [Contributing 
 
 ## What stage of development are we in right now?
 
-Codédex Projects is live with **6** high-quality projects. Now that the MVP is out, our goal is to invite awesome content creators from the Codédex community to author one or two project tutorials since maintaining a resource of this type at-scale is only possible if it's open-sourced. That means we need your help, whether it's contributing, reviewing, or evangelizing!
+Codédex Projects is live with **6** high-quality projects. Now that the MVP is out, our goal is to invite awesome content creators from the community to author one or two project tutorials since maintaining a resource of this type at-scale is only possible if it's open-sourced. That means we need your help, whether it's contributing, reviewing, or evangelizing!
 
 ### 📝 Content Team
 
