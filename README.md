@@ -1,4 +1,4 @@
-# Project Tutorials
+# Codédex Project Tutorials
 
 https://www.codedex.io/projects
 
