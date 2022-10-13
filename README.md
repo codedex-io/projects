@@ -31,3 +31,8 @@ Codédex Projects is live with **6** high-quality projects. Now that the MVP is 
 - [@goku-kun](https://github.com/Goku-kun)
 - [@bobliuuu](https://github.com/Bobliuuu)
 - [@asiqurrahman](https://github.com/asiqurrahman)
+
+
+## Additional Notes
+
+Remember, if you ever have any questions at all, we're always here to help. You can find us at [team@codedex.io].
