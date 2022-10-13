@@ -20,7 +20,7 @@ The team will get back to you about your issue, either to approve your topic, or
 3. Make a copy of the "Codédex project tutorial markdown template", the content guidelines, the [mdx docs](https://mdxjs.com/docs/), and this 
 [completed project](https://github.com/codedex-io/projects/blob/main/projects/generate-a-qr-code-with-python/generate-a-qr-code-with-python.mdx) 
 to see what a final project should look like. Make sure to check your work using [insert mdx editor] to make sure it renders properly.
-4. If you encounter any issues, feel free to reach out to [@sonnynomnom](www.twitter.com/sonnynomnom).
+4. If you encounter any issues, feel free to reach out to [@sonnynomnom](https://www.twitter.com/sonnynomnom).
 5. When you finish your project tutorial, create a pull request [here](https://github.com/codedex-io/projects/pulls), referencing the issue
 The Codédex team will review your PR and give you reviews and suggestions.
 6. Once your project tutorial is completed, your PR will be merged, and you can publish your project tutorial on the site of your choice!
