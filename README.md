@@ -35,4 +35,4 @@ Codédex Projects is live with **6** high-quality projects. Now that the MVP is 
 
 ## Additional Notes
 
-Remember, if you ever have any questions at all, we're always here to help. You can find us at team@codedex.io! 💖
+Remember, if you ever have any questions at all, we're always here to help. You can find us at team@codedex.io! :)
