@@ -17,7 +17,7 @@ Why should you contribute to Codédex? Contributing will get you:
 1. Open an issue [here](https://github.com/codedex-io/projects/issues) with the title “Project Tutorial - Name” and follow the auto generated issue content 
 The team will get back to you about your issue, either to approve your topic, or to suggest a different one.
 2. Once your project topic is accepted by the Codédexx team, you can now start writing it!
-3. Make a copy of the "Codédex project tutorial markdown template", the content guidelines, the [mdx docs](https://mdxjs.com/docs/), and this 
+3. Make a copy of the [Codédex project tutorial mdx template](https://github.com/codedex-io/projects/blob/main/ProjectTemplate.mdx), the content guidelines, the [mdx docs](https://mdxjs.com/docs/), and this 
 [completed project](https://github.com/codedex-io/projects/blob/main/projects/generate-a-qr-code-with-python/generate-a-qr-code-with-python.mdx) 
 to see what a final project should look like. Make sure to check your work using [insert mdx editor] to make sure it renders properly.
 4. If you encounter any issues, feel free to reach out to [@sonnynomnom](https://www.twitter.com/sonnynomnom).
