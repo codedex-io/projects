@@ -42,15 +42,17 @@ _Who knows, maybe this entire article was written by the generator we're about t
 
 ## [#](#-what-is-gpt-3) What is GPT-3?
 
-GPT-3 is an AI model developed by the company OpenAI. An AI model is a program trained on a bunch of data to perform a specific task. In this case, GPT-3 was trained to speak like a human and predict what comes next given the context of a sentence, with its training dataset being 45 terabytes (!) of text from the internet. 
+[GPT-3](https://en.wikipedia.org/wiki/GPT-3) is an AI model released by OpenAI in 2020. An AI model is a program trained on a bunch of data to perform a specific task. In this case, GPT-3 was trained to speak like a human and predict what comes next given the context of a sentence, with its training dataset being 45 terabytes (!) of text from the internet. 
 
 > For reference, if you had to keep writing until your paper hits 45 terabytes in size, you would have to write [22,500,000,000](https://www.techtarget.com/searchstorage/definition/How-many-bytes-for) pages worth of plain text. 
 
-Since GPT-3 was trained on internet data, it knows what the internet knows (not everything of course). This means that if we were to give GPT-3 a sentence, it would be able to predict what comes next in that sentence with high accuracy, based on all the text on the internet that was used to train it.
+Since GPT-3 was trained on internet data, it knows what the internet knows (not everything of course). This means that if we were to give GPT-3 a sentence, it would be able to predict what comes next in that sentence with high accuracy, based on all the text that was used to train it.
 
 Now we know what we'll be working with, let's build the program!
 
 ## [#](#-setting-Up) Setting Up
+
+### [##](##-python-file) OpenAI Account
 
 Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'll need this account access to an API key that we can use to work with GPT-3.
 
@@ -64,19 +66,20 @@ Now that we know where the API key is located, let's keep it in mind for later.
 
 With this API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up \$18. Afterward, we will have to pay to use GPT-3. However, \$18 is more than enough to complete this project.
 
-## [#](#-Beginning-the-Project) Beginning the Project
-
-At the core of this project, all we'll be doing is sending data with instructions to a server owned by OpenAI, then receiving a response back from that server and displaying it.
-
-## [#](#-Coding-Environment) Coding Environment
+### [##](##-python-file) Python Setup
 
 For this project, we'll need [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/) installed.
 
-Assuming that we have those two installed, let's open up the code editor of our choice and create a file called **blog_generator.py**.
+Assuming that we have those two installed, let's open up the code editor of our choice (we recommend [VS Code](https://code.visualstudio.com)) and create a file called **blog_generator.py**.
 
 **Note**: You can name this file anything except for **openai.py**, since the name will clash with a package we'll be installing.
 
-## [#](#-Installing-openai) Installing openai
+
+## [#](#-beginning-the-project) Beginning the Project
+
+At the core of this project, all we'll be doing is sending data with instructions to a server owned by OpenAI, then receiving a response back from that server and displaying it.
+
+### [##](##-installing-openai) Installing openai
 
 We'll be interacting with GPT-3 model using a python package called `openai`. This package consists of methods that can connect to the internet and grant us access to the GPT-3 model hosted by OpenAI, the company.
 
@@ -92,7 +95,7 @@ We can now use this package by importing it into our **blog_generator.py** file 
 import openai
 ```
 
-## [#](#-Authorizing-with-our-API-key) Authorizing API Key
+### [##](##-authorizing-with-our-api-key) Authorizing API Key
 
 Before we can work with GPT-3 we need to set our API key in the `openai` module. Remember, the API key is what gives us access to GPT-3; it authorizes us and says we're allowed to use this API.
 
@@ -112,7 +115,7 @@ import openai
 openai.api_key = 'Your_API_Key'
 ```
 
-## [#](#-The-core-function) The Core Function
+## [#](#-the-core-function) The Core Function
 
 Now that we have access to GPT-3, we can get to the meat of the application, which is creating a function that takes in a prompt as user input and returns a paragraph about that prompt. 
 
