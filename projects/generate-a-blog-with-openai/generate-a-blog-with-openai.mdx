@@ -24,16 +24,15 @@ tags:
 
 ## [#](#-introduction) Introduction
 
-Artificial Intelligence (AI) is becoming the next big technology to harness. From smart fridges
-to self-driving cars, AI is implemented in almost everything you can think of. So let's get ahead of the pack and learn how we can leverage the power of AI with Python and OpenAI.
+[Artificial Intelligence (AI)](https://en.wikipedia.org/wiki/Artificial_intelligence) is becoming the next big technology to harness. From smart fridges to self-driving cars, AI is implemented in almost everything you can think of. So let's get ahead of the pack and learn how we can leverage the power of AI with Python and OpenAI.
 
-In this tutorial, we'll learn how to create a blog generator with [GPT-3](https://openai.com/api/), an AI model provided by [OpenAI](https://www.openai.com). The generator will read a topic to talk about as the input, and GPT-3 will return us a paragraph about that topic as the output.
+In this tutorial, we'll learn how to create a blog generator with [GPT-3](https://openai.com/api/), an AI model provided by [OpenAI](https://www.openai.com). The generator will read a topic to talk about as the input, and GPT-3 will return us a paragraph about that topic as the output. So the computer will write stuff for us. Say goodbye to writer's block!
 
-Wait... hold on! Artificial Intelligence?! AI models?! This must be complicated to code. 😵
+Wait... hold on! Artificial intelligence?! AI models?! This must be complicated to code. 😵
 
 ![meme](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/calculation-math.gif)
 
-Nope, it's easier than you think! It takes 25 lines to code!
+Nope, it's easier than you think. It takes around 25 lines of Python code!
 
 The final result will look something like this:
 
@@ -311,7 +310,7 @@ Otherwise, if the user enters anything but `Y`, we want to stop the loop. We can
 
 With that complete, we can now write as many paragraphs as we want by running the program once!
 
-### Rate Limitation
+### [##](##-rate-limitation) Rate Limitation
 
 Since we're using a `while` loop, we have the potential to be rate limited.
 
@@ -391,11 +390,9 @@ def generate_blog(paragraph_topic):
    prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
    max_tokens = 400,
    temperature = 0.3
- )
-
- retrieve_blog = response.choices[0].text
-
- return retrieve_blog
+  )
+  retrieve_blog = response.choices[0].text
+  return retrieve_blog
 
 keep_writing = True
 
@@ -414,7 +411,7 @@ Congrats, you just created your blog generator! Throughout the article, we learn
 
 AI is expanding rapidly and the first few to utilize it properly through services like GPT-3 will become the innovators in the field.
 
-## [#](#-More-Resources) More Resources:
+### [##](##-more-resources) More Resources
 
-- [Solution Code on GitHub](https://github.com/codedex-io/projects/blob/main/projects/generate-a-blog-with-openai/blog_generator.py)
+- [Solution on GitHub](https://github.com/codedex-io/projects/blob/main/projects/generate-a-blog-with-openai/blog_generator.py)
 - [OpenAI](https://openai.com)
