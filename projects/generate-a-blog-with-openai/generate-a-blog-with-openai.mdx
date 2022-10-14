@@ -29,7 +29,7 @@ to self-driving cars, AI is implemented in almost everything you can think of. S
 
 In this tutorial, we'll learn how to create a blog generator with [GPT-3](https://openai.com/api/), an AI model provided by [OpenAI](https://www.openai.com). The generator will read a topic to talk about as the input, and GPT-3 will return us a paragraph about that topic as the output.
 
-Wait... hold on! Artificial Intelligence?! AI models?! This must be complicated to code 😵.
+Wait... hold on! Artificial Intelligence?! AI models?! This must be complicated to code. 😵
 
 ![meme](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/calculation-math.gif)
 
@@ -53,21 +53,21 @@ Now we know what we'll be working with, let's build the program!
 
 ## [#](#-setting-Up) Setting Up
 
-Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'll need this account to get access to an API key that we can use to work with GPT-3.
+Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'll need this account access to an API key that we can use to work with GPT-3.
 
-> API (Application programming interface) is a way for two computers to communicate with each other. Think of it like two friends texting back and forth. An API key is a code we receive to access the API. Think of it like a very important password, so don’t share it with others!
+> API (Application programming interface) is a way for two computers to communicate with each other. Think of it like two friends texting back and forth. An API key is a code we receive to access the API. Think of it like an important password, so don’t share it with others!
 
 Go to www.openai.com and sign up for an OpenAI account.
 
-After you've created your account, click on your profile picture on the top right, then click "View API keys" to get access to your API key. You can also click the following link to go directly to the page: https://beta.openai.com/account/api-keys.
+After you've created your account, click on your profile picture on the top right, then click "View API keys" to access your API key. You can also click the following link to go directly to the page: https://beta.openai.com/account/api-keys.
 
-Now that we know where our API key is located, let's keep it in mind for later on.
+Now that we know where the API key is located, let's keep it in mind for later.
 
 With this API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up \$18. Afterward, we will have to pay to use GPT-3. However, \$18 is more than enough to complete this project.
 
 ## [#](#-Beginning-the-Project) Beginning the Project
 
-At the core of this project, all we'll be doing is sending data with instructions to a server owned by OpenAI, then receiving back a response from that server and displaying it.
+At the core of this project, all we'll be doing is sending data with instructions to a server owned by OpenAI, then receiving a response back from that server and displaying it.
 
 ## [#](#-Coding-Environment) Coding Environment
 
@@ -75,11 +75,11 @@ For this project, we'll need [Python 3](https://www.python.org/downloads/) and [
 
 Assuming that we have those two installed, let's open up the code editor of our choice and create a file called **blog_generator.py**.
 
-**Note**: You can name this file whatever you want except for **openai.py**, since the name will clash with a package we'll be installing.
+**Note**: You can name this file anything except for **openai.py**, since the name will clash with a package we'll be installing.
 
 ## [#](#-Installing-openai) Installing openai
 
-We'll be interacting with GPT-3 model using a python package called `openai`. This package consists of methods that can connect to the internet and grant us access to the GPT-3 model hosted by OpenAI the company.
+We'll be interacting with GPT-3 model using a python package called `openai`. This package consists of methods that can connect to the internet and grant us access to the GPT-3 model hosted by OpenAI, the company.
 
 To install `openai`, all we have to do is run the following command in our terminal:
 
@@ -95,7 +95,7 @@ import openai
 
 ## [#](#-Authorizing-with-our-API-key) Authorizing API Key
 
-Before we can work with GPT-3 we need to set our API key in the `openai` module. Remember, the API key is what gives us access to GPT-3, it authorizes us and says were allowed to use this API.
+Before we can work with GPT-3 we need to set our API key in the `openai` module. Remember, the API key is what gives us access to GPT-3; it authorizes us and says we're allowed to use this API.
 
 We can set our API key by extending a method in the `openai` module called `api_key`:
 
@@ -105,7 +105,7 @@ openai.api_key = 'Your_API_Key'
 
 The method will take in our API key as a string. Remember, our API key is located in our OpenAI account.
 
-So far our code looks like this:
+So far, our code looks like this:
 
 ```py
 import openai
@@ -113,9 +113,11 @@ import openai
 openai.api_key = 'Your_API_Key'
 ```
 
-## [#](#-The-core-function) The Core function
+## [#](#-The-core-function) The Core Function
 
-Now that we have access to GPT-3, we can get to the meat of the application which is creating a function that takes in a prompt as user input and returns us a paragraph talking about that prompt. That function will look like this:
+Now that we have access to GPT-3, we can get to the meat of the application, which is creating a function that takes in a prompt as user input and returns a paragraph about that prompt. 
+
+That function will look like this:
 
 ```py
 def generate_blog(paragraph_topic):
@@ -124,20 +126,23 @@ def generate_blog(paragraph_topic):
     prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
     max_tokens = 400,
     temperature = 0.3
- )
+  )
 
- retrieve_blog = response.choices[0].text
+  retrieve_blog = response.choices[0].text
 
- return retrieve_blog
+  return retrieve_blog
 ```
 
-Let's break down this function piece by piece and see what's actually going on here.
+Let's break down this function and see what's going on here.
+
+First, we defined a function called `generate_blog()`. There's a single parameter called `paragraph_topic`, which will be the topic used to generate the paragraph:
 
 ```py
 def generate_blog(paragraph_topic):
+  # The code inside
 ```
 
-First, we defined our function and called it `generate_blog()`. We then declare a parameter called `paragraph_topic`, which will be the topic used to generate the paragraph.
+And let's go inside the function. Here's the first part:
 
 ```py
   response = openai.Completion.create(
@@ -148,24 +153,26 @@ First, we defined our function and called it `generate_blog()`. We then declare 
  )
 ```
 
-This is the bulk of our function and where we use GPT-3. We created a variable called `response` to store the response generated by the output of the `Completion.create` method call in our `openai` module and extended the `Completion.create` class giving us access to the **completion** endpoint. GPT-3 has different endpoints for specific purposes, but for our purpose, we'll be using the **completion** endpoint. The **completion** endpoint will generate text depending on the provided prompt. You can read about the different endpoints in the [documentation](https://beta.openai.com/docs/introduction).
+This is the bulk of our function and where we use GPT-3. We created a variable called `response` to store the response generated by the output of the `Completion.create()` method call in our `openai` module. 
+
+GPT-3 has different endpoints for specific purposes, but for our goal, we'll use the [completion](https://beta.openai.com/docs/api-reference/completions) endpoint. The completion endpoint will generate text depending on the provided prompt. You can read about the different endpoints in the [documentation](https://beta.openai.com/docs/introduction).
 
 Now that we have access to the completion endpoint, we need to specify a few things, The first one being:
 
-`model`: The model parameter will take in the model that we want to use. GPT-3 has four models that we can use:
+`model`: The model parameter will take in the model we want to use. GPT-3 has four models that we can use:
 
 - `text-davinci-002`
 - `text-curie-001`
 - `text-babbage-001`
 - `text-ada-001`
 
-These models perform the same task but at a different power level. More power equals better and coherent responses. With `text-davinci-002` being the most powerful and `text-babbage-001` being the least powerful. You can think of it like a bike vs a car. They both perform the same task of taking you from one place to another but the car will perform that task better. You can read more about the models in the [documentation](https://beta.openai.com/docs/models/gpt-3).
+These models perform the same task but at a different power level. More power equals better and more coherent responses, with `text-davinci-002` being the most powerful and `text-babbage-001` being the least powerful. You can think of it like a bike vs. a car. They both perform the same task of taking you from one place to another, but the car will perform that task better. You can read more about the models in the [documentation](https://beta.openai.com/docs/models/gpt-3).
 
 ```py
 prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
 ```
 
-`prompt`: This is where we design the main instructions for GPT-3. This parameter will take in our `paragraph_topic` argument, but right before we can tell GPT-3 what to do with that argument. Currently, we are instructing GPT-3 to write us a paragraph about the provided argument. GPT-3 will try its best to follow this instruction and return us a paragraph. GPT-3 is very flexible, if the string was changed to include blog outline based on the parameter, it will give us an outline instead of a normal paragraph. You can play around with this by telling the model what exactly the model should generate before the text and see what interesting responses you get.
+`prompt`: This is where we design the main instructions for GPT-3. This parameter will take in our `paragraph_topic` argument, but right before we can tell GPT-3 what to do with that argument. Currently, we are instructing GPT-3 to write a paragraph about the provided argument. GPT-3 will try its best to follow this instruction and return us a paragraph. GPT-3 is very flexible, if the string was changed to include blog outline based on the parameter, it will give us an outline instead of a normal paragraph. You can play around with this by telling the model what exactly the model should generate before the text and see what interesting responses you get.
 
 ```py
 max_tokens = 400
@@ -173,7 +180,7 @@ max_tokens = 400
 
 `tokens`: The token number decides how long the response is going to be. A larger token number will produce a larger response. By setting a specific number, we're saying that the response can't go past this token size. The way tokens are counted towards a response is a bit complex, but you can read this [article](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) by OpenAI that explains exactly how token size is calculated.
 
-Roughly, 75 words is about 100 tokens. A paragraph has 300 words on an average. So, 400 tokens is about the length of a normal paragraph. The model **text-davinci-002** has a token limit of 4,000.
+Roughly 75 words is about 100 tokens. A paragraph has 300 words on average. So, 400 tokens is about the length of a normal paragraph. The model `text-davinci-002` has a token limit of 4,000.
 
 ```py
 temperature = 0.3
@@ -185,9 +192,9 @@ There are plenty of other fields that we can specify to fine-tune the model even
 
 Now that we have our model setup, we can run our function and the following things will happen.
 
-1. First, the openai module will take our API key, along with the fields we specified in the `response` variable, and make a request to the **completion** endpoint.
+1. First, the openai module will take our API key, along with the fields we specified in the `response` variable, and make a request to the completion endpoint.
 
-2. OpenAI will then verify that were allowed to use GPT-3 by verifying our API key.
+2. OpenAI will then verify that we're allowed to use GPT-3 by verifying our API key.
 
 3. After verification, GPT-3 will use the fields we specified to produce a response.
 
@@ -236,7 +243,7 @@ Whoah! Let's take a moment and breathe. That was a lot we just covered. Let's gi
 We can test to see if our code works so far by printing out the `generate_blog()` function we just created, giving it a topic to write about, and seeing the response we get.
 
 ```py
-print(generate_blog(‘Why NYC is better than your city.’))
+print(generate_blog('Why NYC is better than your city.'))
 ```
 
 ## [#](#-Paragraph-Generator-to-Blog-Generator) Paragraph Generator to Blog Generator
@@ -361,7 +368,7 @@ The `dotenv_values()` will take in the path to the **.env** file and return us a
 Now, all we have to do is replace the exposed API key with the environment variable in the `config` dictionary like so:
 
 ```py
-openai.api_key = config[‘API_KEY’]
+openai.api_key = config['API_KEY']
 ```
 
 That's it! Our API key is now safe and hidden from the main code.
@@ -403,7 +410,7 @@ while keep_writing:
 
 ## [#](#-Finish-Line) Finish Line
 
-Congrats, You just created your blog generator! Throughout the article, we learned how to use GPT-3 through the official module, use `while` loops to generate multiple paragraphs, rate limits, and secure our app.
+Congrats, you just created your blog generator! Throughout the article, we learned how to use GPT-3 through the official module, use `while` loops to generate multiple paragraphs, rate limits, and secure our app.
 
 AI is expanding rapidly and the first few to utilize it properly through services like GPT-3 will become the innovators in the field.
 
