@@ -57,11 +57,13 @@ Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'l
 
 > API (Application programming interface) is a way for two computers to communicate with each other. Think of it like two friends texting back and forth. An API key is a code we receive to access the API. Think of it like a very important password, so don’t share it with others!
 
-After you've created your account with OpenAI, you can click on your profile picture on the top right, then click **View API keys** to get access to your API key. You can also click the following link to go directly to the page: https://beta.openai.com/account/api-keys.
+Go to www.openai.com and sign up for an OpenAI account.
+
+After you've created your account, click on your profile picture on the top right, then click "View API keys" to get access to your API key. You can also click the following link to go directly to the page: https://beta.openai.com/account/api-keys.
 
 Now that we know where our API key is located, let's keep it in mind for later on.
 
-With this API key, we get access to GPT-3 and $18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up $18. Afterward, we will have to pay to use GPT-3. However, $18 is more than enough to complete this project.
+With this API key, we get access to GPT-3 and $18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up \$18. Afterward, we will have to pay to use GPT-3. However, \$18 is more than enough to complete this project.
 
 ## [#](#-Beginning-the-Project) Beginning the Project
 
@@ -77,7 +79,7 @@ Assuming that we have those two installed, let's open up the code editor of our 
 
 ## [#](#-Installing-openai) Installing openai
 
-The main way that we'll be interacting with GPT-3 is through [http](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages) requests. While we can hard code this ourselves by creating a function that makes secure **http** requests, OpenAI provides us with an easier way. That's through the official package coincidentally called `openai`. This package will handle authorizing our API key and making any requests required.
+We'll be interacting with GPT-3 model using a python package called `openai`. This package consists of methods that can connect to the internet and grant us access to the GPT-3 model hosted by OpenAI the company.
 
 To install `openai`, all we have to do is run the following command in our terminal:
 
@@ -91,7 +93,7 @@ We can now use this package by importing it into our **blog_generator.py** file 
 import openai
 ```
 
-## [#](#-Authorizing-with-our-API-key) Authorizing with our API key
+## [#](#-Authorizing-with-our-API-key) Authorizing API Key
 
 Before we can work with GPT-3 we need to set our API key in the `openai` module. Remember, the API key is what gives us access to GPT-3, it authorizes us and says were allowed to use this API.
 
@@ -111,7 +113,7 @@ import openai
 openai.api_key = 'Your_API_Key'
 ```
 
-## [#](#-The-core-function) The core function
+## [#](#-The-core-function) The Core function
 
 Now that we have access to GPT-3, we can get to the meat of the application which is creating a function that takes in a prompt as user input and returns us a paragraph talking about that prompt. That function will look like this:
 
