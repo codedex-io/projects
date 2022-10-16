@@ -26,7 +26,9 @@ tags:
 
 [Artificial Intelligence (AI)](https://en.wikipedia.org/wiki/Artificial_intelligence) is becoming the next big technology to harness. From smart fridges to self-driving cars, AI is implemented in almost everything you can think of. So let's get ahead of the pack and learn how we can leverage the power of AI with Python and OpenAI.
 
-In this tutorial, we'll learn how to create a blog generator with [GPT-3](https://openai.com/api/), an AI model provided by [OpenAI](https://www.openai.com). The generator will read a topic to talk about as the input, and GPT-3 will return us a paragraph about that topic as the output. So the computer will write stuff for us. Say goodbye to writer's block!
+In this tutorial, we'll learn how to create a blog generator with [GPT-3](https://openai.com/api/), an AI model provided by [OpenAI](https://www.openai.com). The generator will read a topic to talk about as the input, and GPT-3 will return us a paragraph about that topic as the output. 
+
+So AI will be "writing" stuff for us. Say goodbye to writer's block!
 
 Wait... hold on! Artificial intelligence?! AI models?! This must be complicated to code. 😵
 
@@ -38,7 +40,7 @@ The final result will look something like this:
 
 ![generator demo](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/generator-demo.gif)
 
-_Who knows, maybe this entire article was written by the generator we're about to create. 👀_
+_Who knows, maybe this entire project tutorial was written by the generator we're about to create. 👀_
 
 ## [#](#-what-is-gpt-3) What is GPT-3?
 
@@ -64,7 +66,7 @@ After you've created your account, click on your profile picture on the top righ
 
 Now that we know where the API key is located, let's keep it in mind for later.
 
-With this API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up \$18. Afterward, we will have to pay to use GPT-3. However, \$18 is more than enough to complete this project.
+With this API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up the \$18. And that's more than enough to complete this project.
 
 ### [##](##-python-file) Python Setup
 
@@ -274,7 +276,7 @@ Let's do some dissection!
 keep_writing = True
 ```
 
-First, we defined a variable called `keep_writing, to use as a boolean value for the following `while` loop.
+First, we defined a variable called `keep_writing`, to use as a boolean value for the following `while` loop.
 
 ```py
 while keep_writing:
@@ -375,9 +377,9 @@ openai.api_key = config['API_KEY']
 
 That's it! Our API key is now safe and hidden from the main code.
 
-**Note**: If you want to push your code to **GitHub**, you don't want to push the **.env** file as well. In the root directory of your project, create a file called **.gitignore**, and in the Git ignore file, type in `.env`. This will prevent the file from being tracked by Git and ultimately pushed to Github.
+**Note**: If you want to push your code to [GitHub](https://www.github.com), you don't want to push the **.env** file as well. In the root directory of your project, create a file called **.gitignore**, and in the Git ignore file, type in `.env`. This will prevent the file from being tracked by Git and ultimately pushed to Github.
 
-With all that set and done, we’re finished!! Our code should now look like this!
+With all that set and done, we’re finished!! The code should now look like this!
 
 ```py
 import openai
