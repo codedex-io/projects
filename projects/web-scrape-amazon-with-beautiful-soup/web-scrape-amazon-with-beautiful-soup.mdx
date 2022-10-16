@@ -7,7 +7,6 @@ header: URL
 tags:
   - beginner
   - python
-  - webscraping
 ---
 
 # Web Scrape Amazon with Beautiful Soup
@@ -16,8 +15,8 @@ tags:
 
 ![Header image](URL)
 
-**Prerequisites:** Python fundamentals, Basics of HTML  
-**Versions:** Python 3.10, requests 2.28.1, beautifulsoup4 4.11.1, lxml 4.9.1
+**Prerequisites:** Python fundamentals, HTML basics  
+**Versions:** Python 3.10, requests 2.28.1, beautifulsoup4 4.11.1, lxml 4.9.1  
 **Read Time:** 40 minutes  
 
 ## [#](#-introduction) Introduction
@@ -28,7 +27,7 @@ In this tutorial, we will learn to build a web scraper that scrapes Amazon produ
 
 The final result will look something like this:
 
-![Demo](demo.gif)
+![Demo](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/demo.gif)
 
 ## [#](#-what-is-web-scraping) What is Web Scraping?
 
@@ -36,10 +35,12 @@ The process of extracting data from a website is known as web scraping. This dat
 
 While web scraping isn't illegal, it can become illegal if non-publicly available data is extracted. Web scraping can sometimes be difficult as the scraper may need to go through captchas or the website keeps constantly changing.
 
+In Python, you can use the Beautiful Soup library to extract data out of HTML and XML files. With the help of parsers like **lxml**, you can navigate, search and modify the parse tree.  
+
 
 ## [#](#-setting-up) Setting up
 
-First, open a Python code editor of your choice (VS Code recommended), and create a new Python file `scraper.py`. This is where we will be writing our code to scrape Amazon.
+First, open a Python code editor of your choice (VS Code recommended), and create a new Python file **scraper.py**. This is where we will be writing our code to scrape Amazon.
 
 To start with, you will need to install three libraries: 
 * The [`requests`](https://pypi.org/project/requests/) lets you send HTTP requests.
@@ -60,9 +61,9 @@ import requests
 from bs4 import BeautifulSoup
 ```
 
-When we send an HTTP request, we send some **headers** along with the request. If you go to the Network tab of your browser and reload any web page, you can find the request headers similar to below:
+When we send an HTTP request, we send some **headers** along with the request. If you open devtools in your browsers(usually accessible through Command + Option + I or Control + Shift + I) and switch to the **Network** tab and reload any page, you can find the request headers that are similar to the ones shown below:
 
-![Request Headers](request-headers.png)
+![Request Headers](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/request-headers.png)
 
 Similar to browsers, we will also send some headers along with our HTTP request. Let's define them in a dictionary called `headers`:
 
@@ -89,7 +90,7 @@ def get_product_details(product_url: str) -> dict:
     product_details = {}
 ```
 
-Now, let us make an HTTP request to get the HTML content of the product page. Using the `BeautifulSoup` class, we will create a soup of the page content.
+Now, let us make an HTTP request to get the HTML content of the product page. Using the `BeautifulSoup` class, we will create a [soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#making-the-soup) of the page content.
 ```python
 def get_product_details(product_url: str) -> dict:
 
@@ -101,25 +102,37 @@ def get_product_details(product_url: str) -> dict:
     soup = BeautifulSoup(page.content, features="lxml")
 ``` 
 
-Now comes the most important part of the tutorial where we will extract data from the page. For the sake of this tutorial, we will extract two data - the **title** of the product and the **price** of the product.
+Now comes the most important part of the tutorial where we will extract data from the page. For the sake of this tutorial, we will extract two data: 
 
-### Extracting the title of the product
-Open a product page, say [this one](https://www.amazon.com/Acer-Chromebook-Graphics-802-11ac-CB512-C1KJ/dp/B09Q9YKW15/ref=lp_16225007011_1_2) on your browser, and use the **Inspect Element** option to view the HTML content of the page. You will see the below HTML code for the title of the product.
+- The **title** of the product.
+- The **price** of the product.
 
-![Extracting Title](extracting-title.png)
+But before extracting, let us learn how to view the HTML code that makes up any web page. Open a product page, say [this one](https://www.amazon.com/Acer-Chromebook-Graphics-802-11ac-CB512-C1KJ/dp/B09Q9YKW15) on your browser. 
+
+![Amazon Product Page](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/amazon-product-page.png)
+
+To view the HTML code, we have an **Inspect** option in every browser. You can use the keyboard shortcuts – Ctrl + Shift + I for Windows or Linux and Cmd + Option + I for macOS users. Alternatively, right-click on the web page and choose **Inspect** to access the Developer tools panel. Make sure you are on the **Elements** tab in the Developer tools panel.
+
+![Inspect Element](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/inspect-element.gif)
+
+### Extracting the Title of the Product
+ 
+Use the **Inspect** option to view the HTML code used for the title of the product.
+
+![Extracting Title](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/extracting-title.png)
 
 The title is wrapped with a `span` tag with an attribute id **productTitle**. Let's use this id to extract the title of the product.
 
 ```python
 title = soup.find("span", attrs={"id": "productTitle"}).get_text().strip()
 ```
-We use the `find()` method to find a `span` element. We pass the id **productTitle** in a dictionary called `attrs` that accepts the attributes. The `get_text()` method returns the text in a string format. The `strip()` method is used to remove any extra whitespaces.
+We use the `.find()` method to find a `span` element. We pass the `productTitle` id in a dictionary called `attrs` that accepts the attributes. The `.get_text()` method returns the text in a string format. The `.strip()` method is used to remove any extra leading and trailing whitespaces.
 
-### Extracting the price of the product
+### Extracting the Price of the Product
 
-Similar to the title of the product, if you inspect the page, you will find the below HTML code for the price of the product.
+Similar to the title of the product, if you inspect the prices by right clicking on them and opening devtools, you will find the below HTML code for the price of the product.
 
-![Extracting Price](extracting-price.png)
+![Extracting Price](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/extracting-price.png)
 
 Thus, we can extract the price in a similar fashion.
 
@@ -133,7 +146,7 @@ But, you will see a problem when you print the price of the product. The extract
 extracted_price = soup.find("span", attrs={"class": "apexPriceToPay"}).get_text().strip()
 price = "$" + extracted_price.split("$")[1]
 ```
-We split the `extracted_price` string using the **$** symbol and select the element at index 1. We also add the dollar symbol before the price.
+First we split the `extracted_price` string using the `$` symbol using `extracted_price.split("$")`. This will return a list: `['', '166.00', '166.00']`. We then select the element at index 1 from the list. We also add the dollar sign before the price.
 
 Now that you have extracted the product details, you can put them inside the `product_details` dictionary as below:
 
@@ -175,7 +188,7 @@ def get_product_details(product_url: str) -> dict:
 
 Notice that we have used **try-except** block to catch any error.
 
-## [#](#-running-the-scraper) Running the scraper
+## [#](#-running-the-scraper) Running the Scraper
 
 To run the scraper, we will ask the user to enter any product URL. Then we will call the `get_product_details()` function with that product URL and print it.
 
@@ -191,7 +204,7 @@ print(product_details)
 
 In this tutorial, we scraped Amazon to extract the title and price of a product. You can follow the same pattern to extract more details like the rating of the product or its availability.
 
-As mentioned before, the layout of a website keeps changing and hence, the above code may not be helpful in the future. But this tutorial should be helpful to teach to you how to scrape any website.
+As mentioned before, the layout of a website keeps changing and hence, the above code may no longer be applicable as it is, without some changes. But this tutorial should be helpful to teach to you how to scrape any website. Join Codédex club to get support from code mentors if you run any trouble while using this article. 
 
 ## [#](#-more-resources) More Resources
 
