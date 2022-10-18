@@ -1,6 +1,8 @@
-# Codédex Projects Contribution Guide 👩🏻‍💻👨🏾‍💻👩🏼‍💻
+# Codédex Projects: Contribution Guide 👩🏻‍💻👨🏾‍💻👩🏼‍💻
 
-Welcome to the Codédex Projects GitHub repo! Thank you for your interest in contributing a project tutorial for Codédex! 
+Welcome to the [Codédex Projects](https://www.codedex.io/projects) GitHub repo! 
+
+Thank you for your interest in contributing a project tutorial for Codédex. 🫶
 
 ## Why Contribute?
 
@@ -28,7 +30,7 @@ to see what a final project should look like. Check your work using [insert mdx 
 1. Fork [this repository](https://github.com/codedex-io/projects).
 2. Clone the forked repository to your computer.
 3. Create and switch into a new branch.
-4. Create a new folder with your project tutorial `.mdx` file in it.
+4. Create a new folder with your project tutorial **.mdx** file in it.
 5. Make a pull request to merge your fork with this repository.
 
 ## Content Guidelines
@@ -45,5 +47,17 @@ Our projects are divided into three difficulties:
 - `beginner`: Projects for code newbies and people who have just finished "The Legend of Python" course.
 - `intermediate`: Projects that are for less experienced programmers. These projects should contain some more difficult concepts, but should still be understandable by most programmers. 
 - `advanced`: Projects that are for experienced programmers. Projects can contain advanced concepts and paradigms.
+
+## Metadata
+
+
+## Formatting
+
+- Subheadings are title cased: Setting Up
+- File names are bolded: **hello_world.py**
+- Function names have (): `print()`
+- Method names have the dot operator: `.insert()`
+- Python strings should be single quotes.
+- Python indentation is two spaces.
 
 If a project tutorial does not follow these guidelines, we will request changes in order for the tutorial to meet these guidelines. If you do not comply, the PR will be marked as invalid and closed. 
