@@ -20,7 +20,7 @@ tags:
 
 **Prerequisites:** Python fundamentals  
 **Versions:** Python 3.10, python-dotenv 0.21.0, openai 0.23.0  
-**Read Time:** 45 minutes
+**Read Time:** 60 minutes
 
 ## [#](#-introduction) Introduction
 
@@ -58,23 +58,25 @@ Now we know what we'll be working with, let's build the program!
 
 Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'll need this account access to an API key that we can use to work with GPT-3.
 
-> API (Application programming interface) is a way for two computers to communicate with each other. Think of it like two friends texting back and forth. An API key is a code we receive to access the API. Think of it like an important password, so don’t share it with others!
+> [API (Application Programming Interface)](https://en.wikipedia.org/wiki/API) is a way for two computers to communicate with each other. Think of it like two friends texting back and forth. An API key is a code we receive to access the API. Think of it like an important password, so don’t share it with others!
 
 Go to www.openai.com and sign up for an OpenAI account.
 
-After you've created your account, click on your profile picture on the top right, then click "View API keys" to access your API key. You can also click the following link to go directly to the page: https://beta.openai.com/account/api-keys.
+After you've created an account, click on your profile picture on the top right, then click "View API keys" to access your API key. 
+
+You should see [this page](https://beta.openai.com/account/api-keys) and it should look like:
 
 ![API Key](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/api-key.png)
 
 Now that we know where the API key is located, let's keep it in mind for later.
 
-With this API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up the \$18. And that's more than enough to complete this project.
+With this API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up the \$18, which is more than enough to complete this project.
 
 ### [##](##-python-file) Python Setup
 
-For this project, we'll need [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/) installed.
+For this project, we'll need [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/) (package installer) installed.
 
-Assuming that we have those two installed, let's open up the code editor of our choice (we recommend [VS Code](https://code.visualstudio.com)) and create a file called **blog_generator.py**.
+Assuming that we have those two installed, let's open up the code editor of our choice (we recommend [VS Code](https://code.visualstudio.com)) and create a new file called **blog_generator.py**.
 
 **Note**: You can name this file anything except for **openai.py**, since the name will clash with a package we'll be installing.
 
@@ -83,7 +85,7 @@ Assuming that we have those two installed, let's open up the code editor of our 
 
 At the core of this project, all we'll be doing is sending data with instructions to a server owned by OpenAI, then receiving a response back from that server and displaying it.
 
-### [##](##-installing-openai) Installing openai
+### [##](##-installing-openai) Install openai
 
 We'll be interacting with GPT-3 model using a python package called `openai`. This package consists of methods that can connect to the internet and grant us access to the GPT-3 model hosted by OpenAI, the company.
 
@@ -99,7 +101,7 @@ We can now use this package by importing it into our **blog_generator.py** file 
 import openai
 ```
 
-### [##](##-authorizing-with-our-api-key) Authorizing API Key
+### [##](##-authorizing-with-our-api-key) Authorize API Key
 
 Before we can work with GPT-3 we need to set our API key in the `openai` module. Remember, the API key is what gives us access to GPT-3; it authorizes us and says we're allowed to use this API.
 
@@ -109,14 +111,14 @@ We can set our API key by extending a method in the `openai` module called `api_
 openai.api_key = 'Your_API_Key'
 ```
 
-The method will take in our API key as a string. Remember, our API key is located in our OpenAI account.
+The method will take in the API key as a string. Remember, your API key is located in your [OpenAI account](https://beta.openai.com/account/api-keys).
 
-So far, our code looks like this:
+So far, the code should look like this:
 
 ```py
 import openai
 
-openai.api_key = 'Your_API_Key'
+openai.api_key = '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' # Fill in your own key
 ```
 
 ## [#](#-the-core-function) The Core Function
@@ -327,7 +329,7 @@ This is normally done to protect the API from abuse or [DoS](https://en.wikipedi
 
 For GPT-3, the rate limit is 20 requests per minute. As long as we don't run the function 20 times a minute, we'll be fine. But in a rare case that it does occur, GPT-3 will stop producing responses and make us wait a minute to produce another response.
 
-Let's take another breather. We're almost done!!
+Let's take another breather. We're almost done!
 
 ## [#](#-Securing-Our-App) Securing Our App
 
@@ -381,7 +383,7 @@ That's it! Our API key is now safe and hidden from the main code.
 
 **Note**: If you want to push your code to [GitHub](https://www.github.com), you don't want to push the **.env** file as well. In the root directory of your project, create a file called **.gitignore**, and in the Git ignore file, type in `.env`. This will prevent the file from being tracked by Git and ultimately pushed to Github.
 
-With all that set and done, we’re finished!! The code should now look like this!
+With all that set and done, we’re finished! The code should now look like this!
 
 ```py
 import openai
