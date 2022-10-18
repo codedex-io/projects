@@ -41,6 +41,7 @@ To ensure the quality of our project tutorials, all tutorials must abide by thes
 - All the content you create is your own work, and not plagiarized from other sources.
 - All code created is adequately commented or explained.
 - Your project tutorial should correctly render in `mdx`.
+- Each project should have a full complete project solution code in a code block towards the bottom of the project. The name of the file should be in a comment on line 1. If there are multiple files, there should be multiple code blocks. 
 
 ## Metadata
 
