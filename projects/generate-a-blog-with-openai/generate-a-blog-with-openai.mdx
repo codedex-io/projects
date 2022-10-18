@@ -252,6 +252,37 @@ We can test to see if our code works so far by printing out the `generate_blog()
 print(generate_blog('Why NYC is better than your city.'))
 ```
 
+Here's the code so far:
+
+```py
+import openai
+
+openai.api_key = 'sk-jAjqdWoqZLGsh7nXf5i8T3BlbkFJ9CYRkMSvNP' # Fill in your own key
+
+def generate_blog(paragraph_topic):
+  response = openai.Completion.create(
+    model = 'text-davinci-002',
+    prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
+    max_tokens = 400,
+    temperature = 0.3
+  )
+
+  retrieve_blog = response.choices[0].text
+
+  return retrieve_blog
+
+print(generate_blog('Why NYC is better than your city.'))
+```
+
+And boom, after 1-3 seconds, it should spit out a paragraph like this:
+
+```bash
+There are a few reasons why New York City is better than other cities. First, NYC is more diverse than any other city in the world. You can find people from all walks of life here, and the city is always buzzing with energy. Second, the food in NYC is some of the best in the world. You can find any type of cuisine you're in the mood for, and the quality is always top-notch. Finally, the city is just plain fun. There's always something to do, whether you're into art, music, or just exploring.
+```
+
+Try running the code a couple more times; the output should be different every time! 🤯
+
+
 ## [#](#-Paragraph-Generator-to-Blog-Generator) Paragraph Generator to Blog Generator
 
 Right now if we run our code we'll only be able to generate one paragraph worth of text. Remember we're trying to create a blog generator and a blog has multiple paragraphs with each paragraph having a different topic.
