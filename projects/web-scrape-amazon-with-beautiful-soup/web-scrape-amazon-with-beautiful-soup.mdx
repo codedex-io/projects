@@ -31,7 +31,7 @@ The final result will look something like this:
 
 ## [#](#-what-is-web-scraping) What is Web Scraping?
 
-The process of extracting data from a website is known as web scraping. This data is collected and then exported in a way that the user will find more valuable, say an API or a CSV file. Although web scraping can be done manually, automated methods are typically preferable since they can be less expensive and perform more quickly.
+The process of extracting data from a website is known as web scraping. This data is collected and then exported in a way that the user will find more valuable, say an API or a CSV file. Although web scraping can be done manually, automated methods are typically preferable since they can be less expensive and perform more quickly. You can learn more about Web Scraping in this [Wikipedia article](https://en.wikipedia.org/wiki/Web_scraping).
 
 While web scraping isn't illegal, it can become illegal if non-publicly available data is extracted. Web scraping can sometimes be difficult as the scraper may need to go through captchas or the website keeps constantly changing.
 
@@ -90,7 +90,7 @@ def get_product_details(product_url: str) -> dict:
     product_details = {}
 ```
 
-Now, let us make an HTTP request to get the HTML content of the product page. Using the `BeautifulSoup` class, we will create a [soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#making-the-soup) of the page content.
+Now, let's make an HTTP request to get the HTML content of the product page. Using the `BeautifulSoup` class, we will create a [soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#making-the-soup) of the page content.
 ```python
 def get_product_details(product_url: str) -> dict:
 
