@@ -126,7 +126,7 @@ The title is wrapped with a `span` tag with an attribute id **productTitle**. Le
 ```python
 title = soup.find("span", attrs={"id": "productTitle"}).get_text().strip()
 ```
-We use the `.find()` method to find a `span` element. We pass the `productTitle` id in a dictionary called `attrs` that accepts the attributes. The `.get_text()` method returns the text in a string format. The `.strip()` method is used to remove any extra leading and trailing whitespaces.
+We use the `.find()` method to find a `span` element. Then pass the `productTitle` id in a dictionary called `attrs` that accepts the attributes. The `.get_text()` method returns the text in a string format. The `.strip()` method is used to remove any extra leading and trailing whitespaces.
 
 ### Extracting the Price of the Product
 
