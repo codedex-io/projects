@@ -44,7 +44,7 @@ _Who knows, maybe this entire project was written by the generator we're about t
 
 ## [#](#-what-is-gpt-3) What is GPT-3?
 
-[GPT-3](https://en.wikipedia.org/wiki/GPT-3) is an AI model released by OpenAI in 2020. An AI model is a program trained on a bunch of data to perform a specific task. In this case, GPT-3 was trained to speak like a human and predict what comes next given the context of a sentence, with its training dataset being 45 terabytes (!) of text from the internet. 
+[GPT-3](https://en.wikipedia.org/wiki/GPT-3) is an AI model released by OpenAI in 2020. An AI model is a program trained on a bunch of data to perform a specific task. In this case, GPT-3 was trained to speak like a human and predict what comes next given the context of a sentence, with its training dataset being 45 terabytes of text (!) from the internet. 
 
 > For reference, if you had to keep writing until your paper hits 45 terabytes in size, you would have to write [22,500,000,000](https://www.techtarget.com/searchstorage/definition/How-many-bytes-for) pages worth of plain text. 
 
@@ -62,15 +62,13 @@ Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'l
 
 Go to www.openai.com and sign up for an OpenAI account.
 
-After you've created an account, click on your profile picture on the top right, then click "View API keys" to access your API key. 
-
-You should see [this page](https://beta.openai.com/account/api-keys) and it should look like:
+After you've created an account, click on your profile picture on the top right, then click "View API keys" to access your API key. You should see [this page](https://beta.openai.com/account/api-keys) and it should look like:
 
 ![API Key](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/api-key.png)
 
 Now that we know where the API key is located, let's keep it in mind for later.
 
-With this API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we have used up the \$18, which is more than enough to complete this project.
+With the API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we go over the \$18, which is more than enough to complete this project.
 
 ### [##](##-python-file) Python Setup
 
@@ -118,7 +116,7 @@ So far, the code should look like this:
 ```py
 import openai
 
-openai.api_key = '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' # Fill in your own key
+openai.api_key = 'sk-jAjqdWoqZLGsh7nXf5i8T3BlbkFJ9CYRkMSvNP' # Fill in your own key
 ```
 
 ## [#](#-the-core-function) The Core Function
@@ -319,15 +317,25 @@ Otherwise, if the user enters anything but `Y`, we want to stop the loop. We can
 
 With that complete, we can now write as many paragraphs as we want by running the program once!
 
-### [##](##-rate-limitation) Rate Limitation
+### [##](##-rate-limitation) Rate Limit
 
 Since we're using a `while` loop, we have the potential to be rate limited.
 
-> Rate limit is the number of API calls an app or user can make within a given time period
+> Rate limit is the number of API calls an app or user can make within a given time period.
 
 This is normally done to protect the API from abuse or [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) attacks.
 
 For GPT-3, the rate limit is 20 requests per minute. As long as we don't run the function 20 times a minute, we'll be fine. But in a rare case that it does occur, GPT-3 will stop producing responses and make us wait a minute to produce another response.
+
+### [##](##-credit-limite) Credit Limit
+
+If you have been playing with the API nonstop, you might have exceeded the $18 limit. The following error is thrown when that happens:
+
+```bash
+openai.error.RateLimitError: You exceeded your current quota, please check your plan and billing details.
+```
+
+If that's the case, go to OpenAI's [Billing overview](https://beta.openai.com/account/billing/overview) page and create a paid account.
 
 Let's take another breather. We're almost done!
 
