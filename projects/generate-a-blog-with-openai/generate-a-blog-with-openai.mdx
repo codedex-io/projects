@@ -129,7 +129,7 @@ That function will look like this:
 def generate_blog(paragraph_topic):
   response = openai.Completion.create(
     model = 'text-davinci-002',
-    prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
+    prompt = 'Write a paragraph about the following topic. ' + paragraph_topic,
     max_tokens = 400,
     temperature = 0.3
   )
@@ -153,7 +153,7 @@ And let's go inside the function. Here's the first part:
 ```py
   response = openai.Completion.create(
     model = 'text-davinci-002',
-    prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
+    prompt = 'Write a paragraph about the following topic. ' + paragraph_topic,
     max_tokens = 400,
     temperature = 0.3
  )
@@ -175,7 +175,7 @@ Now that we have access to the completion endpoint, we need to specify a few thi
 These models perform the same task but at a different power level. More power equals better and more coherent responses, with `text-davinci-002` being the most powerful and `text-babbage-001` being the least powerful. You can think of it like a bike vs. a car. They both perform the same task of taking you from one place to another, but the car will perform that task better. You can read more about the models in the [documentation](https://beta.openai.com/docs/models/gpt-3).
 
 ```py
-prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
+prompt = 'Write a paragraph about the following topic. ' + paragraph_topic,
 ```
 
 `prompt`: This is where we design the main instructions for GPT-3. This parameter will take in our `paragraph_topic` argument, but right before we can tell GPT-3 what to do with that argument. Currently, we are instructing GPT-3 to write a paragraph about the provided argument. GPT-3 will try its best to follow this instruction and return us a paragraph. GPT-3 is very flexible, if the string was changed to include blog outline based on the parameter, it will give us an outline instead of a normal paragraph. You can play around with this by telling the model what exactly the model should generate before the text and see what interesting responses you get.
@@ -262,7 +262,7 @@ openai.api_key = 'sk-jAjqdWoqZLGsh7nXf5i8T3BlbkFJ9CYRk' # Fill in your own key
 def generate_blog(paragraph_topic):
   response = openai.Completion.create(
     model = 'text-davinci-002',
-    prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
+    prompt = 'Write a paragraph about the following topic. ' + paragraph_topic,
     max_tokens = 400,
     temperature = 0.3
   )
@@ -283,9 +283,9 @@ Try running the code a couple more times; the output should be different every t
 
 ## [#](#-Paragraph-Generator-to-Blog-Generator) Paragraph Generator to Blog Generator
 
-Right now if we run our code we'll only be able to generate one paragraph worth of text. Remember we're trying to create a blog generator and a blog has multiple paragraphs with each paragraph having a different topic.
+Right now, if we run our code, we'll only be able to generate one paragraph worth of text. Remember, we're trying to create a blog generator, and a blog has multiple sections, with each paragraph having a different topic.
 
-Let's add additional code so that we can generate as many paragraphs as we want, with each paragraph discussing a different topic.
+Let's add additional code to generate as many paragraphs as we want, with each paragraph discussing a different topic.
 
 That additional code will be as simple as:
 
@@ -303,11 +303,13 @@ while keep_writing:
 
 Let's do some dissection!
 
+First, we defined a variable called `keep_writing`, to use as a boolean value for the following `while` loop.
+
 ```py
 keep_writing = True
 ```
 
-First, we defined a variable called `keep_writing`, to use as a boolean value for the following `while` loop.
+A `while` loop will repeat a code block until a condition is met.
 
 ```py
 while keep_writing:
@@ -319,30 +321,12 @@ while keep_writing:
     keep_writing = False
 ```
 
-> A `while` loop will repeat a code block until a condition is met.
+In our `while` loop, we first created a variable called `answer` that will take in an input from the user using the built-in `input()` function.
 
-```py
-answer = input('Write a paragraph? Y for yes, anything else for no')
-```
+Using that variable, we then created an `if` statement that will either continue the loop or stop the loop.
 
-In our `while` loop, we first created a variable called `answer` that will take in an input from the user.
-
-Using that variable, we then created an `if` function that will either continue the loop or stop the loop.
-
-```py
-  if (answer == 'Y'):
-    paragraph_topic = input('What should this paragraph talk about?')
-    print(generate_blog(paragraph_topic))
-```
-
-If the input from the user is `Y`, then we will continue the loop and ask the user what topic they want to generate text about, storing that value in a variable called `paragraph_topic`. Then we will execute and print the `generate_blog()` function using the `parapgraph_topic` variable as its argument.
-
-```py
-  else:
-    keep_writing = False
-```
-
-Otherwise, if the user enters anything but `Y`, we want to stop the loop. We can accomplish this by assigning the `keep_writing` variable to `False`.
+- If the input from the user is `Y`, then we will continue the loop and ask the user what topic they want to generate text about, storing that value in a variable called `paragraph_topic`. Then we will execute and print the `generate_blog()` function using the `parapgraph_topic` variable as its argument.
+- Else, if the user enters anything but `Y`, we will stop the loop by assigning the `keep_writing` variable to `False`.
 
 With that complete, we can now write as many paragraphs as we want by running the program once!
 
@@ -354,14 +338,15 @@ Since we're using a `while` loop, we have the potential to be rate limited.
 
 This is normally done to protect the API from abuse or [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) attacks.
 
-For GPT-3, the rate limit is 20 requests per minute. As long as we don't run the function 20 times a minute, we'll be fine. But in a rare case that it does occur, GPT-3 will stop producing responses and make us wait a minute to produce another response.
+For GPT-3, the rate limit is 20 requests per minute. As long as we don't run the function that fast, we'll be fine. But in a rare case that it does occur, GPT-3 will stop producing responses and make us wait a minute to produce another response.
 
 ### [##](##-credit-limite) Credit Limit
 
-If you have been playing with the API nonstop, you might have exceeded the $18 limit. The following error is thrown when that happens:
+By this point, if you have been playing with the API nonstop, there's a chance that you might have exceeded the $18 limit. The following error is thrown when that happens:
 
 ```bash
-openai.error.RateLimitError: You exceeded your current quota, please check your plan and billing details.
+openai.error.RateLimitError:  
+You exceeded your current quota, please check your plan and billing details.
 ```
 
 If that's the case, go to OpenAI's [Billing overview](https://beta.openai.com/account/billing/overview) page and create a paid account.
@@ -433,7 +418,7 @@ openai.api_key = config['API_KEY']
 def generate_blog(paragraph_topic):
   response = openai.Completion.create(
    model = 'text-davinci-002',
-   prompt = 'Write a paragraph about the following topic.' + ' ' + paragraph_topic,
+   prompt = 'Write a paragraph about the following topic. ' + paragraph_topic,
    max_tokens = 400,
    temperature = 0.3
   )
