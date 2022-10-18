@@ -19,7 +19,7 @@ Here are some examples of Codédex Projects:
 
 ## Contributing
 
-Ready to add your own project tutorial? Learn more by reading our [Contributing Guidelines](https://github.com/codedex-io/projects/blob/main/.github/CONTRIBUTING.md)! 🙌
+Ready to add your own project tutorial? Learn more by reading our [Contribution Guide](https://github.com/codedex-io/projects/blob/main/.github/CONTRIBUTING.md)! 🙌
 
 ## What stage of development are we in right now?
 
