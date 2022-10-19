@@ -283,13 +283,11 @@ And boom, after 2-3 seconds, it should spit out a paragraph like this:
 Try running the code a couple more times; the output should be different every time! 🤯
 
 
-## [#](#-Paragraph-Generator-to-Blog-Generator) Paragraph Generator to Blog Generator
+## [#](#-Paragraph-Generator-to-Blog-Generator) Mulitple Paragraphs
 
 Right now, if we run our code, we'll only be able to generate one paragraph worth of text. Remember, we're trying to create a blog generator, and a blog has multiple sections, with each paragraph having a different topic.
 
-Let's add additional code to generate as many paragraphs as we want, with each paragraph discussing a different topic.
-
-That additional code will be as simple as:
+Let's add some additional code to generate as many paragraphs as we want, with each paragraph discussing a different topic:
 
 ```py
 keep_writing = True
@@ -303,32 +301,14 @@ while keep_writing:
     keep_writing = False
 ```
 
-Let's do some dissection!
-
 First, we defined a variable called `keep_writing`, to use as a boolean value for the following `while` loop.
 
-```py
-keep_writing = True
-```
-
-A `while` loop will repeat a code block until a condition is met.
-
-```py
-while keep_writing:
-  answer = input('Write a paragraph? Y for yes, anything else for no.')
-  if (answer == 'Y'):
-    paragraph_topic = input('What should this paragraph talk about? ')
-    print(generate_blog(paragraph_topic))
-  else:
-    keep_writing = False
-```
-
-In our `while` loop, we first created an `answer` variable that will take in an input from the user using the built-in `input()` function.
+In the `while` loop, we created an `answer` variable that will take in an input from the user using the built-in `input()` function.
 
 We then created an `if` statement that will either continue the loop or stop the loop.
 
 - If the input from the user is `Y`, then we will ask the user what topic they want to generate text about, storing that value in a variable called `paragraph_topic`. Then we will execute and print the `generate_blog()` function using the `parapgraph_topic` variable as its argument.
-- Else, if the user enters anything but `Y`, we will stop the loop by assigning the `keep_writing` variable to `False`.
+- Else, if the user enters anything, we will stop the loop by assigning the `keep_writing` variable to `False`.
 
 With that complete, we can now write as many paragraphs as we want by running the program once!
 
@@ -375,6 +355,8 @@ We can install `python-dotenv` by running the following command in the terminal:
 pip install python-dotenv
 ```
 
+### [##](##-dot-env) .env File
+
 Then in our project's root directory, create a file called **.env**. This file will hold our environment variable.
 
 Open up the **.env** file and create a variable like so:
@@ -384,6 +366,8 @@ API_KEY=<Your_API_Key>
 ```
 
 The variable will take in our API key without any quotation marks or spaces. Remember to name this variable as `API_KEY` only.
+
+### [##](##-dot-env) Update Python File
 
 Now that we have our environment variable set, let's open up the **blog_generator.py** file, and paste this code under `import openai`.
 
