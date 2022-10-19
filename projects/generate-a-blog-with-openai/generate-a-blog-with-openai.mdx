@@ -172,19 +172,21 @@ Now that we have access to the completion endpoint, we need to specify a few thi
 - `text-babbage-001`
 - `text-ada-001`
 
-These models perform the same task but at a different power level. More power equals better and more coherent responses, with `text-davinci-002` being the most powerful and `text-babbage-001` being the least powerful. You can think of it like a bike vs. a car. They both perform the same task of taking you from one place to another, but the car will perform that task better. You can read more about the models in the [documentation](https://beta.openai.com/docs/models/gpt-3).
+These models perform the same task but at a different power level. More power equals better and more coherent responses, with `text-davinci-002` being the most powerful and `text-babbage-001` being the least. You can think of it like a car vs. a bike. They both perform the same task of taking you from one place to another, but the car will perform better. You can read more about the models in the [documentation](https://beta.openai.com/docs/models/gpt-3).
 
 ```py
 prompt = 'Write a paragraph about the following topic. ' + paragraph_topic,
 ```
 
-`prompt`: This is where we design the main instructions for GPT-3. This parameter will take in our `paragraph_topic` argument, but right before we can tell GPT-3 what to do with that argument. Currently, we are instructing GPT-3 to write a paragraph about the provided argument. GPT-3 will try its best to follow this instruction and return us a paragraph. GPT-3 is very flexible, if the string was changed to include blog outline based on the parameter, it will give us an outline instead of a normal paragraph. You can play around with this by telling the model what exactly the model should generate before the text and see what interesting responses you get.
+`prompt`: This is where we design the main instructions for GPT-3. This parameter will take in our `paragraph_topic` argument, but before that, we can tell GPT-3 what to do with that argument. Currently, we are instructing GPT-3 to `Write a paragraph about the following topic`. GPT-3 will try its best to follow this instruction and return us a paragraph. 
+
+GPT-3 is very flexible; if the initial string is changed to `Write a blog outline about the follow topic`, it will give us an outline instead of a normal paragraph. You can later play around with this by telling the model exactly what it should generate and seeing what interesting responses you get.
 
 ```py
 max_tokens = 400
 ```
 
-`tokens`: The token number decides how long the response is going to be. A larger token number will produce a larger response. By setting a specific number, we're saying that the response can't go past this token size. The way tokens are counted towards a response is a bit complex, but you can read this [article](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) by OpenAI that explains exactly how token size is calculated.
+`tokens`: The token number decides how long the response is going to be. A larger token number will produce a longer response. By setting a specific number, we're saying that the response can't go past this token size. The way tokens are counted towards a response is a bit complex, but you can read this [article](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) by OpenAI that explains how token size is calculated.
 
 Roughly 75 words is about 100 tokens. A paragraph has 300 words on average. So, 400 tokens is about the length of a normal paragraph. The model `text-davinci-002` has a token limit of 4,000.
 
@@ -192,19 +194,19 @@ Roughly 75 words is about 100 tokens. A paragraph has 300 words on average. So, 
 temperature = 0.3
 ```
 
-`temperature`: Temperature determines the randomness of a response. A higher temperature will produce a more creative response, while a lower temperature will produce a more well-defined response. This basically means that if you set the temperature to `0`, you'll get the same response every time. While a temperature of `.9` will produce a different response every time to the same prompt.
+`temperature`: Temperature determines the randomness of a response. A higher temperature will produce a more creative response, while a lower temperature will produce a more well-defined response.
+
+- `0.9`: A different response every time, even if it's the same prompt.
+- `0`: The same response every time. 
 
 There are plenty of other fields that we can specify to fine-tune the model even more, which you can read in the [documentation](https://beta.openai.com/docs/api-reference/completions/create), but for now, these are the four fields we need to concern ourselves with.
 
-Now that we have our model setup, we can run our function and the following things will happen.
+Now that we have our model setup, we can run our function, and the following things will happen:
 
-1. First, the openai module will take our API key, along with the fields we specified in the `response` variable, and make a request to the completion endpoint.
-
+1. First, the `openai` module will take our API key, along with the fields we specified in the `response` variable, and make a request to the completion endpoint.
 2. OpenAI will then verify that we're allowed to use GPT-3 by verifying our API key.
-
-3. After verification, GPT-3 will use the fields we specified to produce a response.
-
-4. The produced response will be returned back to use in the form of an object and stored in the `response` variable.
+3. After verification, GPT-3 will use the specified fields to produce a response.
+4. The produced response will be returned back in the form of an object and stored in the `response` variable.
 
 That returned object will look like this:
 
@@ -293,9 +295,9 @@ That additional code will be as simple as:
 keep_writing = True
 
 while keep_writing:
-  answer = input('Write a paragraph? Y for yes, anything else for no')
+  answer = input('Write a paragraph? Y for yes, anything else for no. ')
   if (answer == 'Y'):
-    paragraph_topic = input('What should this paragraph talk about?')
+    paragraph_topic = input('What should this paragraph talk about? ')
     print(generate_blog(paragraph_topic))
   else:
     keep_writing = False
@@ -313,19 +315,19 @@ A `while` loop will repeat a code block until a condition is met.
 
 ```py
 while keep_writing:
-  answer = input('Write a paragraph? Y for yes, anything else for no')
+  answer = input('Write a paragraph? Y for yes, anything else for no.')
   if (answer == 'Y'):
-    paragraph_topic = input('What should this paragraph talk about?')
+    paragraph_topic = input('What should this paragraph talk about? ')
     print(generate_blog(paragraph_topic))
   else:
     keep_writing = False
 ```
 
-In our `while` loop, we first created a variable called `answer` that will take in an input from the user using the built-in `input()` function.
+In our `while` loop, we first created an `answer` variable that will take in an input from the user using the built-in `input()` function.
 
-Using that variable, we then created an `if` statement that will either continue the loop or stop the loop.
+We then created an `if` statement that will either continue the loop or stop the loop.
 
-- If the input from the user is `Y`, then we will continue the loop and ask the user what topic they want to generate text about, storing that value in a variable called `paragraph_topic`. Then we will execute and print the `generate_blog()` function using the `parapgraph_topic` variable as its argument.
+- If the input from the user is `Y`, then we will ask the user what topic they want to generate text about, storing that value in a variable called `paragraph_topic`. Then we will execute and print the `generate_blog()` function using the `parapgraph_topic` variable as its argument.
 - Else, if the user enters anything but `Y`, we will stop the loop by assigning the `keep_writing` variable to `False`.
 
 With that complete, we can now write as many paragraphs as we want by running the program once!
@@ -334,7 +336,7 @@ With that complete, we can now write as many paragraphs as we want by running th
 
 Since we're using a `while` loop, we have the potential to be rate limited.
 
-> Rate limit is the number of API calls an app or user can make within a given time period.
+> [Rate limit](https://en.wikipedia.org/wiki/Rate_limiting) is the number of API calls an app or user can make within a given time period.
 
 This is normally done to protect the API from abuse or [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) attacks.
 
@@ -428,9 +430,9 @@ def generate_blog(paragraph_topic):
 keep_writing = True
 
 while keep_writing:
-  answer = input('Write a paragraph? Y for yes, anything else for no')
+  answer = input('Write a paragraph? Y for yes, anything else for no. ')
   if (answer == 'Y'):
-    paragraph_topic = input('What should this paragraph talk about?')
+    paragraph_topic = input('What should this paragraph talk about? ')
     print(generate_blog(paragraph_topic))
   else:
     keep_writing = False
