@@ -357,19 +357,19 @@ Let's take another breather. We're almost done!
 
 ## [#](#-Securing-Our-App) Securing Our App
 
-Let's think about this for a minute. We created this amazing application and we want to share it with the world, right? When we deploy it to the web or share it with our friends, they'll be able to see every piece of code we wrote. That's where the issue lies!
+Let's think about this for a minute. We created this amazing application and want to share it with the world, right? Well, when we deploy it to the web or share it with our friends, they'll be able to see every piece of code in the program. That's where the issue lies!
 
-At the beginning of this article, we created an account with OpenAI and were assigned an API key. Remember, this API key is what gives us access to GPT-3. Since GPT-3 is a paid service, the API key is also used to track how much we used GPT-3 and charge us accordingly. So what happens when someone has access to our API key? They'll be able to use the service with our key and we'll be the one charged, potentially thousands of dollars!
+At the beginning of this article, we created an account with OpenAI and were assigned an API key. Remember, this API key is what gives us access to GPT-3. Since GPT-3 is a paid service, the API key is also used to track usage and charge us accordingly. So what happens when someone knows our API key? They'll be able to use the service with our key, and we'll be the one charged, potentially thousands of dollars!
 
 In order to protect ourselves, we need to hide the API key in our code but still be able to use it. Let's see how we can do that.
 
 ### [##](##-Installing-python-dotenv) Installing `python-dotenv`
 
-`python-dotenv` is a package that allows us to create and use environment variables without having to set them in the operating system manually.
+[`python-dotenv`](https://pypi.org/project/python-dotenv) is a package that allows us to create and use environment variables without having to set them in the operating system manually.
 
-> environment variables are variables whose values are set outside the program, typically in the operating system.
+> Environment variables are variables whose values are set outside the program, typically in the operating system.
 
-We can install `python-dotenv` by running the following command in the terminal.
+We can install `python-dotenv` by running the following command in the terminal:
 
 ```sh
 pip install python-dotenv
@@ -380,7 +380,7 @@ Then in our project's root directory, create a file called **.env**. This file w
 Open up the **.env** file and create a variable like so:
 
 ```
-API_KEY=Your_Api_Key
+API_KEY=<Your_Api_Key>
 ```
 
 The variable will take in our API key without any quotation marks or spaces. Remember to name this variable as `API_KEY` only.
@@ -409,7 +409,11 @@ That's it! Our API key is now safe and hidden from the main code.
 
 With all that set and done, we’re finished! The code should now look like this!
 
+**blog_generator.py**
+
 ```py
+# Generate a Blog with OpenAI 📝
+
 import openai
 from dotenv import dotenv_values
 
@@ -436,6 +440,12 @@ while keep_writing:
     print(generate_blog(paragraph_topic))
   else:
     keep_writing = False
+```
+
+**.env**
+
+```bash
+API_KEY=sk-jAjqdWoqZLGsh7nXf5i8T3BlbkFJ9CYRk
 ```
 
 ## [#](#-Finish-Line) Finish Line
