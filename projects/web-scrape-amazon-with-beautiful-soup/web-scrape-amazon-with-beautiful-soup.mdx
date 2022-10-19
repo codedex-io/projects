@@ -21,9 +21,9 @@ tags:
 
 ## [#](#-introduction) Introduction
 
-Have you ever missed an Amazon product that was available at a discounted price? Have you ever thought of building an application that notifies you when the price of an Amazon product decreases below a certain price? If yes, let's build it together.
+Have you ever missed an Amazon product that was available at a discounted price? Or dreamt of building an application that notifies you when the price of a product dips below a certain price? If so, then let's save some money together!
 
-In this project tutorial, we will build a Python program that "web scrapes" Amazon product details using [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/).
+In this project tutorial, we will build a Python program that "web scrapes" Amazon product details using a library called [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/). 🍜
 
 The final result will look something like this:
 
@@ -47,7 +47,8 @@ To start with, you will need to install three libraries:
 * The [`beautifulsoup4`](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) lets you pull data out of HTML and XML files.
 * The [`lxml`](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser) provides powerful API for parsing HTML and XML.
 
-To install the above-mentioned libraries, run the below command in your VS Code terminal:
+To install the above-mentioned libraries, run the below in your VS Code terminal:
+
 ```bash
 pip install requests beautifulsoup4 lxml
 ```
@@ -61,7 +62,7 @@ import requests
 from bs4 import BeautifulSoup
 ```
 
-When we send an HTTP request, we send some **headers** along with the request. If you open devtools in your browsers(usually accessible through Command + Option + I or Control + Shift + I) and switch to the **Network** tab and reload any page, you can find the request headers that are similar to the ones shown below:
+When we send an HTTP request, we send some **headers** along with the request. If you open devtools in your browser (usually accessible through <kbd>Command</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> or <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>) and switch to the **Network** tab and reload any page, you can find the request headers that are similar to the ones shown below:
 
 ![Request Headers](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/request-headers.png)
 
@@ -69,8 +70,8 @@ Similar to browsers, we will also send some headers along with our HTTP request.
 
 ```python
 headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
-    "Accept-Language": "en-US,en;q=0.5"
+   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
+   "Accept-Language": "en-US,en;q=0.5"
 }
 ```
 To know your headers, you can also check out [this website](http://myhttpheader.com/).
@@ -79,27 +80,27 @@ Next, we will define a function `get_product_details()`.
 
 ```python
 def get_product_details(product_url: str) -> dict:
-    pass
+   pass
 ```
 The function accepts a string parameter `product_url` and returns a dictionary. Let's call this dictionary `product_details`.
 
 ```python
 def get_product_details(product_url: str) -> dict:
 
-    # Create an empty product details dictionary
-    product_details = {}
+   # Create an empty product details dictionary
+   product_details = {}
 ```
 
 Now, let's make an HTTP request to get the HTML content of the product page. Using the `BeautifulSoup` class, we will create a [soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#making-the-soup) of the page content.
 ```python
 def get_product_details(product_url: str) -> dict:
 
-    # Create an empty product details dictionary
-    product_details = {}
+   # Create an empty product details dictionary
+   product_details = {}
     
-    # Get the product page content and create a soup
-    page = requests.get(product_url, headers=headers)
-    soup = BeautifulSoup(page.content, features="lxml")
+   # Get the product page content and create a soup
+   page = requests.get(product_url, headers=headers)
+   soup = BeautifulSoup(page.content, features="lxml")
 ``` 
 
 Now comes the most important part of the tutorial where we will extract data from the page. For the sake of this tutorial, we will extract two data: 
@@ -111,7 +112,12 @@ But before extracting, let's learn how to view the HTML code that makes up any w
 
 ![Amazon Product Page](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/amazon-product-page.png)
 
-To view the HTML code, we have an **Inspect** option in every browser. You can use the keyboard shortcuts – Ctrl + Shift + I for Windows or Linux and Cmd + Option + I for macOS users. Alternatively, right-click on the web page and choose **Inspect** to access the Developer tools panel. Make sure you are on the **Elements** tab in the Developer tools panel.
+To view the HTML code, we have an **Inspect** option in every browser. You can use the keyboard shortcuts:
+
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> for Windows or Linux users.
+- <kbd>Command</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> for Mac users. 
+
+Alternatively, right-click on the web page and choose **Inspect** to access the Developer tools panel. Make sure you are on the **Elements** tab in the Developer tools panel.
 
 ![Inspect Element](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/inspect-element.gif)
 
@@ -161,29 +167,28 @@ So, the `get_product_details()` function will now look like:
 ```python
 def get_product_details(product_url: str) -> dict:
 
-    # Create an empty product details dictionary
-    product_details = {}
+   # Create an empty product details dictionary
+   product_details = {}
 
-    # Get the product page content and create a soup
-    page = requests.get(product_url, headers=headers)
-    soup = BeautifulSoup(page.content, features="lxml")
-    try:
-        # Scrape the product details
-        title = soup.find("span", attrs={"id": "productTitle"}).get_text().strip()
-        extracted_price = soup.find("span", attrs={"class": "apexPriceToPay"}).get_text().strip()
-        price = extracted_price.split("$")[1]
+   # Get the product page content and create a soup
+   page = requests.get(product_url, headers=headers)
+   soup = BeautifulSoup(page.content, features="lxml")
+   try:
+      # Scrape the product details
+      title = soup.find("span", attrs={"id": "productTitle"}).get_text().strip()
+      extracted_price = soup.find("span", attrs={"class": "apexPriceToPay"}).get_text().strip()
+      price = extracted_price.split("$")[1]  
         
-        
-        # Adding it to the product details dictionary
-        product_details["title"] = title
-        product_details["price"] = price
-        product_details["product_url"] = product_url
+      # Adding it to the product details dictionary
+      product_details["title"] = title
+      product_details["price"] = price
+      product_details["product_url"] = product_url
 
-        # Return the product details dictionary
-        return product_details
-    except Exception as e:
-        print("Could not fetch product details")
-        print(f"Failed with exception: {e}")
+      # Return the product details dictionary
+      return product_details
+   except Exception as e:
+      print("Could not fetch product details")
+      print(f"Failed with exception: {e}")
 ```
 
 Notice that we have used **try-except** block to catch any error.
@@ -197,7 +202,6 @@ product_url = input("Enter product url: ")
 product_details = get_product_details(product_url)
 
 print(product_details)
-
 ```
 
 ## [#](#-conclusion) Conclusion
