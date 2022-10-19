@@ -380,7 +380,7 @@ Then in our project's root directory, create a file called **.env**. This file w
 Open up the **.env** file and create a variable like so:
 
 ```
-API_KEY=<Your_Api_Key>
+API_KEY=<Your_API_Key>
 ```
 
 The variable will take in our API key without any quotation marks or spaces. Remember to name this variable as `API_KEY` only.
@@ -405,11 +405,11 @@ openai.api_key = config['API_KEY']
 
 That's it! Our API key is now safe and hidden from the main code.
 
-**Note**: If you want to push your code to [GitHub](https://www.github.com), you don't want to push the **.env** file as well. In the root directory of your project, create a file called **.gitignore**, and in the Git ignore file, type in `.env`. This will prevent the file from being tracked by Git and ultimately pushed to Github.
+**Note**: If you want to push your code to [GitHub](https://www.github.com), you don't want to push the **.env** file as well. In the root directory of your project, create a file called **.gitignore**, and in the Git ignore file, type in `.env`. This will prevent the file from being tracked by Git and ultimately pushed to GitHub.
 
 With all that set and done, we’re finished! The code should now look like this!
 
-**blog_generator.py**
+**blog_generator.py** file:
 
 ```py
 # Generate a Blog with OpenAI 📝
@@ -442,7 +442,7 @@ while keep_writing:
     keep_writing = False
 ```
 
-**.env**
+**.env** file:
 
 ```bash
 API_KEY=sk-jAjqdWoqZLGsh7nXf5i8T3BlbkFJ9CYRk
@@ -450,11 +450,12 @@ API_KEY=sk-jAjqdWoqZLGsh7nXf5i8T3BlbkFJ9CYRk
 
 ## [#](#-Finish-Line) Finish Line
 
-Congrats, you just created your blog generator! Throughout the article, we learned how to use GPT-3 through the official module, use `while` loops to generate multiple paragraphs, rate limits, and secure our app.
+Congrats, you just created a blog generator with OpenAI and Python! Throughout the project, we learned how to use GPT-3 to generate a paragraph, use a `while` loop to create multiple paragraphs, rate limits, and secure our app.
 
-AI is expanding rapidly, and the first few to utilize it properly through services like GPT-3 will become the innovators in the field.
+AI is expanding rapidly, and the first few to utilize it properly through services like GPT-3 will become the innovators in the field. We would love to see what you build with this tutorial!
 
 ### [##](##-more-resources) More Resources
 
 - [Solution on GitHub](https://github.com/codedex-io/projects/blob/main/projects/generate-a-blog-with-openai/blog_generator.py)
 - [OpenAI](https://openai.com)
+- [python-dotenv](https://pypi.org/project/python-dotenv)
