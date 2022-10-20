@@ -119,13 +119,13 @@ You should have the following after completing the steps above:
 import pandas as pd
 import io
 
-df = pd.read_csv(io.BytesIO(uploaded["most_subscribed_youtube_channels.csv"]))
+df = pd.read_csv(io.BytesIO(uploaded['most_subscribed_youtube_channels.csv']))
 display(df)
 ```
 
-Let’s break down and understand what the `df = pd.read_csv(io.BytesIO(uploaded["most_subscribed_youtube_channels.csv"]))` piece of code is doing.
+Let’s break down and understand what the `df = pd.read_csv(io.BytesIO(uploaded['most_subscribed_youtube_channels.csv']))` piece of code is doing.
 
-We know that `uploaded` is a dictionary with file names as keys and file data as values. So, `uploaded["most_subscribed_youtube_channels.csv"]` is simply getting the binary data inside the file named **most_subscribed_youtube_channels.csv** that we uploaded to Google Colab.
+We know that `uploaded` is a dictionary with file names as keys and file data as values. So, `uploaded['most_subscribed_youtube_channels.csv']` is simply getting the binary data inside the file named **most_subscribed_youtube_channels.csv** that we uploaded to Google Colab.
 
 Python's `io` module manages file-related input and output operations. So, `io.BytesIO()` receives all the binary data and creates a stream of data. `pd.read_csv()` can't directly process binary data so we need to convert it into a stream before we can make a DataFrame from this data.
 
@@ -138,11 +138,11 @@ Your notebook should now look like this:
 Notice how in some of the numeric columns, there are commas in between the numbers? Let's take out the commas using:
 
 ```py
-df = df.replace(",", "")
+df = df.replace(',', '')
 display(df)
 ```
 
-Here, we are using the `.replace()` method to replace all occurrences of commas `","` with nothing `""`.
+Here, we are using the `.replace()` method to replace all occurrences of commas `','` with nothing `''`.
 
 For the next section, we will be creating three different graphs: 
 
@@ -166,7 +166,7 @@ import plotly.express as px
 Creating a histogram in Plotly Express is so much easier than you think. Do you know how we create them? Drum roll, please… 🥁
 
 ```python
-fig = px.histogram(df, x="subscribers", title="Subscriber Count")
+fig = px.histogram(df, x='subscribers', title='Subscriber Count')
 fig.show()
 ```
 
@@ -197,12 +197,12 @@ Plotly Express allows us to create much more customizable histograms by inputtin
 
 We are going to do the same thing we did before, but this time we will create a pie chart. For this pie chart, we are going to analyze the different video categories and the top channel they belong to. 
 
-All we need to do is replace `px.histogram(df, x="subscribers")` with `px.pie(df, values="subscribers" names="category", title="YouTube Categories")`:
+All we need to do is replace `px.histogram(df, x='subscribers')` with `px.pie(df, values='subscribers' names='category', title='YouTube Categories')`:
 
 ```py
 import plotly.express as px
 
-fig = px.pie(df, values="subscribers", names="category", title="YouTube Categories")
+fig = px.pie(df, values='subscribers', names='category', title='YouTube Categories')
 fig.show()
 ```
 
@@ -210,7 +210,7 @@ However, this time we need to pass the following arguments to our method call:
 
 - `values` from our data that will represent a portion of the pie chart.
 - `names` that will represent the names for those regions of the pie chart. For this part, you would need to use a column with numeric values for the `values` argument and a column with string values for the `names` variable.
-- `title` to name the graph. You can choose whatever name you want here, but for the sake of this example, we will call our graph “YouTube Categories”. 
+- `title` to name the graph. You can choose whatever name you want here, but for the sake of this example, we will call our graph "YouTube Categories". 
 
 That’s it. All that’s left now is to display the pie chart using the `fig.show()` method.
 
@@ -231,7 +231,7 @@ Sticking to the theme of simplicity, all we have to do to create our box plot is
 ```py
 import plotly.express as px
 
-fig = px.box(df, y="started", title="Years Started")
+fig = px.box(df, y='started', title='Years Started')
 fig.show()
 ```
 
@@ -239,7 +239,7 @@ The `px.box()` method follows the convention we have been using in this tutorial
 
 - First, we passed in our DataFrame, `df`. 
 - Then, we passed in our `y` variable, `started`. 
-- Finishing things off, we named our graph “Years Started”. 
+- Finishing things off, we named our graph "Years Started". 
 
 And like before, the graph is complete but isn’t shown on the notebook page. So, to show the graph, we use `fig.show()` method.
 
@@ -253,7 +253,7 @@ Like that one Tegan and Sara song, let’s get a little bit closer with our grap
 - The median, 2013, represents the average year our top channels started their career. Ah, 2013. What a time to be alive.
 - Our maximum value was 2021. This was the latest year a top channel in our dataset started. As they always say, it's never too late to begin your journey to the top!
 
-Similar to histograms and pie charts, Plotly Express also provides [documentation for box plots](https://plotly.com/python/box-plots/). By passing `point="all"` argument to the `px.box()`, we can also look at all the data points used to make the box plot.
+Similar to histograms and pie charts, Plotly Express also provides [documentation for box plots](https://plotly.com/python/box-plots/). By passing `point='all'` argument to the `px.box()`, we can also look at all the data points used to make the box plot.
 
 ## [#](#-wrapping-up) Wrapping Up
 
