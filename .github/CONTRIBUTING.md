@@ -78,4 +78,17 @@ Our projects are divided into three difficulties:
 - Python strings should be single quotes.
 - Python indentation is two spaces.
 
-If a project tutorial does not follow these guidelines, we will request changes in order for the tutorial to meet these guidelines. If you do not comply, the PR will be marked as invalid and closed. 
+If a project tutorial does not follow these guidelines, we will request changes in order for the tutorial to meet these guidelines. If you do not comply, the PR will be marked as invalid and closed.
+
+## Don't know what to write? Here are a few article ideas that we'd love for you to write.
+
+- Analyze Your Netflix Data with Python.
+- Visualize Your Personal Expenses with Matplotlib.
+- Visualize Your Uber Data with Matplotlib.
+- Pimp Out Your Terminal with X.
+- Build a Twitter Bot with Python.
+- Build a Minecraft Mod with Python.
+- ______ with Raspberry Pi.
+- Analyze Alone (TV Show) with Python.
+- Emotions detector with Python.
+- Face Recognition With Python.
