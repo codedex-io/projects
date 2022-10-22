@@ -157,7 +157,7 @@ extracted_price = soup.find('span', attrs={'class': 'apexPriceToPay'}).get_text(
 price = '$' + extracted_price.split('$')[1]
 ```
 
-First we split the `extracted_price` string using the `$` symbol using `extracted_price.split("$")`. This will return a list: `['', '166.00', '166.00']`. We then select the element at index 1 from the list. We also add the dollar sign before the price.
+First we split the `extracted_price` string using the `$` symbol using `extracted_price.split('$')`. This will return a list: `['', '166.00', '166.00']`. We then select the element at index 1 from the list. We also add the dollar sign before the price.
 
 Now that you have extracted the product details, you can put them inside the `product_details` dictionary as below:
 
