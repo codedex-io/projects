@@ -71,8 +71,8 @@ Similar to browsers, we will also send some headers along with our HTTP request.
 
 ```python
 headers = {
-   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
-   "Accept-Language": "en-US,en;q=0.5"
+   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
+   'Accept-Language': 'en-US,en;q=0.5'
 }
 ```
 
@@ -102,7 +102,7 @@ def get_product_details(product_url: str) -> dict:
     
    # Get the product page content and create a soup
    page = requests.get(product_url, headers=headers)
-   soup = BeautifulSoup(page.content, features="lxml")
+   soup = BeautifulSoup(page.content, features='lxml')
 ``` 
 
 Now comes the most important part of the tutorial where we will extract data from the page. For the sake of this tutorial, we will extract two data: 
@@ -133,7 +133,7 @@ Use the **Inspect** option to view the HTML code used for the title of the produ
 The title is wrapped with a `span` tag with an attribute id **productTitle**. Let's use this id to extract the title of the product.
 
 ```python
-title = soup.find("span", attrs={"id": "productTitle"}).get_text().strip()
+title = soup.find('span', attrs={'id': 'productTitle'}).get_text().strip()
 ```
 We use the `.find()` method to find a `span` element. Then pass the `productTitle` id in a dictionary called `attrs` that accepts the attributes. The `.get_text()` method returns the text in a string format. The `.strip()` method is used to remove any extra leading and trailing whitespaces.
 
@@ -147,24 +147,24 @@ Similar to the title of the product, if you inspect the prices by right clicking
 Thus, we can extract the price in a similar fashion.
 
 ```python
-price = soup.find("span", attrs={"class": "apexPriceToPay"}).get_text().strip()
+price = soup.find('span', attrs={'class': 'apexPriceToPay'}).get_text().strip()
 ```
 
 But, you will see a problem when you print the price of the product. The extracted price will be something like **\$166.00\$166.00** because the parent `span` element contains two `span` elements with the price text in them. But we can clean this extracted price to get the price of the product in the following way:
 
 ```python
-extracted_price = soup.find("span", attrs={"class": "apexPriceToPay"}).get_text().strip()
-price = "$" + extracted_price.split("$")[1]
+extracted_price = soup.find('span', attrs={'class': 'apexPriceToPay'}).get_text().strip()
+price = '$' + extracted_price.split('$')[1]
 ```
 
-First we split the `extracted_price` string using the `$` symbol using `extracted_price.split("$")`. This will return a list: `['', '166.00', '166.00']`. We then select the element at index 1 from the list. We also add the dollar sign before the price.
+First we split the `extracted_price` string using the `$` symbol using `extracted_price.split('$')`. This will return a list: `['', '166.00', '166.00']`. We then select the element at index 1 from the list. We also add the dollar sign before the price.
 
 Now that you have extracted the product details, you can put them inside the `product_details` dictionary as below:
 
 ```python
 # Adding it to the product details dictionary
-product_details["title"] = title
-product_details["price"] = price
+product_details['title'] = title
+product_details['price'] = price
 ```
 
 So, the `get_product_details()` function will now look like:
@@ -180,20 +180,20 @@ def get_product_details(product_url: str) -> dict:
    soup = BeautifulSoup(page.content, features="lxml")
    try:
       # Scrape the product details
-      title = soup.find("span", attrs={"id": "productTitle"}).get_text().strip()
-      extracted_price = soup.find("span", attrs={"class": "apexPriceToPay"}).get_text().strip()
-      price = extracted_price.split("$")[1]  
+      title = soup.find('span', attrs={'id': 'productTitle'}).get_text().strip()
+      extracted_price = soup.find('span', attrs={'class': 'apexPriceToPay'}).get_text().strip()
+      price = extracted_price.split('$')[1]  
         
       # Adding it to the product details dictionary
-      product_details["title"] = title
-      product_details["price"] = price
-      product_details["product_url"] = product_url
+      product_details['title'] = title
+      product_details['price'] = price
+      product_details['product_url'] = product_url
 
       # Return the product details dictionary
       return product_details
    except Exception as e:
-      print("Could not fetch product details")
-      print(f"Failed with exception: {e}")
+      print('Could not fetch product details')
+      print(f'Failed with exception: {e}')
 ```
 
 Notice that we have used **try-except** block to catch any error.
@@ -203,7 +203,7 @@ Notice that we have used **try-except** block to catch any error.
 To run the scraper, we will ask the user to enter any product URL. Then we will call the `get_product_details()` function with that product URL and print it.
 
 ```python
-product_url = input("Enter product url: ")
+product_url = input('Enter product url: ')
 product_details = get_product_details(product_url)
 
 print(product_details)
@@ -218,8 +218,8 @@ import requests
 from bs4 import BeautifulSoup
 
 headers = {
-   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
-   "Accept-Language": "en-US,en;q=0.5"
+   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
+   'Accept-Language': 'en-US,en;q=0.5'
 }
 
 def get_product_details(product_url: str) -> dict:
@@ -233,22 +233,22 @@ def get_product_details(product_url: str) -> dict:
    try:
       # Scrape the product details
       title = soup.find(
-         "span", attrs={"id": "productTitle"}).get_text().strip()
+         'span', attrs={'id': 'productTitle'}).get_text().strip()
       extracted_price = soup.find(
-         "span", attrs={"class": "apexPriceToPay"}).get_text().strip()
-      price = "$" + extracted_price.split("$")[1]
+         'span', attrs={'class': 'apexPriceToPay'}).get_text().strip()
+      price = '$' + extracted_price.split('$')[1]
 
       # Adding it to the product details dictionary
-      product_details["title"] = title
-      product_details["price"] = price
+      product_details['title'] = title
+      product_details['price'] = price
 
       # Return the product details dictionary
       return product_details
    except Exception as e:
-      print("Could not fetch product details")
-      print(f"Failed with exception: {e}")
+      print('Could not fetch product details')
+      print(f'Failed with exception: {e}')
 
-product_url = input("Enter product url: ")
+product_url = input('Enter product url: ')
 product_details = get_product_details(product_url)
 
 print(product_details)
