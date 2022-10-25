@@ -31,7 +31,7 @@ The final result will look something like this:
 
 ## [#](#-what-is-web-scraping) What is Web Scraping?
 
-[Web scraping](https://en.wikipedia.org/wiki/Web_scraping) is the process of extracting data from a website. This data is collected and then exported in a way that the user will find more valuable, such as an API or a CSV file. Manual web scraping is possible, but automated methods are typically preferred since they can be less expensive and faster.
+[Web scraping](https://en.wikipedia.org/wiki/Web_scraping) is the process of extracting data from a website. This data is collected and then exported in a way that the user will find more valuable, such as a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) file. Manual web scraping is possible, but automated methods are typically preferred since they can be less expensive and faster.
 
 While web scraping is legal if the data is publicly available on the internet, it can become illegal if non-public information is extracted, such as personal data, intellectual property, or confidential data.
 
@@ -69,7 +69,9 @@ When we send an HTTP request, we send some **headers** along with the request. I
 
 ![Request Headers](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/request-headers.png)
 
-Similar to browsers, we will also send some headers along with our HTTP request. Let's define them in a dictionary called `headers`:
+Similar to browsers, we will also send some headers along with our HTTP request. 
+
+Let's define them in a dictionary called `headers`:
 
 ```python
 headers = {
