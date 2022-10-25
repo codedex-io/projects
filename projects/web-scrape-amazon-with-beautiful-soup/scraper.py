@@ -8,7 +8,6 @@ headers = {
   "Accept-Language": "en-US,en;q=0.5"
 }
 
-
 def get_product_details(product_url: str) -> dict:
   # Create an empty product details dictionary
   product_details = {}
