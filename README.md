@@ -23,7 +23,7 @@ Ready to add your own project tutorial? Learn more by reading our [Contribution 
 
 ## What stage of development are we in right now?
 
-Codédex Projects is live with **6** high-quality projects. Now that the MVP is out, our goal is to invite awesome content creators from the community to author one or two project tutorials since maintaining a resource of this type at-scale is only possible if it's open-sourced. That means we need your help, whether it's contributing, reviewing, or evangelizing!
+Codédex Projects is live with **7** high-quality projects. Now that the MVP is out, our goal is to invite awesome content creators from the community to author one or two project tutorials since maintaining a resource of this type at-scale is only possible if it's open-sourced. That means we need your help, whether it's contributing, reviewing, or evangelizing!
 
 ### 📝 Content Team
 
