@@ -32,18 +32,20 @@ Codédex Projects is live with **6** high-quality projects. Now that the MVP is 
 - [@bobliuuu](https://github.com/Bobliuuu)
 - [@asiqurrahman](https://github.com/asiqurrahman)
 
-## Don't know what to write? Here are a few article ideas that we'd love for you to write.
+## Don't know what to write? 
 
-- Analyze Your Netflix Data with Python.
-- Visualize Your Personal Expenses with Matplotlib.
-- Visualize Your Uber Data with Matplotlib.
-- Pimp Out Your Terminal with X.
-- Build a Instagram Bot with Python.
-- Build a Minecraft Mod with Python.
-- ______ with Raspberry Pi.
-- Analyze Alone (TV Show) with Python.
-- Emotions detector with Python.
-- Face Recognition With Python.
+Here are a few article ideas that we'd love for you to write:
+
+- Analyze Your Netflix Data with Python
+- Visualize Your Personal Expenses with Matplotlib
+- Visualize Your Uber Data with Matplotlib
+- Pimp Out Your Terminal with X
+- Build a Minecraft Mod with Python
+- Build a Instagram Bot with Python
+- ______ with Raspberry Pi
+- Analyze Alone (TV Show) with Python
+- Emotions Detector with Python
+- Face Recognition With Python
 
 ## Additional Notes
 
