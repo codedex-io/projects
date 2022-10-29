@@ -17,7 +17,7 @@
 - Simple and beautiful User interface
 
 ## How to Install 
-- git clone https://github.com/Arone-S-G-H/GUI-Insta-Downloader
+- git clone <this repo>
 - pip install pillow
 - pip install instaloader
 - pip install tk
