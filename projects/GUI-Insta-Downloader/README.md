@@ -17,7 +17,7 @@
 - Simple and beautiful User interface
 
 ## How to Install 
-- git clone <<this repo>>
+- git clone  |this repo|
 - pip install pillow
 - pip install instaloader
 - pip install tk
