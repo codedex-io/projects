@@ -47,7 +47,161 @@ tags:
   <img src="https://github.com/Arone-S-G-H/GUI-Insta-Downloader/blob/main/Result/Instagram%20Downloader%202.png">
 </p>
 
-## [#](#-more-resources) More Resources
+## Explaination
+<p> Import the required Libraries and Modules </P>
+
+```py
+import qrcode
+from tkinter import ttk
+from tkinter import *
+from tkinter import messagebox
+from tkinter import filedialog
+from PIL import ImageTk, Image
+from  instaloader import Instaloader , Post
+import threading
+import os
+```
+  
+<p>function for downloading User profile picture </p>
+
+
+```py
+def download_profile():
+  def download_image():
+    try:
+      location = filedialog.askdirectory()
+      os.chdir(location)
+      #Profile Picture starts downloading here.
+      obj = Instaloader()
+      profile = profile_pic_input.get()
+      obj.download_profile(profile , profile_pic_only = True)
+      messagebox.showinfo('STATUS','Profile Image Downloaded Successfully')
+    except:
+      messagebox.showerror('ERROR','Username Is Incorrect or Does Not Exist')
+  # Thread is a separate flow of execution. This means that our program will have two things happening at once
+  threading.Thread(target = download_image).start()
+```
+
+<p> Function for downloading image by URL</P>
+
+
+```py
+def download_post(  ):
+  # Get url from user by GUI input (Entry)
+  link = post_input.get()
+  def media():
+    if 'https://www.instagram.com/p/' in link :
+      location = filedialog.askdirectory()
+      os.chdir(location)
+      L = Instaloader()
+      try :
+        L.login(Username , Password)
+      except :
+        messagebox.showerror('ERROR' , 'Username or Password is Wrong')
+      try :
+          short_link = link[28:39]
+          post = Post.from_shortcode(L.context , short_link)
+          L.download_post(post , target = short_link)
+          messagebox.showinfo('STATUS','Download Completed !')
+      except :
+          messagebox.showerror('ERROR' , 'Link Not Found , please enter the link of the image')
+    else :
+      messagebox.showerror('ERROR','URL Is Incorrect')
+  # thread is a separate flow of execution. This means that our program will have two things happening at once
+  threading.Thread(target = media).start()
+```
+
+
+<p> To create a tkinter GUI frame</p>
+
+
+
+```py
+root = Tk()
+# Define the geometry
+root.geometry('300x300')
+root.resizable(False , False)
+# Set the title of tkinter frame
+root.title('Instagram Downloader')
+# Set the background of tkinter frame
+root.config(background = 'grey')
+Icon = PhotoImage(file='img\\Icon.png')
+root.iconphoto(False, Icon)
+```
+
+
+This function takes the Username and Password and pass them to the new_window function 
+
+
+```py
+def caller():
+  Username = username_entry.get()
+  Password = password_entry.get()
+  if Username and Password :
+    new_window(Username , Password)
+  else :
+    messagebox.showerror('Error' , 'You have to enter your Username and Password')
+```
+
+  The new_window function
+  
+  
+```py
+def new_window(Username , Password):
+  # created a new tkinter gui window frame
+  new_window = Toplevel(root)
+  # Define the geometry
+  new_window.geometry('600x600')
+  new_window.resizable(False , False)
+  # Set the title of tkinter frame
+  new_window.title('Instagram Downloader')
+  # Set the background of tkinter frame
+  new_window.config(background = 'grey')
+  Icon = PhotoImage(file='img\\Icon.png')
+  new_window.iconphoto(False, Icon)
+
+  # Load an image
+  load_img = Image.open('img\image.jpg')
+  # Resize the image using resize method
+  resize_img = load_img.resize((150 , 150) , Image.Resampling.LANCZOS)
+  # Create an object of tkinter ImageTk and pass the resized image to it
+  img = ImageTk.PhotoImage(resize_img)
+  # Create a Label Widget to display the Image
+  label_img = ttk.Label(new_window , image = img)
+  label_img.place(x = 30 , y = 20)
+
+  # Create a Label Widget to display the text next to the img
+  label_img_text = Label(new_window , text = 'Instagram' , bg = 'grey' , fg = 'white' , font = ('Calibri' , 50 , 'bold'))
+  label_img_text.place(x = 230 , y = 45)
+  # Creat a Label Widget to display the hint text
+  hint_text=Label(new_window , text = '* Enter the Username of your desired account in below to download profile picture *' , bg = 'grey' , fg = 'yellow' , font = ('Calibri' , 10))
+  hint_text.place(x = 60 , y = 220)
+  hint_text2=Label(new_window , text = '* Enter the Link of your desire Image from instagram in below to download it *' , bg = 'grey' , fg = 'yellow' , font = ('Calibri' , 10))
+  hint_text2.place(x = 70 , y = 360)
+
+  # Set the current value of the input with a StringVar object
+  Current_value = StringVar()
+  # Set input to receive username and download the profile picture
+  profile_pic_input = ttk.Entry(new_window , textvariable = Current_value , width = 35)
+  # the Entry widget has focus, it’s ready to accept the user input
+  profile_pic_input.focus()
+  profile_pic_input.place(x = 190 , y = 260)
+
+  # Set the current value of the input with a StringVar object
+  Current_value2 = StringVar()
+  # Set input to recieve instagram image or video URL
+  post_input = ttk.Entry(new_window , textvariable = Current_value2 , width = 35)
+  # the Entry widget has focus, it’s ready to accept the user input
+  post_input.focus()
+  post_input.place(x = 190 , y = 400)
+  ...
+```
+
+
+
+
+
+## More Resources
 
 - [Solution on GitHub](To be filled)
 - [Documentation: tkinter](https://docs.python.org/3/library/tkinter.html)
