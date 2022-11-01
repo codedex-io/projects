@@ -14,6 +14,16 @@ tags:
 ## Introduction
 <p>Have you ever wanted to download a post from Instagram? and realise that Instagram does not provide a download option.
    Well in this tutorial we will create our own Instagram Post downloader.<p>
+     
+## Instaloader
+In this project we will be using <a href="https://instaloader.github.io">Instaloader</a>, the Instaloader module is a Python package having great functionalities to scrap instagram, it's functions can be used as command-line utility.It is a tool to download pictures or videos along with their captions and other metadata from Instagram.
+**How to Install:**
+With Python already installed, do:
+```py 
+$ pip3 install instaloader
+$ instaloader profile [profile ...]     
+```
+See <a href="https://instaloader.github.io/installation.html#install"> Install Instaloader</a> for more options on how to install Instaloader.
 
 ## Requirements
 - <a href='https://docs.python.org/3/library/tkinter.html'>Tkinter Library</a>
@@ -42,7 +52,7 @@ tags:
   <img src="https://github.com/Arone-S-G-H/GUI-Insta-Downloader/blob/main/Result/Instagram%20Downloader%202.png">
 </p>
 
-## Explaination
+## Explanation
 <p> Import the required Libraries and Modules </P>
 
 ```py
@@ -52,7 +62,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 from PIL import ImageTk, Image
-from  instaloader import Instaloader , Post
+from  instaloader import Instaloader, Post
 import threading
 import os
 ```
@@ -69,7 +79,7 @@ def download_profile():
       #Profile Picture starts downloading here.
       obj = Instaloader()
       profile = profile_pic_input.get()
-      obj.download_profile(profile , profile_pic_only = True)
+      obj.download_profile(profile, profile_pic_only = True)
       messagebox.showinfo('STATUS','Profile Image Downloaded Successfully')
     except:
       messagebox.showerror('ERROR','Username Is Incorrect or Does Not Exist')
@@ -90,16 +100,16 @@ def download_post(  ):
       os.chdir(location)
       L = Instaloader()
       try :
-        L.login(Username , Password)
+        L.login(Username,Password)
       except :
-        messagebox.showerror('ERROR' , 'Username or Password is Wrong')
+        messagebox.showerror('ERROR','Username or Password is Wrong')
       try :
           short_link = link[28:39]
           post = Post.from_shortcode(L.context , short_link)
-          L.download_post(post , target = short_link)
+          L.download_post(post,target = short_link)
           messagebox.showinfo('STATUS','Download Completed !')
       except :
-          messagebox.showerror('ERROR' , 'Link Not Found , please enter the link of the image')
+          messagebox.showerror('ERROR','Link Not Found,please enter the link of the image')
     else :
       messagebox.showerror('ERROR','URL Is Incorrect')
   # thread is a separate flow of execution. This means that our program will have two things happening at once
@@ -115,13 +125,13 @@ def download_post(  ):
 root = Tk()
 # Define the geometry
 root.geometry('300x300')
-root.resizable(False , False)
+root.resizable(False,False)
 # Set the title of tkinter frame
 root.title('Instagram Downloader')
 # Set the background of tkinter frame
 root.config(background = 'grey')
 Icon = PhotoImage(file='img\\Icon.png')
-root.iconphoto(False, Icon)
+root.iconphoto(False,Icon)
 ```
 
 
@@ -133,37 +143,37 @@ def caller():
   Username = username_entry.get()
   Password = password_entry.get()
   if Username and Password :
-    new_window(Username , Password)
+    new_window(Username,Password)
   else :
-    messagebox.showerror('Error' , 'You have to enter your Username and Password')
+    messagebox.showerror('Error','You have to enter your Username and Password')
 ```
 
   The new_window function
   
   
 ```py
-def new_window(Username , Password):
+def new_window(Username,Password):
   # created a new tkinter gui window frame
   new_window = Toplevel(root)
   # Define the geometry
   new_window.geometry('600x600')
-  new_window.resizable(False , False)
+  new_window.resizable(False,False)
   # Set the title of tkinter frame
   new_window.title('Instagram Downloader')
   # Set the background of tkinter frame
   new_window.config(background = 'grey')
   Icon = PhotoImage(file='img\\Icon.png')
-  new_window.iconphoto(False, Icon)
+  new_window.iconphoto(False,Icon)
 
   # Load an image
   load_img = Image.open('img\image.jpg')
   # Resize the image using resize method
-  resize_img = load_img.resize((150 , 150) , Image.Resampling.LANCZOS)
+  resize_img = load_img.resize((150,150),Image.Resampling.LANCZOS)
   # Create an object of tkinter ImageTk and pass the resized image to it
   img = ImageTk.PhotoImage(resize_img)
   # Create a Label Widget to display the Image
-  label_img = ttk.Label(new_window , image = img)
-  label_img.place(x = 30 , y = 20)
+  label_img = ttk.Label(new_window,image = img)
+  label_img.place(x = 30,y = 20)
 
   # Create a Label Widget to display the text next to the img
   label_img_text = Label(new_window , text = 'Instagram' , bg = 'grey' , fg = 'white' , font = ('Calibri' , 50 , 'bold'))
