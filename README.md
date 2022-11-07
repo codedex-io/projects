@@ -23,7 +23,7 @@ Ready to add your own project tutorial? Learn more by reading our [Contribution 
 
 ## What stage of development are we in right now?
 
-Codédex Projects is live with **6** high-quality projects. Now that the MVP is out, our goal is to invite awesome content creators from the community to author one or two project tutorials since maintaining a resource of this type at-scale is only possible if it's open-sourced. That means we need your help, whether it's contributing, reviewing, or evangelizing!
+Codédex Projects is live with **7** high-quality projects. Now that the MVP is out, our goal is to invite awesome content creators from the community to author one or two project tutorials since maintaining a resource of this type at-scale is only possible if it's open-sourced. That means we need your help, whether it's contributing, reviewing, or evangelizing!
 
 ### 📝 Content Team
 
@@ -32,6 +32,20 @@ Codédex Projects is live with **6** high-quality projects. Now that the MVP is 
 - [@bobliuuu](https://github.com/Bobliuuu)
 - [@asiqurrahman](https://github.com/asiqurrahman)
 
+## Don't know what to write? 
+
+Here are a few article ideas that we'd love for you to write:
+
+- Analyze Your Netflix Data with Python
+- Visualize Your Personal Expenses with Matplotlib
+- Visualize Your Uber Data with Matplotlib
+- Pimp Out Your Terminal with X
+- Build a Minecraft Mod with Python
+- Build a Instagram Bot with Python
+- ______ with Raspberry Pi
+- Analyze Alone (TV Show) with Python
+- Emotions Detector with Python
+- Face Recognition With Python
 
 ## Additional Notes
 

@@ -49,7 +49,7 @@ To ensure the quality of our project tutorials, all tutorials must abide by thes
 | ---------------- | ---------------------------------------------- | ------------------------------------ |
 | `title`          | The title of the project.   | title: Gernate a QR Code with Python |
 | `author`         | The author of the project.  | author: Jerry Zhu |
-| `datePublished`  | The published date in `YYYY-MM-DD`.  | dataPublished: 2022-09-19 |
+| `datePublished`  | The published date in `YYYY-MM-DD`.  | datePublished: 2022-09-19 |
 | `description`    | A brief description (ideally under 150 characters) used in search engine results and content previews  | description: Learn how to make a QR code using the qrcode library in this project tutorial                                                            |
 | `header` | The header image that shows up at the top of the project. You can keep this blank. | header: URL |
 | `tags`           | Key words that are relevant to the entry. You can see a list of tags below. 2 tags per project. | tags:<br /> - python<br /> - beginner<br />|
@@ -78,4 +78,4 @@ Our projects are divided into three difficulties:
 - Python strings should be single quotes.
 - Python indentation is two spaces.
 
-If a project tutorial does not follow these guidelines, we will request changes in order for the tutorial to meet these guidelines. If you do not comply, the PR will be marked as invalid and closed. 
+If a project tutorial does not follow these guidelines, we will request changes in order for the tutorial to meet these guidelines. If you do not comply, the PR will be marked as invalid and closed.
