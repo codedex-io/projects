@@ -1,20 +1,18 @@
+---
+title: Detect Not Hot Dogs with hugging face API
+author: Dev-Docs
+datePublished: 2022-09-17
+description: Create your own not-hotdog classifier
+header: URL
+tags:
+  - beginner
+  - python
+---
+
+
 # Detect "Not Hot Dogs" with hugging face API.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![jian-yang](https://raw.githubusercontent.com/avb-is-me/projects/main/projects/detect-not-hot-dogs-with-hugging-face/dev-docs-assets/dev-docs-VGh1LCAxNyBOb3YgMjAyMiAxOToyMjowNyBHTVQ=.png?raw=true)
 
 **Prerequisites:**
 
@@ -29,24 +27,6 @@
 Unlock the power of innovation around detcting if an image is a hot dog or a "not hot dog" just like Jian Yang using machine learning models on hugging face.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-![VSCode image](https://raw.githubusercontent.com/avb-is-me/projects/main/projects/detect-not-hot-dogs-with-hugging-face/dev-docs-assets/dev-docs-VGh1LCAxNyBOb3YgMjAyMiAxOToyMjowNyBHTVQ=.png?raw=true)
-
 ## Create a nothotdog directory:
 
 ```shell
@@ -55,7 +35,7 @@ mkdir nothotodg
 
 ## Cd into the nothotdog directory:
 
-```shell
+```
 cd nothotdog
 ```
 
@@ -67,7 +47,7 @@ python3 -m venv .venv
 
 ## Activate the virtual environment
 
-```shell
+```
 source .venv/bin/activate
 ```
 
@@ -120,7 +100,7 @@ We are using a flask, and couple of built in libaries to handles files and json.
 
 ```python
 #web.py
-<br>
+
 from flask import Flask, render_template, request, jsonify
 import requests
 import json
@@ -134,7 +114,7 @@ Here we will load the enviroment variables that we will get from Hugging face la
 
 ```python
 #web.py
-<br>
+
 from flask import Flask, render_template, request, jsonify
 import requests
 import json
