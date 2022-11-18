@@ -81,7 +81,7 @@ Our projects are divided into three difficulties:
 ## Image Sizes
 
 - Card image on the Projects page: 220x170 ([example](https://www.codedex.io/images/projects/card_images/generate-a-blog-with-openai.png))
-- Project header image: 1000x347 ([example](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/header.png))
+- Project header image: 1000x350 ([example](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/header.png))
 - Project SEO image: 1200x630 ([example](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/seo.png))
 
 If a project tutorial does not follow these guidelines, we will request changes in order for the tutorial to meet these guidelines. If you do not comply, the PR will be marked as invalid and closed.
