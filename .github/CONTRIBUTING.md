@@ -78,4 +78,10 @@ Our projects are divided into three difficulties:
 - Python strings should be single quotes.
 - Python indentation is two spaces.
 
+## Image Sizes
+
+- Card image on the Projects page: 480 x 364 ([example](https://www.codedex.io/images/projects/card_images/build-a-discord-bot-with-python.png))
+- Project header image: 480 x 364(example)
+- Project SEO image: (example)
+
 If a project tutorial does not follow these guidelines, we will request changes in order for the tutorial to meet these guidelines. If you do not comply, the PR will be marked as invalid and closed.
