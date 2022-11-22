@@ -94,7 +94,33 @@ Go into the index html code and copy and paste the code below. It is just a simp
 </html>
 ```
 
-It is important to note that the `action="{{ url_for('upload') }}`
+It is important to note `method="post" action="{{ url_for('upload') }}"` in our form.  This tells our form two things, what action we want to do which is `POST` and what API route to send our data which is going `/upload`.
+
+## Create an .env file
+
+
+This is where we will place our hugging face variables
+
+```shell
+touch .env
+```
+
+## Add variables to the .env file
+
+Open the env variable add `HUGGING_FACE_API_URL= `and `HUGGING_FACE_API_KEY=`. This is where we place the hugging face information. We can actually fill the url with the prefilled model we are using.
+
+```shell
+HUGGING_FACE_API_URL=https://api-inference.huggingface.co/models/julien-c/hotdog-not-hotdog
+HUGGING_FACE_API_KEY=
+```
+
+## Create a hugging face token:
+
+Then go to https://huggingface.co/settings/tokens and create a token.
+
+![hugging face](https://raw.githubusercontent.com/avb-is-me/projects/main/projects/detect-not-hot-dogs-with-hugging-face/dev-docs-assets/dev-docs-VGh1LCAxNyBOb3YgMjAyMiAyMTowMDozMSBHTVQ=.png?raw=true)
+
+Now fill your `HUGGING_FACE_API_KEY` with that value.
 
 ## Create the server file
 
@@ -130,12 +156,13 @@ import os
 from dotenv import load_dotenv
 <br>
 load_dotenv()
-<br>
 API_URL = os.getenv("HUGGING_FACE_API_URL")
 headers = {'Authorization': f'Bearer {os.getenv("HUGGING_FACE_API_KEY")}'}
 <br>
 app = Flask(__name__)
 ```
+
+Here we load our future environment variables.  First we store our url as `API_URL` and then we will load `API_KEY` as a Authorization header variable that will be used as request later to prove to Hugging Face we have access.
 
 ## Lets add a query method
 
@@ -203,32 +230,6 @@ app.run(host='0.0.0.0', port=81)
 ```
 
 Nice now all of our flask code is done!
-
-## Create an .env file
-
-
-This is where we will place our hugging face variables
-
-```shell
-touch .env
-```
-
-## Add variables to the .env file
-
-Open the env variable add `HUGGING_FACE_API_URL= `and `HUGGING_FACE_API_KEY=`. This is where we place the hugging face information. We can actually fill the url with the prefilled model we are using.
-
-```shell
-HUGGING_FACE_API_URL=https://api-inference.huggingface.co/models/julien-c/hotdog-not-hotdog
-HUGGING_FACE_API_KEY=
-```
-
-## Create a hugging face token:
-
-Then go to https://huggingface.co/settings/tokens and create a token.
-
-![hugging face](https://raw.githubusercontent.com/avb-is-me/projects/main/projects/detect-not-hot-dogs-with-hugging-face/dev-docs-assets/dev-docs-VGh1LCAxNyBOb3YgMjAyMiAyMTowMDozMSBHTVQ=.png?raw=true)
-
-Now fill your `HUGGING_FACE_API_KEY` with that value.
 
 ## Now run the project.
 
