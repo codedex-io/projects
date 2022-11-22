@@ -20,11 +20,11 @@ tags:
 
 \-Python 3
 
-**Read Time:** 10 Minutes
+**Read Time:** 30 Minutes
 
 ## Introduction:
 
-Unlock the power of innovation around detcting if an image is a hot dog or a "not hot dog" just like Jian Yang using machine learning models on hugging face.
+Unlock the power of innovation around detecting if an image is a hot dog or a "not hot dog" just like Jian Yang from Silicon Valley using machine learning models on hugging face.
 
 
 ## Create a nothotdog directory:
@@ -41,6 +41,8 @@ cd nothotdog
 
 ## Create the virtual environment
 
+Lets create a virtual environment or venv, which is a isolated environment that contains a Python installation in addition to other packages.  If you want to learn more check out this [Link](https://link-url-here.org](https://docs.python.org/3/tutorial/venv.html).
+
 ```shell
 python3 -m venv .venv
 ```
@@ -53,11 +55,15 @@ source .venv/bin/activate
 
 ## Install the flask
 
+Now we are going to install flask which is a web framework in Python that makes it easy create to web applications and APIs.
+
 ```shell
 python -m pip install flask
 ```
 
 ## Lets create a templates folder for out html
+
+In flask, if we are going to have html files we typically store them in a folder called templates so flask can find it.  Lets create it below.
 
 ```
 mkdir templates
@@ -87,6 +93,8 @@ Go into the index html code and copy and paste the code below. It is just a simp
     </body>
 </html>
 ```
+
+It is important to note that the `action="{{ url_for('upload') }}`
 
 ## Create the server file
 
