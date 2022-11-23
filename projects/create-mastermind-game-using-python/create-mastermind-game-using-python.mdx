@@ -2,7 +2,7 @@
 title: Create Mastermind Game with Python
 author: 3t8
 datePublished: 2022-11-06
-description: Learn how to create Mastermind game using Python in this project tutorial
+description: Learn how to create Mastermind game with Python in this project tutorial
 header: URL
 tags:
   - beginner
@@ -21,7 +21,7 @@ tags:
 
 ## [#](#-introduction) Introduction
 
-With more than 55 million units sold, [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)) is a one of the world’s most popular strategy games ever. The idea behind it is to guess an unknown sequence of coloured pegs in the fewest number of attempts possible. Despite having simple rules the game is still very difficult and entertaining.
+With more than 55 million units sold, [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)) is a one of the world’s most popular strategy games ever. The idea behind it is to guess an unknown sequence of colored pegs in the fewest number of attempts possible. Despite having simple rules the game is still very difficult and entertaining.
 
 Because representing colors in a terminal is not an easy task, we are going to create a more *modern* version of the Mastermind game. In 1977 Invicta released an electronic version of the game where the colored pegs were replaced by an array of up to five digits. In this tutorial we are going to recreate it in Python.
 
@@ -105,7 +105,7 @@ Because there are 4 digits we need to iterate the check 4 times so we use `range
 
 If both `guess` and `number` have the same digits in the same positions, we increment the `correct_position` counter.
 
-To keep track of the matched digits and exclude them later whene we count the right digits in the wrong positions, we conventionally set `unmatched` to `f` at the position of the matched digit. This way `f` will never match with any digit from 0 to 9
+To keep track of the matched digits and exclude them later when we count the right digits in the wrong positions, we conventionally set `unmatched` to `f` at the position of the matched digit. This way `f` will never match with any digit from 0 to 9
 
 ```python
 for i in range(4):
@@ -128,7 +128,7 @@ Once again we use `range(4)` to iterate over all 4 digits.
 This time the digits are compared between `guess` and `unmatched`.
 We check if `guess[i] in unmatched` and if that's true we increment the `correct_digit` counter.
 
-The `guess` variable has not been change at all but we **must not** check the digits that have already been matched in the right position.
+The `guess` variable has not been changed at all, but we **must not** check the digits that have already been matched in the right position.
 That is done by also checking if `guess[i] != number[i]` (or if `unmathced[i] != 'f'`).
 
 ```python
@@ -216,7 +216,7 @@ print('You are a mastermind! You guessed the number in ' + str(tries) + ' tries'
 To improve this project you could try to:
 
 - Increase the number of digits the user has to guess. With 4 digits the possible permutations are 10000.
-- Allow the user to use a [custom seed](https://docs.python.org/3/library/random.html#random.seed) for the secret number. This could allow multple users to compete against each other and try and guess the same number.
+- Allow the user to use a [custom seed](https://docs.python.org/3/library/random.html#random.seed) for the secret number. This could allow multiple users to compete against each other and try and guess the same number.
 - Try to code your own solver by implementing [Knuth's algorithm](https://en.wikipedia.org/wiki/Mastermind_(board_game)#Worst_case:_Five-guess_algorithm).
 
 ## [#](#-more-resources) More Resources
