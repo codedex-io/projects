@@ -24,20 +24,16 @@ tags:
 
 ## Introduction:
 
-Unlock the power of innovation around detecting if an image is a hot dog or a "not hot dog" just like Jian Yang from Silicon Valley using machine learning models on hugging face.
+Unlock the power of innovation around detecting if an image is a hot dog or a "not hot dog" just like Jian Yang from Silicon Valley using machine learning models on hugging face.  To do this we will be using [Hugging Face](https://huggingface.co/), a community and platform that hosts a bunch of open source machine learning models, datasets, and more.
 
 
 ## Create a nothotdog directory:
 
-```shell
-mkdir nothotodg
-```
+Create a new directory named `nothotdog`.  This is where our project will live.
 
 ## Cd into the nothotdog directory:
 
-```
-cd nothotdog
-```
+Enter your directory so we can start getting ready for our code.
 
 ## Create the virtual environment
 
@@ -55,7 +51,7 @@ source .venv/bin/activate
 
 ## Install the flask
 
-Now we are going to install flask which is a web framework in Python that makes it easy create to web applications and APIs.
+Now we are going to install flask which is a web framework in Python that makes it easy create to web applications and APIs.  Here is a [Link](https://flask.palletsprojects.com/en/2.2.x/) if you want to learn more about Flask.
 
 ```shell
 python -m pip install flask
@@ -63,17 +59,18 @@ python -m pip install flask
 
 ## Lets create a templates folder for out html
 
-In flask, if we are going to have html files we typically store them in a folder called templates so flask can find it.  Lets create it below.
+In flask, if we are going to have html files we typically store them in a folder called templates so flask can find it.  It should look like below.
 
 ```
-mkdir templates
+├── root folder
+│   ├── templates
 ```
 
-## Create a file called index.html
 
-```shell
-touch index.html
-```
+
+## Create a file called index.html.
+
+In the templates folder create an index.html file.
 
 ## Add the html code
 
@@ -98,12 +95,7 @@ It is important to note `method="post" action="{{ url_for('upload') }}"` in our 
 
 ## Create an .env file
 
-
-This is where we will place our hugging face variables
-
-```shell
-touch .env
-```
+Create an `.env` file at the root of the project.  This is where we will place our hugging face variables
 
 ## Add variables to the .env file
 
@@ -130,7 +122,7 @@ touch web.py
 
 ## Import the necessary libaries
 
-We are using a flask, and couple of built in libaries to handles files and json.
+We are using a flask, and couple of built in libaries to handle files and json.
 
 ```python
 #web.py
@@ -154,15 +146,15 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
-<br>
+
 load_dotenv()
 API_URL = os.getenv("HUGGING_FACE_API_URL")
 headers = {'Authorization': f'Bearer {os.getenv("HUGGING_FACE_API_KEY")}'}
-<br>
+
 app = Flask(__name__)
 ```
 
-Here we load our future environment variables.  First we store our url as `API_URL` and then we will load `API_KEY` as a Authorization header variable that will be used as request later to prove to Hugging Face we have access.
+Here we load our environment variables.  First we store our url as `API_URL` and then we will load `API_KEY` as a Authorization header variable that will be used as request later to prove to Hugging Face we have access.  The specific code that loads from our environment is `os.getenv("Our Variable")`.
 
 ## Lets add a query method
 
@@ -188,10 +180,17 @@ def query(data):
     response = requests.request('POST', API_URL, headers=headers, data=data)
     return json.loads(response.content.decode('utf-8'))
 ```
+Essentially the query method will take incoming image data that will be coming in from our form and then use the `requests` package to make a `POST` call to the Hugging Face API.  We can observe this in this specific code example below.
+
+```python
+def query(data):
+    response = requests.request('POST', API_URL, headers=headers, data=data)
+    return json.loads(response.content.decode('utf-8'))
+```
 
 ## Now lets add the necessary routes
 
-We will add one route to serve our the index.html template and the other will handle the form post that will receive the image file and send it to our query function.
+Now the two things that are missing are the API routes in flask to host our web form and to handle the posting of image data to our server.  So to fix this we will add one route to serve our index.html template and the other will handle the form post that will receive the image file and send it to our query function.
 
 ```python
 #web.py
@@ -228,6 +227,15 @@ def upload():
 
 app.run(host='0.0.0.0', port=81)
 ```
+
+So here we add the first route by creating a route for our index html file by typing out `@app.route('/')`.  Next we add our `index` method to render the template.  Altogether this looks like this:
+
+```py
+@app.route('/')
+def index():
+    return render_template('./index.html')
+```
+
 
 Nice now all of our flask code is done!
 
