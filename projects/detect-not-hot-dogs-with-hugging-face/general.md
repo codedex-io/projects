@@ -236,6 +236,14 @@ def index():
     return render_template('./index.html')
 ```
 
+So the code above takes care of telling flask to render our index.html template but we still have to handle the image data that will come from our form.  So to do that we add `@app.route('/upload', methods=['POST'])`.  Notice we use `/upload` and `POST`, which matches what we have in the html form.  Then under that we write the logic to parse out an image file and then send it to our `query` method.  This can all be reflected in the code snippet below.
+
+```py
+def upload():
+    file = request.files['file1']
+    modeldata = query(file)
+    return jsonify(modeldata)
+```
 
 Nice now all of our flask code is done!
 
@@ -249,6 +257,12 @@ python3 web.py
 
 The not\_hot\_dog model was original created by Julien C at https://huggingface.co/julien-c. Now the fun thing is you can actually train your own version of the model which we can save for another time, but in the meantime you can replace your `HUGGING_FACE_API_URL` with one I created for not bannanas. Just upload pictures of Bannanas instead of hot dogs.
 
+## Replace your Url
+
+Just set your `HUGGING_FACE_API_URL` in your `.env` file to `https://api-inference.huggingface.co/models/andrewvanbeek/autotrain-not-something-2133568871`.
+
 ```shell
 HUGGING_FACE_API_URL=https://api-inference.huggingface.co/models/andrewvanbeek/autotrain-not-something-2133568871
 ```
+
+Now run the project again and upload bannanas or anything not bannanas.
