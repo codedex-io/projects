@@ -27,7 +27,7 @@ In this project tutorial, we will build a Python program that "web scrapes" Amaz
 
 The final result will look something like this:
 
-![Demo](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/demo.gif)
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/demo.gif" description="Demo" />
 
 ## [#](#-what-is-web-scraping) What is Web Scraping?
 
@@ -67,7 +67,7 @@ from bs4 import BeautifulSoup
 
 When we send an HTTP request, we send some **headers** along with the request. If you open devtools in your browser (usually accessible through <kbd>Command</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> or <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>) and switch to the **Network** tab and reload any page, you can find the request headers that are similar to the ones shown below:
 
-![Request Headers](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/request-headers.png)
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/request-headers.png" description="Request Headers" />
 
 Similar to browsers, we will also send some headers along with our HTTP request. 
 
@@ -116,7 +116,7 @@ Now comes the most important part of the tutorial where we will extract data fro
 
 But before extracting, let's learn how to view the HTML code that makes up any web page. Open a product page, say [this one](https://www.amazon.com/Acer-Chromebook-Graphics-802-11ac-CB512-C1KJ/dp/B09Q9YKW15) on your browser. 
 
-![Amazon Product Page](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/amazon-product-page.png)
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/amazon-product-page.png" description="Amazon Product Page" />
 
 To view the HTML code, we have an **Inspect** option in every browser. You can use the keyboard shortcuts:
 
@@ -125,7 +125,7 @@ To view the HTML code, we have an **Inspect** option in every browser. You can u
 
 Alternatively, right-click on the web page and choose **Inspect** to access the Developer tools panel. Make sure you are on the **Elements** tab in the Developer tools panel.
 
-![Inspect Element](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/inspect-element.gif)
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/inspect-element.gif" description="Inspect Element" />
 
 
 ### [##](##-extracting-the-product-title) Extracting the Product Title
