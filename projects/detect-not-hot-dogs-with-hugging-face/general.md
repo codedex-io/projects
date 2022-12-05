@@ -5,7 +5,7 @@ datePublished: 2022-09-17
 description: Create your own not-hotdog classifier
 header: URL
 tags:
-  - beginner
+  - intermediate
   - python
 ---
 
