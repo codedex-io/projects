@@ -2,7 +2,7 @@
 title: Detect Not Hot Dogs with Hugging Face API
 author: Dev-Docs
 datePublished: 2022-09-17
-description: Create your own not-hotdog classifier
+description: Create your own "Not Hotdog" classifier to help Jian Yang from Silicon Valley.
 header: URL
 tags:
   - intermediate
