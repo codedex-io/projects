@@ -49,7 +49,7 @@ Lets create a virtual environment or venv, which is a isolated environment that 
 python3 -m venv .venv
 ```
 
-## Activate the virtual environment
+Now, let's activate the virtual environment:
 
 ```
 source .venv/bin/activate
