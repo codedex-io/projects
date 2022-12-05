@@ -41,7 +41,7 @@ Create a new directory named `nothotdog`.  This is where our project will live.
 
 Enter your directory so we can start getting ready for our code.
 
-## Create the virtual environment
+## Create the Virtual Environment
 
 Let's create a virtual environment or `venv`, which is an isolated environment that contains a Python installation in addition to other packages.  If you want to learn more check out this [Link](https://link-url-here.org](https://docs.python.org/3/tutorial/venv.html).
 
