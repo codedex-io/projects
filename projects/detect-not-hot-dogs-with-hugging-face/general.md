@@ -24,7 +24,13 @@ tags:
 
 ## Introduction:
 
-Unlock the power of innovation around detecting if an image is a hot dog or a "not hot dog" just like Jian Yang from Silicon Valley using machine learning models on hugging face.  To do this we will be using [Hugging Face](https://huggingface.co/), a community and platform that hosts a bunch of open source machine learning models, datasets, and more.
+Unlock the power of innovation around detecting if an image is a hot dog or a "not hot dog" just like Jian Yang from Silicon Valley using machine learning models on hugging face.  
+
+[add YouTube embed or GIF here]
+
+To do this we will be using [Hugging Face](https://huggingface.co/), a community and platform that hosts a bunch of open source machine learning models, datasets, and more.
+
+Let's get started! 🌭
 
 
 ## Create a nothotdog directory:
