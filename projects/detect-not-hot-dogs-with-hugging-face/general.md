@@ -122,7 +122,7 @@ touch web.py
 
 ## Import the necessary libaries
 
-We are using a flask, and couple of built in libaries to handle files and json.
+We are using Flask, and a couple of built in libaries to handle file types like JSON.
 
 ```python
 #web.py
