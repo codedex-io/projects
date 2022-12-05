@@ -1,5 +1,5 @@
 ---
-title: Detect Not Hot Dogs with hugging face API
+title: Detect Not Hot Dogs with Hugging Face API
 author: Dev-Docs
 datePublished: 2022-09-17
 description: Create your own not-hotdog classifier
