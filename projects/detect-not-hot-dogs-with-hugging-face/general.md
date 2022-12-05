@@ -76,7 +76,7 @@ In flask, if we are going to have html files we typically store them in a folder
 
 ## Create a file called index.html.
 
-In the templates folder create an index.html file.
+In the templates folder create an **index.html** file.
 
 ## Add the html code
 
