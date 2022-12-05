@@ -55,7 +55,7 @@ Now, let's activate the virtual environment:
 source .venv/bin/activate
 ```
 
-## Install the flask
+## Install Flask
 
 Now we are going to install Flask, which is a web framework in Python that makes it easy create to web applications and APIs. You can read more about it [here](https://flask.palletsprojects.com/en/2.2.x/).
 
