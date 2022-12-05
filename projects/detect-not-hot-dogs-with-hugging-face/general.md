@@ -101,7 +101,7 @@ It is important to note `method="post" action="{{ url_for('upload') }}"` in our 
 
 ## Create an .env file
 
-Create an `.env` file at the root of the project.  This is where we will place our hugging face variables
+Create an `.env` file at the root of the project. This is where we will place our Hugging Face variables.
 
 ## Add variables to the .env file
 
