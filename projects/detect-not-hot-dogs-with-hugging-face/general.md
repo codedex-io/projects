@@ -26,20 +26,22 @@ tags:
 
 Unlock the power of innovation around detecting if an image is a hot dog or a "not hot dog" just like Jian Yang from Silicon Valley using machine learning models on hugging face.  
 
-[add YouTube embed or GIF here]
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ACmydtFDTGs/0.jpg)](https://www.youtube.com/watch?v=ACmydtFDTGs)
 
 To do this we will be using [Hugging Face](https://huggingface.co/), a community and platform that hosts a bunch of open source machine learning models, datasets, and more.
 
 Let's get started! 🌭
 
 
-## Create a nothotdog directory:
+## Setting Up
 
-Create a new directory named `nothotdog`.  This is where our project will live.
+Create a new directory named nothotdog. This is where our project will live.
 
-## Cd into the nothotdog directory:
+Next, enter your directory in the terminal, so we can start getting ready for our code:
 
-Enter your directory so we can start getting ready for our code.
+```shell
+cd nothotdog
+```
 
 ## Create the Virtual Environment
 
