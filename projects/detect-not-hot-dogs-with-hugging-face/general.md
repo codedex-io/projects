@@ -136,9 +136,7 @@ Now fill your `HUGGING_FACE_API_KEY` with that value.
 
 ## Create the server file
 
-```shell
-touch web.py
-```
+At the root of our folder create a file called `web.py`.  This is where all of our `flask` server code will live.
 
 ## Import the necessary libaries
 
@@ -286,3 +284,13 @@ HUGGING_FACE_API_URL=https://api-inference.huggingface.co/models/andrewvanbeek/a
 ```
 
 Now run the project again and upload bannanas or anything not bannanas.
+
+## [#](#-final-words) Final Words
+
+You did it, you are a Silicon Valley Legend just like Jian Yang, and now we have two APIs that can detect whether something is not a hot dog or is not a bannana.  If you keep this innovation up you will be raising money from Top VCs like Peter Gregory at Raviga and be on your way to be the next Hooli or Pied Piper.  Thanks for reading!
+
+Hope you enjoyed the tutorial. If you have any questions, reach out to me on my linkedin [andrewryanvanbeek](https://www.linkedin.com/in/andrewryanvanbeek).
+
+### [##](##-more-resources) More Resources
+
+- [Discord Developer Portal](https://discord.com/developers/docs/intro)
