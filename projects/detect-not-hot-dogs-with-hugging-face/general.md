@@ -9,7 +9,6 @@ tags:
   - python
 ---
 
-
 # Detect "Not Hot Dogs" with hugging face API.
 
 ![jian-yang](https://raw.githubusercontent.com/avb-is-me/projects/main/projects/detect-not-hot-dogs-with-hugging-face/dev-docs-assets/dev-docs-VGh1LCAxNyBOb3YgMjAyMiAxOToyMjowNyBHTVQ=.png?raw=true)
