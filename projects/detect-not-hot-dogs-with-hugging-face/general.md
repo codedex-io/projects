@@ -77,9 +77,9 @@ pip install python-dotenv
 ```
 
 
-## Lets create a templates folder for out html
+## Create a templates folder for our HTML
 
-In flask, if we are going to have html files we typically store them in a folder called templates so flask can find it.  Create a folder called templates.  It should look like below.
+In flask, if we are going to have HTML files we typically store them in a folder called templates so flask can find it.  Create a folder called templates.  It should look like below.
 
 ```
 ├── root folder
@@ -92,9 +92,9 @@ In flask, if we are going to have html files we typically store them in a folder
 
 In the templates folder create an **index.html** file.
 
-## Add the html code
+## Add the HTML code
 
-Go into the index html code and copy and paste the code below. It is just a simple form that will post to an API route on our flask server.
+Go into the `index.html` code and copy and paste the code below. It is just a simple form that will post to an API route on our flask server.
 
 ```php-template
 <!-- templates/index.html -->
@@ -176,7 +176,7 @@ app = Flask(__name__)
 
 Here we load our environment variables.  First we store our url as `API_URL` and then we will load `API_KEY` as a Authorization header variable that will be used as request later to prove to Hugging Face we have access.  The specific code that loads from our environment is `os.getenv("Our Variable")`.
 
-## Lets add a query method
+## Add a query method
 
 This will be the method that actually queries the hugging face model via API with an image upload from the html form.
 
@@ -208,7 +208,7 @@ def query(data):
     return json.loads(response.content.decode('utf-8'))
 ```
 
-## Now lets add the necessary routes
+## Now add the necessary routes
 
 Now the two things that are missing are the API routes in flask to host our web form and to handle the posting of image data to our server.  So to fix this we will add one route to serve our index.html template and the other will handle the form post that will receive the image file and send it to our query function.
 
@@ -248,7 +248,7 @@ def upload():
 app.run(host='0.0.0.0', port=81)
 ```
 
-So here we add the first route by creating a route for our index html file by typing out `@app.route('/')`.  Next we add our `index` method to render the template.  Altogether this looks like this:
+So here we add the first route by creating a route for our `index.html` file by typing out `@app.route('/')`.  Next we add our `index` method to render the template.  Altogether this looks like this:
 
 ```py
 @app.route('/')
@@ -256,7 +256,7 @@ def index():
     return render_template('./index.html')
 ```
 
-So the code above takes care of telling flask to render our index.html template but we still have to handle the image data that will come from our form.  So to do that we add `@app.route('/upload', methods=['POST'])`.  Notice we use `/upload` and `POST`, which matches what we have in the html form.  Then under that we write the logic to parse out an image file and then send it to our `query` method.  This can all be reflected in the code snippet below.
+So the code above takes care of telling flask to render our `index.html` template but we still have to handle the image data that will come from our form.  So to do that we add `@app.route('/upload', methods=['POST'])`.  Notice we use `/upload` and `POST`, which matches what we have in the HTML form.  Then under that we write the logic to parse out an image file and then send it to our `query` method.  This can all be reflected in the code snippet below.
 
 ```py
 def upload():
