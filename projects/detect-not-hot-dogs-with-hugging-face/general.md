@@ -86,11 +86,9 @@ In flask, if we are going to have HTML files we typically store them in a folder
 │   ├── templates
 ```
 
-
-
 ## Create a file called index.html.
 
-In the templates folder create an **index.html** file.
+In the templates folder create a **index.html** file.
 
 ## Add the HTML code
 
@@ -126,9 +124,9 @@ HUGGING_FACE_API_URL=https://api-inference.huggingface.co/models/julien-c/hotdog
 HUGGING_FACE_API_KEY=
 ```
 
-## Create a hugging face token:
+## Create a Hugging Face token:
 
-Then go to https://huggingface.co/settings/tokens and create a token.
+Go to https://huggingface.co/settings/tokens and create a token.
 
 ![hugging face](https://raw.githubusercontent.com/avb-is-me/projects/main/projects/detect-not-hot-dogs-with-hugging-face/dev-docs-assets/dev-docs-VGh1LCAxNyBOb3YgMjAyMiAyMTowMDozMSBHTVQ=.png?raw=true)
 
@@ -172,7 +170,7 @@ headers = {'Authorization': f'Bearer {os.getenv("HUGGING_FACE_API_KEY")}'}
 app = Flask(__name__)
 ```
 
-Here we load our environment variables.  First we store our url as `API_URL` and then we will load `API_KEY` as a Authorization header variable that will be used as request later to prove to Hugging Face we have access.  The specific code that loads from our environment is `os.getenv("Our Variable")`.
+Here we load our environment variables.  First we store our url as `API_URL` and then we will load `API_KEY` as an Authorization header variable that will be used in our request later to prove to Hugging Face we have access.  The specific code that loads from our environment is `os.getenv("Our Variable")`.
 
 ## Add a query method
 
@@ -271,9 +269,9 @@ Nice now all of our flask code is done!
 python3 web.py
 ```
 
-## Bonus implement the successor not Bannana.
+## Bonus implement the successor Not Bannana.
 
-The not\_hot\_dog model was original created by Julien C at https://huggingface.co/julien-c. Now the fun thing is you can actually train your own version of the model which we can save for another time, but in the meantime you can replace your `HUGGING_FACE_API_URL` with one I created for not bannanas. Just upload pictures of Bannanas instead of hot dogs.
+The not\_hot\_dog model was originally created by Julien C at https://huggingface.co/julien-c. Now the fun thing is you can actually train your own version of the model which we can save for another time, but in the meantime you can replace your `HUGGING_FACE_API_URL` with one I created for not bannanas. Just upload pictures of Bannanas instead of hot dogs.
 
 ## Replace your Url
 
