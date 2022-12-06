@@ -63,9 +63,26 @@ Now we are going to install Flask, which is a web framework in Python that makes
 python -m pip install flask
 ```
 
+## Install Dotenv
+
+We also have install `dotenv` which we use to load environment variables.  You can find the packlage link [here](https://pypi.org/project/python-dotenv/).
+
+```shell
+pip install python-dotenv
+```
+
+## Install Requests
+
+The last package we have to add is `requests` which is a libary to handle http requests.  You can find the packlage link [here](https://pypi.org/project/requests/).
+
+```shell
+pip install python-dotenv
+```
+
+
 ## Lets create a templates folder for out html
 
-In flask, if we are going to have html files we typically store them in a folder called templates so flask can find it.  It should look like below.
+In flask, if we are going to have html files we typically store them in a folder called templates so flask can find it.  Create a folder called templates.  It should look like below.
 
 ```
 ├── root folder
