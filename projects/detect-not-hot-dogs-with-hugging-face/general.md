@@ -289,7 +289,7 @@ Now run the project again and upload bannanas or anything not bannanas.
 
 You did it, you are a Silicon Valley Legend just like Jian Yang, and now we have two APIs that can detect whether something is not a hot dog or is not a bannana.  If you keep this innovation up you will be raising money from Top VCs like Peter Gregory at Raviga and be on your way to be the next Hooli or Pied Piper.  Thanks for reading!
 
-Hope you enjoyed the tutorial. If you have any questions, reach out to me on my linkedin [andrewryanvanbeek](https://www.linkedin.com/in/andrewryanvanbeek).
+Hope you enjoyed the tutorial. If you have any questions, reach out to me on my linkedin [andrewryanvanbeek](https://www.linkedin.com/in/andrewryanvanbeek).  Also if you interested in following what I am personally building check out [Dev-Docs](https://dev-docs.typedream.app/).
 
 ### [##](##-more-resources) More Resources
 
