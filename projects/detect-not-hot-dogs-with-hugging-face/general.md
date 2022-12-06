@@ -15,9 +15,12 @@ tags:
 
 **Prerequisites:** Hugging Face account, HTML, Python 
 
-\-A hugging Face Account
+\-Hugging Face
 
 \-Python 3
+
+\-Python Fundamentals
+
 
 **Read Time:** 30 Minutes
 
