@@ -13,14 +13,7 @@ tags:
 
 ![jian-yang](https://raw.githubusercontent.com/avb-is-me/projects/main/projects/detect-not-hot-dogs-with-hugging-face/dev-docs-assets/dev-docs-VGh1LCAxNyBOb3YgMjAyMiAxOToyMjowNyBHTVQ=.png?raw=true)
 
-**Prerequisites:** Hugging Face account, HTML, Python 
-
-\-Hugging Face
-
-\-Python 3
-
-\-Python Fundamentals
-
+**Prerequisites:** Hugging Face, HTML, Python Fundamentals
 
 **Read Time:** 30 Minutes
 
