@@ -291,6 +291,6 @@ You did it, you are a Silicon Valley Legend just like Jian Yang, and now we have
 
 Hope you enjoyed the tutorial. If you have any questions, reach out to me on my linkedin [andrewryanvanbeek](https://www.linkedin.com/in/andrewryanvanbeek).  Also if you interested in following what I am personally building check out [Dev-Docs](https://dev-docs.typedream.app/).
 
-### [##](##-more-resources) More Resources
+[##](##-more-resources) More Resources
 
 - [Discord Developer Portal](https://discord.com/developers/docs/intro)
