@@ -117,7 +117,7 @@ Create an `.env` file at the root of the project. This is where we will place ou
 
 ## Add variables to the .env file
 
-Open the .env file and add `HUGGING_FACE_API_URL= `and `HUGGING_FACE_API_KEY=`, ading in your API key and URL. This is where we place the hugging face information. We can actually fill the url with the prefilled model we are using.
+Open the `.env` file and add `HUGGING_FACE_API_URL= `and `HUGGING_FACE_API_KEY=`, ading in your API key and URL. This is where we place the hugging face data to allow us to use hugging face's models. 
 
 ```shell
 HUGGING_FACE_API_URL=https://api-inference.huggingface.co/models/julien-c/hotdog-not-hotdog
