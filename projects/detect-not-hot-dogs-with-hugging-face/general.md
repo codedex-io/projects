@@ -79,7 +79,7 @@ pip install python-dotenv
 
 ## Create a templates folder for our HTML
 
-In flask, if we are going to have HTML files we typically store them in a folder called templates so flask can find it.  Create a folder called templates.  It should look like below.
+In Flask, if we are going to have HTML files we typically store them in a folder called templates so Flask is able to find them.  Create a folder called templates, which should end up looking like this: 
 
 ```
 ├── root folder
