@@ -109,7 +109,7 @@ Go into the `index.html` code and copy and paste the code below. It is just a si
 </html>
 ```
 
-It is important to note `method="post" action="{{ url_for('upload') }}"` in our form.  This tells our form two things, what action we want to do which is `POST` and what API route to send our data which is going `/upload`.
+It is important to note `method="post" action="{{ url_for('upload') }}"` in our form. This tells our form two things: what action we want to perform which is `POST` and what API route to send our data which is going `/upload`.
 
 ## Create an .env file
 
