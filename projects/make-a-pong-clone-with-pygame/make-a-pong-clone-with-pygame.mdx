@@ -119,7 +119,9 @@ Now, in the setup, we need to add some variables for the players and the ball. F
 which is essentially a rectangular sprite with collisions. We also need "move" variables to old the value of the players' movement.
 For the ball, we have a `Rect` as well, and two "acceleration" variables (similar to the players' "move" variables). We set those to
 a random number between 2 and 4 to give some speed variety. We also randomize the direction of the ball by multiplying the acceleration
-variables by -1, one times out of two. Here is the code for this part (it goes in the **setup** section):
+variables by -1, one times out of two. We do this multiplication because, by default, a positive `ball_accel_x` will make the ball go right 
+(because of `Pygame` coordinates). A positive `ball_accel_y` will make the ball go down. By multiplying these variables on the flip of a coin
+we randomize the vertical and horizontal direction of the ball. Here is the code for this part (it goes in the **setup** section):
 
 ```py
 """
