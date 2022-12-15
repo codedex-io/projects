@@ -62,7 +62,7 @@ python -m pip install flask
 
 ## Install Dotenv
 
-We also have install `dotenv` which we use to load environment variables.  You can find the packlage link [here](https://pypi.org/project/python-dotenv/).
+We also have install the `dotenv` library which we use to load environment variables.  You can find the packlage link [here](https://pypi.org/project/python-dotenv/).
 
 ```shell
 pip install python-dotenv
