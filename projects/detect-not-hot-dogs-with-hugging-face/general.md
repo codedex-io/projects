@@ -134,7 +134,7 @@ Now fill your `HUGGING_FACE_API_KEY` with that value.
 
 ## Create the server file
 
-At the root of our folder create a file called `web.py`.  This is where all of our `flask` server code will live.
+At the root of our folder create a file called `web.py`. This is where all of our Flask server code will be.
 
 ## Import the necessary libraries
 
