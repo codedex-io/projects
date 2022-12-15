@@ -40,7 +40,7 @@ cd nothotdog
 
 ## Create the Virtual Environment
 
-Let's create a virtual environment or `venv`, which is an isolated environment that contains a Python installation in addition to other packages.  If you want to learn more check out this [Link](https://docs.python.org/3/tutorial/venv.html).
+Let's create a virtual environment or `venv`, which is an isolated environment that contains a Python installation in addition to other packages. If you want to learn more check out this [link](https://docs.python.org/3/tutorial/venv.html).
 
 ```shell
 python3 -m venv .venv
