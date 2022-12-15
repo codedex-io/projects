@@ -57,8 +57,10 @@ Also, add `import pygame` and `import random` at the start of the file to import
 
 ## [#](#-subheading) Creating a Window
 
-Before we code any of the game logic, we first need to render a simple window with PyGame. We can
-do this very simply:
+Before we code any of the game logic, we first need to render a simple window with PyGame. We'll also set the screen size to `960x720` and the
+background color to `COLOR_BLACK` (a constant). We also go over the `Pygame` event loop, to check for the `QUIT` event. If this event is triggered,
+we exit the function by calling `return`. This event loop will be used again later. Finally, we also set the name of the window to "Pong". 
+Here is the code for all of this
 
 ```py
 # constants for the windows width and height values
