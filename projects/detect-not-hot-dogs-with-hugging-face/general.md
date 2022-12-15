@@ -70,7 +70,7 @@ pip install python-dotenv
 
 ## Install Requests
 
-The last package we have to add is `requests` which is a libary to handle http requests.  You can find the packlage link [here](https://pypi.org/project/requests/).
+The last package we have to add is `requests` which is a libary to handle http requests. You can find the packlage link [here](https://pypi.org/project/requests/).
 
 ```shell
 pip install python-dotenv
