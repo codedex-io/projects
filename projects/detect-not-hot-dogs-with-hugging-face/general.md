@@ -86,7 +86,7 @@ In flask, if we are going to have HTML files we typically store them in a folder
 │   ├── templates
 ```
 
-## Create a file called index.html.
+## Create a file called index.html
 
 In the templates folder create a **index.html** file.
 
