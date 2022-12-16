@@ -59,7 +59,7 @@ def main():
   while True:
 
     # make the ball move after 3 seconds
-    if pygame.time.get_ticks() > 25000:
+    if pygame.time.get_ticks() > 3000:
       started = True
 
     ''' 
