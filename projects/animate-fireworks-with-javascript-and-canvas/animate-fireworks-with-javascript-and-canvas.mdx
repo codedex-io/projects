@@ -18,7 +18,7 @@ tags:
 <BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/header.png" description="Header image" />
 
 **Prerequisites:** HTML, CSS, JavaScript fundamentals  
-**Versions:** Python 3.10, qrcode 7.3.1, Pillow 9.2.0  
+**Versions:** None 
 **Read Time:** 75 minutes  
 
 ## [#](#-introduction) Introduction
@@ -58,11 +58,10 @@ The next thing we need to do is add the following base code:
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- We will write more code here -->
   </body>
 </html>
 ```
-
-`index.html`
 
 Notice that body tags are currently empty. This is where we will place two `canvas` elements and two `script` elements in.
 
@@ -75,15 +74,13 @@ Add the following snippet within the `body` tags.
 <script src="fireworks.js"></script>
 ```
 
-`index.html`
-
 As a convention, the value of the `id` typically goes by “canvas”. But since we’ve got two canvases, I decided to name them `canvas-background` and `canvas-fireworks` so that we can differentiate between them. This of course can be any name of your choosing, just pick something that optimizes your code flow and seems meaningful to you. Remember that naming is one of the most important things to pay attention to. Poorly named ids, variables, functions, etc. can lead to confusion.
 
 Now, why do we need two separate canvases? Well, it is because we will have two layers: one for the background where we will draw the static assets like figures of Avatars, and one for the dynamic fireworks and interactions. At this step, both script files are empty so let’s quickly add them to our file structure.
 
 Create `canvas-background.js` and `canvas-fireworks.js` and keep them empty for now. We will come back to it in a second. These files should be in the same directory as the `index.html`. The base code we pasted in the `index.html` file links HTML and CSS together.
 
-Let’s also create a `styles.css` and add some generic code to it:
+Let’s also create a **styles.css** and add some generic code to it:
 
 ```css
 body {
@@ -104,13 +101,11 @@ canvas {
 }
 ```
 
-`styles.css`
-
 `margin: 0` and `padding: 0` on `body` resets the margin and padding on your body as we are going to make the canvas occupy the whole screen and we don’t want to see any white space around it. It’s a good practice to remove paddings and margins from your text elements like `h1` and `p`. Add `overflow: hidden` to the body tag so that the content will be clipped if necessary to fit the padding box.
 
 It is also essential to set `canvas` elements to the position `absolute` as we want to overlay them on top of each other for an immersive experience.
 
-Extend your `styles.css` with the following:
+Extend your **styles.css** with the following:
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
@@ -150,8 +145,6 @@ canvas {
 }
 ```
 
-`styles.css`
-
 Add custom fonts. We will use google fonts. For this tutorial, let’s select “[Pacifico](https://fonts.google.com/specimen/Pacifico)” for `h1` and “[Work Sans](https://fonts.google.com/specimen/Work+Sans)” for `p` elements.
 
 Start by importing the fonts on top of the file and set the font family across the entire site to be `'Pacifico', cursive`. `p` elements will have `'Work Sans', sans-serif;` set explicitly which will overwrite the default font set on the `body`. 
@@ -171,16 +164,16 @@ Time to launch the live server by clicking on “Go Live” in the bottom right 
 
 ## [#](#-drawing-the-background) Drawing the Background
 
-In order to get some things on the screen, we’re going to add the background first. Open your `canvas-background.js` and add the following code:
+In order to get some things on the screen, we’re going to add the background first. 
+
+Open your **canvas-background.js** and add the following code:
 
 ```jsx
 const canvas = document.getElementById('canvas-background'); // gets a reference to the HTML <canvas> element
 const context = canvas.getContext('2d'); // get the rendering context for the canvas
 ```
 
-`canvas-background.js`
-
-The `Document.getElementById()` method gets a reference to the HTML `<canvas>` element. Next, the `HTMLCanvasElement.getContext()` method gets that element's rendering context - the thing onto which the drawing will be rendered.
+The `.getElementById()` method gets a reference to the HTML `<canvas>` element. Next, the `HTMLCanvasElement.getContext()` method gets that element's rendering context - the thing onto which the drawing will be rendered.
 
 Once you have the initial skeleton set up, two attributes are required when setting up your canvas space. The desired `width` and `height` of the canvas need to be set.
 
@@ -195,8 +188,6 @@ const height = window.innerHeight;
 canvas.width = width;
 canvas.height = height;
 ```
-
-`canvas-background.js`
 
 Moving forward, wrap your code in an IIFE. 
 
