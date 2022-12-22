@@ -18,8 +18,8 @@ tags:
 <RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-qr-code-with-python/header.png" description="Header image" />
 
 **Prerequisites:** HTML, CSS, JavaScript fundamentals  
-**Versions:** Python 3.10, qrcode 7.3.1, Pillow 9.2.0
-**Read Time:** 75 minutes
+**Versions:** Python 3.10, qrcode 7.3.1, Pillow 9.2.0  
+**Read Time:** 75 minutes  
 
 ## [#](#-introduction) Introduction
 
@@ -164,7 +164,8 @@ Time to launch the live server by clicking on “Go Live” in the bottom right 
 
 ![Screenshot 2022-12-17 at 18.26.44.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/495f912c-1a01-4c04-be5c-d2d71be98784/Screenshot_2022-12-17_at_18.26.44.png)
 
-# Drawing the Background
+
+## [#](#-drawing-the-background) Drawing the Background
 
 In order to get some things on the screen, we’re going to add the background first. Open your `canvas-background.js` and add the following code:
 
@@ -329,7 +330,8 @@ Your `canvas-background.js` should contain the following code by now:
 
 `canvas-background.js`
 
-# Adding avatars
+
+## [#](#-adding-avatars) Adding Avatars
 
 Remember in the setup you have added the images to your assets folder. Well, well! Let’s use them.
 
@@ -443,7 +445,8 @@ Next up is where the trick happens. And it is as simple as attaching an event li
 
 Quick Tip: if you didn’t know, JavaScript has a `match` method. Generally, The **`.match()`  c**ompares strings with a regular expression (regex). Or in other words, we can say that it is used to search string objects with any `regex`. But you can also pass a path to the image to it and it will work because it is just a `string`. In this tutorial, we wanted to introduce you to this simple but useful method.
 
-# Adding typography
+
+## [#](#-adding-typography) Adding Typography
 
 The same thing as with `img`, we will add static typography to our site.
 
@@ -585,7 +588,8 @@ Extended `h1` by adding colorful animation. You can play around with it to creat
 
 To finish up the static part, let’s draw some stars on the background canvas.
 
-# Drawing stars
+
+## [#](#-drawing-stars) Drawing Stars
 
 Open up `canvas-background.js` :
 
@@ -698,7 +702,8 @@ Your site should look like this by now:
 
 [static-done.mov](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b445b30c-2da7-420e-b654-2cd34ccb9579/static-done.mov)
 
-# Time for dynamic add-ons!
+
+## [#](#-time-for-dynamic-add-ons) Time for Dynamic Add-Ons!
 
 …and for the most interesting part where you will work with the `second` canvas.
 
@@ -867,7 +872,8 @@ By now, `canvas-fireworks.js` should contain the following code:
 
 `canvas-fireworks.js`
 
-# Shooting crackers 🎇
+
+## [#](#-shooting-crackers) Shooting Crackers 🎇
 
 Finally! We are now at the point where we will have these crackers bursting! To help keep things more customizable, set up some variables and helper functions at the top of the file right after the `positions` object:
 
@@ -995,7 +1001,8 @@ Additionally, you need to keep track of the `coordinates`, their `angle`, and `s
 
 Call `init` method at the bottom of the class.
 
-# Drawing fireworks
+
+## [#](#-drawing-fireworks) Drawing Fireworks
 
 Are you ready to draw some fireworks? Then let’s go!
 
@@ -1202,7 +1209,8 @@ This is how your functionality should look in action by now:
 
 [fireworks-shooting.mov](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/48f7ec50-224d-4a73-a743-bb9ca73b4fa5/fireworks-shooting.mov)
 
-# Adding flecks ✨
+
+## [#](#-adding-flecks) Adding Flecks ✨
 
 You are LITERALLY at the last section of this lesson. How far have you gone? Let’s finish this up by adding flecks to create a beautiful effect of the fireworks bursting once the trail reaches the destination.
 
@@ -1746,23 +1754,12 @@ And the complete `canvas-fireworks.js` has the following code:
 
 `canvas-fireworks.js`
 
-# Conclusion
+
+## [#](#-conclusion) Conclusion
 
 Wow! You’ve just created your first firework show using HTML, CSS, and JavaScript. This project is hosted on GitHub and can be found [here](https://github.com/olgayavnel/new-year-fireworks).
 
 I hope that you have enjoyed this tutorial as much as I did! Happy coding! 💻
-
-## [#](#-improvements) Improvements
-
-To improve this, we could do a couple of things:
-
-- Allow the website link to be typed in using `input()` function.
-- Allow users to customize the QR code generated.
-- Automate the process to create multiple QR codes. 
-- Include more functions (or object parameters) of the [`qrcode`](https://pypi.org/project/qrcode/) library.
-- Try changing the colors and styles of the generated QR codes using different drawer modules and fill colors.
-- Use an application library (like [Tkinter](https://docs.python.org/3/library/tkinter.html)) to add a user interface.
-- Check out other QR code libraries like [`pyqrcode`](https://pypi.org/project/PyQRCode/).
 
 ## [#](#-more-resources) More Resources
 
