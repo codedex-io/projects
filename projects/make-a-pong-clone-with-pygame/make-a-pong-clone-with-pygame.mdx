@@ -166,10 +166,9 @@ pygame.display.update()
 
 ## [#](#-subheading) Making the Ball Move
 
-Next, let's make the ball move! First we'll need to define two variables in the **setup**: one is the `start` variable,
-which determines whether or not the ball can move. This is because we want the ball to only start moving after 3 seconds, to let the players 
-move around a bit. The second is a PyGame `Clock` object. This is probably the most important part of the code, since it allows us to tell what 
-the time, but most importantly, allow us to determine the [delta time](https://en.wikipedia.org/wiki/Delta_timing). Here is the code for that:
+Next, let's make the ball move! First we'll need to define a variablesin the **setup**: it is a PyGame `Clock` object. 
+This is probably the most important part of the code, since it allows us to tell what the time is, but most importantly, allow us to determine the [delta time](https://en.wikipedia.org/wiki/Delta_timing). 
+Here is the code for that:
 
 ```py
 # create the clock object to keep track of the time
@@ -182,19 +181,41 @@ we will make it move after 3 seconds
 started = False
 ```
 
-In the loop, let's add this little bit of code to tell when the ball can start moving. The number 3000 is an arbitrary number, that is in milliseconds. This
-means 3000 is 3 seconds, 4000 would be 4 seconds, etc. You can adjust this to your liking. This code snippet will also include setting the `delta_time` variable.
+In the loop, let's add this little bit of code. This code snippet will also include setting the `delta_time` variable.
 
 ```py
-# make the ball move after 3 seconds
-if pygame.time.get_ticks() > 3000:
-  started = True
-
 """
 get the time elapse between now and the last frame
 60 is an arbitrary number but the game runs smooth at 60 FPS
 """
 delta_time = clock.tick(60)
+```
+Before that, in the loop, let's add a start screen. This can be easily done with the following code (place it after the line that make the screen black):
+
+```
+# make the ball move after 3 seconds
+if not started:
+  # load the Consolas font
+  font = pygame.font.SysFont('Consolas', 30)
+
+  # draw some text to the center of the screen
+  text = font.render('Press Space to Start', True, COLOR_WHITE)
+  text_rect = text.get_rect()
+  text_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+  screen.blit(text, text_rect)
+
+  # update the display
+  pygame.display.flip()
+
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      pygame.quit()
+      return
+    if event.type == pygame.KEYDOWN:
+      if event.key == pygame.K_SPACE:
+        started = True
+
+   continue
 ```
 
 **NOTE**: when looking at the next part of the code, please keep in mind that that PyGame coordinates place (0, 0) at the top-left corner of the screen, and that
