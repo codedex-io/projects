@@ -20,9 +20,7 @@ tags:
 ## [#](#-introduction) Introduction
 
 Can you guess what the first video game ever created was? It was called Pong, and with today's technology, it's super easy to make!
-In this tutorial, you'll learn how to make your very own Pong clone, 
-using Python and the PyGame library. You will learn how this game engine works, and how you can
-make simple collision detection so you and a friend can play Pong on the same computer!
+In this tutorial, you'll learn how to make your very own Pong clone, using Python and the PyGame library. You will learn how this game engine works, and how you can make simple collision detection so you and a friend can play Pong on the same computer!
 
 This is what the game will look like at the end:
 
@@ -34,8 +32,7 @@ Without any further ado, let's get into it!
 
 ## [#](#-subtitle) Setting Everything Up
 
-Before writing any code, go into your terminal and install the Pygame library using pip. Here, we're using the `pip3` command (which comes with pip),
-because we'll be writing our code for version 3 of Python.
+Before writing any code, go into your terminal and install the Pygame library using pip. Here, we're using the `pip3` command (which comes with pip), because we'll be writing our code for version 3 of Python.
 ```sh
 pip3 install pygame
 ```
@@ -56,10 +53,10 @@ Also, add `import pygame` and `import random` at the start of the file to import
 
 ## [#](#-subheading) Creating a Window
 
-Before we code any of the game logic, we first need to render a simple window with PyGame. We'll also set the screen size to `960x720` and the
-background color to `COLOR_BLACK` (a constant). We also go over the `Pygame` event loop, to check for the `QUIT` event. If this event is triggered,
-we exit the function by calling `return`. This event loop will be used again later. Finally, we also set the name of the window to "Pong". 
-Here is the code for all of this
+Before we code any of the game logic, we first need to render a simple window with PyGame. 
+We'll also set the screen size to `960x720` and the background color to `COLOR_BLACK` (a constant). We also go over the `Pygame` event loop, to check for the `QUIT` event. If this event is triggered, we exit the function by calling `return`. 
+This event loop will be used again later. Finally, we also set the name of the window to "Pong". 
+Here is the code for all of this :
 
 ```py
 # constants for the windows width and height values
@@ -103,25 +100,27 @@ def main():
 **NOTE**: You will notice that I have separated the code before and after the `while` loop with two comments. 
 From now on, I will refer to the code before this loop as the setup. The code after will be called the game loop.
 
-You can also see that we initialized some variables before the `main()` function. Since these are constants
-(i. e. they will not change), it is best to name them with capitalized letters. Now you will see that in the game loop
-we have a `for` loop to go through `pygame.event.get()`. This is where all the game engine related events
-(such as the user exiting the window, keypresses, etc.) will be handled. You can also create your own custom events,
-though that will not be covered in this tutorial. Here we simply check if the event list contains the `pygame.QUIT` event,
-which is triggered when the [X] button is clicked on a window. If that is the case, we simply `return` out of the
-`main()` function, which ends the `while` loop and closes the window.
+You can also see that we initialized some variables before the `main()` function. 
+Since these are constants (i. e. they will not change), it is best to name them with capitalized letters. 
+Now you will see that in the game loop we have a `for` loop to go through `pygame.event.get()`. 
+This is where all the game engine related events (such as the user exiting the window, keypresses, etc.) will be handled. 
+You can also create your own custom events, though that will not be covered in this tutorial. 
+Here we simply check if the event list contains the `pygame.QUIT` event, which is triggered when the [X] button is clicked on a window. 
+If that is the case, we simply `return` out of the `main()` function, which ends the `while` loop and closes the window.
 
 You can run the script, and an empty window should appear.
 
 ## [#](#-subheading) Creating the Players and the Ball
 
-Now, in the setup, we need to add some variables for the players and the ball. For the players, they each need a `Rect` object,
-which is essentially a rectangular sprite with collisions. We also need "move" variables to old the value of the players' movement.
-For the ball, we have a `Rect` as well, and two "acceleration" variables (similar to the players' "move" variables). We set those to
-a random number between 2 and 4 to give some speed variety. We also randomize the direction of the ball by multiplying the acceleration
-variables by -1, one times out of two. We do this multiplication because, by default, a positive `ball_accel_x` will make the ball go right 
-(because of `Pygame` coordinates). A positive `ball_accel_y` will make the ball go down. By multiplying these variables on the flip of a coin
-we randomize the vertical and horizontal direction of the ball. Here is the code for this part (it goes in the **setup** section):
+Now, in the setup, we need to add some variables for the players and the ball. 
+For the players, they each need a `Rect` object, which is essentially a rectangular sprite with collisions. 
+We also need "move" variables to old the value of the players' movement.
+For the ball, we have a `Rect` as well, and two "acceleration" variables (similar to the players' "move" variables). 
+We set those to a random number between 2 and 4 to give some speed variety. 
+We also randomize the direction of the ball by multiplying the acceleration variables by -1, one times out of two. 
+We do this multiplication because, by default, a positive `ball_accel_x` will make the ball go right (because of `Pygame` coordinates). 
+A positive `ball_accel_y` will make the ball go down. 
+By multiplying these variables on the flip of a coin we randomize the vertical and horizontal direction of the ball. Here is the code for this part (it goes in the **setup** section):
 
 ```py
 """
@@ -192,7 +191,7 @@ delta_time = clock.tick(60)
 ```
 Before that, in the loop, let's add a start screen. This can be easily done with the following code (place it after the line that make the screen black):
 
-```
+```py
 # make the ball move after 3 seconds
 if not started:
   # load the Consolas font
@@ -218,21 +217,33 @@ if not started:
    continue
 ```
 
-**NOTE**: when looking at the next part of the code, please keep in mind that that PyGame coordinates place (0, 0) at the top-left corner of the screen, and that
-increasing x means going to the right, and increasing y means going down.
+**NOTE**: when looking at the next part of the code, please keep in mind that that PyGame coordinates place (0, 0) at the top-left corner of the screen, and that increasing x means going to the right, and increasing y means going down.
 
-To finish making the ball move, add this code to the end of the **game loop**, right before where we draw the rectangles. First we check if the ball goes out of bounds 
-on the right or left side of the screen. If it does, we end the game by ending the function. Next, we check if the ball rectangle collides with the player rectangles.
-We also check if the ball is in front of the paddle, because if it isn't, then it doesn't make sense to change its direction. To change it, we simply multiply the `ball_accel_x`
-variable from earlier by -1, and add or substract some value to or from x (for a PyGame `Rect`, this is called `left`), to make sure no glitchy collisions happen (if you
-don't believe me, try removing those two lines, and play around for a bit. You'll see what I mean). Finally, if the ball can move (i.e. if `started` is `True`), we simply
-move the ball by adding the `ball_accel_x` and `ball_accel_y` to the `left` and `top` properties of the `ball_rect` object (remember to always multiply by `delta_time`). 
+To finish making the ball move, add this code to the end of the **game loop**, right before where we draw the rectangles. 
+First we check if the ball goes out of bounds on the right or left side of the screen. If it does, we end the game by ending the function. 
+After that, we can very simply check if the ball collides with the bottom or the top of the screen.
+Next, we check if the ball rectangle collides with the player rectangles. 
+We also check if the ball is in front of the paddle, because if it isn't, then it doesn't make sense to change its direction. 
+To change it, we simply multiply the `ball_accel_x` variable from earlier by -1, and add or substract some value to or from x (for a PyGame `Rect`, this is called `left`)
+This is to make sure no glitchy collisions happen (if you don't believe me, try removing those two lines, and play around for a bit. You'll see what I mean). 
+Finally, if the ball can move (i.e. if `started` is `True`), we simply move the ball by adding the `ball_accel_x` and `ball_accel_y` to the `left` and `top` properties of the `ball_rect` object (remember to always multiply by `delta_time`). 
 Here is the code:
 
 ```py
 # if the ball goes out of bounds, end the game 
 if ball_rect.left <= 0 or ball_rect.left >= SCREEN_WIDTH:
   return
+  
+# if the ball is getting close to the top (15 is an arbitrary number, but I found that it worked great)
+if ball_rect.top < 0:
+  # invert its vertical velocity 
+  ball_accel_y *= -1
+  # add a bit of y to it to not trigger the above code again
+  ball_rect.top = 0
+# do the same thing with the bottom
+if ball_rect.bottom > SCREEN_HEIGHT - ball_rect.height:
+  ball_accel_y *= -1
+  ball_rect.top = SCREEN_HEIGHT - ball_rect.heigh
 
 """
 if paddle_1_rect collides with the ball and the ball is in front of it, 
@@ -255,9 +266,10 @@ if started:
 
 ## [#](#-subheading) Making the Players Move
 
-Making the players move is slightly more complicated. However, the result is definitely worth it. Since, in PyGame, `KEYDOWN` and `KEYUP` events are different things,
-we need to check for both. When it's `KEYDOWN`, we set the "move" variable to move the player. When it's `KEYUP`, we can reset the "move" variable. We only actually move
-the players after this. Here is the code, that goes in the `for event in pygame.event.get():` loop:
+Making the players move is slightly more complicated. However, the result is definitely worth it. 
+Since, in PyGame, `KEYDOWN` and `KEYUP` events are different things, we need to check for both. 
+When it's `KEYDOWN`, we set the "move" variable to move the player. When it's `KEYUP`, we can reset the "move" variable. 
+We only actually move the players after this. Here is the code, that goes in the `for event in pygame.event.get():` loop:
 
 ```py
 # if the user is pressing a key
@@ -304,8 +316,9 @@ paddle_2_rect.top += paddle_2_move * delta_time
 
 ## [#](#-conclusion) Conclusion
 
-And voilà! Your Pong clone is done! You can now play Pong with your friend on the same computer. One of you two uses the W and S keys, while the other uses the UP and DOWN 
-arrow keys. If you want to make the game a little better by preventing the players from going completely of limits with their paddles, add in the **game loop**:
+And voilà! Your Pong clone is done! You can now play Pong with your friend on the same computer. 
+One of you two uses the W and S keys, while the other uses the UP and DOWN  arrow keys. 
+If you want to make the game a little better by preventing the players from going completely of limits with their paddles, add this in the **game loop**:
 
 ```py
 if paddle_1_rect.top < 0:
