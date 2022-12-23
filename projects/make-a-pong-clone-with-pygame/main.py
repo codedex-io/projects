@@ -57,16 +57,36 @@ def main():
 
   # GAME LOOP
   while True:
-
-    # make the ball move after 3 seconds
-    if pygame.time.get_ticks() > 3000:
-      started = True
-
+    
     ''' 
     set the back ground color to black
     needs to be called everytime the game updates
     '''
     screen.fill(COLOR_BLACK)
+    
+    # make the ball move after 3 seconds
+    if not started:
+      # load the Consolas font
+      font = pygame.font.SysFont('Consolas', 30)
+      
+      # draw some text to the center of the screen
+      text = font.render('Press Space to Start', True, COLOR_WHITE)
+      text_rect = text.get_rect()
+      text_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+      screen.blit(text, text_rect)
+      
+      # update the display
+      pygame.display.flip()
+
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          pygame.quit()
+          return
+        if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_SPACE:
+            started = True
+
+       continue
 
     '''
     get the time elapse between now and the last frame
