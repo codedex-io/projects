@@ -77,6 +77,7 @@ def main():
       
       # update the display
       pygame.display.flip()
+      clock.tick(60)
 
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
