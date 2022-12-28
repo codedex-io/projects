@@ -120,14 +120,14 @@ You can run the script, and an empty window should appear.
 
 ## [#](#-subheading) Creating the Players and the Ball
 
-Now, in the setup, we need to add some variables for the players and the ball. For the players, they each need a `Rect` object, which is essentially a rectangular sprite with collisions. We also need "move" variables to old the value of the players' movement. For the ball, we have a `Rect` as well, and two "acceleration" variables (similar to the players' "move" variables). We set those to a random number between 2 and 4 to give some speed variety. We also randomize the direction of the ball by multiplying the acceleration variables by -1, one times out of two. We do this multiplication because, by default, a positive `ball_accel_x` will make the ball go right (because of `Pygame` coordinates). A positive `ball_accel_y` will make the ball go down. By multiplying these variables on the flip of a coin we randomize the vertical and horizontal direction of the ball.
+Now, in the setup, we need to add some variables for the players and the ball. For the players, they each need a `Rect` object, which is essentially a rectangular sprite with collisions. We also need "move" variables to hold the value of the players' movement. For the ball, we have a `Rect` as well, and two "acceleration" variables (similar to the players' "move" variables). We set those to a random number between 2 and 4 to give some speed variety. We also randomize the direction of the ball by multiplying the acceleration variables by -1, one times out of two. We do this multiplication because, by default, a positive `ball_accel_x` will make the ball go right (because of `Pygame` coordinates). A positive `ball_accel_y` will make the ball go down. By multiplying these variables on the flip of a coin, we randomize the vertical and horizontal direction of the ball.
 
 Here is the code for this part (it goes in the **setup** section):
 
 ```py
 """
 these are the players' game paddles
-the `Rect` function need the x, y, width and height
+the pygame.Rect function need the x, y, width and height
 of the rectangles we will be drawing
 """
 paddle_1_rect = pygame.Rect(30, 0, 7, 100)
@@ -154,7 +154,7 @@ if random.randint(1, 2) == 1:
 Finally, to draw these rectangles to the screen, add this add the **bottom of the game loop**:
 
 ```py
-# draw player 1 and player 2's rects with the white color
+# draw player 1 and player 2's paddle rects with the white color
 pygame.draw.rect(screen, COLOR_WHITE, paddle_1_rect)
 pygame.draw.rect(screen, COLOR_WHITE, paddle_2_rect)
 
@@ -167,7 +167,7 @@ pygame.display.update()
 
 ## [#](#-subheading) Making the Ball Move
 
-Next, let's make the ball move! First we'll need to define a variablesin the **setup**: it is a PyGame `Clock` object.
+Next, let's make the ball move! First we'll need to define a variable `clock` in the **setup**: it is a PyGame `Clock` object.
 
 This is probably the most important part of the code, since it allows us to tell what the time is, but most importantly, allow us to determine the [delta time](https://en.wikipedia.org/wiki/Delta_timing).
 
@@ -226,7 +226,17 @@ if not started:
 
 **NOTE**: when looking at the next part of the code, please keep in mind that that PyGame coordinates place (0, 0) at the top-left corner of the screen, and that increasing x means going to the right, and increasing y means going down.
 
-To finish making the ball move, add this code to the end of the **game loop**, right before where we draw the rectangles. First we check if the ball goes out of bounds on the right or left side of the screen. If it does, we end the game by ending the function. After that, we can very simply check if the ball collides with the bottom or the top of the screen. Next, we check if the ball rectangle collides with the player rectangles. We also check if the ball is in front of the paddle, because if it isn't, then it doesn't make sense to change its direction. To change it, we simply multiply the `ball_accel_x` variable from earlier by -1, and add or substract some value to or from x (for a PyGame `Rect`, this is called `left`) This is to make sure no glitchy collisions happen (if you don't believe me, try removing those two lines, and play around for a bit. You'll see what I mean). Finally, if the ball can move (i.e. if `started` is `True`), we simply move the ball by adding the `ball_accel_x` and `ball_accel_y` to the `left` and `top` properties of the `ball_rect` object (remember to always multiply by `delta_time`).
+To finish making the ball move, add this code to the end of the **game loop**, right before where we draw the rectangles.
+
+First we check if the ball goes out of bounds on the right or left side of the screen. If it does, we end the game by ending the function.
+
+After that, we can very simply check if the ball collides with the bottom or the top of the screen.
+
+Next, we check if the ball rectangle collides with the player rectangles.
+
+We also check if the ball is in front of the paddle, because if it isn't, then it doesn't make sense to change its direction. To change it, we simply multiply the `ball_accel_x` variable from earlier by -1, and add or substract some value to or from x (for a PyGame `Rect`, this is called `left`). This is to make sure no glitchy collisions happen (if you don't believe me, try removing those two lines, and play around for a bit. You'll see what I mean).
+
+Finally, if the ball can move (i.e. if `started` is `True`), we simply move the ball by adding the `ball_accel_x` and `ball_accel_y` to the `left` and `top` properties of the `ball_rect` object (remember to always multiply by `delta_time`).
 
 Here is the code:
 
