@@ -335,7 +335,7 @@ Go back to `index.html` and add the following code snippet in between the body t
 
 ```html
 <div class="image-container">
-      <img id="avatar" src="./assets/santa.png" alt="avatar" />
+  <img id="avatar" src="./assets/santa.png" alt="avatar" />
 </div>
 ```
 
@@ -707,7 +707,7 @@ Add the following code to `canvas-fireworks.js`:
 
 ```jsx
 (() => {
-	const canvas = document.getElementById('canvas-fireworks'); // gets a reference to the HTML <canvas> element
+  const canvas = document.getElementById('canvas-fireworks'); // gets a reference to the HTML <canvas> element
   const context = canvas.getContext('2d'); // get the rendering context for the canvas
 
   // get document's width and height
@@ -718,7 +718,7 @@ Add the following code to `canvas-fireworks.js`:
   canvas.width = width;
   canvas.height = height;
 
-	const positions = {
+  const positions = {
     mouseX: 0,
     mouseY: 0,
     anchorX: 0,
@@ -782,21 +782,21 @@ Add the following code right after `drawAnchor()` function:
 // listen to the mousemove event and
 // set the mouse positions to the correct coordinates
 const attachEventListeners = () => {
-    canvas.addEventListener('mousemove', (e) => {
-      positions.mouseX = e.pageX;
-      positions.mouseY = e.pageY;
-    });
- };
+  canvas.addEventListener('mousemove', (e) => {
+    positions.mouseX = e.pageX;
+    positions.mouseY = e.pageY;
+  });
+};
 
- const loop = () => {
-    requestAnimationFrame(loop); // call the loop function indefinitely and redraw the screen every frame
-    drawAnchor();
- };
+const loop = () => {
+  requestAnimationFrame(loop); // call the loop function indefinitely and redraw the screen every frame
+  drawAnchor();
+};
 
- window.addEventListener('load', () => {
-    attachEventListeners();
-    loop();
- });
+window.addEventListener('load', () => {
+  attachEventListeners();
+  loop();
+});
 ```
 
 `canvas-fireworks.js`
@@ -904,18 +904,17 @@ d = √x² + y², where x = x1 - x2, and y = y1 - y2
 You need to track mouse-click events, so add the following two event listeners to the `attachEventListeners` function:
 
 ```jsx
-
 const attachEventListeners = () => {
-		// listen to the mousemove event and
-    // set the mouse positions to the correct coordinates
-    canvas.addEventListener('mousemove', (e) => {
-      positions.mouseX = e.pageX;
-      positions.mouseY = e.pageY;
-    });
+  // listen to the mousemove event and
+  // set the mouse positions to the correct coordinates
+  canvas.addEventListener('mousemove', (e) => {
+    positions.mouseX = e.pageX;
+    positions.mouseY = e.pageY;
+  });
 		
-		// track mouse click events
-    canvas.addEventListener('mousedown', () => (mouseClicked = true));
-    canvas.addEventListener('mouseup', () => (mouseClicked = false));
+  // track mouse click events
+  canvas.addEventListener('mousedown', () => (mouseClicked = true));
+  canvas.addEventListener('mouseup', () => (mouseClicked = false));
 };
 ```
 
@@ -929,14 +928,14 @@ Add this code at the bottom of your IIFE function:
 
 ```jsx
 class Firework {
-    constructor() {
-			const init = () => {
-				// Create the firework object
-			...
-			}
+  constructor() {
+    const init = () => {
+      // Create the firework object
+      ...
+    }
 
-			init();
-		}
+    init();
+  }
 }
 ```
 
@@ -946,41 +945,40 @@ Inside of `init()` you want to initialize the default values of each `firework` 
 
 ```jsx
 class Firework {
-    constructor() {
-			const init = () => {
-				// current coordinates
-        this.x = positions.anchorX;
-        this.y = positions.anchorY;
+  constructor() {
+    const init = () => {
+      // current coordinates
+      this.x = positions.anchorX;
+      this.y = positions.anchorY;
+      
+      // target coordinates
+      this.target_x = positions.mouseX;
+      this.target_y = positions.mouseY;
+      
+      // distance from starting point to target
+      this.distanceToTarget = getDistance(
+        this.x,
+        this.y,
+        this.target_x,
+        this.target_y
+      );
+      this.distanceTraveled = 0;
 
-        // target coordinates
-        this.target_x = positions.mouseX;
-        this.target_y = positions.mouseY;
+      this.coordinates = [];
+      this.angle = Math.atan2(
+        this.target_y - positions.anchorY,
+        this.target_x - positions.anchorX
+      );
+      this.speed = 15;
+      this.friction = 0.99;
+      this.hue = random(0, 360);
 
-        // distance from starting point to target
-        this.distanceToTarget = getDistance(
-          this.x,
-          this.y,
-          this.target_x,
-          this.target_y
-        );
-        this.distanceTraveled = 0;
-
-        this.coordinates = [];
-        this.angle = Math.atan2(
-          this.target_y - positions.anchorY,
-          this.target_x - positions.anchorX
-        );
-        this.speed = 15;
-        this.friction = 0.99;
-        this.hue = random(0, 360);
-
-        while (fireworkLength--) {
-          this.coordinates.push([this.x, this.y]);
-        }
-			}
-			
-			init();
-		}
+      while (fireworkLength--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+    }
+    init();
+  }
 }
 ```
 
@@ -993,7 +991,7 @@ Based on these values, you can use the `getDistance` function we defined earlier
 
 Additionally, you need to keep track of the `coordinates`, their `angle`, and `speed` in order to calculate the velocities. As well as a random color defined as hue.
 
-Call `init` method at the bottom of the class.
+Call `init()` method at the bottom of the class.
 
 
 ## [#](#-drawing-fireworks) Drawing Fireworks
@@ -1006,17 +1004,17 @@ After `init` method, add a new `draw` method:
 
 ```jsx
 this.draw = (index) => {
-        context.beginPath();
-        context.moveTo(
-          this.coordinates[this.coordinates.length - 1][0],
-          this.coordinates[this.coordinates.length - 1][1]
-        );
-        context.lineTo(this.x, this.y);
+  context.beginPath();
+  context.moveTo(
+    this.coordinates[this.coordinates.length - 1][0],
+    this.coordinates[this.coordinates.length - 1][1]
+  );
+  context.lineTo(this.x, this.y);
 
-        context.strokeStyle = `hsl(${this.hue}, 100%, 50%)`;
-        context.stroke();
+  context.strokeStyle = `hsl(${this.hue}, 100%, 50%)`;
+  context.stroke();
 
-        this.animate(index);
+  this.animate(index);
 };
 ```
 
@@ -1034,28 +1032,28 @@ Before `draw` the method, add a new method called `animate`. Add the following c
 
 ```jsx
 this.animate = (index) => {
-        this.coordinates.pop();
-        this.coordinates.unshift([this.x, this.y]);
+  this.coordinates.pop();
+  this.coordinates.unshift([this.x, this.y]);
 
-        this.speed *= this.friction;
+  this.speed *= this.friction;
 
-        let velocity_x = Math.cos(this.angle) * this.speed;
-        let velocity_y = Math.sin(this.angle) * this.speed;
+  let velocity_x = Math.cos(this.angle) * this.speed;
+  let velocity_y = Math.sin(this.angle) * this.speed;
 
-        this.distanceTraveled = getDistance(
-          positions.anchorX,
-          positions.anchorY,
-          this.x + velocity_x,
-          this.y + velocity_y
-        );
+  this.distanceTraveled = getDistance(
+    positions.anchorX,
+    positions.anchorY,
+    this.x + velocity_x,
+    this.y + velocity_y
+  );
 
-        if (this.distanceTraveled >= this.distanceToTarget) {
-          let i = numberOfFlecks;
-          fireworks.splice(index, 1);
-        } else {
-          this.x += velocity_x;
-          this.y += velocity_y;
-        }
+  if (this.distanceTraveled >= this.distanceToTarget) {
+    let i = numberOfFlecks;
+    fireworks.splice(index, 1);
+  } else {
+    this.x += velocity_x;
+    this.y += velocity_y;
+  }
 };
 ```
 
@@ -1082,12 +1080,12 @@ Lastly, to create these new fireworks, add the following to your `loop`:
 
 ```jsx
 if (mouseClicked) {
-      fireworks.push(new Firework());
-    }
+  fireworks.push(new Firework());
+}
 
-    let fireworkIndex = fireworks.length;
-    while (fireworkIndex--) {
-      fireworks[fireworkIndex].draw(fireworkIndex);
+let fireworkIndex = fireworks.length;
+while (fireworkIndex--) {
+  fireworks[fireworkIndex].draw(fireworkIndex);
 }
 ```
 
@@ -1097,83 +1095,83 @@ Your Firework class should have the following code by now:
 
 ```jsx
 class Firework {
-    constructor() {
-      const init = () => {
-        let fireworkLength = 8;
+  constructor() {
+    const init = () => {
+      let fireworkLength = 8;
 
-        // current coordinates
-        this.x = positions.anchorX;
-        this.y = positions.anchorY;
+      // current coordinates
+      this.x = positions.anchorX;
+      this.y = positions.anchorY;
 
-        // target coordinates
-        this.target_x = positions.mouseX;
-        this.target_y = positions.mouseY;
+      // target coordinates
+      this.target_x = positions.mouseX;
+      this.target_y = positions.mouseY;
 
-        // distance from starting point to target
-        this.distanceToTarget = getDistance(
-          this.x,
-          this.y,
-          this.target_x,
-          this.target_y
-        );
-        this.distanceTraveled = 0;
+      // distance from starting point to target
+      this.distanceToTarget = getDistance(
+        this.x,
+        this.y,
+        this.target_x,
+        this.target_y
+      );
+      this.distanceTraveled = 0;
 
-        this.coordinates = [];
-        this.angle = Math.atan2(
-          this.target_y - positions.anchorY,
-          this.target_x - positions.anchorX
-        );
-        this.speed = 15;
-        this.friction = 0.99;
-        this.hue = random(0, 360);
+      this.coordinates = [];
+      this.angle = Math.atan2(
+        this.target_y - positions.anchorY,
+        this.target_x - positions.anchorX
+      );
+      this.speed = 15;
+      this.friction = 0.99;
+      this.hue = random(0, 360);
 
-        while (fireworkLength--) {
-          this.coordinates.push([this.x, this.y]);
-        }
-      };
+      while (fireworkLength--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+    };
 
-      this.animate = (index) => {
-        this.coordinates.pop();
-        this.coordinates.unshift([this.x, this.y]);
+    this.animate = (index) => {
+      this.coordinates.pop();
+      this.coordinates.unshift([this.x, this.y]);
 
-        this.speed *= this.friction;
+      this.speed *= this.friction;
 
-        let velocity_x = Math.cos(this.angle) * this.speed;
-        let velocity_y = Math.sin(this.angle) * this.speed;
+      let velocity_x = Math.cos(this.angle) * this.speed;
+      let velocity_y = Math.sin(this.angle) * this.speed;
 
-        this.distanceTraveled = getDistance(
-          positions.anchorX,
-          positions.anchorY,
-          this.x + velocity_x,
-          this.y + velocity_y
-        );
+      this.distanceTraveled = getDistance(
+        positions.anchorX,
+        positions.anchorY,
+        this.x + velocity_x,
+        this.y + velocity_y
+      );
 
-        if (this.distanceTraveled >= this.distanceToTarget) {
-          let i = numberOfFlecks;
-          fireworks.splice(index, 1);
-        } else {
-          this.x += velocity_x;
-          this.y += velocity_y;
-        }
-      };
+      if (this.distanceTraveled >= this.distanceToTarget) {
+        let i = numberOfFlecks;
+        fireworks.splice(index, 1);
+      } else {
+        this.x += velocity_x;
+        this.y += velocity_y;
+      }
+    };
 
-      this.draw = (index) => {
-        context.beginPath();
-        context.moveTo(
-          this.coordinates[this.coordinates.length - 1][0],
-          this.coordinates[this.coordinates.length - 1][1]
-        );
-        context.lineTo(this.x, this.y);
+    this.draw = (index) => {
+      context.beginPath();
+      context.moveTo(
+        this.coordinates[this.coordinates.length - 1][0],
+        this.coordinates[this.coordinates.length - 1][1]
+      );
+      context.lineTo(this.x, this.y);
 
-        context.strokeStyle = `hsl(${this.hue}, 100%, 50%)`;
-        context.stroke();
+      context.strokeStyle = `hsl(${this.hue}, 100%, 50%)`;
+      context.stroke();
 
-        this.animate(index);
-      };
+      this.animate(index);
+    };
 
-      init();
-    }
+    init();
   }
+}
 ```
 
 `canvas-fireworks.js`
@@ -1182,17 +1180,17 @@ And your loop function should look like this by now:
 
 ```jsx
 const loop = () => {
-    requestAnimationFrame(loop); // call the loop function indefinitely and redraw the screen every frame
-    drawAnchor();
-    if (mouseClicked) {
-      fireworks.push(new Firework());
-    }
+  requestAnimationFrame(loop); // call the loop function indefinitely and redraw the screen every frame
+  drawAnchor();
+  if (mouseClicked) {
+    fireworks.push(new Firework());
+  }
 
-    let fireworkIndex = fireworks.length;
-    while (fireworkIndex--) {
-      fireworks[fireworkIndex].draw(fireworkIndex);
-    }
- };
+  let fireworkIndex = fireworks.length;
+  while (fireworkIndex--) {
+    fireworks[fireworkIndex].draw(fireworkIndex);
+  }
+};
 ```
 
 `canvas-fireworks.js`
@@ -1212,15 +1210,15 @@ Just as for the fireworks, create a new class with an `init` called `Fleck`.
 
 ```jsx
 class Fleck {
-    constructor(x, y) {
-				const init = () => {
-						this.x = x;
-		        this.y = y;
-					...
-				}
+  constructor(x, y) {
+    const init = () => {
+      this.x = x;
+      this.y = y;
+      ...
+    }
 
-				init();
-		}
+    init();
+  }
 }
 ```
 
@@ -1232,31 +1230,31 @@ class Fleck {
 
 ```jsx
 class Fleck {
-    constructor(x, y) {
-				const init = () => {
-							this.x = x;
-			        this.y = y;
-							
-							let fleckLength = 7;
-							this.coordinates = [];
+  constructor(x, y) {
+    const init = () => {
+      this.x = x;
+      this.y = y;	
+      
+      let fleckLength = 7;
+      this.coordinates = [];
 	
-			        this.angle = random(0, Math.PI * 2);
-			        this.speed = random(1, 10);
+      this.angle = random(0, Math.PI * 2);
+      this.speed = random(1, 10);
 			
-			        this.friction = 0.95;
-			        this.gravity = 2;
+      this.friction = 0.95;
+      this.gravity = 2;
 			
-			        this.hue = random(0, 360);
-			        this.alpha = 1;
-			        this.decay = random(0.015, 0.03);
+      this.hue = random(0, 360);
+      this.alpha = 1;
+      this.decay = random(0.015, 0.03);
 			
-			        while (fleckLength--) {
-			          this.coordinates.push([this.x, this.y]);
-		        }
-				}
+      while (fleckLength--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+    }
 
-				init();
-		}
+    init();
+  }
 }
 ```
 
@@ -1272,46 +1270,46 @@ For drawing, add the `draw` method after the `init` method:
 
 ```jsx
 class Fleck {
-    constructor(x, y) {
-				const init = () => {
-						 this.x = x;
-			       this.y = y;
+  constructor(x, y) {
+    const init = () => {
+      this.x = x;
+      this.y = y;
 							
-					   let fleckLength = 7;
-					   this.coordinates = [];
+      let fleckLength = 7;
+      this.coordinates = [];
 	
-			       this.angle = random(0, Math.PI * 2);
-			       this.speed = random(1, 10);
+      this.angle = random(0, Math.PI * 2);
+      this.speed = random(1, 10);
 			
-			       this.friction = 0.95;
-			       this.gravity = 2;
+      this.friction = 0.95;
+      this.gravity = 2;
 			
-			       this.hue = random(0, 360);
-			       this.alpha = 1;
-			       this.decay = random(0.015, 0.03);
+      this.hue = random(0, 360);
+      this.alpha = 1;
+      this.decay = random(0.015, 0.03);
 			
-			       while (fleckLength--) {
-			          this.coordinates.push([this.x, this.y]);
-		        }
-				}
+      while (fleckLength--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+    }
 				
-				// add this
-				this.draw = (index) => {
-		        context.beginPath();
-		        context.moveTo(
-		          this.coordinates[this.coordinates.length - 1][0],
-		          this.coordinates[this.coordinates.length - 1][1]
-		        );
-		        context.lineTo(this.x, this.y);
+    // add this
+    this.draw = (index) => {
+      context.beginPath();
+      context.moveTo(
+        this.coordinates[this.coordinates.length - 1][0],
+        this.coordinates[this.coordinates.length - 1][1]
+      );
+      context.lineTo(this.x, this.y);
 		
-		        context.strokeStyle = `hsla(${this.hue}, 100%, 50%, ${this.alpha})`;
-		        context.stroke();
+      context.strokeStyle = `hsla(${this.hue}, 100%, 50%, ${this.alpha})`;
+      context.stroke();
 		
-		        this.animate(index);
-        };
+      this.animate(index);
+    };
 
-				init();
-		}
+    init();
+  }
 }
 ```
 
@@ -1323,63 +1321,63 @@ Now, let’s `animate` the flecks by adding the `animate` method. As you can see
 
 ```jsx
 class Fleck {
-    constructor(x, y) {
-				const init = () => {
-						 this.x = x;
-			       this.y = y;
+  constructor(x, y) {
+    const init = () => {
+      this.x = x;
+      this.y = y;
 							
-					   let fleckLength = 7;
-					   this.coordinates = [];
+      let fleckLength = 7;	
+      this.coordinates = [];
 	
-			       this.angle = random(0, Math.PI * 2);
-			       this.speed = random(1, 10);
+      this.angle = random(0, Math.PI * 2);
+      this.speed = random(1, 10);
 			
-			       this.friction = 0.95;
-			       this.gravity = 2;
+      this.friction = 0.95;
+      this.gravity = 2;
 			
-			       this.hue = random(0, 360);
-			       this.alpha = 1;
-			       this.decay = random(0.015, 0.03);
+      this.hue = random(0, 360);
+      this.alpha = 1;
+      this.decay = random(0.015, 0.03);
 			
-			       while (fleckLength--) {
-			          this.coordinates.push([this.x, this.y]);
-		        }
-				}
-				
-				// add this
-				this.animate = (index) => {
-		        this.coordinates.pop();
-		        this.coordinates.unshift([this.x, this.y]);
+      while (fleckLength--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+    }
+    			
+    // add this
+    this.animate = (index) => {
+      this.coordinates.pop();
+      this.coordinates.unshift([this.x, this.y]);
 		
-		        this.speed *= this.friction;
-		        this.x += Math.cos(this.angle) * this.speed;
-		        this.y += Math.sin(this.angle) * this.speed + this.gravity;
+      this.speed *= this.friction;
+      this.x += Math.cos(this.angle) * this.speed;
+      this.y += Math.sin(this.angle) * this.speed + this.gravity;
 		
-		        this.alpha -= this.decay;
+      this.alpha -= this.decay;
 		
-		        if (this.alpha <= this.decay) {
-		          flecks.splice(index, 1);
-		          flecks2.splice(index, 1);
-		          flecks3.splice(index, 1);
-		        }
-	      };
+      if (this.alpha <= this.decay) {
+        flecks.splice(index, 1);
+        flecks2.splice(index, 1);
+        flecks3.splice(index, 1);
+      }
+    };
 
-				this.draw = (index) => {
-		        context.beginPath();
-		        context.moveTo(
-		          this.coordinates[this.coordinates.length - 1][0],
-		          this.coordinates[this.coordinates.length - 1][1]
-		        );
-		        context.lineTo(this.x, this.y);
-		
-		        context.strokeStyle = `hsla(${this.hue}, 100%, 50%, ${this.alpha})`;
-		        context.stroke();
-		
-		        this.animate(index);
-        };
+    this.draw = (index) => {
+      context.beginPath();
+      context.moveTo(
+        this.coordinates[this.coordinates.length - 1][0],
+        this.coordinates[this.coordinates.length - 1][1]
+      );
+      context.lineTo(this.x, this.y);
+      
+      context.strokeStyle = `hsla(${this.hue}, 100%, 50%, ${this.alpha})`;
+      context.stroke();
+		 
+      this.animate(index);
+    };
 
-				init();
-		}
+    init();
+  }
 }
 ```
 
@@ -1400,37 +1398,37 @@ while (i--) {
 ```jsx
 // animate method within the Firework (!) class
 this.animate = (index) => {
-        this.coordinates.pop();
-        this.coordinates.unshift([this.x, this.y]);
+  this.coordinates.pop();
+  this.coordinates.unshift([this.x, this.y]);
 
-        this.speed *= this.friction;
+  this.speed *= this.friction;
 
-        let velocity_x = Math.cos(this.angle) * this.speed;
-        let velocity_y = Math.sin(this.angle) * this.speed;
+  let velocity_x = Math.cos(this.angle) * this.speed;
+  let velocity_y = Math.sin(this.angle) * this.speed;
 
-        this.distanceTraveled = getDistance(
-          positions.anchorX,
-          positions.anchorY,
-          this.x + velocity_x,
-          this.y + velocity_y
-        );
+  this.distanceTraveled = getDistance(
+    positions.anchorX,
+    positions.anchorY,
+    this.x + velocity_x,
+    this.y + velocity_y
+  );
 
-        if (this.distanceTraveled >= this.distanceToTarget) {
-          let i = numberOfFlecks;
+  if (this.distanceTraveled >= this.distanceToTarget) {
+    let i = numberOfFlecks;
 					
-					// Add this!
-          while (i--) {
-            flecks.push(new Fleck(this.target_x, this.target_y));
-            flecks2.push(new Fleck(this.target_x + 50, this.target_y - 50));
-            flecks3.push(new Fleck(this.target_x - 100, this.target_y - 100));
-          }
+    // Add this!
+    while (i--) {
+      flecks.push(new Fleck(this.target_x, this.target_y));
+      flecks2.push(new Fleck(this.target_x + 50, this.target_y - 50));
+      flecks3.push(new Fleck(this.target_x - 100, this.target_y - 100));
+    }
 
-          fireworks.splice(index, 1);
-        } else {
-          this.x += velocity_x;
-          this.y += velocity_y;
-        }
-      };
+    fireworks.splice(index, 1);
+  } else {
+    this.x += velocity_x;
+    this.y += velocity_y;
+  }
+};
 ```
 
 `canvas-fireworks.js`
