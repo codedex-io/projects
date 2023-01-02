@@ -23,13 +23,13 @@ tags:
 
 **Prerequisites:** Python fundamentals, Game development concepts  
 **Versions:** Python 3.10  
-**Read Time:** X minutes  
+**Read Time:** 60 minutes  
 
 ## [#](#-introduction) Introduction
 
-Can you guess what was the first commercially successful video game ever created? It was called Pong!
+Can you guess what the first commercially successful video game ever created was? It was called Pong!
 
-[Pong](https://en.wikipedia.org/wiki/Pong) is a simple 2D table tennis arcade game created by Atari in 1972. With today's technology, it's easier to make!
+[Pong](https://en.wikipedia.org/wiki/Pong) is a simple 2D table tennis arcade game created by Atari in 1972. With today's technology, it's much easier to make!
 
 In this tutorial, you'll learn how to recreate Pong using Python and the PyGame library. You will learn how this game engine works and how you can make simple collision detection so you and a friend can play Pong on the same computer!
 
@@ -68,11 +68,11 @@ Also, add `import pygame` and `import random` at the start of the file to import
 
 Before we code any of the game logic, we first need to render a simple window with PyGame.
 
-We'll also set the screen size to `960x720` and the background color to `COLOR_BLACK` (a constant). We also go over the `Pygame` event loop, to check for the `QUIT` event. If this event is triggered, we exit the function by calling `return`.
+We'll also set the screen size to `960x720` and the background color to `COLOR_BLACK` (a constant), which represents the color black in a Python tuple. We also go over the `Pygame` event loop, to check for the `QUIT` event. If this event is triggered, we exit the function by calling `return`.
 
 This event loop will be used again later. Finally, we also set the name of the window to "Pong".
 
-Here is the code for all of this :
+Here is the code for all of this:
 
 ```py
 import pygame
@@ -120,11 +120,12 @@ From now on, I will refer to the code before this loop as the setup. The code af
 
 You can also see that we initialized some variables before the `main()` function. Since these are constants (i. e. they will not change), it is best to name them with capitalized letters. Now you will see that in the game loop we have a `for` loop to go through `pygame.event.get()`. This is where all the game engine related events (such as the user exiting the window, keypresses, etc.) will be handled. You can also create your own custom events, though that will not be covered in this tutorial. Here we simply check if the event list contains the `pygame.QUIT` event, which is triggered when the [X] button is clicked on a window. If that is the case, we simply `return` out of the `main()` function, which ends the `while` loop and closes the window.
 
-You can run the script, and an empty window should appear.
+You can run the script, and an empty window should appear, which you can close out of.
+
 
 ## [#](#-subheading) Creating the Players and the Ball
 
-Now, in the setup, we need to add some variables for the players and the ball. For the players, they each need a `Rect` object, which is essentially a rectangular sprite with collisions. We also need "move" variables to hold the value of the players' movement. For the ball, we have a `Rect` as well, and two "acceleration" variables (similar to the players' "move" variables). We set those to a random number between 2 and 4 to give some speed variety. We also randomize the direction of the ball by multiplying the acceleration variables by -1, one times out of two. We do this multiplication because, by default, a positive `ball_accel_x` will make the ball go right (because of `Pygame` coordinates). A positive `ball_accel_y` will make the ball go down. By multiplying these variables on the flip of a coin, we randomize the vertical and horizontal direction of the ball.
+Now, in the setup, we need to add some variables for the players and the ball. For the players, they each need a `Rect` object, which is essentially a rectangular sprite with collisions. We also need variables to hold the value of the players' movement. For the ball, we have a `Rect` as well, and two "acceleration" variables (similar to the players' "move" variables). We set those to a random number between 2 and 4 to give some speed variety. We also randomize the direction of the ball by multiplying the acceleration variables by -1, one times out of two. We do this multiplication because, by default, a positive `ball_accel_x` will make the ball go right (because of `Pygame` coordinates). A positive `ball_accel_y` will make the ball go down. By multiplying these variables on the flip of a coin, we randomize the vertical and horizontal direction of the ball.
 
 Here is the code for this part (it goes in the **setup** section):
 
