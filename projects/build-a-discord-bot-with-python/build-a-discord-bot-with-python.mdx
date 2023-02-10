@@ -96,6 +96,12 @@ Click "Reset Token", write it down somewhere safe and definitely don't put it in
 
 <RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/screenshot5.png" description="Reset Token" />
 
+Lastly, while we're still on the "Bot" tab, scroll down until you find a section about "Privileged Gateway Intents." In order for our Discord bot to receive messages, we'll need to toggle the "Message Content Intent" under this section:
+
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/screenshot11.png" description="enable message content intent" />
+
+Turning this on in the developer portal will us to properly set up our bot in the code later in this project.
+
 ### [##](##-invite-your-application-to-your-discord-server) Step 5. Invite Application to Your Server
 
 Now that we've set up our first application, we have to create an invite, to get our bot into our Discord server. To do that we can click URL Generator and select the following permissions. In the screenshot below, we are telling Discord to create an invitation link for our application with the scope "Bot" and that bot should be able to "Send Messages." (Note: Be careful with granting the all-powerful "Administrator" permission to your bot).
