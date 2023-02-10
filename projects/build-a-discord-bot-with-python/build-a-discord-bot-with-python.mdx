@@ -143,12 +143,15 @@ What did we just do here? We just installed a Python package from [pip](https://
 
 Let’s create a new file called **bot.py** in a new directory. This is the main file where we'll code the logic to make our Discord bot. Now paste the following code into it:
 
-```python
+```py
 import discord
 
 class MyClient(discord.Client):
   async def on_ready(self):
     print('Logged on as {0}!'.format(self.user))
+
+intents = discord.Intents.default()
+intents.message_content = True
 
 client = MyClient()
 client.run('Your Token Here') # Replace with your own token.
@@ -156,7 +159,7 @@ client.run('Your Token Here') # Replace with your own token.
 
 Let’s go over this block of code line by line.
 
-```python
+```py
 import discord
 
 class MyClient(discord.Client):
@@ -168,12 +171,19 @@ First, we've imported the `discord.py` package that we just installed and create
 
 `discord.py` works around the concept of events. There are other types of events (e.g. messages) that we will see later, but for now here's the definition of events from their website:
 
-> An event is something you listen to and then respond to. For example, when a message happens, you will receive an event about it that you can respond to.
+> An event is something you listen for and then respond to. For example, when a message happens, you will receive an event about it that you can respond to.
+
+The next two lines of code sets the `intents` that will be passed into a given instance of `MyClient`. These are the settings for what our Discord can and cannot do. Since we've assigned the `default()` behavior for our bot, we'll need to explicity allow it to interact with messages (i.e., `message_content=True`):
+
+```py
+intents = discord.Intents.default()
+intents.message_content = True
+```
 
 Finally, our last two lines of code instantiates the `MyClient` class and calls `run`, which is the main way to start the client. The client will use the given token (which you should have saved from before) to authenticate itself to the Discord backend servers.
 
-```python
-client = MyClient()
+```py
+client = MyClient(intents=intents)
 client.run('Your Token Here') # Replace with your own token
 ```
 
@@ -199,7 +209,7 @@ Next, we want our bot to read messages in a Discord channel and respond to them.
 
 Add the `.on_message()` method to the `MyClient` class like the following:
 
-```python
+```py
 async def on_message(self, message):
   if message.author == self.user:
     return
@@ -255,7 +265,7 @@ It looks like the `url` field here contains the link for the meme's image. How a
 
 Let's paste these lines of code to the top of the file.
 
-```python
+```py
 import requests
 import json
 
@@ -277,7 +287,7 @@ python3 -m pip install requests
 
 Now all we need to do is call `get_meme()` inside our bot's `on_message()` method. Let's also change the keyword from `$hello` to `$meme` since it's more fitting. Your code should look like this:
 
-```python
+```py
 import discord
 import requests
 import json
@@ -297,7 +307,10 @@ class MyClient(discord.Client):
     if message.content.startswith('$meme'):
       await message.channel.send(get_meme())
 
-client = MyClient()
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = MyClient(intents=intents)
 client.run('Your Token Here') # Replace with your own token
 ```
 
