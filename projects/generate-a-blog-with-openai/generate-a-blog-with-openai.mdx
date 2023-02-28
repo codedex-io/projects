@@ -22,7 +22,7 @@ tags:
 **Versions:** Python 3.10, python-dotenv 0.21.0, openai 0.23.0  
 **Read Time:** 60 minutes
 
-## [#](#-introduction) Introduction
+## Introduction
 
 [Artificial Intelligence (AI)](https://en.wikipedia.org/wiki/Artificial_intelligence) is becoming the next big technology to harness. From smart fridges to self-driving cars, AI is implemented in almost everything you can think of. So let's get ahead of the pack and learn how we can leverage the power of AI with Python and OpenAI.
 
@@ -42,7 +42,7 @@ The final result will look something like this:
 
 _Who knows, maybe this entire project was written by the generator we're about to create. 👀_
 
-## [#](#-what-is-gpt-3) What is GPT-3?
+## What is GPT-3?
 
 [GPT-3](https://en.wikipedia.org/wiki/GPT-3) is an AI model released by OpenAI in 2020. An AI model is a program trained on a bunch of data to perform a specific task. In this case, GPT-3 was trained to speak like a human and predict what comes next given the context of a sentence, with its training dataset being 45 terabytes of text (!) from the internet. 
 
@@ -52,9 +52,9 @@ Since GPT-3 was trained on internet data, it knows what the internet knows (not 
 
 Now we know what we'll be working with, let's build the program!
 
-## [#](#-setting-Up) Setting Up
+## Setting Up
 
-### [##](##-python-file) OpenAI Account
+### OpenAI Account
 
 Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'll need this account access to an API key that we can use to work with GPT-3.
 
@@ -70,7 +70,7 @@ Now that we know where the API key is located, let's keep it in mind for later.
 
 With the API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we go over the \$18, which is more than enough to complete this project.
 
-### [##](##-python-file) Python Setup
+### Python Setup
 
 For this project, we'll need [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/) (package installer) installed.
 
@@ -79,11 +79,11 @@ Assuming that we have those two installed, let's open up the code editor of our 
 **Note**: You can name this file anything except for **openai.py**, since the name will clash with a package we'll be installing.
 
 
-## [#](#-beginning-the-project) Beginning the Project
+## Beginning the Project
 
 At the core of this project, all we'll be doing is sending data with instructions to a server owned by OpenAI, then receiving a response back from that server and displaying it.
 
-### [##](##-installing-openai) Install openai
+### Install openai
 
 We'll be interacting with GPT-3 model using a python package called `openai`. This package consists of methods that can connect to the internet and grant us access to the GPT-3 model hosted by OpenAI, the company.
 
@@ -99,7 +99,7 @@ We can now use this package by importing it into our **blog_generator.py** file 
 import openai
 ```
 
-### [##](##-authorizing-with-our-api-key) Authorize API Key
+### Authorize API Key
 
 Before we can work with GPT-3 we need to set our API key in the `openai` module. Remember, the API key is what gives us access to GPT-3; it authorizes us and says we're allowed to use this API.
 
@@ -119,7 +119,7 @@ import openai
 openai.api_key = 'sk-jAjqdWoqZLGsh7nXf5i8T3BlbkFJ9CYRk' # Fill in your own key
 ```
 
-## [#](#-the-core-function) The Core Function
+## The Core Function
 
 Now that we have access to GPT-3, we can get to the meat of the application, which is creating a function that takes in a prompt as user input and returns a paragraph about that prompt. 
 
@@ -284,7 +284,7 @@ And boom, after 2-3 seconds, it should spit out a paragraph like this:
 Try running the code a couple more times; the output should be different every time! 🤯
 
 
-## [#](#-Paragraph-Generator-to-Blog-Generator) Multiple Paragraphs
+## Multiple Paragraphs
 
 Right now, if we run our code, we'll only be able to generate one paragraph worth of text. Remember, we're trying to create a blog generator, and a blog has multiple sections, with each paragraph having a different topic.
 
@@ -313,7 +313,7 @@ We then created an `if` statement that will either continue the loop or stop the
 
 With that complete, we can now write as many paragraphs as we want by running the program once!
 
-### [##](##-rate-limitation) Rate Limit
+### Rate Limit
 
 Since we're using a `while` loop, we have the potential to be rate limited.
 
@@ -323,7 +323,7 @@ This is normally done to protect the API from abuse or [DoS](https://en.wikipedi
 
 For GPT-3, the rate limit is 20 requests per minute. As long as we don't run the function that fast, we'll be fine. But in a rare case that it does occur, GPT-3 will stop producing responses and make us wait a minute to produce another response.
 
-### [##](##-credit-limite) Credit Limit
+### Credit Limit
 
 By this point, if you have been playing with the API nonstop, there's a chance that you might have exceeded the $18 limit. The following error is thrown when that happens:
 
@@ -336,7 +336,7 @@ If that's the case, go to OpenAI's [Billing overview](https://beta.openai.com/ac
 
 Let's take another breather. We're almost done!
 
-## [#](#-Securing-Our-App) Securing Our App
+## Securing Our App
 
 Let's think about this for a minute. We created this amazing application and want to share it with the world, right? Well, when we deploy it to the web or share it with our friends, they'll be able to see every piece of code in the program. That's where the issue lies!
 
@@ -344,7 +344,7 @@ At the beginning of this article, we created an account with OpenAI and were ass
 
 In order to protect ourselves, we need to hide the API key in our code but still be able to use it. Let's see how we can do that.
 
-### [##](##-Installing-python-dotenv) Install `python-dotenv`
+### Install `python-dotenv`
 
 [`python-dotenv`](https://pypi.org/project/python-dotenv) is a package that allows us to create and use environment variables without having to set them in the operating system manually.
 
@@ -356,7 +356,7 @@ We can install `python-dotenv` by running the following command in the terminal:
 pip install python-dotenv
 ```
 
-### [##](##-dot-env) .env File
+### .env File
 
 Then in our project's root directory, create a file called **.env**. This file will hold our environment variable.
 
@@ -368,7 +368,7 @@ API_KEY=<Your_API_Key>
 
 The variable will take in our API key without any quotation marks or spaces. Remember to name this variable as `API_KEY` only.
 
-### [##](##-python-file) Python File
+### Python File
 
 Now that we have our environment variable set, let's open up the **blog_generator.py** file, and paste this code under `import openai`.
 
@@ -433,7 +433,7 @@ while keep_writing:
 API_KEY=sk-jAjqdWoqZLGsh7nXf5i8T3BlbkFJ9CYRk
 ```
 
-## [#](#-Finish-Line) Finish Line
+## Finish Line
 
 Congrats, you just created a blog generator with OpenAI and Python! Throughout the project, we learned how to use GPT-3 to generate a paragraph, use a `while` loop to create multiple paragraphs, and secure our app with a **.env** file. 🙌
 
@@ -442,7 +442,7 @@ AI is expanding rapidly, and the first few to utilize it properly through servic
 And lastly, we would love to see what you build with this tutorial! Tag [@codedex_io](@codedex_io) and [@openai](https://twitter.com/openai) on Twitter if you make something cool!
 
 
-### [##](##-more-resources) More Resources
+### More Resources
 
 - [Solution on GitHub](https://github.com/codedex-io/projects/blob/main/projects/generate-a-blog-with-openai/blog_generator.py)
 - [OpenAI](https://openai.com)

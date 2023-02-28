@@ -22,7 +22,7 @@ tags:
 **Versions:** Python 3.10, Plotly 5.9  
 **Read Time:** 45 minutes
 
-## [#](#-introduction) Introduction
+## Introduction
 
 So you want to learn about making data visualizations, huh? Well, you’re in the right spot!
 
@@ -35,7 +35,7 @@ In this tutorial, we will create data visualizations of popular YouTube channels
 Let’s get into it (yuh)!
 
 
-## [#](#-setting-up) Setting Up
+## Setting Up
 
 First, visit [colab.research.google.com](https://research.google.com/colaboratory) and start a "New notebook".
 
@@ -50,7 +50,7 @@ Python 3.10.5
 
 Once you have checked this, pull up the [Plotly Express docs page](https://plotly.com/python/plotly-express). It will come in handy while working. Finally, download the dataset used for this tutorial from down below. There would not be a data visualization without some data!
 
-### [##](##-about-the-data) About the Dataset
+### About the Dataset
 
 For this tutorial, we will use the "Most Subscribed YouTube Channels" dataset from [Kaggle](https://www.kaggle.com). The file is called **most_subscribed_youtube_channels.csv**. You can [download it here](https://www.kaggle.com/datasets/surajjha101/top-youtube-channels-data).
 
@@ -73,7 +73,7 @@ It looks something like:
 We have made acquaintance with our dataset. Now, let’s jump into some visualizations!
 
 
-### [##](##-importing-your-data) Importing the Data to Google Colab
+### Importing the Data to Google Colab
 
 First things first (I’m the realest), we are going to import our data into our notebook. After downloading your dataset, you should return to your handy dandy Google Colab notebook.
 
@@ -96,7 +96,7 @@ The `files.upload()` returns a dictionary of the uploaded files. The dictionary'
 In our case, we only uploaded one file. And we are storing this dictionary in the variable `uploaded`, which we will use in a bit!
 
 
-### [##](##-importing-pandas) Importing Pandas and Declaring a DataFrame
+### Importing Pandas and Declaring a DataFrame
 
 [Pandas](https://pandas.pydata.org) is the most widely used open source Python package to perform data analytics. To use it, we will `import pandas as pd`. `pd` serves as the alias (nickname) for referring to the Pandas package in our program. 
 
@@ -153,7 +153,7 @@ For the next section, we will be creating three different graphs:
 Let’s kick things off with the histogram!
 
 
-## [#](#section-1-make-a-histogram) Section 1: Make a Histogram
+## Section 1: Make a Histogram
 
 Normally, people will import their library during setup. However, I like to have my imports and graph code together. Therefore, we are going to import the Plotly Python package by writing `import plotly.express as px`. `px` will serve as the alias for the package in this portion of the process. After you have imported Plotly Express, we will be ready to start on our histogram!
 
@@ -193,7 +193,7 @@ Also, a quick shoutout to the channel all the way at the end that made it to 200
 Plotly Express allows us to create much more customizable histograms by inputting a variety of arguments. Here's a link to [histogram documentation](https://plotly.com/python/histograms/) for further reference. In this section, we only used the base version with numerical data. But other histograms can also be created using other columns in the YouTube data.
 
 
-## [#](#-section-2-make-a-pie-chart) Section 2: Make a Pie Chart
+## Section 2: Make a Pie Chart
 
 We are going to do the same thing we did before, but this time we will create a pie chart. For this pie chart, we are going to analyze the different video categories and the top channel they belong to. 
 
@@ -222,7 +222,7 @@ Pie charts are very straightforward to read. The bigger the chunk, the greater q
 
 [Pie chart](https://plotly.com/python/pie-charts/) documentation provides more information about further personalizing the pie charts by changing the colors of sectors and more.
 
-## [#](#-section-3-make-a-box-plot) Section 3: Make a Box Plot
+## Section 3: Make a Box Plot
 
 I hope you all aren’t too square to make a box plot. Box plots can show us how spread out our data is. For this example, we are going to use a box plot to analyze the different years people start YouTube.
 
@@ -255,13 +255,13 @@ Like that one Tegan and Sara song, let’s get a little bit closer with our grap
 
 Similar to histograms and pie charts, Plotly Express also provides [documentation for box plots](https://plotly.com/python/box-plots/). By passing `point='all'` argument to the `px.box()`, we can also look at all the data points used to make the box plot.
 
-## [#](#-wrapping-up) Wrapping Up
+## Wrapping Up
 
 Congrats, you just created three data visualizations analyzing the top dogs on YouTube! 
 
 Many people assume data visualization is such a complex thing, but it can be as easy as running a few lines of code. One piece of advice I would give you is to practice using one type of library for your first few months of learning data visualizations. It will give you the opportunity to get the hang of things and learn about your preferences.
 
-### [##](##-more-resources) More Resources
+### More Resources
 
 - [Solution on GitHub](https://colab.research.google.com/drive/10X7qNLzXYhr2rIUaG1rkC5NHKB31TYXf)
 - [Dataset on GitHub](https://github.com/codedex-io/projects/blob/main/projects/visualize-youtube-data-with-plotly/most_subscribed_youtube_channels.csv)

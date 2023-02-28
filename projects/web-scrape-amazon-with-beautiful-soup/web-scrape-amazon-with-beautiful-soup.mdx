@@ -19,7 +19,7 @@ tags:
 **Versions:** Python 3.10, requests 2.28.1, beautifulsoup4 4.11.1, lxml 4.9.1  
 **Read Time:** 40 minutes  
 
-## [#](#-introduction) Introduction
+## Introduction
 
 Have you ever missed an Amazon product that was available at a discounted price? Or dreamt of building an application that extracts data from a website? 
 
@@ -29,7 +29,7 @@ The final result will look something like this:
 
 <RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/demo.gif" description="Demo" />
 
-## [#](#-what-is-web-scraping) What is Web Scraping?
+## What is Web Scraping?
 
 [Web scraping](https://en.wikipedia.org/wiki/Web_scraping) is the process of extracting data from a website. This data is collected and then exported in a way that the user will find more valuable, such as a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) file. Manual web scraping is possible, but automated methods are typically preferred since they can be less expensive and faster.
 
@@ -40,7 +40,7 @@ Another thing to note is that web scraping can sometimes be tricky as the scrape
 In Python, we can use the Beautiful Soup library to extract data from HTML and XML files. With the help of parsers like [`lxml`](https://lxml.de), we can navigate, search, and modify the parse tree.
 
 
-## [#](#-setting-up) Setting Up
+## Setting Up
 
 First, open a code editor of your choice (VS Code recommended), and create a new Python file called **scraper.py**. This is where we will be writing our code to scrape Amazon.
 
@@ -56,7 +56,7 @@ To install the three libraries, run the following in your VS Code terminal:
 pip install requests beautifulsoup4 lxml
 ```
 
-## [#](#-scraping-amazon) Scraping Amazon
+## Scraping Amazon
 
 Before we get started, let's import the libraries we will be using in our Python file:
 
@@ -128,7 +128,7 @@ Alternatively, right-click on the web page and choose **Inspect** to access the 
 <RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/inspect-element.gif" description="Inspect Element" />
 
 
-### [##](##-extracting-the-product-title) Extracting the Product Title
+### Extracting the Product Title
  
 Use the **Inspect** option to view the HTML code used for the title of the product.
 
@@ -142,7 +142,7 @@ title = soup.find('span', attrs={'id': 'productTitle'}).get_text().strip()
 We use the `.find()` method to find a `span` element. Then pass the `productTitle` id in a dictionary called `attrs` that accepts the attributes. The `.get_text()` method returns the text in a string format. The `.strip()` method is used to remove any extra leading and trailing whitespaces.
 
 
-### [##](##-extracting-the-product-price) Extracting the Product Price
+### Extracting the Product Price
 
 Similar to the title of the product, if you inspect the prices by right clicking on them and opening devtools, you will find the below HTML code for the price of the product.
 
@@ -201,7 +201,7 @@ def get_product_details(product_url: str) -> dict:
 
 Notice that we have used a **try-except** block to catch any error.
 
-## [#](#-running-the-scraper) Running the Scraper
+## Running the Scraper
 
 To run the scraper, we will ask the user to enter any product URL. Then we will call the `get_product_details()` function with that product URL and print it.
 
@@ -256,13 +256,13 @@ product_details = get_product_details(product_url)
 print(product_details)
 ```
 
-## [#](#-conclusion) Conclusion
+## Conclusion
 
 In this tutorial, we scraped Amazon to extract the title and price of a product. You can follow the same pattern to extract more details, like the rating of the product or its availability.
 
 As mentioned before, the layout of Amazon's website will keep changing. Hence, the code in this project may not be applicable without first inspecting the Amazon product page and looking for the exact attributes that the project mentions. Join Codédex Club to get support from code mentors if you run into any trouble while going through this project!
 
-## [#](#-more-resources) More Resources
+## More Resources
 
 - [Solution on GitHub](https://github.com/codedex-io/projects/blob/main/projects/web-scrape-amazon-with-beautiful-soup/scraper.py)
 - [Documentation: requests](https://pypi.org/project/requests/)

@@ -19,7 +19,7 @@ tags:
 **Versions:** Python 3.10, qrcode 7.3.1, Pillow 9.2.0
 **Read Time:** 40 minutes
 
-## [#](#-introduction) Introduction
+## Introduction
 
 Have you ever wondered how [QR codes](https://en.wikipedia.org/wiki/QR_code) work or how procedural images are generated? Have you ever wanted to send someone a website link in a much cooler way? If you said yes to any of these questions, you're in luck!
 
@@ -29,7 +29,7 @@ Let's jump in!
 
 ![QR example](https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-qr-code-with-python/youtube_qr.png)
 
-## [#](#-what-is-a-qr-code) What Is a QR Code?
+## What Is a QR Code?
 
 The [QR code](https://en.wikipedia.org/wiki/QR_code), short for Quick Response code, was originally invented in 1994 by a Japanese tech company. It is a 2D barcode containing black patterns on a white background. However, this is no ordinary scribble: QR codes are capable of storing huge amounts of data in a deceivingly small amount of space. These black rectangles can store links, text, basically anything you want... and can be accessed simply by scanning from any mobile device!
 
@@ -47,7 +47,7 @@ A QR code is important since it gives users a simple way to access something on 
 
 Enough about QR codes, let's learn how to create one!
 
-## [#](#-setting-up) Setting Up
+## Setting Up
 
 First, go to the Python code editor of your choice (we recommend [VS Code](https://code.visualstudio.com/)), and create a new file called **qr_code.py**. This is where we will be writing our code.
 
@@ -74,7 +74,7 @@ import qrcode
 
 This line of code makes sure that the two libraries can be used in the rest of our code, since Python code runs from top to bottom in a file. We just need to import `qrcode`, because `pillow` is implicitly imported.
 
-## [#](#-creating-the-qr-code) Creating the QR Code
+## Creating the QR Code
 
 First, we want a link that we want to showcase. Let's use a [classic YouTube video](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
@@ -143,7 +143,7 @@ You should see the **youtube_qr.png** image pop up on the left-hand side of VS C
 
 You can add this QR code to anywhere you like, on your website or in an email!
 
-## [#](#-improvements) Improvements
+## Improvements
 
 To improve this, we could do a couple of things:
 
@@ -155,7 +155,7 @@ To improve this, we could do a couple of things:
 - Use an application library (like [Tkinter](https://docs.python.org/3/library/tkinter.html)) to add a user interface.
 - Check out other QR code libraries like [`pyqrcode`](https://pypi.org/project/PyQRCode/).
 
-## [#](#-more-resources) More Resources
+## More Resources
 
 - [Solution on GitHub](https://github.com/codedex-io/projects/blob/main/projects/generate-a-qr-code-with-python/qr_code.py)
 - [Documentation: qrcode](https://pypi.org/project/qrcode/)
