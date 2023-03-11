@@ -29,8 +29,8 @@ Codédex Projects is live with **7** high-quality projects. Now that the MVP is 
 
 - [@sonnynonom](https://github.com/sonnynomnom)
 - [@goku-kun](https://github.com/Goku-kun)
-- [@bobliuuu](https://github.com/Bobliuuu)
 - [@asiqurrahman](https://github.com/asiqurrahman)
+- [@Dusch4593](https://github.com/Dusch4593)
 
 ## Don't know what to write? 
 
