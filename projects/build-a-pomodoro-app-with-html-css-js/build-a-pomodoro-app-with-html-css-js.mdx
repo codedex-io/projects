@@ -1,0 +1,452 @@
+---
+title: Build a Pomodoro App with HTML, CSS, and JavaScript
+author: Dana Lee
+datePublished: 2023-03-12
+description: Learn how to create a Pong game clone with Python and the PyGame library.
+header: URL
+tags:
+  - html
+  - css
+  - js
+  - intermediate
+---
+
+## Introduction
+
+Welcome to the Pomodoro App coding tutorial! In this project, you'll learn how to create a simple and effective time management tool using just HTML, /CSS, and JavaScript. By the end of this tutorial, you'll have a basic understanding of how to build a dynamic web page that responds to user interactions. You'll also learn how to structure and style your HTML elements with CSS, and how to add interactivity with JavaScript. 
+
+The final project will look like this:
+
+<img src="./finished_pomodoro.gif" alt="Finished Pomodoro App" />
+
+## What is the Pomodoro Technique?
+
+The [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) is a time management method developed in the late 80s by Francesco Cirillo. The theory behind this technique is that taking frequent breaks can help improve your mental focus and prevent burnout. It can improve mental agility, boost motivation, and provide a better sense of accomplishment by breaking tasks into smaller chunks. For these reasons, this technique is quite popular with programmers.
+
+The idea is to break down work into short intervals, usually 25 minutes, with short breaks in between sessions, usually 5 to 10 minutes. The goal is to use each Pomodoro to focus on one specific task, then take a break before starting the next one. 
+
+So, let's get started and create a Pomodoro App that will help you increase your productivity and get things done!
+
+# Setting Up 
+
+First, we need to set up our file structure so everything is organized and easy to find.
+
+Create a new folder on your computer and name it **pomodoro-app**.
+Create a file named **app.js** where we write all of our JavaScript code.
+Next, create a file named **style.css** for us to write CSS code to make our app look pretty.
+Lastly, create a file named **index.html** for our application; this will be the main file for our app.
+
+Your final file structure should look like the following:
+
+<img src="./app_file_structure.png" alt="App File Structure" />
+
+# Let's Start Building!
+
+Awesome! Now that we've got the foundation in place for the Pomodoro App, it's time to start building!
+
+## HTML
+
+HTML features the basic building blocks that define the meaning and structure of web pages. 
+
+To start, our **index.html** file should look like the following: 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+</body>
+</html>
+```
+
+Next, let's add a `<title>` element to the `<head>` that says "Pomodoro App".  Then, let's add a `<div>` with an `"app-container"` class to the `<body>:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pomodoro App</title>
+</head>
+<body>
+  <div class="app-container">
+  </div>
+</body>
+</html>
+```
+
+This establishes the basic structure for our Pomodoro App.
+
+Next, let's add the following code to the `<head>` element:
+
+```html
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EG+Garamond:wght@400;500;600;700&family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" ref="./style.css">
+  <title>Pomodoro App</title>
+</head>
+```
+
+We just added a few `<link>` elements:
+
+- Three `<link>` elements are for importing specific fonts from [Google](https://fonts.google.com/).
+- The last one links to our local styles via the **style.css** file.
+
+Inside the `<div>` element with the `app-container` class, let's add the following:
+
+```html
+      <h1>pomodoro</h1>
+      <div class="app-message">press start to begin</div>
+      <div class="app-circle">
+          <div class="circle-shape">
+              <div class="semi-circle right-side circle-mask"></div>
+              <div class="semi-circle right-side circle"></div>
+              <div class="semi-circle left-side circle-mask"></div>
+              <div class="semi-circle left-side circle"></div>
+          </div>
+          <div class="app-counter-box">
+            <p><span class="minutes">25</span>:<span class="seconds">00</span></p>
+          </div>
+          <button class="btn-start">start</button>
+      </div>
+```
+
+Underneath of the `<h1>` element are the main parts of the app:
+
+- A `<div>` element that reads "press start to begin".
+- A `<div>` element with an `"app-circle"` class made of two pieces:
+  - A `"circle-shape"` for the timer, that's made of two semi circles for the `"left-side"` and `"right-side"`.
+  - The `"app-counter-box"` with `<div>` elements for the minutes and seconds of the timer (starting at 25 minutes).
+- A `<button>` element to start the timer.
+
+Let's save the file. If we render this page from the terminal with `open index.html`, it should look like this:
+
+<img src="./rendered_html_only.png" alt="Rendered HTML only (no CSS or JS)" />
+
+Awesome work with the HTML! Let's continue to the next step, styling!
+
+## CSS
+
+Now that we have the overall structure of our web application, let's get started on our CSS, which stands for "Cascading Style Sheets." According to the Mozilla Developer Network (MDN):
+
+> "CSS is a style sheet language used to describe the presentation of a document written in HTML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.”
+
+Basically, this is where we will set up the appearance of our application.
+
+CSS is utilized through class names that are assigned to the HTML elements in our app. They use the following structure:
+
+```css
+<tag class= “class-name">
+  <!-- Content goes here. -->
+</tag>
+```
+
+For example, on line 14, there is one class (“app-container”) assigned to the overall <div> container. Classes are how we select specific elements within the HTML to style.
+
+With their `class` names, elements can be selected and styled with CSS, such as with `<div>` division element with the `"app-container"` class:
+
+```css
+.app-container {
+Styles go here.
+}
+```
+
+To learn more about CSS: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Organizing
+
+Let's begin by establishing a few high-level styles:
+
+```css
+html {
+ font-family: 'Fira Sans', sans-serif;
+ font-size: 20px;
+ letter-spacing: 0.8px;
+ min-height: 100vh;
+ color: #d8e9ef;
+ background-image: linear-gradient(-20deg, #025159 0%, #733b36 100%);
+ background-size: cover;
+}
+```
+
+The styles for the `<html>` element set the font and background of our app.
+
+Next, let's add the following additional styles for our app headings and overall container:
+
+```css
+h1 {
+ margin: 0 auto 10px auto;
+ color: #d8e9ef;
+}
+
+.app-message {
+ height: 20px;
+ margin: 10px auto 20px auto;
+}
+
+.app-container {
+ width: 250px;
+ height: 420px;
+ margin: 40px auto;
+ text-align: center;
+ border-radius: 5px;
+ padding: 20px;
+}
+```
+
+The `margin` and `padding` properties are used to give some spacing between our elements.
+
+Now, let's style the `.app-circle`, which will start with a `.circle-shape`:
+
+```css
+.app-circle {
+ position: relative;
+ margin: 0 auto;
+ width: 200px;
+ height: 200px;
+}
+
+.circle-shape {
+ pointer-events: none;
+}
+```
+
+The `.app-circle` is where the remaining time and start button will be. It is made of two semi-circles for the left- and right-side. The `.circle-shape` is set so that the rendered circle cannot be clicked.
+
+Let's now apply styles to the `<div>` elements marked with the `.semi-circle`, `.left-side`, and `.right-side` classes:
+
+```css
+.semi-circle {
+ position: absolute;
+ width: 100px;
+ height: 200px;
+ box-sizing: border-box;
+ border: solid 6px;
+}
+
+.left-side {
+ top: 0;
+ left: 0;
+ transform-origin: right center;
+ transform: rotate(0deg);
+ border-top-left-radius: 100px;
+ border-bottom-left-radius: 100px;
+ border-right: none;
+ z-index: 1;
+}
+
+ .right-side {
+ top: 0;
+ left: 100px;
+ transform-origin: left center;
+ transform: rotate(0 deg);
+ border-top-right-radius: 100px;
+ border-bottom-right-radius: 100px;
+ border-left: none;
+}
+```
+
+Then, let's apply these styles:
+
+```css
+.circle {
+ border-color: #bf5239;
+}
+
+.circle-mask {
+ border-color: #e85a71;
+}
+```
+
+This sets the border color for the outline of the circle for our timer. When rendered, the page should have a red ring towards the middle of it.
+
+Lastly, let's add these styles:
+
+```css
+.app-counter-box {
+ font-family: 'Droid Sans Mono', monospace;
+ font-size: 250%;
+ position: relative;
+ top: 50px;
+ color: #d8e9ef;
+}
+
+button {
+ position: relative;
+ top: 50px;
+ font-size: 80%;
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ border: none;
+ background: none;
+ outline: none;
+ color: #d8e9ef;
+}
+
+button:hover {
+ color: #90c0d1;
+}
+```
+
+The `.app-counter-box` contains the remaining time for our timer. We gave it one of the fonts we imported in the previous section.
+
+The selected `<button>` element was set so that only the text is visible and it is uppercase. When hovered, the button's color should change.
+
+Let's go ahead and save our **style.css** file and refresh our page to see what it now looks like:
+
+<img src="./rendered_app_no_js.png" alt="Rendered App (no JavaScript)" />
+
+Excellent! It's time to move on to the final part of our Pomodoro App to make it count down!
+
+## JavaScript
+
+With JavaScript, we can create a simple yet functional Pomodoro App that starts counting down from 25 minutes, second by second, when the start button is clicked. 
+
+To learn more about JavaScript: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
+In our **app.js** file, let's initialize the following variables:
+
+```js
+const bells = new Audio('./sounds/bell.wav'); 
+const startBtn = document.querySelector('.btn-start'); 
+const session = document.querySelector('.minutes'); 
+let myInterval; 
+let state = true;
+```
+
+With the `bells` variable, we are assigning a **.wav** file that we got from https://mixkit.co/free-sound-effects/bell/. Using the [`Audio()` constructor](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement/Audio), we assign the path of the bell sound as a parameter.
+
+Like in CSS, HTML elements must be selected to be used in JavaScript. For the `startBtn` and `session` constant variables, we are using the `document` object's [`.querySelector()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) method to select and update elements on the web page. We are selecting the elements through `class` selectors, `.btn-start` and `.minutes`.
+
+For now, we are just instantiating a `myInterval` variable without assigning it.
+
+The last variable is a `state` that is assigned the Boolean value `True`. This defines when the application is running. If it is, the timer will progress. However, if the state is false, there will be an alert that notifies the user that the session has already started.
+
+Awesome! Now that our variables have been declared and initialized, we can move on to the main functionality that brings this all together, the `appTimer()` function.
+
+```js
+const appTimer = () => {
+ const sessionAmount = Number.parseInt(session.textContent)
+
+ if(state) {
+   state = false;
+   let totalSeconds = sessionAmount * 60;
+
+   const updateSeconds = () => {
+     // Function code here.
+   }
+   myInterval = setInterval(updateSeconds, 1000);
+ } else {
+   alert('Session has already started.')
+ }
+}
+``` 
+
+
+Inside the appTimer() function there are a few things happening:
+ 
+- We are grabbing the text "25" in our session variable and converting it to a `Number` and assigning that number to `sessionAmount`
+- If our `state` is `True`, we do the following:
+  - Convert the `sessionAmount`, the time left,to just seconds.
+  - Define a function called `updateSeconds()`, (more on that, shortly).
+  - Use the [`setInverval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) Web API function to run our `updateSeconds()` function every 1 second (or `1000` milliseconds). This is assigned to our `myInterval` function from earlier, so it can be turned off when the timer reaches 0.
+- Else, if the state is `False`,  we alert the user that the "Session has already started". This prevents the user from repeatedly clicking on the start button which would cause multiple calls to the `updateSeconds()` function and would cause the timer to count at an irregular speed.
+
+Earlier, we defined a function called `updateSeconds()`. In this function, we are grabbing two <div> elements called ‘minuteDiv' and ‘secondDiv':
+
+```js
+const updateSeconds = () => {
+  const minuteDiv = document.querySelector('.minutes');
+  const secondDiv = document.querySelector('.seconds')
+
+  totalSeconds--;
+
+  let minutesLeft = Math.floor(totalSeconds/60);
+  let secondsLeft = totalSeconds % 60;
+
+  if(secondsLeft < 10) {
+    secondDiv.textContent = '0' + secondsLeft;
+  } else {
+    secondDiv.textContent = secondsLeft;
+  }
+  minuteDiv.textContent = `${minutesLeft}`
+
+  if(minutesLeft === 0 && secondsLeft === 0) {
+    bells.play()
+    clearInterval(myInterval);
+  }
+}
+```
+
+These elements will allow us to change the text content that is being displayed on the page as the timer counts down to zero.
+
+Next, let's provide the logic for how we handle the countdown.
+
+```js
+const updateSeconds = () => {
+  const minutesFromPage = document.querySelector('.minutes');
+  const secondsFromPage = document.querySelector('.seconds')
+
+  totalSeconds--;
+
+  let minutesLeft = Math.floor(totalSeconds/60);
+  let secondsLeft = totalSeconds % 60;
+}
+```
+
+Here, we are decrementing `totalSeconds` after each second passes. We then convert the seconds into minutes and assign them to a `minutesLeft` variable. Then, we use the `%` modulo operator to ensure that the `secondsLeft` variable is a positive integer between 0 and 59, inclusive. 
+
+Next we use an `if`-`else` block to check the `secondsLeft` variable:
+
+```js
+if(secondsLeft < 10) {
+  secondsFromPage.textContent = '0' + secondsLeft;
+} else {
+  secondsFromPage.textContent = secondsLeft;
+}
+minutesFromPage.textContent = `${minutesLeft}`
+
+if(minutesLeft === 0 && secondsLeft === 0) {
+  bells.play()
+  clearInterval(myInterval);
+}
+```
+
+In this particular block we are saying the following:
+  
+- If `secondsLeft` is less than 10 I want to display ‘0 sec' where sec represents a number between 0 and 9.
+- Otherwise, if `secondsLeft` is greater than 9 I want to display the current value of `secondsLeft` on the screen.
+
+On line 25 we set the `textContent` property of the `minutesFromPage` DOM element to the current value of minutes. And lastly, we handle the logic for when the timer reaches 0. When the timer reaches 0, we will play our bell sound that we declared at the beginning of the application and then we will stop the timer by using the [`clearInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) method that will "turn off" the `updateSeconds()` so it stops running every second.
+
+After the `if`-`else` statement, when the application first runs, we set an [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) to the `startBtn` DOM variable that we selected earlier.
+
+```js
+startBtn.addEventListener('click', appTimer)
+```
+
+In this function, we pass two arguments:
+
+- A mouse ‘click' event that our app listens for.
+- The function to run when the `click` event is triggered. Our `appTimer()` function will run when the user selects the "START" button.
+
+
+Alrighty! Let's save our **app.js** file and refresh our page to test if our Pomodoro App is like this:
+
+<img src="./finished_pomodoro.gif" alt="Finished Pomodoro App" />
+
+## Finish Line
+ 
+Congratulations! You've created a fully functional Pomodoro App! 
+
+Throughout the article, we learned how to use HTML to create the basic skeleton of the app, style it with CSS, and added functionality with JavaScript. 
+**Bonus**: There are plenty of ways to build on top of this. If you're up for an extra challenge:
+
+- Create a "Reset" button that pauses the timer and brings it back to its initial time.
+- Add a "Pause" button that stops the timer when pressed and resumes the timer when pressed again.
+
+### More Resources:
+
+[Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique)
+[The Origins I: HTML](https://www.codedex.io/html)
+[CSS Building Blocks (MDN)](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Organizing)
+[JavaScript (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
