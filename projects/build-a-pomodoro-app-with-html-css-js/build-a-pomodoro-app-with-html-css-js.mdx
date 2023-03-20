@@ -17,7 +17,7 @@ Welcome to the Pomodoro App coding tutorial! In this project, you'll learn how t
 
 The final project will look like this:
 
-<img src="./finished_pomodoro.gif" alt="Finished Pomodoro App" />
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/finished_pomodoro.gif" alt="Finished Pomodoro App" />
 
 ## What is the Pomodoro Technique?
 
@@ -31,14 +31,15 @@ So, let's get started and create a Pomodoro App that will help you increase your
 
 First, we need to set up our file structure so everything is organized and easy to find.
 
-Create a new folder on your computer and name it **pomodoro-app**.
-Create a file named **app.js** where we write all of our JavaScript code.
-Next, create a file named **style.css** for us to write CSS code to make our app look pretty.
-Lastly, create a file named **index.html** for our application; this will be the main file for our app.
+Create a new folder on your computer and name it **pomodoro-app**. Then, create the following inside this folder:
+
+- An **app.js** file where we write all of our JavaScript code.
+- A **style.css** file for us to write CSS code to make our app look pretty.
+- An **index.html** file for our application markup; this will be the main file for our app.
 
 Your final file structure should look like the following:
 
-<img src="./app_file_structure.png" alt="App File Structure" />
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/app_file_structure.png" alt="App File Structure" />
 
 # Let's Start Building!
 
@@ -59,11 +60,15 @@ To start, our **index.html** file should look like the following:
 </html>
 ```
 
-Next, let's add a `<title>` element to the `<head>` that says "Pomodoro App".  Then, let's add a `<div>` with an `"app-container"` class to the `<body>`:
+Next, let's add the following:
+
+- A `<title>` element in the `<head>` element that says "Pomodoro App".
+- A `<div>` element with an `"app-container"` class in the `<body>` element.
+- A `<script>` element with the `src` attributed to our **app.js** file .
 
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Pomodoro App</title>
 </head>
@@ -71,6 +76,7 @@ Next, let's add a `<title>` element to the `<head>` that says "Pomodoro App".  T
   <div class="app-container">
   </div>
 </body>
+<script src="./app.js"></script>
 </html>
 ```
 
@@ -93,7 +99,7 @@ We just added a few `<link>` elements:
 - Three `<link>` elements are for importing specific fonts from [Google Fonts](https://fonts.google.com/).
 - The last one links to our local styles via the **style.css** file.
 
-Inside the `<div>` element with the `app-container` class, let's add the following:
+In the `<body>`, let's add the following inside the `<div>` element with the `app-container` class:
 
 ```html
 <div id="app-container">
@@ -124,7 +130,7 @@ Underneath of the `<h1>` element are the main parts of the app:
 
 If we save and then double-click the file, it should open and look like this:
 
-<img src="./rendered_html_only.png" alt="Rendered HTML only (no CSS or JS)" />
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/rendered_html_only.png" alt="Rendered HTML only (no CSS or JS)" />
 
 Awesome work with the HTML! Let's continue to the next step, styling!
 
@@ -295,7 +301,7 @@ The selected `<button>` element was set so that only the text is visible and it 
 
 Let's go ahead and save our **style.css** file and refresh our page to see what it now looks like:
 
-<img src="./rendered_app_no_js.png" alt="Rendered App (no JavaScript)" />
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/rendered_app_no_js.png" alt="Rendered App (no JavaScript)" />
 
 Excellent! It's time to move on to the final part of our Pomodoro App to make it count down!
 
@@ -434,13 +440,14 @@ In this function, we pass two arguments:
 
 Alrighty! Let's save our **app.js** file and refresh our page to test if our Pomodoro App is like this:
 
-<img src="./finished_pomodoro.gif" alt="Finished Pomodoro App" />
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/finished_pomodoro.gif" alt="Finished Pomodoro App" />
 
 ## Finish Line
  
 Congratulations! You've created a fully functional Pomodoro App! 
 
 Throughout the article, we learned how to use HTML to create the basic skeleton of the app, style it with CSS, and added functionality with JavaScript. 
+
 **Bonus**: There are plenty of ways to build on top of this. If you're up for an extra challenge:
 
 - Create a "Reset" button that pauses the timer and brings it back to its initial time.
