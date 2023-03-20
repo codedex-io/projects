@@ -363,7 +363,7 @@ Inside the appTimer() function there are a few things happening:
   - Use the [`setInverval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) Web API function to run our `updateSeconds()` function every 1 second (or `1000` milliseconds). This is assigned to our `myInterval` function from earlier, so it can be turned off when the timer reaches 0.
 - Else, if the state is `False`,  we alert the user that the "Session has already started". This prevents the user from repeatedly clicking on the start button which would cause multiple calls to the `updateSeconds()` function and would cause the timer to count at an irregular speed.
 
-Earlier, we defined a function called `updateSeconds()`. In this function, we are grabbing two <div> elements called 'minuteDiv' and 'secondDiv':
+Earlier, we defined a function called `updateSeconds()`. In this function, we are grabbing two `<div>` elements called 'minuteDiv' and 'secondDiv':
 
 ```js
 const updateSeconds = () => {
