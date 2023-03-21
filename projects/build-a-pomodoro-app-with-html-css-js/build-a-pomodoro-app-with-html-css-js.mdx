@@ -32,27 +32,27 @@ The final project will look like this:
 
 The [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) is a time management method developed in the late 80s by Francesco Cirillo. The theory behind this technique is that taking frequent breaks can help improve your mental focus and prevent burnout. It can improve mental agility, boost motivation, and provide a better sense of accomplishment by breaking tasks into smaller chunks. For these reasons, this technique is quite popular with programmers.
 
-The idea is to break down work into short intervals, usually 25 minutes, with short breaks in between sessions, usually 5 to 10 minutes. The goal is to use each Pomodoro to focus on one specific task, then take a break before starting the next one. 
+The idea is to break down work into short intervals, usually 25 minutes, with short breaks in between sessions, usually 5 to 10 minutes. Each interval is known as a _pomodoro_, Italian word for tomato. The goal is to use each Pomodoro to focus on one specific task, then take a break before starting the next one.
 
-So, let's get started and create a Pomodoro App that will help you increase your productivity and get things done!
+So, let's get started and create a Pomodoro App that will help you increase your productivity and get things done! 🍅
 
-## Setting Up 
+## Setting Up
 
 First, we need to set up our file structure so everything is organized and easy to find.
 
-Create a new folder on your computer and name it **pomodoro-app**. Then, create the following inside this folder:
+Create a new folder on your computer and name it **pomodoro-app**. Then, create the following files inside this folder:
 
-- An **app.js** file where we write all of our JavaScript code.
-- A **style.css** file for us to write CSS code to make our app look pretty.
-- An **index.html** file for our application markup; this will be the main file for our app.
+- **index.html** - for us to write HTML code; this will be the main file for our app.
+- **style.css** - for us to write CSS code to make the app look pretty.
+- **app.js** - for us to write JavaScript code to make the app more interactive.
 
-Your final file structure should look like the following:
+The file structure should look like the following:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/app_file_structure.png" alt="App File Structure" />
 
 ## Let's Start Building!
 
-Awesome! Now that we've got the foundation in place for the Pomodoro App, it's time to start building!
+Now that we've got the foundation in place for the Pomodoro App, it's time to start building!
 
 ### HTML
 
@@ -63,9 +63,12 @@ To start, our **index.html** file should look like the following:
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head></head>
-<body>
-</body>
+  <head>
+    Some code will go here
+  </head>
+  <body>
+    A lot more goes in here
+  </body>
 </html>
 ```
 
@@ -73,19 +76,19 @@ Next, let's add the following:
 
 - A `<title>` element in the `<head>` element that says "Pomodoro App".
 - A `<div>` element with an `"app-container"` class in the `<body>` element.
-- A `<script>` element with the `src` attributed to our **app.js** file .
+- A `<script>` element with the `src` attributed to our **app.js** file.
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Pomodoro App</title>
-</head>
-<body>
-  <div class="app-container">
-  </div>
-</body>
-<script src="./app.js"></script>
+  <head>
+    <title>Pomodoro App</title>
+  </head>
+  <body>
+    <div class="app-container">
+    </div>
+  </body>
+  <script src="./app.js"></script>
 </html>
 ```
 
