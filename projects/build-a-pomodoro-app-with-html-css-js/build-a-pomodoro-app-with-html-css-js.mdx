@@ -104,7 +104,7 @@ Next, let's add the following code to the `<head>` element:
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EG+Garamond:wght@400;500;600;700&family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" ref="./style.css" />
+  <link rel="stylesheet" href="./style.css" />
   <title>Pomodoro App</title>
 </head>
 ```
@@ -425,11 +425,11 @@ Next we use an `if`-`else` block to check the `secondsLeft` variable:
 
 ```js
 if(secondsLeft < 10) {
-  secondsFromPage.textContent = '0' + secondsLeft;
+  secondDiv.textContent = '0' + secondsLeft;
 } else {
-  secondsFromPage.textContent = secondsLeft;
+  secondDiv.textContent = secondsLeft;
 }
-minutesFromPage.textContent = `${minutesLeft}`;
+minuteDiv.textContent = `${minutesLeft}`;
 
 if(minutesLeft === 0 && secondsLeft === 0) {
   bells.play();
