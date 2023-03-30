@@ -109,7 +109,7 @@ The following functions are required for the Phaser game to work:
 - A `create()` function to generate elements that will appear in our game, such as images that were brought in from the `preload()` function.
 - An `update()` function will be used to update the "bird"object in the game. For example, if we want it to fly up when we press the "up" arrow button, we will do this inside the 'update()' function. It runs continually, and will respond to any user interactions or variables that change.
 
-Next, let's add lthe following code above the functions we defined:
+Next, let's add the following code above the functions we defined:
 
 ```js
 let config = {
@@ -174,7 +174,7 @@ function create() {
  
 With the `setOrigin()` method, we specify that we want the upper left corner of the background to be positioned at (0, 0). 
  
-If you save the files and double-click **index.html**, the following should render on the browser:
+Let's save the files. If you're using Live Server on VS Code, the page just needs to be refreshed. Otherwise, double-click **index.html** and the following should render on the browser:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/flappy_bird_app_bg_only.png" alt="Rendered Flappy Bird App - Background Only" />
 
@@ -221,7 +221,7 @@ const road = roads.create(400, 568, 'road').setScale(2).refreshBody();
 
 As with `roads`, the columns we create from `topColumns` will be static.
 
-In repeat, we specify that we want to create two columns at once.
+In `repeat`, we create an additional column; there are two columns total./
 
 We use the `setXY` object to specify that we want the x and y coordinates of the first column to be 200 and 0, and that we want the second column to be 300 pixels to the right of the first column. 
 
@@ -322,7 +322,7 @@ function create(){
 }
 ``` 
 
-Here we are saying that when the bird hits the road, we will set `hasLanded` to  `true`.
+Here we are saying that when the bird hits the road, we will set `hasLanded` to `true`.
 
 We need to invoke the `.overlap()` method before '.collider()' or else it won't work.
 
@@ -469,7 +469,7 @@ To prevent this, let's add two `if` statements. First, delete the code that was 
 
 ```js
 function update(){
-     if (!hasLanded) {
+  if (!hasLanded) {
     bird.body.velocity.x = 50;
   }
   if (hasLanded) {
@@ -567,7 +567,7 @@ First, let's make sure the bird doesn't move unless 'isGameStarted' is set to `t
 
 ```js
 function update() {
-     if (!isGameStarted) {
+  if (!isGameStarted) {
     bird.setVelocityY(-160);
   }
 }
@@ -666,7 +666,7 @@ When the bird reaches the far right of the screen, let's display the message tha
 
 ```js
 function update(){
-     if (bird.x > 750) {
+  if (bird.x > 750) {
     messageToPlayer.text = `Congrats! You won!`
   } 
 }
@@ -676,7 +676,7 @@ Right now, when the bird reaches the end of the scene, it falls to the road. Let
 
 ```js
 function update(){
-     if (bird.x > 750) {
+  if (bird.x > 750) {
     bird.setVelocityY(40);
     messageToPlayer.text = `Congrats! You won!`
   } 
