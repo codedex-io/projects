@@ -1,0 +1,701 @@
+---
+title: Build a Flappy Bird Clone With Phaser
+author: David Verghese
+uid: 
+datePublished: 
+description: Learn how to create a Flappy Bird clone using HTML and JavaScript.
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/meta.png
+tags:
+  - html
+  - js
+  - intermediate
+---
+
+# Build a Flappy Bird Clone With Phaser
+
+<AuthorAvatar
+  author_name="David Verghese"
+  author_avatar="/images/projects/authors/david-verghese.jpg"
+  username=""
+/>
+
+<BannerImage link="" description="Title Image" />
+
+## Introduction
+
+In this tutorial, we'll learn how to build a clone of the popular mobile game [Flappy Bird](https://en.wikipedia.org/wiki/Flappy_Bird). This will be done with [Phaser](https://phaser.io), a game development framework for creating video games with HTML and JavaScript. We'll also provide a breakdown of each line of code for those who want to get a deeper understanding of how it all works.
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/finished_flappy_bird.gif" alt="Finished Flappy Bird Clone" />
+
+Let's dive in!
+
+## Getting Started
+
+First, let's make a folder called **flappy_bird**. Then, create two new files:
+
+- **index.html**
+- **app.js**
+
+Open up the code editor of your choice (we recommend VS Code).
+
+If you are using VS Code, search for the "Live Server" extension. 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/vs_code_live_server.png" alt="VS Code Live Server" />
+
+This extension basically runs a server for your HTML file.
+
+After installing it and relaunching the editor, you should see a "Go Live" option in the bottom right corner of the editor:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/live_server_toggle.png" alt="Live Server Toggle" />
+
+Selecting "Go Live" will launch the server, which will reload any time we make and save new changes to our files.
+
+Next, we will need the images for the app (e.g., the columns, roads, background, and bird). 
+
+Download the zip file [here](https://drive.google.com/file/d/1FVPEnkhU5bkPHDC2yi8oQPkNriUghQyG/view?usp=sharing) and move the **assets** folder into the **flappy_bird** folder.
+
+We are now ready to start coding!
+
+## Setting Up the HTML
+
+Let's open the **index.html** file and start with this code:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flappy Bird Clone</title>
+</head>
+<body>
+</body>
+</html>
+```
+
+In the `<head>` element, the `<meta>` tag ensures that the app can be [responsively rendered](https://en.wikipedia.org/wiki/Responsive_web_design) on different screen sizes.
+
+Next, add this code snippet to the `<head>` element:
+
+```html
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
+  <script src="app.js"></script>
+  <title>Flappy Bird Clone</title>
+</head>
+```
+
+- The first `<script>` element links to the Phaser library. In programming, libraries are collections of pre-written code (functions, classes, objects, etc.).
+- In the second `<script>` element, we are linking to **app.js**, where we will write our own JS code.
+
+## Creating the Background
+
+Let's now work on the background for our clone app by adding the following code to our **app.js** file:
+
+```js
+function preload () {
+}
+
+function create () {
+}
+
+function update () {
+}
+``` 
+
+The following functions are required for the Phaser game to work:
+
+- A `preload()` function to bring in images for our application, such as the background.
+- A `create()` function to generate elements that will appear in our game, such as images that were brought in from the `preload()` function.
+- An `update()` function will be used to update the "bird"object in the game. For example, if we want it to fly up when we press the "up" arrow button, we will do this inside the 'update()' function. It runs continually, and will respond to any user interactions or variables that change.
+
+Next, let's add lthe following code above the functions we defined:
+
+```js
+let config = {
+  renderer: Phaser.AUTO,
+  width: 800,
+  height: 600,
+  physics: {
+    default: 'arcade',
+    arcade: {
+        gravity: { y: 300 },
+        debug: false
+    }
+  },
+  scene: {
+      preload: preload,
+      create: create,
+      update: update
+  }
+};
+
+let game = new Phaser.Game(config);
+
+
+function preload () {
+}
+
+function create () {
+}
+
+function update () {
+}
+```
+
+Here, we are creating a `game` variable of a new instance of `Phaser.Game` to set up our game. We pass in the `config` object and specify these parameters about the game we want to create:
+
+- The width and height of the game screen (800 x 600 pixels). 
+
+- The physics system of our game; we're using `'arcade'`.
+
+- A `scene` object with the functions we want to use in it, including `preload()`, `create()`, and `update()`.
+
+Let's now add the following code to the `preload()` function:
+
+```js
+function preload() {
+  this.load.image('background', 'assets/background.png');
+  this.load.image('road', 'assets/road.png');
+  this.load.image('column', 'assets/column.png');
+  this.load.spritesheet('bird', 'assets/bird.png', { frameWidth: 64, frameHeight: 96 });
+}
+``` 
+
+We are loading in the images from our **assets** folder. For our bird image, we load it as a 'sprite', not an image. In Phaser, a 'sprite' can be animated, and we will work on that soon!	 
+
+Next, add the following code to the `create()` function:
+
+```js
+function create() {
+  const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
+}
+```
+ 
+With the `setOrigin()` method, we specify that we want the upper left corner of the background to be positioned at (0, 0). 
+ 
+If you save the files and double-click **index.html**, the following should render on the browser:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/flappy_bird_app_bg_only.png" alt="Rendered Flappy Bird App - Background Only" />
+
+## Creating the Road
+
+For our clone application, we're just going to place a single road at the bottom of the game screen. While it won't move like it does in the actual game, you will still learn a lot about the physics used in Phaser. 
+
+Let's add the following to our `create()` function:
+
+```js
+function create() {
+  const roads = this.pythics.add.staticGroup();
+  const road = roads.create(400, 568, 'road').setScale(2).refreshBody();
+}
+```
+
+When we write `this.physics`, we are making a call to the [Arcade Physics system](https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.ArcadePhysics.html) in Phaser. This will allow us to apply a physics simulation to the roads we create.
+
+The `roads` variable allows us to create a single, static `road` variable.
+
+We specify that we want "roads" to have a static body.
+
+With the `setScale()` method, we specify that we want the road to be twice as big as its original size. Since we changed the size, we need to add a call to the `refreshBody()` method  in order for the physics to work now that the size has changed.
+
+After saving **app.js**, you should now see the following rendered on the browser:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/background_and_road.png" alt="Rendered Background and Road" />
+
+## Creating the Columns
+
+It's now time to add those columns from Flappy Bird that descend from the sky and peek out from the ground.
+
+Inside the **app.js** file, add the following to the `create()` function:
+
+```js
+const topColumns = this.physics.add.staticGroup({
+    key: 'column',
+    repeat: 1,
+    setXY: { x: 200, y: 0, stepX: 300 }
+  });
+
+const road = roads.create(400, 568, 'road').setScale(2).refreshBody();
+```
+
+As with `roads`, the columns we create from `topColumns` will be static.
+
+In repeat, we specify that we want to create two columns at once.
+
+We use the `setXY` object to specify that we want the x and y coordinates of the first column to be 200 and 0, and that we want the second column to be 300 pixels to the right of the first column. 
+
+**Note:** We are writing the code for `topColumns` before the line where we create the variable `road`. Phaser  will add elements to our webpage in the order that they are written in our code. So if we were to write the code to generate `topColumns` after we create `road`, we would see the columns on top of the road, which we do not want.
+
+Let's save the file and see what the page now looks like:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/rendered_top_columns.png" alt="Rendered Top Columns" />
+
+Excellent! Now, let's create columns near the road:
+
+```js
+const bottomColumns = this.physics.add.staticGroup({
+    key: 'column',
+    repeat: 1,
+    setXY: { x: 350, y: 400, stepX: 300 },
+  });
+
+const road = roads.create(400, 568, 'road').setScale(2).refreshBody();
+```
+
+Let's save our **app.js** file and re-render the page:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/rendered_bottom_columns.png" alt="Rendered Bottom Columns" />
+
+## Creating the Bird
+
+Let's create the bird. 
+
+We will define the `bird` variable outside the `create()` function, giving it a global [scope](https://www.codedex.io/python/32-stonks#scope).
+
+```js
+let bird;
+
+function create() {
+  ...
+}
+```
+
+Then, add the following to the create function:
+
+```js
+function create() {
+  ...
+  bird = this.physics.add.sprite(0, 50, 'bird').setScale(2);
+  bird.setBounce(0.2);
+  bird.setCollideWorldBounds(true);
+}
+``` 
+
+Since the bird is a sprite, it has a dynamic body. Because it has a dynamic body, the bird will have a `gravity` setting and will fall to the bottom of our scene.
+
+With the `.setBounce()` method, we specify that the bird should bound slightly if it collides with something.
+
+The `.setCollideWorldBounds()` method makes it so that our bird can bump into the edges of the screen, but not go through it.
+
+However, if we save our file and rerender:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/bird_through_road.png" alt="Rendered Bird Falling Through Road" />
+
+We now see the bird, but it's falling down _through_ the road.
+
+Let's make sure the bird lands on top of the road
+
+Add this to the `create()` function:
+
+```js
+this.physics.add.collider(bird, road);
+``` 
+
+Save the **app.js** file and rerender the page:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/bird_atop_road.png" alt="Rendered Bird Atop Road" />
+
+The bird should now land on top of the road.
+
+## Detecting When the Bird Hits the Ground
+
+In our Flappy Bird clone, we want the game to end when the bird lands on the ground. We should have some kind of system of determining when the bird lands.
+
+In our **app.js** file, let's define a `hasLanded` variable (outside of our `create()` function) and initialize to false:
+
+```js
+let hasLanded = false;
+function create() {
+  ...
+}
+```
+
+We want this variable to have a global scope, as we will later use it in both the `create()` and `update()` functions.
+ 
+Inside the `create()` function, let's add the following code:
+
+```js
+function create(){
+   this.physics.add.overlap(bird, road, () => hasLanded = true, null, this);
+   this.physics.add.collider(bird, road);
+}
+``` 
+
+Here we are saying that when the bird hits the road, we will set `hasLanded` to  `true`.
+
+We need to invoke the `.overlap()` method before '.collider()' or else it won't work.
+
+Before moving forward, let's review the code in our **app.js** file so far:
+
+```js
+let config = {
+  renderer: Phaser.AUTO,
+  width: 800,
+  height: 600,
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 300 },
+      debug: false,
+    },
+  },
+  scene: {
+    preload: preload,
+    create: create,
+    update: update,
+  },
+};
+
+let game = new Phaser.Game(config);
+
+function preload() {
+  this.load.image("background", "assets/background.png");
+  this.load.image("road", "assets/road.png");
+  this.load.image("column", "assets/column.png");
+  this.load.spritesheet("bird", "assets/bird.png", {
+    frameWidth: 64,
+    frameHeight: 96,
+  });
+}
+
+var bird;
+let hasLanded = false;
+
+function create() {
+  const background = this.add.image(0, 0, "background").setOrigin(0, 0);
+  const roads = this.physics.add.staticGroup();
+  const topColumns = this.physics.add.staticGroup({
+    key: "column",
+    repeat: 1,
+    setXY: { x: 200, y: 0, stepX: 300 },
+  });
+
+  const bottomColumns = this.physics.add.staticGroup({
+    key: "column",
+    repeat: 1,
+    setXY: { x: 350, y: 400, stepX: 300 },
+  });
+
+  const road = roads.create(400, 568, "road").setScale(2).refreshBody();
+
+  bird = this.physics.add.sprite(0, 50, "bird").setScale(2);
+  bird.setBounce(0.2);
+  bird.setCollideWorldBounds(true);
+
+  this.physics.add.overlap(bird, road, () => (hasLanded = true), null, this);
+  this.physics.add.collider(bird, road);
+}
+
+function update() {}
+```
+
+## Allowing the User To Move the Bird Upwards
+
+Thus far, we've focused mainly on the `create()` method, setting up the game environment as well as some basic physics for the bird.
+
+We want the user to be able to move the bird up. Let's create a system so that when the user presses the up arrow button, the bird moves up. 
+
+Let's start by creating a `cursors` variable outside of our `create()` method:
+
+```js
+let cursors;
+function create(){
+  ...
+}
+```
+
+We are giving `cursors` a global scope.
+
+Next, let's add the following inside the `create()` method: 
+
+```js
+function create() {
+    cursors = this.input.keyboard.createCursorKeys();
+}
+```
+
+As Phaser's documentation explains, the  [`.createCursorKeys()` method](https://newdocs.phaser.io/docs/3.55.2/focus/Phaser.Input.Keyboard.KeyboardPlugin-createCursorKeys) "creates and returns an object containing 4 hotkeys for Up, Down, Left and Right, and also Space Bar and shift."
+
+Now inside of the `update()` function, let's add the following code: 
+
+
+```js
+function update(){
+if (cursors.up.isDown)
+  {
+    bird.setVelocityY(-160);
+  }
+
+}
+```
+
+Here, we are saying that if the user presses the "up" button, then give the bird an upward velocity of -160. This will move it upwards.
+
+In 'Flappy Birds', we want the game to end if the bird hits the road. So let's prevent the user from being able to move the bird if it lands on the ground. 
+
+Add the following code to the `update()` function:
+
+```js
+function update() {
+  if (cursors.up.isDown && !hasLanded) {
+    bird.setVelocityY(-160);
+  }
+}
+```
+
+We are adding an additional condition that the bird cannot move up if it has landed.
+
+
+## Getting the Bird to Move Right 
+
+In Flappy Birds, the bird should continually move right, unless it hits a column or the ground. 
+
+First, add the following to the `update()` function:
+
+```js
+function update(){
+    bird.body.velocity.x = 50;
+}
+```
+
+If we save **app.js** and reload our page:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/bird_moving_right.png" alt="Rendered Bird Moving Right" />
+
+Now our bird moves right! However, the bird continues to move right even when it lands.
+
+To prevent this, let's add two `if` statements. First, delete the code that was in the last snippet from **app.js**, then add the following to the code snippet below:
+
+```js
+function update(){
+     if (!hasLanded) {
+    bird.body.velocity.x = 50;
+  }
+  if (hasLanded) {
+    bird.body.velocity.x = 0;
+  }
+}
+```
+
+If the bird hasn't landed, then give it a velocity of 50 in the x-direction. 
+
+If it lands, make the velocity in the x-direction 0. This means it will stop moving in the x-axis.
+
+We also want the bird to stop moving when it hits a column. Right now, our bird simply moves right through the column when it hits it.
+
+First, add the following to the `create()` function:
+
+```js
+function create() {
+  this.physics.add.collider(bird, topColumns);
+  this.physics.add.collider(bird, bottomColumns);
+}
+```
+
+Now the bird will not pass through the column.
+
+Let's create a system to detect when the bird has hit a column. 
+
+Let's define a hasBumped` variable outside the `create()` function:
+
+```js
+let hasBumped = false;
+
+function create() {
+  ...
+}
+```
+
+Next, let's add the following code to the `create()` function:
+
+```js
+function create() {
+  this.physics.add.overlap(bird, topColumns, ()=>hasBumped=true,null, this);
+  this.physics.add.overlap(bird, bottomColumns, ()=>hasBumped=true,null, this);
+  this.physics.add.collider(bird, topColumns);
+  this.physics.add.collider(bird, bottomColumns);
+}
+```
+
+Here, we say that if the bird hits one of the columns, `hasBumped` will be set to `true`.
+
+We need to add this code before 'this.physics.add.collider(bird, topColumns);' and 'this.physics.add.collider(bird, bottomColumns);' in order for it to work.
+
+
+Now that we have a way of detecting when the bird has bumped into a column, let's make sure that it stops moving right if it bumps into a column:
+
+```js
+function update(){
+  if (cursors.up.isDown && !hasLanded  && !hasBumped) {
+    bird.setVelocityY(-160);
+  }
+
+  if(!hasLanded && !hasBumped) {
+    bird.body.velocity.x = 50;
+  } else {
+    bird.body.velocity.x = 0;
+  }
+}
+```
+
+## Creating a Start Screen 
+
+Right now, the bird starts moving as soon as the page loads. However, it would be better if the game started in response to a user action, so the user didn't have to start the game the moment the page loads. 
+
+For this game, let's have it start when the user presses the <kbd>enter</kbd> key.
+
+First, let's create an `isGameStarted` variable:
+
+```js
+let isGameStarted = false;
+```
+
+Next, add the following code to the `update()` function:
+
+```js
+function update() {
+  if (cursors.space.isDown && !isGameStarted) {
+    isGameStarted = true;
+  }
+}
+```
+
+Here, we are saying that if the user presses the <kbd>space</kbd> key, and the `isGameStarted` variable is `false` (its initial value), then we will set it to `true` and start the game. 
+
+First, let's make sure the bird doesn't move unless 'isGameStarted' is set to `true`. Add the following code to the `update()` function:
+
+```js
+function update() {
+     if (!isGameStarted) {
+    bird.setVelocityY(-160);
+  }
+}
+```
+
+Here, we are saying that if the game hasn't yet started, we will give the bird a velocity of -160 in the y-direction. The bird will move up to the top of the screen instead of falling down.
+
+To make sure the bird doesn't move right if the game has not started, let's revisit the following `if` statement in the `update()` method:
+
+```js
+if(!hasLanded && !hasBumped) {
+  bird.body.velocity.x = 50;
+} else {
+  bird.body.velocity.x= 0;
+}
+```
+
+Let's revise it to this:
+
+```js
+if (!hasLanded || !hasBumped) {
+  bird.body.velocity.x = 50;
+}
+
+if (hasLanded || hasBumped || !isGameStarted) {
+  bird.body.velocity.x = 0;
+}
+```
+
+This ensures the bird won't move unless the game has been started and it hasn't landed on the road or bumped into a column.
+
+## Adding Game Instructions
+
+Right now, our game doesn't have any instructions. Let's display some instructions on the bottom of the screen.
+
+Let's create a 'messageToPlayer' variable and then get it text in the `create()` function::
+
+```js
+let messageToPlayer;
+
+function create() {
+  messageToPlayer = this.add.text(0, 0, `Instructions: Press space bar to start`, { fontFamily: '"Comic Sans MS", Times, serif', fontSize: "20px", color: "white", backgroundColor: "black" });
+}
+```
+
+After saving **app.js** and rerendering the page, we should see the following:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/instructions_top_left.png" alt="Instructions Rendered In Top-Left Corner" />
+
+Right now, this text appears at the top-left corner of the screen.
+
+To move it to the bottom, add the following to the `create()` function:
+
+```js
+function create(){
+  Phaser.Display.Align.In.BottomCenter(messageToPlayer, background, 0, 50);
+}
+``` 
+
+Here, we are saying we want to align `messageToPlayer` to the bottom center of the `background` image.
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/instructions_center_bottom.png" alt="Instructions Centere-Aligned Towards Bottom Of Screen" />
+
+Now the message appears at the center towards the bottom of the screen!
+
+Once the game starts, the user needs to use the up arrow button to avoid hitting the columns or ground. Once the game starts, let's change the message.
+
+Add the following code to the `update()` function:
+
+```js
+function update(){
+ if (cursors.space.isDown && !isGameStarted) {
+    isGameStarted = true;
+   messageToPlayer.text = 'Instructions: Press the "^" button to stay upright\nAnd don\'t hit the columns or ground';
+  }
+}
+```
+
+Now the message will change once the game starts.
+
+Once the bird hits the ground or bumps into a column, let's change the message to say that the bird has crashed, to let the user know that the game is over. 
+
+Let's add the following code to the `update()` function:
+
+```js
+function update() {
+  if (hasLanded || hasBumped) {
+    messageToPlayer.text = `Oh no! You crashed!`
+  }
+}
+``` 
+
+It's time to create an ending for our game. 
+
+When the bird reaches the far right of the screen, let's display the message that says 'Congrats! You won!':
+
+```js
+function update(){
+     if (bird.x > 750) {
+    messageToPlayer.text = `Congrats! You won!`
+  } 
+}
+```
+
+Right now, when the bird reaches the end of the scene, it falls to the road. Let's slow down the speed at which it falls so that it gently floats to the road by adding the following to the `update()` function:
+
+```js
+function update(){
+     if (bird.x > 750) {
+    bird.setVelocityY(40);
+    messageToPlayer.text = `Congrats! You won!`
+  } 
+
+}
+```
+
+We will give it a velocity of 40 in the y-direction.
+
+## Conclusion
+
+Congratulations! We've reached the end of the tutorial, and you have built a functional clone of the popular mobile game Flappy Bird! We harnessed the power of Phaser to build this game with just HTML and JavaScript. Additionally, we got to learn a bit about how game elements are used and placed on a browser screen.
+
+The full code for this project can be viewed [here](https://github.com/codedex-io/projects/tree/main/projects/build-a-flappy-bird-clone-with-phaser).
+
+If you are interested in exploring Phaser further, check out the following resources:
+
+- [Phaser documentation](https://phaser.io/learn)
+- [YouTube tutorial for making a Phaser game](https://lnkd.in/eU5wD3yq)
+- [Other Phaser game examples](https://phaser.io/examples/v2/category/games)
+
+
