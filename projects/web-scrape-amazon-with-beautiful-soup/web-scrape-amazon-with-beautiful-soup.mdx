@@ -2,7 +2,7 @@
 title: Web Scrape Amazon with Beautiful Soup
 author: Ashutosh Krishna
 datePublished: 2022-10-19
-description: Learn how to web scrape Amazon products using Beautiful Soup and Python in this project tutorial. 
+description: Learn how to web scrape Amazon products using Beautiful Soup and Python in this project tutorial.
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/header.png
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/header.png
 tags:
@@ -12,23 +12,33 @@ tags:
 
 # Web Scrape Amazon with Beautiful Soup
 
-<AuthorAvatar author_name="Ashutosh Krishna" author_avatar="/images/projects/authors/ashutosh_krishna.jpg" />
+<AuthorAvatar
+  author_name="Ashutosh Krishna"
+  author_avatar="/images/projects/authors/ashutosh_krishna.jpg"
+  uid={false}
+/>
 
-<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/header.png" description="Header image" />
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/header.png"
+  description="Header image"
+/>
 
 **Prerequisites:** Python fundamentals, HTML basics  
 **Versions:** Python 3.10, requests 2.28.1, beautifulsoup4 4.11.1, lxml 4.9.1  
-**Read Time:** 40 minutes  
+**Read Time:** 40 minutes
 
 ## Introduction
 
-Have you ever missed an Amazon product that was available at a discounted price? Or dreamt of building an application that extracts data from a website? 
+Have you ever missed an Amazon product that was available at a discounted price? Or dreamt of building an application that extracts data from a website?
 
 In this project tutorial, we will build a Python program that "web scrapes" Amazon product information using a library called [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/). 🍜
 
 The final result will look something like this:
 
-<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/demo.gif" description="Demo" />
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/demo.gif"
+  description="Demo"
+/>
 
 ## What is Web Scraping?
 
@@ -40,16 +50,15 @@ Another thing to note is that web scraping can sometimes be tricky as the scrape
 
 In Python, we can use the Beautiful Soup library to extract data from HTML and XML files. With the help of parsers like [`lxml`](https://lxml.de), we can navigate, search, and modify the parse tree.
 
-
 ## Setting Up
 
 First, open a code editor of your choice (VS Code recommended), and create a new Python file called **scraper.py**. This is where we will be writing our code to scrape Amazon.
 
-To start with, you will need to install three Python libraries: 
+To start with, you will need to install three Python libraries:
 
-* [`requests`](https://pypi.org/project/requests/): Sends HTTP requests.
-* [`beautifulsoup4`](https://www.crummy.com/software/BeautifulSoup/bs4/doc/): Pulls data out of HTML and XML files.
-* [`lxml`](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser): Provides powerful API for parsing HTML and XML.
+- [`requests`](https://pypi.org/project/requests/): Sends HTTP requests.
+- [`beautifulsoup4`](https://www.crummy.com/software/BeautifulSoup/bs4/doc/): Pulls data out of HTML and XML files.
+- [`lxml`](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser): Provides powerful API for parsing HTML and XML.
 
 To install the three libraries, run the following in your VS Code terminal:
 
@@ -68,9 +77,12 @@ from bs4 import BeautifulSoup
 
 When we send an HTTP request, we send some **headers** along with the request. If you open devtools in your browser (usually accessible through <kbd>Command</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> or <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>) and switch to the **Network** tab and reload any page, you can find the request headers that are similar to the ones shown below:
 
-<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/request-headers.png" description="Request Headers" />
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/request-headers.png"
+  description="Request Headers"
+/>
 
-Similar to browsers, we will also send some headers along with our HTTP request. 
+Similar to browsers, we will also send some headers along with our HTTP request.
 
 Let's define them in a dictionary called `headers`:
 
@@ -83,7 +95,7 @@ headers = {
 
 To determine your headers, you can also check out [this website](https://developer.mozilla.org/en-US/docs/Glossary/Request_header).
 
-Next, we will define a function `get_product_details()`. 
+Next, we will define a function `get_product_details()`.
 
 ```python
 def get_product_details(product_url: str) -> dict:
@@ -104,33 +116,38 @@ Now, let's make an HTTP request to get the HTML content of the product page. Usi
 def get_product_details(product_url: str) -> dict:
   # Create an empty product details dictionary
   product_details = {}
-  
+
   # Get the product page content and create a soup
   page = requests.get(product_url, headers=headers)
   soup = BeautifulSoup(page.content, features='lxml')
-``` 
+```
 
-Now comes the most important part of the tutorial where we will extract data from the page. For the sake of this tutorial, we will extract two data: 
+Now comes the most important part of the tutorial where we will extract data from the page. For the sake of this tutorial, we will extract two data:
 
 - The **title** of the product.
 - The **price** of the product.
 
-But before extracting, let's learn how to view the HTML code that makes up any web page. Open a product page, say [this one](https://www.amazon.com/Acer-Chromebook-Graphics-802-11ac-CB512-C1KJ/dp/B09Q9YKW15) on your browser. 
+But before extracting, let's learn how to view the HTML code that makes up any web page. Open a product page, say [this one](https://www.amazon.com/Acer-Chromebook-Graphics-802-11ac-CB512-C1KJ/dp/B09Q9YKW15) on your browser.
 
-<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/amazon-product-page.png" description="Amazon Product Page" />
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/amazon-product-page.png"
+  description="Amazon Product Page"
+/>
 
 To view the HTML code, we have an **Inspect** option in every browser. You can use the keyboard shortcuts:
 
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> for Windows or Linux users.
-- <kbd>Command</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> for Mac users. 
+- <kbd>Command</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> for Mac users.{" "}
 
 Alternatively, right-click on the web page and choose **Inspect** to access the Developer tools panel. Make sure you are on the **Elements** tab in the Developer tools panel.
 
-<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/inspect-element.gif" description="Inspect Element" />
-
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/inspect-element.gif"
+  description="Inspect Element"
+/>
 
 ### Extracting the Product Title
- 
+
 Use the **Inspect** option to view the HTML code used for the title of the product.
 
 ![Extracting Title](https://raw.githubusercontent.com/codedex-io/projects/main/projects/web-scrape-amazon-with-beautiful-soup/extracting-title.png)
@@ -140,8 +157,8 @@ The title is wrapped with a `span` tag with an attribute id **productTitle**. Le
 ```python
 title = soup.find('span', attrs={'id': 'productTitle'}).get_text().strip()
 ```
-We use the `.find()` method to find a `span` element. Then pass the `productTitle` id in a dictionary called `attrs` that accepts the attributes. The `.get_text()` method returns the text in a string format. The `.strip()` method is used to remove any extra leading and trailing whitespaces.
 
+We use the `.find()` method to find a `span` element. Then pass the `productTitle` id in a dictionary called `attrs` that accepts the attributes. The `.get_text()` method returns the text in a string format. The `.strip()` method is used to remove any extra leading and trailing whitespaces.
 
 ### Extracting the Product Price
 
@@ -178,7 +195,7 @@ So, the final result of the `get_product_details()` function will now look like:
 def get_product_details(product_url: str) -> dict:
   # Create an empty product details dictionary
   product_details = {}
-  
+
   # Get the product page content and create a soup
   page = requests.get(product_url, headers=headers)
   soup = BeautifulSoup(page.content, features="lxml")
@@ -186,13 +203,13 @@ def get_product_details(product_url: str) -> dict:
     # Scrape the product details
     title = soup.find('span', attrs={'id': 'productTitle'}).get_text().strip()
     extracted_price = soup.find('span', attrs={'class': 'apexPriceToPay'}).get_text().strip()
-    price = extracted_price.split('$')[1]  
-    
+    price = extracted_price.split('$')[1]
+
     # Adding it to the product details dictionary
     product_details['title'] = title
     product_details['price'] = price
     product_details['product_url'] = product_url
-    
+
     # Return the product details dictionary
     return product_details
   except Exception as e:
@@ -229,7 +246,7 @@ headers = {
 def get_product_details(product_url: str) -> dict:
   # Create an empty product details dictionary
   product_details = {}
-  
+
   # Get the product page content and create a soup
   page = requests.get(product_url, headers=headers)
   soup = BeautifulSoup(page.content, features="lxml")
