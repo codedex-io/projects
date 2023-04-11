@@ -71,21 +71,21 @@ async function main() {
       "utf-8"
     );
 
+    const projectMatter = matter(projectContent);
+
+    const source = await serialize(projectMatter.content, {
+      mdxOptions: {
+        remarkPlugins: [
+          remarkPresetLintConsistent,
+          remarkPresetLintRecommended,
+          remarkBreaks,
+          remarkGfm,
+        ],
+        rehypePlugins: [rehypeSlug, rehypeHighlight, rehypeExternalLinks],
+      },
+    });
+
     if (!projectExists) {
-      const projectMatter = matter(projectContent);
-
-      const source = await serialize(projectMatter.content, {
-        mdxOptions: {
-          remarkPlugins: [
-            remarkPresetLintConsistent,
-            remarkPresetLintRecommended,
-            remarkBreaks,
-            remarkGfm,
-          ],
-          rehypePlugins: [rehypeSlug, rehypeHighlight, rehypeExternalLinks],
-        },
-      });
-
       await firestore
         .collection("projects")
         .doc(fileNameWithoutExtension)
