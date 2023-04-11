@@ -95,7 +95,7 @@ async function main() {
             content: projectMatter.content,
             ...projectMatter.data,
             //datePublished: projectMatter.data.datePublished.toUTCString(),
-            dateUpdated: new Date().toUTCString(),
+            dateUpdated: new Date().toDateString(),
             likes: 0,
             link: fileNameWithoutExtension,
           },
@@ -111,7 +111,7 @@ async function main() {
             content: projectMatter.content,
             ...projectMatter.data,
             //datePublished: projectMatter.data.datePublished.toUTCString(),
-            dateUpdated: new Date().toUTCString(),
+            dateUpdated: new Date().toDateString(),
             link: fileNameWithoutExtension,
           },
           { merge: true }
