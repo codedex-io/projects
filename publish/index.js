@@ -10,6 +10,11 @@ import remarkPresetLintConsistent from "remark-preset-lint-consistent";
 import remarkPresetLintRecommended from "remark-preset-lint-recommended";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkBreaks from "remark-breaks";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypeAutoLinkHeadings from "rehype-autolink-headings";
+import rehypeRewrite from "rehype-rewrite";
+import { h } from "hastscript";
 
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert({
@@ -76,12 +81,57 @@ async function main() {
     const source = await serialize(projectMatter.content, {
       mdxOptions: {
         remarkPlugins: [
-          remarkPresetLintConsistent,
+          remarkMath,
           remarkPresetLintRecommended,
           remarkBreaks,
           remarkGfm,
+          remarkPresetLintConsistent,
         ],
-        rehypePlugins: [rehypeSlug, rehypeHighlight, rehypeExternalLinks],
+        rehypePlugins: [
+          rehypeSlug,
+          rehypeHighlight,
+          [
+            rehypeExternalLinks,
+            { target: "_blank", rel: ["nofollow", "noreferrer", "noopener"] },
+          ],
+          rehypeKatex,
+          [
+            rehypeRewrite,
+            {
+              rewrite(node) {
+                if (
+                  node.tagName === "h2" ||
+                  node.tagName === "h3" ||
+                  node.tagName === "h4"
+                ) {
+                  node.children[0].value = " " + node.children[0].value;
+                }
+              },
+            },
+          ],
+          [
+            rehypeAutoLinkHeadings,
+            {
+              behavior: "prepend",
+              content(node) {
+                const { tagName } = node;
+                if (tagName === "h1") {
+                  return h("span", "");
+                } else if (tagName === "h2") {
+                  return h("span", "#");
+                } else if (tagName === "h3") {
+                  return h("span", "##");
+                } else if (tagName === "h4") {
+                  return h("span", "###");
+                } else if (tagName === "h5") {
+                  return h("span", "");
+                } else if (tagName === "h6") {
+                  return h("span", "");
+                }
+              },
+            },
+          ],
+        ],
       },
     });
 
