@@ -62,9 +62,23 @@ async function main() {
     }
 
     const fileNameWithoutExtension = projectMdxFile.split(".")[0];
+
     const projectExists = (
       await firestore.collection("projects").doc(fileNameWithoutExtension).get()
     ).exists;
+
+    const projectReactionsExists = (
+      await firestore
+        .collection("projectReactions")
+        .doc(fileNameWithoutExtension)
+        .get()
+    ).exists;
+
+    if (!projectReactionsExists) {
+      await createProjectReactionsDoc({
+        projectName: fileNameWithoutExtension,
+      });
+    }
 
     const projectContent = fs.readFileSync(
       path.resolve(
@@ -166,4 +180,12 @@ async function main() {
         );
     }
   }
+}
+
+async function createProjectReactionsDoc({ projectName }) {
+  await firestore.collection("projectReactions").doc(projectName).set({
+    likes: 0,
+    shares: 0,
+    bookmarks: 0,
+  });
 }
