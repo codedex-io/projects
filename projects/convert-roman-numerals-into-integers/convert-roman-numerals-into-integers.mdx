@@ -2,7 +2,7 @@
 title: Convert Roman Numerals Into Integers
 author: Daniel Li
 uid:
-datePublished: 2023-04-10
+datePublished: 2023-04-17
 description: Use common Python tools and functions to convert Roman numerals to integers.
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/LINK-HERE
 tags:
@@ -38,7 +38,7 @@ tags:
 
 ## Introduction
 
-[Roman numerals](https://en.wikipedia.org/wiki/Roman_numerals) were developed more than 2,800 years ago. After the Romans’ eventual demise, numerals were still widely used during the Middle Ages. Even today, Roman numerals are prevalent in our everyday lives, showing up in clocks, movie titles, and more! 
+[Roman numerals](https://en.wikipedia.org/wiki/Roman_numerals) were developed more than 2,800 years ago. After the Romans’ eventual demise, numerals were still widely used during the Middle Ages. Even today, Roman numerals are prevalent in our everyday lives, showing up in clocks, movie titles, and more!
 
 Instead of numbers like 1 and 2, Roman numerals use letters (predominantly "I" and "V").
 
@@ -48,7 +48,7 @@ Credit: https://www.onlinemathlearning.com/roman-numerals-chart.html
 
 Using the chart above, "I" is 1, "V" is 5, "X" is 10, and so on…
 
-However, when a large combination of these values gets thrown together, the value of the numeral becomes difficult to read. 
+However, when a large combination of these values gets thrown together, the value of the numeral becomes difficult to read.
 
 Luckily, a sequence of Roman numerals can be easily converted to numbers with Python!
 
@@ -122,7 +122,7 @@ for i in numeral:
     final_answer += 1
 ```
 
-Next , when we print the `final_answer` at the end, we should cast it as a string with the built-in `str()` function so that it can be printed with the rest of the message:
+Next, when we print the `final_answer` at the end, we should cast it as a string with the built-in `str()` function so that it can be printed with the rest of the message:
 
 ```py
 print("The roman numerals you entered translates to: " + str(final_answer) + "!")
@@ -146,11 +146,11 @@ Next, try “MDC”. You should receive an output relating to the value “1600�
 
 ## Step 3: Handle Edge Cases
 
-Not all Roman numerals are represented by one letter. For example, the numeral for 4 is "IV" (two letters, "I" and "V"). Same thing with 9, which translates to "IX". 
+Not all Roman numerals are represented by one letter. For example, the numeral for 4 is "IV" (two letters, "I" and "V"). Same thing with 9, which translates to "IX".
 
 We need to make code that handles these edge cases. Right now, we do not get "IV" when 4 is passed to our `romanToInt()` function. Instead, we will have an output of 6.
 
-We will place this code _before_ the `for` loop we made in the last step. 
+We will place this code _before_ the `for` loop we made in the last step.
 
 This can be done by the following:
 
