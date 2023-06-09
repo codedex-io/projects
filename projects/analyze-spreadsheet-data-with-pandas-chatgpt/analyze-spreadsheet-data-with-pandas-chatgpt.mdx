@@ -1,0 +1,275 @@
+---
+title: Analyze Best Selling Amazon Books with Pandas
+author: Grace Peters
+uid:
+datePublished:
+description: Learn how to import and analyze Amazon data with pandas, a Python library.
+header:
+bannerImage:
+tags:
+ - python
+ - intermediate
+—--
+
+<BannerImage
+ link=""
+ description="Title Image"
+ uid={false}
+ cl="for-sidebar"
+/>
+
+# Import and Analyze Data With Pandas
+
+<AuthorAvatar
+ author_name="Grace Peters"
+ author_avatar="/images/projects/authors/IMAGE.HERE"
+ username=""
+ uid={false}
+/>
+
+<BannerImage
+ link=""
+ description="Title Image"
+ uid={false}
+/>
+
+**Prerequisites:** Python
+**Versions:** Python 3.9.6, pandas 2.0.1
+**Read Time:** 60 minutes
+
+## Introduction
+
+Python is a powerful programming language that can be used for a variety of tasks, including analyzing data from a CSV file. We'll go over how to use Python to import data and run an analysis on it. We'll be using the <a href="https://pandas.pydata.org/" target="_blank">pandas</a> library, a popular data analysis tool for Python.
+
+<a href=”https://www.amazon.com/gp/bestsellers/books”>Amazon Best Sellers</a> are updated every hour. The actual list is made of 100 books, but the data we're working with features just the top 50 books. 📖
+
+## The Dataset
+
+In this tutorial, we will work with a CSV (comma-separated values) file that features some fun data about the top 50 best selling books on Amazon from 2009 to 2019 (provided by <a href="https://www.kaggle.com/datasets/sootersaalu/amazon-top-50-bestselling-books-2009-2019?resource=download">Kaggle</a>).
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas/best-sellers-csv-data.png" alt="" />
+
+**Note**: If you don't have a Kaggle account, you can also download it [here](https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas/bestsellers.csv
+) in our GitHub.
+
+The **.csv** file contains 550 books. Here are the seven columns:
+
+`Name`: Book name
+`Author`: Book author
+`User Rating`: Amazon user rating (0.0 - 5.0)
+`Reviews`: Number of user reviews
+`Price`: Book price (as of 2020)
+`Year`: The year(s) it ranked
+`Genre`: Fiction or non-fiction
+
+Poke around and see if you have any questions. For example: Who are the best selling authors? What are the books with 4.8+ user ratings? Which one performed better: fiction or non-fiction?
+
+Let's dig in!
+
+
+## Step 1: Install and Import pandas
+
+Before we begin, we need to install the pandas library. To do this, open the terminal and type the following command:
+
+```py
+pip3 install pandas
+```
+
+We can confirm that pandas was installed by running `pip3 list`.
+
+Next, we'll create a folder named **amazon-best-sellers-analysis**. Inside the folder, create a **main.py** file and then import `pandas` (using `pd` as an alias):
+
+```py
+import pandas as pd
+
+# Rest of the file go here…
+```
+
+## Step 2: Import pandas and Load the Spreadsheet
+
+Next, we need to import the pandas library and load the data into our Python program.
+Download the **csv**  file and add it to the same folder as your **main.py** file, **amazon-best-sellers-analysis**.
+
+To read CSV files, we'll use the `.read_csv()` function provided by pandas. Then we will save this data to a new `df` variable:
+
+```py
+import pandas as pd
+
+df = pd.read_csv('bestsellers.csv')
+```
+
+The `df` variable is a DataFrame object that allows us to work with tabular data via pandas.
+
+Let's save the **main.py** file and move to the next step!
+
+## Step 3: Explore the Data
+
+Once we've loaded the spreadsheet data, we can explore it to get a better understanding of what we're working with. We can use various functions provided by pandas to do this. Here are a few examples:
+
+```py
+# Get the first 5 rows of the spreadsheet
+print(df.head())
+
+# Get the shape of the spreadsheet
+print(df.shape)
+
+# Get the column names of the spreadsheet
+print(df.columns)
+
+# Get summary statistics for each column
+print(df.describe())
+```
+
+These functions will give us a good overview of the data we're working with, including:
+
+- The size of the data
+- The column names
+- Summary statistics for each column
+
+Let's save the `main.py` file and run `python amazon-best-sellers-analysis/main.py` to print the following:
+
+```
+                                                Name  ...        Genre
+0                      10-Day Green Smoothie Cleanse  ...  Non Fiction
+1                                  11/22/63: A Novel  ...      Fiction
+2            12 Rules for Life: An Antidote to Chaos  ...  Non Fiction
+3                             1984 (Signet Classics)  ...      Fiction
+4  5,000 Awesome Facts (About Everything!) (Natio...  ...  Non Fiction
+
+[5 rows x 7 columns]
+(550, 7)
+Index(['Name', 'Author', 'User Rating', 'Reviews', 'Price', 'Year', 'Genre'], dtype='object')
+       User Rating       Reviews       Price         Year
+count   550.000000    550.000000  550.000000   550.000000
+mean      4.618364  11953.281818   13.100000  2014.000000
+std       0.226980  11731.132017   10.842262     3.165156
+min       3.300000     37.000000    0.000000  2009.000000
+25%       4.500000   4058.000000    7.000000  2011.000000
+50%       4.700000   8580.000000   11.000000  2014.000000
+75%       4.800000  17253.250000   16.000000  2017.000000
+max       4.900000  87841.000000  105.000000  2019.000000
+```
+
+## Step 4: Clean the Data
+
+Once we've explored the data, we may need to clean it before running an analysis.
+
+### Drop Duplicates
+
+The first thing we can do is check for and remove any duplicate rows in the dataset using the `drop_duplicates()` function.
+
+```py
+df.drop_duplicates(inplace=True)
+```
+
+By setting the `inplace` parameter to True, the changes are made directly to the original DataFrame.
+
+### Renaming Columns
+
+Next, we can rename the columns of the DataFrame to make them more descriptive and easier to work with. We can use the `rename()` function to do this.
+
+```py
+df.rename(columns={"Name": "Title", "Year": "Publication Year", "User Rating": "Rating"}, inplace=True)
+```
+
+This code renames the "Name" column to "Title" and the "Year" column to "Publication Year". Again, by setting the `inplace` parameter to `True`, the changes are made directly to the original DataFrame.
+
+### Converting Data Types
+
+Finally, we can convert the "Price" column to a float data type to make it easier to work with. We can use the astype() function to do this.
+
+```py
+df["Price"] = df["Price"].astype(float)
+```
+
+This code converts the "Price" column to a float data type. Note that we select the "Price" column of the DataFrame using the square bracket notation, and then apply the `astype()` function to it. The resulting values are then stored back in the "Price" column of the DataFrame.
+
+After performing these cleaning operations, our DataFrame should be ready for analysis.
+
+## Step 5: Run an Analysis
+
+Once we've cleaned the data, we can run an analysis on it. This could involve calculating summary statistics or creating visualizations.
+
+Here are a few examples:
+
+### Analyzing Author Popularity
+
+Using methods from our `df` DataFrame object, we can get a glimpse of which authors have the most books on the Amazon Best Sellers list.
+
+This can be done by selecting the  `'Author'` column data and using the `value_counts()` method. We can assign this to an `author_counts` variable:
+
+```py
+author_counts = df['Author'].value_counts()
+print(author_counts)
+```
+
+We can then print it and output the following:
+
+```
+Author
+Jeff Kinney                           12
+Gary Chapman                          11
+Rick Riordan                          11
+Suzanne Collins                       11
+American Psychological Association    10
+                                      ..
+Keith Richards                         1
+Chris Cleave                           1
+Alice Schertle                         1
+Celeste Ng                             1
+Adam Gasiewski                         1
+Name: count, Length: 248, dtype: int64
+```
+
+### Average Rating by Genre
+
+We can also use the cleaned data to determine the average rating for each genre in the dataset. We can do this by grouping the data by the "Genre" column and calculating the mean of the "Rating" column.
+
+```py
+avg_rating_by_genre = df.groupby("Genre")["Rating"].mean()
+print(avg_rating_by_genre)
+```
+
+This code groups the data by the "Genre" column, and then calculates the mean of the "Rating" column for each genre. It then prints the resulting series of average ratings by genre.
+
+```
+Genre
+Fiction        4.648333
+Non Fiction    4.595161
+Name: Rating, dtype: float64
+```
+
+These are just a few examples of the types of analyses we can run on our data. The possibilities are endless, depending on the type of data we're working with and the questions we're trying to answer.
+
+## Step 6: Export the Results
+
+Finally, once we have performed our analysis and obtained some insights from the data, we may want to export the results to a file for further analysis or sharing with others. We can use the `to_csv()` function to export our cleaned and analyzed DataFrame to a CSV file.
+
+```py
+# Export top selling authors to a CSV file
+author_counts.head(10).to_csv("top_authors.csv")
+
+# Export average rating by genre to a CSV file
+avg_rating_by_genre.to_csv("avg_rating_by_genre.csv")
+```
+
+This will export the top 10 selling authors and the average rating by genre to a separate **.csv** files.
+
+By default, these files will be saved in the same directory as our **main.py** file. We can specify a different directory by providing a file path instead of just a file name.
+
+## Conclusion
+
+Congratulations! We've made it to the end of the tutorial! 🎊
+
+We were able to harness the power of Python libraries like pandas to analyze data from a CSV file. Specifically, we did the following:
+
+- Imported book data about the top 50   books on Amazon from 2009 to 2019.
+- Explored and cleaned the data with DataFrame methods.
+- Exported the modified data to a new CSV file.  
+
+View the full source for this project <a href="">here</a>.
+
+Also, check out the following resources to learn more about data analysis with Python:
+
+- <a href="https://pandas.pydata.org/docs/">pandas documentation</a>
+- <a href="https://dataanalysispython.readthedocs.io/en/latest/">Data Analysis in Python (Read the Docs)</a>
