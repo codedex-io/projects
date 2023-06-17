@@ -55,13 +55,13 @@ In this tutorial, we will work with a CSV (comma-separated values) file that fea
 
 The **.csv** file contains 550 books. Here are the seven columns:
 
-`Name`: Book name
-`Author`: Book author
-`User Rating`: Amazon user rating (0.0 - 5.0)
-`Reviews`: Number of user reviews
-`Price`: Book price (as of 2020)
-`Year`: The year(s) it ranked
-`Genre`: Fiction or non-fiction
+- `Name`: Book name
+- `Author`: Book author
+- `User Rating`: Amazon user rating (0.0 - 5.0)
+- `Reviews`: Number of user reviews
+- `Price`: Book price (as of 2020)
+- `Year`: The year(s) it ranked
+- `Genre`: Fiction or non-fiction
 
 Poke around and see if you have any questions. For example: Who are the best selling authors? What are the books with 4.8+ user ratings? Which one performed better: fiction or non-fiction?
 
@@ -83,7 +83,7 @@ Next, we'll create a folder named **amazon-best-sellers-analysis**. Inside the f
 ```py
 import pandas as pd
 
-# Rest of the file go here…
+# Rest of the file go here...
 ```
 
 ## Step 2: Import pandas and Load the Spreadsheet
@@ -127,9 +127,9 @@ These functions will give us a good overview of the data we're working with, inc
 - The column names
 - Summary statistics for each column
 
-Let's save the `main.py` file and run `python amazon-best-sellers-analysis/main.py` to print the following:
+Let's save the **main.py** file and run `python amazon-best-sellers-analysis/main.py` to print the following:
 
-```
+```bash
                                                 Name  ...        Genre
 0                      10-Day Green Smoothie Cleanse  ...  Non Fiction
 1                                  11/22/63: A Novel  ...      Fiction
@@ -163,7 +163,7 @@ The first thing we can do is check for and remove any duplicate rows in the data
 df.drop_duplicates(inplace=True)
 ```
 
-By setting the `inplace` parameter to True, the changes are made directly to the original DataFrame.
+By setting the `inplace` parameter to `True`, the changes are made directly to the original DataFrame.
 
 ### Renaming Columns
 
@@ -206,7 +206,7 @@ print(author_counts)
 
 We can then print it and output the following:
 
-```
+```bash
 Author
 Jeff Kinney                           12
 Gary Chapman                          11
@@ -233,7 +233,7 @@ print(avg_rating_by_genre)
 
 This code groups the data by the "Genre" column, and then calculates the mean of the "Rating" column for each genre. It then prints the resulting series of average ratings by genre.
 
-```
+```bash
 Genre
 Fiction        4.648333
 Non Fiction    4.595161
