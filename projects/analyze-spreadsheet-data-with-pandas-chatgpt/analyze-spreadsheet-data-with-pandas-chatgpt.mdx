@@ -42,11 +42,11 @@ tags:
 
 Python is a powerful programming language that can be used for a variety of tasks, including analyzing data from a CSV file. We'll go over how to use Python to import data and run an analysis on it. We'll be using the <a href="https://pandas.pydata.org/" target="_blank">pandas</a> library, a popular data analysis tool for Python.
 
-<a href="https://www.amazon.com/gp/bestsellers/books">Amazon Best Sellers</a> are updated every hour. The actual list is made of 100 books, but the data we're working with features just the top 50 books. 📖
+<a href="https://www.amazon.com/gp/bestsellers/books" target="_blank">Amazon Best Sellers</a> are updated every hour. The actual list is made of 100 books, but the data we're working with features just the top 50 books. 📖
 
 ## The Dataset
 
-In this tutorial, we will work with a CSV (comma-separated values) file that features some fun data about the top 50 best selling books on Amazon from 2009 to 2019 (provided by <a href="https://www.kaggle.com/datasets/sootersaalu/amazon-top-50-bestselling-books-2009-2019?resource=download">Kaggle</a>).
+In this tutorial, we will work with a CSV (comma-separated values) file that features some fun data about the top 50 best selling books on Amazon from 2009 to 2019 (provided by <a href="https://www.kaggle.com/datasets/sootersaalu/amazon-top-50-bestselling-books-2009-2019?resource=download" target="_ blank">Kaggle</a>).
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas/best-sellers-csv-data.png" alt="Best seller CSV data" />
 
@@ -67,7 +67,6 @@ Poke around and see if you have any questions. For example: Who are the best sel
 
 Let's dig in!
 
-
 ## Step 1: Install and Import pandas
 
 Before we begin, we need to install the pandas library. To do this, open the terminal and type the following command:
@@ -77,6 +76,8 @@ pip3 install pandas
 ```
 
 We can confirm that pandas was installed by running `pip3 list`.
+
+**Note:** If you run into any issues when running these commands, check if pip is installed by running `pip --version` or `pip3 --version`. If you don't get a version number, <a href="https://pip.pypa.io/en/stable/installation/" target="_blank">follow these steps</a> to install pip on your computer.
 
 Next, we'll create a folder named **amazon-best-sellers-analysis**. Inside the folder, create a **main.py** file and then import `pandas` (using `pd` as an alias):
 
@@ -89,7 +90,7 @@ import pandas as pd
 ## Step 2: Import pandas and Load the Spreadsheet
 
 Next, we need to import the pandas library and load the data into our Python program.
-Download the **csv**  file and add it to the same folder as your **main.py** file, **amazon-best-sellers-analysis**.
+Download the **bestsellers.csv**  file and add it to the same folder as your **main.py** file, **amazon-best-sellers-analysis**.
 
 To read CSV files, we'll use the `.read_csv()` function provided by pandas. Then we will save this data to a new `df` variable:
 
@@ -268,9 +269,9 @@ We were able to harness the power of Python libraries like pandas to analyze dat
 - Explored and cleaned the data with DataFrame methods.
 - Exported the modified data to a new CSV file.  
 
-View the full source for this project <a href="">here</a>.
+View the full source for this project <a href="https://github.com/codedex-io/projects/blob/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/amazon-best-sellers-analysis/main.py" target="_blank">here</a>.
 
 Also, check out the following resources to learn more about data analysis with Python:
 
-- <a href="https://pandas.pydata.org/docs/">pandas documentation</a>
-- [Data Analysis in Python (Read the Docs)](https://dataanalysispython.readthedocs.io/en/latest)
+- <a href="https://pandas.pydata.org/docs/" target="_blank">pandas documentation</a>
+- <a href="https://dataanalysispython.readthedocs.io/en/latest" target="_blank">Data Analysis in Python (Read the Docs)</a>
