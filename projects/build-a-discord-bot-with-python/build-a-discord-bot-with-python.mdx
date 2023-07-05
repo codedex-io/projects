@@ -1,20 +1,24 @@
 ---
 title: Build a Discord Bot with Python
 author: hongjjeon
+uid: IezwCzNM7dh7UBLAjogXEmLZc982
 datePublished: 2022-08-25
 description: Learn how to create a Discord Bot by using Python and Discord Developer Portal in this project tutorial
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/header.png
+published: true
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/header.png 
 tags:
   - beginner
   - python
 ---
 
+<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/header.png" description="Title Image" uid={true} cl="for-sidebar"/>
+
 # Build a Discord Bot with Python
 
-<AuthorAvatar author_name="Hong Jeon" author_avatar="/images/projects/authors/hong_jeon.jpg" uid={false}/>
+<AuthorAvatar author_name="Hong Jeon" author_avatar="/images/projects/authors/hong_jeon.jpg" uid={true}/>
 
-<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/header.png" description="Title Image" uid={false}/>
+<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/header.png" description="Title Image" uid={true}/>
 
 **Prerequisites:** Python fundamentals  
 **Versions:** Python 3.10  
@@ -242,7 +246,7 @@ We've successfully programmed our bot to log into Discord and respond to our mes
 
 What if instead of responding with a text message, the bot responds with memes? Well that sounds like a lot of work.. buuut the cool thing about programming is that we can reuse other people’s work (yay for open source).
 
-Check out this Github repository: [https://github.com/D3vd/Meme_Api](https://github.com/D3vd/Meme_Api). This API returns a [JSON](https://en.wikipedia.org/wiki/JSON) response containing information about random memes from Reddit. Hmm, let’s see how it works by visiting this URL: https://meme-api.herokuapp.com/gimme.
+Check out this Github repository: [https://github.com/D3vd/Meme_Api](https://github.com/D3vd/Meme_Api). This API returns a [JSON](https://en.wikipedia.org/wiki/JSON) response containing information about random memes from Reddit. Hmm, let’s see how it works by visiting this URL: https://meme-api.com/gimme.
 
 Here is the response that I got:
 
@@ -277,7 +281,7 @@ import requests
 import json
 
 def get_meme():
-  response = requests.get('https://meme-api.herokuapp.com/gimme')
+  response = requests.get('https://meme-api.com/gimme')
   json_data = json.loads(response.text)
   return json_data['url']
 ```
@@ -300,7 +304,7 @@ import requests
 import json
 
 def get_meme():
-  response = requests.get('https://meme-api.herokuapp.com/gimme')
+  response = requests.get('https://meme-api.com/gimme')
   json_data = json.loads(response.text)
   return json_data['url']
 

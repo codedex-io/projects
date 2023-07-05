@@ -1,0 +1,29 @@
+name: Publish on Firestore workflow
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: install dependencies
+        run: npm install
+      - name: publish
+        run: npm run publish
+
+        env:
+          client_id: ${{ secrets.CLIENT_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          client_email: ${{ secrets.CLIENT_EMAIL }}
+          private_key_id: ${{ secrets.PRIVATE_KEY_ID }}
+          client_cert_url: ${{ secrets.CLIENT_CERT_URL }}
+
