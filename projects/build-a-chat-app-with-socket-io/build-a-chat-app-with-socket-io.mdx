@@ -43,8 +43,8 @@ Are you ready to dive into the wonderful world of chat apps? In this beginner-fr
 
 You'll learn about the following:
 
-What the WebSocket protocol is, and how it differs from a request-response architecture.
-How to use Socket.IO to handle users connecting to the chat application, along with the messages they send and receive..
+- What the WebSocket protocol is, and how it differs from a request-response architecture.
+- How to use Socket.IO to handle users connecting to the chat application, along with the messages they send and receive..
 
 By the end of this tutorial, we'll have a chat application that looks and works like this:
 
@@ -82,9 +82,9 @@ Let's begin with some starter code by downloading this [GitHub repo](https://git
 
 In order to download the starter files, follow these steps:
 
-Click on the green button which says “<> Code”.
-In the dropdown, click the “Download ZIP” button and your download will start.
-Once it has been downloaded, unzip the file and open the new folder in your choice of Code Editor.
+1. Click on the green button which says “<> Code”.
+2. In the dropdown, click the “Download ZIP” button and your download will start.
+3. Once it has been downloaded, unzip the file and open the new folder in your choice of Code Editor.
 
 The folder should have the following contents in it:
 
@@ -96,10 +96,10 @@ While the dependencies are being installed, let's go over the folder structure t
 
 In the root **codedex-chat-app/** directory, there are two directories available:
 
-- A  **frontend/** directory with code that runs on the user's browser via HTML and JavaScript: **index.html** and **script.js**.
+- A **frontend/** directory with code that runs on the user's browser via HTML and JavaScript: **index.html** and **script.js**.
 - A **backend/** directory with two files: `**server-starter.js** and **server-completed.js**.
 
-We'll be working in the **server-starter.js**  file. At the end, it'll have the same code as the **server-completed.js** file. Alternatively, the **server-completed.js** file can also be referred to if anyone gets stuck in the middle of this tutorial.
+We'll be working in the **server-starter.js** file. At the end, it'll have the same code as the **server-completed.js** file. Alternatively, the **server-completed.js** file can also be referred to if anyone gets stuck in the middle of this tutorial.
 
 ## Import Libraries & Create Servers
 
@@ -138,7 +138,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 ```
 
-In the code above, we created a new `express` app variable to form both the HTTP  and WebSocket servers, via `http` and `socket-io` respectively. The web server will be responsible for sending the page back to the browser with the visible chat window and the WebSocket server, named `io`, will be responsible for our chat functionality. 
+In the code above, we created a new `express` app variable to form both the HTTP and WebSocket servers, via `http` and `socket-io` respectively. The web server will be responsible for sending the page back to the browser with the visible chat window and the WebSocket server, named `io`, will be responsible for our chat functionality.
 
 **Note:** Per the Socket.IO naming conventions, we named our WebSocket server `io`.
 
@@ -178,7 +178,7 @@ io.on(“connection”, function callback(socket) {
 });
 ```
 
-Let's understand what we did here. So, first of all, we called the `io` object's `.on()` method that  requires 2 arguments:
+Let's understand what we did here. So, first of all, we called the `io` object's `.on()` method that requires 2 arguments:
 
 - The first one is the type of event that is occurring (i.e., `”connection”`).
 - The second one is the `callback()` function that will be automatically executed when the “connection” event occurs. In our case,this function is simply printing out when a user successfully connects to our backend.
@@ -209,9 +209,9 @@ We're only able to do this because we included the earlier script in our **index
 
 This line is handling so many important steps behind the scenes,such as:
 
-Attempting to establish connection with the backend.
-Completes the verification as well as provides services for reconnection if the connection fails.
-Provides a socket instance which can be used to send events to the backend.
+- Attempting to establish connection with the backend.
+- Completes the verification as well as provides services for reconnection if the connection fails.
+- Provides a socket instance which can be used to send events to the backend.
 
 These are just some of the core tasks it's performing. But, because of this line, we get the `”connection successful”` printed in our console.
 
@@ -458,8 +458,8 @@ View the full source code [here](https://github.com/codedex-io/projects/blob/mai
 
 Once we fully understand how the core chatting function works, we can build more features such as:
 
-Adding a database support to permanently store messages and not lose history when the server disconnects.
-Adding support for creating multiple chats. Currently, our chat application only supports a single chat window.
-Adding authentication support so that any random stranger can't join a chat without identifying who they are first.
+- Adding a database support to permanently store messages and not lose history when the server disconnects.
+- Adding support for creating multiple chats. Currently, our chat application only supports a single chat window.
+- Adding authentication support so that any random stranger can't join a chat without identifying who they are first.
 
 Once you've finished this project, feel free to post the images of the functional chat app on Twitter and tag [@codedex_io](https://twitter.com/codedex_io) and [@coder_kun_](https://twitter.com/coder_kun_).
