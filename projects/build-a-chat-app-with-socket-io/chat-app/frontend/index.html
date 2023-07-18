@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <style>
+      .chat-window {
+        min-height: 450px;
+        max-height: 450px;
+        overflow-y: scroll;
+      }
+      body {
+        background: linear-gradient(180deg, #ffb7b7 0%, #727272 100%),
+          radial-gradient(60.91% 100% at 50% 0%, #ffd1d1 0%, #260000 100%),
+          linear-gradient(238.72deg, #ffdddd 0%, #720066 100%),
+          linear-gradient(127.43deg, #00ffff 0%, #ff4444 100%),
+          radial-gradient(100.22% 100% at 70.57% 0%, #ff0000 0%, #00ffe0 100%),
+          linear-gradient(127.43deg, #b7d500 0%, #3300ff 100%);
+        background-blend-mode: screen, overlay, hard-light, color-burn,
+          color-dodge, normal;
+        overflow: hidden;
+      }
+      .chat-window::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chat-window {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+    </style>
+  </head>
+
+  <body class="flex justify-center mt-14 h-screen">
+    <div class="w-full max-w-lg">
+      <div class="bg-gray-600 text-white rounded-t-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4">Chat Window</h2>
+
+        <div class="flex flex-col space-y-4 chat-window"></div>
+      </div>
+
+      <div class="bg-gray-600 rounded-b-lg shadow-md p-5">
+        <h1 class="text-2xl text-white font-semibold mb-4"></h1>
+
+        <form class="chat">
+          <div class="flex items-center mb-4">
+            <i class="fas fa-comment mr-2"></i>
+            <input
+              type="text"
+              class="border border-gray-300 rounded-lg px-4 py-2 flex-grow"
+              placeholder="Type your message here"
+              id="message"
+            />
+
+            <button
+              class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg ml-2"
+            >
+              Send
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
