@@ -45,13 +45,13 @@ Are you ready to dive into the wonderful world of chat apps? In this beginner-fr
 You'll learn about the following:
 
 - What the WebSocket protocol is, and how it differs from a request-response architecture.
-- How to use Socket.IO to handle users connecting to the chat application, along with the messages they send and receive..
+- How to use Socket.IO to handle users connecting to the chat application, along with the messages they send and receive.
 
 By the end of this tutorial, we'll have a chat application that looks and works like this:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/final_project_output.gif" alt="Final Project Output of Chat Application" />
 
-For those who want to directly jump into code, you can start at the [“Setup”](https://www.codedex.io/projects/build-a-chat-app-with-socket-io#setup”) section.
+For those who want to directly jump into code, you can start at the [“Setup”](https://www.codedex.io/projects/build-a-chat-app-with-socket-io#setup) section.
 
 Without further ado, let's get started!
 
@@ -63,9 +63,9 @@ All chat applications need a functional connection between the user-facing chat 
 
 For example, when a user types [“www.codedex.io”](https://www.codedex.io/) in their browser, they are requesting that another computer respond with a specific page. The user must initiate the request first, before the computer (or server) can respond. In this case, the server responded with the webpage that was stored at the location [www.codedex.io](https://www.codedex.io/). The key step being the user initiated the request. The server can never contact the user without the user initializing the request first.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/req_res_issue.png" alt="Request-Response Issue With Mulitple Users" />
+This system wouldn't work in a chat application because it requires real time communication. For example, let's say user A, user B, and user C are connected in a chat and all three of them send a message. However, user B never _requested_ for new messages to be sent as a response because user B wasn't aware that there were new messages being posted. Then, the chat would immediately break.
 
-However, this system wouldn't work in a chat application because it requires real time communication. For example, let's say user A, user B, and user C are connected in a chat and all three of them send a message. However, user B never _requested_ for new messages to be sent as a response because user B wasn't aware that there were new messages being posted. Then, the chat would immediately break.
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/req_res_issue.png" alt="Request-Response Issue With Mulitple Users" />
 
 To prevent this, whenever a new message is posted, everyone involved in the chat should automatically receive it without ever having to request it from the server. Since the request-response architecture would never work, we need a new set of communication rules that will enable both sides to send messages instead of just one side always making a request and another side always sending back a response.
 
@@ -98,7 +98,7 @@ While the dependencies are being installed, let's go over the folder structure t
 In the root **codedex-chat-app/** directory, there are two directories available:
 
 - A **frontend/** directory with code that runs on the user's browser via HTML and JavaScript: **index.html** and **script.js**.
-- A **backend/** directory with two files: `**server-starter.js** and **server-completed.js**.
+- A **backend/** directory with two files: **server-starter.js** and **server-completed.js**.
 
 We'll be working in the **server-starter.js** file. At the end, it'll have the same code as the **server-completed.js** file. Alternatively, the **server-completed.js** file can also be referred to if anyone gets stuck in the middle of this tutorial.
 
@@ -147,7 +147,7 @@ At this point, we can start the server by running the `npm run serve` command in
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/backend_server_terminal.png" alt="Backend server output on terminal" />
 
-**Note:** If this doesn't work, you can try again, or, join the Codédex Discord server where our Code Mentors will help you with the problem you're facing.
+**Note:** If this doesn't work, you can try again or join the Codédex Discord server where our Code Mentors will help you with the problem you're facing.
 
 If the server is functional, it will be listening on port 3000. We can now open our browser and visit the `http://localhost:3000/` URL. This should show us a very beautiful chat application page.
 
