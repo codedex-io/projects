@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  background-image: url(https://www.travellens.co/content/images/size/w2000/format/webp/2022/06/Dumbo-NYC.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  height: 100vh;
+}
+
+
+main {
+  background-color: rgba(227, 193, 173, 0.85);
+  position: relative;
+  top: 30%;
+  border: 1px solid;
+  border-radius: 5px;
+  width: 45%;
+  margin: auto;
+  padding: 2em;
+}
+
+
+h1 {
+  margin-bottom: 20px;
+}
+
+
+#search {
+  border-radius: 5px 0 0 5px;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  width: 70%;
+  height: 48px;
+}
+
+
+#submit {
+  border-radius: 0 5px 5px 0;
+  padding: 10px;
+  font-size: 16px;
+  width: 5em;
+  cursor: pointer;
+}
+
+#weather-wrapper {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  height: 250px;
+}
+
+#weather-search {
+  display: flex;
+  width: 50%;
+  gap: 5px;
+}
+
+
+/* #weather-data {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 5px;
+  padding: 1.5em;
+  margin-top: 20px;
+
+
+  text-align: center;
+  align-items: center;
+  gap: 12px;
+}
+
+
+#weather-data > img {
+  border-radius: 50%;
+  background-color: lightskyblue;
+}*/
