@@ -1,7 +1,7 @@
 ---
 title: Build an Interactive Sounboard with p5.js
 author: Ellie Popoca
-uid: 
+uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
 datePublished: YYYY-MM-DD
 description: 
 header:
@@ -12,39 +12,601 @@ tags:
   - beginner
 ---
 
-<BannerImage
-  link=""
-  description=""
-  uid={false}
-  cl="for-sidebar"
-/>
+
 
 # Build an Interactive Sounboard with p5.js
 
-<AuthorAvatar
-  author_name=""
-  author_avatar=""
-  username=""
-  uid={false}
-/>
-
-<BannerImage
-  link=""
-  description=""
-  uid={false}
-/>
 
 ## Introduction
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/demo.gif" alt="" />
-### Subheading
+Welcome to learning how to make an interactive soundboard with [p5.js](https://p5.js.org)! 🎵✨
 
-Placeholder
+In this tutorial, you’ll be learning about the JavaScript library p5.js, and its sublibrary p5.sound.js as we learn how to animate some buttons that make a variety of sounds when you click on them! They can range from funny vine noise effects, to music sounds, and even beats for your own in-house DJ setup. 😎
+
+p5.js is a JavaScript library for [creative coding](https://timrodenbroeker.de/what-is-creative-coding/#:~:text=Creative%20Coding%20is%20a%20method%20that%20uses%20computer%20programming%20for,exploration%20of%20mostly%20unexpected%20results.), with a focus on making coding accessible and inclusive for artists, designers, educators, beginners, and anyone else who wants to take creativity to the next level. The library extends much farther than what this tutorial will cover, but we hope that it will give you a feel for how you can code in a creative way! 
+
+This is the finished result of what we’ll be making today: 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/demo.gif" alt="Completed three by three grid of interactive soundboard" />
+
+Neat, right? Let’s get started! 
+
+
+### Getting Set Up! 
+
+Here is the list of tools that I will be using for today’s project, feel free to replace any tools that fit your preferences!
+
+- The complete p5.js library that includes the p5.sound sublibrary.
+- VS Code for writing the code.
+  - The VS Code Live Server extension for auto-refreshing our page after making changes.
+- The **.mp3** and **.wav** files with our sound effects.
+
+First, download the zip file for [the complete library of p5.js](https://github.com/processing/p5.js/releases/download/v1.7.0/p5.zip). Along with the core functions, this comes with [p5.sound.js](https://p5js.org/reference/#/libraries/p5.sound),  which is exactly what we’ll want to use for our soundboard! Once you unzip and open the file, you will be shown this folder with all of the folders! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/lib-p5-files.png" alt="file folder called lib" />
+
+You’ll click on the empty-example folder, and you’ll notice these files! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/empty-example.png" alt="file folder called empty example" />
+
+
+
+In VS Code, we’re going to add the **index.html** and **sketch.js** files to a new folder. I named this new folder **music-soundboard**! 
 
 ```
-example code
+mkdir music-soundboard
+cd music-soundboard
+code .
 ```
 
-## Conclusion
+The `code .` command is provided by VS Code and lets you open a new window from the terminal. To [enable](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line) this, go to the Command Palette (<kbd>Command/Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>), search for "shell command", and select "Install 'code' command in PATH".
 
-## Additional Resources
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/code-path.gif" alt="gif preview of adding code to the VS Code shell path" />
+
+Once you have your folder opened in VS Code, you’ll notice it's empty! We’re going to add the **index.html** and **sketch.js** files from the **empty-example** folder. I copied and pasted into the **music-soundboard** folder:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/drag-and-drop-p5-tut.gif" alt="gif preview of dragging files into the VS Code folder" />
+
+Now that we have our boilerplate for the p5.js project, we’re going to add in our p5.js files! This will make sure we can use them to render the shapes and sound for our soundboard! 
+
+We will copy and paste the files the exact same way to include:
+ 
+- **p5.js**
+- **p5.min.js**
+- **p5.sound.js**\*
+- **p5.sound.min.js**\*
+
+\* in the **addons** folder 
+
+Your **music-soundboard** folder should now include these files! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/vscode-files.png" alt="VS Code file folder showing the p5.js files" />
+
+Now that we have our folder setup with all of our files, it's time to start making our soundboard! 🥳
+
+In the **index.html** given to us by p5.js, let's load the p5-related libraries with four `<script>` elements:
+
+```html
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>funky soundboard</title>
+  <link rel="icon" type="image/x-icon" href="kirby.png">
+  <!-- feel free to add in your own favicon! -->
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+
+  <script src="./p5.min.js"></script>
+  <script src="./p5.sound.js"></script> 
+  <script src="./p5.sound.min.js"></script>
+  <script src="sketch.js"></script>
+</head>
+
+<body>
+  <main>
+
+  </main>
+</body>
+
+</html>
+```
+We have now added the script files of p5.js to our HTML, and will be able to read everything we create in our **sketch.js** file! 
+
+Your current **sketch.js** file looks something like this:
+
+```js
+function setup() {
+  // put setup code here
+}
+
+function draw() {
+  // put drawing code here
+}
+```
+
+This file is where we will be placing our soundboard code. A p5.js almost always involves a `setup()` and `draw()` function.
+
+At this point, feel free to turn on your live server! You’ll be ready to see any changes that you make as soon as we start coding! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/server-start.png" alt="VS Code notification showing the live server is on" />
+
+### Setting up the Canvas
+
+In p5.js, we tell our script to set up the width and height of a “canvas” where we are going to be placing content. For our purposes, we'll make the canvas as wide and tall as the browser you're using! This allows for the canvas to scale to whatever screen size you're using the soundboard on!
+
+Let's start a newline above the `setup()` function and initialize some variables for the window's `innerHeight` and `innerWidth` properties (these are system variables that stores the width of the inner window and maps to the window’s width and height) at the very top of our **sketch.js** file, outside the blank `setup()` function: 
+
+```js
+let width = window.innerWidth; 
+let height = window.innerHeight;
+```
+setup() function
+
+You’ll notice `setup()` is blank. Inside, we’re going to make the canvas with the `createCanvas()` function and give it the width and height parameters with our `width` and `height` variables. 
+
+```js
+function setup() {
+  canvas = createCanvas(weight, height); 
+}
+```
+
+#### draw() function
+
+Let’s start to "paint" on our canvas with the `draw()` function, starting with a background color! In p5.js, we add can do this with the built-in `background()` function:
+
+```pseudo
+background(r, g, b);
+```
+
+The `r`, `g`, and `b` stand for "red", "green", and "blue". Each parameter is an integer between 0 and 255.
+
+**Note:** To get RGB values of a color, I like to use a [color generator palette like Coolors](https://coolors.co/generate), and I’m able to copy the RGB value of any color. You’ll want to remember to use RGB values for the colors of the button we’ll be making soon! 
+
+Here’s what your `draw()` function should look like! 
+
+```js
+function draw() {
+  background(247, 178, 183); // replace with RGB color of choice
+}
+```	
+
+Now that we’re all setup, let's get started with creating our buttons! 
+
+### Creating a Button Class
+
+Let’s take a look at the anatomy of the shape of the button we are making. 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/anatomy.png" alt="The button drawn to show the shape of a cylinder" />
+
+Our button is composed of 3 distinct shapes. We have:
+
+- The rectangle
+- The ellipse (or oval) that covers the top part of our rectangle
+- The bottom arc
+
+We’ll make these shapes separately and arrange them to look like our finished button! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/button.png" alt="A purple button shaped like a cylinder" />
+
+Let’s also consider our screen grid. For this tutorial, I will be showing you the steps to create a 3x3 grid of buttons for our soundboard (or 9 buttons total). If you’d like to add more or less, I’d suggest making a grid map of mine below, that will show you exactly how to position your buttons on the screen. This is how I established my dimensions for a 3x3 grid.
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/grid.png" alt="A three by three grid displayed in the center of a rectangle with gray highlighted intersections" />
+
+Each gray circle shows where the button will be.
+
+Under our `draw()` function let's create a new JavaScript class called `Button`. This will include some attributes that will be initialized in our `constructor()` function. Let's take a look at what the attributes of each button will be:
+ 
+- `x` - the x coordinate of the button 
+- `y` - the y coordinate of the button 
+- `w` - the width of the button 
+- `h` - height of the button 
+- `color` - the body color of the button 
+- `accent` - the accent color of the button 
+- `song` - the song that the button will play 
+
+Let’s show this in code! 
+
+```js
+class Button {
+  constructor(x, y, w, h, color, accent, song) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.color = color;
+    this.accent = accent;
+    this.song = song;
+  }
+}
+```
+
+In the `constructor()` function, we’re using `this.`is to eliminate the confusion between class attributes and parameters with the same name. We use it to reference the particular instance of our variable! 
+
+p5.js has a built-in `show()` function, where it will display the code we provide to it when called. 
+
+Here, we will build our button shapes. As a reminder, we need to build:
+ 
+A rectangle for the body of our button
+An ellipse for the top of our button 
+An arc for the bottom of our button
+
+We can use the p5.js functions called [`rect()`](https://p5js.org/reference/#/p5/rect), [`ellipse()`](https://p5js.org/reference/#/p5/ellipse), and [`arc()`](https://p5js.org/reference/#/p5/arc). Take a look at the syntax below for each function: 
+
+```js
+// Rectangle 
+rect(x, y, w, h)
+
+// Ellipse
+ellipse(x, y, w, h)
+
+// Arc
+arc(x, y, w, h, start, stop, [mode]) 
+```
+
+For the `arc()` function, we use the following parameters for the shape we want:
+ 
+A `start` angle for the arc, specified in radians.
+A `stop` angle for the arc, specified in radians.
+
+
+Let’s use our variables to create our shapes using `show()`!
+
+**Note:** In p5.js, shapes are built from the top of the `draw()` function to the bottom. To build our shape correctly, we want our ellipse to cover our rectangle. Let's create the shapes going from rectangle to ellipse, to arc: 
+
+```js
+  show() {
+    noStroke(); 
+
+    fill(this.color); 
+    rect(this.x, this.y, this.w, this.h);
+
+    fill(this.accent); 
+    ellipse(this.x, this.y, this.w, this.h);
+
+    fill(this.color); 
+    arc(this.x, this.y, this.w, this.h, TWO_PI, PI); 
+ }
+```
+
+Let’s dissect this code a bit to understand what’s going on:
+ 
+- The `noStroke()` function allows us to remove any shape outlines.
+- We use our main body color, `fill(this.color)`  for the rectangle and arc, going before the `rect()` and `arc()` shape functions.
+- The `fill(this.accent)` function uses our defined accent color for the top of our button, which is defined by the `ellipse()` function.
+- `arc(this.x, this.y, this.w, this.h, TWO_PI, PI)` allows us to build a round arc at the bottom of our button to blend in with the rectangle body. 
+
+Woohoo! We’re nearly almost done with “drawing” our buttons! 
+
+### Load in your Sounds
+
+Let’s take a little detour and quickly load in our sound and music effects. Whether you’re using the soundboard to create beats, funny sounds for a game, or even videos, you’ll need to load in the sounds to your local development folder! 
+
+#### Ways you can get sound effects
+ 
+I have found that sound effects that are 1-2 seconds long are the best ones for a soundboard, as they’re quick and to the point! That being said, here are some ways you can download **.wav** and **.mp3** sound files for any sound you would like! 
+
+##### YouTube to mp3
+ 
+Searching any sound effect on youtube is easily done! You can grab the link of the YouTube video and paste it into a [“YouTube to mp3”](https://ytmp3.nu/B5Bd/) converter online! 
+
+##### MixKit
+ 
+[MixKit](https://mixkit.co/free-sound-effects/) is a free online library of different audio and sound effects! I used this to grab a couple of the sounds I was using, and they’re a simple download! 
+
+Once you have your 9 sound effects, you’ll want to drag them to your folder like we have done before! It should now look similar to this! I used a variation of instrument sounds, the vine boom sound 🤪 , and some funky retro ones! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/sound-files.png" alt="VS Code file folder with the added digial sound files" />
+
+**Note:** I have renamed my sound files to have recognizable and easy to read names! 
+
+Let’s now load the sounds in code! 
+
+At the top of our file, lets initialize the sound variables
+
+```js
+let vine_boom;
+let retro_game;
+let whoosh;
+let acute_guitar;
+let guitar_string;
+let guitar_notif;
+```
+
+The **p5.sound.js** file allows us to use the `loadSound()` function. We’ll use that to load our sounds, and use them for our soundboard. Let's go back to our `setup()` function, and declare the sounds. It should now look like this: 
+
+```js
+function setup() {
+  canvas = createCanvas(weight, height);
+
+// load sounds
+  vine_boom = loadSound('vine_boom.mp3');
+  retro_game = loadSound('retro_game.wav');
+  whoosh = loadSound('whoosh.wav');
+  acute_guitar = loadSound('acute_guitar.wav');
+  guitar_string = loadSound('guitar_string.wav');
+  guitar_notif = loadSound('guitar_notif.wav');
+}
+``` 
+
+### Creating new instances of Button Objects
+Sweet! We have our sounds loaded, now it's time to start creating buttons! For this, we’re going to create new instances of our buttons. We’re going to add the parameters like how we defined them in our `Button` class. 
+
+As we established earlier, we’re going to use the x and y position ratios from our gird map. We’ll be using 9 variables (`b1`-`b9`) to reference our `Button` instances. For the width and the height, I am using the values 200 and 80 respectively. Feel free to play around with different values!  Additionally, you’ll want to choose 9 main body colors and an additional 9 lighter, accent colors. We will add these below our sounds in our `setup()` method. 
+
+
+```js
+  let b1 = new Button(weight/3, height/3, 200, 80, color(226, 132, 19), color(244, 190, 124), vine_boom);
+  let b2 = new Button(weight/2, height/3, 200, 80, color(0, 159, 183), color(153, 241, 255), retro_game);
+  let b3 = new Button(2*weight/3, height/3, 200, 80, color(145, 145, 233), color(204, 204, 245), whoosh);
+
+  let b4 = new Button(weight/3, height/2, 200, 80, color(205, 92, 92), color(240, 128, 128), vine_boom);
+  let b5 = new Button(weight/2, height/2, 200, 80, color(72, 209, 204), color(175, 238,238), retro_game);
+  let b6 = new Button(2*weight/3, height/2, 200, 80, color(255, 215, 0), color(255, 255, 0), whoosh);
+
+  let b7 = new Button(weight/3, 2*height/3, 200, 80, color(255, 163, 175), color(255, 214, 220), acute_guitar);
+  let b8 = new Button(weight/2, 2*height/3, 200, 80, color(143, 45, 86), color(216, 131, 166), guitar_string);
+  let b9 = new Button(2*weight/3, 2*height/3, 200, 80, color(236, 78, 32), color(234, 162, 133), guitar_notif);
+```
+
+For my 3x3 grid, I’ll have 3 rows and 3 columns. Let's add each row of buttons into their own array. This way, we can access them in other functions, and show them on our canvas. 
+
+At the top of our file, let's declare the following arrays: 
+
+```js
+let buttons_top = [];
+let buttons_middle = [];
+let buttons_bottom = [];
+```
+
+Using the `.push()` array method, let's add all of our references to the array. 
+
+```js
+  buttons_top.push(b1);
+  buttons_top.push(b2);
+  buttons_top.push(b3);
+
+  buttons_middle.push(b4);
+  buttons_middle.push(b5);
+  buttons_middle.push(b6);
+
+  buttons_bottom.push(b7);
+  buttons_bottom.push(b8);
+  buttons_bottom.push(b9);
+```
+
+Your current **sketch.js** file should now look like this! 
+
+```js
+var weight = window.innerWidth;
+var height = window.innerHeight;
+
+let buttons_top = [];
+let buttons_middle = [];
+let buttons_bottom = [];
+
+let vine_boom;
+let retro_game;
+let whoosh;
+let acute_guitar;
+let guitar_string;
+let guitar_notif;
+
+function setup() {
+  canvas=createCanvas(weight, height);
+  vine_boom = loadSound('vine_boom.mp3');
+  retro_game = loadSound('retro_game.wav');
+  whoosh = loadSound('whoosh.wav');
+  acute_guitar = loadSound('acute_guitar.wav');
+  guitar_string = loadSound('guitar_string.wav');
+  guitar_notif = loadSound('guitar_notif.wav');
+
+
+  let b1 = new Button(weight/3, height/3, 200, 80, color(226, 132, 19), color(244, 190, 124), vine_boom);
+  let b2 = new Button(weight/2, height/3, 200, 80, color(0, 159, 183), color(153, 241, 255), retro_game);
+  let b3 = new Button(2*weight/3, height/3, 200, 80, color(145, 145, 233), color(204, 204, 245), whoosh);
+
+  let b4 = new Button(weight/3, height/2, 200, 80, color(205,92,92), color(240,128,128), vine_boom);
+  let b5 = new Button(weight/2, height/2, 200, 80, color(72,209,204), color(175,238,238), retro_game);
+  let b6 = new Button(2*weight/3, height/2, 200, 80, color(255,215,0), color(255,255,0), whoosh);
+
+  let b7 = new Button(weight/3, 2*height/3, 200, 80, color(255, 163, 175), color(255, 214, 220), acute_guitar);
+  let b8 = new Button(weight/2, 2*height/3, 200, 80, color(143, 45, 86), color(216, 131, 166), guitar_string);
+  let b9 = new Button(2*weight/3, 2*height/3, 200, 80, color(236, 78, 32), color(234, 162, 133), guitar_notif);
+  
+  buttons_top.push(b1);
+  buttons_top.push(b2);
+  buttons_top.push(b3);
+
+  buttons_middle.push(b4);
+  buttons_middle.push(b5);
+  buttons_middle.push(b6);
+
+  buttons_bottom.push(b7);
+  buttons_bottom.push(b8);
+  buttons_bottom.push(b9);
+}
+
+function draw() {
+  background(51, 92, 129);
+  noStroke();
+ }
+
+class Button {
+  constructor(x, y, w, h, color, accent, sound) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.color = color;
+    this.accent = accent;
+    this.sound = sound;
+  }
+
+  show() {
+    noStroke();
+    fill(this.color);
+    rect((this.x), this.y, this.w, 50);
+
+    fill(this.accent);
+    ellipse(this.x, this.y, this.w, this.h);
+
+    fill(this.color);
+    arc(this.x, (this.y), this.w, this.h, TWO_PI, PI);
+  }
+}
+```
+
+Let’s now see our buttons! 
+
+Using a `for` loop, let's go through each array, and display all 9 buttons. In the `draw()` function, it should now look like this: 
+
+```js
+function draw() {
+  background(51, 92, 129);
+  noStroke();
+  for (let i = 0; i < buttons_top.length; i++) { 
+    buttons_top[i].show(); // using our show function from our Button class. 
+    buttons_middle[i].show();
+    buttons_bottom[i].show();
+  }
+}
+```
+
+You’ll notice that we have some shapes on the screen! But they look a little weird… We have some shapes, but they’re not in the right position. Let's manipulate some values to arrange the shapes correctly! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/weird-buttons.png" alt="nine Distorted buttons" />
+
+You’ll remember that in our Button class, we have the `show()` function where we establish the x and y position for the shapes. Let's go back and see how we can change these! 
+
+Let’s take a look at what’s currently wrong with our shapes. Our rectangle is shifted to the right, and our arc shape is too high. You’ll recall that we set our initial width of our button to `200`. The rectangle is halfway between the top ellipse, so we’ll move the rectangle `100` units to the left, in the `x` direction. 
+
+```js
+rect((this.x - 100), this.y, this.w, this.h);
+```
+This is what we see now! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/weird2-buttons.png" alt="nine Distorted buttons without a cylinder shape" />
+
+Awesome! Now, let’s shift our arc shape down further to create the illusion of a button shape. If you recall, I chose the height of my rectangle body to be 50 units. That is how much I will shift the arc shape down. 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-soundboard-with-p5js/images/buttons2.png" alt="a three by three grid of multicolored buttons" />
+
+Ta Da!!!! We have buttons!!!! 
+
+### Creating a Mouse Click Function
+Wonderful! We have officially created art using code! Now, let’s begin with adding our music and animating our buttons to have a fun pop! 🙌
+
+Because the clicking for each button will apply to all of the buttons, let’s go back to our `Button` class and create a universal `.clicked()` method for our buttons.
+
+Let’s think about what we need to know… 
+- Where the mouse click occurs (`x` and `y` position)
+- Where the button is to be able to click on
+- How the button should move once there is a click
+- What the button should do once there is a click 
+
+
+Using the p5.js [`dist()` function[(https://p5js.org/reference/#/p5/dist), we can return a number of the distance between 2 distinct points, and in our case, that will be the button and the mouse click. We want our button to do _something_ if we click within the certain area of the button. Our `clicked()` function should take in the x and y parameters of the mouse click. 
+
+**Note:** Here’s the math the `dist()` function is doing behind the scenes. 👀 
+
+$$
+d = \sqrt{{x_1 - x_2 }^2 + {y_1 - y_2 }^2}
+$$
+
+
+Let’s see what this looks like in code. 
+
+```js
+clicked(px, py) { // taking in position x and y of the mouse click 
+    let d = dist(px, py, this.x, this.y); // using the syntax for the distance formula
+    } 
+```
+
+We know that when we click a button we want it to do two things:
+- Go down some number of units to create a button press animation 
+- Play the sound effect
+
+Let’s go ahead and that to our function: 
+
+```js
+  if (d < this.w / 2) { // if the distance is less than half of the width of the button 
+    this.y = this.y + 10; // add 10 units to the y position of the button
+    this.sound.play(); // play the sound 
+  }
+```
+
+Great! Your `Button` class should now be complete, and should look like this! 
+
+```js
+class Button {
+  constructor(x, y, w, h, color, accent, sound) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.color = color;
+    this.accent = accent;
+    this.sound = sound;
+  }
+
+  show() {
+    noStroke();
+    fill(this.color);
+    rect((this.x - 100), this.y, this.w, 50);
+
+    fill(this.accent);
+    ellipse(this.x, this.y, this.w, this.h);
+
+    fill(this.color);
+    arc(this.x, (this.y + 50), this.w, this.h, TWO_PI, PI);
+  }
+
+  clicked(px, py) {
+    let d = dist(px, py, this.x, this.y);
+
+    if (d < this.w / 2) {
+      this.y = this.y + 10;
+      this.sound.play();
+    } 
+  }
+}
+```
+
+Now let’s call our clicked button, and see the button move! 
+
+For this, we’ll need the p5.js [`mousePressed()`](https://p5js.org/reference/#/p5/mousePressed) function, which is called once after every time a mouse button is pressed.Let’s use this to call our clicked function we made for our `Button` class, and apply this to every button we made! 
+
+Because we have our buttons in three separate arrays, let’s iterate through them with a `for` loop, and call the `.clicked()` method we made. For its parameters, we can use p5.js’s [interactive `mouseX` and `mouseY` variables](​​https://p5js.org/learn/interactivity.html) to detect the coordinates of mouse clicks! 
+
+```js
+function mousePressed() {
+  for (let i = 0; i < buttons_top.length; i++) { 
+    buttons_top[i].clicked(mouseX, mouseY);
+    buttons_middle[i].clicked(mouseX, mouseY);
+    buttons_bottom[i].clicked(mouseX, mouseY);
+  }
+}
+```
+
+Try pressing a button! And again. And again and again. You’ll see that we have the sounds going wild and the button never comes back up… 
+
+### Creating a released mouse function 
+Let’s tell our soundboard to move our buttons back up once we stop clicking! We can do that as we did similarly with our last function with the [ `mouseReleased()`](https://p5js.org/reference/#/p5/mouseReleased) p5.js function! 
+
+We’ll iterate through our arrays like last time, but this time, we’ll bring back the rows to their original height: 
+
+```js
+function mouseReleased() {
+  for (let i = 0; i < buttons_top.length; i++) {
+    buttons_top[i].y = height/3;
+    buttons_middle[i].y = height/2;
+    buttons_bottom[i].y = 2*height/3;
+  }
+}
