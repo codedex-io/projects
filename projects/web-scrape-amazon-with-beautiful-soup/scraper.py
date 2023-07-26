@@ -20,7 +20,7 @@ def get_product_details(product_url: str) -> dict:
     title = soup.find(
       "span", attrs={"id": "productTitle"}).get_text().strip()
     extracted_price = soup.find(
-      "span", attrs={"class": "apexPriceToPay"}).get_text().strip()
+      "span", attrs={"class": "a-price"}).get_text().strip()
     price = "$" + extracted_price.split("$")[1]
 
     # Adding it to the product details dictionary
