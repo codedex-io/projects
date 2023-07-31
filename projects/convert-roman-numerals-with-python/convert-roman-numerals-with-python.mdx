@@ -39,7 +39,7 @@ tags:
 
 ## Introduction
 
-[Roman numerals](https://en.wikipedia.org/wiki/Roman_numerals) were developed more than 2,800 years ago. After the Romans’ eventual demise, numerals were still widely used during the Middle Ages. Even today, Roman numerals are prevalent in our everyday lives, showing up in clocks, movie titles, and more!
+[Roman numerals](https://en.wikipedia.org/wiki/Roman_numerals) originated, as the name suggest, in ancient Rome more than 2,800 years ago. After the Romans’ eventual demise, numerals were still widely used during the Middle Ages. Even today, Roman numerals are prevalent in our everyday lives, showing up in clocks, movie titles, and more!
 
 Instead of numbers like 1 and 2, Roman numerals use letters (predominantly "I" and "V").
 
@@ -66,14 +66,11 @@ After setting up, feel free to move onward!
 
 To actually enter a sequence of Roman numerals, we need to ask the user for input. This can be done with the built-in [`input()` function](https://www.codedex.io/python/09-pythagorean#user-input):
 
-
 ```py
 numeral_input = input("Enter the roman numerals you want to convert: ")
 ```
 
 Here, you are creating a variable called `numeral_input` and assigning the user's input to it.
-
-**Note:** A newline `\n` can be used at the end of the text so the input is typed on the next line, making the console seem less cramped.
 
 ## Step 2: Define `roman_to_int()` Function
 
@@ -129,7 +126,7 @@ print("The roman numerals you entered translates to: " + str(final_answer) + "!"
 
 Make sure the `print()` statement is on the same indentation as the `if`-`elif` statements. Otherwise, Python will think you’re trying to put the `print()` command in an `if`-`elif` statement before everything is calculated.
 
-Lastly, outside the `roman_to_int()` function, let's actually use with the input we initially asked for so that our converted integer is printed:
+Lastly, outside the `roman_to_int()` function, let's use the input we prompted the user for so that our converted integer is printed:
 
 ```py
 roman_to_int(numeral_input)
