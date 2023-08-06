@@ -1,6 +1,6 @@
 # Generate a Blog with OpenAI 📝
 
-mport openai
+import openai
 from dotenv import dotenv_values
 
 config = dotenv_values('.env')
