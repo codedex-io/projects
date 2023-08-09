@@ -13,7 +13,7 @@ let guitar_string;
 let guitar_notif;
 
 function setup() {
-  canvas=createCanvas(width,height);
+  canvas = createCanvas(width,height);
   vine_boom = loadSound('vine_boom.mp3');
   retro_game = loadSound('retro_game.wav');
   whoosh = loadSound('whoosh.wav');
