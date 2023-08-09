@@ -21,8 +21,6 @@ function setup() {
   guitar_string = loadSound('guitar_string.wav');
   guitar_notif = loadSound('guitar_notif.wav');
 
-
-
   let b1 = new Button(width/3, height/3, 200, 80, color(226, 132, 19), color(244, 190, 124), vine_boom);
   let b2 = new Button(width/2, height/3, 200, 80, color(0, 159, 183), color(153, 241, 255), retro_game);
   let b3 = new Button(2*width/3, height/3, 200, 80, color(145, 145, 233), color(204, 204, 245), whoosh);
@@ -106,5 +104,4 @@ class Button {
       this.sound.play();
     } 
   }
-    
 }
