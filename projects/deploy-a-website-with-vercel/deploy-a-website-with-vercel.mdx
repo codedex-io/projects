@@ -1,0 +1,113 @@
+---
+title: Deploy A Website with Vercel
+author: Ellie Popoca
+uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
+datePublished: YYYY-MM-DD
+description: Learn how to deploy a static website using Vercel.
+header:
+bannerImage:
+tags:
+    - javascript
+    - html
+    - css
+    - intermediate
+---
+
+<BannerImage
+  link=""
+  description=""
+  uid={false}
+  cl="for-sidebar"
+/>
+
+# Deploy a Website with Vercel
+
+<AuthorAvatar
+  author_name="Ellie Popoca"
+  author_avatar="/images/projects/authors/ellie-popoca.jpg"
+  username="exrlla"
+  uid={true}
+/>
+
+<BannerImage
+  link=""
+  description=""
+  uid={false}
+/>
+
+## Introduction 
+
+Hello everyone! In this tutorial, I will be teaching you how to deploy your very own website using Vercel! This will allow anyone to visit your published website on the internet! 🌍 We’ll help you get started to easily deploy and get it published in no time! 
+
+### What Is Vercel?
+
+What is Vercel? Vercel is a cloud platform that specializes in [serverless deployment](https://www.redhat.com/en/topics/cloud-native-apps/what-is-serverless) and static site hosting. It allows developers to deploy and host web applications, APIs, and static websites with ease!
+
+**Fun Fact:** Vercel was originally known as "Zeit" before it rebranded itself in 2020. It was founded by Guillermo Rauch, who also created Socket.IO (we have a [tutorial](https://www.codedex.io/projects/build-a-chat-app-with-socket-io) about this, too).
+
+### Getting Started with Vercel
+
+Vercel lets us deploy a static website that consists of fixed content and doesn't require server-side processing or a dynamic server to generate web pages. Instead, all the content of a static website is pre-built and stored as HTML, CSS, JavaScript, images, and other assets.
+
+Before you begin, be sure to already have the following:
+ 
+- A [GitHub](https://github.com/) account
+- Your code in a GitHub repository 
+
+Head on over to [Vercel](https://vercel.com/) and log in with your GitHub account. 
+
+!! PICTURE !! 
+
+Once you have authenticated your GitHub account, the screen should now look like this! On the Vercel dashboard, you’ll notice we have some of the repositories we have recently committed to ✨
+
+!! PICTURE !! 
+
+**Note:** If at this point you don’t have your project on a GitHub repository, [follow these instructions](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github) on adding locally hosted code to GitHub. 
+
+### Deploying Your Website
+
+At this point, depending on your project, you should have been able to work on your website and see it displayed locally on your computer. I have a linktr.ee clone that I created, and want to publish! 
+
+!! PICTURE !! 
+
+You’ll see that my website is currently on the `http://localhost:3000`, in which the computer has the role as a virtual server that is running my code. Let's go ahead and use Vercel to deploy the site! 
+
+We’re going to head back to Vercel and select the GitHub repository that has the project you want to publish. 
+
+!! PICTURE !! 
+
+Mine is called "bento"! You’ll be able to reconfigure the name of your project here (this will be the prefix name to your publishing link such as "ellie-bento.vercel.app"). 
+
+You’ll also notice some other settings before deploying such as "Build and Output" overrides and "Environment Variables." Since we’re deploying a static site, we won’t need to change this information. 
+
+**Note:** This static website was created with Next.js, a React-based web framework. However, you can change the framework that you’re using for deployment. Vercel should detect this automatically, but here are some of the options that you will see under "Framework Preset": 
+
+!! PICTURE !! 
+
+Once you’re all set, you can now click "Deploy"! You’ll now notice the build process starting. 
+
+!! PICTURE !! 
+
+This part can take a couple of minutes! Once the deployment is finished, you should see the congratulations screen!! 🎉
+
+!! PICTURE !! 
+
+You’re now able to access my linktree clone website at [bento-blond.vercel.app](https://bento-blond.vercel.app/). 
+
+You'll notice your GitHub repository now looks a bit different! Vercel interacted with your GitHub repository to automate the deployment process and ensure that your website stays up to date with the latest changes in your codebase. That means everytime you push code to the main branch (or the branch specified in Vercel), so you don't have to worry about updating it yourself everytime! You have successfully deployed your website! 
+
+## Conclusion
+
+Congratulations! 🎆
+
+You have successfully deployed your static website using Vercel and GitHub! Now, you’re able to expand to using your own domain if you choose, or creating more websites to share with friends! 👯
+
+If you come across any trouble, you’re welcome to send us a message in the Codédex Community Discord, and we’ll help you out! Share any websites you deploy with me on Twitter and tag [@codedex_io](https://www.twitter.com/codedex_io) and [@exrlla](https://www.twitter.com/exrlla) ✨
+
+### Additional Resources
+ 
+- [Vercel Documentation](https://vercel.com/docs) 
+- [Deploying to Vercel](https://vercel.com/docs/concepts/deployments/overview) 
+- [Static vs. Dynamic Websites](https://www.wix.com/blog/static-vs-dynamic-website#:~:text=The%20key%20difference%20between%20static,to%20change%20with%20the%20user.) 
+- [What is Next.js?](https://nextjs.org/learn/foundations/about-nextjs/what-is-nextjs) 
+
