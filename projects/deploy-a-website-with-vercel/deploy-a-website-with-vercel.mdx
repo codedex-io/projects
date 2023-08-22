@@ -6,11 +6,12 @@ datePublished: YYYY-MM-DD
 description: Learn how to deploy a static website using Vercel.
 header:
 bannerImage:
+published: false
 tags:
-    - javascript
-    - html
-    - css
-    - intermediate
+  - javascript
+  - html
+  - css
+  - intermediate
 ---
 
 <BannerImage
@@ -41,7 +42,7 @@ Hello everyone! In this tutorial, I will be teaching you how to deploy your very
 
 ### What Is Vercel?
 
-What is Vercel? Vercel is a cloud platform that specializes in [serverless deployment](https://www.redhat.com/en/topics/cloud-native-apps/what-is-serverless) and static site hosting. It allows developers to deploy and host web applications, APIs, and static websites with ease!
+Vercel is a cloud platform that specializes in [serverless deployment](https://www.redhat.com/en/topics/cloud-native-apps/what-is-serverless) and static site hosting. It allows developers to easily deploy and host web applications, APIs, and static websites!
 
 **Fun Fact:** Vercel was originally known as "Zeit" before it rebranded itself in 2020. It was founded by Guillermo Rauch, who also created Socket.IO (we have a [tutorial](https://www.codedex.io/projects/build-a-chat-app-with-socket-io) about this, too).
 
@@ -49,24 +50,28 @@ What is Vercel? Vercel is a cloud platform that specializes in [serverless deplo
 
 Vercel lets us deploy a static website that consists of fixed content and doesn't require server-side processing or a dynamic server to generate web pages. Instead, all the content of a static website is pre-built and stored as HTML, CSS, JavaScript, images, and other assets.
 
-Before you begin, be sure to already have the following:
- 
-- A [GitHub](https://github.com/) account
-- Your code in a GitHub repository 
+This tutorial works with code that is pushed to a repository (repo) on [GitHub](https://github.com/).
 
-Head on over to [Vercel](https://vercel.com/) and log in with your GitHub account. 
+Before we begin, let's do the following:
+ 
+1. Create and/or log on to your GItHub account.
+2. Ensure the code you would like to deploy with Vercel is all saved in a folder and pushed to a repo on GitHub.
+
+**Note:** If at this point you don’t have your project on a GitHub repository, [follow these instructions](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github) on adding locally hosted code to GitHub.
+
+Let's head over to [Vercel](https://vercel.com/) and log in with your GitHub account. 
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-intro.png" alt="The Vercel dashboard with instructions to import a repository or clone a template" />
 
-Once you have authenticated your GitHub account, the screen should now look like this! On the Vercel dashboard, you’ll notice we have some of the repositories we have recently committed to ✨
+Once you have authenticated your GitHub account, the screen should now look like this:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-authed.png" alt="The Vercel dashboard with Ellie's recent repositories shown in a list with an option to import to vercel" />
 
-**Note:** If at this point you don’t have your project on a GitHub repository, [follow these instructions](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github) on adding locally hosted code to GitHub. 
+On the Vercel dashboard, you may notice some repositories that were recently committed to! ✨
 
 ### Deploying Your Website
 
-At this point, depending on your project, you should have been able to work on your website and see it displayed locally on your computer. I have a linktr.ee clone that I created!
+At this point, depending on your project, it should be able to display and work locally on your computer Below is a linktr.ee clone that I created!
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-pre-app-demo.gif" alt="Ellie's link tree website with a blue background and three links with an animated gif footer" />
 
@@ -78,7 +83,12 @@ We’re going to head back, and select the GitHub repository that has the projec
 
 My repository is called "bento"! (View the repository [here](https://github.com/exrlla/bento)) You’ll be able to reconfigure the name of your project here (this will be the prefix name to your publishing link such as "bento-blonde.vercel.app"). 
 
-You’ll also notice some other settings before deploying such as "Build and Output" overrides and "Environment Variables." Since we’re deploying a static site, we won’t need to change this information. 
+You’ll also notice some other settings before deploying such as:
+
+- Overrides for the "Build and Output Settings."
+- Settings for "Environment Variables" such as secrets, keys, and passwords.
+
+Since we’re deploying a static site, we won’t need to change this information. 
 
 **Note:** This static website was created with Next.js, a React-based web framework. However, you can change the framework that you’re using for deployment. Vercel should detect this automatically, but here are some of the options that you will see under "Framework Preset": 
 
@@ -98,9 +108,9 @@ You'll notice your GitHub repository now looks a bit different! Vercel interacte
 
 ## Conclusion
 
-Congratulations! 🎆
+Congratulations! 🎊 
 
-You have successfully deployed your static website using Vercel and GitHub! Now, you’re able to expand to using your own domain if you choose, or creating more websites to share with friends! 👯
+You have successfully deployed your static website using Vercel and GitHub! Now, you can use your own domain if or create more websites to share with friends! 👯
 
 If you come across any trouble, you’re welcome to send us a message in the Codédex Community Discord, and we’ll help you out! Share any websites you deploy with me on Twitter and tag [@codedex_io](https://www.twitter.com/codedex_io) and [@exrlla](https://www.twitter.com/exrlla) ✨
 
