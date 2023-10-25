@@ -184,7 +184,7 @@ First, we've imported the `discord.py` package that we just installed and create
 
 > An event is something you listen for and then respond to. For example, when a message happens, you will receive an event about it that you can respond to.
 
-The next two lines of code sets the `intents` that will be passed into a given instance of `MyClient`. These are the settings for what our Discord bot can access. Since we've assigned the `default()` behavior for our bot, we'll need to explicity allow it to interact with messages (i.e., `message_content=True`):
+The next two lines of code sets the `intents` that will be passed into a given instance of `MyClient`. These are the settings for what our Discord bot can access. Since we've assigned the `default()` behavior for our bot, we'll need to explicitly allow it to interact with messages (i.e., `message_content=True`):
 
 ```py
 intents = discord.Intents.default()
