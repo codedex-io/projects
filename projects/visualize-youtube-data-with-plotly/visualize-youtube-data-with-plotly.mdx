@@ -203,7 +203,7 @@ Plotly Express allows us to create much more customizable histograms by inputtin
 
 We are going to do the same thing we did before, but this time we will create a pie chart. For this pie chart, we are going to analyze the different video categories and the top channel they belong to. 
 
-All we need to do is replace `px.histogram(df, x='subscribers')` with `px.pie(df, values='subscribers' names='category', title='YouTube Categories')`:
+All we need to do is replace `px.histogram(df, x='subscribers')` with `px.pie(df, values='subscribers', names='category', title='YouTube Categories')`:
 
 ```py
 import plotly.express as px
