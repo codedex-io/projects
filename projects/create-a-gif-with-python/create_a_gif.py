@@ -1,12 +1,12 @@
 # Create a GIF with Python 🎬
 # Sonny Li
 
-import imageio
+import imageio.v3 as iio
 
 filenames = ['team-pic1.png', 'team-pic2.png']
 images = [ ]
 
 for filename in filenames:
-  images.append(imageio.imread(filename))
+  images.append(iio.imread(filename))
 
-imageio.mimsave('team.gif', images, duration = 0.5)
+iio.imwrite('team.gif', images, duration = 500, loop = 0)
