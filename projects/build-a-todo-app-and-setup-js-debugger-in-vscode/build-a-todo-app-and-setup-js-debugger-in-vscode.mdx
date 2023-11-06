@@ -1,0 +1,127 @@
+---
+title: Build a Todo App and Setup JS Debugger in VS Code
+author: Michael Wiltfong
+uid:
+datePublished: YYYY-MM-DD
+description: Learn to setup your VS Code debugger and build a todo app
+header:
+bannerImage:
+tags:
+  - javascript
+  - intermediate
+---
+
+<BannerImage link="" description="" uid={false} cl="for-sidebar" />
+
+# Build a Todo App and Setup JS Debugger in VS Code
+
+<AuthorAvatar
+  author_name="Michael Wiltfong"
+  author_avatar=""
+  username="wiltfongmichael1116"
+  uid={false}
+/>
+
+<BannerImage link="" description="Title Image" uid={false} />
+
+## Introduction
+
+Do you know what a software architect and someone who just started learning to code have in common? Both will, at one point, produce faulty code and will have to spend time debugging it. It's a tale as old as epoch time! The main difference is that the software architect has enough experience to not only debug code effectively but also to create software that is debuggable. This is why learning to debug your code is arguably one of the most crucial steps in becoming a software developer.
+
+In this tutorial, you are going to learn how to set up your Visual Studio Code (VS Code) for debugging a to-do list project. Through this exercise, you will not only grasp the basics of debugging but also understand how to apply functional paradigms to create a to-do list.
+
+## What is Debugging?
+
+Debugging is the systematic process of identifying and resolving issues within software. It's an extensive field where the specifics can vary greatly depending on the software in question. Generally, the more abstract the software, the more abstract and complex the debugging process can be. Although the goal for any software engineer is to create software that is simple and easy to comprehend, achieving this simplicity is more an ideal than a routine practice.
+For this project, "debugging" will involve a detailed examination of our code, inspecting each line to uncover any errors that might lead to unexpected behavior in our application. Fortunately, VS Code provides a highly convenient debugger that we will be using to assist us in this task.
+
+## Setting Up
+
+### Install NodeJS and Visual Studio Code
+
+Before we begin, you will want to make sure you have [NodeJS](https://nodejs.org/en/download), and [Visual Studio Code](https://code.visualstudio.com/download) installed on your computer.
+
+You can verify whether you have NodeJS installed by running `node –version` in your terminal. The terminal should return a valid version. You will not need a specific version of NodeJS for this exercise.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-todo-app-and-setup-js-debugger-in-vscode/node-version.png"
+  description="node-version example"
+/>
+
+You can verify if you have Visual Studio Code by finding the app in your computer and opening it.
+
+We’ll also be using a simple npm package to spin up on our web app from the terminal. It’s called [serve](https://www.npmjs.com/package/serve). Although you can use any way to spin up a web app, the point is that we need some way to launch our app from the terminal. Therefore, if you are used to using other extensions or ways to launch a web app outside of the terminal, they may not work in this project.
+
+### Set up the debugger
+
+In order for VS Code to debug your javascript code, you will have to either _launch_ your app through VS Code’s built in debugger, or _attach_ it. In this project we will go over what both of these terms mean, but it’s important to distinguish that we will be launching javascript scripts, while we will be attaching the debugger for the to-do list we will make.
+
+First make sure you see the extension in your VS Code. If it isn't already in your Activity Bar, then you can right click your Activity Bar, and then select “Run and Debug.” You can also press Ctrl+Shift+D to see the extension.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-todo-app-and-setup-js-debugger-in-vscode/activity-bar-example.png"
+  description="activity-bar-example"
+/>
+
+After clicking into the extension, you should see the following options.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-todo-app-and-setup-js-debugger-in-vscode/activity-bar-example-2.png"
+  description="activity-bar-example-2"
+/>
+
+### Workspace Setup
+
+Now that your debugger is at a good state, you can refer to the project’s repo to set up your workspace. The `main` branch will contain the three files we will need for the project. You can either copy the files from the repo, or you can fork the project and start your work from `main.`
+
+## Beginning the Project
+
+### Project Goals
+
+Here’s a brief list of what our object is.
+
+1. Create tasks: A task will have a number that represents how many people are working on the task. It will have a description, as well as a date in which it has to be done. It will also require a title.
+2. Delete/Complete to-dos: We can remove to-dos from our list by completing them. We will do this by clicking a button.
+3. Validate the information being passed in. We will verify whether the number of people, the description, and the due date make sense. For example, it wouldn’t make sense if zero people were assigned to a task. Technically at minimum one person needs to be assigned to a task. In addition, a task can not have a blank description, title or no due date whatsoever.
+
+### Paradigm
+
+In this project, we will use functional programming as our strategy to make the todo list. This means a couple things:
+
+1. Although we need to create tasks and delete tasks, we will not change or mutate the state of these to-dos as we pass them through our functions.
+2. We will implement higher-order functions, which can take in other functions as a parameter. We will create a function to validate our tasks before they are rendered on the screen.
+
+### Adding Todos
+
+Since the project already provides the needed HTML and styling, we can immediately jump into the javascript. In this step we are going to create a function that will add todos to our todo list memory. In this case we have defined the memory as an empty array.
+
+Right now we are triggering the function through the typical pattern of using `.addEventListener` on the form element, but how do we convert the `event` object into the data we need? We could add a `console.log` to see what an `event` looks like, but how about we use our debugger instead? Let’s try it!
+
+Let’s add a “breakpoint” in `addTodo()` beside `event.preventDefault()`. You can do this by clicking to the left of the line number. You’ve done it correctly when you see a red dot appear.
+
+Once you have the breakpoint, let’s spin up the web app in the `JavaScript Debug Terminal` by running `serve` in the terminal. You can find the `JavaScript Debug Terminal` by clicking on it in the `Run and Debug`. If the option isn’t there, you can find it by clicking on the “Launch Profile” button in your terminal. You should see a similar message blow:
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-todo-app-and-setup-js-debugger-in-vscode/js-debugger-terminal.png"
+  description="js-debugger-terminal"
+/>
+
+Once you have the `JavaScript Debug Terminal`, and have ran `serve` in the terminal, a link will appear saying where you can access the app. Once you click that link you should see the following:
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-todo-app-and-setup-js-debugger-in-vscode/todo-app-form.png"
+  description="todo-app-form"
+/>
+
+Nice! Now that we have launched our app in the debugger, and our breakpoint set, let’s trigger the `addTodo` method by clicking on the “Add Todo” button. If you look back at your VS Code, you'll see that our breakpoint was triggered! As a result, we can see what some of the variables are at this point in the `addTodo` method, such as `event`.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-todo-app-and-setup-js-debugger-in-vscode/event-object-breakpoint.png"
+  description="event-object"
+/>
+
+Let’s take a look at `event.target`:
+
+## Conclusion
+
+## Additional Resources
