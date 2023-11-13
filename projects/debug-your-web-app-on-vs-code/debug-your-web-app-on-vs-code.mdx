@@ -86,7 +86,7 @@ The todo app consists of five functions:
 
 The main functions we will be focusing on are the `addTodo()` and `validateTodo()` functions.
 
-The `addTodo()` function adds a new todo to the state of the app (the `todos` array) when the user creates a new item. It does this by obtaining a variety of values from the `event` object. 
+The `addTodo()` function adds a new todo to the state of the app (the `todos` array) when the user creates a new item. It does this by obtaining a variety of values from the `event` object.
 
 **Note:** It also acts as a higher-order function, and accepts `validateTodo()` as a parameter. This is why in the scope of `addTodo()` we have `validateCallback()`, but since `validateTodo()` is the only function being passed into `addTodo()` you can think of `validateCallback()` and `validateTodo()` as the same function.
 
@@ -134,7 +134,7 @@ Keep in mind that the "Pause" button becomes a "Play" button (a green arrow) whe
 
 With our app launched in the debugger, and a basic understanding of the issue, let's begin debugging!
 
-Let's add a breakpoint at line 73, beside the `if`-statement that checks if `todo.todoDate` is less than `Date.now()`. Then, let's create a todo with a date from the past. VS Code should pause the app at the breakpoint, and allow you to see the values of the variables until that point.
+Let's add a breakpoint at line 73. Then, let's create a todo with a date from the past. VS Code should pause the app at the breakpoint, and allow you to see the values of the variables until that point.
 
 <RoundedImage
   link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-string.png"
@@ -189,7 +189,7 @@ function validateTodo(todo, errors) {
 }
 ```
 
-With this fix in place, let's remove the breakpoint (you can do this by clicking on the red dot itself) and then test whether the alert box will appear if we enter a todo date in the past. After you confirm this, let us test one other scenario.
+With this fix in place, let's remove the breakpoint at line 73 (you can do this by clicking on the red dot itself) and then test whether the alert box will appear if we enter a todo date in the past. After you confirm this, let us test one other scenario.
 
 Let's test what happens when the user adds no date at all. As in, they leave `yyyy-mm-dd` in the input field. You should see the following in the app.
 
@@ -198,14 +198,14 @@ Let's test what happens when the user adds no date at all. As in, they leave `yy
   description="invalide date error"
 />
 
-This isn't right! Let's setup a breakpoint at `todo.todoDate.getTime()` and recreate this scenario in the app to see what's happening.
+This isn't right! Let's put a breakpoint back at line 73 and recreate this scenario in the app to see what's happening.
 
 <RoundedImage
   link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-invalid-date.png"
   description="invalide date string"
 />
 
-As we can see on the left hand side, `todo.todoDate` is being assigned a value of `Invalid Date`. This is a hint that something is not being correctly passed into `new Date()` in `addTodo()`. Let's add a breakpoint at `const todoDate = new Date(event.target[2].value);` to see what's being passed into `new Date()` and then recreate the scenario that is causing the bug. This breakpoint is a little more involved than the others, mainly because the `event` object is multi-layered.
+As we can see on the left hand side, `todo.todoDate` is being assigned a value of `Invalid Date`. This is a hint that something is not being correctly passed into `new Date()` in `addTodo()`. Let's add a breakpoint at line 20 in **script.js** to see what's being passed into `new Date()` and then recreate the scenario that is causing the bug. This breakpoint is a little more involved than the others, mainly because the `event` object is multi-layered.
 
 To see what `event.target[2].value` equals, you can place your mouse over `.target[2]` and a modal will appear. This modal represents `.target`. If you access the third element (2nd index) in the `.target` array, and then search for the `.value` property, you will see the app is passing an empty string.
 
