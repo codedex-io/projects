@@ -47,20 +47,20 @@ First, make sure you see the extension in VS Code. If it isn't already in your A
   description="activity-bar-example"
 />
 
-After clicking into the extension, you should see the following options.
+After clicking into the extension, you should see the following options:
 
 <RoundedImage
   link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/activity-bar-example-2.png"
   description="activity-bar-example-2"
 />
-Now that your debugger is at a good state, you can refer to the project’s [repo](https://github.com/mdwiltfong/codedex_todo/tree/development)
-and clone the `development` branch so that you can use the app for this project.
+
+Now that your debugger is at a good state, you can refer to the project’s [repo](https://github.com/mdwiltfong/codedex_todo/tree/development) and clone the `development` branch so that you can use the app for this project.
 
 ## Beginning the Project
 
 ### Project Goals
 
-In order to learn about debugging, buggy code is needed. In this [repo](https://github.com/mdwiltfong/codedex_todo/tree/development) there is a todo app that has a bug built into it. To be specific, the app allows users to enter todo dates in the past, which does not make sense in the context of the app's purpose to help users setup tasks for the future!
+In order to learn about debugging, we'll need buggy code. In the repo, there is a todo app with a bug built into it. Specifically, users can set up dates for todo items but they can even enter dates from the past, and this shouldn't be possible.
 
 <RoundedImage
   link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-app-error.png"
@@ -74,7 +74,7 @@ Ideally, the app should alert the user of this invalid data.
   description="todo-app-error"
 />
 
-### Brief Explaination of the Todo App
+### App Breakdown
 
 The todo app consists of five functions:
 
@@ -84,13 +84,15 @@ The todo app consists of five functions:
 - `completeTodo()`
 - `validateTodo()`
 
-You can deduce their purposes from their names, but the main functions we will be focusing on is `addTodo()` and `validateTodo()`.
+The main functions we will be focusing on are the `addTodo()` and `validateTodo()` functions.
 
-The main purpose of `addTodo()` is to control what todos are being added to the state of the app. It does this by obtaining a variety of values from the `event` object. It also acts as a higher-order function, and accepts `validateTodo()` as a parameter. This is why in the scope of `addTodo()` we have `validateCallback()`, but since `validateTodo()` is the only function being passed into `addTodo()` you can think of `validateCallback()` and `validateTodo()` as the same function.
+The `addTodo()` function adds a new todo to the state of the app (the `todos` array) when the user creates a new item. It does this by obtaining a variety of values from the `event` object. 
 
-In order to prevent the user from entering incorret data, the app uses `validateTodo()` to perform a variety of checks on the information the user is submitting. Notice that there is an if-statement that specifically checks if `todo.todoDate` is less than `Date.now()`.
+**Note:** It also acts as a higher-order function, and accepts `validateTodo()` as a parameter. This is why in the scope of `addTodo()` we have `validateCallback()`, but since `validateTodo()` is the only function being passed into `addTodo()` you can think of `validateCallback()` and `validateTodo()` as the same function.
 
-With this basic understanding of the app, we can finally jump into debugging
+In order to prevent the user from entering incorrect data, the app uses `validateTodo()` to perform a variety of checks on the information the user is submitting. Notice that there is an `if`-statement that specifically checks if `todo.todoDate` is less than `Date.now()`.
+
+With this basic understanding of the app, we can finally jump into debugging.
 
 ### Launch the app in VS Code's Debugger
 
@@ -130,16 +132,16 @@ Keep in mind that the "Pause" button becomes a "Play" button (a green arrow) whe
 
 ### Debugging Todo Date
 
-With our app launched in the debugger, and a basic understanding of the app and the issue, let's begin debugging!
+With our app launched in the debugger, and a basic understanding of the issue, let's begin debugging!
 
-Let's add a breakpoint beside the if-statement that checks `todo.todoDate` is less than `Date.now()`. Then, let's create a todo with a date from the past. VS Code should pause the app at the breakpoint, and allow you to see the values of the variables until that point.
+Let's add a breakpoint at line 73, beside the `if`-statement that checks if `todo.todoDate` is less than `Date.now()`. Then, let's create a todo with a date from the past. VS Code should pause the app at the breakpoint, and allow you to see the values of the variables until that point.
 
 <RoundedImage
   link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-string.png"
   description="vs code debugger widget"
 />
 
-The app is indeed picking up the date the user is inputing, but it is assigning a string! Considering that `Date.now()` returns a number, the app is expecting `todo.todoDate` to be a number as well. This would explain why the if-statement is not picking up this error. The best way to solve this is through the `Date` object.
+The app is indeed picking up the date the user entered, but it is assigning a string! Considering that `Date.now()` returns a number, the app is expecting `todo.todoDate` to be a number as well. This would explain why the `if`-statement is not picking up this error. The best way to solve this is through the `Date` object.
 
 `Date.now()` specifically returns the date in "epoch time", or the number of seconds since January 1st, 1970. If we passed in the date as a string into the `Date` object, we can take advantage of the various helper functions in `Date` to convert the string into epoch time. Such as the `.getTime()` method.
 
@@ -212,7 +214,7 @@ To see what `event.target[2].value` equals, you can place your mouse over `.targ
   description="empty string being assigned to new Date()"
 />
 
-Let's resolve this by adding another if-statement in `validateTodo()` that checks if `todo.todoDate` equals `Invalid Date`.
+Let's resolve this by adding another `if`-statement in `validateTodo()` that checks if `todo.todoDate` is equal to `Invalid Date`:
 
 ```js
 function validateTodo(todo, errors) {
