@@ -86,7 +86,7 @@ The todo app consists of five functions:
 
 The main functions we will be focusing on are the `addTodo()` and `validateTodo()` functions.
 
-The `addTodo()` function adds a new todo to the state of the app (the `todos` array) when the user creates a new item. It does this by obtaining a variety of values from the `event` object.
+The `addTodo()` function adds a new todo to the state of the app (the `todos` array) when the user creates a new item. It does this by obtaining a variety of values from the `event` object. You will notice that it also calls on `event.preventDefault()`. Since `addTodo()` is being used as a callback function in the `.addEventListener()` function for a form, it needs to prevent the default behaviour of a form. To be specific, `event.preventDefault()` prevents the form from triggering the page to reload, and therefore cause the app to re-render it's state.
 
 **Note:** It also acts as a higher-order function, and accepts `validateTodo()` as a parameter. This is why in the scope of `addTodo()` we have `validateCallback()`, but since `validateTodo()` is the only function being passed into `addTodo()` you can think of `validateCallback()` and `validateTodo()` as the same function.
 
