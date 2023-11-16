@@ -1,0 +1,269 @@
+---
+title: Debug Your Web App on VS Code
+author: Michael Wiltfong
+uid: inV9GLffvhafMJU3Le6tCezgbrZ2
+datePublished: YYYY-MM-DD
+description: Learn to setup and use the built-in debugger for VS Code.
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/header.png
+tags:
+  - javascript
+  - intermediate
+---
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/header.png"
+  description=""
+  uid={false} cl="for-sidebar"
+/>
+
+# Debug Your Web App on VS Code
+
+<AuthorAvatar
+  author_name="Michael Wiltfong"
+  author_avatar="/images/projects/authors/michael-wiltfong.png"
+  username="wiltfongmichael1116"
+  uid={false}
+/>
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/header.png"
+  description="Title Image"
+  uid={false}
+/>
+
+## Introduction
+
+In this tutorial, you will learn to set up Visual Studio Code (VS Code) for debugging a todo list JavaScript project.
+
+At some point, programmers of all levels will spend time debugging the code that they write. The main difference is that more seasoned programmers can not only debug code effectively, but also create debuggable code. This is why learning to debug your code is arguably one of the most crucial steps in becoming a programmer.
+
+### What is Debugging?
+
+**Debugging** is the systematic process of identifying and resolving issues within code. It's an extensive field where the specifics can vary greatly depending on the code in question. Generally, the more abstract the code, the more abstract and complex the debugging process can be. Although the goal for any programmer is to create code that is simple and easy to comprehend, achieving this simplicity is more an ideal than a routine practice.
+
+For this project, "debugging" will involve a detailed review of code, inspecting each line to uncover any errors that might lead to unexpected behavior in the application. Fortunately, VS Code provides a highly convenient debugger that we will be using to assist with this task.
+
+## Setting Up
+
+In order for VS Code to debug the JavaScript code, you will have to either _launch_ the app through VS Code's built-in debugger, or _attach_ it. In this project, we will go over what both of these terms mean.
+
+First, make sure you see the extension in VS Code. If it isn't already in your Activity Bar, then you can right-click your Activity Bar, and then select “Run and Debug.” You can also press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>d</kbd> to see the extension.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/activity-bar-example.png"
+  description="activity-bar-example"
+/>
+
+After clicking into the extension, you should see the following options:
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/activity-bar-example-2.png"
+  description="activity-bar-example-2"
+/>
+
+Now that your debugger is at a good state, you can refer to the project's [repo](https://github.com/mdwiltfong/codedex_todo/tree/development) and clone the `development` branch so that you can use the app for this project.
+
+```terminal
+git clone -b development https://github.com/mdwiltfong/codedex_todo.git
+```
+
+## Beginning the Project 
+
+### Project Goals
+
+In order to learn about debugging, we'll need buggy code. The repo contains a todo app with a bug inside of the **script.js** file. Specifically, users can set up dates for todo items but they can even enter dates from the past, and this shouldn't be possible.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-app-error.png"
+  description="todo app error"
+/>
+
+Ideally, the app should alert the user of this invalid data.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-app-desired-behaviour.png"
+  description="todo app desired behaviour"
+/>
+
+### App Breakdown
+
+The **script.js** file consists of five functions:
+
+- `addTodo()`
+- `renderTodos()`
+- `generateTodoHTML()`
+- `completeTodo()`
+- `validateTodo()`
+
+The main functions we will be focusing on are the `addTodo()` and `validateTodo()` functions.
+
+When a user creates a new item, the `addTodo()` function adds a new todo to the `todos` array. It does this by obtaining a variety of values from the `event` object.
+
+**Note:** When a form is submitted, the page reloads by default. We want to prevent this so the todos we add with `addTodo()` aren't lost. Therefore, we used `event.preventDefault()` to stop this default behavior .
+
+A `validateCallback` parameter is used as a callback function in `addTodo()` to ensure the new todo item can be added without error. Since `validateTodo()` is the only function passed into `addTodo()` (line 84 in **script.js**), `validateTodo()` and the `validateCallback` can be thought of as being the same. 
+
+In order to prevent the user from entering incorrect data, the app uses `validateTodo()` to perform a variety of checks on the information the user is submitting. Notice that there is an `if`-statement that specifically checks if `todo.todoDate` is less than `Date.now()`.
+
+With this basic understanding of the app, we can finally jump into debugging.
+
+### Launch the App
+
+A common strategy to debugging code is using **breakpoints** to tell the code where you would like to pause the execution of it. This allows you to inspect the state of the application at that point in time. In VS Code, you can set a breakpoint by clicking on the line number of the line you want to pause the code at. You can also set a breakpoint by right-clicking the line number and selecting "Add Breakpoint."
+
+More importantly, you will have to launch the app with VS Code's debugger. With this app, it's as simple as clicking a button! First, open **index.html** and then click on the "Run and Debug" button in the "Run and Debug" extension. Your screen should look similar to the image below:
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/run-and-debug.png"
+  description="run-and-debug"
+/>
+
+Once you click on the "Run and Debug" button, the app will open up in your computer's default browser.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-app-form.png"
+  description="todo app form"
+/>
+
+After the app is launched, you will see the debugger widget appear in VS Code.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/debugger-widget.png"
+  description="vs code debugger widget"
+/>
+
+The widget contains a series of buttons which we will use. From left to right, we have:
+
+- "Pause"
+- "Step Over"
+- "Step Into"
+- "Step Out"
+- "Restart"
+- "Stop"
+
+Keep in mind that the "Pause" button becomes a "Play" button (a green arrow) when the debugger is at a breakpoint, and the app will stay at this point until you press "Play." We will be exploring "Step Over" and "Step Into" in this tutorial.
+
+### Debugging Todo Date
+
+With our app launched in the debugger, and a basic understanding of the issue, let's begin debugging!
+
+Let's add a breakpoint at line 73 in **script.js**. Then, let's create a todo with a date from the past. VS Code should pause the app at the breakpoint, and allow you to see the values of the variables until that point.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-string.png"
+  description="todo string on vs code debugger"
+/>
+
+The app is indeed picking up the date the user entered, but it is assigning a string! Considering that `Date.now()` returns a number, the app is expecting `todo.todoDate` to be a number as well. This would explain why the `if`-statement is not picking up this error. The best way to solve this is through the `Date` object.
+
+`Date.now()` specifically returns the date in "epoch time", or the number of seconds since January 1st, 1970. If we passed in the date as a string into the `Date` object, we can take advantage of the various helper functions in `Date` to convert the string into epoch time, like with the `.getTime()` method.
+
+This fix will take place in two places. First, in `addTodo()`, let's create a new `Date` object and pass `event.target[2].value` into it:
+
+```js
+function addTodo(event, todos, validateCallback) {
+  event.preventDefault();
+  const todoTitle = event.target[0].value;
+  const todoNumOfPeople = event.target[1].value;
+  const todoDate = new Date(event.target[2].value);
+  const todoDescription = event.target[3].value;
+  const todo = {
+    todoTitle,
+    todoNumOfPeople,
+    todoDate,
+    todoDescription,
+  };
+  errors = validateCallback(todo, errors);
+  if (errors.length > 0) {
+    alert("Uh oh! There are some errors in your form \n" + errors.join("\n"));
+    return todos;
+  }
+  const newTodos = [...todos, todo];
+  return newTodos;
+}
+```
+
+Then, in `validateTodo()`, let's update the `if`-statement that checks if `todo.todoDate` is less than `Date.now()` by using the `.getTime()` method:
+
+```js
+function validateTodo(todo, errors) {
+  errors = [];
+  if (todo.todoTitle.length < 5) {
+    errors.push("Todo title must be at least 5 characters long");
+  }
+  if (todo.todoNumOfPeople < 1) {
+    errors.push("Number of people must be greater than 0");
+  }
+  if (todo.todoDate.getTime() < Date.now()) {
+    errors.push("Date must be in the future");
+  }
+  if (todo.todoDescription.length < 10) {
+    errors.push("Description must be at least 10 characters long");
+  }
+  return errors;
+}
+```
+
+With this fix in place, let's remove the breakpoint at line 73 (you can do this by clicking on the red dot itself) and then test whether the alert box will appear if we enter a todo date in the past.
+
+**Note:** Make sure to restart the debugger by opening **index.html** first and then choosing "Run and Debug".
+
+After confirming this, let's test what happens when the user adds no date at all. As in, they leave `yyyy-mm-dd` in the input field. You should see the following in the app.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/invalid-date-error.png"
+  description="invalide date error"
+/>
+
+This isn't right! Let's put a breakpoint back at line 73 and recreate this scenario in the app to see what's happening.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-invalid-date.png"
+  description="invalide date string"
+/>
+
+As we can see on the left hand side, `todo.todoDate` is being assigned a value of `Invalid Date`. This is a hint that something is not being correctly passed into `new Date()` in `addTodo()`. Let's add a breakpoint at line 20 in **script.js** to see what's being passed into `new Date()` and then recreate the scenario that is causing the bug. This breakpoint is a little more involved than the others, mainly because the `event` object is multi-layered.
+
+To see what `event.target[2].value` equals, you can place your mouse over `.target[2]` and a modal will appear. This modal represents `.target`. If you access the third element (2nd index) in the `.target` array, and then search for the `.value` property, you will see the app is passing an empty string.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/empty-string-value.gif"
+  description="empty string being assigned to new Date()"
+/>
+
+Let's resolve this by adding another `if`-statement in `validateTodo()` that checks if `todo.todoDate` is equal to `"Invalid Date"`:
+
+```js
+function validateTodo(todo, errors) {
+  errors = [];
+  if (todo.todoTitle.length < 5) {
+    errors.push("Todo title must be at least 5 characters long");
+  }
+  if (todo.todoNumOfPeople < 1) {
+    errors.push("Number of people must be greater than 0");
+  }
+  if (todo.todoDate == "Invalid Date") {
+    errors.push("Date must be in the format of YYYY-MM-DD");
+  }
+  if (todo.todoDate.getTime() < Date.now()) {
+    errors.push("Date must be in the future");
+  }
+  if (todo.todoDescription.length < 10) {
+    errors.push("Description must be at least 10 characters long");
+  }
+  return errors;
+}
+```
+
+With this fix, let's recreate the scenario where a user doesn't enter a date at all.
+
+<RoundedImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/invalid-date-solution.png"
+  description="valid date solution"
+/>
+
+## Conclusion
+
+Excellent! We not only identified the reason causing the bug, but we resolved it as well! At this point, you have learned how to use VS Code to debug web apps using vanilla JavaScript, as well as generic debugging strategies that you can use in any other app.
+
+If you are interested in learning more about debugging in VS Code, you can always refer to Microsoft's [documentation](https://code.visualstudio.com/docs/nodejs/browser-debugging).
