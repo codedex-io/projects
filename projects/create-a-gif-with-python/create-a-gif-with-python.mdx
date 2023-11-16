@@ -3,7 +3,7 @@ title: Create a GIF with Python
 author: sonnynomnom
 uid: f3vq4kwmixfMb7pB3bTtKUHQMTx2
 datePublished: 2022-07-25
-description: Learn how to make a GIF using the ImageIO library in Python
+description: Learn how to make a GIF using the ImageIO library in Python.
 published: true
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-gif-with-python/header.gif
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-gif-with-python/header.gif
@@ -74,11 +74,11 @@ Here are two images that you can use for this project (feel free to use your own
 
 Make sure to store the image files in the same folder as the one that contains your Python program file.
 
-In our Python program, we start by creating a list that contains the locations of the image files. We also need to create an empty list that will be used to store the actual image data from these files.
+In our Python program, we'll create a list that contains the locations of the image files. We also need to create an empty list that will be used to store the actual image data from these files.
 
 ```py
 filenames = ['team-pic1.png', 'team-pic2.png']
-images = []
+images = [ ]
 ```
 
 Next, let’s use a `for` loop to go through the file paths and read the images using `imageio` library’s `.imread()` method:
