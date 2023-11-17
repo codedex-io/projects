@@ -1,22 +1,22 @@
 ---
-title: Debug Your Web App on VS Code
+title: Debug Your Web App in VS Code
 author: Michael Wiltfong
 uid: inV9GLffvhafMJU3Le6tCezgbrZ2
 datePublished: YYYY-MM-DD
 description: Learn to setup and use the built-in debugger for VS Code.
-header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/header.png
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/header.png
 tags:
   - javascript
   - intermediate
 ---
 
 <BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/header.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/header.png"
   description=""
   uid={false} cl="for-sidebar"
 />
 
-# Debug Your Web App on VS Code
+# Debug Your Web App in VS Code
 
 <AuthorAvatar
   author_name="Michael Wiltfong"
@@ -26,7 +26,7 @@ tags:
 />
 
 <BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/header.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/header.png"
   description="Title Image"
   uid={false}
 />
@@ -50,14 +50,14 @@ In order for VS Code to debug the JavaScript code, you will have to either _laun
 First, make sure you see the extension in VS Code. If it isn't already in your Activity Bar, then you can right-click your Activity Bar, and then select “Run and Debug.” You can also press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>d</kbd> to see the extension.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/activity-bar-example.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/activity-bar-example.png"
   description="activity-bar-example"
 />
 
 After clicking into the extension, you should see the following options:
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/activity-bar-example-2.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/activity-bar-example-2.png"
   description="activity-bar-example-2"
 />
 
@@ -74,14 +74,14 @@ git clone -b development https://github.com/mdwiltfong/codedex_todo.git
 In order to learn about debugging, we'll need buggy code. The repo contains a todo app with a bug inside of the **script.js** file. Specifically, users can set up dates for todo items but they can even enter dates from the past, and this shouldn't be possible.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-app-error.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/todo-app-error.png"
   description="todo app error"
 />
 
 Ideally, the app should alert the user of this invalid data.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-app-desired-behaviour.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/todo-app-desired-behaviour.png"
   description="todo app desired behaviour"
 />
 
@@ -114,21 +114,21 @@ A common strategy to debugging code is using **breakpoints** to tell the code wh
 More importantly, you will have to launch the app with VS Code's debugger. With this app, it's as simple as clicking a button! First, open **index.html** and then click on the "Run and Debug" button in the "Run and Debug" extension. Your screen should look similar to the image below:
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/run-and-debug.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/run-and-debug.png"
   description="run-and-debug"
 />
 
 Once you click on the "Run and Debug" button, the app will open up in your computer's default browser.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-app-form.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/todo-app-form.png"
   description="todo app form"
 />
 
 After the app is launched, you will see the debugger widget appear in VS Code.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/debugger-widget.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/debugger-widget.png"
   description="vs code debugger widget"
 />
 
@@ -150,7 +150,7 @@ With our app launched in the debugger, and a basic understanding of the issue, l
 Let's add a breakpoint at line 73 in **script.js**. Then, let's create a todo with a date from the past. VS Code should pause the app at the breakpoint, and allow you to see the values of the variables until that point.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-string.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/todo-string.png"
   description="todo string on vs code debugger"
 />
 
@@ -211,14 +211,14 @@ With this fix in place, let's remove the breakpoint at line 73 (you can do this 
 After confirming this, let's test what happens when the user adds no date at all. As in, they leave `yyyy-mm-dd` in the input field. You should see the following in the app.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/invalid-date-error.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/invalid-date-error.png"
   description="invalide date error"
 />
 
 This isn't right! Let's put a breakpoint back at line 73 and recreate this scenario in the app to see what's happening.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/todo-invalid-date.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/todo-invalid-date.png"
   description="invalide date string"
 />
 
@@ -227,7 +227,7 @@ As we can see on the left hand side, `todo.todoDate` is being assigned a value o
 To see what `event.target[2].value` equals, you can place your mouse over `.target[2]` and a modal will appear. This modal represents `.target`. If you access the third element (2nd index) in the `.target` array, and then search for the `.value` property, you will see the app is passing an empty string.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/empty-string-value.gif"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/empty-string-value.gif"
   description="empty string being assigned to new Date()"
 />
 
@@ -258,7 +258,7 @@ function validateTodo(todo, errors) {
 With this fix, let's recreate the scenario where a user doesn't enter a date at all.
 
 <RoundedImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-on-vs-code/invalid-date-solution.png"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/debug-your-web-app-in-vs-code/invalid-date-solution.png"
   description="valid date solution"
 />
 
