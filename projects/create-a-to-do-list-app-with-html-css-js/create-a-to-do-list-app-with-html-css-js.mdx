@@ -1,0 +1,602 @@
+---
+title: Create a To-Do List App with HTML, CSS, and JavaScript
+author: Shadeira Nesmith
+uid: 0UmUVZhNNjX6j6GKLr9GHu85vY13
+datePublished:
+description: Use HTML, CSS, and JavaScript to build a To-Do
+published: false
+header:
+bannerImage:
+tags:
+  - intermediate
+  - html
+  - css
+  - javascript
+---
+
+<BannerImage link="" description="Header GIF" uid={false} cl="for-sidebar" />
+
+# Create a To-Do List App with HTML, CSS, and JavaScript
+
+<AuthorAvatar
+  author_name="Shadeira Nesmith"
+  author_avatar="/images/projects/authors/shadeira-nesmith.png"
+  username="shadeiranes"
+  uid={false}
+/>
+
+<BannerImage link="" description="Header GIF" uid={false} />
+
+**Prerequisite:** HTML, CSS, & JS fundamentals  
+**Read Time:** 60 minutes
+
+## Introduction
+
+Tired of your "to-do" list looking more like a "to-don't" list? Today's the day we flip the script! We're turning your to-dos into to-dones!
+
+Follow along with this tutorial as we work together to check off every incomplete task on our to-do list using HTML,CSS, and JavaScript. By the end of the tutorial you'll be able to ADD, DELETE, EDIT, and most importantly COMPLETE tasks.
+
+Here are the following features you will need to complete:
+
+- Add Tasks
+- Read Tasks
+- Update Tasks
+- Delete Tasks
+- Count Number of Complete and Incomplete Tasks
+
+The final project should look similar to this:
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/finished-todo-list.gif"
+  alt="Finished To-Do List application"
+/>
+
+Let's do this!
+
+## Getting Started
+
+Let's set up our editor. For this application, we will be using our PC terminal and Visual Studio Code (VS Code).
+
+**Note:** If you prefer to use an online editor such as Codédex Builds, you are more than welcome to do so.
+
+First, we need to create a directory and files for our project using the terminal. Once you open the terminal `cd` into your Desktop. This is where we will add our directory. You can name it anything you like but to make it easier let's name it **todo-list-project**:
+
+```terminal
+cd Desktop
+mkdir todo-list-project
+cd todo-list-project
+touch index.html script.js styles.css
+```
+
+Now, let's see what we have created. Open VS Code and navigate to the top left corner. Click on "File" from the dropdown menu, choose "Open Folder". Proceed to locate and open the **todo-list-project** folder on your Desktop.
+
+Once you have opened this folder on VS Code. Within this folder, you will see the necessary files we created to build out your application:
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/todo-list-vs-code.png"
+  alt="ToDo list app files on VS Code"
+/>
+
+The following files have been created in our **todo-list-project** folder:
+
+- **index.html** - we will write our HTML code, and this is what will be displayed on our webpage.
+- **style.css** - we will write our CSS code to design how our application looks.
+- **script.js** - our JavaScript code is where we will add our interactions.
+
+## Task 1: Create TODO List Input
+
+In our **index.html** file, we have included a `title` and `link` tag inside of the `head`. For the title we set the name of the app to **TO-DO List**. We also linked the `style.css` file because, trust, styling is gonna make it look super cool later.
+
+Toward the end of our code we need to include our `script` tag. This will link our JS file where we will create variables and functions that will make everything work just right.
+
+Let's check this out:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TO-DO List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
+```
+
+Now, let's create a text `input` box for typing in all those todo tasks, including an "Add" button:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TO-DO List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- create a container for the todo list -->
+    <div id="todo-container">
+      <!--todo list header-->
+      <div id="header">
+        <h1>To Do List</h1>
+      </div>
+
+      <!-- create input box -->
+      <div id="todo-form">
+        <input
+          type="text"
+          class="input-item"
+          name="input_box"
+          id="input-box"
+          placeholder="Add Task"
+        />
+
+        <!-- add button  -->
+        <button id="input-button" onclick="addTask()">Add</button>
+      </div>
+
+      <!-- task list -->
+      <h2>Task List</h2>
+      <ul id="list-container"></ul>
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
+```
+
+- First, we make a `<div>` and give it an `id` of `"todo-container"`, to act as a container for our todo list.
+- We create another `<div>` and give it an `id` of `"header"`. Inside of the `<div>` we create an `<h1>` tag with the title `"To-Do List"`.
+- Then, inside of the `<div id="todo-form">` create an `<input>` element. This will be used for the new task in which the user writes the name of the task.
+- We then create a `<button>` tag with an `id` of `"input-button"` for our `"Add"` button to add our task to the list.
+- Right beneath that, we create an `<h2>` tag with the title `"Task List"` along with a `<ul>` unordered list element, and give it an `id` of `"list-container"` this is where we will display each task.
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/todo-list-html-only.png"
+  alt="First stage of ToDo List app - HTML only"
+/>
+
+The button won't work just yet. But don't worry, we'll get there!
+
+## Task 2: Add Counters
+
+Let's say we want to be able to calculate the number of tasks we have completed and the ones we have yet to get done. Let's make tracking our progress a bit simpler with counters for completed and uncompleted tasks.
+
+Below your `<ul>` list container, add these lines of code:
+
+```html
+<hr />
+<!-- task list counter -->
+<div class="counter-container">
+  <div id="task-counters">
+    Completed: <span id="completed-counter">0</span> | Uncompleted:
+    <span id="uncompleted-counter">0</span>
+  </div>
+</div>
+```
+
+**Note:** We added an `<hr>` tag (horizontal line), to create a separation between our list items and the task counters. We then created a `<div>` for the number of complete and incomplete tasks.
+
+Your updated todo list should look like this:
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/todo-list-complete-uncomplete.png"
+  alt="ToDo List app with HTML only and complete and uncomplete labels"
+/>
+
+Let's take the next steps to activate our buttons, counter and add our first task to the list.
+
+## Task 3: Add JavaScript
+
+Let's kick things into high gear by adding some JavaScript!
+
+Above, we set up the structure for our todo list using HTML. Here, we're about to create a function that will let us seamlessly add our tasks to the list. Let's open our **script.js** file where we will first create two variables.
+
+We will use these variables for our input and todo list container:
+
+```js
+const inputBox = document.getElementById("input-box");
+const listContainer = document.getElementById("list-container");
+```
+
+We used the special `document` object and its `getElementById()` method to select our input box and list container elements. Then we assigned them to the `inputBox` and `listContainer` variables.
+
+### Add Your First List Item
+
+Next, we will create our `addTask()` function! If a user forgets to type in a task and eagerly hits that "Add" button, a friendly alert message will pop up, reminding them to "Please write down a task":
+
+```js
+function addTask() {
+  const task = inputBox.value.trim();
+  if (!task) {
+    alert("Please write down a task");
+    return;
+  }
+}
+```
+
+We'll continue working inside this function in this section. Since we have already created a `<ul>` container in our HTML file to hold our list, let's create a new list item with the `document` object's `createElement()` method:
+
+```js
+const li = document.createElement("li");
+```
+
+Then we will we set up the HTML content of the list item:
+
+```js
+li.innerHTML = `
+  <label>
+    <input type="checkbox">
+    <span>${task}</span>
+  </label>
+  <span class="edit-btn">Edit</span>
+  <span class="delete-btn">Delete</span>
+`;
+```
+
+The inner HTML of our new task item includes:
+
+- A checkbox-type `<input>`.
+- The task content (using the `${task}` placeholder).
+- "Edit" and "Delete" buttons that appear at the end of every task.
+
+To actually add the item to our list, we will need to use our `.appendChild()` method. This will add the newly created list item to the container specified by `listContainer`:
+
+```js
+listContainer.appendChild(li);
+```
+
+Open up your application inside your browser and test it out!
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/todo-list-edit-delete-html-only.gif"
+  alt="ToDo list app with edit and delete"
+/>
+
+Great job! You've successfully added your first task.
+
+However, you may have noticed that when we add a new task, it remains in the input box, requiring you to delete it before entering a new task. To fix this, we can add the following:
+
+```js
+inputBox.value = "";
+```
+
+This line of code sets the value of the input field (`inputBox`) to an empty string, clearing the field after adding the task. At this point, the `addTask` function should contain the following lines of code:
+
+```js
+function addTask() {
+  const task = inputBox.value.trim();
+  if (!task) {
+    alert("Please write down a task");
+    return;
+  }
+
+  li.innerHTML = `
+    <label>
+      <input type="checkbox">
+      <span>${task}</span>
+    </label>
+    <span class="edit-btn">Edit</span>
+    <span class="delete-btn">Delete</span>
+    `;
+
+  listContainer.appendChild(li);
+  inputBox.value = "";
+}
+```
+
+## Task 4: Activate Task Buttons
+
+In the code provided above, we created an `input` for a checkbox and a `span` for our "Edit" and "Delete" buttons. Each task added to our list should allow us to manipulate it. Here's how each element functions:
+
+- Checkbox: When the checkbox next to a task is selected, it strikes a line through the task and changes its color to gray, marking it "complete".
+- Edit: Allows us to modify the task's content to something else.
+- Delete: Removes a task from the list.
+
+Using the `.querySelector()` method, let's create a variable for each of our elements:
+
+```js
+const checkbox = li.querySelector("input");
+const editBtn = li.querySelector(".edit-btn");
+const taskSpan = li.querySelector("span");
+const deleteBtn = li.querySelector(".delete-btn");
+```
+
+**Note:** As you can see, we have a `taskSpan` variable that allows us to edit a specific task when the edit button is clicked.
+
+### Checkbox
+
+Below, our `.addEventListener()` method is attached to the `"checkbox"` element. It will react to a click on the checkbox.
+
+```js
+checkbox.addEventListener("click", function () {
+  li.classList.toggle("completed", checkbox.checked);
+});
+```
+
+- We use the `classList.toggle()` to add the "completed" class to the list item `li`.
+- When the checkbox is checked (checkbox.checked is true), and removes the "completed" class if the checkbox is unchecked (checkbox.checked is now false).
+
+Make sure to add this code to your **style.css** file:
+
+```css
+.completed {
+  text-decoration: line-through;
+  color: gray;
+  border: 1px solid gray;
+}
+```
+
+### Edit Button
+
+```js
+editBtn.addEventListener("click", function () {
+  const update = prompt("Edit task:", taskSpan.textContent);
+  if (update !== null) {
+    taskSpan.textContent = update;
+    li.classList.remove("completed");
+  }
+});
+```
+
+We attached an `.addEventListener()` method to our "Edit" button (`editBtn`) that executes the enclosed function when the button is clicked.
+
+- We are using the `prompt()` function to display a dialog box asking the user to input a new task. The default value in the prompt is set to the current content of `taskSpan`.
+- Then our `if` condition checks if the user has provided a new input.
+- If the user provides a new input, the `textContent` of the `taskSpan` will be updated which displays the task content with the new input.
+
+Imagine this: one of our tasks, checked off as complete, but suddenly we're having the urge to edit and bring it back to the list. In this scenario, we need to strip away that "checked" styling. Let's make it happen:
+
+```js
+li.classList.remove("completed");
+```
+
+Once a task is edited after being marked "complete", it will remove the styling of `"completed"` and uncheck the task.
+
+## Update Task Counters
+
+Let's take it a step further! Remember those task counters be added in our **index.html** file. We're about to make those counters update dynamically every time a task gets added, checked off, edited, or deleted.
+
+First let's create variables for our complete and incomplete task. This code will be in your **script.js** file below your `listContainer` variable:
+
+```js
+const completedCounter = document.getElementById("completed-counter");
+const uncompletedCounter = document.getElementById("uncompleted-counter");
+```
+
+Next, we will create a function for the counters. Whenever anything changes with our task, we will update it with this `updateCounters()` function:
+
+```js
+function updateCounters() {
+  const completedTasks = document.querySelectorAll(".completed").length;
+  const uncompletedTasks =
+    document.querySelectorAll("li:not(.completed)").length;
+
+  completedCounter.textContent = completedTasks;
+  uncompletedCounter.textContent = uncompletedTasks;
+}
+```
+
+- `document.querySelectorAll(".completed")` selects all elements with the `"completed"` class. The `.length` property is then used to count the number of elements with this class, representing the number of completed tasks.
+- Next, `document.querySelectorAll("li:not(.completed)")` is used to select all `<li>` elements that do not have the `"completed"` class. The `.length` property is then used to count the number of uncompleted tasks.
+- The text content update the `completedCounter` and `uncompletedCounter` elements in our **index.html** file to display the counts of completed and uncompleted tasks, respectively.
+
+When we first add a task we want the `updateCounters()` function to update. Let's make sure to include this code at the end of our code:
+
+```js
+updateCounters();
+```
+
+Now let's test out the `updateCounters()` function on our checkbox.
+
+When we check off a task, it is marked as "complete". But we want to mark it back as "incomplete" after we edit it. Below, we will have to add the `updateCounters()` function here:
+
+```js
+checkbox.addEventListener("click", function () {
+  li.classList.toggle("completed", checkbox.checked);
+  //add the function below
+  updateCounters();
+});
+```
+
+Now for our edit button we need to set `checkbox.checked` to `false` to uncheck the box and update the counter:
+
+```js
+editBtn.addEventListener("click", function () {
+  const update = prompt("Edit task:", taskSpan.textContent);
+  if (update !== null) {
+    taskSpan.textContent = update;
+    li.classList.remove("completed");
+    //add the code below
+    checkbox.checked = false;
+    updateCounters();
+  }
+});
+```
+
+Whoa, that was a lot! Now, let's open up our todo list in the browser again. It's time to test it out before we move on:
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/todo-list-edit-task-html.gif"
+  alt="Editing a task on the ToDo List app"
+/>
+
+How did it go? If it goes well, let's move on! If not, try going through this section again.
+
+### Delete Button
+
+Now that we have completed most of our tasks, it's time for some cleanup. Let's delete the ones that are no longer useful lets delete them if they no longer useful:
+
+```js
+deleteBtn.addEventListener("click", function () {
+  if (confirm("Are you sure you want to delete this task?")) {
+    li.remove();
+    updateCounters();
+  }
+});
+```
+
+- As you can see above, when you go to delete the task an alert message will appear confirming if you want to delete the following task.
+- If the answer is yes, it will proceed to the next line of code and delete the task with the `remove()` method.
+- When a task is deleted the `updateCounters()` function updates showing the new number of remaining tasks.  Once the task is removed and no longer counts as completed or uncompleted.
+
+Let's see how it works: 
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/todo-list-remove-task-html.gif"
+  alt="Removing a task on the ToDo List app"
+/>
+
+## Task 5: Add CSS
+
+Lastly, it's time to give our to-do list a makeover! We've completed some of the toughest tasks, and now, let's have some fun playing around with styling. Let's add that finishing touch to make our to-do list look as good as it works!
+
+Here, we start with some high-level styling. In our `body` tag we give our app a gradient background [check out this link](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient) to learn more about radial-gradient color and give a font style. We also style our text to be in the center of the screen with a `margin-top`:
+
+```css
+body { 
+  background: rgb(0,0,0);
+  background: radial-gradient(circle, rgba(0,0,0,0.028124999999999956) 0%, rgba(253,187,45,1) 100%);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
+```
+
+Now let's work on the container of our todo list. For our `<div id="todo-container">`, we are giving the background a different color from the body and adding a border around the container: 
+
+
+```css
+#todo-container {
+  background: rgb(41, 33, 33);
+  width: 400px;
+  margin: 0 auto;
+  border: 2px solid #0033ff;
+  padding: 20px;
+  color: white;
+  border-radius: 15px;
+}
+```
+
+Inside of the container will style our header, input box, and input button:
+
+```css
+#todo-container {
+  background: rgb(41, 33, 33);
+  width: 400px;
+  margin: 0 auto;
+  border: 2px solid #0033ff;
+  padding: 20px;
+  color: white;
+  border-radius: 15px;
+}
+```
+
+Inside of the container will style our header, input box, and input button:
+
+```css
+#header {
+  margin: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px; 
+}
+
+#input-box {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+#input-button {
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.4s;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2e60ea;
+}
+
+#input-button:hover {
+  background-color: #9eb7fd; 
+}
+```
+
+Next, for our task items and button:
+
+- Remove the bullet styling from the unordered list.
+- Add a border to each new item added to the list. 
+- Float the edit and delete button to the right and change the color to crimson. When we hover over each button the cursor changes to a pointer to let us know it's clickable. 
+
+```css
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align:left;
+
+}
+
+li {
+border: 1px solid white;
+border-radius: 5px;
+margin-bottom: 10px;
+padding: 10px;
+margin-top: 10px;
+}
+
+.edit-btn, .delete-btn {
+  float: right;
+  color:crimson;
+  cursor: pointer;
+  margin: 3px 5px;
+  border: none;
+  padding: 3px 5px;
+  background: none;
+} 
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+  border: 1px solid gray;
+}
+```
+
+Now, let's check out our completed application:
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/finished-todo-list.png"
+  alt="Finished ToDo List app"
+/>
+
+## Conclusion
+
+Congratulations! 🎊
+
+You did it!
+
+In this tutorial, we learned to build a simple todo application using JavaScript. We were able to add, complete, edit, and delete tasks.
+
+Challenge yourself to add more advanced features to your todo application. Here is a list  of possible features to give you a few ideas:
+
+- Sign-in and Sign-up
+- Save user history when signed in or save to local storage.
+- Date and time task was added.
+- Delete all items.
+- A trash page of deleted items.
+- Success notifications for completed, edited and deleted task. 
+- Show completed tasks, all tasks, active tasks.
+
+## Resources
+
+- [Project source code](https://github.com/codedex-io/projects/tree/main/projects/create-a-to-do-list-app-with-html-css-js/create-a-to-do-list-app-with-html-css-js/)
+- [The Origins I: HTML](https://www.codedex.io/html)
+- [The Origins II: CSS](https://www.codedex.io/css)
+- [The Origins III: JS](https://www.codedex.io/javascript)
