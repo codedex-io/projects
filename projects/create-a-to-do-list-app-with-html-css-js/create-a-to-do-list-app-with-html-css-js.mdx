@@ -27,14 +27,14 @@ tags:
 
 <BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-to-do-list-app-with-html-css-js/header.png" description="Header GIF" uid={true} />
 
-**Prerequisite:** HTML, CSS, & JS fundamentals  
+**Prerequisites:** HTML, CSS, & JS fundamentals  
 **Read Time:** 60 minutes
 
 ## Introduction
 
 Tired of your "to-do" list looking more like a "to-don't" list? Today's the day we flip the script! We're turning your to-dos into to-dones!
 
-Follow along with this tutorial as we work together to check off every incomplete task on our to-do list using HTML,CSS, and JavaScript. By the end of the tutorial you'll be able to ADD, DELETE, EDIT, and most importantly COMPLETE tasks.
+Follow along with this tutorial as we work together to check off every incomplete task on our to-do list using HTML, CSS, and JavaScript. By the end of the tutorial, you'll be able to ➕ ADD, ➖ DELETE, ✏️ EDIT, and most importantly ✅ COMPLETE tasks.
 
 Here are the following features you will need to complete:
 
@@ -55,20 +55,18 @@ Let's do this!
 
 ## Getting Started
 
-Let's set up our editor. For this application, we will be using our PC terminal and Visual Studio Code (VS Code).
+Let's set up our editor. For this application, we will be using our PC terminal and [Visual Studio Code](https://code.visualstudio.com) (VS Code). If you prefer an online editor such as Codédex Builds, you are more than welcome to do so.
 
-**Note:** If you prefer to use an online editor such as Codédex Builds, you are more than welcome to do so.
+First, we need to create a directory and files for our project using the terminal. Once you open the terminal, `cd` into your **Desktop**. This is where we will add our directory. You can name it anything you like but to make it easier, let's name it **todo-list-project**:
 
-First, we need to create a directory and files for our project using the terminal. Once you open the terminal `cd` into your Desktop. This is where we will add our directory. You can name it anything you like but to make it easier let's name it **todo-list-project**:
-
-```
+```terminal
 cd Desktop
 mkdir todo-list-project
 cd todo-list-project
 touch index.html script.js styles.css
 ```
 
-Now, let's see what we have created. Open VS Code and navigate to the top left corner. Click on "File" from the dropdown menu, choose "Open Folder". Proceed to locate and open the **todo-list-project** folder on your Desktop.
+Now, let's see what we have created. Open VS Code and navigate to the top left corner. Click on "File" from the dropdown menu, choose "Open Folder". Proceed to locate and open the **todo-list-project** folder on your **Desktop**.
 
 Once you have opened this folder on VS Code. Within this folder, you will see the necessary files we created to build out your application:
 
@@ -79,15 +77,15 @@ Once you have opened this folder on VS Code. Within this folder, you will see th
 
 The following files have been created in our **todo-list-project** folder:
 
-- **index.html** - we will write our HTML code, and this is what will be displayed on our webpage.
-- **style.css** - we will write our CSS code to design how our application looks.
-- **script.js** - our JavaScript code is where we will add our interactions.
+- 🏠 **index.html** - we will write our HTML code, and this is what will be displayed on our webpage.
+- 💅 **style.css** - we will write our CSS code to design how our application looks.
+- 🚀 **script.js** - our JavaScript code is where we will add our interactions.
 
 ## Task 1: Create TODO List Input
 
-In our **index.html** file, we have included a `title` and `link` tag inside of the `head`. For the title we set the name of the app to **TO-DO List**. We also linked the `style.css` file because, trust, styling is gonna make it look super cool later.
+In our **index.html** file, we have included a `<title>` and `<link>` element inside of the `<head>`. For the title we set the name of the app to **TO-DO List**. We also linked the **style.css** file because, trust, styling is gonna make it look super cool later.
 
-Toward the end of our code we need to include our `script` tag. This will link our JS file where we will create variables and functions that will make everything work just right.
+Toward the end of our code we need to include our `<script>` tag. This will link our JS file where we will create variables and functions that will make everything work just right.
 
 Let's check this out:
 
@@ -116,7 +114,7 @@ Now, let's create a text `input` box for typing in all those todo tasks, includi
   <body>
     <!-- create a container for the todo list -->
     <div id="todo-container">
-      <!--todo list header-->
+      <!-- todo list header -->
       <div id="header">
         <h1>To Do List</h1>
       </div>
@@ -131,7 +129,7 @@ Now, let's create a text `input` box for typing in all those todo tasks, includi
           placeholder="Add Task"
         />
 
-        <!-- add button  -->
+        <!-- add button -->
         <button id="input-button" onclick="addTask()">Add</button>
       </div>
 
@@ -578,11 +576,9 @@ Now, let's check out our completed application:
 
 ## Conclusion
 
-Congratulations! 🎊
+Congratulations! You did it! 🎊
 
-You did it!
-
-In this tutorial, we learned to build a simple todo application using JavaScript. We were able to add, complete, edit, and delete tasks.
+In this project tutorial, we learned to build a simple todo application using JavaScript. We were able to add, complete, edit, and delete tasks.
 
 Challenge yourself to add more advanced features to your todo application. Here is a list  of possible features to give you a few ideas:
 
@@ -594,7 +590,7 @@ Challenge yourself to add more advanced features to your todo application. Here 
 - Success notifications for completed, edited and deleted task. 
 - Show completed tasks, all tasks, active tasks.
 
-## Resources
+### More Resources
 
 - [Project source code](https://github.com/codedex-io/projects/tree/main/projects/create-a-to-do-list-app-with-html-css-js/create-a-to-do-list-app-with-html-css-js/)
 - [The Origins I: HTML](https://www.codedex.io/html)
