@@ -45,12 +45,11 @@ Before we get started, you will need a few things if you don't have them already
 - A Discord account.
 - A Discord server with "Manager Server" permissions.
 
-
 ## How Does a Discord Bot Work
 
 First, let's zoom out a bit and think about this question: "What does it mean to code a Discord Bot?" Simply put, a bot is nothing more than a computer program that performs some useful actions. 
 
-Because Discord wants bots to be able to do useful things, they have allowed developers to access parts of its system in their code, such as automatically responding to messages or helping with the server's admin functions (e.g. check out these [popular Discord Bots](https://top.gg/list/top)). 
+Because Discord wants bots to be able to do useful things, they have allowed developers to access parts of its system in their code, such as automatically responding to messages or helping with the server's admin functions (e.g., check out these [popular Discord Bots](https://top.gg/list/top)). 
 
 Today, we're focused on getting our bot to read and write messages, so let's see how that works.
 
@@ -61,7 +60,6 @@ From the crude drawing above (I'm an engineer, not an artist), we can see how us
 > API (Application Programming Interface) is just a fancy terminology to define how one program talks to another program. In our case, Discord's API allows us to read and send messages to its backend servers.
 
 First, we'll have to create and register our bot from Discord's Developer Portal.
-
 
 ## Setting Up Discord Developer Portal
 
@@ -112,7 +110,9 @@ Turning this on in the developer portal will allow us to properly set up our bot
 Now that we've set up our first application, we have to create an invite, to get our bot into our Discord server. To do that we can click URL Generator and select the following permissions. In the screenshot below, we are telling Discord to create an invitation link for our application with the scope "Bot" and that bot should be able to "Send Messages." (Note: Be careful with granting the all-powerful "Administrator" permission to your bot).
 
 <RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/screenshot6.png" description="set up permissions" />
-<br />
+
+<br>
+
 <RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/screenshot7.png" description="get the invite link" />
 
 This is the link to invite our application (Discord bot) into a Discord server. Copy and paste this link into another tab in your browser and invite the bot into the Discord server that you want.
@@ -124,7 +124,6 @@ You can confirm if this worked by checking for this message in your Discord serv
 <RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-discord-bot-with-python/screenshot9.png" description="invite success" />
 
 Alright, now that we’ve set up our coding environment and got the necessary permissions from Discord for our new application, let’s write some code.
-
 
 ## Writing the Python Code
 
@@ -180,7 +179,7 @@ class MyClient(discord.Client):
 
 First, we've imported the `discord.py` package that we just installed and created our own class `MyClient` which we will use to interact with the Discord API. We create this class by extending from the base class `discord.Client`. This base class already has methods to respond to common events. For example, the `on_ready()` function above will be called when the Discord bot's login is successful.
 
-`discord.py` works around the concept of events. There are other types of events (e.g. messages) that we will see later, but for now here's the definition of events from their website:
+`discord.py` works around the concept of events. There are other types of events (e.g., messages) that we will see later, but for now here's the definition of events from their website:
 
 > An event is something you listen for and then respond to. For example, when a message happens, you will receive an event about it that you can respond to.
 
