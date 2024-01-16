@@ -698,9 +698,6 @@ Your site should look like this by now:
 
 ![static-done.png](https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/static-done.png)
 
-![static-done.mov](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b445b30c-2da7-420e-b654-2cd34ccb9579/static-done.mov)
-
-
 ## Time for Dynamic Add-Ons!
 
 ...and for the most interesting part where you will work with the `second` canvas.
@@ -909,7 +906,7 @@ Add four arrays for holding each firework, and eventually, the particles, or fle
 Moving on, add a variable for the number of flecks, so it's easier to tweak them. Bear in mind that performance will degrade fast if you increase the number of flecks. You also want a variable for keeping track of if the mouse is clicked. And lastly, include a function for calculating the distance between two points. For that, we can use the Pythagorean theorem.
 
 $$
-d = \sqrt{x^2 + y^2}, where x = x1 - x2 and y = y1 - y2
+d = \sqrt{(x1-x2)^2 + (y1-y2)^2}
 $$
 
 You need to track mouse-click events, so add the following two event listeners to the `attachEventListeners` function:
@@ -1042,7 +1039,7 @@ This however won't complete the job. In order to see the fireworks, you need to 
 Before `draw` the method, add a new method called `animate`. Add the following code to it:
 
 ```js
-// canvas-firework.js
+// canvas-fireworks.js
 
 this.animate = (index) => {
   this.coordinates.pop();
@@ -1208,11 +1205,6 @@ const loop = () => {
 
 This will initiate a new `Firework`, every time the mouse is clicked. Until the array gets empty, it will draw, and animate your fireworks.
 
-This is how your functionality should look in action by now:
-
-![fireworks-shooting.mov](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/48f7ec50-224d-4a73-a743-bb9ca73b4fa5/fireworks-shooting.mov)
-
-
 ## Adding Flecks ✨
 
 You are LITERALLY at the last section of this lesson. How far have you gone? Let's finish this up by adding flecks to create a beautiful effect of the fireworks bursting once the trail reaches the destination.
@@ -1235,9 +1227,7 @@ class Fleck {
 }
 ```
 
-`canvas-fireworks.js`
-
-`constructor` will take `x` and `y` coordinates as parameters. In `init`, we set this parameter to `this.x` and `this.y`. It will allow us to use them within the `init` method.
+The `constructor` will take `x` and `y` coordinates as parameters. In `init`, we set this parameter to `this.x` and `this.y`. It will allow us to use them within the `init` method.
 
  For the `init`, we will have similar properties as for `fireworks`.
 
@@ -1401,7 +1391,7 @@ The same principle, start by getting rid of the last item in the `coordinates` a
 One very important thing is to add the following code snippet to the animate method of the `Firework` (!) class right before splicing the firework.
 
 ```js
-// canvas-firework.js
+// canvas-fireworks.js
 
 while (i--) {
   flecks.push(new Fleck(this.target_x, this.target_y));
@@ -1411,7 +1401,7 @@ while (i--) {
 ```
 
 ```js
-// canvas-firework.js
+// canvas-fireworks.js
 
 // animate method within the Firework (!) class
 this.animate = (index) => {
