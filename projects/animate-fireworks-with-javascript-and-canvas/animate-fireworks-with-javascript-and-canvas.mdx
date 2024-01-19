@@ -32,6 +32,10 @@ The holiday season is a special time for everyone. Christmas and New Year are ar
 
 We're going to make our very own fireworks using JavaScript and the Canvas API. This way, you will be able to show your project to your family and friends and believe me, it will spark a smile on their faces.
 
+By the end, you will create the following:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/completed-animation.gif" alt="Completed firework animation" />
+
 And it is: let's code it up!
 
 
@@ -79,7 +83,7 @@ In the `<body>` element, replace the comment with the following snippet:
   <canvas id="canvas-background"></canvas>
   <canvas id="fireworks"></canvas>
   <script src="canvas-background.js"></script>
-  <script src="fireworks.js"></script>
+  <script src="canvas-fireworks.js"></script>
 </body>
 ```
 
@@ -581,6 +585,10 @@ Notice the comments before the selectors that should be extended or added.
 
 Extended `h1` by adding colorful animation. You can play around with it to create your custom gradient and transition.
 
+At this point, our animation should look like this:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/animation-wip.gif" alt="Work-in-progress for animation" />
+
 To finish up the static part, let's draw some stars on the background canvas.
 
 ## Drawing Stars
@@ -770,7 +778,7 @@ We do it with `save()` method that will save the entire state of the canvas by p
 
 So what does translate do?
 
-The `[translate()` method](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate) adds a translation transformation to the current matrix by moving the canvas and its origin `x` units horizontally and `y` units vertically on the grid.
+The [`translate()` method](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate) adds a translation transformation to the current matrix by moving the canvas and its origin `x` units horizontally and `y` units vertically on the grid.
 
 ![canvas_grid_translate.png](https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/canvas_grid_translate.png)
 
@@ -1756,6 +1764,10 @@ And the complete **canvas-fireworks.js** has the following code:
   }
 })();
 ```
+
+After saving all your files and re-launching the **index.html** file with Live Server, you should see the following:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/completed-animation.gif" alt="Completed firework animation" />
 
 ## Conclusion
 
