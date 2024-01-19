@@ -1,0 +1,258 @@
+---
+title: Create a VR Solar System with A-Frame
+author: Tara Tran
+uid: 8PG5qRSzM5hsOXbm0qPtxBZt4wG2
+datePublished: 2024-01-19
+description: Learn to create a virtual reality model of the Solar System with A-Frame and HTML.
+header:
+published: false
+tags:
+  - intermediate
+  - html
+  - javascript
+---
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/header.gif"
+  description="Title Image"
+  uid={false}
+  cl="for-sidebar"
+/>
+
+# Build the Solar System With A-Frame
+
+<AuthorAvatar
+  author_name="Tara Tran"
+  author_avatar="/images/projects/authors/tara_tran.png"
+  username="taratptran"
+  uid={false}
+/>
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/header.gif"
+  description="Title Image"
+  uid={false}
+/>
+
+**Prerequisites:** HTML/CSS, JavaScript
+**Versions:** HTML5, CSS3, ES6+ (JavaScript)
+**Read Time:** 60 minutes
+
+## Introduction
+
+One of my most cherished and formative memories was our 4th grade field trip to the local planetarium. In advance of the trip, we had a whole 1-month unit on our solar system. I remember learning the basic facts on other planets in the solar system (at that time, Pluto was still a planet), about other galaxies, and the life cycle of a star. Before going to the planetarium, we each built our own model of the solar system like the image you see below! 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/solar-system-model.png" alt="Science kit for buldilng a solar system model" />
+
+We're bringing back the nostalgia of crafting solar system models by going virtual!
+
+In this tutorial, you'll learn how to create a virtual reality solar system using A-frame. 
+
+If you google “A-Frame” you may find pictures of houses with sloped roofs and unique window designs. I'd love to retire in one of these someday and live my best outdoorsy life. 
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/a-frame-image.png" alt="Comparison of a-shaped house with A-frame framework logo" />
+
+We'll be focusing on _this_ [A-Frame](https://aframe.io/), which is an open-source web framework for creating and building virtual reality (VR) experiences.
+
+With basic HTML and JavaScript knowledge, A-Frame allows you to easily build immersive VR experiences. You could build anything, ranging from interactive museum exhibits to escape rooms and everything in between. The possibilities are truly endless!
+
+By the end, our finished solar system will look like this:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/finished-solar-system.gif" alt="Science kit for buldilng a solar system model" />
+
+Let's get started!
+
+## Setting Up
+ 
+### VS Code Setup
+
+For this tutorial, we'll be using Visual Studio Code (VS Code) as our code editor. You can [download VS Code](https://code.visualstudio.com/download) directly from its website. 
+
+Then, let's open VS Code and create a new HTML file:
+ 
+1. Select "File" > "New File" 
+2. Save the file as **index.html** 
+
+Let's  open the **index.html** file and enter the following starter code:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+</html>
+```
+
+Next, make sure you've downloaded the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for VS Code.
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/live-server.png" alt="Live Server extension on VS Code" />
+
+At various times, after saving changes made in our **index.html** file, we will use Live Server to see what our solar system looks like thus far. It can be started with the "Go Live" button found near the bottom-right of the VS Code window:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/go-live-button.png" alt="Go Live button for Live Server VS Code extension" />
+
+Let's now get started in our **index.html** file!
+
+### Include the A-Frame Library
+
+As mentioned before, we will be working with A-frame web to build our VR solar system experience. We need to include its library in our **index.html** file. Add the following inside the `<head>` element:
+
+```html
+<head>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script> 
+</head>
+```
+
+### Create a Textures Folder
+
+We are going to use image files to represent the textures (or appearance) of the night sky, Sun, and planets of our solar system!
+
+Under the same directory as your **index.html** file, create a new **planet_textures/** folder. Next, you can find the texture files for our system [here](https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/planet_textures). Go ahead and download each file and add them to your **planet_textures/** folder.
+
+## Start with the Sky
+
+We're going to start with creating a background sky. Inside the `<body>` element of your *index.html** file, add the following code: 
+
+```html
+<body>
+  <a-scene>
+    <a-sky src="planet_textures/nightsky.jpeg"></a-sky>
+  </a-scene>
+</body>
+```
+
+In this snippet, you'll see:
+ 
+- `<a-scene>` is the container element for our entire VR experience. 
+- `<a-sky>` is the A-Frame element for defining a sky.
+
+The `src` attribute within the `<a-sky>` element specifies the image file path. Case sensitivity matters, so make sure the file name and extension match exactly with the image you saved. 
+
+Preview your scene by saving the HTML file and opening it in your web browser. The image should be displayed as the background sky in your VR scene.
+
+**Note:** If you don't see the image, double-check the image path and file names for any potential errors.
+
+Great work on adding your first A-Frame element! 🌌
+
+## Add the Sun
+
+Next, we'll add the first celestial body and star (no pun intended) of our virtual solar system: the Sun. For each celestial body, we'll be:
+ 
+- Creating the body.
+- Declaring its position in the sky.
+- Setting its size.
+- Giving it texture and color.
+- Animating (specifically, rotating) the body.
+
+### A-Frame Element Creation
+
+Start by creating the Sun using `<a-sphere>` element with an `id` of “sun”: 
+
+```html
+<a-sphere id="sun"> </a-sphere> 
+```
+
+**Note:** This element goes after the `<a-sky>` element we added in the previous section.
+
+### A-Frame Position
+
+Next, we want to determine the spatial location of the Sun within the virtual environment:
+
+ ```html
+<a-sphere id="sun" position="0 1.25 -5"></a-sphere>
+```   
+
+The `position` attribute sets the Sun's initial position in our virtual space using a three-dimensional coordinate system (x, y, z). In this example, the Sun is positioned at coordinate (0, 1.25, -5), which moves the Sun slightly above the center and closer to the viewer.
+
+**Note**: When you're first starting out, it's helpful to experiment and acclimate yourself to the coordinate system by “plugging and chugging” different numbers, observing how they position the element and finding what best suits your vision. 
+
+### A-Frame Size
+ 
+Now that we've got the Sun where we want it to be, let's change the size of our `<a-sphere>` element with the `radius` attribute: 
+
+```html
+<a-sphere id="sun" position="0 1.25 -5" radius ="3"></a-sphere> 
+```
+
+We're using 3 as the value in this tutorial, since we want it to be large relative to the other planets, but feel free to explore different scales to create your solar system. 
+
+### A-Frame Texture
+
+Similar to the night sky, find a Sun texture image and add it as a `src` attribute:
+  
+```html
+<a-sphere id="sun" position="0 1.25 -5" radius = "3" src="planet_textures/sun.jpeg"></a-sphere>
+```
+
+### A-Frame Animation
+ 
+Lastly, let's bring the Sun to life by adding a rotation. Use the `rotation` attribute to specify the rotation angles along the x, y, and z axes:
+ 
+```html
+<a-sphere id="sun" position="0 1.25 -5" radius ="3" src="planet_textures/sun.jpeg" rotation ="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 22224"></a-sphere>
+```
+
+Let's break down each of the properties in the rotation animation:
+ 
+- `rotation = "0 0 0"` sets the initial rotation and ensures that the Sun begins its animation with no prior rotation, thus creating a clean and consistent starting point..
+- The `animation` attribute rotates the Sun with the following sub-attributes:
+  - `property: rotation` indicates that the Sun should rotate.
+  - `to: 0 360 0` specifies the final rotation angles in degrees along the x, y, and z axes. This means that the Sun completes a full 360-degree rotation around the y-axis. 
+  - `loop: true` creates a continuous, cyclic motion and ensures the rotation animation repeats indefinitely. 
+  - `dur: 22224` sets the duration of the animation in milliseconds. Here, the Sun takes around 22 seconds to complete one full rotation. Adjusting this value will change the speed of the rotation: a longer duration slows down the rotation. You can change this to match and scale how the Sun rotates relative to other planets.
+
+**Note:** There are other A-Frame animation properties, such as animating the scale, transparency, or position of an element. You can read more about it with [A-Frame's documentation(https://aframe.io/docs/1.5.0/components/animation.html).
+
+## Repeating With Other Planets
+ 
+Now that we've successfully animated the Sun, it's your turn to bring the rest of the solar system to life! Repeat the steps we've taken for the Sun, adjust the size, position, rotation values, and texture for each planet.
+
+You can also refer to the table below with information derived from [NASA's databases](https://nssdc.gsfc.nasa.gov/planetary/factsheet/) with some A-Frame suggested values to help with some of your customizable values:
+
+| Celestial Body | A-Frame Position | A-Frame Radius | A-Frame Rotation Duration |
+| :---: | :---: | :---: | :---: |
+| Sun | 0 1.25 -5 | 3 | 22224 |
+| Mercury | 3.9 1.25 -5 | 0.1 | 58650 |
+| Venus | 7.2 1.25 -5 | 0.2 | 243000 |
+| Earth | 10 1.25 -5 | 0.3 | 864 |
+| Mars | 15.2 1.25 -5 | 0.2 | 8864 |
+| Jupiter | 52 1.25 -5 | 1.5 | 3528 |
+| Saturn | 95 1.25 -5 | 1.2 | 3952 |
+| Uranus | 192 1.25 -5 | 0.7 | 60480 |
+| Neptune | 301 1.25 -5 | 0.7 | 54720 |
+
+For example, if we want to add Mercury with the information from the table above:
+
+```html
+<a-sphere id="mercury" position="3.9 1.25 -5" radius="0.1" src="planet_textures/mercury.jpeg" rotation="0 0 0" animation="property: rotate; to: 0 360 0; loop: true; dur: 58650"></a-sphere>
+```
+
+**Note:** Don't forget to add a fun image to the `src` attribute for each planet!
+
+Your finished solar system should now look like this:
+
+<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/finished-solar-system.gif" alt="Science kit for buldilng a solar system model" />
+
+## Conclusion
+ 
+Congratulations! 🎊
+
+You've reached the end of the tutorial and built your very own VR solar system using A-Frame! 
+
+As a potential extension, my 4th-grade teacher asked us to add one non-planet in our physical models so I'm going to ask you to do the same in this tutorial. The possibilities are endless and some potential ideas are:
+
+- Comet
+- Asteroid belt
+- Moons
+- Other galaxies
+- Spacecraft
+- Space stations
+- Planetary rings
+- Nebulas
+- Celestial clouds
+
+## More Resources
+
+- [Source code for this project](https://github.com/codedex-io/projects/tree/main/projects/create-a-vr-solar-system-with-a-frame)
+- [A-Frame documentation](https://aframe.io/docs/1.5.0/introduction/)
+- [More about WebVR (WebXR) experiences](https://en.wikipedia.org/wiki/WebXR)
