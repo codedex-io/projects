@@ -53,22 +53,24 @@ It is used in machine learning, a major field that lets computers take in data a
 ## Linear Regression
 
 
-Linear regression is a simple statistical technique used to model the relationship between independent x variables (e.g., house sizes) and a dependent y variable (e.g., house prices) by fitting a linear equation to observed data. We are essentially drawing a straight line through a dataset to map out and predict. In data science, linear regression is widely used for tasks such as predicting sales, analyzing economic trends, and understanding the impact of variables on an outcome.
+[Linear regression](http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm) is a simple statistical technique used to model the relationship between independent x variables (e.g., house sizes) and a dependent y variable (e.g., house prices) by fitting a linear equation to observed data. We are essentially drawing a straight line through a dataset to map out and predict. In data science, linear regression is widely used for tasks such as predicting sales, analyzing economic trends, and understanding the impact of variables on an outcome.
 
 In this tutorial, we will be using linear regression to predict house prices based on house sizes, where the model learns a linear relationship between these two variables and then makes predictions on the test set, as visualized in the scatter plot.
 
 <img 
-    src="
+    src="https://github.com/codedex-io/projects/blob/3bb055969781c1b39575a95f0e7e34d84fddfba9/projects/predict-home-prices-with-python-and-linear-regression/data.gif"
+    alt="Data Set for House Size and Price"
 />
 
 ## Getting Set Up with Anaconda
 
-This tutorial will show you how to use predictive modeling on Anaconda Online. Anaconda Online utilizes integrated Jupyter Notebooks and powerful package management making it super easy to run complex programs including linear regression. 
+This tutorial will show you how to use predictive modeling on [Anaconda](https://anaconda.cloud/) Online. Anaconda Online utilizes integrated Jupyter Notebooks and powerful package management making it super easy to run complex programs including linear regression. 
 
-Begin by accessing Anaconda Online through your web browser, we are eliminating the need for local installations. Sign up for a free account to use the editor. 
+Begin by [accessing Anaconda Online](https://anaconda.cloud/) through your web browser, we are eliminating the need for local installations. Sign up for a free account to use the editor. 
 
 <img
-    src="
+    src="https://github.com/codedex-io/projects/blob/3bb055969781c1b39575a95f0e7e34d84fddfba9/projects/predict-home-prices-with-python-and-linear-regression/anaconda.png"
+    alt="Anaconda Cloud"
 />
 
 ##Our Tools of Choice
@@ -85,12 +87,13 @@ If you ever wondered how “prediction” charts are created in Python, the odds
 After launching Notebook on Anaconda, open a new project:
 
 <img
-    src="
+    src="https://github.com/codedex-io/projects/blob/3bb055969781c1b39575a95f0e7e34d84fddfba9/projects/predict-home-prices-with-python-and-linear-regression/notebook.png"
+    alt="Anaconda Notebook"
 />
 
 ##Getting Started
 
-In this tutorial, we will be using a data set that compares house size and house prices of properties sold in Brooklyn's Dumbo neighborhood to predict the cost of houses based on size. 
+In this tutorial, we will be using a [data set](https://docs.google.com/spreadsheets/d/11IDKeCPA5jMSG5I_KNps4VfFVfNyG8eIizwnm7KLR4o/edit#gid=0) that compares house size and house prices of properties sold in Brooklyn's Dumbo neighborhood to predict the cost of houses based on size. 
 
 To get started, let’s import the libraries. Remember that since you are using an online emulator there is no need for local installations. This is a simple setup for linear regression using the scikit-learn library.
 
@@ -109,10 +112,11 @@ Here is a quick refresher on libraries and what they do:
 `train_test_split` from `sklearn.model_selection` is used for splitting datasets into training and testing sets.
 `LinearRegression` from `sklearn.linear_model` is the class that implements linear regression.
 
-Next, let’s import some data. All data was gathered from Zillow recently sold. You will need to download the data set and upload it to Anaconda.
+Next, let’s import some data. All data was gathered from [Zillow recently sold](https://www.zillow.com/dumbo-brooklyn-new-york-ny/sold/2_p/?searchQueryState=%7B%22pagination%22%3A%7B%22currentPage%22%3A2%7D%2C%22isMapVisible%22%3Atrue%2C%22mapBounds%22%3A%7B%22west%22%3A-74.00184392074586%2C%22east%22%3A-73.97236107925416%2C%22south%22%3A40.69250416567913%2C%22north%22%3A40.710561005824665%7D%2C%22regionSelection%22%3A%5B%7B%22regionId%22%3A270841%2C%22regionType%22%3A8%7D%5D%2C%22filterState%22%3A%7B%22sort%22%3A%7B%22value%22%3A%22globalrelevanceex%22%7D%2C%22fsba%22%3A%7B%22value%22%3Afalse%7D%2C%22fsbo%22%3A%7B%22value%22%3Afalse%7D%2C%22nc%22%3A%7B%22value%22%3Afalse%7D%2C%22cmsn%22%3A%7B%22value%22%3Afalse%7D%2C%22auc%22%3A%7B%22value%22%3Afalse%7D%2C%22fore%22%3A%7B%22value%22%3Afalse%7D%2C%22rs%22%3A%7B%22value%22%3Atrue%7D%7D%2C%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A15%7D). You will need to download the [data set](https://docs.google.com/spreadsheets/d/11IDKeCPA5jMSG5I_KNps4VfFVfNyG8eIizwnm7KLR4o/edit#gid=0) and upload it to Anaconda.
 
 <img
-    src="
+    src="https://github.com/codedex-io/projects/blob/3bb055969781c1b39575a95f0e7e34d84fddfba9/projects/predict-home-prices-with-python-and-linear-regression/file.png"
+    alt="Upload File on Anaconda"
 />
 
 ```
@@ -135,18 +139,67 @@ plt.title('House Prices vs. House Size')
 plt.xlabel('House Size (sq.ft)')
 plt.ylabel('House Price ($)')
 plt.show()
-
 ```
 ##Train test
 
 Now that we have extracted our data and plotted on a graph, it's time for the linear regression part.
 
-A train-test splits the generated data into training and testing sets using the `train_test_split()` function from Sklearn.
+A [train-test](https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets) splits the generated data into training and testing sets using the `train_test_split()` function from Sklearn.
 
 The train test split is a model validation procedure commonly used in predictive machine learning to simulate how a model will work with new/unknown data. It is commonly used with large data sets or when you need a quick estimate.
 
+```
+#Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(house_sizes, house_prices, test_size=0.2, random_state=42)
 
+```
+The code above splits the data 80/20:
+
+- 80% of the data will be used to train the algorithm in `x_train` and `y_train`.
+- The other 20% will be used for testing the algorithm in `x_test` and `y_test`.
+
+In this next step, we are creating and training the model to make predictions with the following code:
+
+```
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(house_sizes, house_prices, test_size=0.2, random_state=42)
+
+# Reshape the data for NumPy
+X_train = X_train.reshape(-1, 1)
+X_test = X_test.reshape(-1, 1)
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X_train, y_train)
+```
+After preparing our data for Numpy with `.reshape()`, we can create the linear regression model with `LinearRegression()` and train it using our `x_train` and `y_train`data.
+
+##Predicting
+The model we just trained will now be able to make predictions on the test set `x-test` and `y-test`. The results are stored in the `predictions` variable.
+
+We are now going to plot our results from our predictive modeling: 
+
+```
+# Predict prices for the test set
+predictions = model.predict(X_test)
+
+# Visualize the predictions
+plt.scatter(X_test, y_test, marker='o', color='blue', label='Actual Prices')
+plt.plot(X_test, predictions, color='red', linewidth=2, label='Predicted Prices')
+plt.title('Dumbo Property Price Prediction with Linear Regression')
+plt.xlabel('House Size (sq.ft)')
+plt.ylabel('House Price (millions $)')
+plt.legend()
+plt.show()
+```
+With our `plt` object, we use a scatter plot to visualize the actual and predicted prices and show the results with blue dots and a red regression line:
+
+<img
+       src="https://github.com/codedex-io/projects/blob/3bb055969781c1b39575a95f0e7e34d84fddfba9/projects/predict-home-prices-with-python-and-linear-regression/graph.png"
+       alt="Final Graph"
+/>
 
 ## Conclusion
+That’s it, you have now officially trained and visualized a predictive modeling algorithm.
 
-## Additional Resources
+Take what you learned an extra step, let’s gather some data and use linear regression to visualize it. [Kaggle](https://www.kaggle.com/) is a great place to find data sets that have already been proven but you can also import any data. Get creative and remember to format your data for easy access.
