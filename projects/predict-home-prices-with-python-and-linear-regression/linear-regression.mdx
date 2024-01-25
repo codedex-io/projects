@@ -168,9 +168,10 @@ X_test = X_test.reshape(-1, 1)
 model = LinearRegression()
 model.fit(X_train, y_train)
 ```
-After preparing our data for Numpy with `.reshape()`, we can create the linear regression model with `LinearRegression()` and train it using our `x_train` and `y_train`data.
 
-##Predicting
+After preparing our data for Numpy with `.reshape()`, we can create the linear regression model with `LinearRegression()` and train it using our `x_train` and `y_train` data.
+
+## Predicting
 The model we just trained will now be able to make predictions on the test set `x-test` and `y-test`. The results are stored in the `predictions` variable.
 
 We are now going to plot our results from our predictive modeling: 
