@@ -178,11 +178,11 @@ We are now going to plot our results from our predictive modeling:
 
 ```py
 # Predict prices for the test set
-predictions = model.predict(X_test)
+predictions = model.predict(x_test)
 
 # Visualize the predictions
-plt.scatter(X_test, y_test, marker='o', color='blue', label='Actual Prices')
-plt.plot(X_test, predictions, color='red', linewidth=2, label='Predicted Prices')
+plt.scatter(x_test, y_test, marker='o', color='blue', label='Actual Prices')
+plt.plot(x_test, predictions, color='red', linewidth=2, label='Predicted Prices')
 plt.title('Dumbo Property Price Prediction with Linear Regression')
 plt.xlabel('House Size (sq.ft)')
 plt.ylabel('House Price (millions $)')
