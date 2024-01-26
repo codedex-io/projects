@@ -55,8 +55,8 @@ Machine learning is a major field that lets computers take in data and learn pat
 In this tutorial, we create a linear regression model to predict house prices based on house sizes. Using a scatterplot of test data, the model will form a relationship between the two variables and then makes predictions.
 
 <img 
-    src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/data.gif"
-    alt="Data Set for House Size and Price"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/data.gif"
+  alt="Data Set for House Size and Price"
 />
 
 ## Getting Set Up with Anaconda
@@ -71,13 +71,13 @@ Next, sign into your account to get to the homepage. Then, select "Launch Notebo
 
 
 <img
-    src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/anaconda.png"
-    alt="Anaconda Cloud"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/anaconda.png"
+  alt="Anaconda Cloud"
 />
 
 ## Our Tools of Choice
 
-Libraries! Gotta love ’em. In this tutorial, we will be using the following Python libraries for data analysis, data visualization, and machine learning:
+Libraries! Gotta love 'em. In this tutorial, we will be using the following Python libraries for data analysis, data visualization, and machine learning:
 
 - 🔢 [NumPy](https://numpy.org) offers a robust foundation for numerical operations and data analysis.
 - 📖 [Pandas](https://pandas.pydata.org/) allows you to analyze, clean, explore, and manipulate data from different sources.
@@ -89,15 +89,15 @@ If you ever wondered how “prediction” charts are created in Python, the odds
 After launching Notebook on Anaconda, open a new project:
 
 <img
-    src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/notebook.png"
-    alt="Anaconda Notebook"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/notebook.png"
+  alt="Anaconda Notebook"
 />
 
 ## Getting Started
 
 In this tutorial, we will be using a [data set](https://drive.google.com/file/d/1cNtzy7IwR753aXvpaYQRuEoxMfUNnYHl/view?usp=sharing) that compares house size and house prices of properties sold in Brooklyn's Dumbo neighborhood to predict the cost of houses based on size. 
 
-To get started, let’s import the libraries. Remember that since you are using an online emulator there is no need for local installations. This is a simple setup for linear regression using the scikit-learn library.
+To get started, let's import the libraries. Remember that since you are using an online emulator there is no need for local installations. This is a simple setup for linear regression using the scikit-learn library.
 
 ```py
 import numpy as np
@@ -115,11 +115,11 @@ Here is a quick refresher on libraries and what they do:
 `train_test_split` from `sklearn.model_selection` is used for splitting datasets into training and testing sets.
 `LinearRegression` from `sklearn.linear_model` is the class that implements linear regression.
 
-Next, let’s import some data. All data was gathered from [Zillow recently sold](https://bit.ly/3Sawp7f). You will need to download the [data set](https://docs.google.com/spreadsheets/d/11IDKeCPA5jMSG5I_KNps4VfFVfNyG8eIizwnm7KLR4o/edit#gid=0) and upload it to Anaconda.
+Next, let's import some data. All data was gathered from [Zillow recently sold](https://bit.ly/3Sawp7f). You will need to download the [data set](https://docs.google.com/spreadsheets/d/11IDKeCPA5jMSG5I_KNps4VfFVfNyG8eIizwnm7KLR4o/edit#gid=0) and upload it to Anaconda.
 
 <img
-    src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/file.png"
-    alt="Upload File on Anaconda"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/file.png"
+  alt="Upload File on Anaconda"
 />
 
 ```
@@ -131,7 +131,7 @@ house_sizes = data ['HouseSize'].values
 house_prizes = data['HousePrice'].values
 ```
 
-We are using `pd.read_csv()` to read the CSV file containing 59 pairs of data points. Next, we are extracting the values corresponding to the features on the data sheet. In this case, the data from the column named “HouseSize” is being added to the ‘house_size’ variable.
+We are using `pd.read_csv()` to read the CSV file containing 59 pairs of data points. Next, we are extracting the values corresponding to the features on the data sheet. In this case, the data from the column named “HouseSize” is being added to the `house_size` variable.
 
 Let's now get started on plotting the data via the `plt` object from Matplotlib.
 
@@ -146,7 +146,7 @@ plt.ylabel('House Price ($)')
 plt.show()
 ```
 
-## Train test
+## Train Test
 
 Now that we have extracted our data and plotted on a graph, it's time for the linear regression part.
 
@@ -158,7 +158,6 @@ The train test split is a model validation procedure commonly used in predictive
 # Split the data into training and testing sets
 x_train, x_test, y_train, y_test = train_test_split(house_sizes, house_prices, test_size=0.2, random_state=42)
 ```
-
 
 The code above splits the data 80/20:
 
@@ -211,7 +210,7 @@ With our `plt` object, we use a scatter plot to visualize the actual and predict
 
 ## Conclusion
 
-That’s it, you have now officially trained and visualized a predictive modeling algorithm.
+That's it, you have now officially trained and visualized a predictive modeling algorithm.
 
 To take your skills to the next level, consider sourcing data and utilizing linear regression for visualization.[Kaggle](https://www.kaggle.com/) is a great place to find data sets that have already been proven but you can also import any data. You can use linear regression to predict so many things:
 

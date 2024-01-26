@@ -3,10 +3,9 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
-#Although this code is saved as a .py file this code will only run on anaconda.cloud 
-#Linear Regression is a fundamental aspect of  machine learning remember this could be used to predict anything aslong as there is a database to train a model on
+# Although this code is saved as a .py file this code will only run on anaconda.cloud 
 
-
+# Linear regression is a fundamental aspect of machine learning. Remember: this could be used to predict anything as long as there is a database to train a model on.
 
 # Generate random house sizes
 np.random.seed(0)
@@ -21,27 +20,23 @@ plt.xlabel('House Size (sq.ft)')
 plt.ylabel('House Price ($)')
 plt.show()
 
-X_train, X_test, y_train, y_test = train_test_split(house_sizes, house_prices, test_size=0.2, random_state=42)
-
+x_train, x_test, y_train, y_test = train_test_split(house_sizes, house_prices, test_size=0.2, random_state=42)
 
 # Reshape the data for NumPy
-X_train = X_train.reshape(-1, 1)
-X_test = X_test.reshape(-1, 1)
+x_train = x_train.reshape(-1, 1)
+x_test = x_test.reshape(-1, 1)
 
 # Create and train the model
 model = LinearRegression()
-model.fit(X_train, y_train)
-
+model.fit(x_train, y_train)
 
 # Predict prices for the test set
-predictions = model.predict(X_test)
+predictions = model.predict(x_test)
 
-plt.scatter(X_test, y_test, marker='o', color='blue', label='Actual Prices')
-plt.plot(X_test, predictions, color='red', linewidth=2, label='Predicted Prices')
+plt.scatter(x_test, y_test, marker='o', color='blue', label='Actual Prices')
+plt.plot(x_test, predictions, color='red', linewidth=2, label='Predicted Prices')
 plt.title('House Price Prediction with Linear Regression')
 plt.xlabel('House Size (sq.ft)')
 plt.ylabel('House Price ($)')
 plt.legend()
 plt.show()
-
-
