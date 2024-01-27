@@ -1,18 +1,18 @@
 ---
-title: Build an Album Finder with the Spotify Web API
+title: Build an Album Finder with Spotify API
 author: Ellie Popoca
 uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
 datePublished: 2024-01-26
 description: Learn to make an album finder app with the Spotify API and ReactJS.
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/header.gif
 published: false
-tags: 
+tags:
   - javascript
   - html
   - intermediate
 ---
 
-<BannerImage link="" description="Title Image" uid={true} cl="for-sidebar"/>
+<BannerImage link="" description="Title Image" uid={true} cl="for-sidebar" />
 
 # Build an Album Finder with Spotify API
 
@@ -23,128 +23,153 @@ tags:
   uid={true}
 />
 
-<BannerImage link="" description="Title Image" uid={true}/>
-
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/header.gif"
+  description="Title Image"
+  uid={true}
+/>
 
 ## Introduction
 
 Did you see your Spotify Wrapped this year? I know I did! Whether you have Apple Music or YouTube music, we all listen to music from time to time! (I had about 100,000 minutes of listening time last year…) 🙈
 
-Just like Spotify engineers, we’re going to be accessing the entire Spotify library through code using the Spotify Web API and JavaScript! An API (application programming interface)  is code that allows two programs to talk to each other! The Spotify Web API in particular allows our program to talk to Spotify to retrieve data from your favorite artists or albums!
+Just like Spotify engineers, we're going to be accessing the entire Spotify library through code using the Spotify Web API and JavaScript! An API (application programming interface) is code that allows two programs to talk to each other! The Spotify Web API in particular allows our program to talk to Spotify to retrieve data from your favorite artists or albums!
 
- We'll be elevating your web development experience by learning how to build a simple Album Finder that can access albums of any artist that you want! 
+We'll be elevating your web development experience by learning how to build a simple Album Finder that can access albums of any artist that you want!
 
-The Album Finder we’re building today will work like this! ✨✨
+The Album Finder we're building today will work like this! ✨✨
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/01_api_g.gif" alt="GIF of the Spotify Album Finder App" />
-
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/01_api_g.gif"
+  alt="GIF of the Spotify Album Finder App"
+/>
 
 ### Spotify API
 
-If you've scrolled through social media, chances are you've seen a "receipt" of your friends' top songs from a website called [Receiptify](https://receiptify.herokuapp.com/). Michelle Liu, the creator of the website, used the Spotify API to curate your monthly “receipt” of top songs. The site became so popular, acquiring over a million users per month. 
+If you've scrolled through social media, chances are you've seen a "receipt" of your friends' top songs from a website called [Receiptify](https://receiptify.herokuapp.com/). Michelle Liu, the creator of the website, used the Spotify API to curate your monthly “receipt” of top songs. The site became so popular, acquiring over a million users per month.
 
 Me being one of them, I had to see what my top songs were for the month! As expected, I have Taylor Swift and Noah Kahan on repeat. 💯
 
- <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/15_api.gif" alt="GIF of the Recieptify App" />
+{" "}
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/15_api.gif"
+  alt="GIF of the Recieptify App"
+/>
 
-
-Learning how to use the Spotify API was a fun project for Michelle that unexpectedly changed her life completely, and for this project tutorial, you’ll learn how to use the API to create something cool alongside unlocking its capabilities. 
+Learning how to use the Spotify API was a fun project for Michelle that unexpectedly changed her life completely, and for this project tutorial, you'll learn how to use the API to create something cool alongside unlocking its capabilities.
 
 ### React and Bootstrap
 
-[React](https://react.dev/) is a JavaScript library for building user interfaces. Using components, React makes it easier for us to create web applications! Components can be buttons, widgets, cards, and more, as you create them. If you're familiar with HTML, CSS, and Javascript, learning React will allow us to combine everything with JSX, the React syntax extension. 
+[React](https://react.dev/) is a JavaScript library for building user interfaces. Using components, React makes it easier for us to create web applications! Components can be buttons, widgets, cards, and more, as you create them. If you're familiar with HTML, CSS, and Javascript, learning React will allow us to combine everything with JSX, the React syntax extension.
 
-If this is the first time you're using React, this project tutorial will have the basics to get you feeling more comfortable with React, and with learning how to integrate the Spotify API. 
+If this is the first time you're using React, this project tutorial will have the basics to get you feeling more comfortable with React, and with learning how to integrate the Spotify API.
 
-[Bootstrap](https://react-bootstrap.netlify.app/), is a UI (user interface) library that provides you with built-in components that you're able to easily and quickly use. We'll be using both React and Bootstrap in our application to help us create our album finder. 
-
+[Bootstrap](https://react-bootstrap.netlify.app/), is a UI (user interface) library that provides you with built-in components that you're able to easily and quickly use. We'll be using both React and Bootstrap in our application to help us create our album finder.
 
 ## Setup
 
 ### Create a Spotify Developer Account
- 
-To get started, head on over to the [Spotify for Developers](https://developer.spotify.com/) website and log in with your Spotify account. If you don't have one, you can [create one](https://www.spotify.com/us/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F%3F) through the Spotify website. 
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/02_api.png" alt="Dashboard of the Spotify Developers Wesbite" />
+To get started, head on over to the [Spotify for Developers](https://developer.spotify.com/) website and log in with your Spotify account. If you don't have one, you can [create one](https://www.spotify.com/us/signup?forward_url=https%3A%2F%2Fopen.spotify.com%2F%3F) through the Spotify website.
 
-Once you're logged in, you're going to head on over to the Dashboard and click "Create App". 
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/02_api.png"
+  alt="Dashboard of the Spotify Developers Wesbite"
+/>
 
-Here, you're going to give your app a name! Try "Album Finder" or "Spotify Music Finder"! 
-Give your app a description, and a redirect URI. Since we're creating an app that will be used for our personal use, insert the redirect as `http://localhost/`. 
+Once you're logged in, you're going to head on over to the Dashboard and click "Create App".
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/03_api.png" alt="The Creating an App Section of the Spotify Developers Website" />
+Here, you're going to give your app a name! Try "Album Finder" or "Spotify Music Finder"!
 
+Give your app a description, and a redirect URI. Since we're creating an app that will be used for our personal use, insert the redirect as `http://localhost/`.
 
-We'll only be using the Web API for this tutorial, so be sure to check it off as the API we are planning to use. 
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/03_api.png"
+  alt="The Creating an App Section of the Spotify Developers Website"
+/>
 
-Agree with Spotify's Developer Terms of Service and Design Guidelines, and you're all set! 💪 
+We'll only be using the Web API for this tutorial, so be sure to check it off as the API we are planning to use.
 
-We now have our “Client ID” and our “Client Secret”. These will be important for when we obtain our access token! More on that later in the tutorial! 
+Agree with Spotify's Developer Terms of Service and Design Guidelines, and you're all set! 💪
+
+We now have our “Client ID” and our “Client Secret”. These will be important for when we obtain our access token! More on that later in the tutorial!
 
 ### Clone GitHub Project Template
 
-We're now going to head over to GitHub, where we'll be using [this repository](https://github.com/exrlla/codedex-api-template) as our template to get started with our project! 
+We're now going to head over to GitHub, where we'll be using [this repository](https://github.com/exrlla/codedex-api-template) as our template to get started with our project!
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/04_api.png" alt="Codédex API Template GitHub Respository" />
-
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/04_api.png"
+  alt="Codédex API Template GitHub Respository"
+/>
 
 Important Note:
-- This repository uses React [Vite](https://vitejs.dev),  a build tool that aims to provide a faster and leaner development experience for modern web projects. 
-- Includes the base code for this tutorial, using React Vanilla JS. 
 
-Let's clone this repository by either downloading the folder or using Git commands: 
+- This repository uses React [Vite](https://vitejs.dev), a build tool that aims to provide a faster and leaner development experience for modern web projects.
+- Includes the base code for this tutorial, using React Vanilla JS.
+
+Let's clone this repository by either downloading the folder or using Git commands:
 
 ```terminal
 git clone https://github.com/exrlla/codedex-api-template.git
 ```
-You’ll need to have Node.js v10 or above installed for the next couple of steps, and you can double check your version or if you have it installed with the following command in your terminal:
+
+You'll need to have Node.js v10 or above installed for the next couple of steps, and you can double check your version or if you have it installed with the following command in your terminal:
 
 ```terminal
 node -v
 ```
 
-We’re going to open a new terminal window at your project’s folder location. In the window, enter the command `npm install`. 
+We're going to open a new terminal window at your project's folder location. In the window, enter the command `npm install`.
 
-Open this folder in VS Code. You'll see the project folder as such: 
+Open this folder in VS Code. You'll see the project folder as such:
 
-If you don’t have VS Code, you can check out our [project tutorial on setting up your local environment](https://www.codedex.io/projects/set-up-your-local-environment-in-python).  
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/05_api.png" alt="VS Code window showing the App project file" />
+If you don't have VS Code, you can check out our [project tutorial on setting up your local environment](https://www.codedex.io/projects/set-up-your-local-environment-in-python).
 
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/05_api.png"
+  alt="VS Code window showing the App project file"
+/>
 
 ### Installing Bootstrap
- 
-As mentioned earlier, we're going to be using the UI library [Bootstrap](https://react-bootstrap.netlify.app/). Bootstrap is a framework of components that is going to make our lives a bit easier when designing and adding CSS! Let’s install Bootstrap with the following command. 
+
+As mentioned earlier, we're going to be using the UI library [Bootstrap](https://react-bootstrap.netlify.app/). Bootstrap is a framework of components that is going to make our lives a bit easier when designing and adding CSS! Let's install Bootstrap with the following command.
 
 ```terminal
 npm install react-bootstrap bootstrap
 ```
 
-Now that we have our libraries and project folder setup, we can begin developing! 
+Now that we have our libraries and project folder setup, we can begin developing!
 
-## Starting the Development Server and Connecting to the Spotify Web API
+## Starting the Development Server
 
-Let's get the development server started by running 
+Let's get the development server started by running the following in the folder:
 
 ```
 npm run dev
 ```
 
-in the folder. 
+You'll see the localhost ready to view, and you can click on the link to follow this site to your browser. You should see something like this:
 
-You'll see the localhost ready to view, and you can click on the link to follow this site to your browser. You should see something like this: 
- <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/06_api.png" alt="Website in development with the text Codedex Project Template" />
-
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/06_api.png"
+  alt="Website in development with the text Codedex Project Template"
+/>
 
 **Note:** Any edits you make on your project folder will automatically reload in the browser, so you can check your progress every time you save!
 
+## Connecting to the Spotify Web API
 
-Now, let's get started with setting up your Spotify API keys to use for our project! 
-In your main project folder, you're going to create a file called **.env**. It should look like this: 
+Now, let's get started with setting up your Spotify API keys to use for our project!
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/07_api.png" alt="Side folder in VS Code that holds the files for the project" />
+In your main project folder, you're going to create a file called **.env**. It should look like this:
 
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/07_api.png"
+  alt="Side folder in VS Code that holds the files for the project"
+/>
 
-Here you're going to copy the code block below and add your keys from the Spotify API developer settings. 
+Here you're going to copy the code block below and add your keys from the Spotify API developer settings.
 
 **Note:** Having this env file will allow you to push your code to GitHub without publishing your keys! Keep these secure!
 
@@ -154,143 +179,153 @@ VITE_CLIENT_ID=YOUR CLIENT ID HERE
 VITE_CLIENT_SECRET=YOUR CLIENT SECRET HERE
 ```
 
-In your **App.jsx** file, we're going to declare our variables from our env file. Under the imports, add the following: 
+In your **App.jsx** file, we're going to declare our variables from our env file. Under the imports, add the following:
 
 ```js
 //App.jsx
-const clientId  =  import.meta.env.VITE_CLIENT_ID;
-const  clientSecret  =  import.meta.env.VITE_CLIENT_SECRET;
+const clientId = import.meta.env.VITE_CLIENT_ID;
+const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 ```
 
 Now that we have declared our keys, let's check the progress of our app using the console.log. This will let us know that we can successfully read our keys!
 
 Under your declared variables, add the following line of code:
+
 ```js
-console.log(clientId, clientSecret)
+console.log(clientId, clientSecret);
 ```
 
 To check if this is read correctly, head over to your browser, and click "Inspect" Click on the console, and you'll see the keys in the output!
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/09_api.gif" alt="GIF showing how to open the console using browser developer tools" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/09_api.gif"
+  alt="GIF showing how to open the console using browser developer tools"
+/>
 
+Your **App.jsx** app should now look like this:
 
-Your **App.jsx** app should now look like this
 ```js
 // App.jsx
 
-import  './App.css'
+import "./App.css";
 const clientId = import.meta.env.VITE_CLIENT_ID;
 const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 console.log(clientId, clientSecret);
 
-function  App() {
-return (
-	<div  className="App">
-		<h1>Codédex Project Template</h1>
-	</div>
-	)
+function App() {
+  return (
+    <div className="App">
+      <h1>Codédex Project Template</h1>
+    </div>
+  );
 }
-export default  App
+export default App;
 ```
-Now that we have our keys in place, let's get started with our interface! 
+
+Now that we have our keys in place, let's get started with our interface!
 
 ## Search Bar
- 
-To build our album finder, we need to create a search bar to allow for requests. Let's code a simple search bar using Bootstrap. 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/10_api.png" alt="Website in developer mode with a search box in the center" />
 
+To build our album finder, we need to create a search bar to allow for requests. Let's code a simple search bar using Bootstrap.
+
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/10_api.png"
+  alt="Website in developer mode with a search box in the center"
+/>
 
 From Bootstrap, we'll be using:
- 
-- Container, our wrapper 
+
+- Container, our wrapper
 - Input Group, our search box
 - Form Control, our submit button
 
-Since we want our app to send a request to Spotify when we click "Search", we'll use form control to check when our button is pressed. 
+Since we want our app to send a request to Spotify when we click "Search", we'll use form control to check when our button is pressed.
 
 Let's get started by first creating our search box. Below is the container that has already some applied CSS. Let's import these components:
 
 ```js
-import { FormControl, InputGroup, Container, Button } from  'react-bootstrap'
+import { FormControl, InputGroup, Container, Button } from "react-bootstrap";
 ```
 
-Inside our `return()` let's replace the template text with the component below. Note that there's some pre-written CSS as well. 
+Inside our `return()` let's replace the template text with the component below. Note that there's some pre-written CSS as well.
 
 ```js
 <Container>
-	<InputGroup>
-		<FormControl
-		placeholder="Search For Artist"
-		type='input'
-		aria-label="Search for an Artist"
-		onKeyDown={{}} // search function
-		onChange={{}} // setSearch 
-		style={{
-			width:  '300px',
-			height:  '35px',
-			borderWidth:  '0px',
-			borderStyle:  'solid',
-			borderRadius:  '5px',
-			marginRight:  '10px',
-			paddingLeft:  '10px'
-			}}
-	/>
+  <InputGroup>
+    <FormControl
+      placeholder="Search For Artist"
+      type="input"
+      aria-label="Search for an Artist"
+      onKeyDown={{}} // search function
+      onChange={{}} // setSearch
+      style={{
+        width: "300px",
+        height: "35px",
+        borderWidth: "0px",
+        borderStyle: "solid",
+        borderRadius: "5px",
+        marginRight: "10px",
+        paddingLeft: "10px",
+      }}
+    />
 
-		<Button onClick={{}}> // search function
-			Search
-		</Button>
-	</InputGroup>
+    <Button onClick={{}}> // search function Search</Button>
+  </InputGroup>
 </Container>
 ```
 
 We'll add this inside our `return()` function.
 
-Your app should now look like this! ✨ 
-
+Your app should now look like this! ✨
 
 ## Hooks
 
-Currently, our button doesn't do anything, and our form isn't tracking what we type in! Let’s fix that now. 
+Currently, our button doesn't do anything, and our form isn't tracking what we type in! Let's fix that now.
 
-We're going to utilize the `useEffect` hook to fetch an access token from the Spotify API using client credentials authentication. 
+We're going to utilize the `useEffect` hook to fetch an access token from the Spotify API using client credentials authentication.
 
-Inside the `useEffect`, we want to accomplish a couple of things: 
-- Make a POST request to the Spotify API to obtain an access token using client credentials authentication. 
-- Set the access token in the component's state
+Inside the `useEffect`, we want to accomplish a couple of things:
 
-Since we're dealing with component state changes, we're going to use the `useState`. 
+- Make a POST request to the Spotify API to obtain an access token using client credentials authentication.
+- Set the access token in the component's state.
+
+Since we're dealing with component state changes, we're going to use the `useState`.
 
 Import both `useState` and `useEffect`.
-```js
-import { useState, useEffect } from  'react'
-```
-
-Inside our `App()` function, we're going to declare our search input (the artist name you type) and our access token that we obtain from the POST request. 
-
 
 ```js
-const [searchInput, setSearchInput] =  useState("")
-const [accessToken, setAccessToken] =  useState("")
+import { useState, useEffect } from "react";
 ```
 
-First, let's write use `useEffect` to fetch our access token. 
+Inside our `App()` function, we're going to declare our search input (the artist name you type) and our access token that we obtain from the POST request.
+
+```js
+const [searchInput, setSearchInput] = useState("");
+const [accessToken, setAccessToken] = useState("");
+```
+
+First, let's write use `useEffect` to fetch our access token.
 
 ```js
 useEffect(() => {
-  let authParams  = {
-		method: 'POST',
-		headers: {
-		'Content-Type':  'application/x-www-form-urlencoded',
-		},
-		body:  'grant_type=client_credentials&client_id='  +  clientId  +  '&client_secret='  +  clientSecret,
-		}
+  let authParams = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body:
+      "grant_type=client_credentials&client_id=" +
+      clientId +
+      "&client_secret=" +
+      clientSecret,
+  };
 
-	fetch('https://accounts.spotify.com/api/token', authParams)
-	.then(result  =>  result.json())
-	.then(data  => {
-	setAccessToken(data.access_token)
-
-})}, [])
+  fetch("https://accounts.spotify.com/api/token", authParams)
+    .then((result) => result.json())
+    .then((data) => {
+      setAccessToken(data.access_token);
+    });
+}, []);
 ```
 
 `fetch()` is a built-in JavaScript function used to make HTTP requests. It takes two parameters:
@@ -298,255 +333,278 @@ useEffect(() => {
 - The URL to which the request is sent ('https://accounts.spotify.com/api/token').
 - An options object (`authParams`).
 
-It returns a Promise in which we're able to use our access token for our search function. 
+It returns a Promise in which we're able to use our access token for our search function.
 
 ## Async Search Function
 
-Great! Let's now continue with the main part of our app, the search functionality! 
+Great! Let's now continue with the main part of our app, the search functionality!
 
-We're going to create an asynchronous function called search that is going to be responsible for searching for an artist on Spotify. 
+We're going to create an asynchronous function called search that is going to be responsible for searching for an artist on Spotify.
 
-Using [Spotify for Developers documentation/Web API Reference](https://developer.spotify.com/documentation/web-api/reference/get-an-artist), we want to use the GET request for artists. We'll need the ID of the artist that holds the name of the artist. 
+Using [the Spotify Web API documentation](https://developer.spotify.com/documentation/web-api/reference/get-an-artist), we want to use the GET request for artists. We'll need the ID of the artist that holds the name of the artist.
 
-Using await, we're going to use our `searchInput` that holds what the user has typed to search for our artist. This will then return the first search result. 
+Using await, we're going to use our `searchInput` that holds what the user has typed to search for our artist. This will then return the first search result.
 
 ```js
 async function search() {
-	
-	let artistParams = {
-		method: 'GET',
-		headers: {
-			'Content-Type':  'application/json',
-			'Authorization':  'Bearer '  +  accessToken,
-		},
-	}
-	
-	// Get Artist
-	const  artistID  =  await  fetch('https://api.spotify.com/v1/search?q='  +  searchInput  +  '&type=artist', artistParams)
-		.then(result  =>  result.json())
-		.then(data  => {
-			return  data.artists.items[0].id
-	})
+  let artistParams = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    },
+  };
+
+  // Get Artist
+  const artistID = await fetch(
+    "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
+    artistParams
+  )
+    .then((result) => result.json())
+    .then((data) => {
+      return data.artists.items[0].id;
+    });
 }
 ```
 
-Before we get started on testing our functions, let's go back to our search button and make it functional! 
- 
+Before we get started on testing our functions, let's go back to our search button and make it functional!
+
 ```js
 <Container>
-	<InputGroup>
-		<FormControl
-		placeholder="Search For Artist"
-		type='input'
-		aria-label="Search for an Artist"
-		onKeyDown={event  => {
-			if (event.key === "Enter") { 
-				search()
-			} // search function 
-		}}
-		onChange={event  =>  setSearchInput(event.target.value)} // setSearch
-		style={{
-			width:  '300px',
-			height:  '35px',
-			borderWidth:  '0px',
-			borderStyle:  'solid',
-			borderRadius:  '5px',
-			marginRight:  '10px',
-			paddingLeft:  '10px'
-			}}
-	/>
-
-		<Button onClick={search}> // search function
-			Search
-		</Button>
-	</InputGroup>
+  <InputGroup>
+    <FormControl
+      placeholder="Search For Artist"
+      type="input"
+      aria-label="Search for an Artist"
+      onKeyDown={(event) => {
+        if (event.key === "Enter") {
+          search();
+        } // search function
+      }}
+      onChange={(event) => setSearchInput(event.target.value)} // setSearch
+      style={{
+        width: "300px",
+        height: "35px",
+        borderWidth: "0px",
+        borderStyle: "solid",
+        borderRadius: "5px",
+        marginRight: "10px",
+        paddingLeft: "10px",
+      }}
+    />
+    // search function
+    <Button onClick={search}>Search</Button>
+  </InputGroup>
 </Container>
 ```
 
 Now, our code can:
-- Go to our search function when the button is clicked using  `onClick`. 
-- Go to our search function when a user presses enter using `onKeyDown`. 
+
+- Go to our search function when the button is clicked using `onClick`.
+- Go to our search function when a user presses enter using `onKeyDown`.
 - Modify the search input state with `onChange`.
 
-Before we move along, be sure that your **App.jsx** file looks like this: 
+Before we move along, be sure that your **App.jsx** file looks like this:
 
 ```js
-import  './App.css'
-import { FormControl, InputGroup, Container, Button } from  'react-bootstrap'
-import { useState, useEffect } from  'react'
- 
-const  clientId  =  import.meta.env.VITE_CLIENT_ID;
-const  clientSecret  =  import.meta.env.VITE_CLIENT_SECRET;
+import "./App.css";
+import { FormControl, InputGroup, Container, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
 
-function  App() {
-const [searchInput, setSearchInput] =  useState("")
-const [accessToken, setAccessToken] =  useState("")
+const clientId = import.meta.env.VITE_CLIENT_ID;
+const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 
-	useEffect(() => {
-		let  authParams  = {
-			method:  'POST',
-			headers: {
-			'Content-Type':  'application/x-www-form-urlencoded',
-			},
-			body:  'grant_type=client_credentials&client_id='  +  clientId  +  '&client_secret='  +  clientSecret,
-			}
-		fetch('https://accounts.spotify.com/api/token', authParams)
-		.then(result  =>  result.json())
-		.then(data  => {
-		setAccessToken(data.access_token)
-		
-	})}, [])
+function App() {
+  const [searchInput, setSearchInput] = useState("");
+  const [accessToken, setAccessToken] = useState("");
 
-	async  function  search() {
-		let  artistParams  = {
-			method:  'GET',
-			headers: {
-			'Content-Type':  'application/json',
-			'Authorization':  'Bearer '  +  accessToken,
-		},
-	}
+  useEffect(() => {
+    let authParams = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body:
+        "grant_type=client_credentials&client_id=" +
+        clientId +
+        "&client_secret=" +
+        clientSecret,
+    };
+    fetch("https://accounts.spotify.com/api/token", authParams)
+      .then((result) => result.json())
+      .then((data) => {
+        setAccessToken(data.access_token);
+      });
+  }, []);
 
- 
-// Get Artist
-		const  artistID  =  await  fetch('https://api.spotify.com/v1/search?q='  +  searchInput  +  '&type=artist', artistParams)
-			.then(result  =>  result.json())
-			.then(data  => {
-			return  data.artists.items[0].id
-			})
-		}
+  async function search() {
+    let artistParams = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    };
 
-	return (
-	<>
-	<Container>
-		<InputGroup>
-			<FormControl
-			placeholder="Search For Artist"
-			type='input'
-			aria-label="Search for an Artist"
-			onKeyDown={event  => {
-			if (event.key === "Enter") {
-			search()
-			}
-			}}
-			onChange={event  =>  setSearchInput(event.target.value)}
-			style={{
-			width:  '300px',
-			height:  '35px',
-			borderWidth:  '0px',
-			borderStyle:  'solid',
-			borderRadius:  '5px',
-			marginRight:  '10px',
-			paddingLeft:  '10px'
-			}}
-			/>
-			
-			<Button  onClick={search}>
-			Search
-			</Button>
+    // Get Artist
+    const artistID = await fetch(
+      "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
+      artistParams
+    )
+      .then((result) => result.json())
+      .then((data) => {
+        return data.artists.items[0].id;
+      });
+  }
 
-		</InputGroup>
-	</Container>
-</> 
-	)
+  return (
+    <>
+      <Container>
+        <InputGroup>
+          <FormControl
+            placeholder="Search For Artist"
+            type="input"
+            aria-label="Search for an Artist"
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                search();
+              }
+            }}
+            onChange={(event) => setSearchInput(event.target.value)}
+            style={{
+              width: "300px",
+              height: "35px",
+              borderWidth: "0px",
+              borderStyle: "solid",
+              borderRadius: "5px",
+              marginRight: "10px",
+              paddingLeft: "10px",
+            }}
+          />
+
+          <Button onClick={search}>Search</Button>
+        </InputGroup>
+      </Container>
+    </>
+  );
 }
 
-export  default  App
+export default App;
 ```
 
-## Testing our functions
+## Testing Our Functions
 
-Now that our search box can search for artists, let's test it in in the console before continuing! 
+Now that our search box can search for artists, let's test it in the console before continuing!
 
-Let's add some helpful console messages that give us some information. We want to test that our search input is correctly saving and that we get back an artist ID from that search input. 
+Let's add some helpful console messages that give us some information. We want to test that our search input is correctly saving and that we get back an artist ID from that search input.
 
 Add the following code inside our search function:
 
 ```js
 // Get Artist
-const  artistID  =  await  fetch('https://api.spotify.com/v1/search?q='  +  searchInput  +  '&type=artist', artistParams)
-	.then(result  =>  result.json())
-	.then(data  => {
-	return  data.artists.items[0].id
-	})
-	
-	console.log("Search Input: "  +  searchInput)
-	console.log("Artist ID: "  +  artistID)
-}
+const artistID = await fetch(
+  "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
+  artistParams
+)
+  .then((result) => result.json())
+  .then((data) => {
+    return data.artists.items[0].id;
+  });
+
+console.log("Search Input: " + searchInput);
+console.log("Artist ID: " + artistID);
 ```
 
-Let's go back to inspecting our page on our localhost server, and see the information we get back! Enter any artist's name into the search bar and click Search. 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/11_api.png" alt="Console output of an artist name and a randomly generated key" />
+Let's go back to inspecting our page on our localhost server, and see the information we get back! Enter any artist's name into the search bar and click "Search."
 
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/11_api.png"
+  alt="Console output of an artist name and a randomly generated key"
+/>
 
-
-🎉🎉 Yay! We see that our search result is saved and an artist ID is returned! Let's continue and use our results to build out the interface that shows all the albums of an artist! 
+🎉🎉 Yay! We see that our search result is saved and an artist ID is returned! Let's continue and use our results to build out the interface that shows all the albums of an artist!
 
 ## GET Artist Albums
 
-Since we know we can use our search input to search for an artist and return an `artistID`, we can use this result to connect the artist to their albums. 
+Since we know we can use our search input to search for an artist and return an `artistID`, we can use this result to connect the artist to their albums.
 
-Again, feel free to use the Web API Reference guide from Spotify to provide additional information. 
+Again, feel free to use the Spotify Web API documentation to provide additional information.
 
-Let's keep in mind that we want to store the album information that we get back from our search results. Let's declare another useState. 
+Let's keep in mind that we want to store the album information that we get back from our search results. Let's declare another `useState()`.
 
 ```js
-// const [searchInput, setSearchInput] =  useState("")
-// const [accessToken, setAccessToken] =  useState("")
-const [albums, setAlbums] =  useState([])
+// const [searchInput, setSearchInput] = useState("")
+// const [accessToken, setAccessToken] = useState("")
+const [albums, setAlbums] = useState([]);
 ```
 
-You'll notice that, unlike our last two variables, albums are going to hold an array of information so we'll initialize an empty array for now that will get populated once we apply the `artistID`. 
+You'll notice that, unlike our last two variables, albums are going to hold an array of information so we'll initialize an empty array for now that will get populated once we apply the `artistID`.
 
-Let's now write our code to get album information. This will go right below  the artistID functionality, inside our search function.
+Let's now write our code to get album information. This will go right below the artistID functionality, inside our search function.
 
 ```js
 // Get Artist Albums
-await fetch('https://api.spotify.com/v1/artists/'  +  artistID  +  '/albums?include_groups=album&market=US&limit=50', artistParams)
-.then(result  =>  result.json())
-.then(data  => {
-  setAlbums(data.items)
-})
+await fetch(
+  "https://api.spotify.com/v1/artists/" +
+    artistID +
+    "/albums?include_groups=album&market=US&limit=50",
+  artistParams
+)
+  .then((result) => result.json())
+  .then((data) => {
+    setAlbums(data.items);
+  });
 ```
 
-Your search function should now look like this: 
+Your search function should now look like this:
 
 ```js
-async  function  search() {
-	let  artistParams  = {
-		method:  'GET',
-		headers: {
-		'Content-Type':  'application/json',
-		'Authorization':  'Bearer '  +  accessToken,
-		},
-	}
+async function search() {
+  let artistParams = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    },
+  };
 
-// Get Artist
-	const  artistID  =  await  fetch('https://api.spotify.com/v1/search?q='  +  searchInput  +  '&type=artist', artistParams)
-		.then(result  =>  result.json())
-		.then(data  => {
-		return  data.artists.items[0].id
-		})
+  // Get Artist
+  const artistID = await fetch(
+    "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
+    artistParams
+  )
+    .then((result) => result.json())
+    .then((data) => {
+      return data.artists.items[0].id;
+    });
 
-// Get Artist Albums
-	await  fetch('https://api.spotify.com/v1/artists/'  +  artistID  +  '/albums?include_groups=album&market=US&limit=50', artistParams)
-	.then(result  =>  result.json())
-	.then(data  => {
-	setAlbums(data.items)
-	})
+  // Get Artist Albums
+  await fetch(
+    "https://api.spotify.com/v1/artists/" +
+      artistID +
+      "/albums?include_groups=album&market=US&limit=50",
+    artistParams
+  )
+    .then((result) => result.json())
+    .then((data) => {
+      setAlbums(data.items);
+    });
 }
 ```
 
 ## Mapping Search Results
 
-Now that we have access to the artist and the albums you query from the search box, let's go ahead and display our returned results in cards for each album! 
+Now that we have access to the artist and the albums you query from the search box, let's go ahead and display our returned results in cards for each album!
 
-As a reminder, this is what a card looks like: 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/12_api.png" alt="Card component of the album Tell me that its over by Wallows followed by the album information" />
+As a reminder, this is what a card looks like:
 
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/12_api.png"
+  alt="Card component of the album Tell me that its over by Wallows followed by the album information"
+/>
 
+In order to build this, we'll want the following information:
 
-In order to build this, Some information we want:
- 
 - Image of the album cover
 - Name of the album
 - Album release date
@@ -554,42 +612,51 @@ In order to build this, Some information we want:
 
 Let's build the interface for our cards!
 
-We'll need the Card and Row component from Bootstrap to create the mapping of the results. 
+We'll need the Card and Row component from Bootstrap to create the mapping of the results.
 
-Your import statement should now look like this 
+Your import statement should now look like this
 
 ```js
-import { FormControl, InputGroup, Container, Button, Row, Card } from  'react-bootstrap'
+import {
+  FormControl,
+  InputGroup,
+  Container,
+  Button,
+  Row,
+  Card,
+} from "react-bootstrap";
 ```
 
 Right after our Search Box container in the return section of our code, let's add another container for our cards :
 
 ```js
-Container>
-	<Row  style={{
-	display:  'flex',
-	flexDirection:  'row',
-	flexWrap:  'wrap',
-	justifyContent:  'space-around',
-	alignContent:  'center'
-	}}>
-		//content
-	</Row>
+<Container>
+  <Row
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-around",
+      alignContent: "center",
+    }}
+  >
+    // content
+  </Row>
 </Container>
 ```
 
-Let's circle back to our albums! We know that the variable `albums` holds the list of information from the artist we choose to query. According to [Spotify Web API Reference for "Get Album"](https://developer.spotify.com/documentation/web-api/reference/get-an-album), we get access to information like href, id, images, URI, type, restrictions, release date, artists, genres, and so much more! 
+Let's circle back to our albums! We know that the variable `albums` holds the list of information from the artist we choose to query. According to [Spotify Web API documentation for "Get Album"](https://developer.spotify.com/documentation/web-api/reference/get-an-album), we get access to information like href, id, images, URI, type, restrictions, release date, artists, genres, and so much more!
 
-For this tutorial, we're going to be retrieving the album image, name, release date, and link! According to the documentation, we can access this information for each album with the following:
- 
+For this tutorial, we'll retrieve the album image, name, release date, and link! According to the documentation, we can access this information for each album with the following:
+
 - `id` (album id)
 - `images[0].url` (source image file for the album)
-- `release_date` (release date of the album) 
-- `external_urls.spotify` (Spotify link for the album) 
+- `release_date` (release date of the album)
+- `external_urls.spotify` (Spotify link for the album)
 
-Our Bootstrap Card component will have an Image, Title, Text, and a Button, for users to go visit the album link. This can be used by the `<Card.Img>`, `<Card.Body>`, `<Card.Title>`, and `<Card.Text>` components. 
+Our Bootstrap Card component will have an Image, Title, Text, and a Button, for users to go visit the album link. This can be used by the `<Card.Img>`, `<Card.Body>`, `<Card.Title>`, and `<Card.Text>` components.
 
-To access our album information array without mutating it as we change it to display our album card, we're going to use the handy `map()` javascript function! 
+To access our album information array without mutating it as we change it to display our album card, we're going to use the handy `map()` javascript function!
 
 ### The `map()` function
 
@@ -597,73 +664,79 @@ Take a look at the `map()` function syntax:
 
 ```js
 const numbers = [1, 2, 3, 4, 5];
-const doubledNumbers = numbers.map(num => num * 2);
+const doubledNumbers = numbers.map((num) => num * 2);
 console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
 ```
 
-A new `doubledNumbers` array is made with the map function as it takes the array values and transforms them. In our case, we won't be multiplying numbers but rather displaying a component with our album information. 
+A new `doubledNumbers` array is made with the `map()` function as it takes the transforms the values from the `numbers` array. In our case, we won't be multiplying numbers but rather displaying a component with our album information.
 
-Inside the row component of the new container we just made, let's set up our mapping with our `album` array that we're using to store our album query results. 
+Inside the row component of the new container we just made, let's set up our mapping with our `album` array that we're using to store our album query results.
 
 ```js
-{albums.map((album) => {
-	return(
-	<Card  key={album.id}  style={{
-		backgroundColor:  'white',
-		margin:  '10px',
-		borderRadius:  '5px',
-		marginBottom:  '30px',
-	}}>
-		//card content
-	</Card>
-	)
-})}
+{
+  albums.map((album) => {
+    return (
+      <Card
+        key={album.id}
+        style={{
+          backgroundColor: "white",
+          margin: "10px",
+          borderRadius: "5px",
+          marginBottom: "30px",
+        }}
+      >
+        //card content
+      </Card>
+    );
+  });
+}
 ```
 
-You'll notice that we're using `album.id` as our key. In React, a key is necessary to uniquely identify elements when rendering lists/arrays. In our case, we're going to use the unique album IDs. 
+You'll notice that we're using `album.id` as our key. In React, a key is necessary to uniquely identify elements when rendering lists/arrays. In our case, we're going to use the unique album IDs.
 
-At this point, feel free to uniquely customize your card to your liking. The CSS and styling for my album cards are written here: 
+At this point, feel free to uniquely customize your card to your liking. The CSS and styling for my album cards are written here:
 
 ```js
 {albums.map((album) => {
 return(
-<Card  key={album.id}  style={{
-	backgroundColor:  'white',
-	margin:  '10px',
-	borderRadius:  '5px',
-	marginBottom:  '30px',
+<Card key={album.id} style={{
+	backgroundColor: 'white',
+	margin: '10px',
+	borderRadius: '5px',
+	marginBottom: '30px',
 	}} >
-	
-	<Card.Img  
-	width={200}  
-	src={album.images[0].url}  
-	style={{
-	borderRadius:  '4%',
-	}}  />
-	
+
+	<Card.Img
+	  width={200}
+	  src={album.images[0].url}
+	  style={{borderRadius: '4%',}}
+  />
+
 	<Card.Body>
-		<Card.Title  style={{
-			whiteSpace:  'wrap',
-			fontWeight:  'bold',
-			maxWidth:  '200px',
-			fontSize:  '18px',
-			marginTop:  '10px',
-			color:  'black'
-			}}>{album.name}</Card.Title>
-		
-		<Card.Text  style={{
-		color:  'black'
+		<Card.Title style={{
+			whiteSpace: 'wrap',
+			fontWeight: 'bold',
+			maxWidth: '200px',
+			fontSize: '18px',
+			marginTop: '10px',
+			color: 'black'
 		}}>
-		Release Date: <br/>  {album.release_date}
+      {album.name}
+    </Card.Title>
+
+		<Card.Text style={{
+		  color: 'black'
+		}}>
+		  Release Date: <br> {album.release_date}
 		</Card.Text>
-		
-		<Button  href={album.external_urls.spotify}  style={{
-			backgroundColor:  'black',
-			color:  'white',
-			fontWeight:  'bold',
-			fontSize:  '15px',
-			borderRadius:  '5px',
-			padding:  '10px',
+
+		<Button href={album.external_urls.spotify} style={{
+			backgroundColor: 'black',
+			color: 'white',
+			fontWeight: 'bold',
+			fontSize: '15px',
+			borderRadius: '5px',
+			padding: '10px',
 			}}>Album Link
 		</Button>
 	</Card.Body>
@@ -673,166 +746,200 @@ return(
 })}
 ```
 
-The finalized version of the **App.jsx** file looks as such: 
+The finalized version of the **App.jsx** file looks as such:
+
 ```js
-import  './App.css'
-import { FormControl, InputGroup, Container, Button, Card, Row } from  'react-bootstrap'
-import { useState, useEffect } from  'react'
-const  clientId  =  import.meta.env.VITE_CLIENT_ID;
-const  clientSecret  =  import.meta.env.VITE_CLIENT_SECRET;
+import "./App.css";
+import {
+  FormControl,
+  InputGroup,
+  Container,
+  Button,
+  Card,
+  Row,
+} from "react-bootstrap";
+import { useState, useEffect } from "react";
 
-function  App() {
-const [searchInput, setSearchInput] =  useState("")
-const [accessToken, setAccessToken] =  useState("")
-const [albums, setAlbums] =  useState([])
+const clientId = import.meta.env.VITE_CLIENT_ID;
+const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 
-useEffect(() => {
-let  authParams  = {
-method:  'POST',
-headers: {
-'Content-Type':  'application/x-www-form-urlencoded',
-},
-body:  'grant_type=client_credentials&client_id='  +  clientId  +  '&client_secret='  +  clientSecret,
+function App() {
+  const [searchInput, setSearchInput] = useState("");
+  const [accessToken, setAccessToken] = useState("");
+  const [albums, setAlbums] = useState([]);
+
+  useEffect(() => {
+    let authParams = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body:
+        "grant_type=client_credentials&client_id=" +
+        clientId +
+        "&client_secret=" +
+        clientSecret,
+    };
+
+    fetch("https://accounts.spotify.com/api/token", authParams)
+      .then((result) => result.json())
+      .then((data) => {
+        setAccessToken(data.access_token);
+      });
+  }, []);
+
+  async function search() {
+    let artistParams = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    };
+
+    // Get Artist
+    const artistID = await fetch(
+      "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
+      artistParams
+    )
+      .then((result) => result.json())
+      .then((data) => {
+        return data.artists.items[0].id;
+      });
+
+    // Get Artist Albums
+    await fetch(
+      "https://api.spotify.com/v1/artists/" +
+        artistID +
+        "/albums?include_groups=album&market=US&limit=50",
+      artistParams
+    )
+      .then((result) => result.json())
+      .then((data) => {
+        setAlbums(data.items);
+      });
+  }
+
+  return (
+    <>
+      <Container>
+        <InputGroup>
+          <FormControl
+            placeholder="Search For Artist"
+            type="input"
+            aria-label="Search for an Artist"
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                search();
+              }
+            }}
+            onChange={(event) => setSearchInput(event.target.value)}
+            style={{
+              width: "300px",
+              height: "35px",
+              borderWidth: "0px",
+              borderStyle: "solid",
+              borderRadius: "5px",
+              marginRight: "10px",
+              paddingLeft: "10px",
+            }}
+          />
+          <Button onClick={search}>Search</Button>
+        </InputGroup>
+      </Container>
+
+      <Container>
+        <Row
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            alignContent: "center",
+          }}
+        >
+          {albums.map((album) => {
+            return (
+              <Card
+                key={album.id}
+                style={{
+                  backgroundColor: "white",
+                  margin: "10px",
+                  borderRadius: "5px",
+                  marginBottom: "30px",
+                }}
+              >
+                <Card.Img
+                  width={200}
+                  src={album.images[0].url}
+                  style={{
+                    borderRadius: "4%",
+                  }}
+                />
+                <Card.Body>
+                  <Card.Title
+                    style={{
+                      whiteSpace: "wrap",
+                      fontWeight: "bold",
+                      maxWidth: "200px",
+                      fontSize: "18px",
+                      marginTop: "10px",
+                      color: "black",
+                    }}
+                  >
+                    {album.name}
+                  </Card.Title>
+                  <Card.Text
+                    style={{
+                      color: "black",
+                    }}
+                  >
+                    Release Date: <br /> {album.release_date}
+                  </Card.Text>
+                  <Button
+                    href={album.external_urls.spotify}
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                      borderRadius: "5px",
+                      padding: "10px",
+                    }}
+                  >
+                    Album Link
+                  </Button>
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </Row>
+      </Container>
+    </>
+  );
 }
 
-fetch('https://accounts.spotify.com/api/token', authParams)
-.then(result  =>  result.json())
-.then(data  => {
-setAccessToken(data.access_token)
-
-})}, [])
-
-async  function  search() {
-let  artistParams  = {
-method:  'GET',
-headers: {
-'Content-Type':  'application/json',
-'Authorization':  'Bearer '  +  accessToken,
-},
-
-}
-
-// Get Artist
-const  artistID  =  await  fetch('https://api.spotify.com/v1/search?q='  +  searchInput  +  '&type=artist', artistParams)
-.then(result  =>  result.json())
-.then(data  => {
-return  data.artists.items[0].id
-})
-
-// Get Artist Albums
-await  fetch('https://api.spotify.com/v1/artists/'  +  artistID  +  '/albums?include_groups=album&market=US&limit=50', artistParams)
-.then(result  =>  result.json())
-.then(data  => {
-setAlbums(data.items)
-})
-} 
-
-return (
-<>
-<Container>
-	<InputGroup>
-	<FormControl
-	placeholder="Search For Artist"
-	type='input'
-	aria-label="Search for an Artist"
-	onKeyDown={event  => {
-	if (event.key === "Enter") {
-	search()
-	}
-	}}
-	onChange={event  =>  setSearchInput(event.target.value)}
-	style={{
-	width:  '300px',
-	height:  '35px',
-	borderWidth:  '0px',
-	borderStyle:  'solid',
-	borderRadius:  '5px',
-	marginRight:  '10px',
-	paddingLeft:  '10px'
-	}}
-	/>
-	<Button  onClick={search}>
-	Search
-	</Button>
-	</InputGroup>
-	</Container>
-
-<Container>
-<Row  style={{
-display:  'flex',
-flexDirection:  'row',
-flexWrap:  'wrap',
-justifyContent:  'space-around',
-alignContent:  'center'
-}}>
-
-{albums.map((album) => {
-return(
-	<Card  key={album.id}  style={{
-	backgroundColor:  'white',
-	margin:  '10px',
-	borderRadius:  '5px',
-	marginBottom:  '30px',
-	}}  >
-
-		<Card.Img
-		width={200}
-		src={album.images[0].url}
-		style={{
-		borderRadius:  '4%',
-		}}  />
-		<Card.Body>
-		<Card.Title  style={{
-		whiteSpace:  'wrap',
-		fontWeight:  'bold',
-		maxWidth:  '200px',
-		fontSize:  '18px',
-		marginTop:  '10px',
-		color:  'black'
-		}}>{album.name}</Card.Title>
-		<Card.Text  style={{
-		color:  'black'
-		}}>
-		Release Date: <br/>  {album.release_date}
-		</Card.Text>
-		<Button  href={album.external_urls.spotify}  style={{
-		backgroundColor:  'black',
-		color:  'white',
-		fontWeight:  'bold',
-		fontSize:  '15px',
-		borderRadius:  '5px',
-		padding:  '10px',
-		}}>Album Link
-		</Button>
-		</Card.Body>
-	</Card>
-)
-
-})}
-</Row>
-</Container>
-</>
-)
-}
- 
-export  default  App
+export default App;
 ```
 
-And that’s a wrap! Try out your app!! 🎉🎉 Enter any artist's name in the search bar and watch the cards get populated with results! 
+And that's a wrap! Try out your app!! 🎉🎉 Enter any artist's name in the search bar and watch the cards get populated with results!
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/13_api.gif" alt="GIF of searching of an artist in the search bar and getting a list of cards with albums and descriptions" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-album-finder-with-spotify-api/images/13_api.gif"
+  alt="GIF of searching of an artist in the search bar and getting a list of cards with albums and descriptions"
+/>
 
 ## Conclusion
- 
+
 Congratulations!!! 🎊
 
-You’ve reached the end of the tutorial! You built a web app! I hope that you feel more comfortable using  Web APIs and building with React! 
+You've reached the end of the tutorial! You built a web app! I hope that you feel more comfortable using Web APIs and building with React!
 
 The ideas are limitless! This tutorial has been a starting point for you to explore other ways in which the Spotify API can be used! 🎵
 
 Some other ideas include:
 
-- Data Visualization on Spotify Data 
+- Data Visualization on Spotify Data
 - Authentication to your personal Spotify account
 - Playlist creator
 - CSS Redesign
@@ -841,10 +948,8 @@ Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_
 
 ## More Resources
 
-
-Take a look at the [source code here](https://github.com/exrlla/codedex-api-template/blob/version-final/src/App.jsx)! 
-- [Spotify for Developers Web API Documentation](https://developer.spotify.com/documentation/web-api) 
-- [React Bootstrap Documentation](https://react-bootstrap.netlify.app/) 
-- [React Documentation](https://react.dev/) 
-- [Understanding the Spotify Web API by Spotify Engineering](https://engineering.atspotify.com/2015/03/understanding-spotify-web-api/) 
-
+- [Source code for this tutorial](https://github.com/exrlla/codedex-api-template/blob/version-final/src/App.jsx)!
+- [Spotify for Developers Web API Documentation](https://developer.spotify.com/documentation/web-api)
+- [React Bootstrap Documentation](https://react-bootstrap.netlify.app/)
+- [React Documentation](https://react.dev/)
+- [Understanding the Spotify Web API by Spotify Engineering](https://engineering.atspotify.com/2015/03/understanding-spotify-web-api/)
