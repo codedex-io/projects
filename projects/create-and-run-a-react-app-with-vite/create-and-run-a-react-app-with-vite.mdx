@@ -1,0 +1,192 @@
+---
+title: Create and Run a React App with Vite
+author: Brandon Dusch
+uid: H7lTRTjDJ0VbnaVUJdWSclFxwiH3
+datePublished: 2024-03-12
+description: Learn to create and run a React app with the Vite build tool.
+header: 
+published: false
+tags:
+  - intermediate
+  - command line
+---
+
+<BannerImage
+  link=""
+  description="Title Image"
+  uid={false}
+  cl="for-sidebar"
+/>
+
+# Create and Run a React App with Vite
+
+<AuthorAvatar
+  author_name="Brandon Dusch"
+  author_avatar="/images/projects/authors/brandon_dusch.png"
+  username="Dusch4593"
+  uid={false}
+/>
+
+<BannerImage
+  link=""
+  description="Title Image"
+  uid={false}
+/>
+
+**Prerequisites:** Command Line
+**Versions:** Node v18, Vite 5.0.12
+**Read Time:** 25 minutes
+
+## Introduction
+
+For the last decade, React has grown from a project used by a small Facebook team into a tool used by a global community. React's ability to let you code your website with reusable components and make edits from fewer places changed the world of web development.
+
+But like many tools, getting React set up on your local computer can be tricky. It isn't as simple as installing one package or double-clicking an **.html** file.
+
+In this tutorial, you will create and run a React app with Vite! ⚡
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-and-run-a-react-app-with-vite/react-hero-image.png" alt="React hero image" />
+
+### What is Vite?
+
+We can render our React code with Vite.
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-and-run-a-react-app-with-vite/vite-logo.png" alt="Vite logo" />
+
+[**Vite**](https://vitejs.dev/) is a tool that allows us to create and run light to mid-sized React applications.
+
+While there are other ways to launch a React app, Vite is the most straightforward.
+
+Vite (French for "quick"), is a remarkably speedy frontend build tool. Though not a full-fledged framework for React, Vite is nice for small to moderate-sized apps.
+
+In order to use Vite, we'll need to do a few things first. Let's get started!
+
+## Node
+
+Vite can be installed as a package from a Node package manager. In this tutorial, we will use [npm](https://www.npmjs.com/) (or "node package manager").
+
+But wait, what is "Node"?
+
+[Node.js](https://nodejs.org/) is a special tool that lets you run your JavaScript code on a server, in addition to a browser. When Node is installed, you already have npm!
+
+To check if Node is installed, run the following command on the terminal:
+
+```terminal
+node -v
+```
+
+If Node is installed, this command will print the version number you're using. This means you'll also have npm installed! If Node is not found, then [download it here](https://nodejs.org/en/download). 
+
+Next, we will need an editor to write our React code. We recommend VS Code but feel free to use any editor you like.
+
+If your Node version is older than 18, or you don't get a version number at all, make sure to download the latest version [here](https://nodejs.org/en/download).
+
+## Install Vite
+
+Now that we've ensured that Node is installed, it's time to start using npm!
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-and-run-a-react-app-with-vite/npm-logo.png" alt="npm logo" />
+
+We can use npm to install Vite.
+
+Enter the following in the terminal and press <kbd>enter</kbd>:
+
+```js
+npm install vite@latest
+```
+
+This will download the latest version of Vite.
+
+## Setup React App
+
+Now, let's set up our React app!
+
+Run the following command:
+
+```js
+npm create vite@latest
+```
+
+This will begin with a set of prompts that you'll need to fill out to create the app.
+
+The first asks what you want to name your project. Maybe something like `my-first-app`?
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-and-run-a-react-app-with-vite/vite-prompt-1.png" alt="Prompt to name Vite project" />
+
+Next, you'll be asked what kind of app you want to make. Use the arrow keys to go to "React" and select with <kbd>enter</kbd>.
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-and-run-a-react-app-with-vite/vite-prompt-2.png" alt="Prompt to select React" />
+
+**Note:** With Vite, you can make more than just a React app. Even ones in Vue or Svelte! 
+
+You'll then be asked whether you want the React app set up with TypeScript or regular JavaScript. Let's go for just JavaScript.
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-and-run-a-react-app-with-vite/vite-prompt-3.png" alt="Prompt to select JavaScript" />
+
+But wait, what about this "SWC" thing? This stands for "Speedy Web Compiler" and it allows your code to get processed a little quicker. For this tutorial, it doesn't matter if you select it.
+
+## Run React App
+
+After this point, everything should be set and Vite will print directions for how to run your React app!
+
+First, use the `cd` command to change into the new Vite folder you made:
+
+```
+cd my-first-app
+```
+
+Next, run the following npm command:
+
+```
+npm install
+```
+
+Just like how we are using Vite as a tool, Vite itself uses tools, or dependencies, to work as expected. Similar to booting up a game console, running `npm install` starts up these dependencies so that Vite can work.
+
+
+Lastly, we will run this command:
+
+```
+npm run dev
+```
+
+Vite will now build up our app and then serve it with a `localhost` link, similar to this:
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-and-run-a-react-app-with-vite/served-react-app-1.png" alt="Served React app, as seen from terminal" />
+
+If we copy/paste this link on a browser, we should see the following output:
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-and-run-a-react-app-with-vite/served-react-app-2.png" alt="Served React app, as seen from the browser" />
+
+To copy/paste, here are the keyboard shortcuts:
+
+- For Mac:
+  - Copy:   <kbd>cmd</kbd> + <kbd>c</kbd>
+  - Paste: <kbd>cmd</kbd> + <kbd>v</kbd>
+
+- Windows:
+  - Copy: <kbd>ctrl</kbd> + <kbd>c</kbd>
+  - Paste: <kbd>ctrl</kbd> + <kbd>v</kbd>
+
+## Vite App Structure
+
+When creating a new React project, Vite sets up all the files and folders usually needed. This way, we can get right to building.
+
+If we open our `my-first-app` folder in an editor like VS Code, the following files and folders are usually found:
+
+- 📂 **src/**
+  - 📄 **App.jsx**: The code for the `<App>` component, written in JavaScript Syntax Extension (JSX).
+  - 📄 **index.css**: The base styles for the React app.
+- 📄 **index.html**: The place where the root of the React app (i.e., `<div id="root"></div>`).
+- 📄 **package.json**: A list of the outside code used to make this app run, including `react`, `react-dom`, and `vite`.
+- 📄 **vite.config.js**: The settings for our Vite React app.
+
+Inside most Vite React apps, there is a  **src** folder (short for "source") that contains all the source code, including **.jsx** files.
+
+## Conclusion
+
+There you have it! We've just learned to create and run a React app with Vite! 🎉
+
+Vite is currently one of the best options for getting new ideas up and running quickly. And React is one of the best ways to express those ideas!
+
+Feel free to play around with the code in the files, especially in **App.jsx**. Also, don't be afraid to start your next project with Vite!
