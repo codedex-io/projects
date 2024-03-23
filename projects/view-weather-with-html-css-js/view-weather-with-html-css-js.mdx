@@ -53,7 +53,7 @@ By the end of this tutorial, you will have learned to utilize the following:
 
 The finished weather will look and work like this:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/finished_weather_app.gif" alt="Finished Weather Application" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/finished_weather_app.gif" alt="Finished Weather Application" />
 
 Let's get started!
 
@@ -81,19 +81,19 @@ OpenWeather provides several APIs (or application programming interfaces) that f
 
 If you haven't already, you must create an OpenWeather account with a username, email, and password:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/new_open_weather_account_form.png" alt="Form for new account with OpenWeather" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/new_open_weather_account_form.png" alt="Form for new account with OpenWeather" />
 
 **Note:** You'll be sent a verification email; make sure to answer it!
 
 Next, you'll be prompted to state what you want to do with OpenWeather's API.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/open_weather_account_prompt.png" alt="Prompt by OpenWeather (post-login)" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/open_weather_account_prompt.png" alt="Prompt by OpenWeather (post-login)" />
 
 I recommend choosing “Education/Science" or “Other".
 
 You should now be ready to view your API key! After creating a new account, a new key should be generated for you. Near the top right, select your username, followed by “My API keys" in the dropdown:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/open_weather_api_key.gif" alt="Screen for generating new keys for OpenWeather API" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/open_weather_api_key.gif" alt="Screen for generating new keys for OpenWeather API" />
 
 After confirming you have an active API key, let's move on to the next step!
 
@@ -150,7 +150,7 @@ We also added a `<script>` element to connect our HTML with the **script.js** fi
 If we save the **index.html** file and open it on the browser, it should look like this:
 
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_html_only.png" alt="Rendered Weather App (HTML only)" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_html_only.png" alt="Rendered Weather App (HTML only)" />
 
 It's looking pretty bare-bones right now. But not to worry! We'll take care of that in the next step.
 
@@ -214,7 +214,7 @@ Starting from the top, we did the following:
 
 If we save our **styles.css** file at this point, our rendered weather app should look like this:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_1.png" alt="Rendered app with some CSS" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_1.png" alt="Rendered app with some CSS" />
 
 Now, let's make the `<input>` elements appear larger to better match the `<h1>` heading above them. Select these elements with `#search` and `#submit`, and add the following:
 
@@ -245,7 +245,7 @@ The `#submit` element gets a `width` of `10em`, along with a `cursor: pointer` s
 
 Let's save **styles.css** and re-render the page:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_2.png" alt="Rendered app with more CSS added" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_2.png" alt="Rendered app with more CSS added" />
 
 Next, we're going to apply some CSS Flexbox to easily center-align the content in our weather app.
 
@@ -284,7 +284,7 @@ To center-align the items, we used `place-items: center`. We also made the `#wea
 
 Let's save the **styles.css** file now and re-render the page:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_3.png" alt="Rendered app with even more CSS added" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_3.png" alt="Rendered app with even more CSS added" />
 
 Next, we're going to apply some CSS Flexbox to easily center-align the content in our weather app.
 
@@ -324,7 +324,7 @@ To center-align the items, we used `place-items: center`. We also made the `#wea
 
 Let's save the **styles.css** file now and re-render the page:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_4.png" alt="Rendered app with final CSS added" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_4.png" alt="Rendered app with final CSS added" />
 
 Excellent! Our app is starting to look good!
 
@@ -498,7 +498,7 @@ Using the weather information from the `data` variable, let's do the following w
 
 ```js
   weatherDataSection.innerHTML = `
-  <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
+  <ImageZoom src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
   <div>
   <h2>${data.name}</h2>
   <p><strong>Temperature:</strong> ${Math.round(data.main.temp - 273.15)}°C</p>
@@ -538,7 +538,7 @@ async function fetchWeather() {
 
 Let's save **script.js** and see what our rendered app now does when searching:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/finished_weather_app.gif" alt="Finished Weather Application" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/finished_weather_app.gif" alt="Finished Weather Application" />
 
 ### Style Weather Data
 
@@ -551,7 +551,7 @@ First, let's make it so the weather information is placed beside the weather ico
 ```js
   weatherDataSection.style.display = "flex";
   weatherDataSection.innerHTML = `
-  <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
+  <ImageZoom src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
   <div>
   <h2>${data.name}</h2>
   <p><strong>Temperature:</strong> ${Math.round(data.main.temp - 273.15)}°C</p>
@@ -595,7 +595,7 @@ Congratulations, we are now finished with building our weather application!
 
 Let's go ahead and save our **styles.css** file one last time! Refresh the rendered page and try typing in your favorite city:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/finished_weather_app.gif" alt="Finished Weather Application" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/finished_weather_app.gif" alt="Finished Weather Application" />
 
 Using the three building blocks of HTML, CSS, and JavaScript, we were able to build a functional application that uses some deep frontend and backend elements such as:
 
