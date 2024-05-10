@@ -1,0 +1,226 @@
+---
+title: Build a Custom Search Engine with ExaAI
+author: Ellie Popoca
+uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
+datePublished: 
+description: Learn how to create a Discord Bot by using Python and Discord Developer Portal in this project tutorial
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-custom-search-engine-with-exaai/header.png
+published: false
+bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-custom-search-engine-with-exaai/header.png
+tags:
+  - advanced
+  - python
+---
+
+<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-custom-search-engine-with-exaai/header.png" description="Title Image" uid={true} cl="for-sidebar"/>
+
+# Build a Custom Search Engine with ExaAI
+
+{/* <AuthorAvatar author_name="Curriculum Team" author_avatar="/images/projects/authors/hong_jeon.jpg" uid={true}/> */}
+
+<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-custom-search-engine-with-exaai/header.png" description="Title Image" uid={true}/>
+
+**Prerequisites:** Python
+**Versions:** Python 3.13 
+**Read Time:** 45 minutes
+
+## Introduction
+Have you ever read something amazing, then completely blanked out on where you read it or who wrote it?
+
+Imagine there was a search engine that could re-discover exactly what you're thinking about. Now, it's possible with machine learning. More specifically **Natural Language Processing (NLP)**, a branch of machine learning that teaches computers to understand, interpret, and generate human language. 
+In this tutorial, we'll build a custom search engine using an API with LLM capabilities! 🚀 
+
+ **LLMs** or Large Language Models are a powerful tool within the broader field of NLP. These models are trained on insane amounts of data and can grasp the intricacies of human language. 🤯 A popular LLM that you might already be using is GPT-3. 
+
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-custom-search-engine-with-exaai/token.gif" description="Tokenization Example" />
+
+LLMs leverage deep learning techniques to generate text, translate languages, answer questions, and so much more. The model works by estimating the probability of a token or a sequence of tokens in a sequence.
+
+However, accessing LLMs is a little tricky since training models is both time-consuming and expensive. APIs solve this. APIs serve as a tool to access NLP tasks, such as text generation, translation, summarization, and more, which we'll explore today! Let's learn how we can even build our very own custom search engine! 👀
+
+
+### Exa AI API
+[Exa.AI](https://exa.ai) (or just "Exa") is an API (Application Programming Interface) that retrieves the best content on the web. With Exa, anyone can semantically search the web to get high-quality, relevant information. With Exa’s technology, we can rediscover the content on the internet. Unlike Google, which relies on keyword search (matching the exact words of the query to the web content), Exa can understand both the user’s input and the content out there. Wow, right? 
+
+Exa specializes in advanced natural language processing (NLP), utilizing large language models (LLMs) as a core component. It has been extensively trained to help computers understand human language.
+
+In this tutorial, we use Exa's natural language processing (NLP) capabilities to build a basic search engine that can help you find exactly what you are searching for.
+
+## Set up
+First, we need to create an account with [Exa](http://exa.ai/) to access our API key to build out the “search” functionality of our search engine! You'll automatically get 1000 free requests just for signing up at https://dashboard.exa.ai/login. After creating an account, navigate to 'Overview' to retrieve your API key.
+
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-custom-search-engine-with-exaai/ExaDashboard.JPG" description="Exa Dashboard" />
+
+Note: Keep your private keys safe 🔒and avoid sharing and posting them online.
+
+For this project, we'll need [Python 3](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/) (package installer) installed.
+
+Assuming that we have those two installed, let's open up our preferred code editor (we recommend VS Code) and create a new file called **main.py**. 
+
+### Packages and Imports
+With Python installed, let's go ahead and use pip to download Exa:
+
+```py
+pip install exa_py
+```
+
+Note: Alternatively try `pip3 install exa_py` if the command above doesn't work.
+
+In our **main.py** file, we're going to import Exa, and initialize Exa with our API key!
+
+```py
+from exa_py import Exa
+
+exa = Exa('YOUR_KEY_HERE')
+```
+
+## Getting Started with Searching!⚡
+In the same file, let's create a variable called `prompt`, which will hold the response to the input of what we want to search! 
+
+```py
+from exa_py import Exa
+
+exa = Exa('YOUR_KEY_HERE')
+
+prompt = input('Search here: ')
+```
+
+Now, let's take a look at Exa's `.search()` function.
+```py
+from exa_py import Exa
+
+exa = Exa('YOUR_KEY_HERE')
+
+response = exa.search(
+  "Best Chicago cold brew",
+  num_results=10,
+)
+```
+
+
+Here's an example of the returned data.
+```terminal
+{
+  "score": 0.1940334290266037,
+  "title": "13 Innovative Cold Brew Drinks from Coffee Shops Around the Country",
+  "id": "https://www.thrillist.com/drink/nation/best-cold-brew-coffee-drinks",
+  "url": "https://www.thrillist.com/drink/nation/best-cold-brew-coffee-drinks",
+  "publishedDate": "2017-07-10",
+  "author": "Dan Gentile"
+},
+```
+
+We have a search query of “Best Chicago cold brew”, showing the top 10 search results. For each search result, we get:
+
+- `score`: The score associated indicates its relevance within the query system. Higher scores = greater relevance.
+- `title`: This is the name of the article/blog/website
+- `id`:
+- `url`:
+- `publishedDate`: This lists the publish date 
+- `author`: This credits a writer. This will return “None” if there is no credited writer.
+
+To customize our Exa results further, we can play around with Exa's filters, allowing us to find the exact type of content we need. You can explore the filters here [Exa's API Search documentation](https://docs.exa.ai/reference/search). Here are some of our favorite filters:
+
+- `numResults`: Number of search results to return
+- `includeDomains`: List of domains to include in the search.
+- `category`: A data category to focus on, with higher comprehensivity and data cleanliness. Categories right now include company, news, pdf, papers, tweet, GitHub, movies, songs, and personal sites. 
+
+The search example below will return the results for “best pizza in Brooklyn” searching through Twitter since May 2023.
+```py
+response = exa.search( "best pizza in Brooklyn",
+    num_results=10,
+    start_published_date="2023-05-01", 
+    category="tweet", 
+    use_autoprompt= True, )
+```
+
+This is where the fun customization begins! ✨💖 For this tutorial, you'll learn how to search TikTok to obtain top coffee drink accounts! 
+
+In our case, we will want only the top 5 search results, and only from TikTok [https://www.tiktok.com](https://www.tiktok.com/). Additionally, we're going to treat our search function like a keyword, so we need to declare that as well! 
+
+Let's go ahead and use the Exa parameters to accomplish this. To display this, let’s also add a print statement at the end of our file to search! 
+```py 
+from exa_py import Exa
+
+exa = Exa('YOUR_KEY_HERE')
+
+search = input('Search here: ')
+
+response = exa.search(
+    search,
+    num_results=5,
+    type="keyword",
+    include_domains=["https://www.tiktok.com/"],
+)
+print(response)
+```
+
+Run the script by going to your terminal and typing 
+```terminal
+python3 main.py
+```
+
+After pressing <kbd>Enter</kbd>, you should now see the following! 
+
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-custom-search-engine-with-exaai/Coffee_Exa_Search.gif" description="Input Search typing the word coffee" />
+
+You might notice some information on each result like Score, Author, and Text! Depending on your search query, you may or may not want these to be displayed every time you write a query. 
+
+Let's format our code so that for our React documentation search engine, we only get the **Title** and the **URL**. Delete the print statement, and add the following to **main.py**. 
+```py
+for result in response.results:
+  print(f'Title: {result.title}')
+  print(f'URL: {result.url}')
+  print()
+``` 
+
+Now, your search results should look something like this! 
+
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-custom-search-engine-with-exaai/Coffee_Search_Results.png" description="Query Results including Title and URL" />
+
+A lot easier on the eyes, right? 🤩💫
+
+If you're following along, your **main.py** file should look like this: 
+```py
+from exa_py import Exa
+
+exa = Exa(‘YOUR_KEY_HERE’)
+
+search = input("Search here:")
+
+response = exa.search(
+    search,
+    num_results=5,
+    type="keyword",
+    include_domains=["https://www.tiktok.com"],
+)
+
+for result in response.results:
+    print(f"Title: {result.title}")
+    print(f"URL: {result.url}")
+    print()
+```
+## Mission Accomplished
+Congrats, you just created a custom search engine!✨ Here are some additional ideas on what you could search with the Exa API! 
+
+- Wikipedia Links
+- Coding Documentation
+- Academic Papers
+- Tweets
+- Research Papers
+- News and Media
+
+## More Resources
+Thanks for following along, here are some helpful links!
+
+- [Source Code]()
+- [Exa.io Documentation](https://docs.exa.ai/reference/getting-started)
+- [Exa.io Cheat Sheet](https://docs.exa.ai/reference/cheat-sheet)
+- [Intro to LLM](https://developers.google.com/machine-learning/resources/intro-llms)
+- [Codedex Discord](https://discord.com/invite/HCShtBqbfV)
+- [Exa's Discord](https://discord.com/invite/HCShtBqbfV)
+
+We would love to see what you build with this tutorial! Tag [@codedex_io](https://twitter.com/codedex_io) and [@ExaAILabs](https://twitter.com/ExaAILabs) on Twitter if you make something cool! ⚡
+
+
+
