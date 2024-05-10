@@ -41,17 +41,17 @@ tags:
 
 Have you ever wondered how some apps and sites let you check the weather?
 
-In this tutorial, we're going to learn to build a web app that displays the current weather, using HTML, CSS, JavaScript, and a special ingredient... APIs!
+In this tutorial, we're going build a web app that displays the current weather, using HTML, CSS, JavaScript, and a special ingredient... APIs!
 
-With the power of [Open Weather](https://openweathermap.org/) and a bit of coding magic, we can check the weather by location.
+With the power of [Open Weather](https://openweathermap.org/) and a bit of coding magic, we can check our local weather forecast.
 
-By the end of this tutorial, you will have learned to utilize the following:
+By the end of this tutorial, you will have learned to:
 
-- Fetching asynchronous data with API secrets/keys.
-- Organizing content with a CSS layout model.
-- Changing what's on the rendered page.
+- Fetch asynchronous data with an API key.
+- Organize content with a CSS layout model.
+- Change what's on the rendered page.
 
-The finished weather will look and work like this:
+The finished weather app will look and work like this:
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/finished_weather_app.gif" alt="Finished Weather Application" />
 
@@ -64,20 +64,20 @@ First, we'll need to create the folders and files that will hold the code for ou
 ```
 mkdir weather-app
 cd weather-app
-touch index.html styles.css index.js
+touch index.html styles.css script.js
 ```
 
 This will create the following files in the **weather-app** folder:
 
 - An **index.html** file to render the application.
 - A **styles.css** file for customizing the appearance of our application.
-- An **index.js** file where we will fetch our weather data.
+- An **script.js** file where we will fetch our weather data.
 
 We will return to these files later on. But for now, let's head over to OpenWeather!
 
 ## Step 2: Get API Key From OpenWeather
 
-OpenWeather provides several APIs (or application programming interfaces) that feature interesting weather-related data. 
+OpenWeather provides several APIs (or application programming interfaces) for fetching weather-related data. 
 
 If you haven't already, you must create an OpenWeather account with a username, email, and password:
 
@@ -124,31 +124,31 @@ Next, let's add the following HTML inside the `<body>` element:
 
 ```html
 <body>
-<main>
-  <section id="weather-wrapper">
-    <h1>Weather App</h1>
-    <div id="weather-search">
-     <input id="search" type="text" placeholder="Search by city" />
-      <input id="submit" type="submit" onclick="fetchWeather()" value="Search" />
-    </div>
-    <div id="weather-data" style="display: none;"></div>
-  </section>
+  <main>
+    <section id="weather-wrapper">
+      <h1>Weather App</h1>
+      <div id="weather-search">
+        <input id="search" type="text" placeholder="Search by city" />
+        <input id="submit" type="submit" onclick="fetchWeather()" value="Search" />
+      </div>
+      <div id="weather-data" style="display: none;"></div>
+    </section>
   </main>
   <script src="script.js"></script>
 </body>
 ```
 
-The `<main>` element will hold all of our app structure, which includes a heading followed by two `<section>` elements:
+The `<main>` element holds all of our app structure, and includes a `<section>` element with the following:
 
-- One contains `<input>` elements that include an event listener, which activates a function when something happens to the element, such as being clicked (i.e., `onclick="fetchWeather()"`). 
-- The other one is empty for now, but will eventually be populated with weather data when we write the `fetchWeather()` event listener later on in this tutorial.
+- An `<h1>` heading element.
+- A `<div>` element with two `<input>` elements for searching for weather by city.
+- The other `<div>` is empty for now, but will be populated with the data returned by the `fetchWeather()` function we'll write later on.
 
 We also added a `<script>` element to connect our HTML with the **script.js** file.
 
-**Note:** The `<script>` element is written before the closing `</body>` tag to ensure all of the HTML is loaded and can be worked with by JavaScript.
+**Note:** The `<script>` element is written before the closing `</body>` tag to ensure all of the HTML is loaded and accessible to JavaScript.
 
 If we save the **index.html** file and open it on the browser, it should look like this:
-
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_html_only.png" alt="Rendered Weather App (HTML only)" />
 
@@ -158,10 +158,9 @@ It's looking pretty bare-bones right now. But not to worry! We'll take care of t
 
 Let's add a little pizazz to our weather app by styling it with CSS!
 
-For the most part, this step will feature plain CSS. However, we will also be using a fun layout model for CSS called Flexbox to better position our application content.
+For the most of this step, we will use plain CSS. However, we'll also use a fun layout model for CSS called Flexbox to help arrange our application content.
 
-
-Inside of our **styles.css**, let's begin by adding the following:
+Inside of our **styles.css** file, let's begin by adding the following:
 
 ```css
 * {
@@ -171,7 +170,7 @@ Inside of our **styles.css**, let's begin by adding the following:
 }
 
 body {
-  background-image: url(https://www.travellens.co/content/images/size/w2000/format/webp/2022/06/Dumbo-NYC.jpg);
+  background-image: url(https://bit.ly/4bcK1Hc);
   background-repeat: no-repeat;
   background-size: cover;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -183,7 +182,7 @@ Here's what we did in the snippet above:
 
 - First, we're selecting everything (i.e., `*`), defaulting the `margin` and `padding` to zero, and factoring the `padding` and `border` into element sizes with `box-sizing: border-box`.
 - Then, we're making the `body` as tall as the screen on which it is rendered with `100vh`. We're also setting its `font-family` information, with a default `sans-serif` font.
-- Lastly, we are setting a `background-image` by passing a PNG file of Brooklyn (where Codédex is based) to the `url()` function. Feel free to use your own image, though!
+- Lastly, we are setting a `background-image` by passing an image link of Brooklyn (where Codédex is based) to the `url()` function. Feel free to use your own image, though!
 
 Next, we're gonna select the `<main>` element and add the following styles:
 
@@ -194,9 +193,10 @@ main {
   top: 30%;
   border: 1px solid;
   border-radius: 5px;
-  padding: 2em;
-  width: 45%;
+  min-width: 540px;
+  max-width: 50%;
   margin: auto;
+  padding: 2em;
 }
 
 h1 {
@@ -204,15 +204,17 @@ h1 {
 }
 ```
 
-Starting from the top, we did the following:
+We styled the `<main>` element with the following:
 
-- We added a `background-color` with RGB values, as well as a fourth value that makes the `<main>` element 85% "see-through."
-- The `<main>` element was placed 30% from the `top` of the screen after being set with `position: relative`.
-- We added some box layer settings,  including `border`, `border-radius`, and `padding`, to the `<main>` element..
-- Since the `<main>` element is a block element, we centered it with a `width` of 40% and `margin: auto`. 
-- Lastly, we added some space below the `h1` element with `margin-bottom`.
+- We added a `background-color` with RGB values, as well as a fourth value that makes the element 85% "see-through."
+- It was given a `relative` position, and placed 30% from the `top` of the screen.
+- Some box layer settings were added, including `border`, `border-radius`, and `padding`.
+- We gave it a `min-width` of 540px and a `max-width` of 50%.
+- Since the `<main>` element is a block element, we centered it with `margin: auto`. 
 
-If we save our **styles.css** file at this point, our rendered weather app should look like this:
+Lastly, we added some space below the `h1` element with `margin-bottom`.
+
+Let's save our **styles.css** file. At this point, our rendered weather app should look like this:
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_1.png" alt="Rendered app with some CSS" />
 
@@ -221,11 +223,11 @@ Now, let's make the `<input>` elements appear larger to better match the `<h1>` 
 ```css
 #search {
   border-radius: 5px 0 0 5px;
+  border: none;
   padding: 10px;
   font-size: 16px;
   width: 70%;
-  height: 50px;
-  border: none;
+  height: 42px;
 }
 
 #submit {
@@ -237,11 +239,11 @@ Now, let's make the `<input>` elements appear larger to better match the `<h1>` 
 }
 ```
 
-Both of these elements get the same styles for `border-radius`, `padding`, and `font-size`.
+Both of these elements get the same styles for `padding`, and `font-size`.
 
-The `#search` element gets a 50% `width`, as well as a `height` of `50px` and no `border`.
+The `#search` element gets a 70% `width`, as well as a `height` of `42px` and no `border`.
 
-The `#submit` element gets a `width` of `10em`, along with a `cursor: pointer` style that makes the arrow turn into a pointing hand while hovering above this element.
+The `#submit` element gets a `width` of `5em`, along with a `cursor: pointer` style that makes the arrow turn into a pointing hand while hovering above this element.
 
 Let's save **styles.css** and re-render the page:
 
@@ -249,7 +251,7 @@ Let's save **styles.css** and re-render the page:
 
 Next, we're going to apply some CSS Flexbox to easily center-align the content in our weather app.
 
-Inside the `#weather-wrapper` and `#weather-search` elements, let's add the following:
+Select the `#weather-wrapper` and `#weather-search` elements, and add the following:
 
 ```css
 #weather-wrapper {
@@ -261,15 +263,16 @@ Inside the `#weather-wrapper` and `#weather-search` elements, let's add the foll
 }
 ```
 
-Since both `#weather-wrapper` and `#weather-search` contains child elements, `display: flex` turns them into flex containers. The elements in these containers become flex items that we can align with certain properties.
+This turns the `#weather-wrapper` and `#weather-search` elements into flex containers. Therefore, their child elements become flex items that we can align with certain properties.
 
-Go ahead and add the following:
+Update these elements with the following:
 
 ```css
 #weather-wrapper {
   display: flex;
   flex-direction: column;
   place-items: center;
+  justify-content: space-between;
 }
 
 #weather-search {
@@ -280,63 +283,23 @@ Go ahead and add the following:
 
 By default, flex items are displayed in a row. But we changed this for the `#weather-wrapper` element by setting `flex-direction` to `column`.
 
-To center-align the items, we used `place-items: center`. We also made the `#weather-search` element half the width of its parent `#weather-wrapper` element.
+To center-align the items, we used the `place-items` property. We also made the `#weather-search` element half the width of its parent `#weather-wrapper` element.
 
-Let's save the **styles.css** file now and re-render the page:
+If we save the **styles.css** file again, the rendered page should look like this:
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_3.png" alt="Rendered app with even more CSS added" />
 
-Next, we're going to apply some CSS Flexbox to easily center-align the content in our weather app.
+Excellent! Our app is coming together!
 
-Inside the `#weather-wrapper` and `#weather-search` elements, let's add the following:
-
-```css
-#weather-wrapper {
-  display: flex;
-}
-
-#weather-search {
-  display: flex;
-}
-```
-
-Since both `#weather-wrapper` and `#weather-search` contains child elements, `display: flex` turns them into flex containers. The elements in these containers become flex items that we can align with certain properties.
-
-Go ahead and add the following:
-
-```css
-#weather-wrapper {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-}
-
-#weather-search {
-  display: flex;
-  width: 50%;
-  gap: 5px;
-}
-```
-
-By default, flex items are displayed in a row. But we changed this for the `#weather-wrapper` element by setting `flex-direction` to `column`.
-
-To center-align the items, we used `place-items: center`. We also made the `#weather-search` element half the width of its parent `#weather-wrapper` element. Lastly, we maintained that space between the text input and the "Search" button with `gap: 5px`.
-
-Let's save the **styles.css** file now and re-render the page:
-
-<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/rendered_weather_app_with_css_4.png" alt="Rendered app with final CSS added" />
-
-Excellent! Our app is starting to look good!
-
-In the next step, we will be spending most of it writing JavaScript for our weather app. However, it will involve coming back to style our `#weather-data` element!
+In the next step, we will code the JavaScript for our weather app. However, it will involve coming back to style our `#weather-data` element!
 
 ## Step 5: Write JavaScript
 
-Remember the submit-type `<input>` element (`#submit`) we created in the last step? It had an `onclick` attribute set to a function called `fetchWeather()`.
+Remember the submit-type `<input id="submit" type="submit" >` element we created in the last step? It had an `onclick` attribute set to a function called `fetchWeather()`.
 
-In this final step, we are going to write this `fetchWeather()` function! Afterwards, when we type something and search with the “Get Weather" button, this function will execute every time.
+In this final step, we are going to write this `fetchWeather()` function! Afterwards, when we type something and use the "Search" button, this function will activate every time.
 
-### Define Global Variables
+### Define Our Function
 
 Let's open our **script.js** file and start by defining a new `fetchWeather()` function:
 
@@ -346,22 +309,22 @@ function fetchWeather() {
 }
 ```
 
-This function takes no parameters. Next, let's define a few global variables inside the function:
+This function takes no parameters. Next, let's create a few variables inside the function:
 
 ```js
 function fetchWeather() {
   let searchInput = document.getElementById("search").value;
   const weatherDataSection = document.getElementById("weather-data");
   weatherDataSection.style.display = "block";
-  const apiKey = “REPLACE WITH YOUR API KEY"; 
+  const apiKey = "REPLACE WITH YOUR API KEY"; 
 }
 ```
 
 In the snippet above, we did the following:
 
-- We created a  `searchInput` variable with the value of `#search` element we selected via `document.getElementById()`.
+- We created a `searchInput` variable with the `#search` element's value, selected via `document.getElementById()`.
 - We also selected the `#weather-data` element, where our search result will appear.
-  - When we first made this element in Step 3, its `display` property was set to none. We changed this to `block` in `fetchWeather()` so the weather data can be seen.
+  - When we first made this element in Step 3, its `display` property was set to `none`. We changed this to `block` in the function so the fetched data can be seen.
 - Lastly, we initialized an `apiKey` variable with a placeholder string. Make sure to replace this with your OpenWeather API Key (from Step 2).
 
 **Note:** Never, ever share your API keys in public to prevent hacking and inappropriate use of API services. If you intend on pushing your tutorial code to a place like GitHub, replace the value of `apiKey` with a comment or empty string.
@@ -372,20 +335,21 @@ Since we now have a variable representing the `#weather-data` element, let's add
 if (searchInput == "") {
   weatherDataSection.innerHTML = `
   <div>
-  <h2>Empty Input!</h2>
-  <p>Please try again with a valid <u>city name</u>.</p>
+    <h2>Empty Input!</h2>
+    <p>Please try again with a valid <u>city name</u>.</p>
   </div>
   `;
   return;
 }
 ```
+
+**Note:** Make sure this is done in the `fetchWeatherDate()` function.
+
 Next, let's define two inner functions that will help us with getting our weather information.
 
 ```js
 function fetchWeather() {
-  const searchInput = document.getElementById('search').value;
-
-  const apiKey = // REPLACE WITH YOUR API KEY
+  // Previous code
 
   async function getLonAndLat() {
 
@@ -399,8 +363,8 @@ function fetchWeather() {
 
 We need these functions to use two separate APIs from OpenWeather:
 
-- One for getting a location's longitude and latitude based on a typed name or zip code.
-- One for getting current weather information based on the longitude and latitude.
+- One gets a location's longitude and latitude coordinates from a typed name.
+- The other gets current weather data based on those coordinates.
 
 You may have noticed that these functions have the `async` keyword in front of them. We'll be using the companion `await` keyword, along with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch" target="_blank">`fetch()`</a> function, to ensure we get valid weather information each time.
 
@@ -408,16 +372,16 @@ You may have noticed that these functions have the `async` keyword in front of t
 
 First, let's write the code for the `getLonAndLat()` function that will use OpenWeather's GeoCoding API to return the longitude and latitude data based on our `searchInput`.
 
-For this tutorial, we're only going to search by location. Therefore, the `searchInput` should be a string of a valid location or city name (e.g., “Pittsburgh" or “Brooklyn, NY").
+We're only going to search by location. Therefore, the `searchInput` should be a string of a valid location or city name (e.g., “Pittsburgh" or “Brooklyn, NY").
 
 **Note:** But feel free to add more search criteria to this code (e.g., zip code)!
 
-Let's define two variables:
+Let's define two variables in `getLonAndLat()`:
 
 ```js
 async function getLonAndLat() {
-  const countryCode = 1
-  const geocodeURL = `https://api.openweathermap.org/geo/1.0/direct?q=${searchInput.replace(" ", "%20")},${countryCode}&limit=1&appid=${apiKey}`
+  const countryCode = 1;
+  const geocodeURL = `https://api.openweathermap.org/geo/1.0/direct?q=${searchInput.replace(" ", "%20")},${countryCode}&limit=1&appid=${apiKey}`;
 }
 ```
 
@@ -425,58 +389,60 @@ We defined a `countryCode` integer that is needed for the GeoCoding API to work.
  
 **Note:** The `countryCode` for the U.S. is 1, but yours may be different. Try searching for yours [here](https://countrycode.org/).
 
-To return the longitude and latitude data, we need to fetch it from the API. One way of doing this is with the web-based `fetch()` method.
+To return the longitude and latitude data, we need to fetch it from the API. Let's add the following to `getLonAndLat()`:
 
 ```js
-  const response = await fetch(geocodeURL);
-  if (!response.ok) {
-    console.log("Bad response! ", response.status);
-    return;
-  }
+const response = await fetch(geocodeURL);
+if (!response.ok) {
+  console.log("Bad response! ", response.status);
+  return;
+}
 ```
 
-This returns a response from OpenWeather's API. However, because this data is coming from another computer (probably a server), it may not be returned immediately. Also, the program is allowed to run ahead, even if there is no response yet.
+This returns a response object from the API. However, because this data is coming from another computer (probably a server), it may not be returned immediately. Also, the program is allowed to run ahead, even if there is no response yet.
 
-This is why we use `async/await`; the `await`-part prevents the associated `async` function from continuing until response data is returned from `fetch()`. We then store this in a `response` variable. If its HTTP status is anything but 200 or “good" (i.e., `!response.ok`), then an error message is logged and nothing is returned.
+This is why we use `async/await`; the `await`-part prevents the associated `async` function from continuing until response data is returned from `fetch()`. We then store this in a `response` variable. If we get a bad response (i.e., `!response.ok`), then an error message is logged and nothing is returned.
 
-Next, we want to get the actual geocode data in JSON (or JavaScript Object Notation). We can use the `response` object's `.json()` to do this! And since the data is coming from the response, this is returned asynchronously and so we must use the `await` keyword:
+Next, we want to get the actual geocode data in JSON (or JavaScript Object Notation). We can use the `response` object's `.json()` to do this! And since the data is coming from the response, it is asynchronous and we must use the `await` keyword:
 
 ```js
-  const data = await response.json();
+const data = await response.json();
 ```
 
-Similar to what we did for a case where the `searchInput` is empty, let's add a conditional statement for how what the app should display based on the value of `data`:
+Then, let's add the following `if`/`else` statement below where we defined `data`:
 
 ```js
-  if (data.length == 0) {
-    console.log("Something went wrong here.");
-    weatherDataSection.innerHTML = `
-    <div>
+if (data.length == 0) {
+  console.log("Something went wrong here.");
+  weatherDataSection.innerHTML = `
+  <div>
     <h2>Invalid Input: "${searchInput}"</h2>
     <p>Please try again with a valid <u>city name</u>.</p>
-    </div>
-    `;
-    return;
-  } else {
-    return data[0];
-  }
+  </div>
+  `;
+  return;
+} else {
+  return data[0];
+}
 ```
 
-If our API call for the longitude and latitude didn't go as planned, our `data` should be returned as an empty array and an error message will be rendered, instead. Otherwise, there should be a JSON object stored as the first element and we'll return that in the `else` clause.
+If our API call wasn't successful, our `data` array will be empty and an error message will be rendered. Otherwise, there should be a JSON object stored as the first element and we'll return that in the `else` clause.
+
+Now it's time to work on the next inner function!
 
 ### Write getWeatherData() Function
 
-Let's now write code for the `getWeatherData()` function. This accepts a `lon` and `lat` parameter that will be used in the API call for the current weather data. We will have gotten this information from the `getLonAndLat()` function we defined earlier.
+The `getWeatherData()` function accepts a `lon` and `lat` parameter that will be used in the API call for the current weather data. This information comes from the `getLonAndLat()` function we defined earlier.
 
-The `getWeatherData()` function will also work with response data from the `fetch()` function. Therefore, this function also gets the `async` keyword.
+Because this function will also works with fetched response data, it also gets the `async` keyword.
 
-This function is a little more straightforward. First, we'll define a `weatherURL` and assign the other OpenWeather endpoint:
+First, we'll define a `weatherURL` variable and assign the other OpenWeather API endpoint string to it:
 
 ```js
-const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 ```
 
-Next, we'll define a `response` variable and assign to it the object returned by the `fetch()` function with the `weatherURL` passed in. If there's a problem, we'll print an error message and return nothing. Otherwise, we'll press on and make another `data` object with the JSON object for the current weather data.
+Next, we'll define a `response` variable and assign to it the object returned by the `fetch()` function with the `weatherURL` passed in.
 
 **Note:** Don't forget the `await` keyword for the `response` and `data` variables!
 
@@ -490,6 +456,8 @@ if (!response.ok) {
 const data = await response.json();
 ```
 
+Like before, we'll print an error message and return nothing if there's a problem. Otherwise, we'll press on and make another `data` object with the JSON object for the current weather data.
+
 ### Display Weather Data
 
 For this next part, we'll finish work inside of the `getWeatherData()` function, as well as in the outer `fetchWeather()` function. We'll be displaying the `data` information we just got to our HTML file. Then, we'll get to actually see the requested API data displayed on the browser!
@@ -497,17 +465,17 @@ For this next part, we'll finish work inside of the `getWeatherData()` function,
 Using the weather information from the `data` variable, let's do the following with the `weatherDataSection`:
 
 ```js
-  weatherDataSection.innerHTML = `
-  <ImageZoom src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
-  <div>
+weatherDataSection.innerHTML = `
+<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
+<div>
   <h2>${data.name}</h2>
   <p><strong>Temperature:</strong> ${Math.round(data.main.temp - 273.15)}°C</p>
   <p><strong>Description:</strong> ${data.weather[0].description}</p>
-  </div>
-  `
+</div>
+`
 ```
 
-We used the `.innerHTML` property to assign some new HTML to the `#weather-data` element, such as:
+We used the `.innerHTML` property to assign some new HTML to the selected `#weather-data` element, such as:
 
 - `data.weather[0].icon` for an image representation of the current weather.
 - `data.name` for the location/city.
@@ -516,10 +484,10 @@ We used the `.innerHTML` property to assign some new HTML to the `#weather-data`
 
 We are now finished with writing the `getWeatherData()` function! But now, we need to actually use the functions we just defined to finish writing the outer `fetchWeather()` function.
 
-Near the closing curly brace `}` of the `fetchWeather()` function, let's add the following:
+Near the closing curly brace `}` of the outer `fetchWeather()` function, add the following:
 
 ```js
-document.getElementbyId("search").value = "";
+document.getElementById("search").value = "";
 const geocodeData = await getLonAndLat();
 getWeatherData(geocodeData.lon, geocodeData.lat);
 ```
@@ -536,33 +504,31 @@ async function fetchWeather() {
 }
 ```
 
-Let's save **script.js** and see what our rendered app now does when searching:
-
-<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/view-weather-with-html-css-js/finished_weather_app.gif" alt="Finished Weather Application" />
+Let's save **script.js** and test if our app now displays weather data when we search by location.
 
 ### Style Weather Data
 
 We're almost finished!
 
-There are just a few last things to do for both the CSS and JavaScript of this project. Our `#weather-data` element is behaving as expected, but now let's style it a bit more!
+There are just a few last things to do for both the CSS and JavaScript files. Our `#weather-data` element is behaving as expected, but now let's style it a bit more!
 
-First, let's make it so the weather information is placed beside the weather icon. We can do this by changing the `display` property of the `weatherDataSection` variable from `"block"` to `"flex"`:
+In the `getWeatherData()` function, let's place the weather information beside the icon by changing the `display` property of the `weatherDataSection` variable from `"block"` to `"flex"`:
 
 ```js
-  weatherDataSection.style.display = "flex";
-  weatherDataSection.innerHTML = `
-  <ImageZoom src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
-  <div>
+weatherDataSection.style.display = "flex";
+weatherDataSection.innerHTML = `
+<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
+<div>
   <h2>${data.name}</h2>
   <p><strong>Temperature:</strong> ${Math.round(data.main.temp - 273.15)}°C</p>
   <p><strong>Description:</strong> ${data.weather[0].description}</p>
-  </div>
-  `
+</div>
+`
 ```
 
-We made the `#weather-data` element a flex container with JavaScript code… wow!
+We made the `#weather-data` element a flex container with JavaScript code... wow! Go ahead and save **script.js**.
 
-Next, let's save **script.js** and re-open the **styles.css** file, and add the following to the bottom:
+Now, re-open the **styles.css** file and add the following to the bottom:
 
 ```css
 #weather-data {
@@ -591,7 +557,7 @@ In the snippet above, we added some more styles to the `#weather-data` element, 
 
 ## Conclusion
 
-Congratulations, we are now finished with building our weather application!
+Congratulations! We finished building our weather application!
 
 Let's go ahead and save our **styles.css** file one last time! Refresh the rendered page and try typing in your favorite city:
 
@@ -605,10 +571,9 @@ Using the three building blocks of HTML, CSS, and JavaScript, we were able to bu
 
 How would you build upon this application? Some ideas could be adding more data like humidity and wind/gust speed, or including a 5- or 10-day forecast.
 
-View the source code [here](https://github.com/codedex-io/projects/blob/main/projects/view-weather-with-html-css-js/weather-app).
-
 ### More Resources
 
+- [Source code for this tutorial](https://github.com/codedex-io/projects/blob/main/projects/view-weather-with-html-css-js/weather-app)
 - [OpenWeather API page](https://openweathermap.org/api)
 - [Basic DOM Manipulation (MDN Documentation)](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents#active_learning_basic_dom_manipulation)
 - [Asynchronous Programming (Chapter from Eloquent JavaScript book)](https://eloquentjavascript.net/11_async.html)
