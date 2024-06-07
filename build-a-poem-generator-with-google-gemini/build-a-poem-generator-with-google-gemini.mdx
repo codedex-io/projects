@@ -96,18 +96,18 @@ At this point, our API key should be ready to go! Let's use the current Google g
 
 Your function should now look like so
 ```js
-  const fetchPoem = async () => {
-    try {
-      const genAI = new GoogleGenerativeAI('YOUR_API_KEY');
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt = "AI PROMPT HERE";
-      const result = await model.generateContent(prompt);
-      const text = result.response.text();
-      setResponse(text);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+const fetchPoem = async () => {
+  try {
+    const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const prompt = "AI PROMPT HERE";
+    const result = await model.generateContent(prompt);
+    const text = result.response.text();
+    setResponse(text);
+  } catch (err) {
+    setError(err.message);
+  }
+};
 ```
 
 ### More on Prompting
