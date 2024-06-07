@@ -3,7 +3,7 @@ title: Build a Poem Generator with Google Gemini
 author: Katherin Solis
 uid: Zai06xd7TDfDZgzx6MjUgvwYJe32
 datePublished: 
-description:
+description: Learn how to use the Google Generative AI model to generate poems in different styles.
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/
 published: false
 tags:
@@ -11,15 +11,37 @@ tags:
   - javascript
 ---
 
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-poem-generator-with-google-gemini/header.png"
+  description="Header Image"
+  uid={true}
+  cl="for-sidebar"
+/>
+
 # Build a Poem Generator with Google Gemini
 
-Prerequisites: Javascript, HTML, CSS
-Versions: Node.js 18, Vite 5, React 18 
-Read Time: 45 minutes
+<AuthorAvatar
+  author_name="Katherin Solis"
+  author_avatar="/images/projects/authors/katherin_solis.png"
+  username="katherin"
+  uid={true}
+/>
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-poem-generator-with-google-gemini/header.png"
+  description="Header Image"
+  uid={true}
+/>
+
+**Prerequisites:** HTML, CSS, JavaScript fundamentals
+**Versions:** Node.js 18, Vite 5, React 18 
+**Read Time:** 45 minutes
 
 ## Introduction
 
 Words, lyrics, music, poetry. Whether it's John Lennon or William Blake, songwriters and poets manage to express feelings that appeal to generations with their writing style. Now imagine if you could combine their styles or even create a new style. In this project tutorial, we will create a poem-generating website using the power of Google Gemini. The poem below changes after a certain number of seconds to always keep you inspired. The best part is that you can customize this completely based on your preferences by the end of this tutorial.
+
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-poem-generator-with-google-gemini/poem_ai_screen_result.png" description="generator demo"/>
 
 Before we dive into the wonders of literary voices and how their styles can be mimicked, let's go over the basics of what you will need to complete this project.
 
@@ -115,19 +137,19 @@ const fetchPoem = async () => {
 Like ChapGPT, Google Gemini is made of LLMs that use NLP to interpret and respond to user inputs. LLMs (short for "Large Language Models") are machine learning models that can understand and generate text based on human language patterns. NLP (short for "Natural Language Processing") is the technology that lets models interpret and manipulate human language. Much like any conversation, you have to have good prompts to experience the best results.
 Prompting on Gemini is like prompting for any other LLM. Here are some things you should remember as you write your prompt.
 
-`💬 Natural Language`: talk to the language model as if you are giving instructions to a stranger.
+💬 **Natural Language:** talk to the language model as if you are giving instructions to a stranger.
 - If you want: a poem that rhymes about sunsets
 - Prompt for: "write me a sonnet about sunsets in New York"
 
-`🎯 Precise Instructions`: avoid using vague or filler words. (e.g., "like, some, a few")
+🎯 **Precise Instructions:** avoid using vague or filler words. (e.g., "like, some, a few")
 - If you want: a short poem about tea
 - Prompt for: "write me haiku about earl grey"
 
-`😊 Context`: the more context you provide the more useful Gemini can be.
+😊 **Context:** the more context you provide the more useful Gemini can be.
 - If you want: a fish poem in Dr.Seuss style
 - Prompt for: "write a poem about fish using an anapestic tetrameter in the style of Dr.Seuss"
 
- `🔑 Keywords`: Gemini works better when specific keywords are used in the prompt.
+🔑 **Keywords:** Gemini works better when specific keywords are used in the prompt.
 - If you want: a poem similar to work by Rupi Kaur
 - Prompt for: "write me a 10-word poem in the tone of milk and honey by rupi kaur."
 
@@ -172,15 +194,24 @@ return (
 ## Congrats
 
 You just created your very own poem generator! Here is how you can take your poem generator to the next level 🚀
-- Deploy the Website: [Learn to deploy with Vercel here.](https://www.codedex.io/projects/deploy-a-website-with-vercel)
-- Add a Clock
+- Prompt a user to input their own poem style
+- Add a feature to save poems
+- Design and add CSS
+- Add a Clock component to display the time
+- Generate poems in different languages
+- Create a feature to share poems on social media
+- Generate poems based on a user's mood
+
+Here are some examples we made to inspire your creativity:
+
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-poem-generator-with-google-gemini/poem_css_examples" description="generator css demos"/>
 
 ## More Resources
 Hope you had fun generating poems, here are some helpful links!
 
 - [Source Code] (https://github.com/codedex-io/projects/blob/8591ffd6fe547e79d551c7cbc81c455a3d63741d/build-a-poem-generator-with-google-gemini/PoemWidget.jsx)
-- [Gemini Documentation](https://ai.google.dev/gemini-api/docs)
-- [Intro to LLM](https://developers.google.com/machine-learning/resources/intro-llms)
+- [Google Gemini Documentation](https://ai.google.dev/gemini-api/docs)
+- [Intro to LLMs](https://developers.google.com/machine-learning/resources/intro-llms)
 - [Codédex Discord](https://discord.com/invite/HCShtBqbfV)
 
 Share your poems! We would love to see what you built, so make sure to tag us [@codedex_io on Twitter](https://twitter.com/codedex_io) ✍️
