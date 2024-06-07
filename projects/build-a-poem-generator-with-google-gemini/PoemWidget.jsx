@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-function GptResponse() {
+export default function PoemBox() {
   const [response, setResponse] = useState("");
   const [error, setError] = useState(null);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -51,5 +51,3 @@ function GptResponse() {
     </div>
   );
 }
-
-export default GptResponse;
