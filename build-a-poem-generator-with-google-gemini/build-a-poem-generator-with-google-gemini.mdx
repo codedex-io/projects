@@ -144,15 +144,15 @@ Let’s use a handy `useEffect()` hook to create an interval!
 
 ```js
 useEffect(() => {
-    // Fetch a poem on initial render
-    fetchPoem();     
+  // Fetch a poem on initial render
+  fetchPoem();     
 
-    // Fetch a new poem every 30 seconds
-    const poemIntervalId = setInterval(fetchPoem, 30000);
-    return () => {
-      clearInterval(poemIntervalId); // Cleanup poem interval on component unmount
-    };
-  }, []);
+  // Fetch a new poem every 30 seconds
+  const poemIntervalId = setInterval(fetchPoem, 30000);
+  return () => {
+    clearInterval(poemIntervalId); // Cleanup poem interval on component unmount
+  };
+}, []);
 ```
 
 ## Completion
