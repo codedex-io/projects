@@ -107,7 +107,7 @@ As mentioned before, we will be working with A-frame web to build our VR solar s
 
 We are going to use image files to represent the textures (or appearance) of the night sky, Sun, and planets of our solar system!
 
-Under the same directory as your **index.html** file, create a new **planet_textures/** folder. Next, you can find the texture files for our system [here](https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-vr-solar-system-with-a-frame/planet_textures). Go ahead and download each file and add them to your **planet_textures/** folder.
+Under the same directory as your **index.html** file, create a new **planet_textures/** folder. Next, you can find the texture files for our system [here](https://github.com/codedex-io/projects/tree/main/projects/create-a-vr-solar-system-with-a-frame/planet_textures). Go ahead and download each file and add them to your **planet_textures/** folder.
 
 ## Start with the Sky
 
@@ -224,7 +224,7 @@ You can also refer to the table below with information derived from [NASA's data
 For example, if we want to add Mercury with the information from the table above:
 
 ```html
-<a-sphere id="mercury" position="3.9 1.25 -5" radius="0.1" src="planet_textures/mercury.jpeg" rotation="0 0 0" animation="property: rotate; to: 0 360 0; loop: true; dur: 58650"></a-sphere>
+<a-sphere id="mercury" position="3.9 1.25 -5" radius="0.1" src="planet_textures/mercury.jpeg" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 58650"></a-sphere>
 ```
 
 **Note:** Don't forget to add a fun image to the `src` attribute for each planet!
