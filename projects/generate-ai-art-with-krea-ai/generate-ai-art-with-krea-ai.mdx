@@ -1,0 +1,167 @@
+---
+title: Generate AI Art with Krea.AI
+author: Katherin Solis
+uid: Zai06xd7TDfDZgzx6MjUgvwYJe32
+datePublished: 2024-06-20
+description: Learn how to create AI generated images using Krea.AI
+header: 
+published: false
+tags:
+  - beginner
+---
+
+<BannerImage
+  link=""
+  description="Header Image"
+  uid={true}
+  cl="for-sidebar"
+/>
+
+# Generate AI Art with Krea.AI
+
+<AuthorAvatar
+  author_name="Katherin Solis"
+  author_avatar="/images/projects/authors/katherin_solis.png"
+  username="katherin"
+  uid={true}
+/>
+
+<BannerImage
+  link=""
+  description="Header Image"
+  uid={true}
+/>
+
+**Prerequisites:** HTML, CSS
+**Versions:** Krea AI Free Account
+**Read Time:** 15 minutes
+
+## Introduction
+
+Ever wondered how AI can transform your ideas into stunning visuals?
+
+<RoundedImage
+  link="https://github.com/codedex-io/projects/blob/add-krea-ai/projects/generate-ai-art-with-krea-ai/Krea%20intro.gif"
+  description="krea intro"
+/>
+
+Similar to how we learned to pick up on context clues in conversations or text, AI image models reference their knowledge base to output images based on prompts. [Krea](https://www.krea.ai/home) is an AI image model that can help you visualize your text. 
+
+In this tutorial, we will be creating a wallpaper using Krea’s pattern tool.
+
+<RoundedImage
+  link="https://github.com/codedex-io/projects/blob/add-krea-ai/projects/generate-ai-art-with-krea-ai/krea%20demo.gif"
+  description="krea demo"
+/>
+
+## How Krea Works
+
+AI image models like Krea work based on anticipation. The image generators are trained using Language Learning Models (LLM).
+
+Predicting images is very similar to predicting words. Let’s think of fill-in-the-blanks statements. When you are given a sentence such as:
+
+```
+Dear (name), You are (adverb) invited!
+```
+
+You can easily interpret this as an invitation and fill in the blanks. You can anticipate an invitation and fill this in accordingly.
+
+```
+Dear Ellie, You are enthusiastically invited!
+```
+
+Now, let’s make it a little harder:
+
+```
+This summer we will take a vacation in (adjective). Please respond with a (verb) to confirm your attendance.
+```
+
+This fill-in-the-blank statement is a little harder to complete without any context. This can easily be an invitation to anywhere in the world and there are so many ways to confirm attendance. So what exactly do fill-in-the-blank statements have to do with generative image models?
+
+We can identify context clues to successfully fill in the blanks regardless of the amount of text you are presented with. Let’s think of context as noise. **Noise** in generative modeling is not sound, it is random variation in an image.
+
+<RoundedImage
+  link="https://github.com/codedex-io/projects/blob/add-krea-ai/projects/generate-ai-art-with-krea-ai/cat%20noise.png"
+  description="Cat Noise"
+/>
+
+[Source](https://developer.nvidia.com/blog/improving-diffusion-models-as-an-alternative-to-gans-part-1)
+
+Image models are trained to reduce the noise, engineers do this by taking real images and adding a little noise to them. The models are then asked to look through the noise and correctly return a cohesive image. Like an Olympic athlete, models go through extensive training to look through the noise. Standout models such as [DALL-E](https://openai.com/index/dall-e-3/) can find images in extreme noise. Much like our fill-in-the-blank sentences, these image generators try different variations to return a cohesive image.
+
+<RoundedImage
+  link="https://github.com/codedex-io/projects/blob/add-krea-ai/projects/generate-ai-art-with-krea-ai/cute%20frog.gif"
+  description="Cute Frog"
+/>
+[Source](https://x.com/krea_ai/status/1748045292405195198)
+
+## Vector Space
+
+For the image-generating model to return exactly what we picture in our mind through the noise, we need to define our prompts. Let’s go back to our fill-in-the-blank statements.
+
+```
+This summer we will take a vacation in (adjective). Please respond with a (verb) to confirm your attendance.
+```
+
+This is a lot easier to fill in if I share that this invitation is for a “voice-message-loving family who loves the Mediterranean”. This narrows down our choices for adjectives and we can safely assume the verb in question is a “voice message”.
+
+LLMs are trained to cluster concepts on a vector space. An LLM will find the next word in a sentence by looking for it in a vector space. An LLM will predict our adjective based on the context in our fill-in-the-blank example. Since the Mediterranean is mentioned in the context, it will look for a word in that vector space. In this case, an LLM will fill in the “adjective” blank with countries or popular family-friendly destinations in the Mediterranean.
+
+<RoundedImage
+  link="https://github.com/codedex-io/projects/blob/add-krea-ai/projects/generate-ai-art-with-krea-ai/vector%20space.png"
+  description="Vector Destinations"
+/>
+
+Just like an LLM can correctly fill in the blank with context, we can ask our generative image models to focus on a particular region of vector space through prompting. Similar to context, the more specific the prompt the better. The more specific a prompt, the smaller the target in the vector becomes and the better the results.
+
+## Getting Started with Krea
+
+Now that we know a little more about what goes on behind image-generating models, it’s time to get started with Krea. 
+
+After you sign up for a free account, head for the “Pattern Tool” on the home page.
+
+<RoundedImage
+  link="https://github.com/codedex-io/projects/blob/add-krea-ai/projects/generate-ai-art-with-krea-ai/locate%20tool.gif"
+  description="Locate Pattern Tool"
+/>
+
+## Create a Pattern
+
+Time to build! 
+When you use the “Pattern Tool”, you will be asked for two different inputs.
+
+<RoundedImage
+  link="https://github.com/codedex-io/projects/blob/add-krea-ai/projects/generate-ai-art-with-krea-ai/Pattern%20tool.gif"
+  description="Pattern Tool"
+/>
+
+### Prompt
+
+- Just like prompting ChatGPT, remember to be as descriptive as possible. In the prompt box, you will need to specify what you wish for your pattern to visually look like.
+
+### Pattern
+
+- A pattern is the shape that Krea will generate images around. Krea provides a few select patterns that are readily available for your use and even allows you to upload your own.
+
+After you select a pattern and fill in the prompt, hit generate. Wall paper generated! 🎉
+
+## Have Fun
+
+Remember that Krea is generating images based on your prompt and selected pattern and may require a few iterations to generate a cohesive image. Krea makes generative image processing fun to work with. If you want to take it to the next level, Krea also offers [AI Video generation](https://www.krea.ai/apps/video/v1).
+
+If you want some inspiration, look at the examples of patterns and prompts below and try to guess the album covers that inspired the prompts. 🔍
+
+<RoundedImage
+  link="https://github.com/codedex-io/projects/blob/add-krea-ai/projects/generate-ai-art-with-krea-ai/Krea_albums.png"
+  description="Krea album"
+/>
+
+## Congrats
+
+🚀 That’s a wrap! You just created your very own wallpaper. Hope you had fun generating AI-powered images, here are some helpful links to make your wallpaper stand out! 
+
+- [Krea Discord](https://discord.com/invite/rJurUAR8Kz) 
+- [Codédex Discord](https://discord.com/invite/HCShtBqbfV)
+- [Getting Started with Prompts](https://huit.harvard.edu/news/ai-prompts-images)
+
+Share your creation! We would love to see what you spun up, so make sure to tag [@codedex_io](https://twitter.com/codedex_io) and [@krea_ai](https://x.com/krea_ai) on Twitter. 🫶
