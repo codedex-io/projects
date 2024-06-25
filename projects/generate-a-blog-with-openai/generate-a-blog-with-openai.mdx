@@ -63,7 +63,7 @@ Now we know what we'll be working with, let's build the program!
 
 ### OpenAI Account
 
-Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'll need this account access to an API key that we can use to work with GPT-3.
+Before we do anything, we need an [OpenAI](https://openai.com/api) account. We'll need this to access an API key for using GPT-3. Note that OpenAI no longer offers free credits, so you'll need to purchase at least 5 dollars worth of credits to start using the API.
 
 > [API (Application Programming Interface)](https://en.wikipedia.org/wiki/API) is a way for two computers to communicate with each other. Think of it like two friends texting back and forth. An API key is a code we receive to access the API. Think of it like an important password, so don’t share it with others!
 
@@ -74,8 +74,6 @@ After you've created an account, click on your profile picture on the top right,
 <RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/generate-a-blog-with-openai/api-key.png" description="API Key"/>
 
 Now that we know where the API key is located, let's keep it in mind for later.
-
-With the API key, we get access to GPT-3 and \$18 worth of free credit. Meaning that we can use GPT-3 for free until we go over the \$18, which is more than enough to complete this project.
 
 ### Python Setup
 
@@ -327,14 +325,14 @@ For GPT-3, the rate limit is 20 requests per minute. As long as we don't run the
 
 ### Credit Limit
 
-By this point, if you have been playing with the API nonstop, there's a chance that you might have exceeded the $18 limit. The following error is thrown when that happens:
+By this point, if you have been playing with the API nonstop, there's a chance that you might have exceeded your purchased credit limit. The following error is thrown when that happens:
 
 ```bash
 openai.error.RateLimitError:  
 You exceeded your current quota, please check your plan and billing details.
 ```
 
-If that's the case, go to OpenAI's [Billing overview](https://beta.openai.com/account/billing/overview) page and create a paid account.
+If that's the case, go to OpenAI's [Billing overview](https://platform.openai.com/settings/organization/billing/overview) page and purchase additional credits.
 
 Let's take another breather. We're almost done!
 
