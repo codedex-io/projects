@@ -1,4 +1,4 @@
-# Create a GIF with Python 🎬
+# Create a GIF with Python 🎞️
 # Sonny Li
 
 import imageio.v3 as iio
