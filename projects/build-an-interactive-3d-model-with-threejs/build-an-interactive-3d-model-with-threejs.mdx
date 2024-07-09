@@ -1,0 +1,348 @@
+---
+title: Build an Interactive 3D Model with Three.js
+author: Ellie Popoca
+uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
+datePublished: 
+description: Learn how to load a 3D Model using the JavaScript library Three.js for your website.
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-3d-model-with-threejs/header.gif
+published: false
+tags:
+  - intermediate
+  - javascript
+  - html/css
+---
+
+<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-3d-model-with-threejs/header.gif" description="Title Image" uid={true} cl="for-sidebar"/>
+
+# Build an Interactive 3D Model with Three.js
+
+<AuthorAvatar
+  author_name="Ellie Popoca"
+  author_avatar="/images/projects/authors/ellie-popoca.jpg"
+  username="exrlla"
+  uid={true}
+/>
+
+<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-3d-model-with-threejs/header.gif" description="Title Image" uid={true}/>
+
+
+## Introduction 
+
+Think of one of the coolest websites you've ever seen… Do they have some cool 3D scroll effects or interactive elements? Some of the coolest websites online right now are leveled up with the power of 3D graphics! 🔥
+
+<RoundedImage link="https://imgur.com/sanPQ8f" description="Threejs library 3D examples"/>
+
+Chances are, these websites are powered by WebGL (Web Graphics Library), a JavaScript API that lets us create 3D graphics! [Three.js](https://threejs.org/) is a JavaScript library built on top of WebGL that's easier to program with, and it can draw and render 3D components on the browser! 🌎
+
+In this project tutorial, we'll cover the basics of Three.js, and how to load a GLB/GLTF file that holds a 3D render of a Shiba dog! 🐶
+
+<RoundedImage link="https://imgur.com/6HR53d3" description="3D Shiba dog moving in 3D space"/>
+
+We'll interact with the Shiba to move it around the canvas and create a jumping animation! ✨ (Yes, she's on a website!) 
+
+Let's get coding! ദ്ദി (˶ᵔ ᵕ ᵔ˶)~✧
+
+## Setup Dev Environment
+
+For this project, we'll be using [Node.js](https://nodejs.org) to load and manage dependencies. We'll also be using [Vite](https://vitejs.dev/guide/) as our build tool to compile our website! 
+
+- Test if Node version 18+ is installed with `node -v` or Install [here](https://nodejs.org/en/download/package-manager).
+- [Create your Vite application](https://www.codedex.io/projects/create-a-react-app-with-vite).
+
+```terminal
+npm create vite@latest
+```
+- Name your project
+- Select the **Vanilla** framework template.
+- Select the **JavaScript** variant.
+
+You now have your project folder set up! 🚀
+
+Let's go ahead and open this folder in your code editor of choice. In your project folder directory, run the following commands:
+
+```terminal
+npm i 
+npm run dev 
+```
+
+You should now see the Vite logo, and your development environment all set up! 
+
+<RoundedImage link="https://imgur.com/hWcsGF7" description="Boilerplate default website with Vanilla JavaScript and the Vite logo"/>
+
+Set up a blank slate and remove the boilerplate code provided by Vite. Replace the following files:
+- **main.js** and erase all the code
+- **/public** folder, and delete all its contents
+- **counter.js**  and delete
+- **index.html** and delete all to replace with the following code block
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐕</text></svg>"
+    />
+    <title>Three.js Project</title>
+  </head>
+  <body>
+    <script type="module" src="/main.js"></script>
+    <div id="canvas-container">
+      <canvas></canvas>
+    </div>
+  </body>
+</html>
+```
+
+Your project directory should look like the following:
+
+```terminal
+project-name/
+  ├── node_modules/
+  ├── public/
+  ├── .gitignore
+  ├── index.html
+  ├── main.js
+  ├── package-lock.json
+  ├── package.json
+  └──style.css
+```
+
+Now, without any further delay, let's move on to all the fun 3D jazz! 
+
+## The World of 3D
+
+Before we start coding, let's understand the Three.js library a bit and its shenanigans to know how exactly 3D objects are placed in 2D space. 
+
+For any 3D scene (think of your favorite 3D animated movie), we need shapes or **geometries**. This will be our Shiba dog! Additionally, there are **textures and materials**, **lights**, and the **camera perspective**. The scene is our container for all of our assets.
+
+<RoundedImage link="https://imgur.com/a3eCzf8" description="3D Shapes, Mesh, and Lighting" />
+
+### The Camera
+
+<RoundedImage link="https://imgur.com/Nj3ijwx" description="Visualization of the perspective camera" />
+
+The diagram above shows us the view of a **Perspective Camera**. Three.js offers a variety of cameras, but for this project, we will stick with the one most similar to visualizing an object through human eyes. 
+
+In Three.js, we define a camera as such:
+
+```js
+const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+```
+- `fieldOfView`: FOV is the extent of the scene that is seen on the display at any given moment. The value is in degrees.
+- `aspectRatio`: Typically, the width of the element divided by the height
+- `nearPlane`: Objects closer to the camera than the value of `near` are clipped, or not rendered
+- `farPlane`: Objects further away from the camera than the value of `far` are clipped, or not rendered.
+- The near and far clipping planes make up the **View Frustum**, which controls which objects will be visible to the camera itself. 
+
+We'll add actual code values in the next section! 🤩
+
+## Make a Scene 
+
+Let's go ahead and use npm to install Three.js: 
+
+```terminal
+npm i three
+```
+
+For the rest of the tutorial, we'll be writing code in our **main.js** file! 
+
+Let's get started and import Three.js in our file, and the GLTF loader, which will allow us to load the 3D Shiba model! 
+
+```js
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+```
+
+Let's now create a new scene that we'll call `scene`, and create the new perspective camera that we'll call `camera`. 
+
+```js
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+```
+Above, we have defined the typical default values for our field of view angle, aspect ratio, and view frustum. Once we have our model loaded later on, feel free to experiment with these values! 😀
+
+Now, we need to use the Three.js Renderer to render our model on our page, and we'll use the `document.querySelector` to render our 3D model, and set the size and color. 
+
+```js
+const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('canvas') });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(new THREE.Color(0xffffff)); // hex for white
+```
+
+### GLTFLoader
+
+Inside your **/public** folder, we're going to add our Shiba GLB file. 
+- Click and download the Shiba [file here](https://drive.google.com/uc?export=download&id=1-AZ2VwfGrDLcha0b5HlDWwRJ9QqK3m9r) 
+- Not a Shiba fan? No worries! [Sketchfab](https://sketchfab.com/3d-models?features=downloadable&sort_by=-likeCount&cursor=bz0xJnA9MjUwMQ%3D%3D) is an online community with hundreds of 3D models for you to pick from. Be sure to download either the GLTF or GLB file for this project. 
+
+Let's now create a new `GLTFLoader` object, and create a function that will load our Shiba model to work alongside Three.js. Additionally, let's also add a line of code that changes the position of the camera to “zoom out” and places the Shiba model farther in the z-direction. Be sure to switch the values out depending on how far away or close you want the model to be.
+
+<RoundedImage link="https://imgur.com/BT6iqFa" description="X, Y, and Z coordinate plane" />
+
+```js
+const loader = new GLTFLoader();
+
+let shiba;
+loader.load(
+    './shiba.glb', // Replace with the path to your Shiba model
+    function (gltf) {
+        shiba = gltf.scene;
+        scene.add(shiba);
+    },
+    undefined,
+    function (error) {
+        console.error(error);
+    }
+);
+
+camera.position.z = 5;
+```
+
+Now, let's create the `animate()` function which will set up an animation loop and render the scene we have created. The function is recursively calling itself using `requestAnimationFrame`. This creates an infinite loop where the browser continuously calls the animate function! 
+
+```js
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+
+animate();
+```
+Let's take a look at our site!
+
+<RoundedImage link="https://imgur.com/ZCkQvI4" description="3D Shiba Model on a blank webpage"/>
+
+Your site should now have our little Shiba dog!!!! You'll notice now, our Shiba dog is immovable… 
+So, let's learn about Orbit Controls! 🛰️
+
+## Orbit Controls
+
+Using our mouse or trackpad, we want to be able to control Shiba and move her around in our 3D scene. At the top of our imports, let's go ahead and import the `OrbitControls` class provided by Three.js. Our imports at the top of **main.js** should now look like the following:
+
+```js
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+```
+
+After the renderer variable, let's go ahead and add in a couple of lines of code!
+
+```js
+// const renderer = new THREE.WebGLRenderer();
+// renderer.setSize(window.innerWidth, window.innerHeight);
+// document.body.appendChild(renderer.domElement);
+
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; // enable damping
+```
+
+Here, we've initialized the Orbit Controls, which takes the camera and the HTML element that connects the 3D Model to the browser as arguments. We have also enabled damping, which is just a fun way of making the camera movements smoother by slowing down the camera's motion when the user stops interacting with the controls.
+
+Let's now update our `animate()` function to include the orbit controls. We'll use a built-in method called `.update()` to update the controls. Your function should now look like this:
+
+```js
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update(); // Update controls with damping
+  renderer.render(scene, camera);
+}
+
+animate();
+```
+
+<RoundedImage link="https://imgur.com/Kq9blDK" description="Cursor moving the 3D Shiba Model in a spinning motion"/>
+
+Try to move your shiba now! („• ֊ •„)੭
+
+## Click to Jump
+
+Woohoo! We have a working movable Shiba dog! Now, let's make the Shiba jump every time we click on her to have another layer of interactivity. 
+
+Let's start by installing an additional library that's going to help us create and animate our Three.js object called GSAP. Enter the following command in your terminal: 
+
+```terminal 
+npm i gsap
+```
+
+Then, add GSAP to the imports at the top of the file. Your imports should now include the following:
+
+```js
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import gsap from 'gsap';
+```
+
+We now need a couple of things to activate our click-to-jump Shiba dog:
+
+The intersection point of the Shiba dog and your click. 
+The coordinates of where you click.
+
+Luckily, we have some objects from Three.js to help us out! We're going to add a raycaster object which performs “raycasting”, a technique for detecting the intersection of a line with objects in a 3D scene. We will also create a vector object that holds the mouse coordinates! 
+
+Let's add these lines of code above the `animate()` function
+
+```js
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+```
+
+Under these lines of code, let's create a function called `onDocumentMouseDown()`. We want 
+this function to handle mouse-down events on our page to detect clicks on the Shiba in a Three.js scene and trigger the jump! 
+
+Let's create this function that takes in `event` as a parameter, and normalizes the device coordinates. Then, check if the shiba is intersected by the raycaster ray, and make it jump if the value is greater than one, or has intersected. 
+
+```js
+function onDocumentMouseDown(event) {
+    event.preventDefault();
+
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    const intersects = raycaster.intersectObjects(scene.children, true);
+
+    if (intersects.length > 0) {
+        const jumpHeight = 1.5;
+        const jumpDuration = 0.4;
+        gsap.to(shiba.position, { y: jumpHeight, duration: jumpDuration, yoyo: true, repeat: 1, ease: "power1.inOut" });
+    }
+}
+```
+
+You'll notice that when you try to click on your site, the shiba doesn't jump 😞. Add an event listener that will detect the mouse click, and run the `onDocumentMouseDown()` function! 
+
+Add this line after the end of the function you just made. 
+
+```js
+document.addEventListener('mousedown', onDocumentMouseDown, false);
+```
+
+CLICK ON SHIBA! 
+
+<RoundedImage link="https://imgur.com/0l9WifA" description="Zoomed in 3D Shiba on a webpage"/>
+
+## Congrats!
+ 
+Woohoo! ✨Congratulations on creating your first Three.js project! 
+
+There are no limits to how you can continue to develop your website or project. Here are a few ideas to get you inspired:
+ 
+- Use [polycam](https://poly.cam) to 3D scan your own object and download it as a GLB file.
+- Add a background image to your website.
+- Have the 3D object get closer as you scroll.
+- Have two 3D objects interact with each other.
+- Create a personal portfolio with rotating objects.
+
+## More Resources
+
+Check out the [live demo version](https://3d-shiba-dog.vercel.app) here! Here are some helpful resources as well to help you with your future Three.js endeavors! 
+- [Installing Three.js](https://threejs.org/docs/#manual/en/introduction/Installation) 
+- [Creating a Scene in Three.js](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene) 
+- [Three.js examples](https://threejs.org/examples/#webgl_depth_texture) 
+
+Feel free to also check out the [source code](https://github.com/exrlla/SHIBAAA3D) for this project! ✨We would love to see what you build with this tutorial! Tag [@codedex_io](https://twitter.com/codedex_io), [@threejs](https://twitter.com/threejs) and [@exrlla](https://x.com/exrlla) on Twitter if you make something cool! ₊˚⊹ᰔ
