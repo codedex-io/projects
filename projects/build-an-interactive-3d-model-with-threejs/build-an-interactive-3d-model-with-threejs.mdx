@@ -30,13 +30,13 @@ tags:
 
 Think of one of the coolest websites you've ever seen… Do they have some cool 3D scroll effects or interactive elements? Some of the coolest websites online right now are leveled up with the power of 3D graphics! 🔥
 
-<RoundedImage link="https://imgur.com/sanPQ8f" description="Threejs library 3D examples"/>
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-3d-model-with-threejs/images/threejs-demo.gif" description="Threejs library 3D examples"/>
 
 Chances are, these websites are powered by WebGL (Web Graphics Library), a JavaScript API that lets us create 3D graphics! [Three.js](https://threejs.org/) is a JavaScript library built on top of WebGL that's easier to program with, and it can draw and render 3D components on the browser! 🌎
 
 In this project tutorial, we'll cover the basics of Three.js, and how to load a GLB/GLTF file that holds a 3D render of a Shiba dog! 🐶
 
-<RoundedImage link="https://imgur.com/6HR53d3" description="3D Shiba dog moving in 3D space"/>
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-3d-model-with-threejs/images/shiba-final-demo.gif" description="3D Shiba dog moving in 3D space"/>
 
 We'll interact with the Shiba to move it around the canvas and create a jumping animation! ✨ (Yes, she's on a website!) 
 
@@ -67,7 +67,7 @@ npm run dev
 
 You should now see the Vite logo, and your development environment all set up! 
 
-<RoundedImage link="https://imgur.com/hWcsGF7" description="Boilerplate default website with Vanilla JavaScript and the Vite logo"/>
+<RoundedImage link="https://i.imgur.com/hWcsGF7.png" description="Boilerplate default website with Vanilla JavaScript and the Vite logo"/>
 
 Set up a blank slate and remove the boilerplate code provided by Vite. Replace the following files:
 - **main.js** and erase all the code
@@ -117,11 +117,11 @@ Before we start coding, let's understand the Three.js library a bit and its shen
 
 For any 3D scene (think of your favorite 3D animated movie), we need shapes or **geometries**. This will be our Shiba dog! Additionally, there are **textures and materials**, **lights**, and the **camera perspective**. The scene is our container for all of our assets.
 
-<RoundedImage link="https://imgur.com/a3eCzf8" description="3D Shapes, Mesh, and Lighting" />
+<RoundedImage link="https://i.imgur.com/a3eCzf8.png" description="3D Shapes, Mesh, and Lighting" />
 
 ### The Camera
 
-<RoundedImage link="https://imgur.com/Nj3ijwx" description="Visualization of the perspective camera" />
+<RoundedImage link="https://i.imgur.com/Nj3ijwx.png" description="Visualization of the perspective camera" />
 
 The diagram above shows us the view of a **Perspective Camera**. Three.js offers a variety of cameras, but for this project, we will stick with the one most similar to visualizing an object through human eyes. 
 
@@ -179,7 +179,7 @@ Inside your **/public** folder, we're going to add our Shiba GLB file.
 
 Let's now create a new `GLTFLoader` object, and create a function that will load our Shiba model to work alongside Three.js. Additionally, let's also add a line of code that changes the position of the camera to “zoom out” and places the Shiba model farther in the z-direction. Be sure to switch the values out depending on how far away or close you want the model to be.
 
-<RoundedImage link="https://imgur.com/BT6iqFa" description="X, Y, and Z coordinate plane" />
+<RoundedImage link="https://i.imgur.com/BT6iqFa.jpg" description="X, Y, and Z coordinate plane" />
 
 ```js
 const loader = new GLTFLoader();
@@ -212,7 +212,7 @@ animate();
 ```
 Let's take a look at our site!
 
-<RoundedImage link="https://imgur.com/ZCkQvI4" description="3D Shiba Model on a blank webpage"/>
+<RoundedImage link="https://i.imgur.com/ZCkQvI4.png" description="3D Shiba Model on a blank webpage"/>
 
 Your site should now have our little Shiba dog!!!! You'll notice now, our Shiba dog is immovable… 
 So, let's learn about Orbit Controls! 🛰️
@@ -253,7 +253,7 @@ function animate() {
 animate();
 ```
 
-<RoundedImage link="https://imgur.com/Kq9blDK" description="Cursor moving the 3D Shiba Model in a spinning motion"/>
+<RoundedImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-3d-model-with-threejs/images/testing_shiba.gif" description="Cursor moving the 3D Shiba Model in a spinning motion"/>
 
 Try to move your shiba now! („• ֊ •„)੭
 
@@ -324,7 +324,7 @@ document.addEventListener('mousedown', onDocumentMouseDown, false);
 
 CLICK ON SHIBA! 
 
-<RoundedImage link="https://imgur.com/0l9WifA" description="Zoomed in 3D Shiba on a webpage"/>
+<RoundedImage link="https://i.imgur.com/0l9WifA.png" description="Zoomed in 3D Shiba on a webpage"/>
 
 ## Congrats!
  
