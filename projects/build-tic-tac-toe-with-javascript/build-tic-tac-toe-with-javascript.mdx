@@ -1,0 +1,248 @@
+---
+title: Build Tic-Tac-Toe With JavaScript
+author: Daniel Li
+uid: 5k5WC31oPvcUQmaDCgK38v6Et133
+datePublished: 
+published: 
+description: Use JavaScript and Nodejs to build a simple Tic-Tac-Toe game.
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-tic-tac-toe-with-javascript/header.png
+tags:
+  - beginner
+  - javascript
+---
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-tic-tac-toe-with-javascript/header.png"
+  description="Title Image"
+  uid={true}
+  cl="for-sidebar"
+/>
+
+# Build Tic-Tac-Toe With JavaScript
+
+<AuthorAvatar
+  author_name="Daniel Li"
+  author_avatar="/images/projects/authors/daniel-li.png"
+  username="Tenny"
+  uid={true}
+/>
+
+<BannerImage
+  link=""
+  description="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-tic-tac-toe-with-javascript/header.png"
+  uid={true}
+/>
+
+**Prerequisites**: JavaScript fundamentals
+**Version**: Node.js 16.14.0
+**Read Time**: 30 minutes
+
+## Introduction
+
+Even in ancient times, people across the world still enjoyed playing games. One game that has stood against the test of time is Tic-Tac-Toe. From Egyptian merchants who played on roofing tiles to Roman Soldiers (who knew the game as [“Terni Lapilli”](https://en.wikipedia.org/wiki/Tic-tac-toe_variants)), Tic-Tac-Toe has been widely played and appreciated over many millennia.
+
+<RoundedImage
+  link="https://i.imgur.com/o6imkVE.png"
+  description="Tic-Tac-Toe Game on concerete" 
+/>
+
+In this project tutorial, we will learn to build a Tic-Tac-Toe program with JavaScript in the terminal! ❌ ⭕️
+
+<RoundedImage
+  link="https://i.imgur.com/aimW37h.png"
+  description="Tic-Tac-Toe Game displayed in terminal" 
+/>
+
+
+You'll be using:
+- Node.js
+- The 'Prompt-sync' JavaScript package 
+- IDE code editor (VS Code, etc)
+
+
+## Setting things up
+
+Our first task is to install **Node.js**, a JavaScript runtime environment that lets us run JavaScript code.
+
+You can install it from the [Node.js website](https://nodejs.org/en/download/package-manager), or check if you already have it installed with the `node -v` command. If you don't, simply type `npm install prompt-sync` in the terminal to install the package after downloading from the Node.js website. To execute your program simply run `node <filename>` in the terminal. 
+
+```js
+node tictactoe.js
+```
+* in this example, `tictactoe.js` is the name of the file you saved your code in.
+
+This project needs to import the 'Prompt-sync' package, which will allow our program to handle user input. This can be done by the following code:
+
+```js
+const prompt = require('prompt-sync')();
+```
+
+Next, we need to set up the game variables such as the game board, player names, and state of the game.
+
+Let's define the following global game variables:
+- `gameBoard`
+- `currentPlayer`
+- `gameActive`
+
+Since the entire game is built on plain JavaScript, the game will be played on the console. Thus, we can use blank spaces to represent the TicTacToe board as an array with 9 positions.
+
+```js
+let gameBoard = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
+```
+
+In addition to this, we also need to assign a name for players to track which players turn it is. 
+
+For this tutorial, I'll make player 1 be ‘🐐’, but you can assign any name to it.
+
+```js
+let currentPlayer = '🐐';
+```
+You may have noticed that we only assigned one name to a player, despite there being two players in a Tic-Tac-Toe game. Don’t worry–we’ll address this later down the program.
+
+We also need to set up a game state, so the program knows when to stop and finish. When we run the program, we can start with the active variable being set to true. This is essentially just a Boolean to indicate that the game is still going, and only until a player loses or ties will it change.
+
+```js
+let gameActive = true;
+```
+
+## Printing the board 
+
+Since we defined the `gameBoard` array previously, let's make a function that displays the current state of the game board. As time goes on and the game gets played, the array will alter itself so we need placeholders for the data being inserted. We will make a set of strings that can be easily manipulated, which is done via [string interpolation](https://en.wikipedia.org/wiki/String_interpolation).
+
+```js
+function printBoard() {
+  console.log(`
+    ${gameBoard[0]} | ${gameBoard[1]} | ${gameBoard[2]}
+    ---------
+    ${gameBoard[3]} | ${gameBoard[4]} | ${gameBoard[5]}
+    ---------
+    ${gameBoard[6]} | ${gameBoard[7]} | ${gameBoard[8]}
+  `);
+}
+```
+
+This piece of code creates a multi-line string, with `${}` syntax being used to set values of the `gameBoard` array elements to their corresponding positions. `${gameboard[0]}` relates to the first value of the `gameBoard`, allowing us to easily manipulate each cell's contents on the Tic-tac-toe grid. Each number 0-8 corresponds to a cell on the TicTacToe grid (This is because the first number is 0, instead of one):
+
+<RoundedImage
+  link="https://i.imgur.com/jG3saIL.png"
+  description="Tic-Tac-Toe grid with cell numbers and corresponding positions" 
+/>
+
+## Making Moves
+
+In Tic-Tac-Toe, players cannot take a space that is already occupied by the opponent or themselves. As a result, we need to check if a space is taken. 
+
+Since we assigned a space to each blank space initially, we know that if there's a space in a cell, it isn't taken and we can update the board with the player's move. This comes out to be a relatively easy `if`/`else` statement that checks if the player's chosen cell is indeed empty, otherwise prompting the player to try again if not. 
+
+Let's make a function called `handleMove()` that takes in the player's position as an argument.
+
+```js
+function handleMove(position) {
+  if (gameBoard[position] === ' ') {
+    gameBoard[position] = currentPlayer;
+  } else {
+    console.log('Cell already taken, choose another one.');
+    return false;
+  }
+}
+```
+
+Later, we will make a function that checks if a player has won or not. But for now, we will just add an `if` statement to the `handleMove()` function to check if a player has won every move. 
+
+If a player has won, the game will no longer be active and the program will display a winning message!
+
+```js
+  if (checkWin()) {
+    printBoard();
+    console.log(`Player ${currentPlayer} wins!`);
+    gameActive = false;
+    return true;
+  }
+```
+
+In the real game, when all the cells are filled without there being a winner, it's a draw. Let's create a function that checks if all cells from the gameBoard array are filled, and if so, concludes the game with a draw.
+
+```js
+  if (gameBoard.every(cell => cell !== ' ')) {
+    printBoard();
+    console.log('It\'s a draw!');
+    gameActive = false;
+    return true;
+  }
+```
+
+The `handleMove()` function runs every time a player makes a move, so after one player's move, we need to switch to the next player. This can be done by checking if the `currentPlayer` variable is equal to  ‘🐐’, and if the condition is true it will be swapped out by `🍇`, and vice versa. In other words, we are toggling `currentPlayer` between `🐐` and `🍇` after every move by replacing the variable with it's alternative.
+
+```js
+  currentPlayer = currentPlayer === '🐐' ? '🍇' : '🐐';
+  return true;
+```
+
+The code in the “Making Moves” section is in ONE function! Make sure your `handleMove()` function looks like this, with indentation and brackets matching up before moving on.
+
+<RoundedImage
+  link="https://i.imgur.com/TwYMeHu.png"
+  description="The code for the handleMove function" 
+/>
+
+## Finishing Touches
+
+Only a few more things must be done before the program is runnable and works! Let's create the checkWin function that's checked in the `handleMove()` function.
+
+```js
+function checkWin() {
+  const conditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+}
+```
+
+This function determines if the current player has won, with conditions being an array of all the possible winning combinations able to be displayed on the board. For example, [0,1,2] corresponds to the first column being occupied by one player, which would yield a win.
+
+Now we need to evaluate the conditions. For each winning condition, we test a, b, and c to check if the values at these index properties all match the current player. As long as one condition is met, the player will win.
+
+Let's add this return statement after the `conditions` array inside of our `checkWin()` function:
+
+```js
+ return conditions.some(condition => {
+    const [a, b, c] = condition;
+    return gameBoard[a] === currentPlayer && gameBoard[b] === currentPlayer && gameBoard[c] === currentPlayer;
+  });
+```
+
+The last part of the program is creating a loop to allow the players to make moves until one player has won. A `while` loop will be used because the game state can be evaluated through the gameState boolean, which can be true or false. Since we want the 'position' variable to be an integer before we pass it on to the later code, we use the parseInt function to convert from a string to an integer. 
+We also have to make a domain for the possible moves. With 9 total moves and 0 being our starting point, the position must be between 0 and 8. This loop will continuously run until active = false so we want it to be independent from the checkWin function.
+
+```js
+while (gameActive) {
+  printBoard();
+  const position = prompt(`Player ${currentPlayer}, enter your move (0-8): `);
+
+  if (position >= 0 && position <= 8) {
+    handleMove(parseInt(position));
+  } else {
+    console.log('Invalid position, enter a number between 0 and 8.');
+  }
+}
+```
+
+The loop will repeat until gameActive is false. It prints the updated version of the board after every move and asks the current player for their move. Since the game board only has a total of 9 cells (0-8), we make the player pick again if their move is out of the range. If the move is within range, it sends the move back to the handleMove function we previously made to process the move. 
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-tic-tac-toe-with-javascript/output.gif" alt="Final output of Tic Tac Toe project"/>
+
+## Congrats!
+
+You have made it through the Tic Tac Toe project tutorial and utilized control flow, arrays, input handling, and game logic to code a game right on your computer!  If you would like to challenge yourself more, create a tally or score system to keep track of how many times each player has won. 
+
+### More Resources
+
+- [Source code]()
+- [Node.js official site](https://nodejs.org)
+- [Tic-tac-toe (Wikipedia)](https://en.wikipedia.org/wiki/Tic-tac-toe) 
