@@ -1,7 +1,7 @@
 const prompt = require('prompt-sync')();
 
-let board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
-let currentPlayer = '🐐';
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+let currentPlayer = "🐐";
 let active = true;
 
 function printBoard() {
@@ -15,10 +15,10 @@ function printBoard() {
 }
 
 function handleMove(position) {
-  if (board[position] === ' ') {
+  if (board[position] === " ") {
     board[position] = currentPlayer;
   } else {
-    console.log('Cell already taken, choose another one.');
+    console.log("Cell already taken, choose another one.");
     return false;
   }
 
@@ -29,14 +29,14 @@ function handleMove(position) {
     return true;
   }
 
-  if (board.every(cell => cell !== ' ')) {
+  if (board.every(cell => cell !== " ")) {
     printBoard();
-    console.log('It\'s a draw!');
+    console.log("It's a draw!");
     active = false;
     return true;
   }
 
-  currentPlayer = currentPlayer === '🐐' ? '🍇' : '🐐';
+  currentPlayer = currentPlayer === "🐐" ? "🍇" : "🐐";
   return true;
 }
 
@@ -65,6 +65,6 @@ while (active) {
   if (position >= 0 && position <= 8) {
     handleMove(parseInt(position));
   } else {
-    console.log('Invalid position, enter a number between 0 and 8.');
+    console.log("Invalid position, enter a number between 0 and 8.");
   }
 }
