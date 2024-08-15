@@ -4,36 +4,37 @@ author: Daniel Li
 uid: 5k5WC31oPvcUQmaDCgK38v6Et133
 datePublished: 2024-08-02
 published: true
-description: Use JavaScript and Node.js to build a simple Tic-Tac-Toe game.
-header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-tic-tac-toe-with-javascript/header.png
+description: Use Python to Build a Simple Word Guessing Game.
+header: **NEED STILL**
 tags:
   - beginner
-  - javascript
+  - intermediate
+  - python
 ---
 
 <BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-tic-tac-toe-with-javascript/header.png"
+  link="**NEED STILL**"
   description="Title Image"
   uid={true}
   cl="for-sidebar"
 />
 
-# Build Tic-Tac-Toe With JavaScript
+# Build a Word Guessing Game with Python
 
 <AuthorAvatar
   author_name="Daniel Li"
   author_avatar="/images/projects/authors/daniel-li.png"
-  username="Tenny"
+  username="Tentor"
   uid={true}
 />
 
 <BannerImage
   link=""
-  description="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-tic-tac-toe-with-javascript/header.png"
+  description="**NEED STILL**"
   uid={true}
 />
 
-**Prerequisites**: JavaScript fundamentals
+**Prerequisites**: Python fundamentals
 **Version**: Python X.X
 **Read Time**: 30 minutes
 
@@ -103,8 +104,11 @@ while attempts > 0:
 
 Each time the loop runs, we will display the current state of the word being guessed. 
 
+```py
+while attempts > 0:
 
-
+    print('\nCurrent word: ' + ' '.join(guessedWord))
+```
 
 The statement is printed on a new line via `\n`, and joins the strings in `guessedWord` together with spaces. For example, if the state of `guessedWord` is `['a', '_', 'p', '_', 'e']`, the operation would result in the string `”a _ p _ e”`, making the program look smoother and less clunky.
 
@@ -116,7 +120,13 @@ guess = input('Guess a letter: ')
 
 We then need to determine whether or not the guessed letter is contained in the correct word. If it is, we loop through each letter of the word to find which position the letter is in and replace the placeholder with that same letter.
 
-
+```py
+if guess in word:
+    for i in range(len(word)):
+        if word[i] == guess:
+            guessedWord[i] = guess
+    print('Great guess!')
+```
 
 The `for i in range(len(word)):` loop goes over each index of the word from 0 to the length of the word minus one, allowing it to check every letter. If the letter is at position `i` matches the player’s guess, it updates the position in the `guessedWord` list. We'll print out some positive feedback to let the user know that they guessed correctly.
 
@@ -145,9 +155,29 @@ else:
 
 **Note:** We don’t need to break the `while` loop because the condition was `while attempts > 0`.
 
-When you’re finished, the game loop should look like this: 
+When you’re finished, the game loop should look something like this: 
 
+```py
+while attempts > 0:
+   
+    print('\nCurrent word: ' + ' '.join(guessedWord))
 
+    guess = input("Guess a letter: ").lower()
+   
+    if guess in word:
+        for i in range(len(word)):
+            if word[i] == guess:
+                guessedWord[i] = guess
+        print("Great guess!")
+    else:
+        attempts -= 1
+        print("Wrong guess! Attempts left: " + str(attempts))
+    if '_' not in guessedWord:
+        print("\nCongratulations!! You guessed the word: " + word)
+        break
+else:
+    print('\nYou've run out of attempts! The word was: ' + word)
+```
 
 ## Conclusion
 
