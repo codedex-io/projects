@@ -1,0 +1,201 @@
+---
+title: Build a Word Guessing Game with Python
+author: Daniel Li
+uid: 5k5WC31oPvcUQmaDCgK38v6Et133
+datePublished: 2024-08-16
+published: false
+description: Use Python to Build a Simple Word Guessing Game.
+header: 
+tags:
+  - beginner
+  - python
+---
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-word-guessing-game-with-python/header.png"
+  description="Title Image"
+  uid={true}
+  cl="for-sidebar"
+/>
+
+# Build a Word Guessing Game with Python
+
+<AuthorAvatar
+  author_name="Daniel Li"
+  author_avatar="/images/projects/authors/daniel-li.png"
+  username="Tentor"
+  uid={true}
+/>
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-word-guessing-game-with-python/header.png"
+  description="Banner"
+  uid={true}
+/>
+
+**Prerequisites**: Python fundamentals
+**Version**: Python 3
+**Read Time**: 30 minutes
+
+## Introduction
+
+One popular game is where we guess an unknown word or phrase one letter at a time. If the player(s) can guess the word within a certain amount of attempts, they will win. Alternatively, when they run out of attempts, they will lose. This game is usually played on paper, but what if we could make it using Python?
+
+<RoundedImage
+  link="https://i.imgur.com/mxd2mJJ.gif"
+  description="Word Guesser Final Output" 
+/>
+
+In this project tutorial, we'll be using:
+
+- The `random` module
+- A code editor (VS Code, Codédex Build, etc.)
+
+If needed, you can follow the steps in [this project tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python) to set up VS Code with Python. 
+
+## Create the Word Bank
+
+First, we'll need to create a word bank of all the possible words to be guessed, and randomly select one to be the correct answer. This way, the game has an element of mystery and surprise! 🔍🕵
+
+We can do this by installing the `random` module:
+```py
+import random
+```
+
+Next, we will make a list that has all the possible words that can be the answer. This tutorial will only use five words, but you can add as many as you want!
+
+```py
+word_bank = ['rizz', 'ohio', 'sigma', 'tiktok', 'skibidi']
+```
+
+Now, we will randomly choose one of these words to be the correct answer. 🎲 
+
+```py
+word = random.choice(word_bank)
+```
+
+The `random.choice()` method is used to randomly selects a word from the `word_bank` list and assigns it to the `word` variable. All possible options having an equal probability of being chosen.
+
+## Finishing the Setup
+
+We don't want to reveal the letters of the word we're trying to guess initially, so we need a list of underscores as "placeholders" to represent letters that haven't been guessed yet. The number of placeholders should directly correspond with the number of letters the word has. (i.e., the word “apple”  is five letters, so there should be five underscores as placeholders) 
+
+```py
+guessedWord = ['_'] * len(word)
+```
+
+In Python, you can multiply a list by an integer and the list will repeat that amount of times. The `['_']` creates a list with a single underscore element, while the `len(word)` function returns the length (or number of characters) in the `word` string. 
+
+We'll finish setting by determining how many attempts the player has at guessing the word. We will be using 10 for this tutorial, but you can make it any number you want.
+
+```py
+attempts = 10
+```
+
+Go ahead and save the file and let's move on to the game loop!
+
+### Game Loop
+
+We need to create a `while` loop so the player can continuously guess until they run out of `attempts` or guess the word correctly. 🔁
+
+```py
+while attempts > 0:
+```
+
+Each time the loop runs, we will display the current state of the word being guessed. 
+
+```py
+while attempts > 0:
+  print('\nCurrent word: ' + ' '.join(guessedWord))
+```
+
+The statement is printed on a new line via `\n`, and joins the strings in `guessedWord` together with spaces. For example, if the state of `guessedWord` is `['a', '_', 'p', '_', 'e']`, the result would be the string `"a _ p _ e"`, making the program look smoother and less clunky.
+
+Since the guessing is based on user input, we need to prompt the user to guess a letter and store it in a variable.
+
+```py
+guess = input('Guess a letter: ')
+```
+
+We then need to determine whether or not the guessed letter is in the correct word. If it is, we loop through each letter of the word to find which position the letter is in and replace the placeholder with the guessed letter.
+
+```py
+if guess in word:
+  for i in range(len(word)):
+    if word[i] == guess:
+      guessedWord[i] = guess
+  print('Great guess!')
+```
+
+The `for` loop goes over each index of the `word`, to check every letter. If the letter at position `i` matches the player’s guess, it updates the position in the `guessedWord` list. We'll print out some positive feedback to let the user know that they guessed correctly.
+
+Furthermore, we need to write some code that handles situations where the user guesses incorrectly. If the player's guess is not in the word, the number of `attempts` decreases by one. Since `attempts` is an integer, we must also convert it to a string to let the player know how many attempts they have left.
+
+```py
+else:
+  attempts -= 1
+  print('Wrong guess! Attempts left: ' + str(attempts))
+```
+
+We're almost done! We'll know if the player has won the game when they guess all the letters in the word. If there are no more underscores as placeholders in the `guessedWord` variable, there are no more blanks left. When the player wins, we will break the `while` loop and end the game.
+
+```py
+  if '_' not in guessedWord:
+        print('\nCongratulations!! You guessed the word: ' + word)
+        break
+```
+
+Finally, we need a condition that results in a loss for the player when they run out of `attempts` and reveal the correct word.
+
+```py
+else:
+    print('\nYou\'ve run out of attempts! The word was: ' + word)
+```
+
+**Note:** We don't need to break the `while` loop because the condition was `while attempts > 0`.
+
+When you're finished, the game loop should look something like this: 
+
+```py
+while attempts > 0:
+   
+    print('\nCurrent word: ' + ' '.join(guessedWord))
+
+    guess = input('Guess a letter: ').lower()
+   
+    if guess in word:
+        for i in range(len(word)):
+            if word[i] == guess:
+                guessedWord[i] = guess
+        print('Great guess!')
+    else:
+        attempts -= 1
+        print('Wrong guess! Attempts left: ' + str(attempts))
+    if '_' not in guessedWord:
+        print('\nCongratulations!! You guessed the word: ' + word)
+        break
+    else:
+      print('\nYou\'ve run out of attempts! The word was: ' + word)
+```
+
+## Conclusion
+
+Congratulations! You have completed the project! 🎉🎊
+
+In this tutorial, you used the following to build a word-guessing game:
+
+- The `random` module
+- List and string operations
+- Input/output handling
+- Control flow statements
+
+Now, you can enjoy this game you built yourself, or with friends!
+
+If you would like to challenge yourself, try to add a ["hangman" stick figure](https://en.wikipedia.org/wiki/Hangman_(game)) that is changed every time the user guesses a character incorrectly.
+
+## More Resources
+
+- [Source Code](https://github.com/codedex-io/projects/blob/main/projects/build-a-word-guessing-game-with-python/game.py)
+- [Random Module Documentation](https://docs.python.org/3/library/random.html)
+- [Nested If Statement Bonus Article](https://www.codedex.io/python/bonus/nested-control-statements)
+- [Nested Loops Bonus Article](https://www.codedex.io/python/bonus/nested-loops)
