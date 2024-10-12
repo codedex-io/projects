@@ -177,7 +177,7 @@ In the real game, when all the cells are filled without there being a winner, it
 
 The `handleMove()` function runs every time a player makes a move, so after one player's move, we need to switch to the next player. This can be done by checking if the `currentPlayer` variable is equal to  ‘🐐’, and if the condition is true it will be swapped out by `🍇`, and vice versa. In other words, we are toggling `currentPlayer` between `🐐` and `🍇` after every move by replacing the variable with it's alternative. 
 
-We'll use a [ternerary operator](https://www.codedex.io/javascript/bonus/ternary-operators-in-javascript) to do this, which is a shorthand for an `if`/`else` statement.
+We'll use a [ternary operator](https://www.codedex.io/javascript/bonus/ternary-operators-in-javascript) to do this, which is a shorthand for an `if`/`else` statement.
 
 ```js
   currentPlayer = currentPlayer === "🐐" ? "🍇" : "🐐";
