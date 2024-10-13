@@ -93,6 +93,20 @@ p {
   color: #d8e9ef;
 }
 
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg); /* Start the circle at the top */
+}
+
+.progress-ring circle {
+  stroke-dasharray: 565.48; /* 2 * PI * radius (90) */
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+
+
 button {
   position: relative;
   top: 50px;

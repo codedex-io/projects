@@ -12,17 +12,15 @@
     <h1>pomodoro</h1>
     <div class="app-message">press start to begin</div>
     <div class="app-circle">
-        <div class="circle-shape">
-          <div class="semi-circle right-side circle-mask"></div>
-          <div class="semi-circle right-side circle"></div>
-          <div class="semi-circle left-side circle-mask"></div>
-          <div class="semi-circle left-side circle"></div>
-        </div>
-        <div class="app-counter-box">
-          <p><span class="minutes">25</span>:<span class="seconds">00</span></p>
-        </div>
+      <div class="app-counter-box">
+        <p><span class="minutes">25</span>:<span class="seconds">00</span></p>
+      </div>
+      <svg class="progress-ring" width="200" height="200">
+        <circle cx="100" cy="100" r="90" stroke="#BF5239" stroke-width="10" fill="none"></circle>
+      </svg>
       <button class="btn-start">start</button>
     </div>
+    
 </div>
 </body>
 <script src="./app.js"></script>
