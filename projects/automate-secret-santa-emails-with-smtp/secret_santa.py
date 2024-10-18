@@ -22,7 +22,7 @@ Remember to spend 10$-20$ on your gift, but don't stress about it being the perf
 
 names_list = ['Sonny', 'Dharma', 'Malcolm', 'Jerry', 'Asiqur', 'Rose', 'Lillian']
 names_and_emails = [
-  ['Asiqur', 'asiqur@codedex.io']
+  ['Asiqur', 'asiqur@codedex.io'],
   ['Dharma', 'dharma@codedex.io'],
   ['Jerry', 'jerry@codedex.io'],
   ['Lillian', 'lillian@codedex.io'],
