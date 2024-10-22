@@ -2,26 +2,35 @@ import discord
 import requests
 import json
 
-# update the url to https://meme-api.com/gimme
+# Update the URL to https://meme-api.com/gimme
 def get_meme():
-    response = requests.get('https://meme-api.com/gimme')
-    json_data = json.loads(response.text)
-    return json_data['url']
+    try:
+        response = requests.get('https://meme-api.com/gimme')
+        response.raise_for_status()  # Raise an error for bad responses
+        json_data = response.json()  # Directly parse the JSON response
+        return json_data['url']
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching meme: {e}")
+        return None  # Return None in case of an error
 
 class MyClient(discord.Client):
-    async def on_read(self):
+    async def on_ready(self):
         print(f'Logged on as {self.user}')
 
     async def on_message(self, message):
         if message.author == self.user:
             return
         if message.content.startswith('$meme'):
-            await message.channel.send(get_meme())
+            meme_url = get_meme()
+            if meme_url:  # Check if a meme was fetched successfully
+                await message.channel.send(meme_url)
+            else:
+                await message.channel.send("Sorry, I couldn't fetch a meme right now.")
 
-# create intents keyword argument
+# Create intents keyword argument
 intents = discord.Intents.default()
 intents.message_content = True
 
-# update the call here by passing the 'intents' keyword argument
+# Update the call here by passing the 'intents' keyword argument
 client = MyClient(intents=intents)
 client.run('Your Token Here')
