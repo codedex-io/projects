@@ -164,7 +164,7 @@ def main():
     # do the same thing with the bottom
     if ball_rect.bottom > SCREEN_HEIGHT - ball_rect.height:
       ball_accel_y *= -1
-      ball_rect.top = SCREEN_HEIGHT - ball_rect.heigh
+      ball_rect.top = SCREEN_HEIGHT - ball_rect.height #t is missing 
 
     # if the ball goes out of bounds, end the game 
     if ball_rect.left <= 0 or ball_rect.left >= SCREEN_WIDTH:
