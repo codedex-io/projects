@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
-# Although this code is saved as a .py file this code will only run on anaconda.cloud 
+# This code requires the numpy, matplotlib, and scikit-learn libraries.
+# Ensure these libraries are installed in your Python environment for the code to run successfully.
+
 
 # Linear regression is a fundamental aspect of machine learning. Remember: this could be used to predict anything as long as there is a database to train a model on.
 
