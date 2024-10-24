@@ -9,7 +9,7 @@ def get_meme():
     return json_data['url']
 
 class MyClient(discord.Client):
-    async def on_read(self):
+    async def on_ready(self):
         print(f'Logged on as {self.user}')
 
     async def on_message(self, message):
