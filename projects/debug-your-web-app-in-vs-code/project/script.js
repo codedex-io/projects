@@ -45,12 +45,12 @@ function renderTodos(todos) {
 
 function generateTodoHTML(todo, index) {
   return `
-    <div data-se=${index} class="card-body my-2 p-2 border dorder-dark">
+    <div data-se=${index} class="card-body my-2 p-2 border border-dark">
       <h5 class="card-title">${todo.todoTitle}</h5>
       <h6 class="card-subtitle mb-2 text-muted">${todo.todoDate}</h6>
       <h6 class="card-subtitle mb-2 text-muted">${todo.todoNumOfPeople}</h6>
       <p class="card-text">${todo.todoDescription}</p>
-      <button type="click" id="done" class="btn btn-success">Done</button>
+      <button type="button" id="done" class="btn btn-success">Done</button>
     </div>
   `;
 }
