@@ -20,7 +20,7 @@ Why should you contribute to Codédex? Contributing will get you:
 2. Once your project topic is accepted by the Codédex team, you can now start writing it!
 3. Make a copy of the [project template](https://github.com/codedex-io/projects/blob/main/docs/project_template.mdx), then review our [content guidelines](https://github.com/codedex-io/projects/tree/main/docs/content_guidelines.mdx), the [official MDX docs](https://mdxjs.com/docs/), and 
 [one of our published projects](https://github.com/codedex-io/projects/blob/main/projects/generate-a-qr-code-with-python/generate-a-qr-code-with-python.mdx) 
-To see what a final project should looks like and ensure that it renders properly, use an MDX previewer like [this one](https://mdxjs.com/playground/).
+To see what a final project should look like and ensure that it renders properly, use an MDX previewer like [this one](https://mdxjs.com/playground/).
 4. If you encounter any issues, feel free to reach out to [@sonnynomnom](https://www.twitter.com/sonnynomnom).
 5. When you finish your project tutorial, [create a pull request](https://github.com/codedex-io/projects/pulls), referencing the issue. The Codédex team will then review your PR and give suggestions.
 6. Once your project tutorial is completed, your PR will be merged. From there, you can publish your project tutorial on the site of your choice!
