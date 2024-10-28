@@ -24,7 +24,6 @@ df["Price"] = df["Price"].astype(float)
 
 df.rename(columns={"Name": "Title", "Year": "Publication Year", "User Rating": "Rating"}, inplace=True)
 
-df["Price"] = df["Price"].astype(float)
 
 # Step 5
 author_counts = df['Author'].value_counts()
