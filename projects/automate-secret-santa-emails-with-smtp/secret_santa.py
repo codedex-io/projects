@@ -7,7 +7,7 @@ import ssl
 load_dotenv()
 
 def send_email(sender, receiver, recipient):
-  password = os.environ('password')
+  password = os.environ['password']
   body_msg = f'''\
 From: {sender}
 Subject: Your Secret Santa Present
