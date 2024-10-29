@@ -87,7 +87,6 @@ def main():
           if event.key == pygame.K_SPACE:
             started = True
 
-       continue
 
     '''
     get the time elapse between now and the last frame
