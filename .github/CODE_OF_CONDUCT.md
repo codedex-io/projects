@@ -26,7 +26,7 @@ community include:
 
 Examples of unacceptable behavior include:
 
-- Plagerism of any kind from other documentation sites
+- Plagiarism of any kind from other documentation sites
 - The use of sexualized language or imagery, and sexual attention or
   advances of any kind
 - Trolling, insulting or derogatory comments, and personal or political attacks
@@ -77,10 +77,10 @@ includes avoiding interactions in community spaces as well as external channels
 like social media. Violating these terms may lead to a temporary or
 permanent ban.
 
-### 3. Temporary Ban
+### 2. Temporary Ban
 
 **Community Impact**: A serious violation of community standards, including
-sustained inappropriate behavior, or the 2nd case of plagerism after receiving the 1st warning.
+sustained inappropriate behavior, or the 2nd case of plagiarism after receiving the 1st warning.
 
 **Consequence**: A temporary ban from any sort of interaction or public
 communication with the community for a specified period of time. No public or
@@ -88,7 +88,7 @@ private interaction with the people involved, including unsolicited interaction
 with those enforcing the Code of Conduct, is allowed during this period.
 Violating these terms may lead to a permanent ban.
 
-### 4. Permanent Ban
+### 3. Permanent Ban
 
 **Community Impact**: Demonstrating a pattern of violation of community
 standards, including sustained inappropriate behavior, harassment of an
