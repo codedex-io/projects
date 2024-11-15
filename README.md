@@ -28,7 +28,7 @@ Now that the MVP is out, our goal for Codédex Projects is to invite awesome con
 ### 📝 Content Team
 
 - [@sonnynonom](https://github.com/sonnynomnom)
-- [@dusch4593](https://github.com/Dusch4593)
+- ellie
 - [@goku-kun](https://github.com/Goku-kun)
 - [@asiqurrahman](https://github.com/asiqurrahman)
 
