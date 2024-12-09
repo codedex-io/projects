@@ -90,7 +90,7 @@ def main():
        continue
 
     '''
-    get the time elapse between now and the last frame
+    get the time elapsed between now and the last frame
     60 is an arbitrary number but the game runs smooth at 60 FPS
     '''
     delta_time = clock.tick(60)
