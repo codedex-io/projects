@@ -1,0 +1,330 @@
+---
+title: Analyze U.S. Census Data with SciPy
+author: 
+uid:
+# datePublished: 
+published: false
+description: 
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-us-census-data-with-scipy/header.gif
+tags:
+  - intermediate
+  - python
+---
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-us-census-data-with-scipy/header.gif"
+  description="Title Image"
+  uid={true}
+  cl="for-sidebar"
+/>
+
+# Analyze U.S. Census Data with SciPy
+
+<AuthorAvatar
+  author_name=""
+  author_avatar="/images/projects/authors/"
+  username=""
+  uid={true}
+/>
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-us-census-data-with-scipy/header.gif"
+  description="Banner"
+  uid={true}
+/>
+
+**Prerequisites**: Intermediate Python, SciPy
+**Version**: Python 3
+**Read Time**: X minutes
+
+## Introduction
+
+No matter where you are on your journey to mastering data science, it's always helpful to practice the basics of finding, cleaning, and analyzing real-world datasets. Back in 2020, COVID-19 sent us many of us into quarantine and while its long-term impact is still relatively unknown, we can reference a handful of public datasets to begin to scratch the surface. 
+
+In this tutorial, we'll be analyzing a dataset gathered from the 2022 [U.S. Census](https://data.census.gov/) covering geographic relocation roughly two years after quarantine.
+
+<RoundedImage
+  link="https://i.imgur.com/QSycenX.gif"
+  description="U.S. Census Data Analysis" 
+/>
+
+We will begin to test our assumptions and answer some basic questions about various demographic groups using SciPy, NumPy, Pandas, and some basic working knowledge of statistics, including the following:
+
+- Is there a difference in mobility patterns between those that moved within their home state versus across states lines in New York and California in particular?
+    - And do trends vary amongst citizenship status?
+- Is there a difference in those same patterns amongst educational status between the Northeast (New Jersey, Pennsylvania, Rhode Island, Vermont, etc.) and the South (Georgia, Maryland, Virginia, D.C., etc.)?
+- What about marital status across conservative divisions like the South Atlantic (Washington D.C., Georgia, Florida, North Carolina, etc.) and the Mountain States (Colorado, Wyoming, Nevada, Arizona, etc.)? Do we notice a difference in geographic mobility there as well?
+
+## Cleaning Raw Data
+
+As you can see below, the original data provided by census.gov contains two separate CSVs, one with the raw data and another with metadata that contains details of what each column represents.
+
+<RoundedImage
+  link="https://i.imgur.com/uvbRfkQ.png"
+  description="U.S. Census Data Analysis" 
+/>
+<RoundedImage
+  link="https://i.imgur.com/nxdFv8j.png"
+  description="U.S. Census Data Analysis" 
+/>
+
+
+When this happens, it's helpful to have some basic data preparation skills. While this isn't typically a requirement for using the SciPy package or conducting basic statistical analysis, you can look at each step we took to clean and structure the data by referencing the source code [here](https://colab.research.google.com/drive/1ujk1u0TWqlNolFwv9-rUNMjaghZuLLZK).
+
+## About the Clean Datasets
+
+The source code cranks out multiple categories of the same data, including information on the total population in 2022: 
+
+- those that moved within the same county and/or state
+- those that moved between states
+- those moved from abroad.
+
+For the categories listed, each dataset contains the following columns, which are all characterized by the levels of detail noted below:
+
+<RoundedImage
+  link="https://i.imgur.com/dzkXTSC.gif"
+  description="U.S. Census Data Analysis" 
+/>
+
+### Geographical Data
+
+Geography ID: a unique identifier used to reference specific geographic areas
+
+Census Tract: a small, relatively permanent subdivision of a county 
+
+State: the state in which the Census Tract is located
+
+County: the county within the state in which the Census Tract resides
+
+Region: the broader geographic area in which the state or county is located, typically referring to one of four major regions: Northeast, Midwest, South, or West
+
+Division: a sub-region within a Census Bureau-defined region, used for more detailed geographic analysis
+
+Total Population: the total number of people residing in a specific Census Tract
+
+### Citizenship Status
+
+Total U.S. Citizens (Native): the total number of individuals who are U.S. citizens by birth
+
+Total U.S. Citizens (Naturalized): the total number of individuals who have obtained U.S. citizenship through the naturalization process after being born in another country
+
+Total Non-Citizens: the total number of individuals who are not U.S. citizens, including both legal immigrants, visa holders, and undocumented individuals
+
+### Marital Status
+
+Married: the total number of individuals who are legally married at the time of the census
+
+Never Married: the total number of individuals who have never been legally married
+
+Separated: the total number of individuals who are legally married but currently living apart from their spouse due to marital separation
+
+Divorced: the total number of individuals who have been legally divorced
+
+Widowed: the total number of individuals who have lost their spouse and have not remarried
+
+### Educational Attainment
+
+Less than a High School Graduate: the total number of individuals who have not completed high school or its equivalent
+
+High School Graduate (or its Equivalency): the total number of individuals who have completed high school or obtained an equivalent diploma, such as a GED
+
+Some College or Associate's Degree: the total number of individuals who have attended college or earned an Associate's Degree but have not completed a Bachelor's Degree
+
+Bachelor's Degree: the total number of individuals who have earned a Bachelor's Degree, typically after completing four years of undergraduate education at a university or college
+
+Graduate or Professional Degree: the total number of individuals who have earned a Master's Degree, Doctoral Degree (Ph.D.), or other professional degrees such as a Law Degree (J.D.) or Medical Degree (M.D.)
+
+In this tutorial, we'll use SciPy to run some analysis and find out whether there are statistically significant differences in relocation patterns for each group - but first, let’s review the basics.
+
+## Some Basic Stats
+
+When conducting an exploratory analysis, we first want to make sure that our data abides by the [underlying assumptions](https://www.pythonfordatascience.org/parametric-assumptions-python/) of whatever method we use. This is extremely important because it can make or break the credibility of our work in the long-term, and that’s a huge no-no for the data science industry.
+
+Generally speaking, most data science models abide by what we call parametric assumptions, which refer to normal distribution of a fixed set of parameters. In our particular case, those parameters include, but are not limited to, the columns we listed above. The three parametric assumptions are independence, normality, and homogeneity of variances.
+
+Additionally, traditional A/B testing typically utilizes one of two methods: either a chi-squared (which looks for dependence between two categorical variables) or a t-test (which looks for a statistically significant difference between the averages of two groups) to validate what we refer to as the null hypothesis (which is the assumption that there is no relationship or comparison between two patterns of behavior). 
+
+For this tutorial, we'll be running t-tests.
+
+## Getting Started
+
+To get started, you'll need the following [datasets](https://drive.google.com/drive/folders/1xO33dvJV_RySl77y2W-7lxIvBW7PUoEg?usp=sharing) and a copy of [this Google Colab notebook](https://colab.research.google.com/drive/1GWiNXPVuRTORqEBNFV7zpTGZD_yeprNt?usp=sharing).
+
+Feel free to manually upload the CSVs to the notebook if you don't already see them embedded in your copy.
+
+<RoundedImage
+  link="https://i.imgur.com/Iz1PLIY.png"
+  description="U.S. Census Data Analysis" 
+/>
+
+First we'll begin by importing the necessary packages:
+
+```python
+import pandas as pd
+import numpy as np
+from scipy import stats
+```
+
+Next, we'll load the CSV files to their own dataframes using pandas.
+
+```python
+c = ("/content/moved_same_state.csv")
+v = ("/content/moved_between_states.csv")
+```
+```python
+control = pd.read_csv(c)
+variant = pd.read_csv(v)
+
+#control.head()
+#variant.head()
+```
+
+## Let's Explore
+
+Let's begin by manually creating an empty dataframe (table) based on each level of detail (County, State, Division, and Region) listed by the U.S. Census.
+
+```python
+county = pd.DataFrame()
+state = pd.DataFrame()
+division = pd.DataFrame()
+region = pd.DataFrame()
+```
+
+Now let's complete a simple pandas exercise. Sum the total number of people that relocated within the U.S. in both the control and variant groups at the state level.
+
+<RoundedImage
+  link="https://i.imgur.com/8LlsAhS.png"
+  description="U.S. Census Data Analysis" 
+/>
+
+
+```python
+state["Relocated Within State"] = control.groupby("State")["Total Population"].sum()
+state["Relocated Between States"] = variant.groupby("State")["Total Population"].sum()
+
+state.head()
+```
+Comparing California residents to those from New York only, **is there a significant difference in mobility between those that relocated within the same** area (in this case, state) **versus those that moved across state lines?** 
+
+We'll use the .loc method to search for the two states and extract the summed values that we calculated in the exercise above.
+```python
+cny = state.loc[["California", "New York"]]
+
+cny
+```
+<RoundedImage
+  link="https://i.imgur.com/IR9CX8c.png"
+  description="U.S. Census Data Analysis" 
+/>
+
+
+```python
+t_stat, p_value = stats.ttest_ind(cny["Relocated Within State"], cny["Relocated Between States"])
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+```
+
+A p-value of ~0.20 suggests that we can be roughly 80% certain the rate at which New York acquired new residents compared to retaining its current ones was higher than that of California roughly two years after quarantine.
+
+The common threshold for statistical significance is < 0.05, however, which would indicate a confidence interval of 95%.
+
+Comparing prior residents only (meaning those that moved within state lines), was there a significant difference in mobility amongst immigrants between the two states?
+
+This time, instead of summing the values before we index the states we want to look at, we'll filter the dataset so that we are running calculations on only the specific categories that we want to test.
+
+```python
+d = control[(control["State"] == "California") | (variant["State"] == "New York")]
+
+cny2 = pd.DataFrame()
+cny2["Total U.S. Citizens (Naturalized)"] = d.groupby("State")["Total US Citizens (Naturalized)"].sum()
+cny2["Total Non-Citizens"] = d.groupby("State")["Total Non-Citizens"].sum()
+
+cny2
+```
+
+```python
+t_stat, p_value = stats.ttest_ind(cny2["Total U.S. Citizens (Naturalized)"], cny2["Total Non-Citizens"])
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+```
+
+The p-value is much higher in this instance, suggesting that we can be only 62% certain that there was a difference in mobility amongst immigrants between the two states.
+
+Now what about when comparing U.S. citizens only?
+```python
+cny3 = pd.DataFrame()
+cny3["Total U.S. Citizens (Native)"] = d.groupby("State")["Total US Citizens (Native)"].sum()
+cny3["Total U.S. Citizens (Naturalized)"] = cny2["Total U.S. Citizens (Naturalized)"]
+
+cny3
+```
+
+```python
+t_stat, p_value = stats.ttest_ind(cny3["Total U.S. Citizens (Native)"], cny3["Total U.S. Citizens (Naturalized)"])
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+```
+
+The p-value is even higher in this instance, suggesting that there is no difference in domestic mobility between the two amongst U.S. citizens (or that there's merely a 35% chance that it is).
+
+## Additional Questions
+
+When comparing the Northeast to the South, is there a difference between the total number of high school graduates that relocated compared to those with bachelors' degrees?
+
+From this point on, we'll reuse the methods from the above section.
+
+```python
+region["High School Graduate (or its Equivalency)"] = control.groupby("Region")["High School Graduate (or its Equivalency)"].sum()
+region["Bachelor's Degree"] = control.groupby("Region")["Bachelor's Degree"].sum()
+
+nem = region.loc[region.index.isin(["Northeast", "South"])]
+#nem
+```
+```python
+t_stat, p_value = stats.ttest_ind(nem["High School Graduate (or its Equivalency)"], nem["Bachelor's Degree"])
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+```
+
+Lastly, let's compare marital status in more conservative divisions like the South Atlantic (Washington D.C., Georgia, Florida, North Carolina, etc.) and the Mountain States (Colorado, Wyoming, Nevada, Arizona, etc.).
+
+Did those who have yet to marry relocate more often than those who already are amongst the control group (meaning those that moved within state lines)?
+
+```python
+division["Never Married"] = control.groupby("Division")["Never Married"].sum()
+division["Married"] = control.groupby("Division")["Married"].sum()
+
+sam = division.loc[division.index.isin(["South Atlantic", "Mountain"])]
+#sam
+```
+```python
+t_stat, p_value = stats.ttest_ind(sam["Never Married"], sam["Married"])
+
+print("t-statistic:", t_stat)
+print("p-value:", p_value)
+```
+
+Now answer the same exact question at the county level using two counties that you know of and follow the same formula as above.
+
+```python
+county["Never Married"] = control.groupby("County")["Never Married"].sum()
+county["Married"] = control.groupby("County")["Married"].sum()
+
+#home = county.loc[county.index.isin(["Your Home county", "Home County 2"])]
+```
+
+## Conclusion
+
+So what have we learned?? We've learned that:
+
+- Yes, there a difference in mobility patterns between those that moved within their home state versus across states lines in New York and California (with roughly 80% certainty), although citizenship status seems to bear little to no relationship between the two.
+- No, there does not appear to be a difference in those same patterns amongst educational status between the Northeast (New Jersey, Pennsylvania, Rhode Island, Vermont, etc.) and the South (Georgia, Maryland, Virginia, D.C., etc.).
+- No, there also does not appear to be a difference across marital status for conservative divisions like the South Atlantic (Washington D.C., Georgia, Florida, North Carolina, etc.) and the Mountain States (Colorado, Wyoming, Nevada, Arizona, etc.) either.
+
+Why does this matter? It matters because it demonstrates that there's actually a sound and scientific method for answering these questions when they come up. Feel free to try your hand at doing the same the next time you run into an interesting dataset.
+
+Thanks for coding with us!
