@@ -182,7 +182,6 @@ function preload() {
   julien1997 = loadImage("https://i.imgur.com/a0I87n4.png");
   julien2024 = loadImage("https://i.imgur.com/wkYjjo9.png");
 }
-
 ```
 
 I replaced the paddle rectangles with images in the showPaddle function.
@@ -209,6 +208,7 @@ function showPaddle(playerNumber){
   );
   pop();
 }
+```
 
 💬 **Step 3: Add the chat text as an array of strings**
 
