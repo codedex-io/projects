@@ -39,80 +39,76 @@ tags:
 
 ## Introduction
 
-In web development, HTML ultimately rests underneath the websites we use. But how can we test or preview the websites we build with HTML on our local computer?
+HTML ultimately rests underneath the websites we use. But how can we test or preview the websites we build with HTML on our local computer?
 
 This tutorial shows a few ways to do just that!
 
-Before reading on, make sure to create a new **index.html** file somewhere on your computer. And then feel free to place anything in the `<body>` element so we can render it later.
+**Note:** Make sure to create a new **index.html** file somewhere on your computer. Then place anything in the `<body>` element so we can render it later.
 
 ## Option A: Double-Click the File
 
-The first option involves using our computer's application for location files ("Finder" for Mac; "File Explorer" for Windows).
+The first option involves using our computer's file manager ("Finder" for Mac; "File Explorer" for Windows).
 
-This is how to access a file with Mac's Finder:
+This is how to access a web page in Mac:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/run-a-website-locally-with-html/open-html-on-mac-finder.gif" alt="Using the Mac Finder to open an HTML file." />
 
-Simply double-click the **index.html** file and it should open on your default browser window. Boom, you got yourself a web page!
+If you double-click the **index.html** file, it should open on your default browser window. Boom, you just opened a web page!
 
-Remember, this web page is not on the internet; you can tell by looking at the file path in the browser. It only lives on your computer.
+**Note:** This page is not on the internet; you can tell by looking at the file path in the browser. It exists locally on your computer.
 
-Now you can pull this side-by-side. Everytime you make a change to your **index.html** file, just save the file and then refresh the browser window to render the updated web page.
+Every time you make a change to your index.html file, just save the file and then refresh the browser window to render the updated page.
 
-If you prefer, you can use keyboard shortcuts for this:
+You can also use keyboard shortcuts for this:
 
-Saving on VS Code: <kbd>command</kbd> + <kbd>s</kbd>
-Refreshing a web page: <kbd>command</kbd> + <kbd>shift</kbd> + <kbd>r</kbd>
+- Saving on VS Code: <kbd>command</kbd> + <kbd>s</kbd>
+- Refreshing a web page: <kbd>command</kbd> + <kbd>shift</kbd> + <kbd>r</kbd>
 
-This is how to access one with the Windows File Explorer:
+To open a page in Windows:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/run-a-website-locally-with-html/open-html-in-windows-explorer.png" alt="Using Windows File Explorer to open an HTML file." />
 
-Same thing as with the Mac finder: double-click the **index.html** file and a browser window should open with the HTML.
+Like with the Mac Finder, double-click the **index.html** file and a browser window should open the page.
 
 ## Option B: Live Server (VS Code Extension)
 
-One of the most popular tools for building websites is a code editor called Visual Studio Code (VS Code). As of now, there is nothing built into VS Code for running HTML locally. But we can get around this with VS Code extensions!
+Visual Studio Code (VS Code) is a popular code editor for building websites. It uses extensions for added functionality, including running HTML locally!
 
 ### VS Code Overview
 
-If you're not familiar with VS Code, or you don't have it installed on your computer, you can follow the steps in [this tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python#setting-up) to do so.
+If you're not familiar with VS Code, or you don't have it installed, you can follow the steps in [this tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python#setting-up) to do so.
 
-After installing, launch VS Code by double-clicking the icon. When the window opens, there should be a group of icons vertically arranged on the left-side (highlighted below):
+After installing, launch VS Code by double-clicking the icon. When the window opens, there is a group of icons located on the left-side (highlighted below):
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/run-a-website-locally-with-html/vs-code-activity-bar.png" alt="Activity Bar highlighted on left-side of VS Code window" />
 
-The highlighted section is known as the "Activity Bar". The topmost icon is the "Explorer", where you can create files and folders for your projects! Let's select the "Explorer" icon and then create a new **index.html** file (if needed).
+This is known as the "Activity Bar." The topmost icon is the "Explorer", where you can create files and folders for your projects! Let's select this icon and then create a new **index.html** file (if needed).
 
-When first installed, VS Code is already powerful. But it can be taken even further with extensions! They give special abilities to VS Code such as code highlighting and formatting. Thousands of extensions are available in VS Code, many of which support HTML.
-
-One way to access and install extensions is with the icon in the Activity Bar:
+Extensions give us special abilities such as code highlighting and formatting. Thousands of extensions are available for install via the "Extensions" icon in the Activity Bar:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/run-a-website-locally-with-html/vs-code-extensions.gif" alt="VS Code section for Extensions" />
 
-We can also go to the program menu ("View" > "Extensions") or use keyboard shortcuts:
+Alternatively, we can access with "View" > "Extensions" or keyboard shortcuts:
 
 - Windows: <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>x</kbd>
 - Mac: <kbd>cmd</kbd> + <kbd>shift</kbd> + <kbd>x</kbd>
 
-Now that we can view extensions on VS Code, let's explore some that support HTML!
+Let's now explore one that supports HTML!
 
 ### Live Server
 
 A popular extension for running local HTML is the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
 
-When installed, Live Server can start a new `localhost` server for an **.html** file via a "Go Live" button near the bottom-right corner of the VS Code window:
+When installed, it can start a new `localhost` server for an **.html** file via a "Go Live" button near the bottom-right corner of the VS Code window:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/run-a-website-locally-with-html/live-server-button.png" alt="VS Code Live Server button on bottom-right of window" />
 
 This button appears while viewing an **.html** file on VS Code. When clicked, a new `localhost` server is started and can be accessed at an address such as `127.0.0.01.5501/filename.html`.
 
-If changes are made and saved on the file while the server is still running, the content is automatically updated on the browser (no refresh necessary):
+If you edit and save the file while the server is still running, the browser automatically refreshes the page:
 
 <img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/run-a-website-locally-with-html/live-server-demo.gif" alt="Demo of Live Server extension in VS Code" />
 
 ## Conclusion
 
-There you have it! We explored a couple of ways to run and preview HTML on the local computer. Even though VS Code itself doesn't have a built-in feature for running HTML locally, we have the command line along with an ecosystem of extensions!
-
-Go ahead and try to start your next project on VS Code with what you've learned!
+Congrats! You learned two ways to run and preview local HTML. Whether you're using your file manager or a VS code extension, you have options for your next project!
