@@ -186,11 +186,7 @@ region = pd.DataFrame()
 
 Now let's complete a simple pandas exercise. Sum the total number of people that relocated within the U.S. in both the control and variant groups at the state level.
 
-<RoundedImage
-  link="https://i.imgur.com/8LlsAhS.png"
-  description="U.S. Census Data Analysis" 
-/>
-
+![U.S. Census Data Analysis](https://i.imgur.com/8LlsAhS.png)
 
 ```python
 state["Relocated Within State"] = control.groupby("State")["Total Population"].sum()
