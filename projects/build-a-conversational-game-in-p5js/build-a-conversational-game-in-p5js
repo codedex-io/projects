@@ -1,0 +1,286 @@
+---
+title: Build a Conversational Game with p5.js
+author: 
+uid:
+# datePublished: 
+published: false
+description: 
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-us-census-data-with-scipy/header.gif
+tags:
+  - intermediate
+  - p5.js
+---
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-us-census-data-with-scipy/header.gif"
+  description="Title Image"
+  uid={true}
+  cl="for-sidebar"
+/>
+
+# Build a Conversational Pong Game in p5.js
+
+<AuthorAvatar
+  author_name=""
+  author_avatar="/images/projects/authors/"
+  username=""
+  uid={true}
+/>
+
+<BannerImage
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-us-census-data-with-scipy/header.gif"
+  description="Banner"
+  uid={true}
+/>
+
+**Prerequisites**: p5.js, JavaScript
+**Version**: p5@1.11.2, JavaScript ES2023
+**Read Time**: 30 minutes
+
+## Introduction
+
+Hi, my name is ✨Julien✨, and I’m the new Senior Curriculum Developer here at Codédex! I love zines, games, indie comics, park hangs, and experimental baking (holiday cookie box loading…). I’m based in Brooklyn, and am originally from Los Angeles! I’ve always made art, and didn’t consider myself a technical person until my coding journey unexpectedly began about a decade ago.
+
+<RoundedImage
+  link="https://i.imgur.com/a0I87n4.png"
+  description="" 
+/>
+
+<RoundedImage
+  link="https://i.imgur.com/ZLLInna.png"
+  description="" 
+/>
+
+<RoundedImage
+  link="https://i.imgur.com/eN6lvAQ.png"
+  description="" 
+/>
+
+<RoundedImage
+  link="https://i.imgur.com/wkYjjo9.png"
+  description="choose your fighter 👾" 
+/>
+
+Since this is my first project tutorial here at Codédex, I’m revisiting the first coding project I ever finished. I made it ten years ago using [Processing](https://processing.org) (the Java-based precursor to p5.js). 
+
+## A Conversation
+
+The game is called *A Conversation*, and it’s a two-player game of Pong, but with a twist. Instead of each paddle, I drew a person’s head facing toward the center, and instead of a ball, I drew a speech bubble. As players hit the speech bubble back and forth, the text inside the speech bubble changes to form a conversation. 
+
+<RoundedImage
+  link="https://i.imgur.com/94X89Jo.gif"
+  description="" 
+/>
+<RoundedImage
+  link="https://i.imgur.com/dgqpb3M.png"
+  description="" 
+/>
+
+I spent a lot of 2014 thinking about the ways people communicate nonverbally while playing games, so I decided to make those invisible conversations, well, visible.
+
+<RoundedImage
+  link="https://i.imgur.com/f8m1zfQ.jpeg"
+  description="brainstorming sketches from 2014" 
+/>
+
+The conversation itself was…hm…it was pretty dramatic. I wasn’t sure if I was going to make this tutorial, because I was a little embarrassed by the narrative stylings of nineteen-year-old Julien. But honestly? I think it’s important to honor our past selves. I was learning to code for the first time after a lifetime of considering myself An Artist Not A Programmer. 
+
+<RoundedImage
+  link="https://i.imgur.com/cA4UduS.png"
+  description="[@WarronBebster](https://x.com/warronbebster)" 
+/>
+
+Since this project was created in 2014 on an ancient laptop I no longer have access to, I’m recreating it from scratch in p5.js, a JavaScript library. If you’ve completed our p5.js course, you may remember coding a simple game of Pong in one of the exercises! 
+
+In this project tutorial, I'll expand the one-player Pong game from the WASD exercise in our p5.js course into a two-player game, using the conceptual framing of two characters having a conversation.
+
+I found this email to my community college professor where I gave her some context about my goals so she could write me a recommendation letter:
+
+<RoundedImage
+  link="https://i.imgur.com/qKVVVtZ.png"
+  description="" 
+/>
+
+Omg,,,,
+Anyway, let’s dive in! 
+
+
+## Pong
+
+Since [Pong](https://en.wikipedia.org/wiki/Pong) is a super popular game, I had a hunch that there would be lots of existing resources online to help me debug. I had a lot of ideas, but didn’t quite have the technical know-how to build something from scratch! I wanted to learn from other people. Experienced programmers still do this! The googling never stops.
+
+<RoundedImage
+  link="https://i.imgur.com/XnMB36n.gif"
+  description="" 
+/>
+
+For this year’s iteration of Pong, I decided to have a conversation with my past self. I initially thought about talking to 2014 me, but then I decided to go way, waaaaay back, to 1997. Let's have a chat.
+
+<RoundedImage
+  link="https://i.imgur.com/4r8RZbT.gif"
+  description="literally" 
+/>
+
+### Upgrading From Simple Pong
+
+There were a few elements I added to upgrade the sketch from the WASD (Pong) exercise in our p5.js tutorial. Here is a link to the [Codédex Exercise](https://www.codedex.io/p5js/05-wasd) that features single-player Pong. Here is the [starter code](https://www.codedex.io/@Julien/build/pong-as-a-conversation-starter-code) for a basic two-player pong game, which looks a bit different from the Codédex exercise. 
+
+<RoundedImage
+  link="https://i.imgur.com/leVbTL9.gif"
+  description="👁️ 👁️ I could watch this for hours 💿🟦" 
+/>
+
+So, how do we go from a screensaver to a conversation? I find it helpful to break down the process into smaller steps. I’m gonna show you three things that can personalize our basic Pong game. 🕹️
+
+🎧**Step 1: Add a looping soundtrack**
+
+The first thing I want to do is add a soundtrack, to give the game ambiance. To play sound files in p5.js in the Codédex IDE, you’ll need to link to a url containing a .ogg audio file. You can find a ton of .ogg files with varying moods [here](https://developers.google.com/assistant/tools/sound-library). I chose an ambient outdoor summer track since I’ve always loved laying in the grass while reading a book in the park! 
+
+Declare a `gameSoundtrack` variable and define it in the preload function, where audio (and images!) load before the setup function. 
+
+```
+let gameSoundtrack;
+
+function preload() {
+  gameSoundtrack = loadSound("https://actions.google.com/sounds/v1/ambiences/outdoor_summer_ambience.ogg");
+}
+```
+
+Then, we’ll loop the soundtrack in the setup function.
+
+```
+function setup(){
+…
+  //loop the game soundtrack
+  gameSoundtrack.loop();
+…
+}
+```
+
+🕺🏻**Step 2: Replace paddles with player images** 
+
+To add images for the players, you’ll need to draw or find transparent PNGs. Since I decided to have a conversation with my younger self this time, I found a recent photo of me posing in a way that’s similar to a photo of me posing as a kid. Then, I removed their backgrounds with [Adobe’s Free Image Background Remover] (https://www.adobe.com/express/feature/image/remove-background) and did some light editing in Adobe Express.
+
+<RoundedImage
+  link="https://i.imgur.com/gMAkmjC.jpeg"
+  description="" 
+/>
+
+<RoundedImage
+  link="https://i.imgur.com/a0I87n4.png"
+  description="" 
+/>
+
+I uploaded the photos to Imgur, and added them to the preload function where my soundtrack lives.
+
+```
+let julien1997;
+let julien2024;
+
+function preload() {
+...
+  julien1997 = loadImage("https://i.imgur.com/a0I87n4.png");
+  julien2024 = loadImage("https://i.imgur.com/wkYjjo9.png");
+}
+
+```
+
+I replaced the paddle rectangles with images in the showPaddle function.
+
+```
+function showPaddle(playerNumber){
+...
+  push();
+  imageMode(CENTER);
+
+  image(
+    julien2024,
+    thisPlayer1.paddleH + 60,
+    thisPlayer1.paddleV,
+    PADDLE_WIDTH * 1.5, // adjusted width for photo proportions
+    PADDLE_HEIGHT * 1.5 // adjusted height for photo proportions
+  );
+  image(
+    julien1997,
+    thisPlayer2.paddleH - 20,
+    thisPlayer2.paddleV,
+    PADDLE_WIDTH / 1.2, // adjusted width for photo proportions
+    PADDLE_HEIGHT
+  );
+  pop();
+}
+
+💬 **Step 3: Add the chat text as an array of strings**
+
+I thought about what I would want to talk to myself about. I knew that baby me would probably want to ask me the silly philosophical questions he was asking everyone else. Growing up, my Russian-speaking grandmother recognized my innate curiosity and affectionately called me "Pochemuchka" — loosely, “one who asks too many questions”. 👦🏻
+
+I declare my array of strings and a variable tracking where we are in the array.
+
+```
+let convoText = [
+...
+  "why is the moon broken?",
+  "it's just hiding behind the fog, babe",
+  "what about when it looks like someone took a bite out of it?",
+  "that's called a crescent moon",
+...
+];
+let phrase = 0;
+```
+
+In the `drawGame()` function, I draw the text, and position it with the ball coordinates.
+
+```
+  push();
+  imageMode(CENTER);
+  textSize(20);
+  fill(255);
+  textAlign(CENTER);
+  if (showBall == true){
+  text(convoText[phrase], ball.h, ball.v);
+  }
+  pop();
+```
+
+In the `moveBall()` function, I cycle through the text array each time the ball collides with a player.
+
+```
+    ...
+      phrase++;
+      //stop the array at the last phrase
+      if (phrase == convoText.length) {
+        phrase = 0;
+      }
+    }
+```
+
+🪩 🔮 🎱
+
+Some other changes from the original lesson code:
+- Add a [background](https://p5js.org/reference/p5/background/) image (a particularly foggy night with a blurry moon)
+- Resize the paddles to be wrapped to the images
+- Figure out what I want to talk to myself about, and write it down 
+- Add brat [font](https://p5js.org/reference/p5/textFont/) 
+- Add custom messages for different game states
+- Add custom text to the title
+- Flip the game to vertical orientation
+- Add a second paddle
+- Add arrow key controls for player 2
+- Track score
+- Add ability to restart game
+
+Here is a link to my [final code](https://www.codedex.io/@Julien/build/pong-as-a-conversation-final-code) for the 2024 version of A Conversation.
+
+
+### Your Turn!
+
+If you could use a game to have a conversation, what would you say, and who would you have a conversation with? You could also imagine a conversation between two other people. You and a friend? You and a family member? What would your pet say to you if they could communicate with words? What about those two people you saw at a restaurant – who are they to each other, and what might they be discussing? What about two characters from a TV show? Make a two-player Pong game based on your conversation of choice.
+
+<RoundedImage
+  link="https://i.imgur.com/19juCNR.gif"
+  description="What do you think they’re talking about? Past Lives (2023), directed by Celine Song" 
+/>
+
+Extra challenge: Think of some other games that could be turned into conversations. Find existing code examples and see if you can find a way to modify them into this conversational format.
+
+Happy chatting! 
