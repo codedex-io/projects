@@ -41,7 +41,7 @@ tags:
 
 No matter where you are on your journey to mastering data science, it's always helpful to practice the basics of finding, cleaning, and analyzing real-world datasets. Back in 2020, COVID-19 sent us many of us into quarantine and while its long-term impact is still relatively unknown, we can reference a handful of public datasets to begin to scratch the surface. 
 
-In this tutorial, we'll be analyzing a dataset gathered from the 2022 [U.S. Census](https://data.census.gov/) covering geographic relocation roughly two years after quarantine.
+In this project tutorial, we'll be analyzing a dataset gathered from the 2022 [U.S. Census](https://data.census.gov/) covering geographic relocation roughly two years after quarantine.
 
 <RoundedImage
   link="https://i.imgur.com/QSycenX.gif"
@@ -52,7 +52,7 @@ We will begin to test our assumptions and answer some basic questions about vari
 
 - Is there a difference in mobility patterns between those that moved within their home state versus across states lines in New York and California in particular?
     - And do trends vary amongst citizenship status?
-- Is there a difference in those same patterns amongst educational status between the Northeast (New Jersey, Pennsylvania, Rhode Island, Vermont, etc.) and the South (Georgia, Maryland, Virginia, D.C., etc.)?
+- Is there a difference in those same patterns amongst educational status between the Northeast (New Jersey, Pennsylvania, Rhode Island, Vermont, etc.) and the South (Georgia, Maryland, Virginia, etc.)?
 - What about marital status across conservative divisions like the South Atlantic (Washington D.C., Georgia, Florida, North Carolina, etc.) and the Mountain States (Colorado, Wyoming, Nevada, Arizona, etc.)? Do we notice a difference in geographic mobility there as well?
 
 ## Cleaning Raw Data
@@ -88,19 +88,13 @@ For the categories listed, each dataset contains the following columns, which ar
 
 ### Geographical Data
 
-Geography ID: a unique identifier used to reference specific geographic areas
-
-Census Tract: a small, relatively permanent subdivision of a county 
-
-State: the state in which the Census Tract is located
-
-County: the county within the state in which the Census Tract resides
-
-Region: the broader geographic area in which the state or county is located, typically referring to one of four major regions: Northeast, Midwest, South, or West
-
-Division: a sub-region within a Census Bureau-defined region, used for more detailed geographic analysis
-
-Total Population: the total number of people residing in a specific Census Tract
+- Geography ID: a unique identifier used to reference specific geographic areas
+- Census Tract: a small, relatively permanent subdivision of a county 
+- State: the state in which the Census Tract is located
+- County: the county within the state in which the Census Tract resides
+- Region: the broader geographic area in which the state or county is located, typically referring to one of four major regions: Northeast, Midwest, South, or West
+- Division: a sub-region within a Census Bureau-defined region, used for more detailed geographic analysis
+- Total Population: the total number of people residing in a specific Census Tract
 
 ### Citizenship Status
 
