@@ -244,7 +244,7 @@ In the `drawGame()` function, I draw the text, and position it with the ball coo
 
 In the `moveBall()` function, I cycle through the text array each time the ball collides with a player.
 
-```
+```js
     ...
       phrase++;
       //stop the array at the last phrase
