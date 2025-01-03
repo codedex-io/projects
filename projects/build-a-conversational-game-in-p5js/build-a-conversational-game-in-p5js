@@ -186,7 +186,7 @@ function preload() {
 
 I replaced the paddle rectangles with images in the showPaddle function.
 
-```
+```js
 function showPaddle(playerNumber){
 ...
   push();
