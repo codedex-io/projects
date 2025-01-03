@@ -75,6 +75,7 @@ The game is called *A Conversation*, and it’s a two-player game of Pong, but w
 <RoundedImage
   link="https://i.imgur.com/dgqpb3M.png"
   description="" 
+  marginTop="16px"
 />
 
 I spent a lot of 2014 thinking about the ways people communicate nonverbally while playing games, so I decided to make those invisible conversations, well, visible.
