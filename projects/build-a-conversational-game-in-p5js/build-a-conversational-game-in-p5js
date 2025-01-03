@@ -230,7 +230,7 @@ let phrase = 0;
 
 In the `drawGame()` function, I draw the text, and position it with the ball coordinates.
 
-```
+```js
   push();
   imageMode(CENTER);
   textSize(20);
