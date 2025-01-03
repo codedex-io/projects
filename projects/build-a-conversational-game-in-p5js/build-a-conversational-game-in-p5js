@@ -173,7 +173,7 @@ To add images for the players, you’ll need to draw or find transparent PNGs. S
 
 I uploaded the photos to Imgur, and added them to the preload function where my soundtrack lives.
 
-```
+```js
 let julien1997;
 let julien2024;
 
