@@ -149,7 +149,7 @@ function preload() {
 
 Then, we’ll loop the soundtrack in the setup function.
 
-```
+```js
 function setup(){
 …
   //loop the game soundtrack
