@@ -138,7 +138,7 @@ The first thing I want to do is add a soundtrack, to give the game ambiance. To 
 
 Declare a `gameSoundtrack` variable and define it in the preload function, where audio (and images!) load before the setup function. 
 
-```
+```js
 let gameSoundtrack;
 
 function preload() {
