@@ -12,7 +12,7 @@ tags:
 ---
 
 <BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-us-census-data-with-scipy/header.gif"
+  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-conversational-game-in-p5js/header.gif"
   description="Title Image"
   uid={true}
   cl="for-sidebar"
