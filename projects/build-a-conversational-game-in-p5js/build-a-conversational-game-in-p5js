@@ -216,7 +216,7 @@ I thought about what I would want to talk to myself about. I knew that baby me w
 
 I declare my array of strings and a variable tracking where we are in the array.
 
-```
+```js
 let convoText = [
 ...
   "why is the moon broken?",
