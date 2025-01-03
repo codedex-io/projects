@@ -59,8 +59,9 @@ Hi, my name is ✨Julien✨, and I’m the new Senior Curriculum Developer here 
 
 <RoundedImage
   link="https://i.imgur.com/wkYjjo9.png"
-  description="choose your fighter 👾" 
+  description="" 
 />
+choose your fighter 👾
 
 Since this is my first project tutorial here at Codédex, I’m revisiting the first coding project I ever finished. I made it ten years ago using [Processing](https://processing.org) (the Java-based precursor to p5.js). 
 
@@ -82,15 +83,17 @@ I spent a lot of 2014 thinking about the ways people communicate nonverbally whi
 
 <RoundedImage
   link="https://i.imgur.com/f8m1zfQ.jpeg"
-  description="brainstorming sketches from 2014" 
+  description="" 
 />
+brainstorming sketches from 2014
 
 The conversation itself was…hm…it was pretty dramatic. I wasn’t sure if I was going to make this tutorial, because I was a little embarrassed by the narrative stylings of nineteen-year-old Julien. But honestly? I think it’s important to honor our past selves. I was learning to code for the first time after a lifetime of considering myself An Artist Not A Programmer. 
 
 <RoundedImage
   link="https://i.imgur.com/cA4UduS.png"
-  description="[@WarronBebster](https://x.com/warronbebster)" 
+  description="" 
 />
+[@WarronBebster](https://x.com/warronbebster)
 
 Since this project was created in 2014 on an ancient laptop I no longer have access to, I’m recreating it from scratch in p5.js, a JavaScript library. If you’ve completed our p5.js course, you may remember coding a simple game of Pong in one of the exercises! 
 
@@ -129,8 +132,9 @@ There were a few elements I added to upgrade the sketch from the WASD (Pong) exe
 
 <RoundedImage
   link="https://i.imgur.com/leVbTL9.gif"
-  description="👁️ 👁️ I could watch this for hours 💿🟦" 
+  description="" 
 />
+👁️ 👁️ I could watch this for hours 💿🟦
 
 So, how do we go from a screensaver to a conversation? I find it helpful to break down the process into smaller steps. I’m gonna show you three things that can personalize our basic Pong game. 🕹️
 
@@ -280,8 +284,10 @@ If you could use a game to have a conversation, what would you say, and who woul
 
 <RoundedImage
   link="https://i.imgur.com/19juCNR.gif"
-  description="What do you think they’re talking about? Past Lives (2023), directed by Celine Song" 
+  description="" 
 />
+Past Lives (2023), directed by Celine Song
+What do you think they’re talking about? 
 
 Extra challenge: Think of some other games that could be turned into conversations. Find existing code examples and see if you can find a way to modify them into this conversational format.
 
