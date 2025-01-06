@@ -185,13 +185,25 @@ function setup(){
 
 To add images for the players, you’ll need to draw or find transparent PNGs. Since I decided to have a conversation with my younger self this time, I found a recent photo of me posing in a way that’s similar to a photo of me posing as a kid. Then, I removed their backgrounds with [Adobe’s Free Image Background Remover] (https://www.adobe.com/express/feature/image/remove-background) and did some light editing in Adobe Express.
 
-<div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-<div>
-            <img src="https://i.imgur.com/gMAkmjC.jpeg" />
-
-            <img src="https://i.imgur.com/a0I87n4.png" />
-
-</div>
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+  }}
+>
+  <img
+    src="https://i.imgur.com/gMAkmjC.jpeg"
+    width={250}
+    height="auto"
+    alt="character image"
+  />
+  <img
+    src="https://i.imgur.com/a0I87n4.png"
+    width={150}
+    height="auto"
+    alt="character image"
+  />
 </div>
 
 I uploaded the photos to Imgur, and added them to the preload function where my soundtrack lives.
