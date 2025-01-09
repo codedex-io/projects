@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/codedex-io/projects#readme",
   "dependencies": {
-    "firebase-admin": "^11.6.0",
+    "firebase-admin": "^13.0.2",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.2.0",
     "next-mdx-remote": "^4.3.0",
