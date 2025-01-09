@@ -31,6 +31,7 @@ Now that the MVP is out, our goal for Codédex Projects is to invite awesome con
 - ellie
 - [@goku-kun](https://github.com/Goku-kun)
 - [@asiqurrahman](https://github.com/asiqurrahman)
+- julien
 
 ### 🏆 Alumni
 
