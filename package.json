@@ -27,7 +27,7 @@
     "rehype-autolink-headings": "^6.1.1",
     "rehype-external-links": "^2.0.1",
     "rehype-highlight": "^5.0.2",
-    "rehype-katex": "^6.0.2",
+    "rehype-katex": "^6.0.3",
     "rehype-rewrite": "^3.0.6",
     "rehype-slug": "^5.0.1",
     "remark": "^14.0.2",
