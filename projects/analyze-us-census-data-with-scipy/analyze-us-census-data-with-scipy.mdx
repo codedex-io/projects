@@ -2,7 +2,7 @@
 title: Analyze U.S. Census Data with SciPy
 author: Sade Snowden-Akintunde
 uid: LC6iTrJZzITO0aBq3iaamSvy6Q93
-datePublished: 2025-01-02
+datePublished: 2025-01-13
 published: true
 description: Learn how to analyze U.S. census data with SciPy
 header: https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/assets%2Findex%2F12423.png?alt=media&token=721aaaaa-f431-438e-bd19-c3f6a97afb41
@@ -33,9 +33,9 @@ tags:
   uid={true}
 />
 
-**Prerequisites**: Intermediate Python, SciPy
+**Prerequisites**: Python, NumPy, SciPy
 **Version**: Python 3
-**Read Time**: X minutes
+**Read Time**: 45 minutes
 
 ## Introduction
 
@@ -48,7 +48,9 @@ In this project tutorial, we'll be analyzing a dataset gathered from the 2022 [U
   description="U.S. Census Data Analysis" 
 />
 
-We will begin to test our assumptions and answer some basic questions about various demographic groups using SciPy, NumPy, Pandas, and some basic working knowledge of statistics, including the following:
+We will begin to test our assumptions and answer some basic questions about various demographic groups using SciPy, NumPy, Pandas, and some basic working knowledge of statistics.
+
+The questions include:
 
 - Is there a difference in mobility patterns between those that moved within their home state versus across states lines in New York and California in particular?
     - And do trends vary amongst citizenship status?
@@ -57,7 +59,7 @@ We will begin to test our assumptions and answer some basic questions about vari
 
 ## Cleaning Raw Data
 
-As you can see below, the original data provided by census.gov contains two separate CSVs, one with the raw data and another with metadata that contains details of what each column represents.
+As you can see below, the original data provided by [census.gov](https://data.census.gov/) contains two separate CSVs, one with the raw data and another with metadata that contains details of what each column represents.
 
 <RoundedImage
   link="https://i.imgur.com/uvbRfkQ.png"
@@ -88,45 +90,35 @@ For the categories listed, each dataset contains the following columns, which ar
 
 ### Geographical Data
 
-- Geography ID: a unique identifier used to reference specific geographic areas
-- Census Tract: a small, relatively permanent subdivision of a county 
-- State: the state in which the Census Tract is located
-- County: the county within the state in which the Census Tract resides
-- Region: the broader geographic area in which the state or county is located, typically referring to one of four major regions: Northeast, Midwest, South, or West
-- Division: a sub-region within a Census Bureau-defined region, used for more detailed geographic analysis
-- Total Population: the total number of people residing in a specific Census Tract
+- **Geography ID**: a unique identifier used to reference specific geographic areas
+- **Census Tract**: a small, relatively permanent subdivision of a county 
+- **State**: the state in which the Census Tract is located
+- **County**: the county within the state in which the Census Tract resides
+- **Region**: the broader geographic area in which the state or county is located, typically referring to one of four major regions: Northeast, Midwest, South, or West
+- **Division**: a sub-region within a Census Bureau-defined region, used for more detailed geographic analysis
+- **Total Population**: the total number of people residing in a specific Census Tract
 
 ### Citizenship Status
 
-Total U.S. Citizens (Native): the total number of individuals who are U.S. citizens by birth
-
-Total U.S. Citizens (Naturalized): the total number of individuals who have obtained U.S. citizenship through the naturalization process after being born in another country
-
-Total Non-Citizens: the total number of individuals who are not U.S. citizens, including both legal immigrants, visa holders, and undocumented individuals
+- **Total U.S. Citizens (Native)**: the total number of individuals who are U.S. citizens by birth
+- **Total U.S. Citizens (Naturalized)**: the total number of individuals who have obtained U.S. citizenship through the naturalization process after being born in another country
+- **Total Non-Citizens**: the total number of individuals who are not U.S. citizens, including both legal immigrants, visa holders, and undocumented individuals
 
 ### Marital Status
 
-Married: the total number of individuals who are legally married at the time of the census
-
-Never Married: the total number of individuals who have never been legally married
-
-Separated: the total number of individuals who are legally married but currently living apart from their spouse due to marital separation
-
-Divorced: the total number of individuals who have been legally divorced
-
-Widowed: the total number of individuals who have lost their spouse and have not remarried
+- **Married:** the total number of individuals who are legally married at the time of the census
+- **Never Married:** the total number of individuals who have never been legally married
+- **Separated:** the total number of individuals who are legally married but currently living apart from their spouse due to marital separation
+- **Divorced:** the total number of individuals who have been legally divorced
+- **Widowed:** the total number of individuals who have lost their spouse and have not remarried
 
 ### Educational Attainment
 
-Less than a High School Graduate: the total number of individuals who have not completed high school or its equivalent
-
-High School Graduate (or its Equivalency): the total number of individuals who have completed high school or obtained an equivalent diploma, such as a GED
-
-Some College or Associate's Degree: the total number of individuals who have attended college or earned an Associate's Degree but have not completed a Bachelor's Degree
-
-Bachelor's Degree: the total number of individuals who have earned a Bachelor's Degree, typically after completing four years of undergraduate education at a university or college
-
-Graduate or Professional Degree: the total number of individuals who have earned a Master's Degree, Doctoral Degree (Ph.D.), or other professional degrees such as a Law Degree (J.D.) or Medical Degree (M.D.)
+- **Less than a High School Graduate**: the total number of individuals who have not completed high school or its equivalent
+- **High School Graduate (or its Equivalency)**: the total number of individuals who have completed high school or obtained an equivalent diploma, such as a GED
+- **Some College or Associate's Degree**: the total number of individuals who have attended college or earned an Associate's Degree but have not completed a Bachelor's Degree
+- **Bachelor's Degree**: the total number of individuals who have earned a Bachelor's Degree, typically after completing four years of undergraduate education at a university or college
+- **Graduate or Professional Degree**: the total number of individuals who have earned a Master's Degree, Doctoral Degree (Ph.D.), or other professional degrees such as a Law Degree (J.D.) or Medical Degree (M.D.)
 
 In this tutorial, we'll use SciPy to run some analysis and find out whether there are statistically significant differences in relocation patterns for each group - but first, let’s review the basics.
 
