@@ -128,7 +128,7 @@ When conducting an exploratory analysis, we first want to make sure that our dat
 
 Generally speaking, most data science models abide by what we call parametric assumptions, which refer to normal distribution of a fixed set of parameters. In our particular case, those parameters include, but are not limited to, the columns we listed above. The three parametric assumptions are independence, normality, and homogeneity of variances.
 
-Additionally, traditional A/B testing typically utilizes one of two methods: either a chi-squared (which looks for dependence between two categorical variables) or a t-test (which looks for a statistically significant difference between the averages of two groups) to validate what we refer to as the null hypothesis (which is the assumption that there is no relationship or comparison between two patterns of behavior). 
+Additionally, traditional **A/B testing** typically utilizes one of two methods: either a **chi-squared** (which looks for dependence between two categorical variables) or a **t-test** (which looks for a statistically significant difference between the averages of two groups) to validate what we refer to as the null hypothesis (which is the assumption that there is no relationship or comparison between two patterns of behavior). 
 
 For this tutorial, we'll be running t-tests.
 
@@ -163,8 +163,8 @@ v = ("/content/moved_between_states.csv")
 control = pd.read_csv(c)
 variant = pd.read_csv(v)
 
-#control.head()
-#variant.head()
+# control.head()
+# variant.head()
 ```
 
 
@@ -266,7 +266,7 @@ region["High School Graduate (or its Equivalency)"] = control.groupby("Region")[
 region["Bachelor's Degree"] = control.groupby("Region")["Bachelor's Degree"].sum()
 
 nem = region.loc[region.index.isin(["Northeast", "South"])]
-#nem
+# nem
 ```
 ```python
 t_stat, p_value = stats.ttest_ind(nem["High School Graduate (or its Equivalency)"], nem["Bachelor's Degree"])
@@ -284,7 +284,7 @@ division["Never Married"] = control.groupby("Division")["Never Married"].sum()
 division["Married"] = control.groupby("Division")["Married"].sum()
 
 sam = division.loc[division.index.isin(["South Atlantic", "Mountain"])]
-#sam
+# sam
 ```
 ```python
 t_stat, p_value = stats.ttest_ind(sam["Never Married"], sam["Married"])
@@ -299,7 +299,7 @@ Now answer the same exact question at the county level using two counties that y
 county["Never Married"] = control.groupby("County")["Never Married"].sum()
 county["Married"] = control.groupby("County")["Married"].sum()
 
-#home = county.loc[county.index.isin(["Your Home county", "Home County 2"])]
+# home = county.loc[county.index.isin(["Your Home county", "Home County 2"])]
 ```
 
 ## Conclusion
