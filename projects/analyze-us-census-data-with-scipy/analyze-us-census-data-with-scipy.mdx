@@ -120,7 +120,7 @@ For the categories listed, each dataset contains the following columns, which ar
 - **Bachelor's Degree**: the total number of individuals who have earned a Bachelor's Degree, typically after completing four years of undergraduate education at a university or college
 - **Graduate or Professional Degree**: the total number of individuals who have earned a Master's Degree, Doctoral Degree (Ph.D.), or other professional degrees such as a Law Degree (J.D.) or Medical Degree (M.D.)
 
-In this tutorial, we'll use SciPy to run some analysis and find out whether there are statistically significant differences in relocation patterns for each group - but first, let’s review the basics.
+In this tutorial, we'll use SciPy to run some analysis and find out whether there are statistically significant differences in relocation patterns for each group – but first, let’s review the basics.
 
 ## Some Basic Stats
 
@@ -189,19 +189,18 @@ state["Relocated Between States"] = variant.groupby("State")["Total Population"]
 
 state.head()
 ```
+
 Comparing California residents to those from New York only, **is there a significant difference in mobility between those that relocated within the same** area (in this case, state) **versus those that moved across state lines?** 
 
-We'll use the .loc method to search for the two states and extract the summed values that we calculated in the exercise above.
+We'll use the `.loc[]` method to search for the two states and extract the summed values that we calculated in the exercise above.
+
 ```python
 cny = state.loc[["California", "New York"]]
 
 cny
 ```
-<RoundedImage
-  link="https://i.imgur.com/IR9CX8c.png"
-  description="U.S. Census Data Analysis" 
-/>
 
+![U.S. Census Data Analysis](https://i.imgur.com/IR9CX8c.png)
 
 ```python
 t_stat, p_value = stats.ttest_ind(cny["Relocated Within State"], cny["Relocated Between States"])
@@ -313,3 +312,9 @@ So what have we learned?? We've learned that:
 Why does this matter? It matters because it demonstrates that there's actually a sound and scientific method for answering these questions when they come up. Feel free to try your hand at doing the same the next time you run into an interesting dataset.
 
 Thanks for coding with us!
+
+### More Resources
+
+- [Source Code](https://colab.research.google.com/drive/1ujk1u0TWqlNolFwv9-rUNMjaghZuLLZK)
+- [NumPy course](https://www.codedex.io/numpy)
+- [A/B Testing](https://www.oracle.com/cx/marketing/what-is-ab-testing)
