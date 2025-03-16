@@ -107,3 +107,75 @@ Let's also take a look at this line of code:
 ```
 animation: colorChange 2s infinite;  
 ```
+
+- `colorChange` is the name of our animation 
+- `2s` is the length in seconds of how long the animation lasts
+- `infinite` is indicating it will loop forever
+
+The line of code above is attached to the `.box` class from our HTML file! Animations can only show up if they are defined in the `animation:`. 
+
+## Easing 
+Easing in CSS animations is essential to understanding the pace in which an animation progresses over time. 
+
+<RoundedImage link="https://i.imgur.com/9C7DeEg.gif" description="easing demo from mdn web docs" />
+
+Some common ones you'll see: 
+
+- `linear`: Constant speed
+- `ease`: Starts slow, speeds up, then slows down
+- `ease-in`: Starts slow, then accelerates
+- `ease-out`: Starts fast, then decelerates
+- `ease-in-out`: Combines `ease-in` and `ease-out`
+
+These can differ and are added right in the `animation:` of your CSS. 
+
+```
+.tinker_bell {
+  animation: bounce 1s linear infinite;
+}
+```
+
+**Note:** Easing can get pretty complicated based on the type of motion you want to create! You can review the open source [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function) for more information on easing and animation examples. 
+
+
+### Spin Animation
+
+Think of the last time you saw a spinning loader: 
+
+<RoundedImage link="https://i.imgur.com/lW1fWrY.gif" description="spinning loader" />
+
+This can be recreated with a spin animation like so: 
+
+```
+<div className="sensei">
+  <img src="sensei.png" alt="club penguin gray sensei penguin" />
+</div>
+```
+
+```
+/* spinning animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sensei {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+  animation: spin 1s linear infinite;
+}
+
+```
+
+Here, we're using the CSS function `rotate()` to establish which degree we want to start and end at. In this example, we're using the keywords `from` and `to` which are shortcuts for `0%` and `100%`. 
+
+The result of the club penguin sensei looks like this 🔥🔥
+
+<RoundedImage link="https://i.imgur.com/YVnPHFA.gif" description="spinning club penguin sensei" />
+
