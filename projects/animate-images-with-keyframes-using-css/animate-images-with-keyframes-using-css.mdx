@@ -73,3 +73,37 @@ Before we get started, it's important to note what animations are in CSS. Animat
 <RoundedImage link="https://i.imgur.com/oYGbPkH.gif" description="html review" />
 
 ### keyframes
+
+CSS animations have "steps" in them (also known as keyframes) to signify each moment of change in the animation. 
+
+For example, 
+
+```
+<div className="box"></div>
+```
+```
+@keyframes colorChange {
+  0% { background-color: red; }
+  50% { background-color: yellow; }
+  100% { background-color: red; }
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation: colorChange 2s infinite;  
+}
+```
+
+would look like 
+
+<RoundedImage link="https://i.imgur.com/bBzHFra.gif" description="flashing yellow and red box" />
+
+So at 0% of the animation, the color is red, at 50% it's yellow, and at 100% or at the end, it's red again, hence the loop! 
+
+Let's also take a look at this line of code: 
+
+```
+animation: colorChange 2s infinite;  
+```
