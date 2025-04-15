@@ -1,66 +1,70 @@
 ---
-title: Create a Voice Virtual Assistant
+title: Create a Voice Virtual Assistant with ElevenLabs
 author: Alexandre Sajus
-uid: 
-datePublished: 
-published: false
+uid: u2DitJXVOqWo18bLsyXNLcVtufC2
+datePublished: TODO
 description: Learn how to build a Voice Virtual Assistant using ElevenLabs API and Python for seamless AI-powered interactions.
-header: 
+published: false
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-voice-virtual-assistant/header.gif
 tags:
-  - Intermediate
-  - Python
+  - intermediate
+  - python
   - AI
 ---
 
-<BannerImage
-  link=""
-  description="Title Image"
-  uid={true}
-  cl="for-sidebar"
-/>
+<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-voice-virtual-assistant/header.gif" description="Title Image" uid={true} cl="for-sidebar"/>
 
-# Build a Conversational Pong Game in p5.js
+# Create a Voice Virtual Assistant
 
 <AuthorAvatar
-  author_name="Alexandre Sajus"
-  author_avatar="https://i.imgur.com/fhkMdV4.jpeg"
-  username=""
-  uid={true}
+author_name="Alexandre Sajus"
+author_avatar="/media/Alexandre.jpg"
+username="AlexandreSajus"
+uid={true}
 />
 
-<BannerImage
-   link=""
-  description="Banner"
-  uid={true}
-/>
+<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-voice-virtual-assistant/header.gif" description="Title Image" uid={true}/>
 
-**Prerequisites:** Python
+**Prerequisites:** Python fundamentals, API usage
 **Versions:** Python 3.11, python-dotenv 1.0.1, elevenlabs 1.54.0, elevenlabs[pyaudio]
-**Read Time:** 60 minutes 
+**Read Time:** 60 minutes  
 
 ## Introduction
 
-Voice assistants like Siri, Google Assistant, and Alexa have revolutionized the way we interact with technology. In this tutorial, we’ll learn how to create a Voice Virtual Assistant using [ElevenLabs](https://elevenlabs.io/) API and Python. This assistant will be able to engage in natural conversations and provide helpful responses in real time.
+Hey!👋 I'm Alex! Since this is my first tutorial on Codédex, I wanted to revisit a very popular project I made in 2023: creating a voice virtual assistant using Python.
 
-The final assistant will:
+Back in 2023, I had just graduated with a Master's of Science in Artificial Intelligence and I had already made a few fun AI projects like detecting vehicles in video games using object detection or teaching 3D characters to jump over obstacles using reinforcement learning (You can check them out on my [YouTube channel](https://www.youtube.com/@alexandresajus/videos)).
 
-- Process user voice and text input
-- Use ElevenLabs API for voice synthesis
-- Provide a seamless conversational experience
+<ImageZoom src="https://i.imgur.com/W5fyBFH.png" style={{width: "60%", height: "auto"}}/>
 
-Here is a sneak peek of the final assistant in action:
+AI around language was getting more and more popular: ChatGPT released in 2022, and multiple companies were releasing APIs around managing text transcription and voice synthesis. 
 
-<p align="center">
-    <video width="1280" height="480" controls>
-        <source src="media/demo.mp4" type="video/mp4" />
-    </video>
-</p>
+Despite this, voice-based conversational AI was still in its early stages and voice assistants like the one in ChatGPT were just starting to be released in beta.
+
+That's why I decided to create my own! Back then, APIs were limited in functionality so I had to build my own pipeline with one tool per task:
+- 🎤 PyAudio to record the user's voice
+- ⌨️ Deepgram to transcribe the voice to text
+- 🤖 OpenAI GPT-3 to generate a response
+- 📈 ElevenLabs to convert the response to speech
+- 🔊 Pygame to play the response
+- 💻 Taipy to display the conversation
+- 🤝 And a lot of Python code to glue everything together
+
+<ImageZoom src="https://i.imgur.com/bWX2sx8.png" style={{width: "60%", height: "auto"}}/>
+
+It was a lot of work but it was worth it! I released it on [GitHub](https://github.com/AlexandreSajus/JARVIS) and on [YouTube](https://github.com/AlexandreSajus/JARVIS) and it got 24k views, 485 stars and 88 forks! Here's me talking to my chatbot after spending 24 hours without sleep creating it:
+
+<ImageZoom src="https://i.imgur.com/ecC0Tff.png" style={{width: "60%", height: "auto"}}/>
+
+Now, in 2025, I'm excited to revisit this project since APIs have evolved a lot since then. What took 6 different libraries to work in 2023 can now be done with just one API. In this tutorial, we will use the ElevenLabs API to record our voice and play the assistant's response in real time:
+
+<ImageZoom src="https://i.imgur.com/6iGvFsk.gif" style={{width: "60%", height: "auto"}}/>
 
 Let's dive in!
 
 ## Setting Up the Environment
 
-### 1. Install Required Packages
+### Install Required Packages
 
 Before we start, make sure you have Python installed. Then, install the required dependencies:
 
@@ -68,43 +72,45 @@ Before we start, make sure you have Python installed. Then, install the required
 pip install elevenlabs elevenlabs[pyaudio] python-dotenv
 ```
 
-### 2. Setting up ElevenLabs
+Processing audio requires additional dependencies on Linux and MacOS:
 
-ElevenLabs provides a Conversational AI API that we will use to create our Voice Assistant. - The API records the user's voice through the microphone
-- It processes it to know when the user has finished speaking or is interrupting the assistant
-- It calls an LLM model to generate a response
-- It synthesizes the response into speech
-- It plays the synthesized speech through the speakers
+- For Linux, you need to install `portaudio19`:
+```sh
+sudo apt install portaudio19
+```
+- For MacOS, you need to install `portaudio`:
+```sh
+brew install portaudio
+```
 
-<p align="center">
-  <img src="https://i.imgur.com/TZpJsMK.png" alt="ElevenLabs Function Diagram" width="80%"/>
-</p>
+### Setting up ElevenLabs
+
+ElevenLabs provides a Conversational AI API that we will use to create our Voice Assistant. 
+- 🎤 The API records the user's voice through the microphone
+- 🖨️ It processes it to know when the user has finished speaking or is interrupting the assistant
+- 🤖 It calls an LLM model to generate a response
+- 📈 It synthesizes the response into speech
+- 🔊 It plays the synthesized speech through the speakers
+
+<ImageZoom src="https://i.imgur.com/QZkz0Rh.png" style={{width: "60%", height: "auto"}}/>
 
 1. Sign up at [ElevenLabs](https://elevenlabs.io/app/sign-up) and follow the instructions to create an account.
 
 2. Once signed in, go to "Conversational AI"
 
-<p align="center">
-  <img src="https://i.imgur.com/bXHHn0E.png" alt="Conversational AI button on dashboard" width="80%"/>
-</p>
+<ImageZoom src="https://i.imgur.com/aIYfusq.png" style={{width: "60%", height: "auto"}}/>
 
 3. Go to "Agents"
 
-<p align="center">
-  <img src="https://i.imgur.com/Hdzof0l.png" alt="Agents button on dashboard" width="80%"/>
-</p>
+<ImageZoom src="https://i.imgur.com/L9xwBgl.png" style={{width: "60%", height: "auto"}}/>
 
 4. Click on "Start from blank"
 
-<p align="center">
-  <img src="https://i.imgur.com/uAMmwqB.png" alt="Start from blank button" width="80%"/>
-</p>
+<ImageZoom src="https://i.imgur.com/PD8v3Ax.png" style={{width: "60%", height: "auto"}}/>
 
 5. Create a ".env" file at the root of your project folder. We will use this file to store our API credentials securely. This way they won't be hardcoded in the script. In this ".env" file, add your Agent ID:
 
-<p align="center">
-  <img src="https://i.imgur.com/WEfcWZK.png" alt="Agent ID" width="80%"/>
-</p>
+<ImageZoom src="https://i.imgur.com/vfmMv7r.png" style={{width: "60%", height: "auto"}}/>
 
 ```bash
 AGENT_ID=your_agent_id
@@ -112,9 +118,7 @@ AGENT_ID=your_agent_id
 
 6. Go to the "Security" tab, enable the "First message" and "System prompt" overrides, and save. This will allow us to customize the assistant's first message and system prompt using Python code.
 
-<p align="center">
-  <img src="https://i.imgur.com/ugDFbs1.png" alt="Security tab" width="80%"/>
-</p>
+<ImageZoom src="https://i.imgur.com/0vfNTOd.png" style={{width: "60%", height: "auto"}}/>
 
 7. Click on your profile and go to "API keys". Create a new API key and copy it to your ".env" file:
 
@@ -122,22 +126,22 @@ AGENT_ID=your_agent_id
 API_KEY="sk_XXX...XXX"
 ```
 
-<p align="center">
-  <img src="https://i.imgur.com/lfPxnL8.png" alt="API keys" width="80%"/>
-</p>
+**Make sure to save your ".env" file after adding the credentials.**
+
+<ImageZoom src="https://i.imgur.com/Q5QrGVl.png" style={{width: "60%", height: "auto"}}/>
 
 ElevenLabs is now set up and ready to be used in our Python script!
 
-Note: ElevenLabs works with a credit system. When you sign up, you get 10,000 free credits which amount to 15 minutes of conversation. You can buy more credits if needed.
+**Note:** ElevenLabs works with a credit system. When you sign up, you get 10,000 free credits which amount to 15 minutes of conversation. You can buy more credits if needed.
 
 
 ## Building the Voice Assistant
 
-### 1. Load Environment Variables
+### Load Environment Variables
 
 Create a Python file (e.g., `voice_assistant.py`) and load your API credentials:
 
-```python
+```py
 import os
 from dotenv import load_dotenv
 
@@ -153,29 +157,35 @@ We will set up the ElevenLabs client and configure a conversation instance.
 
 We'll start by importing the necessary modules:
 
-```python
+```py
 from elevenlabs.client import ElevenLabs
 from elevenlabs.conversational_ai.conversation import Conversation
 from elevenlabs.conversational_ai.default_audio_interface import DefaultAudioInterface
 from elevenlabs.types import ConversationConfig
 ```
 
-We will then configure the conversation with the agent's first message and system prompt. We are going to inform the assistant that the user has a schedule and prompt it to help the user. In this part you can customize:
-- The user's name: what the assistant will call the user
-- The schedule: the user's schedule that the assistant will use to provide help
-- The prompt: the message that the assistant will receive when the conversation starts to understand the context of the conversation
-- The first message: the first message the assistant will say to the user
+We will then configure the conversation with the agent's first message and system prompt. 
 
-```python
+We are going to inform the assistant that the user has a schedule and prompt it to help the user. In this part you can customize:
+- The **user's name**: what the assistant will call the user
+- The **schedule**: the user's schedule that the assistant will use to provide help
+- The **prompt**: the message that the assistant will receive when the conversation starts to understand the context of the conversation
+- The **first message**: the first message the assistant will say to the user
+
+**Prompts** are used to provide context to the assistant and help it understand the user's needs. 
+
+Here's my example:
+
+```py
 user_name = "Alex"
 schedule = "Sales Meeting with Taipy at 10:00; Gym with Sophie at 17:00"
 prompt = f"You are a helpful assistant. Your interlocutor has the following schedule: {schedule}."
 first_message = f"Hello {user_name}, how can I help you today?"
 ```
 
-We are then going to set this configuration to our ElevenLabs agent:
+Underneath in the same file, we are then going to set this configuration to our ElevenLabs agent:
 
-```python
+```py
 conversation_override = {
     "agent": {
         "prompt": {
@@ -191,7 +201,7 @@ config = ConversationConfig(
     dynamic_variables={},
 )
 
-client = ElevenLabs(api_key=API_KEY, timeout=15)
+client = ElevenLabs(api_key=API_KEY)
 conversation = Conversation(
     client,
     AGENT_ID,
@@ -203,9 +213,9 @@ conversation = Conversation(
 
 ### 3. Implement Callbacks for Responses
 
-To improve user experience, define callback functions to handle assistant responses. These functions will print the assistant's responses and user transcripts. We also define a function to handle the situation where the user interrupts the assistant:
+We'll also need to handle assistant responses by printing the assistant's responses and user transcripts, as well as handling the situation where the user interrupts the assistant. We can do so by implementing a few callback functions underneath our configuration.
 
-```python
+```py
 def print_agent_response(response):
     print(f"Agent: {response}")
 
@@ -218,9 +228,9 @@ def print_user_transcript(transcript):
 
 ### 4. Start the Voice Assistant Session
 
-Finally, initiate the conversation session:
+Finally, initiate the conversation session in the same file:
 
-```python
+```py
 conversation = Conversation(
     client,
     AGENT_ID,
@@ -237,6 +247,8 @@ conversation.start_session()
 
 ## Running the Assistant
 
+**Please make sure your audio devices are correctly set up in your system settings before running the code.**
+
 Execute the script:
 
 ```bash
@@ -245,14 +257,19 @@ python voice_assistant.py
 
 The assistant will start listening for input and responding in real time!
 
+You can stop the assistant at any time by closing the terminal.
+
 ## Conclusion
 
-Congratulations! 🎉 You've successfully built a Voice Virtual Assistant using ElevenLabs API. You can extend its capabilities by integrating it with home automation, calendars, or other APIs to make it even more useful.
+Congratulations! 🎉 
+
+You've successfully built a Voice Virtual Assistant using ElevenLabs API. You can extend its capabilities by integrating it with home automation, calendars, or other APIs to make it even more useful.
 
 Stay creative and keep experimenting with AI-powered assistants!
 
 ## More Resources
 
+- [Source Code](TO DO)
 - ElevenLabs Conversational AI [Overview](https://elevenlabs.io/docs/conversational-ai/overview)
 - ElevenLabs Python SDK [Documentation](https://elevenlabs.io/docs/conversational-ai/libraries/python)
 - Enable your assistant to execute Python functions with [Client Tools](https://elevenlabs.io/docs/conversational-ai/customization/tools-events/client-tools)
