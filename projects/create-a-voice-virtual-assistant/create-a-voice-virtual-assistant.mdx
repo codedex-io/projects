@@ -18,7 +18,7 @@ tags:
 
 <AuthorAvatar
 author_name="Alexandre Sajus"
-author_avatar="/media/Alexandre.jpg"
+author_avatar="/images/projects/authors/alexandre.jpg"
 username="AlexandreSajus"
 uid={true}
 />
@@ -50,15 +50,19 @@ That's why I decided to create my own! Back then, APIs were limited in functiona
 - 💻 Taipy to display the conversation
 - 🤝 And a lot of Python code to glue everything together
 
-<ImageZoom src="https://i.imgur.com/bWX2sx8.png" style={{width: "60%", height: "auto"}}/>
+<ImageZoom src="https://i.imgur.com/bWX2sx8.png" />
 
 It was a lot of work but it was worth it! I released it on [GitHub](https://github.com/AlexandreSajus/JARVIS) and on [YouTube](https://github.com/AlexandreSajus/JARVIS) and it got 24k views, 485 stars and 88 forks! Here's me talking to my chatbot after spending 24 hours without sleep creating it:
 
-<ImageZoom src="https://i.imgur.com/ecC0Tff.png" style={{width: "60%", height: "auto"}}/>
+<ImageZoom src="https://i.imgur.com/ecC0Tff.png" />
 
 Now, in 2025, I'm excited to revisit this project since APIs have evolved a lot since then. What took 6 different libraries to work in 2023 can now be done with just one API. In this tutorial, we will use the ElevenLabs API to record our voice and play the assistant's response in real time:
 
-<ImageZoom src="https://i.imgur.com/6iGvFsk.gif" style={{width: "60%", height: "auto"}}/>
+<video
+  controls
+  src="https://i.imgur.com/Rhcgc2O.mp4"
+  width="620">
+</video>
 
 Let's dive in!
 
@@ -92,17 +96,17 @@ ElevenLabs provides a Conversational AI API that we will use to create our Voice
 - 📈 It synthesizes the response into speech
 - 🔊 It plays the synthesized speech through the speakers
 
-<ImageZoom src="https://i.imgur.com/QZkz0Rh.png" style={{width: "60%", height: "auto"}}/>
+<ImageZoom src="https://i.imgur.com/QZkz0Rh.png" />
 
 1. Sign up at [ElevenLabs](https://elevenlabs.io/app/sign-up) and follow the instructions to create an account.
 
 2. Once signed in, go to "Conversational AI"
 
-<ImageZoom src="https://i.imgur.com/aIYfusq.png" style={{width: "60%", height: "auto"}}/>
+<ImageZoom src="https://i.imgur.com/aIYfusq.png" />
 
 3. Go to "Agents"
 
-<ImageZoom src="https://i.imgur.com/L9xwBgl.png" style={{width: "60%", height: "auto"}}/>
+<ImageZoom src="https://i.imgur.com/L9xwBgl.png" />
 
 4. Click on "Start from blank"
 
@@ -110,7 +114,7 @@ ElevenLabs provides a Conversational AI API that we will use to create our Voice
 
 5. Create a ".env" file at the root of your project folder. We will use this file to store our API credentials securely. This way they won't be hardcoded in the script. In this ".env" file, add your Agent ID:
 
-<ImageZoom src="https://i.imgur.com/vfmMv7r.png" style={{width: "60%", height: "auto"}}/>
+<ImageZoom src="https://i.imgur.com/vfmMv7r.png"/>
 
 ```bash
 AGENT_ID=your_agent_id
@@ -118,7 +122,7 @@ AGENT_ID=your_agent_id
 
 6. Go to the "Security" tab, enable the "First message" and "System prompt" overrides, and save. This will allow us to customize the assistant's first message and system prompt using Python code.
 
-<ImageZoom src="https://i.imgur.com/0vfNTOd.png" style={{width: "60%", height: "auto"}}/>
+<ImageZoom src="https://i.imgur.com/0vfNTOd.png"/>
 
 7. Click on your profile and go to "API keys". Create a new API key and copy it to your ".env" file:
 
@@ -128,7 +132,7 @@ API_KEY="sk_XXX...XXX"
 
 **Make sure to save your ".env" file after adding the credentials.**
 
-<ImageZoom src="https://i.imgur.com/Q5QrGVl.png" style={{width: "60%", height: "auto"}}/>
+<ImageZoom src="https://i.imgur.com/Q5QrGVl.png" />
 
 ElevenLabs is now set up and ready to be used in our Python script!
 
@@ -269,7 +273,7 @@ Stay creative and keep experimenting with AI-powered assistants!
 
 ## More Resources
 
-- [Source Code](TO DO)
+- [Source Code](https://github.com/AlexandreSajus/codedex-voice/blob/main/voice_assistant.py)
 - ElevenLabs Conversational AI [Overview](https://elevenlabs.io/docs/conversational-ai/overview)
 - ElevenLabs Python SDK [Documentation](https://elevenlabs.io/docs/conversational-ai/libraries/python)
 - Enable your assistant to execute Python functions with [Client Tools](https://elevenlabs.io/docs/conversational-ai/customization/tools-events/client-tools)
