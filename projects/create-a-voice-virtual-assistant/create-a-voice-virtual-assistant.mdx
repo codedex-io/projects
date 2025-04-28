@@ -31,7 +31,7 @@ uid={true}
 
 ## Introduction
 
-Hey!👋 I'm Alex! Since this is my first tutorial on Codédex, I wanted to revisit a very popular project I made in 2023: creating a voice virtual assistant using Python.
+Hey! 👋 I'm Alex! Since this is my first project tutorial on Codédex, I wanted to revisit a very popular project I made in 2023: creating a voice virtual assistant using Python.
 
 Back in 2023, I had just graduated with a Master's of Science in Artificial Intelligence and I had already made a few fun AI projects like detecting vehicles in video games using object detection or teaching 3D characters to jump over obstacles using reinforcement learning (You can check them out on my [YouTube channel](https://www.youtube.com/@alexandresajus/videos)).
 
@@ -52,7 +52,7 @@ That's why I decided to create my own! Back then, APIs were limited in functiona
 
 <ImageZoom src="https://i.imgur.com/bWX2sx8.png" />
 
-It was a lot of work but it was worth it! I released it on [GitHub](https://github.com/AlexandreSajus/JARVIS) and on [YouTube](https://github.com/AlexandreSajus/JARVIS) and it got 24k views, 485 stars and 88 forks! Here's me talking to my chatbot after spending 24 hours without sleep creating it:
+It was a lot of work but it was worth it! I released it on [GitHub](https://github.com/AlexandreSajus/JARVIS) and on [YouTube](https://github.com/AlexandreSajus/JARVIS) and it got 24k views, 485 stars, and 88 forks! Here's me talking to my chatbot after spending 24 hours without sleep creating it:
 
 <ImageZoom src="https://i.imgur.com/ecC0Tff.png" />
 
@@ -100,19 +100,19 @@ ElevenLabs provides a Conversational AI API that we will use to create our Voice
 
 1. Sign up at [ElevenLabs](https://elevenlabs.io/app/sign-up) and follow the instructions to create an account.
 
-2. Once signed in, go to "Conversational AI"
+2. Once signed in, go to "Conversational AI".
 
 <ImageZoom src="https://i.imgur.com/aIYfusq.png" />
 
-3. Go to "Agents"
+3. Go to "Agents".
 
 <ImageZoom src="https://i.imgur.com/L9xwBgl.png" />
 
-4. Click on "Start from blank"
+4. Click on "Start from blank".
 
 <ImageZoom src="https://i.imgur.com/PD8v3Ax.png" style={{width: "60%", height: "auto"}}/>
 
-5. Create a ".env" file at the root of your project folder. We will use this file to store our API credentials securely. This way they won't be hardcoded in the script. In this ".env" file, add your Agent ID:
+5. Create a **.env** file at the root of your project folder. We will use this file to store our API credentials securely. This way they won't be hardcoded in the script. In this **.env** file, add your Agent ID:
 
 <ImageZoom src="https://i.imgur.com/vfmMv7r.png"/>
 
@@ -120,17 +120,19 @@ ElevenLabs provides a Conversational AI API that we will use to create our Voice
 AGENT_ID=your_agent_id
 ```
 
+There shouldn’t be spaces around the `=` in a **.env** file.
+
 6. Go to the "Security" tab, enable the "First message" and "System prompt" overrides, and save. This will allow us to customize the assistant's first message and system prompt using Python code.
 
 <ImageZoom src="https://i.imgur.com/0vfNTOd.png"/>
 
-7. Click on your profile and go to "API keys". Create a new API key and copy it to your ".env" file:
+7. Click on your profile and go to "API keys". Create a new API key and copy it to your **.env** file:
 
 ```bash
 API_KEY="sk_XXX...XXX"
 ```
 
-**Make sure to save your ".env" file after adding the credentials.**
+**Important:** Make sure to save your **.env** file after adding the credentials.
 
 <ImageZoom src="https://i.imgur.com/Q5QrGVl.png" />
 
@@ -143,7 +145,7 @@ ElevenLabs is now set up and ready to be used in our Python script!
 
 ### Load Environment Variables
 
-Create a Python file (e.g., `voice_assistant.py`) and load your API credentials:
+Create a Python file (e.g., **voice_assistant.py**) and load your API credentials:
 
 ```py
 import os
