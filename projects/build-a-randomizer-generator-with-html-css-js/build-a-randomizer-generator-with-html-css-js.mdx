@@ -1,8 +1,8 @@
 ---
 title: Build a Randomizer Generator with HTML/CSS/JS 
 author: Julien Kris
-uid: 
-datePublished: 
+uid: Jps14SaCwqgdbbnYvoMpvMKv92P2
+datePublished: 2025-05-09
 description: 
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-randomizer-generator-with-html-css-js/header.gif
 published: false
@@ -11,7 +11,6 @@ tags:
   - css
   - javascript
   - intermediate
-
 ---
 
 <BannerImage 
@@ -61,7 +60,7 @@ Let's take a look at some [starter code](https://www.codedex.io/@Julien/build/ra
 
 If you've taken the HTML, CSS, and JavaScript courses, our web stack for this project will look familiar. We have an HTML file that links to an external CSS stylesheet and an external JavaScript file, all contained within the same folder.
 
-```terminal
+```
 CluelessGenerator/
 ├── index.html
 ├── style.css
@@ -210,7 +209,7 @@ The arrow buttons (`prevBtn` and `nextBtn`) allow the user to navigate through t
 
 When the Next button is clicked, the index for the category increases by 1, and the `updateImage()` function is called to update the displayed image.
 
-```javascript
+```
 document.getElementById(category.nextBtn).addEventListener("click", () => {
   category.index = (category.index + 1) % category.images.length;  // Loop back to the first image
   updateImage(cat);
@@ -219,7 +218,7 @@ document.getElementById(category.nextBtn).addEventListener("click", () => {
 
 When the Prev button is clicked, the index decreases by 1, and again, the `updateImage()` function is called. It loops back to the last image if you go backward from the first one.
 
-```javascript
+```
 document.getElementById(category.prevBtn).addEventListener("click", () => {
   category.index = (category.index - 1 + category.images.length) % category.images.length;  // Loop to last image
   updateImage(cat);
@@ -266,7 +265,7 @@ To add styling for the shoes category, follow the same pattern as for other cate
 You'll also add `.shoes-image`.
 ### JavaScript
 In JavaScript, you'll need to add a new category to the categories object. Each category includes an array of images, an index to track the current image, references to the HTML elements, and button IDs for navigation. Here's how you'll add the shoes category:
-```javascript
+```
 const categories = {
  …
   shoes: {  // Add new category for shoes
