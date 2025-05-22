@@ -100,12 +100,12 @@ The HTML and body elements use flexbox to center the content both horizontally a
 html {
   background-color: #ff5f1f;
   display: flex;
-  justify-content: center; /* Center horizontally */
+  justify-content: center; 
   font-family: sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden; 
 }
 ```
 
@@ -116,10 +116,10 @@ The `.main-container` holds all of the sections (like the images and buttons). T
 ```css
 .main-container {
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center content */
-  gap: 15px; /* Add space between items */
-  padding: 10px; /* Small padding around the container */
+  flex-direction: column; 
+  align-items: center; 
+  gap: 15px; 
+  padding: 10px;
 }
 ```
 
@@ -131,10 +131,10 @@ The images in the outfit categories (add-ons, tops, bottoms) are set to take up 
 .addons-image,
 .tops-image,
 .bottoms-image {
-  width: 90%; /* Take up 90% of the container's width */
-  max-width: 250px; /* Don't exceed 250px in width */
-  aspect-ratio: 3 / 4; /* Maintain consistent proportions */
-  object-fit: contain; /* Preserve image aspect ratio */
+  width: 90%; 
+  max-width: 250px; 
+  aspect-ratio: 3 / 4; 
+  object-fit: contain; 
 }
 ```
 
@@ -146,19 +146,23 @@ The buttons are styled with a bright pink background and white text. A hover eff
 button {
   font-size: 1rem;
   color: white;
-  background-color: #ff69b4; /* Pink background */
+  background-color: #ff69b4; 
   padding: 8px 16px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #d90166; /* Darker pink when hovered */
+  background-color: #d90166; 
 }
 
 .random-button {
-  background-color: green; /* Green button for "randomize" */
+  background-color: green; 
 }
 ```
+
+Here's what out generator will look like at this point:
+<RoundedImage link="https://i.imgur.com/v6R1K0o.png" description="" />
+
 ## JavaScript
 
 ### Randomizer Logic
@@ -224,7 +228,13 @@ document.getElementById(category.prevBtn).addEventListener("click", () => {
 
 The `%` modulo operator is used here to make the images cycle in a continuous loop.
 
-## Avatar Creator
+Voila! Here's our final result for the outfit generator.
+<RoundedImage link="https://i.imgur.com/1lTRM6l.png" description="" />
+And here's our [final code](https://www.codedex.io/@Julien/build/randomizer-generator-final-code).
+
+## Bonus Challenges
+
+### Avatar Creator
 
 You can use the same logic above to create a monster or an avatar. Here's a fun example, using the heads, torsos, and legs of monsters from Monster's Inc, Inside Out, Minions.
 
@@ -232,11 +242,9 @@ You can use the same logic above to create a monster or an avatar. Here's a fun 
 
 This example also shows an alternate way of designing the arrows so the three characters swap heads, torsos, and legs at the same time. 
 
-## Adding more categories
+### Adding more categories
 
 So – what if we have our avatar and want to add another category, like shoes? Here's how we'd do that:
-
-### HTML
 
 In the HTML, you'll need to add a new section for shoes. This will look similar to how the other sections are structured. You would add the following HTML code:
 
@@ -244,28 +252,27 @@ In the HTML, you'll need to add a new section for shoes. This will look similar 
 <div class="shoes-container">
   <img id="shoes" class="shoes-image" src="" alt="shoes" />
   <div class="carousel-buttons">
-    <button id="3prevBtn"><--</button>
-    <button id="3nextBtn">--></button>
+    <button id="3prevBtn">⬅️</button>
+    <button id="3nextBtn">➡️</button>
   </div>
 </div>
 ```
 
 This creates a new section with an image for shoes and navigation buttons (previous and next). You can place this code in the `<div class="main-container">` along with the other categories.
 
-### CSS
-To add styling for the shoes category, follow the same pattern as for other categories! Anywhere that you currently have
+To add CSS styling for the shoes category, follow the same pattern as for other categories! Anywhere that you currently have
 ```css
 .addons-image,
 .tops-image,
-.bottoms-image {
+.bottoms-image 
 ```
 You'll also add `.shoes-image`.
-### JavaScript
+
 In JavaScript, you'll need to add a new category to the categories object. Each category includes an array of images, an index to track the current image, references to the HTML elements, and button IDs for navigation. Here's how you'll add the shoes category:
 ```
 const categories = {
  …
-  shoes: {  // Add new category for shoes
+  shoes: {  
     images: [
       // Your shoe images go here
     ],
@@ -278,18 +285,17 @@ const categories = {
 ```
 You'll add a `shoes` key with an array of image URLs, an index to track the current image, an element to target the HTML image element, and button IDs for the next and previous buttons.
 
-## Bonus Challenge
+### Mismatch
 
 If you've already added a fourth section, try making a feature that toggles a pop-up that says "mismatch!" when the outfit doesn't match. Or, if you're creating a monster, the feature could say the sound the monster would make, depending on the combinations.
 
 <RoundedImage link="https://i.imgur.com/4VYyB9N.jpeg" description="" />
 
-
 ## Conclusion
 
 Congrats! You've built your own generator! Now you're equipped with the skills to build on this concept and create other kinds of generative projects!
 
-Here's our [final code](https://www.codedex.io/@Julien/build/randomizer-generator-final-code).
+P.S. Are you waiting for an Avatar Builder on Codédex? Keep an eye out!
 
 ## Additional Resources
 
