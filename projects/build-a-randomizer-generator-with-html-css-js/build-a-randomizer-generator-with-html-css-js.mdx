@@ -71,6 +71,16 @@ CluelessGenerator/
 
 HTML buttons allow users to interact with the outfit generator. These buttons control the behavior of the app, such as randomizing outfits and cycling through different images of accessories, tops, and bottoms. Here’s what each part does:
 
+### Main Container
+
+Below the header, add a div that wraps everything:
+
+```html
+<div class="main-container">
+</div>
+```
+Everything else will go inside this container.
+
 ### Randomize Button:
 
 <RoundedImage link="https://i.imgur.com/PL9cXAX.gif" description="" />
@@ -81,18 +91,24 @@ This button, labeled "randomize!", triggers the randomization of outfit pieces w
 <button class="random-button" id="random-btn">randomize!</button>
 ```
 
-### Arrow Buttons (Prev/Next)
+### Outfit sections
 
- These buttons let the user cycle through different outfit pieces within each category (add-ons, tops, bottoms). For example, the `0prevBtn` and `0nextBtn` control the add-ons (accessories) images:
+Next, add three sections (Add Ons, Tops, and Bottoms), each with an image, and two arrow buttons below them (previous and next).
 
+First, create the container section for Add Ons (hats and glasses):
 ```html
-<div class="carousel-buttons">
-  <button id="0prevBtn">←</button>
-  <button id="0nextBtn">→</button>
+<div class="addons-container">
+  <img id="addOns" class="addons-image" src="" alt="accessories" />
+  <div class="carousel-buttons">
+    <button id="0prevBtn">←</button>
+    <button id="0nextBtn">→</button>
+  </div>
 </div>
 ```
 
-Similarly, each outfit category has its own set of arrows to go backward or forward through the images.
+Then, follow the same format to create the Tops section and the Bottoms section. Make sure to change the `img id`, `class`, and `alt` descriptions, as well as the values of `button id`.
+
+Each section has an empty image to be filled by JavaScript, uses unique IDs to match with your script later, and contains two buttons for cycling through images of the outfit pieces within each category.
 
 ## CSS Styling
 
