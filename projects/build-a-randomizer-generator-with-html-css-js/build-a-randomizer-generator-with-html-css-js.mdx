@@ -1,5 +1,5 @@
 ---
-title: Build a Randomizer Generator with HTML/CSS/JS 
+title: Build an Avatar Generator with HTML, CSS, JavaScript
 author: Julien Kris
 uid: Jps14SaCwqgdbbnYvoMpvMKv92P2
 datePublished: 2025-05-09
@@ -20,7 +20,7 @@ tags:
   cl="for-sidebar" 
 />
 
-# Build a Randomizer Generator with HTML, CSS, and JavaScript
+# Build an Avatar Generator with HTML, CSS, JavaScript
 
 <AuthorAvatar
   author_name="Julien Kris"
@@ -36,29 +36,26 @@ tags:
 />
 
 **Prerequisites:** HTML, CSS, JavaScript fundamentals
-**Versions:** None
 **Read Time:** 45 minutes
 
 # Introduction
 
-Are you familiar with Cher's closet from [Clueless](https://en.wikipedia.org/wiki/Clueless)? 
+Are you familiar with Cher's closet from [Clueless](https://en.wikipedia.org/wiki/Clueless) or the randomize button in a game's character creator? 
 
 <RoundedImage link="https://i.imgur.com/TYmiJnX.gif" description="" />
 
-It's an example of a randomizer generator! In Clueless, Cher used it to plan outfits by swiping through a catalogue of her entire wardrobe.
+These are both examples of randomizer generators! In Clueless, Cher used it to plan outfits by swiping through a catalogue of her entire wardrobe.
 
 There are other types of cool generators out there in games, movies, and TV shows. We can use the same logic to design monsters or even avatars.
 
 <RoundedImage link="https://i.imgur.com/jkgf7of.gif" description="" />
-…how many hours of BG3 do you think we've played? ⚔️
+…how many hours of Baldur's Gate 3 do you think we've played? ⚔️
 
-Today, we'll be learning how to use HTML, CSS, and vanilla JavaScript to build our own Randomizer Generator.
+Today, we'll be learning how to use HTML, CSS, and vanilla JavaScript to build our own Random Generator.
 
 ## Code Structure
 
-Let's take a look at some [starter code](https://www.codedex.io/@Julien/build/randomizer-starter-code) and some [final code](https://www.codedex.io/@Julien/build/randomizer-generator-final-code). We'll be learning how to get from point A to point B.
-
-If you've taken the HTML, CSS, and JavaScript courses, our web stack for this project will look familiar. We have an HTML file that links to an external CSS stylesheet and an external JavaScript file, all contained within the same folder.
+Let's take a look at some [starter code](https://www.codedex.io/@Julien/build/randomizer-generator-starter-code). If you've taken the HTML, CSS, and JavaScript courses, our web stack for this project will look familiar. We have an HTML file that links to an external CSS stylesheet and an external JavaScript file, all contained within the same folder.
 
 ```
 CluelessGenerator/
@@ -87,8 +84,8 @@ This button, labeled "randomize!", triggers the randomization of outfit pieces w
 
 ```html
 <div class="carousel-buttons">
-  <button id="0prevBtn"><--</button>
-  <button id="0nextBtn">--></button>
+  <button id="0prevBtn">⬅️</button>
+  <button id="0nextBtn">➡️</button>
 </div>
 ```
 
@@ -197,7 +194,7 @@ updateImage(cat);
 ```
 This shows the new image on screen using the category’s updated index.
 
-Finally, we'll connect the real randomize() function to the button:
+Finally, we'll connect the real `randomize()` function to the button:
 
  ```js
 document.getElementById("random-btn").addEventListener("click", randomize);
@@ -225,7 +222,7 @@ document.getElementById(category.prevBtn).addEventListener("click", () => {
 });
 ```
 
-The modulo (%) operator is used here to make the images cycle in a continuous loop.
+The `%` modulo operator is used here to make the images cycle in a continuous loop.
 
 ## Avatar Creator
 
@@ -291,6 +288,8 @@ If you've already added a fourth section, try making a feature that toggles a po
 ## Conclusion
 
 Congrats! You've built your own generator! Now you're equipped with the skills to build on this concept and create other kinds of generative projects!
+
+Here's our [final code](https://www.codedex.io/@Julien/build/randomizer-generator-final-code).
 
 ## Additional Resources
 
