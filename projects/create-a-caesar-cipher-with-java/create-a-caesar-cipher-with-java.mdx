@@ -44,7 +44,7 @@ So, he pulled off a kinda genius move... he shifted each letter in his messages 
 
 This meant that "attack at dawn" would become "dwwdfn dw gdzq" to any nosey enemies.
 
-```
+```output
 Wms fytc y jckmlybc kmsrf!
 ```
 
@@ -54,7 +54,7 @@ The text above contains an _encrypted_ message, and more specifically, a Caesar 
 
 For example, let's say we shift the letters by 3: 
 
-```
+```output
 A → D 
 B → E
 C → F
@@ -72,6 +72,8 @@ Let's build a program that lets you create your own cipher!
 
 
 ## Setup
+Choose your Java IDE or [Codédex Builds](https://www.codedex.io/builds), and create a new Java project.
+
 Before we begin, be sure to use the correct import for the `Scanner`, since we will be utilizing user input. 
 
 ```java
@@ -102,7 +104,9 @@ Consider the sentence: "For each character in this sentence we want to do x". We
 
 ```java
 // for-each loop
-for (char character : text.toCharArray()) {}
+for (char character : text.toCharArray()) {
+    // do something with character
+}
 ```
 
 Which is exactly the same as doing: 
@@ -171,7 +175,7 @@ Let's say we are trying to shift `C` 3 spaces. Since 'C' is uppercase, the base 
 
 If we subtract the base from the character, we get: 
 
-```
+```terminal
 character - base = 'C' - 'A' = 67 - 65 = 2
 ```
 So 'C' is the 2nd letter in the alphabet (index 2, starting from 0). Now we have the index of our letter, but since we're trying to shift it 3 spaces, let's add `3` to the current index. 
@@ -219,16 +223,16 @@ Then, be sure to `return` the final string result. Your method should now look l
 public static String encrypt(String text, int shift) {
     StringBuilder result = new StringBuilder();
 
-		for (char character : text.toCharArray()) {
-		    if (Character.isLetter(character)) {
-		        char base = Character.isLowerCase(character) ? 'a' : 'A';
-		        char shifted = (char) ((character - base + shift) % 26 + base);
-		        result.append(shifted);
-		    } else {
-		        result.append(character);
-		    }
-		}
-		
+    for (char character : text.toCharArray()) {
+        if (Character.isLetter(character)) {
+            char base = Character.isLowerCase(character) ? 'a' : 'A';
+            char shifted = (char) ((character - base + shift) % 26 + base);
+            result.append(shifted);
+        } else {
+            result.append(character);
+        }
+    }
+
     return result.toString();
 }
 ```
@@ -242,7 +246,7 @@ You'll need two things from the user:
 - text to encrypt (String)
 - the shift number (0-25) (int)
 
-```
+```terminal
 Enter text to encrypt: Thank you Penguin123 for keeping Club Penguin safe. Here are four hundred coins.
 Enter shift key (0-25): 17
 ```
@@ -270,7 +274,7 @@ Your project is now ready to be tested, try encrypting your favorite movie quote
 
 Congratulations!!! 🎊
 
-You've reached the end of the project, and now you have a cool encrypter to mess around with!
+You've reached the end of the project, and now you have a cool encrypter to mess around with! Find the solution code [here](https://github.com/codedex-io/projects/blob/main/projects/create-a-caesar-cipher-with-java/CaesarCipher.java)
 
 <ImageZoom src="https://i.imgur.com/IYCu7c4.gif" /> 
 
