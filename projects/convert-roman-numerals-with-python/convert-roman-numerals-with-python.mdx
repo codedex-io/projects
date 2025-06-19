@@ -124,7 +124,7 @@ Next, when we print the `final_answer` at the end, we should cast it as a string
 print("The roman numerals you entered translates to: " + str(final_answer) + "!")
 ```
 
-Make sure the `print()` statement is on the same indentation as the `if`-`elif` statements. Otherwise, Python will think you’re trying to put the `print()` command in an `if`-`elif` statement before everything is calculated.
+Make sure the `print()` function is inside the `for` loop and only indented once (the same indentation as the `if`-`elif`s). Otherwise, Python will think you’re trying to put the `print()` function _inside_ an `if`-`elif` statement before everything is calculated.
 
 Lastly, outside the `roman_to_int()` function, let's use the input we prompted the user for so that our converted integer is printed:
 
