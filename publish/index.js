@@ -103,7 +103,7 @@ async function main() {
         ],
         rehypePlugins: [
           rehypeSlug,
-          rehypeHighlight,
+          [rehypeHighlight, { aliases: { markdown: ["output", "terminal"] } }],
           [
             rehypeExternalLinks,
             { target: "_blank", rel: ["nofollow", "noreferrer", "noopener"] },
