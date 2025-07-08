@@ -114,7 +114,7 @@ The statement is printed on a new line via `\n`, and joins the strings in `guess
 Since the guessing is based on user input, we need to prompt the user to guess a letter and store it in a variable.
 
 ```py
-guess = input('Guess a letter: ')
+guess = input('Guess a letter: ').lower()
 ```
 
 We then need to determine whether or not the guessed letter is in the correct word. If it is, we loop through each letter of the word to find which position the letter is in and replace the placeholder with the guessed letter.
