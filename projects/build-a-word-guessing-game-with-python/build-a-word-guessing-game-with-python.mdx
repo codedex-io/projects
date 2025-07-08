@@ -145,11 +145,11 @@ We're almost done! We'll know if the player has won the game when they guess all
         break
 ```
 
-Finally, we need a condition that results in a loss for the player when they run out of `attempts` and reveal the correct word.
+Finally, we need a condition that results in a loss for the player when they run out of `attempts` and reveal the correct word. This means that this line of code needs to be written outside of the `while()` loop. 
 
 ```py
-else:
-    print('\nYou\'ve run out of attempts! The word was: ' + word)
+if attempts == 0 and '_' in guessedWord::
+  print('\nYou\'ve run out of attempts! The word was: ' + word)
 ```
 
 **Note:** We don't need to break the `while` loop because the condition was `while attempts > 0`.
@@ -158,24 +158,24 @@ When you're finished, the game loop should look something like this:
 
 ```py
 while attempts > 0:
-   
-    print('\nCurrent word: ' + ' '.join(guessedWord))
+  print('\nCurrent word: ' + ' '.join(guessedWord))
 
-    guess = input('Guess a letter: ').lower()
+  guess = input('Guess a letter: ').lower()
    
-    if guess in word:
-        for i in range(len(word)):
-            if word[i] == guess:
-                guessedWord[i] = guess
-        print('Great guess!')
-    else:
-        attempts -= 1
-        print('Wrong guess! Attempts left: ' + str(attempts))
-    if '_' not in guessedWord:
-        print('\nCongratulations!! You guessed the word: ' + word)
-        break
-    else:
-      print('\nYou\'ve run out of attempts! The word was: ' + word)
+  if guess in word:
+    for i in range(len(word)):
+        if word[i] == guess:
+            guessedWord[i] = guess
+      print('Great guess!')
+  else:
+    attempts -= 1
+    print('Wrong guess! Attempts left: ' + str(attempts))
+  if '_' not in guessedWord:
+    print('\nCongratulations!! You guessed the word: ' + word)
+    break
+
+if attempts == 0 and '_' in guessedWord:
+  print('\nYou\'ve run out of attempts! The word was: ' + word)
 ```
 
 ## Conclusion
