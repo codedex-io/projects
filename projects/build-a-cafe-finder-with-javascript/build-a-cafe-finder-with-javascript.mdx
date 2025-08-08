@@ -45,6 +45,8 @@ The Google Maps Platform is a collection of Application Programming Interfaces (
 
 Some popular apps that use the Google Maps Platform include Uber and Airbnb, which access a user’s location to calculate rides and show rentals in specific areas!
 
+<ImageZoom src="https://miro.medium.com/v2/resize:fit:7680/1*ThzU2nLvoAHfPwLqlddwhQ.png" />
+
 The [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) is a smaller API under the Google Maps API. It fetches location data like location names, addresses, photos, and many more attributes! It’s a great tool for accessing updated data and finding multiple places without manually copying all of their information into a project. ****We’ll be using this in our project! ****
 
 # ## Setup
@@ -112,7 +114,7 @@ const proxy = "https://cors-anywhere.herokuapp.com/";
 
 ## ### Geolocation
 
-To see cafes nearby, the browser needs access to your location. There’s a built in JavaScript function that takes care of that for you called ``useLocation()`` and it takes your device’s latitude and longitude coordinates.
+To see cafes nearby, the browser needs access to your location. There’s a built-in JavaScript function that takes care of that for you called ``useLocation()`` and it takes your device’s latitude and longitude coordinates.
 
 ```jsx
  function getLocation() {
