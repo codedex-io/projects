@@ -4,12 +4,13 @@ author: Gabriela Banaag
 uid: 
 datePublished: 2025-08-06
 description:
-header: https://imgur.com/a/iz4inIW
+header: https://i.imgur.com/VKm4oPJ.gif
+
 tags:
 ---
 
 <BannerImage
-  link="https://imgur.com/a/iz4inIW"
+  link="https://i.imgur.com/VKm4oPJ.gif"
   description=""
   uid={false}
   cl="for-sidebar"
@@ -25,7 +26,7 @@ tags:
 />
 
 <BannerImage
-  link="https://imgur.com/a/iz4inIW"
+  link="https://i.imgur.com/VKm4oPJ.gif"
   description=""
   uid={false}
 />
@@ -43,6 +44,8 @@ If you’re an iced-bev-meets-coworking-space fiend like me and want to shake up
 The Google Maps Platform is a collection of Application Programming Interfaces (APIs) and Software Development Kits (SDKs). Each tool on the platform lets users use Google Maps functions and data in their own projects!
 
 Some popular apps that use the Google Maps Platform include Uber and Airbnb, which access a user’s location to calculate rides and show rentals in specific areas!
+
+<ImageZoom src="https://miro.medium.com/v2/resize:fit:7680/1*ThzU2nLvoAHfPwLqlddwhQ.png" />
 
 The [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) is a smaller API under the Google Maps API. It fetches location data like location names, addresses, photos, and many more attributes! It’s a great tool for accessing updated data and finding multiple places without manually copying all of their information into a project. ****We’ll be using this in our project! ****
 
@@ -111,7 +114,7 @@ const proxy = "https://cors-anywhere.herokuapp.com/";
 
 ## ### Geolocation
 
-To see cafes nearby, the browser needs access to your location. There’s a built in JavaScript function that takes care of that for you called ``useLocation()`` and it takes your device’s latitude and longitude coordinates.
+To see cafes nearby, the browser needs access to your location. There’s a built-in JavaScript function that takes care of that for you called ``useLocation()`` and it takes your device’s latitude and longitude coordinates.
 
 ```jsx
  function getLocation() {
@@ -185,8 +188,6 @@ If the API finds results for nearby cafes, we’ll take that data and insert it 
 
 We’re gonna create a wrapper for our cards, and inject data from the API into the wrapper as we go. To start, let’s make a function called ``displayCards()`` that renders a div container whenever the website starts up. 
 
-<ImageZoom src="https://imgur-url-here.png" style={{ width: "60%", height: "auto" }} alt="alt text here"/>
-
 We’ll start by creating a container that takes the first saved cafe in our cafe options. We’ll make the content of this card blank for now, and fill it in with information when we use the Places API. 
 
 ```jsx
@@ -258,7 +259,7 @@ container.appendChild(wrapper);
 <aside>
 💡
 
-A ****library**** is a collection of reusable resources like functions, classes, and pieces of pre-written code. An **API****** is a an interface that lets your code communicate with another application. 
+A ****library**** is a collection of reusable resources like functions, classes, and pieces of pre-written code. An **API****** is an interface that lets your code communicate with another application. 
 
 </aside>
 
@@ -372,7 +373,7 @@ container.appendChild(card);
 
 Here's my final result:
 
-<ImageZoom src="https://imgur.com/a/TuZpvsR" />
+<ImageZoom src="https://i.imgur.com/qfYI134.gif" />
 
 You did it! Enjoy your newly built cafe finder and be sure to treat yourself to a coffee, chai, matcha, or boba to celebrate your hard work. 🍵 
 
@@ -389,6 +390,6 @@ If you’re looking for another challenge or a way to spice up your project, you
 
 ## ### Additional Resources
 
-- GitHub repository
+- [GitHub repository with all the code](https://github.com/gbanaag/codedex-cafe-curator)
 - YouTube video (coming soon!)
 - [Places API Documentation](https://developers.google.com/maps/documentation/places/web-service/overview#how-use)
