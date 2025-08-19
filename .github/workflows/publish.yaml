@@ -26,4 +26,6 @@ jobs:
           client_email: ${{ secrets.CLIENT_EMAIL }}
           private_key_id: ${{ secrets.PRIVATE_KEY_ID }}
           client_cert_url: ${{ secrets.CLIENT_CERT_URL }}
+          MEILISEARCH_API_KEY: ${{ secrets.MEILISEARCH_API_KEY }}
+          MEILISEARCH_HOST: ${{ secrets.MEILISEARCH_HOST }}
 
