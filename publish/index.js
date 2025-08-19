@@ -15,6 +15,13 @@ import rehypeKatex from "rehype-katex";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings";
 import rehypeRewrite from "rehype-rewrite";
 import { h } from "hastscript";
+import { MeiliSearch } from "meilisearch";
+
+const client = new MeiliSearch({
+  host: process.env.MEILISEARCH_HOST,
+  apiKey: process.env.MEILISEARCH_API_KEY,
+});
+
 
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert({
@@ -68,10 +75,7 @@ async function main() {
     ).exists;
 
     const projectReactionsExists = (
-      await firestore
-        .collection("projectReactions")
-        .doc(fileNameWithoutExtension)
-        .get()
+      await firestore.collection("projectReactions").doc(fileNameWithoutExtension).get()
     ).exists;
 
     if (!projectReactionsExists) {
@@ -81,12 +85,7 @@ async function main() {
     }
 
     const projectContent = fs.readFileSync(
-      path.resolve(
-        process.cwd(),
-        "projects",
-        projectFolderName,
-        projectMdxFile
-      ),
+      path.resolve(process.cwd(), "projects", projectFolderName, projectMdxFile),
       "utf-8"
     );
 
@@ -148,6 +147,21 @@ async function main() {
         ],
       },
     });
+
+    try {
+      await client.index("projects").addDocuments([
+        {
+          id: fileNameWithoutExtension,
+          title: projectMatter.data.title,
+          description: projectMatter.data.description,
+          content: projectMatter.content,
+          author: projectMatter.data.author,
+          tags: projectMatter.data.tags || [],
+        },
+      ]);
+    } catch (error) {
+        console.error("Error adding document to MeiliSearch:", error);
+    }
 
     if (!projectExists) {
       await firestore
