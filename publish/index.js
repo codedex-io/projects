@@ -22,7 +22,6 @@ const client = new MeiliSearch({
   apiKey: process.env.MEILISEARCH_API_KEY,
 });
 
-
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert({
     type: "service_account",
@@ -149,18 +148,20 @@ async function main() {
     });
 
     try {
-      await client.index("projects").addDocuments([
-        {
-          id: fileNameWithoutExtension,
-          title: projectMatter.data.title,
-          description: projectMatter.data.description,
-          content: projectMatter.content,
-          author: projectMatter.data.author,
-          tags: projectMatter.data.tags || [],
-        },
-      ]);
+      if (projectMatter.data.published === "live") {
+        await client.index("projects").addDocuments([
+          {
+            id: fileNameWithoutExtension,
+            title: projectMatter.data.title,
+            description: projectMatter.data.description,
+            content: projectMatter.content,
+            author: projectMatter.data.author,
+            tags: projectMatter.data.tags || [],
+          },
+        ]);
+      }
     } catch (error) {
-        console.error("Error adding document to MeiliSearch:", error);
+      console.error("Error adding document to MeiliSearch:", error);
     }
 
     if (!projectExists) {
