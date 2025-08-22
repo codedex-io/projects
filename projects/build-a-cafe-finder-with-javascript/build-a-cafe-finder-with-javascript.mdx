@@ -49,7 +49,7 @@ Some popular apps that use the Google Maps Platform include Uber and Airbnb, whi
 
 <ImageZoom src="https://miro.medium.com/v2/resize:fit:7680/1*ThzU2nLvoAHfPwLqlddwhQ.png" />
 
-The [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) is a smaller API under the Google Maps API. It fetches location data like location names, addresses, photos, and many more attributes! It's a great tool for accessing updated data and finding multiple places without manually copying all of their information into a project. ****We'll be using this in our project!****
+The [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) is a smaller API under the Google Maps API. It fetches location data like location names, addresses, photos, and many more attributes! It's a great tool for accessing updated data and finding multiple places without manually copying all of their information into a project. We'll be using this in our project!
 
 ## Setup
 
@@ -100,13 +100,13 @@ const apiKey = "STRING_OF_RANDOM_CHARACTERS_HERE";
 
 ### cors-anywhere
 
-Head to [https://cors-anywhere.herokuapp.com/](https://cors-anywhere.herokuapp.com/). Make sure to click on the ``Request temporary access to the demo server`` button to get set up with a temporary server for your project. 
+Head to [https://cors-anywhere.herokuapp.com](https://cors-anywhere.herokuapp.com/). Make sure to click on the ``Request temporary access to the demo server`` button to get set up with a temporary server for your project. 
 
 Then, add these lines to the top of your JavaScript file.
 
 ```jsx
 const useProxy = true;
-const proxy = "https://cors-anywhere.herokuapp.com/";
+const proxy = "https://cors-anywhere.herokuapp.com";
 ```
 
 ### Geolocation
@@ -251,12 +251,7 @@ container.appendChild(wrapper);
 
 [Hammer](http://hammerjs.github.io/) is a library used to recognize touch gestures in the browser! 
 
-<aside>
-💡
-
-A **library** is a collection of reusable resources like functions, classes, and pieces of pre-written code. An **API** is an interface that lets your code communicate with another application. 
-
-</aside>
+💡 A **library** is a collection of reusable resources like functions, classes, and pieces of pre-written code. An **API** is an interface that lets your code communicate with another application. 
 
 To make sure we have swiping gestures detected on the site, we're gonna import the library by adding this line in the ``<head>`` of your HTML file:
 
@@ -377,7 +372,7 @@ If you're looking for another challenge or a way to spice up your project, you c
 
 ### Troubleshooting
 
-- Make sure you're granted temporary access on https://cors-anywhere.herokuapp.com/.
+- Make sure you're granted temporary access on https://cors-anywhere.herokuapp.com.
 - Make sure to allow location access when you try out the site.
 
 ### Additional Resources
