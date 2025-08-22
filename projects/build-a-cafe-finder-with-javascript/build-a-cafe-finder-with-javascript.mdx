@@ -34,17 +34,16 @@ tags:
   uid="CgUQBagDrWWBRUuoh3mkyi3aedg1"
 />
 
-**Prerequisites: HTML, CSS, JavaScript**
-
+**Prerequisites:** HTML, CSS, JavaScript
 **Read Time:** 30 minutes
 
 ## Introduction
 
-If you're an iced-bev-meets-coworking-space fiend like me and want to shake up what cafe you head to next, this is the perfect project for you. We'll be using our trilogy of web dev tools: ****HTML****, ****CSS****, and ****JavaScript****, and an API from the Google Maps Platform called ****Places****. We'll also make some quick animations and implement swiping recognition with a JavaScript library called ****Hammer****!
+If you're an iced-bev-meets-coworking-space fiend like me and want to shake up what cafe you head to next, this is the perfect project for you. We'll be using our trilogy of web dev tools: HTML, CSS, and JavaScript, and an API from the Google Maps Platform called [Places](https://developers.google.com/maps/documentation/places/web-service/overview). We'll also make some quick animations and implement swiping recognition with a JavaScript library called [Hammer](https://hammerjs.github.io)!
 
 ## About the Google Maps Platform
 
-The Google Maps Platform is a collection of Application Programming Interfaces (APIs) and Software Development Kits (SDKs). Each tool on the platform lets users use Google Maps functions and data in their own projects!
+The [Google Maps Platform](https://mapsplatform.google.com) is a collection of Application Programming Interfaces (APIs) and Software Development Kits (SDKs). Each tool on the platform lets users use Google Maps functions and data in their own projects!
 
 Some popular apps that use the Google Maps Platform include Uber and Airbnb, which access a user's location to calculate rides and show rentals in specific areas!
 
@@ -56,11 +55,11 @@ The [Places API](https://developers.google.com/maps/documentation/places/web-ser
 
 ### Workspace
 
-Start by creating a new HTML/CSS/JS project in [Codédex Builds](https://www.codedex.io/builds). You can also use a Code editor of your choice, like [VSCode](https://code.visualstudio.com/).
+Start by creating a new HTML/CSS/JS project in [Codédex Builds](https://www.codedex.io/builds). You can also use a code editor of your choice, like [VS Code](https://code.visualstudio.com/).
 
 ### Google Cloud Console
 
-Set up your project in the [[Google Cloud Console](https://developers.google.com/maps/documentation/elevation/cloud-setup). You'll enter a project name and billing information. Your website won't work as it should unless you enable billing, but you won't be charged if the API doesn't get called past the monthly limit (we'll teach you how to cap it at the limit, which is usually 10,000 API calls).
+Set up your project in the [Google Cloud Console](https://developers.google.com/maps/documentation/elevation/cloud-setup). You'll enter a project name and billing information. Your website won't work as it should unless you enable billing, but you won't be charged if the API doesn't get called past the monthly limit (we'll teach you how to cap it at the limit, which is usually 10,000 API calls).
 
 ### Clone Template
 
@@ -87,9 +86,9 @@ Here's how to create and protect your API key:
 3. Make sure you're on your cafe finder project and select the APIs & Services button.
 4. On the left menu, click on library. 
 5. Search for the Places API (new) and click on it. Make sure the Places API is enabled.
-6. Click on the hamburger menu and look for the APIs & Services button again. Then click on ****create** **credentials ****, then API key.
+6. Click on the hamburger menu and look for the APIs & Services button again. Then click on **create credentials**, then API key.
 7. After your key is generated, click on edit key. Restrict your application to websites.
-8. Add the domain your project is hosted on. In my case, mine is hosted on Codédex builds. 
+8. Add the domain your project is hosted on. In my case, mine is hosted on Codédex Builds. 
 
 Put your API key at the top of your JavaScript file. It should look like this:
 
@@ -97,12 +96,7 @@ Put your API key at the top of your JavaScript file. It should look like this:
 const apiKey = "STRING_OF_RANDOM_CHARACTERS_HERE"; 
 ```
 
-<aside>
-⚠️
-
-****Make sure your API key is restricted to just your project (step 7), or else anyone can use it freely and you'll get charged for it!****
-
-</aside>
+**⚠️ Warning:** Make sure your API key is restricted to just your project (step 7), or else anyone can use it freely and you'll get charged for it!
 
 ### cors-anywhere
 
@@ -120,34 +114,34 @@ const proxy = "https://cors-anywhere.herokuapp.com/";
 To see cafes nearby, the browser needs access to your location. There's a built-in JavaScript function that takes care of that for you called ``useLocation()`` and it takes your device's latitude and longitude coordinates.
 
 ```jsx
- function getLocation() {
-      const cache = JSON.parse(localStorage.getItem('cachedLocation') || '{}');
-      const now = Date.now();
+function getLocation() {
+  const cache = JSON.parse(localStorage.getItem('cachedLocation') || '{}');
+  const now = Date.now();
 ```
 
 Next, we'll check if any location data has been cached (saved to the browser) and is less than 10 minutes old. 
 
 ```jsx
 if (cache.timestamp && now - cache.timestamp < 10 * 60 * 1000) {
-        useLocation(cache.lat, cache.lng);
-      } 
+  useLocation(cache.lat, cache.lng);
+} 
 ```
 
 If there's no cached location information found, the browser pulls your current latitude and longitude from a built-in function. 
 
 ```jsx
 else {
-        navigator.geolocation.getCurrentPosition(pos => {
-          const lat = pos.coords.latitude;
-          const lng = pos.coords.longitude;
+  navigator.geolocation.getCurrentPosition(pos => {
+  const lat = pos.coords.latitude;
+  const lng = pos.coords.longitude;
 ```
 
-We'll save the location and timestamp in ``localStorage`` in case we use our cafe finder website in the near future. Then we'll add error handling - an alert that lets you know if your location can't be accessed.
+We'll save the location and timestamp in `localStorage` in case we use our cafe finder website in the near future. Then we'll add error handling - an alert that lets you know if your location can't be accessed.
 
 ```jsx
-          localStorage.setItem('cachedLocation', JSON.stringify({ lat, lng, timestamp: now }));
-          useLocation(lat, lng);
-        }, () => alert("Location access denied or unavailable."));
+  localStorage.setItem('cachedLocation', JSON.stringify({ lat, lng, timestamp: now }));
+  useLocation(lat, lng);
+}, () => alert("Location access denied or unavailable."));
 ```
 
 ### Using the API
@@ -166,8 +160,8 @@ We'll call the API to find nearby cafes and *_fetch_* their urls.
 
 ```jsx
 try {
-    const response = await fetch(url);
-    const data = await response.json();
+  const response = await fetch(url);
+  const data = await response.json();
 ```
 
 If the API finds results for nearby cafes, we'll take that data and insert it into cards (we'll write the `displayCards` function next!)
@@ -200,8 +194,8 @@ We'll start by creating a container that takes the first saved cafe in our cafe 
 We'll then make a for loop that iterates through the cafe list to… 
 
 - Create a new div to wrap each cafe card
-- Add a class (``swipe-wrapper``) to each card to keep card styles consistent
-- Adjust the card's ****z-index**** (display order) so that new cards appear under old ones
+- Add a class (`swipe-wrapper`) to each card to keep card styles consistent
+- Adjust the card's **z-index** (display order) so that new cards appear under old ones
 
 ```jsx
  cafes.forEach((cafe, i) => {
@@ -239,7 +233,7 @@ const cafeData = {
 };
 ```
 
-Putting in tags between the ````` symbol when changing an element's ``innerHTML`` allows you to render HTML elements when functions run. We'll append (connect) the card to its wrapper, and append its wrapper to its container. 
+Putting in tags between the ``` ``` symbol when changing an element's `innerHTML` allows you to render HTML elements when functions run. We'll append (connect) the card to its wrapper, and append its wrapper to its container. 
 
 ```jsx
 card.innerHTML = `
