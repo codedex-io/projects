@@ -5,7 +5,7 @@ uid: CgUQBagDrWWBRUuoh3mkyi3aedg1
 datePublished: 2025-08-06
 description: Learn how to build a cafe finder with JavaScript
 header: https://i.imgur.com/VKm4oPJ.gif
-bannerImage: https://i.imgur.com/VKm4oPJ.gif
+bannerImage: https://i.imgur.com/lfbCFid.gif
 published: live
 tags:
   - intermediate
@@ -13,7 +13,7 @@ tags:
 ---
 
 <BannerImage
-  link="https://i.imgur.com/VKm4oPJ.gif"
+  link="https://i.imgur.com/lfbCFid.gif"
   description=""
   uid={false}
   cl="for-sidebar"
@@ -29,7 +29,7 @@ tags:
 />
 
 <BannerImage
-  link="https://i.imgur.com/VKm4oPJ.gif"
+  link="https://i.imgur.com/lfbCFid.gif"
   description=""
   uid="CgUQBagDrWWBRUuoh3mkyi3aedg1"
 />
@@ -187,8 +187,8 @@ We'll start by creating a container that takes the first saved cafe in our cafe 
 
 ```jsx
   function displayCards(cafes) {
-      const container = document.querySelector('.cards');
-      container.innerHTML = ''; 
+    const container = document.querySelector('.cards');
+    container.innerHTML = ''; 
 ```
 
 We'll then make a for loop that iterates through the cafe list to… 
@@ -198,15 +198,15 @@ We'll then make a for loop that iterates through the cafe list to…
 - Adjust the card's **z-index** (display order) so that new cards appear under old ones
 
 ```jsx
- cafes.forEach((cafe, i) => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'swipe-wrapper';
-        wrapper.style.zIndex = 200 - i;
+cafes.forEach((cafe, i) => {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'swipe-wrapper';
+  wrapper.style.zIndex = 200 - i;
 
-        var newCards = document.querySelectorAll('.location-card:not(.removed)');
-        var allCards = document.querySelectorAll('.location-card');
-      });
-    }
+  var newCards = document.querySelectorAll('.location-card:not(.removed)');
+  var allCards = document.querySelectorAll('.location-card');
+  });
+}
 ```
 
 We'll add more inside the function that inserts location information into each card by calling the Places API. Add a line that creates a card div and another line that assigns the card's class name to be ``location-card``.
@@ -263,17 +263,17 @@ We're going to add a function that detects left and right swipes and makes each 
 
 ```jsx
   const hammertime = new Hammer(wrapper);
-        hammertime.on('swipeleft', () => {
-          wrapper.style.transform = 'translateX(-150%) rotate(-15deg)';
-          wrapper.style.opacity = 0;
-          setTimeout(() => wrapper.remove(), 100);
-        });
-        hammertime.on('swiperight', () => {
-          saveCafe(JSON.stringify(cafeData));
-          wrapper.style.transform = 'translateX(150%) rotate(15deg)';
-          wrapper.style.opacity = 0;
-          setTimeout(() => wrapper.remove(), 100);
-        });
+  hammertime.on('swipeleft', () => {
+    wrapper.style.transform = 'translateX(-150%) rotate(-15deg)';
+    wrapper.style.opacity = 0;
+    setTimeout(() => wrapper.remove(), 100);
+  });
+  hammertime.on('swiperight', () => {
+    saveCafe(JSON.stringify(cafeData));
+    wrapper.style.transform = 'translateX(150%) rotate(15deg)';
+    wrapper.style.opacity = 0;
+    setTimeout(() => wrapper.remove(), 100);
+  });
 ```
 
 ### Saving Cafes
@@ -303,7 +303,7 @@ if (!saved.find(c => c.place_id === cafe.place_id)) {
 We'll need a fallback in case the cafe is already saved. Write an `else` statement that alerts the user if a cafe has already been saved, so it doesn't get duplicated into the saved list of cafes. 
 
 ```jsx
-else {
+  else {
     alert(`${cafe.name} is already saved.`);
   }
 }
@@ -317,8 +317,8 @@ Start by writing a function called `showSaved()`. Similar to the `displayCards()
 
 ```jsx
 function showSaved() {
-    const container = document.querySelector('.cards');
-    container.innerHTML = '';
+  const container = document.querySelector('.cards');
+  container.innerHTML = '';
 ```
 
 Then, add this line to parse through the list of saved cafes and save the information in a variable.
@@ -331,9 +331,9 @@ If the saved array is empty, it'll update the page by adding a ``<p>`` tag to sa
 
 ```jsx
 if (saved.length === 0) {
-      container.innerHTML = '<p>No saved cafes yet 😢</p>';
-      return;
-    }
+  container.innerHTML = '<p>No saved cafes yet 😢</p>';
+  return;
+}
 ```
 
 For each cafe in the saved array, we'll make a card div, add the `location-card` class name, and update the card's content with `innerHTML` to include the current cafe's information. 
