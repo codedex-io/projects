@@ -39,15 +39,15 @@ tags:
 
 # Introduction: Companion Creatures
 
-Anyone who's played Baldur's Gate 3 knows it features some truly epic battles, with animal allies who fight alongside you, like our best boy, Scratch.
+[Baldur’s Gate 3](https://en.wikipedia.org/wiki/Baldur%27s_Gate_3) (BG3) is a 2023 RPG by Larian Studios, adapted from the fifth edition of Dungeons & Dragons. It's earned over 10 million players due to its expansive worldbuilding, fleshed out characters, and stunning visuals.
+
+Anyone who's played knows it features some truly epic battles, with animal allies who fight alongside you, like our best boy, Scratch.
 
 <ImageZoom src="https://i.imgur.com/rxAJDtM.png" style={{ width: "80%", height: "auto" }} alt="Scratch"/>
 
-[Baldur’s Gate 3](https://en.wikipedia.org/wiki/Baldur%27s_Gate_3) (BG3) is a 2023 RPG by Larian Studios, adapted from the fifth edition of Dungeons & Dragons. It's earned over 10 million players due to its expansive worldbuilding, fleshed out characters, and stunning visuals.
-
 The game is incredibly well designed, but have you ever wanted to make Baldur’s Gate 3 *a little sillier*? 
 
-Remember the Addled Frog you meet in Auntie Ethel’s swamp? It’s normally not a recruitable companion, but what if you could recruit it to help you fight your battles? 🐸 
+Well, remember the Addled Frog you met in Auntie Ethel’s swamp? It’s normally not a recruitable companion, but what if you could summon it to help you win your battles? 🐸 
 
 We're going to do just that by making our own mod! 
 
@@ -184,6 +184,8 @@ data "UnarmedRangedAttackAbility" "Dexterity"
 - `data "DifficultyStatuses"` adjusts stats or abilities based on game difficulty.
 - `data "UnarmedRangedAttackAbility"` determines which stat the creature uses for unarmed ranged attacks, in this case it’ll use Dexterity.
 
+<ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="image of frog in battle casting spell"/>
+
 Phew, our frog friend sure is powerful!
 
 ## Write your Lua Script
@@ -238,6 +240,8 @@ end)
 
 Inside the callback function, we check if the spell being cast is `Target_Summon_Frog`. If yes, the program runs `KillFrog()` to clean up any old frogs.
 
+<ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="image of spell being cast/frog spawning"/>
+
 ## Export your Mod to a .pak
 
 Before your mod shows up in Baldur’s Gate 3, you’ll usually need to package it into a **.pak** file. This isn’t done in BG3 itself, you’ll use external tools made by the modding community.
@@ -252,6 +256,8 @@ Extract the contents of the .zip folder into the `ModdingTools` folder so you ca
 - Open BG3 Modder’s Multitool (installed outside the game).
 - Select your project folder (`Mods`).
 - Click Build Mod, which generates a .pak file.
+
+<ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="screenshot of multitool"/>
 
 The **.pak** should be saved here:
 
@@ -271,7 +277,7 @@ The Script Extender console should load automatically, but if you don’t see it
 
 You’ll be able to find the teapot containing the frog in the Tutorial Chest at the very beginning of the game, on the Tutorial Level (the Nautiloid ship). Walk past Shadowheart and open the chest in the next room.
 
-<ImageZoom src="swap image before publishing" style={{ width: "80%", height: "auto" }} alt="Discovering the teapot containing Frog"/>
+<ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="Discovering the teapot containing Frog"/>
 
 # Bonus Challenges
 
@@ -303,7 +309,7 @@ Here are some more resources to explore:
 - [Manual Modding in BG3 for MacOS Users](https://www.youtube.com/watch?v=8BNi0uNOvrE)
 - [Jon Hinkerton’s other mods](https://next.nexusmods.com/profile/jonhinkerton/mods?gameId=3474&page=1)
 
-Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io)! Let us know what you come up with!  
+Scratch told us he wants you to share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io)! Let us know what you come up with!  
 <span style={{ fontSize: "16px", lineHeight: 1 }}>
   <img
     src="https://i.imgur.com/H6GXsjP.png"
