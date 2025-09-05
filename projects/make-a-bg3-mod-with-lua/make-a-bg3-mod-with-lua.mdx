@@ -34,34 +34,34 @@ tags:
   uid={true}
 />
 
-{/* <RoundedImage link="https://i.imgur.com/jkgf7of.gif" description="" /> */}
-
 **Prerequisites:** Lua basics, Baldur's Gate 3
 **Read Time:** 45 minutes
 
-# Introduction: Frogify Your Enemies
+# Introduction: Companion Creatures
 
-Anyone who's played Baldur's Gate 3 knows it features some truly epic battles.
+Anyone who's played Baldur's Gate 3 knows it features some truly epic battles, with animal allies who fight alongside you, like our best boy, Scratch.
 
-<RoundedImage link="https://i.imgur.com/kop1His.png" description="Gale casting a fire spell in Baldur's Gate 3" />
+<ImageZoom src="https://i.imgur.com/rxAJDtM.png" style={{ width: "80%", height: "auto" }} alt="Scratch"/>
 
 [Baldur’s Gate 3](https://en.wikipedia.org/wiki/Baldur%27s_Gate_3) (BG3) is a 2023 RPG by Larian Studios, adapted from the fifth edition of Dungeons & Dragons. It's earned over 10 million players due to its expansive worldbuilding, fleshed out characters, and stunning visuals.
 
-But have you ever wanted to make Baldur’s Gate 3 *a little sillier*? 🐸 What if, every time combat started, your terrifying enemies suddenly transformed… into frogs?
-  
-<RoundedImage link="https://i.imgur.com/hsBhlGp.png" description="Baldur's Gate 3 frog" />
+The game is incredibly well designed, but have you ever wanted to make Baldur’s Gate 3 *a little sillier*? 
 
-We're going to do just that by making our own mods! 
+Remember the Addled Frog you meet in Auntie Ethel’s swamp? It’s normally not a recruitable companion, but what if you could recruit it to help you fight your battles? 🐸 
 
-**Mods** (short for modifications) are a way of writing code to alter features, graphics, or gameplay of an existing game, even for huge titles like Baldur's Gate 3.
+We're going to do just that by making our own mod! 
+
+<ImageZoom src="https://i.imgur.com/8NiJnGA.png" style={{ width: "80%", height: "auto" }} alt="Baldur's Gate 3 frog"/>He’s literally so babygirl.
+
+**Mods** (short for modifications) are a way of writing code to alter features, graphics, or gameplay of an existing game, even for huge titles like Baldur's Gate 3. Special thanks to [Jon Hinkerton](https://next.nexusmods.com/profile/jonhinkerton?gameId=3474) for creating the original mod that inspired this tutorial.
+
+We’ll create a mod that lets your character cast a spell to spawn their frog friend anywhere. That frog friend is a playable character who can help out during battles! 
 
 Since BG3 Lua modding is only supported on Windows, this tutorial is aimed at Windows users.  If you're a Mac user, scroll down to our Resources section for some links!
 
-<RoundedImage link="swap image before publishing" description="Image of enemies turning into frogs in combat" />
-
 By the end of this tutorial, you’ll know how to:
-- Write a BG3 mod with Lua 
-- Apply polymorph statuses during combat 
+- Write a BG3 mod that lets you summon a custom companion with Lua 
+- Customize the companion’s stats
 - Test your mod in-game
 
 ## Getting Started
@@ -74,48 +74,34 @@ If you don't already have a code editor installed, download [Visual Studio Code]
 
 **BG3 Script Extender (BG3SE)** is a program that adds Lua scripting and console support to Baldur's Gate 3. Download it from [GitHub](https://github.com/Norbyte/bg3se). 
 
-Right click on the downloaded .zip file, select [Extract All], and extract the files to a new folder called in your Documents directory, and name it somehting like `ModdingTools`. Next to your `ModdingTools` folder, create a new folder called `Mods`. We'll be keeping our modding apps in the `ModdingTools` folder, and our working files in the `Mods` folder.
+Right click on the downloaded .zip file, select [Extract All], and extract the files to a new folder called in your Documents directory, and name it something like `ModdingTools`. Next to your `ModdingTools` folder, create a new folder called `Mods`. We'll be keeping our modding apps in the `ModdingTools` folder, and our working files in the `Mods` folder.
 
 Here's the structure you'll be working with inside the Mods folder (you'll learn how to create the meta.lsx files and both .lua files in a bit!)
 
+### Starter files
+[Here’s](LINK) a zip folder containing the starter files for this project! It contains the basic file structure you’ll be working with. 
 ```
-Mods/FrogifyEnemies/Mods/FrogifyEnemies
+Mods/Frog/Mods/Frog
 ├── meta.lsx
-└── Public/
-    └── FrogifyEnemies/
-        └── Scripts/
-            ├── Init.lua
-            └── Frogify.lua
+└── ScriptExtender/
+    └── Lua/
+            ├── BoostrapServer.lua
+            └── Server/
+            └── Frog.lua
 ```
-
 
 ## Set up the .lsx file 
+
 An **.lsx** (XML) file tells Baldur’s Gate 3 about your mod, including its name, author, folder location, version, and unique ID, so the game can recognize and load it correctly. 
 
-Create a new plain text file in VS Code (or your favorite code editor) and save it as **meta.lsx** inside your **FrogifyEnemies** folder.
+We’ve provided you with a boilerplate **meta.lsx file** inside the project folder. 
 
 A **UUID (Universally Unique Identifier)** is a 128-bit value used to uniquely identify information across systems or databases without significant risk of duplication. It looks something like: `87654321-DCBA-4321-DCBA-0987654321AB`.
 
-It'll make sure your mod is unique and doesn't interfere with another mod installed on the same system. Generate your own by using this [online UUID generator](https://www.uuidgenerator.net/version4).
+It'll make sure your mod is unique and doesn't interfere with another mod installed on the same system. We’ve left it blank, so generate your own by using this [online UUID generator](https://www.uuidgenerator.net/version4), and paste it in here:
 
 ```xml
-<save>
-  <version>1</version>
-  <region id="ModuleSettings">
-    <node id="root">
-      <children>
-        <node id="ModuleShortDesc">
-          <attribute id="UUID" value="87654321-DCBA-4321-DCBA-0987654321AB"/>
-          <attribute id="Folder" value="FrogifyEnemies"/>
-          <attribute id="Name" value="Frogify Enemies"/>
-          <attribute id="Author" value="YourName"/>
-          <attribute id="Description" value="Turns all enemies into frogs when combat starts."/>
-          <attribute id="Version64" value="1"/>
-        </node>
-      </children>
-    </node>
-  </region>
-</save>
+<attribute id="UUID" type="FixedString" value="your UUID goes here" />
 ```
 The **meta.lsx** file tells the game info about your mod, including what the mod is called, who made it, where its files live, and how to tell it apart from other mods. 
 
@@ -130,60 +116,127 @@ It contains the following components:
 
 Without this file, the game doesn’t know your mod exists.
 
-## Write your Mod
+## Setting up .txt files
 
-The core logic: transform enemies into frogs when combat starts.
+In Baldur’s Gate 3, most of the game’s data, like characters, spells, and items, is stored inside .pak files. These are packed files that the game reads directly, so you can’t edit them in a normal text editor.
+
+To make modding easier, the BG3 modding community uses tools to export, convert, and edit these files in a readable .txt format before putting them back into the game.
+
+Inside the **Data** folder, you should see three text files.
+- **Character.txt** is empty right now but it will define the stats for your frog, including Strength, Dexterity, Constitution, and other abilities. It will also include special boosts, resistances, and spells that the frog can use.
+- **Object.txt** contains information about the object that interacts with the frog, like a teapot or magical item that summons it. This includes the item’s name, rarity, and any effects it grants (for example, unlocking the summon spell when equipped or used).
+- **Spell_Target.txt** defines the spells themselves. It includes the summon spell you can cast to bring the frog into the game, as well as the frog’s own spells or attacks it can use in battle to help you out!
+
+We’ve pre-populated **Object.txt** and **Spell_Target.txt** with example entries so you can see how the structure works (and because it’s a ton of metadata to sort through!) 
+
+We left **Character.txt** blank, so open it up, and let’s fill it out together!
+
+We’ll write the header first.
+
+```
+new entry "Frog_Summon"
+type "Character"
+using "_Critter"
+```
+
+- `new entry` is the internal name of your creature.
+- `type "Character"` is always "Character" for creatures, NPCs, or summons.
+- `using "_Critter"` pulls in the default critter template so you don’t have to define every single property from scratch.
+
+Next let’s set up our frog’s stats!
+
+```
+data "Strength" "2"
+data "Dexterity" "15"
+data "Constitution" "8"
+data "Intelligence" "2"
+data "Wisdom" "8"
+data "Charisma" "4"
+```
+
+These are all standard DnD stats. Feel free to change these numbers around!
+
+```
+data "Vitality" "2"
+data "Weight" "1"
+data "StepsType" "Clawed"
+```
+- `Vitality` is the base number of hit points.
+- `Weight` affects physics and interactions.
+- `StepsType` determines footstep sound/animation (Clawed, Hoofed, etc.).
+
+Next, let’s set up how the frog acts in combat and what abilities it has
+
+```
+data "SpellCastingAbility" "Dexterity"
+data "ActionResources" "ActionPoint:1;BonusActionPoint:1;Movement:9;ReactionActionPoint:1"
+data "Passives" "AttackOfOpportunity;ShortResting"
+data "DefaultBoosts" "Skill(Stealth,6);IncreaseMaxHP(Owner.Level*2);UnlockSpell(Target_Claws_Bufo);ProficiencyBonus(SavingThrow,Dexterity);ProficiencyBonusOverride(Owner.LevelMapValue(StandardProficiencyBonusScale));RollBonus(Attack,max(Owner.DexterityModifier,Owner.SpellCastingAbilityModifier));IF(ConditionResult(GetSummoner(context.Source).Intelligence > 17) or ConditionResult(GetSummoner(context.Source).Wisdom > 17) or ConditionResult(GetSummoner(context.Source).Charisma > 17)):SpellSaveDC(2);UnlockSpell(Target_HypnoticPattern_Bufo);ScaleMultiplier(2);WeightCategory(+4);ObjectSize(+4);Ability(Strength,+8);Ability(Constitution,+8);Ability(Dexterity,-8);AC(-4)"
+data "AcidResistance" "Resistant"
+data "DifficultyStatuses" "STATUS_EASY:PLAYER_BONUSES_EASYMODE"
+data "UnarmedRangedAttackAbility" "Dexterity"
+```
+- `data "SpellCastingAbility"` determines which stat the creature uses for spell attacks and spell save DCs. In this example, the frog’s spells are powered by Dexterity, so attack rolls and DCs use the Dexterity modifier.
+- `data "ActionResources"` defines what the creature can do on its turn.
+- `data "Passives"` lists abilities that are always active.
+- `data "DefaultBoosts"` are automatic bonuses or effects applied to the creature. 
+- `data "AcidResistance"` sets resistances. Options include None, Resistant, or Immune. In this case, the frog resists acid damage, since it can make acid attacks.
+- `data "DifficultyStatuses"` adjusts stats or abilities based on game difficulty.
+- `data "UnarmedRangedAttackAbility"` determines which stat the creature uses for unarmed ranged attacks, in this case it’ll use Dexterity.
+
+Phew, our frog friend sure is powerful!
+
+## Write your Lua Script
+
+The core logic: Summon our Frog friend when you cast the spell, and make sure only one Frog can be spawned at a time.
 
 As you saw in your file folder structure, you'll create two Lua scripts:
 
-The first script is **Init.lua**: 
+The first script is **BootstrapServer.lua**. Write the following code inside:
 
 ```lua
--- Require your main logic file
-Ext.Require("Frogify.lua")
-
--- Print when Init itself loads
-print("Init.lua loaded")
-
--- Hook into session start
-Ext.Events.SessionLoaded:Subscribe(function ()
-    print("Frogify Enemies mod loaded!")
-end)
-
+Ext.Require("Server/Frog.lua")
+print("BootstrapServer.lua loaded")
 
 ```
+Here, we are telling Script Extender to load our frog.lua file which contains the game logic, and once it's finished loading, we tell the game to run the code inside (in this case, a print message that says the mod has loaded!).
 
-Here, we are loading a save file, and once it's finished loading, we tell the game to run the code inside (in this case, a print message that says the mod has loaded!).
+The second script is **Frog.lua**.
 
-The second script is **Frogify.lua**.
+By default, the `Target_Summon_Frog` spell just spawns a new frog every time it’s cast. If you cast it twice, you’d have two frogs. If you cast it ten times, you’d have a swarm of frogs!
 
+This script fixes that by ensuring that any existing frog is removed before a new one is created. That way, you’ll always have exactly one frog active.
+
+Write the following code:
 ```lua
--- Subscribe to session loaded to confirm mod is active
-Ext.Events.SessionLoaded:Subscribe(function()
-   Print("Frogify Enemies mod loaded!")
+local function KillFrog()
+    local summons = Osi.DB_PlayerSummons:Get(nil)
+    for _, summon in pairs(summons) do
+		if string.match(summon[1],"Frog") ~= nil then
+			Die(summon[1])
+		end
+    end
+end
+```
+`Osi.DB_PlayerSummons:Get(nil)` queries the game for all currently active summons belonging to the player. The script checks them one by one.
 
-    -- Listen for combat starting
-    Ext.Osiris.RegisterListener("EnteredCombat", 2, "after", function(combatGuid, characterGuid)
-        -- Only affect enemies
-        if Osi.IsEnemy(characterGuid) == 1 then
-            -- Transform enemy into a frog
-            Osi.ApplyStatus(characterGuid, "POLYMORPH_FROG", -1, 1)
-           Print("Frogified enemy: " .. characterGuid)
-        end
-    end)
+`string.match(summon[1], "Frog")` says that if the summon’s identifier (its internal name) contains "Frog", we’ve found a frog.
+
+`Die(summon[1])` kills that frog immediately. Don’t fret though! We aren’t literally killing the frog, we’re just making sure we don’t spawn a million frogs and accidentally crash the game.
+
+Below that, write
+```lua
+Ext.Osiris.RegisterListener("UsingSpell", 5, "before", function(caster, spell, targettingType, school, StoryActionID)
+    if spell == "Target_Summon_Frog" then
+        KillFrog()
+    end
 end)
 ```
+`Ext.Osiris.RegisterListener("UsingSpell", 5, "before", ...)` registers a listener for the `UsingSpell` event in the game’s scripting system.
 
-Here, we are using `Ext.Osiris.RegisterListener("EnteredCombat", ...)` to listen for the event “a character has entered combat.”
+`UsingSpell` fires whenever someone casts a spell, and it contains `5` parameters. `before` means the function runs before the spell’s normal effects are applied.
 
-`characterGuid` is the game’s internal ID for that specific character. Similar to UUID from before, **GUID** stands for Globally Unique Identifier. But unlike the UUID, this isn't a randomly generated string of numbers, but a predetermined identifier that the game automatically feeds into the function when the `EnteredCombat` event fires.
-
-`if Osi.IsEnemy(characterGuid) == 1 then` checks: “Is this character an enemy?” (1 = yes, 0 = no).
-
-`Osi.ApplyStatus(..., "POLYMORPH_FROG", -1, 1)` applies the “frog polymorph” effect. -1 means it lasts forever until combat ends. `POLYMORPH_FROG` is a built-in string ID that the game understands.
-Finally, `print("Frogified enemy: " .. characterGuid)` writes a debug message in the console so you can confirm the frogification was successful.
-
-<RoundedImage link="swap image before publishing" description="Combat begins, enemies turn into frogs" />
+Inside the callback function, we check if the spell being cast is `Target_Summon_Frog`. If yes, the program runs `KillFrog()` to clean up any old frogs.
 
 ## Export your Mod to a .pak
 
@@ -203,7 +256,7 @@ Extract the contents of the .zip folder into the `ModdingTools` folder so you ca
 The **.pak** should be saved here:
 
 ```
-C:\Users\<YourName>\AppData\Local\Larian Studios\Baldur's Gate 3\Mods\FrogifyEnemies\
+C:\Users\<YourName>\AppData\Local\Larian Studios\Baldur's Gate 3\Mods\
 ```
 
 ## Load and Test Your Mod
@@ -212,45 +265,33 @@ Open BG3 Mod Manager, and drag your **.pak** mod from Inactive Mods → Active M
 
 Click [Save Load Order] and [Export].
 
-Time to launch Baldur’s Gate 3 via Steam!! Start a new game or load an existing save. Then, enter combat! As soon as the battle begins, enemies should polymorph into frogs before your very eyes.
+Now you can go right into launching Baldur's Gate 3! Start a new game. 
 
-To debug, open the Script Extender console (<kbd>~</kbd> key) to check for errors.
-Now you can go right into launching Baldur's Gate 3! Start a new game or load a save. 
-Find an enemy whose model you swapped. It should now appear as a frog!
+The Script Extender console should load automatically, but if you don’t see it, make sure you’re running your game in Windowed mode, and press <kbd>~</kbd> key to check for errors.
 
+You’ll be able to find the teapot containing the frog in the Tutorial Chest at the very beginning of the game, on the Tutorial Level (the Nautiloid ship). Walk past Shadowheart and open the chest in the next room.
 
-## Bonus Challenge: Random Animal Mode 
-Let's  randomize between frogs, chickens, or sheep. 🐸🐔🐑
+<ImageZoom src="swap image before publishing" style={{ width: "80%", height: "auto" }} alt="Discovering the teapot containing Frog"/>
 
-Open **Frogify.lua**, which contains the combat logic for polymorphing enemies, and adds randomization.
+# Bonus Challenges
 
-```lua
-local animals = {"POLYMORPH_FROG", "POLYMORPH_CHICKEN", "POLYMORPH_SHEEP"}
-local choice = animals[math.random(#animals)]
+Try changing the frog’s stats! For example, you can scale the frog into a **giant** frog by altering the number inside `ScaleMultiplier()` in the Character.txt file.
 
-Osi.ApplyStatus(characterGuid, choice, -1, 1)
-print("Transformed enemy into: " .. choice)
-```
+<ImageZoom src="https://i.imgur.com/yYwLo1m.png" style={{ width: "80%", height: "auto" }} alt="BIG FROG"/>Fun fact: that's Jackie’s BG3 character on the right
 
-`local animals = {...}` creates a list of different polymorph status IDs. `POLYMORPH_FROG`, `POLYMORPH_CHICKEN`, `POLYMORPH_SHEEP` are all predefined effects in the game. 
+You can also try summoning other creatures! The best way to understand Mod files is to download existing ones and play around. 
 
-`local choice = animals[math.random(#animals)]` provides the number of items in the `animals` list (3 in this case). Then, it picks a random number between 1 and 3 (since Lua uses 1-based index) and selects the animal polymorph at that position in the `animals`list.
-
-`Osi.ApplyStatus(characterGuid, choice, -1, 1)` applies the randomly selected polymorph effect to the enemy, to be applied indefinitely (`-1`) and immediately (`1`).
-
-Finally, it prints a debug message showing which animal the enemy transformed into.
-
-There are even more animals you can polymorph your enemies into! Search the word "POLYMORPH" in [Norbyte's BG3 Search Engine](https://bg3.norbyte.dev/search) to explore more options.
+Download one of these mods that use similar logic and let you summon a [Ghost Cat](https://www.nexusmods.com/baldursgate3/mods/5720), a [Tressym](https://www.nexusmods.com/baldursgate3/mods/5742), or even a [Pet Rock](https://www.nexusmods.com/baldursgate3/mods/7217).
 
 # Conclusion
 
 Congrats! You just made your first Baldur’s Gate 3 mod! 🎉
 
-<RoundedImage link="https://i.imgur.com/PafW349.png" description="Baldur's Gate 3 party victoriously looking out at a cliff" />
+<ImageZoom src="https://i.imgur.com/PafW349.png" style={{ width: "80%", height: "auto" }} alt="Baldur's Gate 3 party victoriously looking out at a cliff"/>
 
-We started by frogifying enemies, and extended it into a randomizer. For an even bigger challenge, you can explore more polymorphs ([cheese wheel](https://www.reddit.com/r/BG3/comments/1ceqelg/i_got_turned_into_a_cheese_wheel/), anyone?), or get wild with custom models.
+We created a frog companion that can fight by your side in battle! 
 
-Have fun breaking Faerûn!
+May you win every battle, and have fun breaking Faerûn!
 
 # Additional Resources
 
@@ -260,13 +301,14 @@ Here are some more resources to explore:
 - [BG3 Modding Wiki](https://bg3.wiki/wiki/Modding:Modding_resources)
 - [Norbyte's BG3 Search Engine](https://bg3.norbyte.dev/search)
 - [Manual Modding in BG3 for MacOS Users](https://www.youtube.com/watch?v=8BNi0uNOvrE)
-
+- [Jon Hinkerton’s other mods](https://next.nexusmods.com/profile/jonhinkerton/mods?gameId=3474&page=1)
 
 Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io)! Let us know what you come up with!  
 <span style={{ fontSize: "16px", lineHeight: 1 }}>
   <img
-    src="https://i.imgur.com/xbx0UAG.png"
+    src="https://i.imgur.com/H6GXsjP.png"
     alt="emoji"
-    style={{ height: "1em", width: "auto", verticalAlign: "middle" }}
+    style={{ height: "10em", width: "auto", verticalAlign: "middle" }}
   />
 </span>
+
