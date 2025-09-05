@@ -1,5 +1,5 @@
 ---
-title: Make a Baldur's Gate 3 Mod With Lua
+title: Make a Baldur's Gate 3 Mod with Lua
 author: Julien Kris
 uid: Jps14SaCwqgdbbnYvoMpvMKv92P2
 datePublished: 2025-09-03
@@ -19,7 +19,7 @@ tags:
   cl="for-sidebar" 
 />
 
-# Make a Baldur's Gate 3 Mod With Lua
+## Make a Baldur's Gate 3 Mod With Lua
 
 <AuthorAvatar
   author_name="Julien Kris"
@@ -39,9 +39,7 @@ tags:
 
 # Introduction: Companion Creatures
 
-[Baldur’s Gate 3](https://en.wikipedia.org/wiki/Baldur%27s_Gate_3) (BG3) is a 2023 RPG by Larian Studios, adapted from the fifth edition of Dungeons & Dragons. It's earned over 10 million players due to its expansive worldbuilding, fleshed out characters, and stunning visuals.
-
-Anyone who's played knows it features some truly epic battles, with animal allies who fight alongside you, like our best boy, Scratch.
+[Baldur’s Gate 3](https://en.wikipedia.org/wiki/Baldur%27s_Gate_3) (BG3) is a 2023 RPG by Larian Studios, adapted from Dungeons & Dragons. It's earned over 10 million players due to its expansive worldbuilding, fleshed out characters, and stunning visuals. Anyone who's played knows it features some truly epic battles, with animal allies who fight alongside you, like our best boy, Scratch.
 
 <ImageZoom src="https://i.imgur.com/rxAJDtM.png" style={{ width: "80%", height: "auto" }} alt="Scratch"/>
 
@@ -51,9 +49,9 @@ Well, remember the Addled Frog you met in Auntie Ethel’s swamp? It’s normall
 
 We're going to do just that by making our own mod! 
 
-<ImageZoom src="https://i.imgur.com/8NiJnGA.png" style={{ width: "80%", height: "auto" }} alt="Baldur's Gate 3 frog"/>He’s literally so babygirl.
+<ImageZoom src="https://i.imgur.com/8NiJnGA.png" style={{ width: "80%", height: "auto" }} alt="Baldur's Gate 3 frog"/>
 
-**Mods** (short for modifications) are a way of writing code to alter features, graphics, or gameplay of an existing game, even for huge titles like Baldur's Gate 3. Special thanks to [Jon Hinkerton](https://next.nexusmods.com/profile/jonhinkerton?gameId=3474) for creating the original mod that inspired this tutorial.
+**Mods** (short for modifications) are a way of writing code to alter features, graphics, or gameplay of an existing game, even for huge titles like Baldur's Gate 3.
 
 We’ll create a mod that lets your character cast a spell to spawn their frog friend anywhere. That frog friend is a playable character who can help out during battles! 
 
@@ -64,6 +62,8 @@ By the end of this tutorial, you’ll know how to:
 - Customize the companion’s stats
 - Test your mod in-game
 
+**Note:** Special thanks to [Jon Hinkerton](https://next.nexusmods.com/profile/jonhinkerton?gameId=3474) for creating the original mod that inspired this tutorial.
+
 ## Getting Started
 
 Make sure you have Baldur's Gate 3 installed on your machine! If not, start [installing](https://store.steampowered.com/app/1086940/Baldurs_Gate_3) it in the background while you create your mod.
@@ -72,21 +72,27 @@ If you don't already have a code editor installed, download [Visual Studio Code]
 
 ### BG3 Script Extender
 
-**BG3 Script Extender (BG3SE)** is a program that adds Lua scripting and console support to Baldur's Gate 3. Download it from [GitHub](https://github.com/Norbyte/bg3se). 
+**BG3 Script Extender (BG3SE)** is a program created by a developer named @Norbyte that adds Lua scripting and console support to Baldur's Gate 3. Download it from [GitHub](https://github.com/Norbyte/bg3se). 
 
-Right click on the downloaded .zip file, select [Extract All], and extract the files to a new folder called in your Documents directory, and name it something like `ModdingTools`. Next to your `ModdingTools` folder, create a new folder called `Mods`. We'll be keeping our modding apps in the `ModdingTools` folder, and our working files in the `Mods` folder.
+Right click on the downloaded **.zip** file, select [Extract All], and extract the files to a new folder in your **Documents** directory, and name it something like **ModdingTools**. Next to your **ModdingTools** folder, create a new folder called **Mods**. 
 
-Here's the structure you'll be working with inside the Mods folder (you'll learn how to create the meta.lsx files and both .lua files in a bit!)
+We'll be keeping:
+
+- Our modding apps in the **ModdingTools** folder.
+- Our working files in the **Mods** folder.
+
+Here's the structure you'll be working with inside the **Mods** folder (you'll learn how to create the **meta.lsx** files and both **.lua** files in a bit!)
 
 ### Starter files
-[Here’s](LINK) a zip folder containing the starter files for this project! It contains the basic file structure you’ll be working with. 
+
+[Here’s a zip folder](LINK) containing the starter files for this project! It contains the basic file structure you’ll be working with. 
 ```
 Mods/Frog/Mods/Frog
 ├── meta.lsx
 └── ScriptExtender/
     └── Lua/
-            ├── BoostrapServer.lua
-            └── Server/
+        ├── BoostrapServer.lua
+        └── Server/
             └── Frog.lua
 ```
 
@@ -118,9 +124,9 @@ Without this file, the game doesn’t know your mod exists.
 
 ## Setting up .txt files
 
-In Baldur’s Gate 3, most of the game’s data, like characters, spells, and items, is stored inside .pak files. These are packed files that the game reads directly, so you can’t edit them in a normal text editor.
+In Baldur’s Gate 3, most of the game’s data, like characters, spells, and items, is stored inside **.pak** files. These are packed files that the game reads directly, so you can’t edit them in a normal text editor.
 
-To make modding easier, the BG3 modding community uses tools to export, convert, and edit these files in a readable .txt format before putting them back into the game.
+To make modding easier, the BG3 modding community uses tools to export, convert, and edit these files in a readable **.txt** format before putting them back into the game.
 
 Inside the **Data** folder, you should see three text files.
 - **Character.txt** is empty right now but it will define the stats for your frog, including Strength, Dexterity, Constitution, and other abilities. It will also include special boosts, resistances, and spells that the frog can use.
@@ -199,9 +205,9 @@ The first script is **BootstrapServer.lua**. Write the following code inside:
 ```lua
 Ext.Require("Server/Frog.lua")
 print("BootstrapServer.lua loaded")
-
 ```
-Here, we are telling Script Extender to load our frog.lua file which contains the game logic, and once it's finished loading, we tell the game to run the code inside (in this case, a print message that says the mod has loaded!).
+
+Here, we are telling Script Extender to load our **frog.lua** file which contains the game logic, and once it's finished loading, we tell the game to run the code inside (in this case, a print message that says the mod has loaded!).
 
 The second script is **Frog.lua**.
 
@@ -210,6 +216,7 @@ By default, the `Target_Summon_Frog` spell just spawns a new frog every time it�
 This script fixes that by ensuring that any existing frog is removed before a new one is created. That way, you’ll always have exactly one frog active.
 
 Write the following code:
+
 ```lua
 local function KillFrog()
     local summons = Osi.DB_PlayerSummons:Get(nil)
@@ -220,6 +227,7 @@ local function KillFrog()
     end
 end
 ```
+
 `Osi.DB_PlayerSummons:Get(nil)` queries the game for all currently active summons belonging to the player. The script checks them one by one.
 
 `string.match(summon[1], "Frog")` says that if the summon’s identifier (its internal name) contains "Frog", we’ve found a frog.
@@ -279,7 +287,7 @@ You’ll be able to find the teapot containing the frog in the Tutorial Chest at
 
 <ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="Discovering the teapot containing Frog"/>
 
-# Bonus Challenges
+## Bonus Challenges
 
 Try changing the frog’s stats! For example, you can scale the frog into a **giant** frog by altering the number inside `ScaleMultiplier()` in the Character.txt file.
 
@@ -289,7 +297,7 @@ You can also try summoning other creatures! The best way to understand Mod files
 
 Download one of these mods that use similar logic and let you summon a [Ghost Cat](https://www.nexusmods.com/baldursgate3/mods/5720), a [Tressym](https://www.nexusmods.com/baldursgate3/mods/5742), or even a [Pet Rock](https://www.nexusmods.com/baldursgate3/mods/7217).
 
-# Conclusion
+## Conclusion
 
 Congrats! You just made your first Baldur’s Gate 3 mod! 🎉
 
@@ -299,7 +307,7 @@ We created a frog companion that can fight by your side in battle!
 
 May you win every battle, and have fun breaking Faerûn!
 
-# Additional Resources
+### Additional Resources
 
 Here are some more resources to explore:
 
@@ -309,7 +317,8 @@ Here are some more resources to explore:
 - [Manual Modding in BG3 for MacOS Users](https://www.youtube.com/watch?v=8BNi0uNOvrE)
 - [Jon Hinkerton’s other mods](https://next.nexusmods.com/profile/jonhinkerton/mods?gameId=3474&page=1)
 
-Scratch told us he wants you to share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io)! Let us know what you come up with!  
+Scratch told us he wants you to share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io) and [@baldursgate3](https://x.com/baldursgate3)! Let us know what you come up with!  
+
 <span style={{ fontSize: "16px", lineHeight: 1 }}>
   <img
     src="https://i.imgur.com/H6GXsjP.png"
