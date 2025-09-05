@@ -87,13 +87,24 @@ Here's the structure you'll be working with inside the **Mods** folder (you'll l
 
 [Here’s a zip folder](https://drive.google.com/drive/folders/1JOE5uq8Ky6MKy3agzan6Zqdr7Z2HAYtJ?usp=sharing) containing the starter files for this project! It contains the basic file structure you’ll be working with. 
 ```
-Mods/Frog/Mods/Frog
-├── meta.lsx
-└── ScriptExtender/
-    └── Lua/
-        ├── BoostrapServer.lua
-        └── Server/
-            └── Frog.lua
+Mods/Frog/
+├── Mods
+    └── Frog
+        └── ScriptExtender
+            └── Lua
+                └── Server
+                    ├── Frog.lua
+                    └── BootstrapServer.lua
+                ├── Config.json
+                └── meta.lsx
+├── Public
+    └── Frog
+        └── Stats
+            └── Generated
+                └── Data
+                    ├── Character.txt
+                    ├── Object.txt
+                    ├── Spell_Target.txt
 ```
 
 ## Set up the .lsx file 
