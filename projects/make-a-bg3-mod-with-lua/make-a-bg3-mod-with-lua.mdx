@@ -100,16 +100,7 @@ Mods/Frog/Mods/Frog
 
 An **.lsx** (XML) file tells Baldur’s Gate 3 about your mod, including its name, author, folder location, version, and unique ID, so the game can recognize and load it correctly. 
 
-We’ve provided you with a boilerplate **meta.lsx file** inside the project folder. 
-
-A **UUID (Universally Unique Identifier)** is a 128-bit value used to uniquely identify information across systems or databases without significant risk of duplication. It looks something like: `87654321-DCBA-4321-DCBA-0987654321AB`.
-
-It'll make sure your mod is unique and doesn't interfere with another mod installed on the same system. We’ve left it blank, so generate your own by using this [online UUID generator](https://www.uuidgenerator.net/version4), and paste it in here:
-
-```xml
-<attribute id="UUID" type="FixedString" value="your UUID goes here" />
-```
-The **meta.lsx** file tells the game info about your mod, including what the mod is called, who made it, where its files live, and how to tell it apart from other mods. 
+The **meta.lsx** file tells the game info about your mod, including what the mod is called, who made it, where its files live, and how to tell it apart from other mods. We’ve provided you with a boilerplate **meta.lsx file** inside the project folder. 
 
 It contains the following components:
 
@@ -121,6 +112,16 @@ It contains the following components:
 - `Version`: A number you can bump up when you release updates so the game (and users) know it’s a new version.
 
 Without this file, the game doesn’t know your mod exists.
+
+A **UUID (Universally Unique Identifier)** is a 128-bit value used to uniquely identify information across systems or databases without significant risk of duplication. It looks something like: `30b78323-c06f-4a66-9767-6241f5ee4656`.
+
+It'll make sure your mod is unique and doesn't interfere with another mod installed on the same system. We’ve left it blank, so generate your own by using this [online UUID generator](https://www.uuidgenerator.net/version4), and paste it in here:
+
+```xml
+<attribute id="UUID" type="FixedString" value="your UUID goes here" />
+```
+
+<ImageZoom src="https://i.imgur.com/PYLUQzU.png" style={{ width: "80%", height: "auto" }} alt="sample UUID"/>
 
 ## Setting up .txt files
 
@@ -160,6 +161,8 @@ data "Wisdom" "8"
 data "Charisma" "4"
 ```
 
+<ImageZoom src="https://i.imgur.com/5kqogmE.png" style={{ width: "80%", height: "auto" }} alt="image of frog's stats"/>
+
 These are all standard DnD stats. Feel free to change these numbers around!
 
 ```
@@ -190,7 +193,7 @@ data "UnarmedRangedAttackAbility" "Dexterity"
 - `data "DifficultyStatuses"` adjusts stats or abilities based on game difficulty.
 - `data "UnarmedRangedAttackAbility"` determines which stat the creature uses for unarmed ranged attacks, in this case it’ll use Dexterity.
 
-<ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="image of frog in battle casting spell"/>
+<ImageZoom src="https://i.imgur.com/1ATlFDZ.gif" style={{ width: "80%", height: "auto" }} alt="image of frog in battle casting spell"/>
 
 Phew, our frog friend sure is powerful!
 
@@ -221,9 +224,9 @@ Write the following code:
 local function KillFrog()
     local summons = Osi.DB_PlayerSummons:Get(nil)
     for _, summon in pairs(summons) do
-		if string.match(summon[1],"Frog") ~= nil then
-			Die(summon[1])
-		end
+        if string.match(summon[1], "Frog") ~= nil then
+            Die(summon[1])
+        end
     end
 end
 ```
@@ -248,7 +251,7 @@ end)
 
 Inside the callback function, we check if the spell being cast is `Target_Summon_Frog`. If yes, the program runs `KillFrog()` to clean up any old frogs.
 
-<ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="image of spell being cast/frog spawning"/>
+<ImageZoom src="https://i.imgur.com/Upz0Qc3.gif" style={{ width: "80%", height: "auto" }} alt="image of spell being cast/frog spawning"/>
 
 ## Export your Mod to a .pak
 
@@ -265,7 +268,7 @@ Extract the contents of the .zip folder into the `ModdingTools` folder so you ca
 - Select your project folder (`Mods`).
 - Click Build Mod, which generates a .pak file.
 
-<ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="screenshot of multitool"/>
+<ImageZoom src="https://i.imgur.com/JVOmY04.png" style={{ width: "80%", height: "auto" }} alt="screenshot of multitool"/>
 
 The **.pak** should be saved here:
 
@@ -285,7 +288,7 @@ The Script Extender console should load automatically, but if you don’t see it
 
 You’ll be able to find the teapot containing the frog in the Tutorial Chest at the very beginning of the game, on the Tutorial Level (the Nautiloid ship). Walk past Shadowheart and open the chest in the next room.
 
-<ImageZoom src="insert image before publishing" style={{ width: "80%", height: "auto" }} alt="Discovering the teapot containing Frog"/>
+<ImageZoom src="https://i.imgur.com/iO4Zxr3.png" style={{ width: "80%", height: "auto" }} alt="Discovering the teapot containing Frog"/>
 
 ## Bonus Challenges
 
@@ -321,7 +324,7 @@ Scratch told us he wants you to share your projects with the team [@codedex_io](
 
 <span style={{ fontSize: "16px", lineHeight: 1 }}>
   <img
-    src="https://i.imgur.com/H6GXsjP.png"
+    src="https://i.imgur.com/gu1x0ge.png"
     alt="emoji"
     style={{ height: "10em", width: "auto", verticalAlign: "middle" }}
   />
