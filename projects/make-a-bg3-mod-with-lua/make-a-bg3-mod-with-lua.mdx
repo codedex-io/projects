@@ -19,7 +19,7 @@ tags:
   cl="for-sidebar" 
 />
 
-## Make a Baldur's Gate 3 Mod With Lua
+# Make a Baldur's Gate 3 Mod With Lua
 
 <AuthorAvatar
   author_name="Julien Kris"
@@ -37,9 +37,11 @@ tags:
 **Prerequisites:** Lua basics, Baldur's Gate 3
 **Read Time:** 45 minutes
 
-# Introduction: Companion Creatures
+## Introduction: Companion Creatures
 
-[Baldur’s Gate 3](https://en.wikipedia.org/wiki/Baldur%27s_Gate_3) (BG3) is a 2023 RPG by Larian Studios, adapted from Dungeons & Dragons. It's earned over 10 million players due to its expansive worldbuilding, fleshed out characters, and stunning visuals. Anyone who's played knows it features some truly epic battles, with animal allies who fight alongside you, like our best boy, Scratch.
+[Baldur’s Gate 3](https://en.wikipedia.org/wiki/Baldur%27s_Gate_3) (BG3) is a 2023 RPG by Larian Studios, adapted from Dungeons & Dragons. It's earned over 10 million players due to its expansive worldbuilding, fleshed out characters, and stunning visuals. 
+
+Anyone who's played knows it features some truly epic battles, with animal allies who fight alongside you, like our best boy, Scratch.
 
 <ImageZoom src="https://i.imgur.com/rxAJDtM.png" style={{ width: "80%", height: "auto" }} alt="Scratch"/>
 
@@ -55,9 +57,10 @@ We're going to do just that by making our own mod!
 
 We’ll create a mod that lets your character cast a spell to spawn their frog friend anywhere. That frog friend is a playable character who can help out during battles! 
 
-Since BG3 Lua modding is only supported on Windows, this tutorial is aimed at Windows users.  If you're a Mac user, scroll down to our Resources section for some links!
+Since BG3 Lua modding is only supported on Windows, this tutorial is aimed at Windows users. If you're a Mac user, scroll down to our Resources section for some links!
 
 By the end of this tutorial, you’ll know how to:
+
 - Write a BG3 mod that lets you summon a custom companion with Lua 
 - Customize the companion’s stats
 - Test your mod in-game
@@ -74,7 +77,9 @@ If you don't already have a code editor installed, download [Visual Studio Code]
 
 **BG3 Script Extender (BG3SE)** is a program created by a developer named @Norbyte that adds Lua scripting and console support to Baldur's Gate 3. Download it from [GitHub](https://github.com/Norbyte/bg3se). 
 
-Right click on the downloaded **.zip** file, select [Extract All], and extract the files to a new folder in your **Documents** directory, and name it something like **ModdingTools**. Next to your **ModdingTools** folder, create a new folder called **Mods**. 
+Right click on the downloaded **.zip** file, select [Extract All], and extract the files to a new folder in your **Documents** directory, and name it something like **ModdingTools**. 
+
+Next to your **ModdingTools** folder, create a new folder called **Mods**. 
 
 We'll be keeping:
 
@@ -124,7 +129,9 @@ It contains the following components:
 
 Without this file, the game doesn’t know your mod exists.
 
-A **UUID (Universally Unique Identifier)** is a 128-bit value used to uniquely identify information across systems or databases without significant risk of duplication. It looks something like: `30b78323-c06f-4a66-9767-6241f5ee4656`.
+A **UUID (Universally Unique Identifier)** is a 128-bit value used to uniquely identify information across systems or databases without significant risk of duplication. 
+
+It looks something like: `30b78323-c06f-4a66-9767-6241f5ee4656`.
 
 It'll make sure your mod is unique and doesn't interfere with another mod installed on the same system. We’ve left it blank, so generate your own by using this [online UUID generator](https://www.uuidgenerator.net/version4), and paste it in here:
 
@@ -140,7 +147,8 @@ In Baldur’s Gate 3, most of the game’s data, like characters, spells, and it
 
 To make modding easier, the BG3 modding community uses tools to export, convert, and edit these files in a readable **.txt** format before putting them back into the game.
 
-Inside the **Data** folder, you should see three text files.
+Inside the **Data** folder, you should see three text files:
+
 - **Character.txt** is empty right now but it will define the stats for your frog, including Strength, Dexterity, Constitution, and other abilities. It will also include special boosts, resistances, and spells that the frog can use.
 - **Object.txt** contains information about the object that interacts with the frog, like a teapot or magical item that summons it. This includes the item’s name, rarity, and any effects it grants (for example, unlocking the summon spell when equipped or used).
 - **Spell_Target.txt** defines the spells themselves. It includes the summon spell you can cast to bring the frog into the game, as well as the frog’s own spells or attacks it can use in battle to help you out!
@@ -181,7 +189,7 @@ data "Vitality" "2"
 data "Weight" "1"
 data "StepsType" "Clawed"
 ```
-- `Vitality` is the base number of hit points.
+- `Vitality` is the base number of hit points (hp).
 - `Weight` affects physics and interactions.
 - `StepsType` determines footstep sound/animation (Clawed, Hoofed, etc.).
 
@@ -214,14 +222,19 @@ The core logic: Summon our Frog friend when you cast the spell, and make sure on
 
 As you saw in your file folder structure, you'll create two Lua scripts:
 
+###  BootstrapServer.lua
+
 The first script is **BootstrapServer.lua**. Write the following code inside:
 
 ```lua
 Ext.Require("Server/Frog.lua")
+
 print("BootstrapServer.lua loaded")
 ```
 
 Here, we are telling Script Extender to load our **frog.lua** file which contains the game logic, and once it's finished loading, we tell the game to run the code inside (in this case, a print message that says the mod has loaded!).
+
+###  Frog.lua
 
 The second script is **Frog.lua**.
 
@@ -248,7 +261,8 @@ end
 
 `Die(summon[1])` kills that frog immediately. Don’t fret though! We aren’t literally killing the frog, we’re just making sure we don’t spawn a million frogs and accidentally crash the game.
 
-Below that, write
+Below that, write:
+
 ```lua
 Ext.Osiris.RegisterListener("UsingSpell", 5, "before", function(caster, spell, targettingType, school, StoryActionID)
     if spell == "Target_Summon_Frog" then
@@ -256,6 +270,7 @@ Ext.Osiris.RegisterListener("UsingSpell", 5, "before", function(caster, spell, t
     end
 end)
 ```
+
 `Ext.Osiris.RegisterListener("UsingSpell", 5, "before", ...)` registers a listener for the `UsingSpell` event in the game’s scripting system.
 
 `UsingSpell` fires whenever someone casts a spell, and it contains `5` parameters. `before` means the function runs before the spell’s normal effects are applied.
@@ -274,10 +289,11 @@ A **.pak** file is a type of “package” file, primarily used in video games, 
 
 Download [BG3 Modder’s Multitool](https://github.com/ShinyHobo/BG3-Modders-Multitool), which is a beginner-friendly open source tool that lets you unpack BG3’s files, browse models, and export your own mod into **.pak** format. 
 
-Extract the contents of the .zip folder into the `ModdingTools` folder so you can run the tool separately from your mod files.
+Extract the contents of the .zip folder into the **ModdingTools** folder so you can run the tool separately from your mod files.
+
 - Open BG3 Modder’s Multitool (installed outside the game).
-- Select your project folder (`Mods`).
-- Click Build Mod, which generates a .pak file.
+- Select your project folder (**Mods**).
+- Click Build Mod, which generates a **.pak** file.
 
 <ImageZoom src="https://i.imgur.com/wjDsrkV.png" style={{ width: "80%", height: "auto" }} alt="screenshot of multitool"/>
 
@@ -305,7 +321,7 @@ You’ll be able to find the teapot containing the frog in the Tutorial Chest at
 
 ## Bonus Challenges
 
-Try changing the frog’s stats! For example, you can scale the frog into a **giant** frog by altering the number inside `ScaleMultiplier()` in the Character.txt file.
+Try changing the frog’s stats! For example, you can scale the frog into a GIANT frog by altering the number inside `ScaleMultiplier()` in the **Character.txt** file.
 
 <ImageZoom src="https://i.imgur.com/yYwLo1m.png" style={{ width: "80%", height: "auto" }} alt="BIG FROG"/>Fun fact: that's Jackie’s BG3 character on the right
 
