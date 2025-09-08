@@ -77,7 +77,7 @@ Let's begin by creating a `class` to represent our points. Each point will have:
 - A random class (either red or green).
 - A function to draw itself on the canvas:
 
-```js
+```javascript
 class Point {
   constructor() {
     this.x = Math.random() * width;           // A random value along the x axis
@@ -105,7 +105,7 @@ class Point {
 
 If you'd like to test creating and displaying a point, you can do so in the `setup()` function:
 
-```js
+```javascript
 function setup() {
   createCanvas(300, 300);
   test_point = new Point();
@@ -119,13 +119,13 @@ Feel free to run your code a few times. Each time you run your code, your point 
 
 Rather than just creating and displaying a single point, let's create a whole set of points. At the very top of your code, outside of any functions, create an empty array named `points`.
 
-```js
+```javascript
 var points = [];
 ```
 
 Then, inside of `setup()` use a `for` loop to create 20 `Points` (feel free to delete your code that created `test_point` from the last step):
 
-```js
+```javascript
   for (var i = 0; i < 20; i++) {
     points.push(new Point());
   }
@@ -133,7 +133,7 @@ Then, inside of `setup()` use a `for` loop to create 20 `Points` (feel free to d
 
 Finally, in the `draw()` function, loop through your list and call `.display()` on each point.
 
-```js
+```javascript
 function draw() {
   background(255);
   for (var i = 0; i < points.length; i++) {
@@ -144,12 +144,14 @@ function draw() {
 
 ### Step 3: Classify Your Mouse
 
-Now's the fun part: classification! We'll write a function that classifies our mouse pointer as either red or green based on the 3 closest neighbors. Here are the steps to do this:
+Now's the fun part: classification! We'll write a function that classifies our mouse pointer as either red or green based on the 3 closest neighbors. 
 
-Measure the distance from the mouse to every `Point`. Store these values in an array.
-Sort the distances to find the 3 nearest neighbors
-Count how many neighbors are red and green, and classify the mouse pointer based on those numbers.
-Draw a small red or green circle at the location of the mouse.
+Here are the steps to do this:
+
+1. Measure the distance from the mouse to every `Point`. Store these values in an array.
+2. Sort the distances to find the 3 nearest neighbors
+3. Count how many neighbors are red and green, and classify the mouse pointer based on those numbers.
+4. Draw a small red or green circle at the location of the mouse.
 
 Let's get started!
 
@@ -157,7 +159,7 @@ Let's get started!
 
 We need to find the distance between our mouse pointer and each `Point` in our dataset. We'll put each distance in an array. Let's begin by creating an empty array and setting up our `for` loop:
 
-```js
+```javascript
 function classifyMouse() {
 
   let distances = [];
@@ -169,13 +171,13 @@ function classifyMouse() {
 
 Next, we can use the `dist()` function to find the distance between our mouse and each point. Use this code inside your `for` loop:
 
-```js
+```javascript
 let distance = dist(points[i].x, points[i].y, mouseX, mouseY);
 ```
 
 Finally, we don't want to simply add the distance to our list. We need to add the distance **AND** the `class` of the `Point` associated with that distance. Inside your food loop, write the following line of code:
 
-```js
+```javascript
 distances.push([distance, points[i].class]);
 ``` 
 
@@ -187,7 +189,7 @@ This sort function is slightly complicated, because `distances` isn't simply a l
 
 The following line of code will sort your list correctly. This should be put outside the `for` loop, but inside your `classifyMouse()` function:
 
-```js
+```javascript
 distances.sort((a, b) => a[0] - b[0]);
 ```
 
@@ -195,7 +197,7 @@ distances.sort((a, b) => a[0] - b[0]);
 
 Let's now loop through the first 3 items in the list and count the number of times class `1` and class `0` show up:
 
-```js
+```javascript
 let numZero = 0;
 let numOne = 0;
 
@@ -213,7 +215,7 @@ for (var i = 0; i < 3; i++) {
 
 We now know whether the mouse should be classified as red or green. Let's draw a small circle at the location of the mouse with the correct color. This should be the end of your `classifyMouse()` function, outside of all loops:
 
-```js
+```javascript
 noStroke();
 if (numOne > numZero) {
   fill(255, 0, 0);
@@ -225,14 +227,14 @@ ellipse(mouseX, mouseY, 10, 10);
 
 Now we just need to call it! At the bottom of the `draw()` function, call `classifyMouse()`. Feel free to move your mouse around and see if the classification is correct! Is your mouse pointer red when the majority of the 3 nearest neighbors are also red?
 
-### Extensions:
+## Extensions:
 
 You made a working KNN visualizer! Want to level it up? Try these challenges:
 
-We've hard-coded `20` points in our dataset and `3` nearest neighbors. Refactor your code so it is easy to quickly change those values to any numbers.
-It can be a bit tough to eyeball which points are the nearest neighbors to your mouse. Edit your code so the nearest neighbors are now highlighted (maybe with a yellow border rather than black)
-Add your own style! Rather than red and green points, you could draw your points as wizard 🧙‍♂️ or warrior ⚔️ emojis (calling back to our original example). Or come up with your own theme! Could you do something interesting with the background?
-KNN models can work with multi-class problems. Rather than simply red and green points, what if you had red, green, and blue points? Refactor your code so your visualization works with _any_ number of classes.
+- We've hard-coded `20` points in our dataset and `3` nearest neighbors. Refactor your code so it is easy to quickly change those values to any numbers.
+- It can be a bit tough to eyeball which points are the nearest neighbors to your mouse. Edit your code so the nearest neighbors are now highlighted (maybe with a yellow border rather than black)
+- Add your own style! Rather than red and green points, you could draw your points as wizard 🧙‍♂️ or warrior ⚔️ emojis (calling back to our original example). Or come up with your own theme! Could you do something interesting with the background?
+- KNN models can work with multi-class problems. Rather than simply red and green points, what if you had red, green, and blue points? Refactor your code so your visualization works with _any_ number of classes.
 
 Congrats on reaching the end of this project! You now hopefully have a better understanding of how a K-Nearest Neighbor model works under the hood!
 
@@ -241,4 +243,3 @@ Congrats on reaching the end of this project! You now hopefully have a better un
 - [p5.js](https://p5js.org)
 - [More Machine Learning on Codédex](https://www.codedex.io/machine-learning)
 - [The KNN Algorithm](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)
-
