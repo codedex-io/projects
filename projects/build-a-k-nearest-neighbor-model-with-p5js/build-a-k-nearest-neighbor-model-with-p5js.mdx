@@ -101,7 +101,6 @@ class Point {
   }
 
  display() {
-    
     stroke(0);
     strokeWeight(2);
     
@@ -151,6 +150,7 @@ Finally, in the `draw()` function, loop through your list and call `.display()` 
 ```javascript
 function draw() {
   background(255);
+  
   for (var i = 0; i < points.length; i++) {
     points[i].display();
   }
@@ -176,8 +176,8 @@ We need to find the distance between our mouse pointer and each `Point` in our d
 
 ```javascript
 function classifyMouse() {
-
   let distances = [];
+  
   for (var i = 0; i < points.length; i++) {
     // TODO: Find the distance between each point and the mouse.
   }
@@ -232,11 +232,13 @@ We now know whether the mouse should be classified as red or green. Let's draw a
 
 ```javascript
 noStroke();
+
 if (numOne > numZero) {
   fill(255, 0, 0);
 } else {
   fill(0, 255, 0);
 }
+
 ellipse(mouseX, mouseY, 10, 10);
 ```
 
