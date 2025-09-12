@@ -60,7 +60,7 @@ def main():
     
     ''' 
     set the back ground color to black
-    needs to be called everytime the game updates
+    needs to be called every time the game updates
     '''
     screen.fill(COLOR_BLACK)
     
