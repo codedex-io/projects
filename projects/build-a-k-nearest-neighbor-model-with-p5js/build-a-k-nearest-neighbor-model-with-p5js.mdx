@@ -98,7 +98,7 @@ Let's begin by creating a `class` to represent our points. Each point will have:
 - A random class (either red or green).
 - A function to draw itself on the canvas:
 
-```javascript
+```js
 class Point {
   constructor() {
     this.x = Math.random() * width;           // A random value along the x axis
@@ -125,7 +125,7 @@ class Point {
 
 If you'd like to test creating and displaying a point, you can do so in the `setup()` function:
 
-```javascript
+```js
 function setup() {
   createCanvas(300, 300);
   test_point = new Point();
@@ -139,13 +139,13 @@ Feel free to run your code a few times. Each time you run your code, your point 
 
 Rather than just creating and displaying a single point, let's create a whole set of points. At the very top of your code, outside of any functions, create an empty array named `points`.
 
-```javascript
+```js
 var points = [];
 ```
 
 Then, inside of `setup()` use a `for` loop to create 20 `Points` (feel free to delete your code that created `test_point` from the last step):
 
-```javascript
+```js
   for (var i = 0; i < 20; i++) {
     points.push(new Point());
   }
@@ -153,7 +153,7 @@ Then, inside of `setup()` use a `for` loop to create 20 `Points` (feel free to d
 
 Finally, in the `draw()` function, loop through your list and call `.display()` on each point.
 
-```javascript
+```js
 function draw() {
   background(255);
   
@@ -180,7 +180,7 @@ Let's get started!
 
 We need to find the distance between our mouse pointer and each `Point` in our dataset. We'll put each distance in an array. Let's begin by creating an empty array and setting up our `for` loop:
 
-```javascript
+```js
 function classifyMouse() {
   let distances = [];
   
@@ -192,13 +192,13 @@ function classifyMouse() {
 
 Next, we can use the `dist()` function to find the distance between our mouse and each point. Use this code inside your `for` loop:
 
-```javascript
+```js
 let distance = dist(points[i].x, points[i].y, mouseX, mouseY);
 ```
 
 Finally, we don't want to simply add the distance to our list. We need to add the distance **AND** the `class` of the `Point` associated with that distance. Inside your food loop, write the following line of code:
 
-```javascript
+```js
 distances.push([distance, points[i].class]);
 ``` 
 
@@ -210,7 +210,7 @@ This sort function is slightly complicated, because `distances` isn't simply a l
 
 The following line of code will sort your list correctly. This should be put outside the `for` loop, but inside your `classifyMouse()` function:
 
-```javascript
+```js
 distances.sort((a, b) => a[0] - b[0]);
 ```
 
@@ -218,7 +218,7 @@ distances.sort((a, b) => a[0] - b[0]);
 
 Let's now loop through the first 3 items in the list and count the number of times class `1` and class `0` show up:
 
-```javascript
+```js
 let numZero = 0;
 let numOne = 0;
 
@@ -236,7 +236,7 @@ for (var i = 0; i < 3; i++) {
 
 We now know whether the mouse should be classified as red or green. Let's draw a small circle at the location of the mouse with the correct color. This should be the end of your `classifyMouse()` function, outside of all loops:
 
-```javascript
+```js
 noStroke();
 
 if (numOne > numZero) {
