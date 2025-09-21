@@ -38,19 +38,19 @@ tags:
 **Prerequisites:** HTML, CSS, JavaScript fundamentals
 **Read Time:** 45 minutes
 
-# Introduction
+## Introduction
 
 Have you ever used the randomize button in a video game's character creator? (…how many hours of Baldur's Gate 3 do you think we've played? ⚔️)
 <RoundedImage link="https://i.imgur.com/jkgf7of.gif" description="" />
 
-Or, remember Cher's closet from [Clueless](https://en.wikipedia.org/wiki/Clueless), which helped her plan outfits by swiping through a catalogue of her entire wardrobe.?
+Or, remember Cher's closet from [Clueless](https://en.wikipedia.org/wiki/Clueless), which helped her plan outfits by swiping through a catalogue of her entire wardrobe?
 <RoundedImage link="https://i.imgur.com/TYmiJnX.gif" description="" />
 
 These are both examples of randomizer generators!
 
 There are other types of cool generators out there in games, movies, and TV shows. We can use the same logic to design monsters or even avatars.
 
-Today, we'll be learning how to use HTML, CSS, and vanilla JavaScript to build our own Randomizer Generator.
+Today, we'll be learning how to use HTML, CSS, and vanilla JS to build our own Randomizer Generator.
 
 ## Getting Started
 
@@ -62,26 +62,29 @@ If you've taken the HTML, CSS, and JavaScript courses, our web stack for this pr
 
 ```
 CluelessGenerator/
-├── index.html
-├── style.css
-└── script.js
+  ├── index.html
+  ├── style.css
+  └── script.js
 ```
 
 ## HTML
 
-HTML buttons allow users to interact with the outfit generator. These buttons control the behavior of the app, such as randomizing outfits and cycling through different images of accessories, tops, and bottoms. Here’s what each part does:
+HTML buttons allow users to interact with the outfit generator. These buttons control the behavior of the app, such as randomizing outfits and cycling through different images of accessories, tops, and bottoms. 
+
+Here’s what each part does:
 
 ### Main Container
 
-Below the header, add a div that wraps everything:
+Below the header, add a `<div>` that wraps everything:
 
 ```html
 <div class="main-container">
+  
 </div>
 ```
 Everything else will go inside this container.
 
-### Randomize Button:
+### Randomize Button
 
 <RoundedImage link="https://i.imgur.com/PL9cXAX.gif" description="" />
 
@@ -290,7 +293,7 @@ You'll also add `.shoes-image`.
 In JavaScript, you'll need to add a new category to the categories object. Each category includes an array of images, an index to track the current image, references to the HTML elements, and button IDs for navigation. Here's how you'll add the shoes category:
 ```
 const categories = {
- …
+ ...
   shoes: {  
     images: [
       // Your shoe images go here
@@ -316,16 +319,15 @@ Congrats! You've built your own generator! Now you're equipped with the skills t
 
 P.S. Are you waiting for an Avatar Builder on Codédex? Keep an eye out!
 
-## Additional Resources
+### Additional Resources
 
 - [90's Fashion Nova Holiday Hackathon Project by Ciera](https://www.codedex.io/community/hackathon/OSlnGKjR7MWDaIRgvNdD) 
 - [Archive App by Vita Newstetter](https://archive.clothing/)
 - [I Recreated Cher's Closet From Clueless](https://www.studiosophy.com/blog/2022/2/28/i-recreated-chers-closet-from-clueless)
 - [MoMa Exquisite Corpse Generator](https://ec.moma.org/intro)
 
-
 Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io)! Let us know what you come up with!  
-<span style={{ fontSize: "16px", lineHeight: 1 }}>
+<span style={{ fontSize: "20px", lineHeight: 1 }}>
   <img
     src="https://i.imgur.com/FOR1yp5.gif"
     alt="emoji"
