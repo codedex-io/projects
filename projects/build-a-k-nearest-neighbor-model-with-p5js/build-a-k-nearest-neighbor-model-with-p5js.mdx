@@ -1,9 +1,9 @@
 ---
-title: Build a K-Nearest Neighbor Model with p5.js
+title: Build a K-Nearest Neighbors Model with p5.js
 author: Alex Kuntz
 uid: ZjTU0yoJGgNolU9xIJGOR3bxYKm2
 datePublished: 2025-09-08
-description: Learn how to build a K-Nearest Neighbor (KNN) model from scratch using p5.js
+description: Learn how to build a K-Nearest Neighbors (KNN) model from scratch using p5.js
 header: https://i.imgur.com/RmZDc8j.gif
 bannerImage: https://i.imgur.com/RmZDc8j.gif
 published: live
@@ -101,12 +101,12 @@ Let's begin by creating a `class` to represent our points. Each point will have:
 ```js
 class Point {
   constructor() {
-    this.x = Math.random() * width;           // A random value along the x axis
-    this.y = Math.random() * height;          // A random value along the y axis
-    this.class = floor(Math.random() * 2)     // A random class: either 0 or 1
+    this.x = Math.random() * width;          // A random value along the x axis
+    this.y = Math.random() * height;         // A random value along the y axis
+    this.class = floor(Math.random() * 2);   // A random class: either 0 or 1
   }
 
- display() {
+  display() {
     stroke(0);
     strokeWeight(2);
     
@@ -185,7 +185,7 @@ function classifyMouse() {
   let distances = [];
   
   for (var i = 0; i < points.length; i++) {
-    // TODO: Find the distance between each point and the mouse.
+    // TODO... Find the distance between each point and the mouse.
   }
 }
 ```
@@ -254,7 +254,7 @@ Now we just need to call it! At the bottom of the `draw()` function, call `class
 
 Congrats on reaching the end of this project! You made a working KNN visualizer! 
 
-You now hopefully have a better understanding of how a K-Nearest Neighbor model works under the hood!
+You now hopefully have a better understanding of how a K-Nearest Neighbor model works under the hood.
 
 ### Bonus Challenges
 
@@ -264,6 +264,10 @@ Want to level it up? Try these bonus challenges:
 - It can be a bit tough to eyeball which points are the nearest neighbors to your mouse. Edit your code so the nearest neighbors are now highlighted (maybe with a yellow border rather than black)
 - Add your own style! Rather than red and green points, you could draw your points as wizard 🧙‍♂️ or warrior ⚔️ emojis (calling back to our original example). Or come up with your own theme! Could you do something interesting with the background?
 - KNN models can work with multi-class problems. Rather than simply red and green points, what if you had red, green, and blue points? Refactor your code so your visualization works with _any_ number of classes.
+
+### Video Walkthrough
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uq0kvzBX6uU?si=r4GbxX5BBG953-Ad" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Additional Resources
 
