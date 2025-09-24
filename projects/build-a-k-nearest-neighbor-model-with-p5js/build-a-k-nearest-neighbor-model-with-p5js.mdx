@@ -176,7 +176,7 @@ Here are the steps to do this:
 
 Let's get started!
 
-### Step 3.1: Measure Distances:
+### Step 3.1: Measure Distances
 
 We need to find the distance between our mouse pointer and each `Point` in our dataset. We'll put each distance in an array. Let's begin by creating an empty array and setting up our `for` loop:
 
@@ -202,7 +202,7 @@ Finally, we don't want to simply add the distance to our list. We need to add th
 distances.push([distance, points[i].class]);
 ``` 
 
-### Step 3.2: Sort the Distances:
+### Step 3.2: Sort the Distances
 
 We now need to find the 3 closest points. The easiest way to do this is by sorting our list of distances from low-to-high and looking at the first 3 points in our list.
 
@@ -232,7 +232,7 @@ for (var i = 0; i < 3; i++) {
 }
 ```
 
-### Step 3.4: Draw a Circle Based on Classification:
+### Step 3.4: Draw a Circle Based on Classification
 
 We now know whether the mouse should be classified as red or green. Let's draw a small circle at the location of the mouse with the correct color. This should be the end of your `classifyMouse()` function, outside of all loops:
 
