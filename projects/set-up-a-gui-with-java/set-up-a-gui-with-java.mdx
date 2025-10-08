@@ -6,6 +6,7 @@ datePublished: 2025-05-22
 published: live
 description: Learn how to set up a graphical user interface with Java
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/set-up-a-gui-with-java/header.png
+bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/set-up-a-gui-with-java/header.png
 readTime: 30
 prerequisites: Java fundamentals
 versions: None
@@ -16,50 +17,49 @@ tags:
 
 ## Introduction
 
-GUI (Often pronounced "GOO-ee", but actually "Gee-Yuuu-Eye") stands for **graphical user interface**. 
+GUI (Often pronounced "GOO-ee", but actually "Gee-Yuuu-Eye") stands for **graphical user interface**.
 
-Back in the OLD, ANCIENT days of the 1980s, you had to be a knowledgeable tech person to really use computers, but thanks to graphical user interfaces, things like buttons, sliders, windows, and menus let your 5-year-old sibling pull up [Roblox](https://en.wikipedia.org/wiki/Roblox) on their iPad! 
+Back in the OLD, ANCIENT days of the 1980s, you had to be a knowledgeable tech person to really use computers, but thanks to graphical user interfaces, things like buttons, sliders, windows, and menus let your 5-year-old sibling pull up [Roblox](https://en.wikipedia.org/wiki/Roblox) on their iPad!
 
-<ImageZoom src="https://i.imgur.com/wfJ167k.png" /> 
+<ImageZoom src="https://i.imgur.com/wfJ167k.png" />{" "}
 
-You use GUIs every day, and most commonly, web-based GUIs! As you can imagine, ChatGPT is a GUI, as it lets you prompt without ever interacting with code or the command line. 
+You use GUIs every day, and most commonly, web-based GUIs! As you can imagine, ChatGPT is a GUI, as it lets you prompt without ever interacting with code or the command line.
 
-<ImageZoom src="https://i.imgur.com/TxEy5sO.png" /> 
+<ImageZoom src="https://i.imgur.com/TxEy5sO.png" />{" "}
 
 ## Setting Up
 
-In Java development, you're able to create GUIs for your programs without needing any additional downloads! All you need is the **Swing** GUI Toolkit import statement in the IDE of your choice, and you're able to get started immediately! 
-
+In Java development, you're able to create GUIs for your programs without needing any additional downloads! All you need is the **Swing** GUI Toolkit import statement in the IDE of your choice, and you're able to get started immediately!
 
 ```java
 import javax.swing.*;
 ```
 
-If you don't already have a Java IDE, Click [here](https://www.codedex.io/java/bonus/set-up-your-java-dev-env) to set yours up! 
+If you don't already have a Java IDE, Click [here](https://www.codedex.io/java/bonus/set-up-your-java-dev-env) to set yours up!
 
-Create a public class and add a main method to begin. 
+Create a public class and add a main method to begin.
 
-You'll want to add a `JFrame` object with a title, and use methods like `.setSize()`, `.setDefaultCloseOperation`, and `.setLayout` to set up your window screen. 
+You'll want to add a `JFrame` object with a title, and use methods like `.setSize()`, `.setDefaultCloseOperation`, and `.setLayout` to set up your window screen.
 
-Then, close your program with `frame.setVisible(true)` to see your interface! 
+Then, close your program with `frame.setVisible(true)` to see your interface!
 
 ```java
 public class SimpleGUI {
   public static void main(String[] args) {
-  
+
   // Create a new window (JFrame)
   JFrame frame = new JFrame("My First GUI");
   frame.setSize(300, 150);
   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   frame.setLayout(null); // absolute positioning
-  
-  
-  frame.setVisible(true); 
+
+
+  frame.setVisible(true);
   }
 }
 ```
 
-Take a look! 
+Take a look!
 
 <ImageZoom src="https://i.imgur.com/5C8igzQ.png" />
 
@@ -74,7 +74,7 @@ Take a look!
 - `JComboBox` A drop-down list (like a select box)
 - `JTextField` A single-line text input
 
-For example, we can add text fields, buttons, and labels by creating objects for each of them and then using `.setBounds` to set up the location of where these components would appear. 
+For example, we can add text fields, buttons, and labels by creating objects for each of them and then using `.setBounds` to set up the location of where these components would appear.
 
 ```java
 // text field
@@ -90,7 +90,7 @@ JLabel label = new JLabel("Hello!");
 label.setBounds(20, 60, 250, 25);
 ```
 
-Then, use the `.add()` to add these components to the frame, since we've only initialized them above. 
+Then, use the `.add()` to add these components to the frame, since we've only initialized them above.
 
 ```java
 // Add components to the frame
@@ -99,7 +99,7 @@ frame.add(button);
 frame.add(label);
 ```
 
-This is your result! 
+This is your result!
 
 <ImageZoom src="https://i.imgur.com/llQyEYk.png" />
 
@@ -112,25 +112,28 @@ button.addActionListener(e -> {
 });
 ```
 
-Now, we can see a name in our frame! 
+Now, we can see a name in our frame!
 
-<ImageZoom src="https://i.imgur.com/rF9mZMm.png" /> 
+<ImageZoom src="https://i.imgur.com/rF9mZMm.png" />{" "}
 
 ## Congratulations!
 
-Congrats! You've made your very own GUI with Java's Swing GUI Toolkit. This is just the beginning of the possibilities of what you can build with Java; Games, forms, and image displays are now possible with Swing! 
+Congrats! You've made your very own GUI with Java's Swing GUI Toolkit. This is just the beginning of the possibilities of what you can build with Java; Games, forms, and image displays are now possible with Swing!
 
-### More Resources 
-Be sure to check out 
+### More Resources
+
+Be sure to check out
+
 - [The Swing API Documentation](https://docs.oracle.com/javase/7/docs/api/javax/swing/package-summary.html) to see other methods and objects you can create for your GUI
 - [Setting up your local Java Development Environment](https://www.codedex.io/java/bonus/set-up-your-java-dev-env)
 
-Note that Swing is the default, built-in GUI Toolkit. Other toolkits like [JavaFX](https://openjfx.io/openjfx-docs/#install-javafx) exist with more functionality with their own SDK, or download package. 
+Note that Swing is the default, built-in GUI Toolkit. Other toolkits like [JavaFX](https://openjfx.io/openjfx-docs/#install-javafx) exist with more functionality with their own SDK, or download package.
 
 Other ideas include
+
 - Weather Farrenheit to Celcius converter
 - Math calculator
 - To-Do list
 - Music Player
 
-Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io) and me, [@exrlla](https://www.twitter.com/exrlla)! Let us know what you come up with! 
+Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io) and me, [@exrlla](https://www.twitter.com/exrlla)! Let us know what you come up with!
