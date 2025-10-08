@@ -6,7 +6,10 @@ datePublished: 2023-03-20
 description: Learn to make a Pomodoro timer app with HTML, CSS, and JavaScript to improve time management.
 published: live
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/meta.png
-bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/header.gif 
+bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/header.gif
+readTime: 45
+prerequisites: HTML, CSS, JavaScript fundamentals
+versions: None
 tags:
   - html
   - css
@@ -14,30 +17,16 @@ tags:
   - intermediate
 ---
 
-<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/header.gif" description="Title Image" uid={true} cl="for-sidebar"/>
-
-# Build a Pomodoro App with HTML, CSS, JavaScript
-
-<AuthorAvatar
-  author_name="Dana Lee"
-  author_avatar="/images/projects/authors/dana-lee.jpg"
-  username="danalee39"
-  uid={true}
-/>
-
-<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/header.gif" description="Title Image" uid={true}/>
-
-**Prerequisites:** HTML, CSS, JavaScript fundamentals
-**Versions:** None
-**Read Time:** 45 minutes
-
 ## Introduction
 
-Welcome to the Pomodoro timer app coding tutorial! In this project, you'll learn how to create a simple and effective time management tool using just HTML, CSS, and JavaScript. By the end of this tutorial, you'll have a basic understanding of how to build a dynamic web page that responds to user interactions. You'll also learn how to structure and style your HTML elements with CSS, and how to add interactivity with JavaScript. 
+Welcome to the Pomodoro timer app coding tutorial! In this project, you'll learn how to create a simple and effective time management tool using just HTML, CSS, and JavaScript. By the end of this tutorial, you'll have a basic understanding of how to build a dynamic web page that responds to user interactions. You'll also learn how to structure and style your HTML elements with CSS, and how to add interactivity with JavaScript.
 
 The final project will look like this:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/finished_pomodoro.gif" alt="Finished Pomodoro App" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/finished_pomodoro.gif"
+  alt="Finished Pomodoro App"
+/>
 
 ## What is the Pomodoro Technique?
 
@@ -51,7 +40,7 @@ So, let's get started and create a Pomodoro app that will help you increase your
 
 First, we need to set up our file structure so everything is organized and easy to find.
 
-Create a new folder on your computer and name it **pomodoro-app**. 
+Create a new folder on your computer and name it **pomodoro-app**.
 
 Then, create the following files inside the folder:
 
@@ -61,7 +50,10 @@ Then, create the following files inside the folder:
 
 The file structure should look like the following:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/app_file_structure.png" alt="App File Structure" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/app_file_structure.png"
+  alt="App File Structure"
+/>
 
 ## Let's Start Building!
 
@@ -69,9 +61,9 @@ Now that we've got the foundation in place for the Pomodoro app, it's time to st
 
 ### HTML
 
-HTML features the basic building blocks that define the meaning and structure of web pages. 
+HTML features the basic building blocks that define the meaning and structure of web pages.
 
-To start, our **index.html** file should look like the following: 
+To start, our **index.html** file should look like the following:
 
 ```html
 <!DOCTYPE html>
@@ -98,8 +90,7 @@ Next, let's add the following:
     <title>Pomodoro App</title>
   </head>
   <body>
-    <div class="app-container">
-    </div>
+    <div class="app-container"></div>
   </body>
   <script src="./app.js"></script>
 </html>
@@ -113,7 +104,10 @@ Next, let's add the following code to the `<head>` element:
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EG+Garamond:wght@400;500;600;700&family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=EG+Garamond:wght@400;500;600;700&family=Fira+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="./style.css" />
   <title>Pomodoro App</title>
 </head>
@@ -155,7 +149,10 @@ Underneath of the `<h1>` element are the main parts of the app:
 
 If we save and then double-click the file, it should open and look like this:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/rendered_html_only.png" alt="Rendered HTML only (no CSS or JS)" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/rendered_html_only.png"
+  alt="Rendered HTML only (no CSS or JS)"
+/>
 
 Awesome work with the HTML! Let's continue to the next step, styling!
 
@@ -191,7 +188,7 @@ Let's begin by establishing a few high-level styles:
 
 ```css
 html {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
   font-size: 20px;
   letter-spacing: 0.8px;
   min-height: 100vh;
@@ -271,7 +268,7 @@ Let's now apply styles to the `<div>` elements marked with the `.semi-circle`, `
   z-index: 1;
 }
 
- .right-side {
+.right-side {
   top: 0;
   left: 100px;
   transform-origin: left center;
@@ -300,7 +297,7 @@ Lastly, let's add these styles:
 
 ```css
 .app-counter-box {
-  font-family: 'Droid Sans Mono', monospace;
+  font-family: "Droid Sans Mono", monospace;
   font-size: 250%;
   position: relative;
   top: 50px;
@@ -330,23 +327,26 @@ The selected `<button>` element was set so that only the text is visible and it 
 
 Let's go ahead and save our **style.css** file and refresh our page to see what it now looks like:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/rendered_app_no_js.png" alt="Rendered App (no JavaScript)" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/rendered_app_no_js.png"
+  alt="Rendered App (no JavaScript)"
+/>
 
 Excellent! It's time to move on to the final part of our Pomodoro App to make it count down!
 
 ### JavaScript
 
-With JavaScript, we can create a simple yet functional Pomodoro App that starts counting down from 25 minutes, second by second, when the start button is clicked. 
+With JavaScript, we can create a simple yet functional Pomodoro App that starts counting down from 25 minutes, second by second, when the start button is clicked.
 
 To learn more about JavaScript, visit [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
 In our **app.js** file, let's initialize the following variables:
 
 ```js
-const bells = new Audio('./sounds/bell.wav'); 
-const startBtn = document.querySelector('.btn-start'); 
-const session = document.querySelector('.minutes'); 
-let myInterval; 
+const bells = new Audio("./sounds/bell.wav");
+const startBtn = document.querySelector(".btn-start");
+const session = document.querySelector(".minutes");
+let myInterval;
 let state = true;
 ```
 
@@ -362,55 +362,55 @@ Awesome! Now that our variables have been declared and initialized, we can move 
 
 ```js
 const appTimer = () => {
-  const sessionAmount = Number.parseInt(session.textContent)
+  const sessionAmount = Number.parseInt(session.textContent);
 
-  if(state) {
+  if (state) {
     state = false;
     let totalSeconds = sessionAmount * 60;
 
     const updateSeconds = () => {
       // Function code here.
-    }
+    };
     myInterval = setInterval(updateSeconds, 1000);
   } else {
-    alert('Session has already started.')
+    alert("Session has already started.");
   }
-}
-``` 
+};
+```
 
 Inside the `appTimer()` function there are a few things happening:
- 
+
 - We are grabbing the text "25" in our session variable and converting it to a `Number` and assigning that number to `sessionAmount`
 - If our `state` is `True`, we do the following:
   - Convert the `sessionAmount`, the time left, to just seconds.
   - Define a function called `updateSeconds()`, (more on that, shortly).
   - Use the [`setInverval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) Web API function to run our `updateSeconds()` function every 1 second (or `1000` milliseconds). This is assigned to our `myInterval` function from earlier, so it can be turned off when the timer reaches 0.
-- Else, if the state is `False`,  we alert the user that the "Session has already started". This prevents the user from repeatedly clicking on the start button which would cause multiple calls to the `updateSeconds()` function and would cause the timer to count at an irregular speed.
+- Else, if the state is `False`, we alert the user that the "Session has already started". This prevents the user from repeatedly clicking on the start button which would cause multiple calls to the `updateSeconds()` function and would cause the timer to count at an irregular speed.
 
 Earlier, we defined a function called `updateSeconds()`. In this function, we are grabbing two `<div>` elements called 'minuteDiv' and 'secondDiv':
 
 ```js
 const updateSeconds = () => {
-  const minuteDiv = document.querySelector('.minutes');
-  const secondDiv = document.querySelector('.seconds');
+  const minuteDiv = document.querySelector(".minutes");
+  const secondDiv = document.querySelector(".seconds");
 
   totalSeconds--;
 
-  let minutesLeft = Math.floor(totalSeconds/60);
+  let minutesLeft = Math.floor(totalSeconds / 60);
   let secondsLeft = totalSeconds % 60;
 
-  if(secondsLeft < 10) {
-    secondDiv.textContent = '0' + secondsLeft;
+  if (secondsLeft < 10) {
+    secondDiv.textContent = "0" + secondsLeft;
   } else {
     secondDiv.textContent = secondsLeft;
   }
-  minuteDiv.textContent = `${minutesLeft}`
+  minuteDiv.textContent = `${minutesLeft}`;
 
-  if(minutesLeft === 0 && secondsLeft === 0) {
-    bells.play()
+  if (minutesLeft === 0 && secondsLeft === 0) {
+    bells.play();
     clearInterval(myInterval);
   }
-}
+};
 ```
 
 These elements will allow us to change the text content that is being displayed on the page as the timer counts down to zero.
@@ -419,36 +419,36 @@ Next, let's provide the logic for how we handle the countdown.
 
 ```js
 const updateSeconds = () => {
-  const minuteDiv = document.querySelector('.minutes');
-  const secondDiv = document.querySelector('.seconds');
+  const minuteDiv = document.querySelector(".minutes");
+  const secondDiv = document.querySelector(".seconds");
 
   totalSeconds--;
 
-  let minutesLeft = Math.floor(totalSeconds/60);
+  let minutesLeft = Math.floor(totalSeconds / 60);
   let secondsLeft = totalSeconds % 60;
-}
+};
 ```
 
-Here, we are decrementing `totalSeconds` after each second passes. We then convert the seconds into minutes and assign them to a `minutesLeft` variable. Then, we use the `%` modulo operator to ensure that the `secondsLeft` variable is a positive integer between 0 and 59, inclusive. 
+Here, we are decrementing `totalSeconds` after each second passes. We then convert the seconds into minutes and assign them to a `minutesLeft` variable. Then, we use the `%` modulo operator to ensure that the `secondsLeft` variable is a positive integer between 0 and 59, inclusive.
 
 Next we use an `if`-`else` block to check the `secondsLeft` variable:
 
 ```js
-if(secondsLeft < 10) {
-  secondDiv.textContent = '0' + secondsLeft;
+if (secondsLeft < 10) {
+  secondDiv.textContent = "0" + secondsLeft;
 } else {
   secondDiv.textContent = secondsLeft;
 }
 minuteDiv.textContent = `${minutesLeft}`;
 
-if(minutesLeft === 0 && secondsLeft === 0) {
+if (minutesLeft === 0 && secondsLeft === 0) {
   bells.play();
   clearInterval(myInterval);
 }
 ```
 
 In this particular block we are saying the following:
-  
+
 - If `secondsLeft` is less than 10, I want to display '0 sec' where sec represents a number between 0 and 9.
 - Otherwise, if `secondsLeft` is greater than 9, I want to display the current value of `secondsLeft` on the screen.
 
@@ -457,7 +457,7 @@ On line 25 we set the `textContent` property of the `minutesFromPage` DOM elemen
 After the `if`-`else` statement, when the application first runs, we set an [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) to the `startBtn` DOM variable that we selected earlier.
 
 ```js
-startBtn.addEventListener('click', appTimer);
+startBtn.addEventListener("click", appTimer);
 ```
 
 In this function, we pass two arguments:
@@ -465,16 +465,18 @@ In this function, we pass two arguments:
 - A mouse 'click' event that our app listens for.
 - The function to run when the `click` event is triggered. Our `appTimer()` function will run when the user selects the "START" button.
 
-
 Alrighty! Let's save our **app.js** file and refresh our page to test if our Pomodoro App is like this:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/finished_pomodoro.gif" alt="Finished Pomodoro App" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pomodoro-app-with-html-css-js/finished_pomodoro.gif"
+  alt="Finished Pomodoro App"
+/>
 
 ## Finish Line
- 
-Congratulations! You've created a fully functional Pomodoro App! 
 
-Throughout the article, we learned how to use HTML to create the basic skeleton of the app, style it with CSS, and added functionality with JavaScript. 
+Congratulations! You've created a fully functional Pomodoro App!
+
+Throughout the article, we learned how to use HTML to create the basic skeleton of the app, style it with CSS, and added functionality with JavaScript.
 
 **Bonus**: There are plenty of ways to build on top of this. If you're up for an extra challenge:
 

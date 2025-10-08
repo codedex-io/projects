@@ -8,36 +8,12 @@ header: https://i.imgur.com/RmZDc8j.gif
 bannerImage: https://i.imgur.com/RmZDc8j.gif
 published: live
 readTime: 45
+prerequisites: Machine Learning, JavaScript, p5.js fundamentals
+versions: None
 tags:
   - intermediate
   - javascript
 ---
-
-<BannerImage 
-  link="https://i.imgur.com/RmZDc8j.gif" 
-  description="Title Image" 
-  uid={true} 
-  cl="for-sidebar" 
-/>
-
-# Build a K-Nearest Neighbor Model with p5.js
-
-<AuthorAvatar
-  author_name="Alex Kuntz"
-  author_avatar=""
-  username="akuntz09708"
-  uid={true}
-/>
-
-<BannerImage
-  link="https://i.imgur.com/RmZDc8j.gif" 
-  description="Title Image"
-  uid={true}
-/>
-
-**Prerequisites:** Machine Learning, JavaScript, p5.js fundamentals  
-**Versions:** None  
-**Read Time:** 45 minutes  
 
 ## Introduction
 
@@ -49,7 +25,11 @@ Imagine you're designing a new video game character. You've decided on their sta
 
 To decide, you compare their stats to characters you've already created. If most of the closest matches are warriors, your new character should be classified as a warrior. If more are wizards, then wizard it is!
 
-<img src="https://i.imgur.com/4hEBmgd.png" alt="video game characters" width="30%"></img>
+<img
+  src="https://i.imgur.com/4hEBmgd.png"
+  alt="video game characters"
+  width="30%"
+></img>
 
 That's KNN: look at the most similar examples, count the votes, and classify the new datapoint as the majority class. If you'd like to learn more about Machine Learning models and KNN, check out our [ML course](https://www.codedex.io/machine-learning)!
 
@@ -57,9 +37,9 @@ So what's p5.js?
 
 ## Visualization with p5.js
 
-[p5.js](https://www.codedex.io/p5js), a JavaScript library for creative coding, is one of my favorite programming tools, because it allows us to easily visualize complex ideas. When I was a high school computer science teacher, I would use p5.js in my classroom to introduce fundamental machine learning concepts to the students. 
+[p5.js](https://www.codedex.io/p5js), a JavaScript library for creative coding, is one of my favorite programming tools, because it allows us to easily visualize complex ideas. When I was a high school computer science teacher, I would use p5.js in my classroom to introduce fundamental machine learning concepts to the students.
 
-In this project, we'll do exactly that! 
+In this project, we'll do exactly that!
 
 We'll create a visual demo of a K-Nearest Neighbor machine learning model using p5.js. Like this:
 
@@ -86,7 +66,7 @@ KNN is a simple machine learning algorithm that:
 
 That's why it's called K-Nearest Neighbors:
 
-- If `K` is 3, we are looking at 3 closest neighbors. 
+- If `K` is 3, we are looking at 3 closest neighbors.
 - If `K` is 5, we are looking at 5 closest neighbors.
 
 Easy to remember, right?
@@ -102,22 +82,22 @@ Let's begin by creating a `class` to represent our points. Each point will have:
 ```js
 class Point {
   constructor() {
-    this.x = Math.random() * width;          // A random value along the x axis
-    this.y = Math.random() * height;         // A random value along the y axis
-    this.class = floor(Math.random() * 2);   // A random class: either 0 or 1
+    this.x = Math.random() * width; // A random value along the x axis
+    this.y = Math.random() * height; // A random value along the y axis
+    this.class = floor(Math.random() * 2); // A random class: either 0 or 1
   }
 
   display() {
     stroke(0);
     strokeWeight(2);
-    
+
     // Coloring the points. Points in class 1 are red, points in class 0 are green
-    if (this.class == 1) { 
+    if (this.class == 1) {
       fill(255, 0, 0);
     } else {
       fill(0, 255, 0);
     }
-    
+
     // Drawing a circle at the correct position
     ellipse(this.x, this.y, 20, 20);
   }
@@ -147,9 +127,9 @@ var points = [];
 Then, inside of `setup()` use a `for` loop to create 20 `Points` (feel free to delete your code that created `test_point` from the last step):
 
 ```js
-  for (var i = 0; i < 20; i++) {
-    points.push(new Point());
-  }
+for (var i = 0; i < 20; i++) {
+  points.push(new Point());
+}
 ```
 
 Finally, in the `draw()` function, loop through your list and call `.display()` on each point.
@@ -157,7 +137,7 @@ Finally, in the `draw()` function, loop through your list and call `.display()` 
 ```js
 function draw() {
   background(255);
-  
+
   for (var i = 0; i < points.length; i++) {
     points[i].display();
   }
@@ -166,7 +146,7 @@ function draw() {
 
 ### Step 3: Classify Your Mouse
 
-Now's the fun part: classification! We'll write a function that classifies our mouse pointer as either red or green based on the 3 closest neighbors. 
+Now's the fun part: classification! We'll write a function that classifies our mouse pointer as either red or green based on the 3 closest neighbors.
 
 Here are the steps to do this:
 
@@ -184,7 +164,7 @@ We need to find the distance between our mouse pointer and each `Point` in our d
 ```js
 function classifyMouse() {
   let distances = [];
-  
+
   for (var i = 0; i < points.length; i++) {
     // TODO... Find the distance between each point and the mouse.
   }
@@ -201,13 +181,13 @@ Finally, we don't want to simply add the distance to our list. We need to add th
 
 ```js
 distances.push([distance, points[i].class]);
-``` 
+```
 
 ### Step 3.2: Sort the Distances
 
 We now need to find the 3 closest points. The easiest way to do this is by sorting our list of distances from low-to-high and looking at the first 3 points in our list.
 
-This sort function is slightly complicated, because `distances` isn't simply a list of numbers. It contains objects like `[distance, class]`. 
+This sort function is slightly complicated, because `distances` isn't simply a list of numbers. It contains objects like `[distance, class]`.
 
 The following line of code will sort your list correctly. This should be put outside the `for` loop, but inside your `classifyMouse()` function:
 
@@ -253,7 +233,7 @@ Now we just need to call it! At the bottom of the `draw()` function, call `class
 
 ## Wrapping Up
 
-Congrats on reaching the end of this project! You made a working KNN visualizer! 
+Congrats on reaching the end of this project! You made a working KNN visualizer!
 
 You now hopefully have a better understanding of how a K-Nearest Neighbor model works under the hood.
 
@@ -270,7 +250,16 @@ Let me know what variations you have created by tagging [@alexbkuntz](https://x.
 
 ### Project Walkthrough
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/uq0kvzBX6uU?si=r4GbxX5BBG953-Ad" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/uq0kvzBX6uU?si=r4GbxX5BBG953-Ad"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
 
 ### More Resources
 

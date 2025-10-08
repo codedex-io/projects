@@ -7,36 +7,13 @@ published: live
 description: Learn about using WebSocket and Socket.IO to build a chat application.
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/header.png
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/header.png
+readTime: 60
+prerequisites: JavaScript, Node.js, async/await, Promises, ExpressJS
+versions: Node.js v10+
 tags:
   - intermediate
   - javascript
 ---
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/header.png"
-  description="Title Image"
-  uid={true}
-  cl="for-sidebar"
-/>
-
-# Build a Chat App With Socket.IO
-
-<AuthorAvatar
-  author_name="Dharma Jethva"
-  author_avatar="/images/projects/authors/dharma-jethva.jpg"
-  username="dharma"
-  uid={true}
-/>
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/header.png"
-  description="Title Image"
-  uid={true}
-/>
-
-**Prerequisites:** JavaScript, Node.js, async/await, Promises, ExpressJS
-**Versions:** Node.js v10+
-**Read Time:** 60 minutes
 
 ## Introduction
 
@@ -49,7 +26,10 @@ You'll learn about the following:
 
 By the end of this tutorial, we'll have a chat application that looks and works like this:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/final_project_output.gif" alt="Final Project Output of Chat Application" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/final_project_output.gif"
+  alt="Final Project Output of Chat Application"
+/>
 
 For those who want to directly jump into code, you can start at the [“Setup”](https://www.codedex.io/projects/build-a-chat-app-with-socket-io#setup) section.
 
@@ -59,13 +39,19 @@ Without further ado, let's get started!
 
 All chat applications need a functional connection between the user-facing chat window and the chat server. The traditional HTTP protocol is based on the request-response architecture.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/request_response_diagram.png" alt="Request-Response Diagram" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/request_response_diagram.png"
+  alt="Request-Response Diagram"
+/>
 
 For example, when a user types [“www.codedex.io”](https://www.codedex.io/) in their browser, they are requesting that another computer respond with a specific page. The user must initiate the request first, before the computer (or server) can respond. In this case, the server responded with the webpage that was stored at the location [www.codedex.io](https://www.codedex.io/). The key step being the user initiated the request. The server can never contact the user without the user initializing the request first.
 
 This system wouldn't work in a chat application because it requires real time communication. For example, let's say user A, user B, and user C are connected in a chat and all three of them send a message. However, user B never _requested_ for new messages to be sent as a response because user B wasn't aware that there were new messages being posted. Then, the chat would immediately break.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/req_res_issue.png" alt="Request-Response Issue With Mulitple Users" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/req_res_issue.png"
+  alt="Request-Response Issue With Mulitple Users"
+/>
 
 To prevent this, whenever a new message is posted, everyone involved in the chat should automatically receive it without ever having to request it from the server. Since the request-response architecture would never work, we need a new set of communication rules that will enable both sides to send messages instead of just one side always making a request and another side always sending back a response.
 
@@ -73,7 +59,10 @@ To prevent this, whenever a new message is posted, everyone involved in the chat
 
 The [WebSocket protocol](https://en.wikipedia.org/wiki/WebSocket) allows both the browser and the web server to independently send _and_ receive messages from each other in real time. This means that messages can be sent from the browser to the server, and the server can send messages back to the browsers without needing any formal request.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/two_way_websockets.png" alt="Continuous, two-way WebSocket communication between the browser and the server" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/two_way_websockets.png"
+  alt="Continuous, two-way WebSocket communication between the browser and the server"
+/>
 
 Now that we've got the concepts down, it's time for some real-time (pun intended) code in action.
 
@@ -89,7 +78,10 @@ In order to download the starter files, follow these steps:
 
 The folder should have the following contents in it:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/project_folder_structure.png" alt="Project folder structure" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/project_folder_structure.png"
+  alt="Project folder structure"
+/>
 
 Once you have this setup, open a new terminal window at this folder's location. In the window, enter the command `npm install`.
 
@@ -145,17 +137,23 @@ In the code above, we created a new `express` app variable to form both the HTTP
 
 At this point, we can start the server by running the `npm run serve` command in the terminal. If everything worked correctly, you should be able to see the following output in your terminal window.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/backend_server_terminal.png" alt="Backend server output on terminal" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/backend_server_terminal.png"
+  alt="Backend server output on terminal"
+/>
 
 **Note:** If this doesn't work, you can try again or join the Codédex Discord server where our Code Mentors will help you with the problem you're facing.
 
 If the server is functional, it will be listening on port 3000. We can now open our browser and visit the `http://localhost:3000/` URL. This should show us a very beautiful chat application page.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/static_html_page.png" alt="Static HTML page for chat application" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/static_html_page.png"
+  alt="Static HTML page for chat application"
+/>
 
 We've got the HTTP web server working! 🎉
 
-Behind the scenes, our HTTP server is simply taking the **index.html** file and **script.js** file (inside the **frontend/** directory) and serving the updated **index.html** file  back to the browser. The index.html file is responsible for showing all of this UI to us in the browser.
+Behind the scenes, our HTTP server is simply taking the **index.html** file and **script.js** file (inside the **frontend/** directory) and serving the updated **index.html** file back to the browser. The index.html file is responsible for showing all of this UI to us in the browser.
 
 But, the chat functionality doesn't work at this point since we haven't set up the WebSocket server necessary to chat. So, let's do that now.
 
@@ -186,7 +184,10 @@ Let's understand what we did here. So, first of all, we called the `io` object's
 
 Saving the file and refreshing the browser tab should show new console logs in our terminal console like so:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/successful_connection_terminal.png" alt="Successful server connection message printed to terminal" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/successful_connection_terminal.png"
+  alt="Successful server connection message printed to terminal"
+/>
 
 Now, although we won't be editing any of the frontend code, let's understand how we will be connecting to our WebSocket server backend. To do that, go to the **frontend/** folder and let's open the **/index.html** and **script.js** files.
 
@@ -253,11 +254,17 @@ Alright, we're very close to building out the fully functional chat application.
 
 In order to do that, we'll first start with our frontend logic to see what custom events have been created to signify that a message is being sent when the send button is clicked. Inside the **script.js**, we'll see that an event listener is executed when the `“submit”` event takes place.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/frontend_code_submit_listener.png" alt="Submit event listener code from frontend directory" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/frontend_code_submit_listener.png"
+  alt="Submit event listener code from frontend directory"
+/>
 
 The function body is executing another function called `sendMessage()`. This function is using the `socket` object and emitting a new event called `”post-message”` which sends the value of the text currently typed into the input box to our WebSocket backend server. This message is transformed into an object with the message property.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/frontend_code_send_listener.png" alt="Async listener code for sending messages, from frontend directory" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/frontend_code_send_listener.png"
+  alt="Async listener code for sending messages, from frontend directory"
+/>
 
 Therefore, we'll create a new event listener which listens for `”post-message”` on our backend. Going back to the **server-starter.js** file, we'll add the following code:
 
@@ -286,7 +293,10 @@ We've now added a `”post-message”` event listener that is being sent from th
 
 Once we've received the message, we log it to our console. For example, if we type in `Hello!` in our input box and send it, it'll be printed like so:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/server_printing_usernames_messages.png" alt="Usernames and messages now printing to console" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/server_printing_usernames_messages.png"
+  alt="Usernames and messages now printing to console"
+/>
 
 So, we're now able to connect to the user, and send messages to the server. What's left? We need to add the ability to send those messages back to the user who sent the message as well as all other users in this chat.
 
@@ -327,7 +337,10 @@ In this case, the data is the entire chat history that includes all the messages
 
 At this point, our messages that we sent should be visible to everyone in the chat like so:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/usernames_messages_on_screen.png" alt="Usernames and messages now displaying on the screen" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/usernames_messages_on_screen.png"
+  alt="Usernames and messages now displaying on the screen"
+/>
 
 The final piece in this chat app puzzle is to receive the chat history once you're connected to the backend. As of now, the chat history only appears when the user first sends a message. We want to display the chat history even before the first message is sent.
 
@@ -370,7 +383,10 @@ Bravo! You just built a chat application! 🥳
 
 You can test it out by creating 2 or more tabs in your browser and sending messages!
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/final_project_output.gif" alt="Final Project Output of Chat Application" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-chat-app-with-socket-io/final_project_output.gif"
+  alt="Final Project Output of Chat Application"
+/>
 
 Let's look at all of the code written in the **server-starter.js** file.
 
@@ -463,7 +479,7 @@ Once we fully understand how the core chatting function works, we can build more
 - Adding support for creating multiple chats. Currently, our chat application only supports a single chat window.
 - Adding authentication support so that any random stranger can't join a chat without identifying who they are first.
 
-Once you've finished this project, feel free to post the images of the functional chat app on Twitter and tag [@codedex_io](https://twitter.com/codedex_io) and [@coder_kun_](https://twitter.com/coder_kun_).
+Once you've finished this project, feel free to post the images of the functional chat app on Twitter and tag [@codedex_io](https://twitter.com/codedex_io) and [@coder*kun*](https://twitter.com/coder_kun_).
 
 ### More Resources
 

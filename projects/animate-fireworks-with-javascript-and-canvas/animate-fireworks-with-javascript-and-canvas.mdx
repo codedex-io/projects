@@ -7,24 +7,15 @@ description: Learn how to make our very own fireworks using JavaScript and the C
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/header.png
 published: live
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/header.png
+readTime: 75
+prerequisites: <a href="/HTML">HTML</a>, <a href="/CSS">CSS</a>, <a href="/javascript">JavaScript</a> fundamentals
+versions: None
 tags:
   - intermediate
   - html
   - css
   - javascript
 ---
-
-<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/header.png" description="Header image" uid={true} cl="for-sidebar" />
-
-# Animate Fireworks with JavaScript and Canvas
-
-<AuthorAvatar author_name="Olga Ivanova" author_avatar="/images/projects/authors/olga_ivanova.png" uid={true} username="K5DdIb3vuoU1QNxZbmPbBroLapO2"/>
-
-<BannerImage link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/header.png" description="Header image" uid={true}/>
-
-**Prerequisites:** HTML, CSS, JavaScript fundamentals  
-**Versions:** None 
-**Read Time:** 75 minutes  
 
 ## Introduction
 
@@ -34,16 +25,18 @@ We're going to make our very own fireworks using JavaScript and the Canvas API. 
 
 By the end, you will create the following:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/completed-animation.gif" alt="Completed firework animation" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/completed-animation.gif"
+  alt="Completed firework animation"
+/>
 
 And it is: let's code it up!
-
 
 ## Setting Up
 
 Let's start by setting up the project and the structure. But before that, a quick recap.
 
-💡  What is Canvas API? If you have never worked with it before, no worries! It is fairly simple and so much fun!
+💡 What is Canvas API? If you have never worked with it before, no worries! It is fairly simple and so much fun!
 
 Let's get it rolling! 🎉
 
@@ -89,7 +82,7 @@ In the `<body>` element, replace the comment with the following snippet:
 
 As a convention, the value of the `id` is typically just “canvas”. But since we've got two canvases, I decided to name them `canvas-background` and `canvas-fireworks` so that we can differentiate between them. This of course can be any name of your choosing, just pick something that is easy to remember.
 
-Now, why do we need two separate canvases? Well, it is because we will have two layers: 
+Now, why do we need two separate canvases? Well, it is because we will have two layers:
 
 - One for the background where we will draw the static assets like figures of Avatars
 - One for the dynamic fireworks and interactions. At this step, both script files are empty so let's quickly add them to our file structure.
@@ -105,7 +98,8 @@ body {
   overflow: hidden;
 }
 
-h1, p {
+h1,
+p {
   padding: 0;
   margin: 0;
 }
@@ -123,18 +117,19 @@ It is also essential to set `canvas` elements to the position `absolute` as we w
 Extend your **styles.css** with the following:
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
 
 body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   color: #fff;
 }
 
-h1, p {
+h1,
+p {
   padding: 0;
   margin: 0;
 }
@@ -150,7 +145,7 @@ p {
   z-index: 2;
   text-transform: uppercase;
   font-size: 1.5vw;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
 canvas {
@@ -161,13 +156,13 @@ canvas {
 
 Add custom fonts. We will use Google fonts. For this tutorial, let's select [Pacifico](https://fonts.google.com/specimen/Pacifico) for `h1` and [Work Sans](https://fonts.google.com/specimen/Work+Sans) for `p` elements.
 
-Start by importing the fonts on top of the file and set the font family across the entire site to be `'Pacifico', cursive`. `p` elements will have `'Work Sans', sans-serif;` set explicitly which will overwrite the default font set on the `body`. 
+Start by importing the fonts on top of the file and set the font family across the entire site to be `'Pacifico', cursive`. `p` elements will have `'Work Sans', sans-serif;` set explicitly which will overwrite the default font set on the `body`.
 
 Since `h1` and `p` will be static elements, we need to make sure that they will overlay the canvases. `z-index: 2;` does this. (We will set an Avatar image to `z-index: 1;` later on.)
 
 Let's quickly recap on `rem` and `vw`.
 
-💡 Relative length values are defined in terms of some other value. These are, for example, rem, em, and `vw`. You can read more on this on MDN Web Docs. Just know, that `rem` is defined relative to the font size of the root element. If the root element's font size is not changed by the user this value is normally `16px`. `vw` stands for 1% viewport width. That is to say that if you define the `width` property as `6vw`, the element will take up 6% of the available viewport's width. 
+💡 Relative length values are defined in terms of some other value. These are, for example, rem, em, and `vw`. You can read more on this on MDN Web Docs. Just know, that `rem` is defined relative to the font size of the root element. If the root element's font size is not changed by the user this value is normally `16px`. `vw` stands for 1% viewport width. That is to say that if you define the `width` property as `6vw`, the element will take up 6% of the available viewport's width.
 
 Lastly, I have created two transparent avatar images using Canva App. These images can be found in the **assets/** folder of the [GitHub repository](https://github.com/codedex-io/projects/tree/main/projects/animate-fireworks-with-javascript-and-canvas/assets) for this tutorial. Download them and then add them to your own **assets/** folder.
 
@@ -175,15 +170,15 @@ Time to launch the live server by clicking on “Go Live” in the bottom right 
 
 ## Drawing the Background
 
-In order to get some things on the screen, we're going to add the background first. 
+In order to get some things on the screen, we're going to add the background first.
 
 Open your **canvas-background.js** and add the following code:
 
 ```js
 // canvas-background.js
 
-const canvas = document.getElementById('canvas-background');
-const context = canvas.getContext('2d');
+const canvas = document.getElementById("canvas-background");
+const context = canvas.getContext("2d");
 ```
 
 **Note:** A comment with the file name will be included at the top of each JavaScript code snippet so that you can better tell which snippet goes with which **.js** file.
@@ -206,19 +201,19 @@ canvas.width = width;
 canvas.height = height;
 ```
 
-Moving forward, wrap your code in an IIFE. 
+Moving forward, wrap your code in an IIFE.
 
 ```jsx
 // canvas-background.js
 
 (() => {
-  const canvas = document.getElementById('canvas-background');
-  const context = canvas.getContext('2d');
-  
+  const canvas = document.getElementById("canvas-background");
+  const context = canvas.getContext("2d");
+
   // get document's width and height
   const width = window.innerWidth;
   const height = window.innerHeight;
-  
+
   // set background to be fullscreen
   canvas.width = width;
   canvas.height = height;
@@ -227,7 +222,7 @@ Moving forward, wrap your code in an IIFE.
 
 💡 IIFE
 
-*Immediately Invoked Function Expression*
+_Immediately Invoked Function Expression_
 An **immediately invoked function expression (IIFE)** is one of the most popular design patterns in JavaScript. It pronounces like iify. In short: It is a function expression that invokes itself automatically. Almost like magic! 🪄
 
 An IIFE is composed of three main components:
@@ -250,10 +245,10 @@ const drawBackground = () => {
   // The outer circle is at x=0, y=0, with radius=width
   const gradient = context.createRadialGradient(0, 0, height, 0, 0, width);
   // offset and color
-  gradient.addColorStop(0, '#002D62');
-  gradient.addColorStop(0.5, '#0066b2');
-  gradient.addColorStop(1, '#6699CC');
-  
+  gradient.addColorStop(0, "#002D62");
+  gradient.addColorStop(0.5, "#0066b2");
+  gradient.addColorStop(1, "#6699CC");
+
   // make canvas the color of gradient
   context.fillStyle = gradient;
   // place its top-left corner at (0, 0), and
@@ -266,7 +261,7 @@ drawBackground();
 
 Call `drawBackground()` at the bottom but within your IIFE.
 
-This will generate a smooth radial gradient from the left upper corner down to the right bottom corner. The `.createRadialGradient()` method creates a radial gradient using the size and coordinates of two circles. To be applied to a shape, the gradient must first be assigned to the `fillStyle` property. 
+This will generate a smooth radial gradient from the left upper corner down to the right bottom corner. The `.createRadialGradient()` method creates a radial gradient using the size and coordinates of two circles. To be applied to a shape, the gradient must first be assigned to the `fillStyle` property.
 
 💡 The `.createRadialGradient()` method is specified by six parameters, three defining the gradient's start circle, and three defining the end circle. A radial `CanvasGradient` initialized with the two specified circles will be returned.
 
@@ -274,7 +269,7 @@ This will generate a smooth radial gradient from the left upper corner down to t
 
 You can find more about it in the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient).
 
-Notice three color stops between the gradient's two circles are then created. `addColorStop()`  method is being used taking in an `offset` and a `color` as arguments. Keep in mind, your offset needs to be a number between 0 and 1, where 0 is the start and 1 is the end of the gradient. Finally, the gradient is assigned to the canvas context and is rendered to a filled rectangle.
+Notice three color stops between the gradient's two circles are then created. `addColorStop()` method is being used taking in an `offset` and a `color` as arguments. Keep in mind, your offset needs to be a number between 0 and 1, where 0 is the start and 1 is the end of the gradient. Finally, the gradient is assigned to the canvas context and is rendered to a filled rectangle.
 
 To draw the foreground — represented by a dark blue pedestal at the bottom — extend the file with the following function:
 
@@ -282,10 +277,10 @@ To draw the foreground — represented by a dark blue pedestal at the bottom —
 // canvas-background.js
 
 const drawForeground = () => {
-  context.fillStyle = '#13274F';
+  context.fillStyle = "#13274F";
   context.fillRect(0, height * 0.95, width, height);
-  
-  context.fillStyle = '#002D62';
+
+  context.fillStyle = "#002D62";
   context.fillRect(0, height * 0.955, width, height);
 };
 
@@ -304,25 +299,25 @@ Your **canvas-background.js** file should contain the following code by now:
 // canvas-background.js
 
 (() => {
-  const canvas = document.getElementById('canvas-background'); // gets a reference to the HTML <canvas> element
-  const context = canvas.getContext('2d'); // get the rendering context for the canvas
-  
+  const canvas = document.getElementById("canvas-background"); // gets a reference to the HTML <canvas> element
+  const context = canvas.getContext("2d"); // get the rendering context for the canvas
+
   // get document's width and height
   const width = window.innerWidth;
   const height = window.innerHeight;
-  
+
   // set background to be fullscreen
   canvas.width = width;
   canvas.height = height;
-  
+
   const drawBackground = () => {
     // The inner circle is at x=0, y=0, with radius=height
     // The outer circle is at x=0, y=0, with radius=width
     const gradient = context.createRadialGradient(0, 0, height, 0, 0, width);
     // offset and color
-    gradient.addColorStop(0, '#002D62');
-    gradient.addColorStop(0.5, '#0066b2');
-    gradient.addColorStop(1, '#6699CC');
+    gradient.addColorStop(0, "#002D62");
+    gradient.addColorStop(0.5, "#0066b2");
+    gradient.addColorStop(1, "#6699CC");
 
     // make canvas the color of gradient
     context.fillStyle = gradient;
@@ -330,12 +325,12 @@ Your **canvas-background.js** file should contain the following code by now:
     // and give it a size of "width" wide by "height" tall.
     context.fillRect(0, 0, width, height);
   };
-  	
+
   const drawForeground = () => {
-    context.fillStyle = '#13274F';
+    context.fillStyle = "#13274F";
     context.fillRect(0, height * 0.95, width, height);
-    
-    context.fillStyle = '#002D62';
+
+    context.fillStyle = "#002D62";
     context.fillRect(0, height * 0.955, width, height);
   };
 
@@ -373,7 +368,7 @@ Your code should look like this:
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Year Fireworks 🎉</title>
-		// Add favicon
+    // Add favicon
     <link rel="icon" type="image/x-icon" href="./assets/santa.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -417,27 +412,28 @@ img {
 Also, add `img` to have position absolute and cursor pointer. We can just chain it before the canvas.
 
 ```css
-img, canvas {
+img,
+canvas {
   cursor: pointer;
   position: absolute;
 }
 ```
 
-What's next? Your guess is correct. Create a new file called **avatar-toggle.js** and add the following code: 
+What's next? Your guess is correct. Create a new file called **avatar-toggle.js** and add the following code:
 
 ```js
 // avatar-toggle.js
-const image = document.getElementById('avatar');
+const image = document.getElementById("avatar");
 
-image.addEventListener('click', function () {
-  if (image.src.match('./assets/santa.png')) {
-    image.src = './assets/reindeer.png';
-  } else if (image.src.match('./assets/reindeer.png')) {
-    image.src = './assets/bear.png';
-  } else if (image.src.match('./assets/bear.png')) {
-    image.src = './assets/cookie.png';
+image.addEventListener("click", function () {
+  if (image.src.match("./assets/santa.png")) {
+    image.src = "./assets/reindeer.png";
+  } else if (image.src.match("./assets/reindeer.png")) {
+    image.src = "./assets/bear.png";
+  } else if (image.src.match("./assets/bear.png")) {
+    image.src = "./assets/cookie.png";
   } else {
-    image.src = './assets/santa.png';
+    image.src = "./assets/santa.png";
   }
 });
 ```
@@ -496,18 +492,19 @@ Your final **index.html** should look like this:
 Now, let's add some styles and animation to our typography. Navigate to **styles.css**. Your final CSS should look like this:
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
 
 body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   color: #fff;
 }
 
-h1, p {
+h1,
+p {
   padding: 0;
   margin: 0;
 }
@@ -556,7 +553,7 @@ p {
   z-index: 2;
   text-transform: uppercase;
   font-size: 1.5vw;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
 img {
@@ -587,7 +584,10 @@ Extended `h1` by adding colorful animation. You can play around with it to creat
 
 At this point, our animation should look like this:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/animation-wip.gif" alt="Work-in-progress for animation" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/animation-wip.gif"
+  alt="Work-in-progress for animation"
+/>
 
 To finish up the static part, let's draw some stars on the background canvas.
 
@@ -612,14 +612,14 @@ And to draw the stars, add the `drawStars()` function to the end of the file:
 
 const drawStars = () => {
   let countOfStars = numOfStars;
-  
-  context.fillStyle = '#E6E6FA';
-  
+
+  context.fillStyle = "#E6E6FA";
+
   while (countOfStars--) {
     const x = random(25, width - 50);
     const y = random(25, height * 0.5);
     const size = random(1, 4);
-  
+
     context.fillRect(x, y, size, size);
   }
 };
@@ -638,10 +638,10 @@ Your final **canvas-background.js** file should look like this:
 
 (() => {
   // gets a reference to the HTML <canvas> element
-  const canvas = document.getElementById('canvas-background');
+  const canvas = document.getElementById("canvas-background");
 
   // get the rendering context for the canvas
-  const context = canvas.getContext('2d');
+  const context = canvas.getContext("2d");
 
   // get document's width and height
   const width = window.innerWidth;
@@ -661,9 +661,9 @@ Your final **canvas-background.js** file should look like this:
     // The outer circle is at x=0, y=0, with radius=width
     const gradient = context.createRadialGradient(0, 0, height, 0, 0, width);
     // offset and color
-    gradient.addColorStop(0, '#002D62');
-    gradient.addColorStop(0.5, '#0066b2');
-    gradient.addColorStop(1, '#6699CC');
+    gradient.addColorStop(0, "#002D62");
+    gradient.addColorStop(0.5, "#0066b2");
+    gradient.addColorStop(1, "#6699CC");
 
     // make canvas the color of gradient
     context.fillStyle = gradient;
@@ -673,17 +673,17 @@ Your final **canvas-background.js** file should look like this:
   };
 
   const drawForeground = () => {
-    context.fillStyle = '#13274F';
+    context.fillStyle = "#13274F";
     context.fillRect(0, height * 0.95, width, height);
 
-    context.fillStyle = '#002D62';
+    context.fillStyle = "#002D62";
     context.fillRect(0, height * 0.955, width, height);
   };
 
   const drawStars = () => {
     let countOfStars = numOfStars;
 
-    context.fillStyle = '#E6E6FA';
+    context.fillStyle = "#E6E6FA";
 
     while (countOfStars--) {
       const x = random(25, width - 50);
@@ -719,10 +719,10 @@ Add the following code to **canvas-fireworks.js**:
 
 (() => {
   // gets a reference to the HTML <canvas> element
-  const canvas = document.getElementById('canvas-fireworks');
+  const canvas = document.getElementById("canvas-fireworks");
 
   // get the rendering context for the canvas
-  const context = canvas.getContext('2d');
+  const context = canvas.getContext("2d");
 
   // get document's width and height
   const width = window.innerWidth;
@@ -738,7 +738,6 @@ Add the following code to **canvas-fireworks.js**:
     anchorX: 0,
     anchorY: 0,
   };
-
 })();
 ```
 
@@ -755,14 +754,14 @@ const drawAnchor = () => {
   // get the position for the anchor on the canvas
   positions.anchorX = width / 2;
   positions.anchorY = height * 0.9;
-  
+
   context.clearRect(0, 0, width, height);
-  
+
   // save context to remove transformation afterwards
   context.save();
-  
+
   context.translate(positions.anchorX, positions.anchorY);
-  	
+
   // restores the empty context state
   context.restore();
 };
@@ -774,7 +773,7 @@ We need to clear the context every time before running the function again. If we
 
 We also need to save this state to be able to translate the positions.
 
-We do it with `save()` method that will save the entire state of the canvas by pushing the current state onto a stack. But don't worry about it. 😇  You just need to know that we are clearing the canvas and saving its new empty state before moving on. Skipping ahead, at the end of the function we use `restore()` method. It will restore the saved context once the function reaches its end. This way translate calls will not add up. 
+We do it with `save()` method that will save the entire state of the canvas by pushing the current state onto a stack. But don't worry about it. 😇 You just need to know that we are clearing the canvas and saving its new empty state before moving on. Skipping ahead, at the end of the function we use `restore()` method. It will restore the saved context once the function reaches its end. This way translate calls will not add up.
 
 So what does translate do?
 
@@ -795,7 +794,7 @@ Add the following code right after `drawAnchor()` function:
 
 // listen to the mousemove event and
 const attachEventListeners = () => {
-  canvas.addEventListener('mousemove', (e) => {
+  canvas.addEventListener("mousemove", (e) => {
     // set the mouse positions to the correct coordinates
     positions.mouseX = e.pageX;
     positions.mouseY = e.pageY;
@@ -807,7 +806,7 @@ const loop = () => {
   drawAnchor();
 };
 
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
   attachEventListeners();
   loop();
 });
@@ -824,10 +823,10 @@ By now, **canvas-fireworks.js** should contain the following code:
 
 (() => {
   // gets a reference to the HTML <canvas> element
-  const canvas = document.getElementById('canvas-fireworks');
+  const canvas = document.getElementById("canvas-fireworks");
 
   // get the rendering context for the canvas
-  const context = canvas.getContext('2d');
+  const context = canvas.getContext("2d");
 
   // get document's width and height
   const width = window.innerWidth;
@@ -861,9 +860,9 @@ By now, **canvas-fireworks.js** should contain the following code:
   };
 
   const attachEventListeners = () => {
-  // listen to the mousemove event and
-  // set the mouse positions to the correct coordinates
-    canvas.addEventListener('mousemove', (e) => {
+    // listen to the mousemove event and
+    // set the mouse positions to the correct coordinates
+    canvas.addEventListener("mousemove", (e) => {
       positions.mouseX = e.pageX;
       positions.mouseY = e.pageY;
     });
@@ -874,7 +873,7 @@ By now, **canvas-fireworks.js** should contain the following code:
     drawAnchor();
   };
 
-  window.addEventListener('load', () => {
+  window.addEventListener("load", () => {
     attachEventListeners();
     loop();
   });
@@ -909,7 +908,7 @@ const getDistance = (x1, y1, x2, y2) => {
 let mouseClicked = false;
 ```
 
-Add four arrays for holding each firework, and eventually, the particles, or flecks, associated with them. We want three firework bursts and for that, we need to have three arrays of flecks. 
+Add four arrays for holding each firework, and eventually, the particles, or flecks, associated with them. We want three firework bursts and for that, we need to have three arrays of flecks.
 
 Moving on, add a variable for the number of flecks, so it's easier to tweak them. Bear in mind that performance will degrade fast if you increase the number of flecks. You also want a variable for keeping track of if the mouse is clicked. And lastly, include a function for calculating the distance between two points. For that, we can use the Pythagorean theorem.
 
@@ -924,19 +923,19 @@ You need to track mouse-click events, so add the following two event listeners t
 
 const attachEventListeners = () => {
   // listen to the mousemove event
-  canvas.addEventListener('mousemove', (e) => {
+  canvas.addEventListener("mousemove", (e) => {
     // set the mouse positions to the correct coordinates
     positions.mouseX = e.pageX;
     positions.mouseY = e.pageY;
   });
-		
+
   // track mouse click events
-  canvas.addEventListener('mousedown', () => (mouseClicked = true));
-  canvas.addEventListener('mouseup', () => (mouseClicked = false));
+  canvas.addEventListener("mousedown", () => (mouseClicked = true));
+  canvas.addEventListener("mouseup", () => (mouseClicked = false));
 };
 ```
 
-Our fireworks are going to be set off based on the value of `mouseClicked` variable. If it is `true`, then we want to draw fireworks. If it is `false`, then we want to stop drawing fireworks. 
+Our fireworks are going to be set off based on the value of `mouseClicked` variable. If it is `true`, then we want to draw fireworks. If it is `false`, then we want to stop drawing fireworks.
 
 To create new fireworks, we will use a class with an `init` function inside it:
 
@@ -968,11 +967,11 @@ class Firework {
       // current coordinates
       this.x = positions.anchorX;
       this.y = positions.anchorY;
-      
+
       // target coordinates
       this.target_x = positions.mouseX;
       this.target_y = positions.mouseY;
-      
+
       // distance from starting point to target
       this.distanceToTarget = getDistance(
         this.x,
@@ -994,21 +993,20 @@ class Firework {
       while (fireworkLength--) {
         this.coordinates.push([this.x, this.y]);
       }
-    }
+    };
     init();
   }
 }
 ```
 
-First, add the length of the firework. The higher this value is, the longer the tail will be. Add the `x`, `y`, and `target_x`, `target_y` values. They will hold the initial and target coordinates. Initially, they will always equal the position of the anchor and the position where the 
-click occurred. 
+First, add the length of the firework. The higher this value is, the longer the tail will be. Add the `x`, `y`, and `target_x`, `target_y` values. They will hold the initial and target coordinates. Initially, they will always equal the position of the anchor and the position where the
+click occurred.
 
 Based on these values, you can use the `getDistance` function we defined earlier to get the distance between the two points on the canvas. And you also want to add a property `distanceTraveled` to keep track of the traveled distance. Set it to `0` for now.
 
 Additionally, you need to keep track of the `coordinates`, their `angle`, and `speed` in order to calculate the velocities. As well as a random color defined as hue.
 
 Call `init()` method at the bottom of the class.
-
 
 ## Drawing Fireworks
 
@@ -1036,9 +1034,9 @@ this.draw = (index) => {
 };
 ```
 
-It will take in the `index` from the `fireworks` array and pass it down to the `animate` method that we will add in a moment. 
+It will take in the `index` from the `fireworks` array and pass it down to the `animate` method that we will add in a moment.
 
-To draw the trails, you want to draw a line from the very last coordinates from the `coordinates` array to the current `x` and `y` positions. 
+To draw the trails, you want to draw a line from the very last coordinates from the `coordinates` array to the current `x` and `y` positions.
 
 For the color, we can use HSL notation, where we give it a random `hue`, 100% saturation, and 50% brightness.
 
@@ -1085,11 +1083,11 @@ $$
 x = cos(angle) * velocity = sin(angle) * velocity
 $$
 
-These values are used for updating the `x` and `y` coordinates of the firework, as long as it didn't reach its final destination. 
+These values are used for updating the `x` and `y` coordinates of the firework, as long as it didn't reach its final destination.
 
-How can we verify that a firework has reached its final destination? Well, just get the distance between the anchor and its current positions, including the velocities, and check it against the target distance. For that, use our helper function defined at the top `getDistance`. 
+How can we verify that a firework has reached its final destination? Well, just get the distance between the anchor and its current positions, including the velocities, and check it against the target distance. For that, use our helper function defined at the top `getDistance`.
 
-Finally, you want to create as many flecks as you have defined at the beginning of the 
+Finally, you want to create as many flecks as you have defined at the beginning of the
 file. Don't forget to remove the fireworks from the array once it's exploded using `splice`.
 
 Lastly, to create these new fireworks, add the following to your `loop`:
@@ -1237,7 +1235,7 @@ class Fleck {
 
 The `constructor` will take `x` and `y` coordinates as parameters. In `init`, we set this parameter to `this.x` and `this.y`. It will allow us to use them within the `init` method.
 
- For the `init`, we will have similar properties as for `fireworks`.
+For the `init`, we will have similar properties as for `fireworks`.
 
 ```js
 // canvas-fireworks.js
@@ -1246,25 +1244,25 @@ class Fleck {
   constructor(x, y) {
     const init = () => {
       this.x = x;
-      this.y = y;	
-      
+      this.y = y;
+
       let fleckLength = 7;
       this.coordinates = [];
-	
+
       this.angle = random(0, Math.PI * 2);
       this.speed = random(1, 10);
-			
+
       this.friction = 0.95;
       this.gravity = 2;
-			
+
       this.hue = random(0, 360);
       this.alpha = 1;
       this.decay = random(0.015, 0.03);
-			
+
       while (fleckLength--) {
         this.coordinates.push([this.x, this.y]);
       }
-    }
+    };
 
     init();
   }
@@ -1287,25 +1285,25 @@ class Fleck {
     const init = () => {
       this.x = x;
       this.y = y;
-							
+
       let fleckLength = 7;
       this.coordinates = [];
-	
+
       this.angle = random(0, Math.PI * 2);
       this.speed = random(1, 10);
-			
+
       this.friction = 0.95;
       this.gravity = 2;
-			
+
       this.hue = random(0, 360);
       this.alpha = 1;
       this.decay = random(0.015, 0.03);
-			
+
       while (fleckLength--) {
         this.coordinates.push([this.x, this.y]);
       }
-    }
-				
+    };
+
     // add this
     this.draw = (index) => {
       context.beginPath();
@@ -1314,10 +1312,10 @@ class Fleck {
         this.coordinates[this.coordinates.length - 1][1]
       );
       context.lineTo(this.x, this.y);
-		
+
       context.strokeStyle = `hsla(${this.hue}, 100%, 50%, ${this.alpha})`;
       context.stroke();
-		
+
       this.animate(index);
     };
 
@@ -1338,36 +1336,36 @@ class Fleck {
     const init = () => {
       this.x = x;
       this.y = y;
-							
-      let fleckLength = 7;	
+
+      let fleckLength = 7;
       this.coordinates = [];
-	
+
       this.angle = random(0, Math.PI * 2);
       this.speed = random(1, 10);
-			
+
       this.friction = 0.95;
       this.gravity = 2;
-			
+
       this.hue = random(0, 360);
       this.alpha = 1;
       this.decay = random(0.015, 0.03);
-			
+
       while (fleckLength--) {
         this.coordinates.push([this.x, this.y]);
       }
-    }
-    			
+    };
+
     // add this
     this.animate = (index) => {
       this.coordinates.pop();
       this.coordinates.unshift([this.x, this.y]);
-		
+
       this.speed *= this.friction;
       this.x += Math.cos(this.angle) * this.speed;
       this.y += Math.sin(this.angle) * this.speed + this.gravity;
-		
+
       this.alpha -= this.decay;
-		
+
       if (this.alpha <= this.decay) {
         flecks.splice(index, 1);
         flecks2.splice(index, 1);
@@ -1382,10 +1380,10 @@ class Fleck {
         this.coordinates[this.coordinates.length - 1][1]
       );
       context.lineTo(this.x, this.y);
-      
+
       context.strokeStyle = `hsla(${this.hue}, 100%, 50%, ${this.alpha})`;
       context.stroke();
-		 
+
       this.animate(index);
     };
 
@@ -1394,7 +1392,7 @@ class Fleck {
 }
 ```
 
-The same principle, start by getting rid of the last item in the `coordinates` and adding a new one to the beginning of the array with `unshift`. Then reassign `speed` to slow each fleck down over time, and don't forget to apply velocities for the `x` and `y` coordinates. Finally, the `alpha` value can be decreased in each frame until the fleck is not visible anymore. Once it's invisible, it can be removed from the array. 
+The same principle, start by getting rid of the last item in the `coordinates` and adding a new one to the beginning of the array with `unshift`. Then reassign `speed` to slow each fleck down over time, and don't forget to apply velocities for the `x` and `y` coordinates. Finally, the `alpha` value can be decreased in each frame until the fleck is not visible anymore. Once it's invisible, it can be removed from the array.
 
 One very important thing is to add the following code snippet to the animate method of the `Firework` (!) class right before splicing the firework.
 
@@ -1430,7 +1428,7 @@ this.animate = (index) => {
 
   if (this.distanceTraveled >= this.distanceToTarget) {
     let i = numberOfFlecks;
-					
+
     // Add this!
     while (i--) {
       flecks.push(new Fleck(this.target_x, this.target_y));
@@ -1446,9 +1444,9 @@ this.animate = (index) => {
 };
 ```
 
-This will actually add the flecks to their corresponding arrays and position them relative to each other when the firework or better to say its trail, itself will get drawn. 
+This will actually add the flecks to their corresponding arrays and position them relative to each other when the firework or better to say its trail, itself will get drawn.
 
-Finally, remember to add the  `while` loop to the `loop` function you have for the fireworks:
+Finally, remember to add the `while` loop to the `loop` function you have for the fireworks:
 
 ```js
 // canvas-fireworks.js
@@ -1475,32 +1473,32 @@ The complete loop function should look like this:
 // canvas-fireworks.js
 
 const loop = () => {
-    requestAnimationFrame(loop); // call the loop function indefinitely and redraw the screen every frame
-    drawAnchor();
-    if (mouseClicked) {
-      fireworks.push(new Firework());
-    }
+  requestAnimationFrame(loop); // call the loop function indefinitely and redraw the screen every frame
+  drawAnchor();
+  if (mouseClicked) {
+    fireworks.push(new Firework());
+  }
 
-    let fireworkIndex = fireworks.length;
-    while (fireworkIndex--) {
-      fireworks[fireworkIndex].draw(fireworkIndex);
-    }
+  let fireworkIndex = fireworks.length;
+  while (fireworkIndex--) {
+    fireworks[fireworkIndex].draw(fireworkIndex);
+  }
 
-    let fleckIndex = flecks.length;
-    while (fleckIndex--) {
-      flecks[fleckIndex].draw(fleckIndex);
-    }
+  let fleckIndex = flecks.length;
+  while (fleckIndex--) {
+    flecks[fleckIndex].draw(fleckIndex);
+  }
 
-    let fleckIndex2 = flecks2.length;
-    while (fleckIndex2--) {
-      flecks2[fleckIndex2].draw(fleckIndex2);
-    }
+  let fleckIndex2 = flecks2.length;
+  while (fleckIndex2--) {
+    flecks2[fleckIndex2].draw(fleckIndex2);
+  }
 
-    let fleckIndex3 = flecks3.length;
-    while (fleckIndex3--) {
-      flecks3[fleckIndex3].draw(fleckIndex3);
-    }
-  };
+  let fleckIndex3 = flecks3.length;
+  while (fleckIndex3--) {
+    flecks3[fleckIndex3].draw(fleckIndex3);
+  }
+};
 ```
 
 And the complete **canvas-fireworks.js** has the following code:
@@ -1512,10 +1510,10 @@ And the complete **canvas-fireworks.js** has the following code:
   // Generic Canvas Setup
 
   // gets a reference to the HTML <canvas> element
-  const canvas = document.getElementById('canvas-fireworks');
+  const canvas = document.getElementById("canvas-fireworks");
 
   // get the rendering context for the canvas
-  const context = canvas.getContext('2d');
+  const context = canvas.getContext("2d");
 
   // get document's width and height
   const width = window.innerWidth;
@@ -1573,14 +1571,14 @@ And the complete **canvas-fireworks.js** has the following code:
   const attachEventListeners = () => {
     // listen to the mousemove event and
     // set the mouse positions to the correct coordinates
-    canvas.addEventListener('mousemove', (e) => {
+    canvas.addEventListener("mousemove", (e) => {
       positions.mouseX = e.pageX;
       positions.mouseY = e.pageY;
     });
 
     // track mouse click events
-    canvas.addEventListener('mousedown', () => (mouseClicked = true));
-    canvas.addEventListener('mouseup', () => (mouseClicked = false));
+    canvas.addEventListener("mousedown", () => (mouseClicked = true));
+    canvas.addEventListener("mouseup", () => (mouseClicked = false));
   };
 
   const loop = () => {
@@ -1611,7 +1609,7 @@ And the complete **canvas-fireworks.js** has the following code:
     }
   };
 
-  window.addEventListener('load', () => {
+  window.addEventListener("load", () => {
     attachEventListeners();
     loop();
   });
@@ -1767,7 +1765,10 @@ And the complete **canvas-fireworks.js** has the following code:
 
 After saving all your files and re-launching the **index.html** file with Live Server, you should see the following:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/completed-animation.gif" alt="Completed firework animation" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-fireworks-with-javascript-and-canvas/completed-animation.gif"
+  alt="Completed firework animation"
+/>
 
 ## Conclusion
 

@@ -6,36 +6,13 @@ datePublished: 2024-08-16
 published: live
 description: Use Python to Build a Simple Word Guessing Game.
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-word-guessing-game-with-python/header.gif
+readTime: 30
+prerequisites: Python fundamentals
+versions: Python 3
 tags:
   - beginner
   - python
 ---
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-word-guessing-game-with-python/header.gif"
-  description="Title Image"
-  uid={true}
-  cl="for-sidebar"
-/>
-
-# Build a Word Guessing Game with Python
-
-<AuthorAvatar
-  author_name="Daniel Li"
-  author_avatar="/images/projects/authors/daniel-li.png"
-  username="Tentor"
-  uid={true}
-/>
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-word-guessing-game-with-python/header.gif"
-  description="Banner"
-  uid={true}
-/>
-
-**Prerequisites**: Python fundamentals
-**Version**: Python 3
-**Read Time**: 30 minutes
 
 ## Introduction
 
@@ -43,7 +20,7 @@ One popular game is where we guess an unknown word or phrase one letter at a tim
 
 <RoundedImage
   link="https://i.imgur.com/mxd2mJJ.gif"
-  description="Word Guesser Final Output" 
+  description="Word Guesser Final Output"
 />
 
 In this project tutorial, we'll be using:
@@ -51,13 +28,14 @@ In this project tutorial, we'll be using:
 - The `random` module
 - A code editor (VS Code, Codédex Build, etc.)
 
-If needed, you can follow the steps in [this project tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python) to set up VS Code with Python. 
+If needed, you can follow the steps in [this project tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python) to set up VS Code with Python.
 
 ## Create the Word Bank
 
 First, we'll need to create a word bank of all the possible words to be guessed, and randomly select one to be the correct answer. This way, the game has an element of mystery and surprise! 🔍🕵
 
 We can do this by installing the `random` module:
+
 ```py
 import random
 ```
@@ -68,7 +46,7 @@ Next, we will make a list that has all the possible words that can be the answer
 word_bank = ['rizz', 'ohio', 'sigma', 'tiktok', 'skibidi']
 ```
 
-Now, we will randomly choose one of these words to be the correct answer. 🎲 
+Now, we will randomly choose one of these words to be the correct answer. 🎲
 
 ```py
 word = random.choice(word_bank)
@@ -78,13 +56,13 @@ The `random.choice()` method is used to randomly select a word from the `word_ba
 
 ## Finishing the Setup
 
-We don't want to reveal the letters of the word we're trying to guess initially, so we need a list of underscores as "placeholders" to represent letters that haven't been guessed yet. The number of placeholders should directly correspond with the number of letters the word has. (i.e., the word “apple”  is five letters, so there should be five underscores as placeholders) 
+We don't want to reveal the letters of the word we're trying to guess initially, so we need a list of underscores as "placeholders" to represent letters that haven't been guessed yet. The number of placeholders should directly correspond with the number of letters the word has. (i.e., the word “apple” is five letters, so there should be five underscores as placeholders)
 
 ```py
 guessedWord = ['_'] * len(word)
 ```
 
-In Python, you can multiply a list by an integer and the list will repeat that amount of times. The `['_']` creates a list with a single underscore element, while the `len(word)` function returns the length (or number of characters) in the `word` string. 
+In Python, you can multiply a list by an integer and the list will repeat that amount of times. The `['_']` creates a list with a single underscore element, while the `len(word)` function returns the length (or number of characters) in the `word` string.
 
 We'll finish setting by determining how many attempts the player has at guessing the word. We will be using 10 for this tutorial, but you can make it any number you want.
 
@@ -102,7 +80,7 @@ We need to create a `while` loop so the player can continuously guess until they
 while attempts > 0:
 ```
 
-Each time the loop runs, we will display the current state of the word being guessed. 
+Each time the loop runs, we will display the current state of the word being guessed.
 
 ```py
 while attempts > 0:
@@ -145,7 +123,7 @@ We're almost done! We'll know if the player has won the game when they guess all
         break
 ```
 
-Finally, we need a condition that results in a loss for the player when they run out of `attempts` and reveal the correct word. This means that this line of code needs to be written outside of the `while()` loop. 
+Finally, we need a condition that results in a loss for the player when they run out of `attempts` and reveal the correct word. This means that this line of code needs to be written outside of the `while()` loop.
 
 ```py
 if attempts == 0 and '_' in guessedWord::
@@ -154,14 +132,14 @@ if attempts == 0 and '_' in guessedWord::
 
 **Note:** We don't need to break the `while` loop because the condition was `while attempts > 0`.
 
-When you're finished, the game loop should look something like this: 
+When you're finished, the game loop should look something like this:
 
 ```py
 while attempts > 0:
   print('\nCurrent word: ' + ' '.join(guessedWord))
 
   guess = input('Guess a letter: ').lower()
-   
+
   if guess in word:
     for i in range(len(word)):
         if word[i] == guess:
@@ -191,7 +169,7 @@ In this tutorial, you used the following to build a word-guessing game:
 
 Now, you can enjoy this game you built yourself, or with friends!
 
-If you would like to challenge yourself, try to add a ["hangman" stick figure](https://en.wikipedia.org/wiki/Hangman_(game)) that is changed every time the user guesses a character incorrectly.
+If you would like to challenge yourself, try to add a ["hangman" stick figure](<https://en.wikipedia.org/wiki/Hangman_(game)>) that is changed every time the user guesses a character incorrectly.
 
 ## More Resources
 

@@ -7,52 +7,40 @@ description: Learn how to import and analyze Amazon data with pandas, a Python l
 published: live
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/header.png
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/header.png
+readTime: 60
+prerequisites: Python fundamentals
+versions: Python 3.9.6, pandas 2.0.1
+courses:
+  - python
 tags:
   - intermediate
   - python
 ---
 
-<BannerImage
- link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/header.png"
- description="Title Image"
- uid={true}
- cl="for-sidebar"
-/>
-
-# Analyze Best Selling Amazon Books with Pandas
-
-<AuthorAvatar
- author_name="Grace Peters"
- author_avatar="/images/projects/authors/grace-peters-chatgpt.png"
- username="gracepeters"
- uid={true}
-/>
-
-<BannerImage
- link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/header.png"
- description="Title Image"
- uid={true}
-/>
-
-**Prerequisites:** Python
-**Versions:** Python 3.9.6, pandas 2.0.1
-**Read Time:** 60 minutes
-
 ## Introduction
 
 Python is a powerful programming language that can be used for a variety of tasks, including analyzing data from a CSV file. We'll go over how to use Python to import data and run an analysis on it. We'll be using the <a href="https://pandas.pydata.org/" target="_blank">pandas</a> library, a popular data analysis tool for Python.
 
-<a href="https://www.amazon.com/gp/bestsellers/books" target="_blank">Amazon Best Sellers</a> are updated every hour. The actual list is made of 100 books, but the data we're working with features just the top 50 books. 📖
+<a href="https://www.amazon.com/gp/bestsellers/books" target="_blank">
+  Amazon Best Sellers
+</a> are updated every hour. The actual list is made of 100 books, but the data we're
+working with features just the top 50 books. 📖
 
 ## The Dataset
 
 In this tutorial, we will work with a CSV (comma-separated values) file that features some fun data about the top 50 best selling books on Amazon from 2009 to 2019 (provided by <a href="https://www.kaggle.com/datasets/sootersaalu/amazon-top-50-bestselling-books-2009-2019?resource=download" target="_ blank">Kaggle</a>).
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/best-sellers-csv-data.png" alt="Best seller CSV data" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/best-sellers-csv-data.png"
+  alt="Best seller CSV data"
+/>
 
 **Note**: If you don't have a Kaggle account, you can also download it <a href="https://github.com/codedex-io/projects/blob/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/amazon-best-sellers-analysis/bestsellers.csv" target="_blank">here</a> in our GitHub:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/file_download_btn_github.png" alt="File Download Button on GitHub" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/file_download_btn_github.png"
+  alt="File Download Button on GitHub"
+/>
 
 The **.csv** file contains 550 books. Here are the seven columns:
 
@@ -91,7 +79,7 @@ import pandas as pd
 ## Step 2: Import pandas and Load the Spreadsheet
 
 Next, we need to import the pandas library and load the data into our Python program.
-Download the **bestsellers.csv**  file and add it to the same folder as your **main.py** file, **amazon-best-sellers-analysis**.
+Download the **bestsellers.csv** file and add it to the same folder as your **main.py** file, **amazon-best-sellers-analysis**.
 
 To read CSV files, we'll use the `.read_csv()` function provided by pandas. Then we will save this data to a new `df` variable:
 
@@ -199,7 +187,7 @@ Here are a few examples:
 
 Using methods from our `df` DataFrame object, we can get a glimpse of which authors have the most books on the Amazon Best Sellers list.
 
-This can be done by selecting the  `'Author'` column data and using the `value_counts()` method. We can assign this to an `author_counts` variable:
+This can be done by selecting the `'Author'` column data and using the `value_counts()` method. We can assign this to an `author_counts` variable:
 
 ```py
 author_counts = df['Author'].value_counts()
@@ -266,13 +254,17 @@ Congratulations! We've made it to the end of the tutorial! 🎊
 
 We were able to harness the power of Python libraries like pandas to analyze data from a CSV file. Specifically, we did the following:
 
-- Imported book data about the top 50   books on Amazon from 2009 to 2019.
+- Imported book data about the top 50 books on Amazon from 2009 to 2019.
 - Explored and cleaned the data with DataFrame methods.
-- Exported the modified data to a new CSV file.  
+- Exported the modified data to a new CSV file.
 
 View the full source for this project <a href="https://github.com/codedex-io/projects/blob/main/projects/analyze-spreadsheet-data-with-pandas-chatgpt/amazon-best-sellers-analysis/main.py" target="_blank">here</a>.
 
 Also, check out the following resources to learn more about data analysis with Python:
 
-- <a href="https://pandas.pydata.org/docs/" target="_blank">pandas documentation</a>
-- <a href="https://dataanalysispython.readthedocs.io/en/latest" target="_blank">Data Analysis in Python (Read the Docs)</a>
+- <a href="https://pandas.pydata.org/docs/" target="_blank">
+    pandas documentation
+  </a>
+- <a href="https://dataanalysispython.readthedocs.io/en/latest" target="_blank">
+    Data Analysis in Python (Read the Docs)
+  </a>

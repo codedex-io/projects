@@ -7,6 +7,9 @@ description: So you've created a website locally on your computer; how do you ge
 header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/seo-header.png
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/header.png
 published: live
+readTime: 20
+prerequisites: Git, GitHub
+versions: None
 tags:
   - javascript
   - html
@@ -14,36 +17,11 @@ tags:
   - intermediate
 ---
 
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/header.png"
-  description="Learn how to deploy a static website using Vercel"
-  uid={true}
-  cl="for-sidebar"
-/>
-
-# Deploy a Website with Vercel
-
-<AuthorAvatar
-  author_name="Ellie Popoca"
-  author_avatar="/images/projects/authors/ellie-popoca.jpg"
-  username="ellie"
-  uid={true}
-/>
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/header.png"
-  description="Learn how to deploy a static website using Vercel"
-  uid={true}
-/>
-
-**Prerequisites:** Git, GitHub
-**Read Time:** 20 minutes
-
-## Introduction 
+## Introduction
 
 So you've created a website on your computer; how do you get it live on the web for your friends to visit with a URL?
 
-Hello everyone! In this tutorial, I will be teaching you how to deploy your very own website using Vercel! This will allow anyone to visit your published website on the internet. 🌍 
+Hello everyone! In this tutorial, I will be teaching you how to deploy your very own website using Vercel! This will allow anyone to visit your published website on the internet. 🌍
 
 We'll help you get started to easily deploy your website and get it ✨ live ✨ in no time!
 
@@ -62,7 +40,7 @@ Vercel lets us deploy a static website that consists of fixed content and doesn'
 This tutorial works with code that is pushed to a repository (repo) on [GitHub](https://github.com/).
 
 Before we begin, let's do the following:
- 
+
 1. Create and/or log on to your GitHub account.
 2. Ensure the code you would like to deploy with Vercel is all saved in a folder and pushed to a repo on GitHub.
 
@@ -70,11 +48,17 @@ Before we begin, let's do the following:
 
 Let's head over to [Vercel](https://vercel.com/) and log in with your GitHub account.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-intro.png" alt="The Vercel dashboard with instructions to import a repository or clone a template" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-intro.png"
+  alt="The Vercel dashboard with instructions to import a repository or clone a template"
+/>
 
 Once you have authenticated your GitHub account, the screen should now look like this:
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-authed.png" alt="The Vercel dashboard with Ellie's recent repositories shown in a list with an option to import to vercel" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-authed.png"
+  alt="The Vercel dashboard with Ellie's recent repositories shown in a list with an option to import to vercel"
+/>
 
 In the Vercel dashboard, you may notice some repositories that were recently committed to! ✨
 
@@ -82,13 +66,19 @@ In the Vercel dashboard, you may notice some repositories that were recently com
 
 At this point, depending on your project, it should be able to display and work locally on your computer. Below is a [linktr.ee](https://linktr.ee) clone that I created!
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-pre-app-demo.gif" alt="Ellie's link tree website with a blue background and three links with an animated gif footer" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-pre-app-demo.gif"
+  alt="Ellie's link tree website with a blue background and three links with an animated gif footer"
+/>
 
 You'll see that my website is currently on the `http://localhost:3000`, in which the computer has the role of a virtual server that is running my code. Let's go ahead and use Vercel to deploy the site!
 
 We're going to head back, and select the GitHub repository that has the project you want to publish by pressing the white "Import" button.
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-pre-deploy.png" alt="The Vercel dashboard with settings for deployment" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-pre-deploy.png"
+  alt="The Vercel dashboard with settings for deployment"
+/>
 
 My repository is called "bento" (view the repository [here](https://github.com/exrlla/bento))! You'll be able to reconfigure the name of your project here (this will be the prefix name to your publishing link such as "bento-blonde.vercel.app").
 
@@ -101,17 +91,26 @@ Since we're deploying a static site, we won't need to change this information.
 
 This static website was created with Next.js, a React-based web framework. However, you can change the framework that you're using for deployment. Vercel should detect this automatically, but here are some of the options that you will see under "Framework Preset":
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-fw-demo.gif" alt="GIF with the Vercel dashboard showing a list of popular frameworks" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-fw-demo.gif"
+  alt="GIF with the Vercel dashboard showing a list of popular frameworks"
+/>
 
 **Note:** If you are not using a framework, choose "Other" in "Framework Preset" and make sure an **index.html** file is included in the repo prior to deployment.
 
 Once you're all set, you can now click "Deploy". You'll now notice the build process starting!
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-loading.png" alt="The Vercel dashboard with a yellow arrow and a box around the text that shows the loading screen for deployment" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-loading.png"
+  alt="The Vercel dashboard with a yellow arrow and a box around the text that shows the loading screen for deployment"
+/>
 
 This part can take a couple of minutes! Once the deployment is finished, you should see the congratulations screen! Yay! 🎉
 
-<img src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-congrats.png" alt="The Vercel dashboard with confetti and a congratulations screen" />
+<img
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/deploy-a-website-with-vercel/images/vercel-congrats.png"
+  alt="The Vercel dashboard with confetti and a congratulations screen"
+/>
 
 You're now able to access my linktr.ee clone website at [bento-blond.vercel.app](https://bento-blond.vercel.app/).
 
@@ -127,10 +126,19 @@ If you come across any trouble, you're welcome to send us a message in the Codé
 
 ### Project Walkthrough
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/EGByNys0gko?si=Cq_Gnvp2Wl9v3Bjd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/EGByNys0gko?si=Cq_Gnvp2Wl9v3Bjd"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
 
 ### More Resources
- 
+
 - [Vercel Documentation](https://vercel.com/docs)
 - [Deploying to Vercel](https://vercel.com/docs/concepts/deployments/overview)
 - [Static vs. Dynamic Websites](https://www.wix.com/blog/static-vs-dynamic-website#:~:text=The%20key%20difference%20between%20static,to%20change%20with%20the%20user.)

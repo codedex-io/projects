@@ -2,40 +2,17 @@
 title: Build a Conversational Game with p5.js
 author: Julien Kris
 uid: Jps14SaCwqgdbbnYvoMpvMKv92P2
-datePublished: 2025-01-03 
+datePublished: 2025-01-03
 published: live
 description: Learn how to make a game of Pong that takes the form of two characters having a conversation, using p5.js.
 header: https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/assets%2Findex%2FCopy%20of%20Codedex%20Project%20Headers%20(Twitter%20Post).gif?alt=media&token=f1a5a667-5967-4e50-ad37-ec63f09535eb
+readTime: 30
+prerequisites: p5.js, JavaScript
+versions: p5 1.11.2
 tags:
   - intermediate
   - javascript
 ---
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-conversational-game-in-p5js/header.gif"
-  description="Title Image"
-  uid={true}
-  cl="for-sidebar"
-/>
-
-# Build a Conversational Pong Game in p5.js
-
-<AuthorAvatar
-  author_name=""
-  author_avatar="/images/projects/authors/"
-  username=""
-  uid={true}
-/>
-
-<BannerImage
-   link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-conversational-game-in-p5js/header.gif"
-  description="Banner"
-  uid={true}
-/>
-
-**Prerequisites**: p5.js, JavaScript  
-**Version**: p5 1.11.2  
-**Read Time**: 30 minutes  
 
 ## Introduction
 
@@ -88,59 +65,49 @@ Hi, my name is ✨Julien✨, and I’m the new Senior Curriculum Developer here 
   </p>
 </div>
 
-Since this is my first project tutorial here at Codédex, I’m revisiting the first coding project I ever finished. I made it ten years ago using [Processing](https://processing.org) (the Java-based precursor to the p5.js library). 
+Since this is my first project tutorial here at Codédex, I’m revisiting the first coding project I ever finished. I made it ten years ago using [Processing](https://processing.org) (the Java-based precursor to the p5.js library).
 
 ## A Conversation
 
 Here's the project:
 
-The game is called *A Conversation*, and it’s a two-player game of Pong, but with a twist. Instead of each paddle, I drew a person’s head facing toward the center, and instead of a ball, I drew a speech bubble. As players hit the speech bubble back and forth, the text inside the speech bubble changes to form a conversation. 
+The game is called _A Conversation_, and it’s a two-player game of Pong, but with a twist. Instead of each paddle, I drew a person’s head facing toward the center, and instead of a ball, I drew a speech bubble. As players hit the speech bubble back and forth, the text inside the speech bubble changes to form a conversation.
 
 <RoundedImage
   link="https://i.imgur.com/94X89Jo.gif"
-  description="a gif of an illustrated game of pong where the paddles are people's heads and the ball is a text bubble" 
+  description="a gif of an illustrated game of pong where the paddles are people's heads and the ball is a text bubble"
 />
 
 <RoundedImage
   link="https://i.imgur.com/dgqpb3M.png"
-  description="a lose state of the game with thext that says The Conversation Got Awkward" 
+  description="a lose state of the game with thext that says The Conversation Got Awkward"
   marginTop="16px"
 />
 
 I spent a lot of 2014 thinking about the ways people communicate nonverbally while playing games, so I decided to make those invisible conversations, well, visible.
 
-<RoundedImage
-  link="https://i.imgur.com/f8m1zfQ.jpeg"
-  description="" 
-/>
+<RoundedImage link="https://i.imgur.com/f8m1zfQ.jpeg" description="" />
 
 <p style={{ textAlign: "center" }}>brainstorming sketches from 2014</p>
 
-The conversation itself was…hm…it was pretty dramatic. I wasn’t sure if I was going to make this tutorial, because I was a little embarrassed by the narrative stylings of nineteen-year-old Julien. But honestly? I think it’s important to honor our past selves. I was learning to code for the first time after a lifetime of considering myself An Artist Not A Programmer. 
+The conversation itself was…hm…it was pretty dramatic. I wasn’t sure if I was going to make this tutorial, because I was a little embarrassed by the narrative stylings of nineteen-year-old Julien. But honestly? I think it’s important to honor our past selves. I was learning to code for the first time after a lifetime of considering myself An Artist Not A Programmer.
 
-<RoundedImage
-  link="https://i.imgur.com/XyJaet1.png"
-  description="" 
-/>
+<RoundedImage link="https://i.imgur.com/XyJaet1.png" description="" />
 
-<div style={{ textAlign: "center"}}>
- [@WarronBebster](https://x.com/warronbebster)
+<div style={{ textAlign: "center" }}>
+  [@WarronBebster](https://x.com/warronbebster)
 </div>
 
-Since this project was created in 2014 on an ancient laptop I no longer have access to, I’m recreating it from scratch in p5.js, a JavaScript library. If you’ve completed our p5.js course, you may remember coding a simple game of Pong in one of the exercises! 
+Since this project was created in 2014 on an ancient laptop I no longer have access to, I’m recreating it from scratch in p5.js, a JavaScript library. If you’ve completed our p5.js course, you may remember coding a simple game of Pong in one of the exercises!
 
 In this project tutorial, I'll expand the one-player Pong game from the WASD exercise in our p5.js course into a two-player game, using the conceptual framing of two characters having a conversation.
 
 I found this email to my community college professor where I gave her some context about my goals so she could write me a recommendation letter:
 
-<RoundedImage
-  link="https://i.imgur.com/qKVVVtZ.png"
-  description="" 
-/>
+<RoundedImage link="https://i.imgur.com/qKVVVtZ.png" description="" />
 
 Omg,,,,
-Anyway, let’s dive in! 
-
+Anyway, let’s dive in!
 
 ## Pong
 
@@ -152,19 +119,13 @@ Since [Pong](https://en.wikipedia.org/wiki/Pong) is a super popular game, I had 
 
 For this year’s iteration of Pong, I decided to have a conversation with my past self. I initially thought about talking to 2014 me, but then I decided to go way, waaaaay back, to 1997. Let's have a chat.
 
-<RoundedImage
-  link="https://i.imgur.com/4r8RZbT.gif"
-  description="literally" 
-/>
+<RoundedImage link="https://i.imgur.com/4r8RZbT.gif" description="literally" />
 
 ### Upgrading From Simple Pong
 
-There were a few elements I added to upgrade the sketch from the WASD (Pong) exercise in our p5.js tutorial. Here is a link to the [Codédex exercise](https://www.codedex.io/p5js/05-wasd) that features single-player Pong. Here is the [starter code](https://www.codedex.io/@Julien/build/pong-as-a-conversation-starter-code) for a basic two-player pong game, which looks a bit different from the Codédex exercise. 
+There were a few elements I added to upgrade the sketch from the WASD (Pong) exercise in our p5.js tutorial. Here is a link to the [Codédex exercise](https://www.codedex.io/p5js/05-wasd) that features single-player Pong. Here is the [starter code](https://www.codedex.io/@Julien/build/pong-as-a-conversation-starter-code) for a basic two-player pong game, which looks a bit different from the Codédex exercise.
 
-<RoundedImage
-  link="https://i.imgur.com/leVbTL9.gif"
-  description="" 
-/>
+<RoundedImage link="https://i.imgur.com/leVbTL9.gif" description="" />
 
 <p style={{ textAlign: "center" }}>👁️ 👁️ I could watch this for hours 💿🟦</p>
 
@@ -172,15 +133,17 @@ So, how do we go from a screensaver to a conversation? I find it helpful to brea
 
 🎧 **Step 1: Add a looping soundtrack**
 
-The first thing I want to do is add a soundtrack, to give the game ambiance. To play sound files in p5.js in the Codédex IDE, you’ll need to link to a url containing a **.ogg** audio file. You can find a ton of .ogg files with varying moods [here](https://developers.google.com/assistant/tools/sound-library). I chose an ambient outdoor summer track since I’ve always loved laying in the grass while reading a book in the park! 
+The first thing I want to do is add a soundtrack, to give the game ambiance. To play sound files in p5.js in the Codédex IDE, you’ll need to link to a url containing a **.ogg** audio file. You can find a ton of .ogg files with varying moods [here](https://developers.google.com/assistant/tools/sound-library). I chose an ambient outdoor summer track since I’ve always loved laying in the grass while reading a book in the park!
 
-Declare a `gameSoundtrack` variable and define it in the preload function, where audio (and images!) load before the `setup()` function. 
+Declare a `gameSoundtrack` variable and define it in the preload function, where audio (and images!) load before the `setup()` function.
 
 ```js
 let gameSoundtrack;
 
 function preload() {
-  gameSoundtrack = loadSound("https://actions.google.com/sounds/v1/ambiences/outdoor_summer_ambience.ogg");
+  gameSoundtrack = loadSound(
+    "https://actions.google.com/sounds/v1/ambiences/outdoor_summer_ambience.ogg"
+  );
 }
 ```
 
@@ -195,7 +158,7 @@ function setup(){
 }
 ```
 
-🕺🏻 **Step 2: Replace paddles with player images** 
+🕺🏻 **Step 2: Replace paddles with player images**
 
 To add images for the players, you’ll need to draw or find transparent PNGs. Since I decided to have a conversation with my younger self this time, I found a recent photo of me posing in a way that’s similar to a photo of me posing as a kid. Then, I removed their backgrounds with [Adobe’s Free Image Background Remover](https://www.adobe.com/express/feature/image/remove-background) and did some light editing in Adobe Express.
 
@@ -280,16 +243,16 @@ let phrase = 0;
 In the `drawGame()` function, I draw the text, and position it with the ball coordinates.
 
 ```js
-  push();
-  imageMode(CENTER);
-  textSize(20);
-  fill(255);
-  textAlign(CENTER);
+push();
+imageMode(CENTER);
+textSize(20);
+fill(255);
+textAlign(CENTER);
 
-  if (showBall == true){
-    text(convoText[phrase], ball.h, ball.v);
-  }
-  pop();
+if (showBall == true) {
+  text(convoText[phrase], ball.h, ball.v);
+}
+pop();
 ```
 
 In the `moveBall()` function, I cycle through the text array each time the ball collides with a player.
@@ -307,10 +270,11 @@ In the `moveBall()` function, I cycle through the text array each time the ball 
 🪩 🔮 🎱
 
 Some other changes from the original lesson code:
+
 - Add a [background](https://p5js.org/reference/p5/background/) image (a particularly foggy night with a blurry moon)
 - Resize the paddles to be wrapped to the images
-- Figure out what I want to talk to myself about, and write it down 
-- Add brat [font](https://p5js.org/reference/p5/textFont/) 
+- Figure out what I want to talk to myself about, and write it down
+- Add brat [font](https://p5js.org/reference/p5/textFont/)
 - Add custom messages for different game states
 - Add custom text to the title
 - Flip the game to vertical orientation
@@ -320,7 +284,6 @@ Some other changes from the original lesson code:
 - Add ability to restart game
 
 Here is a link to my [final code](https://www.codedex.io/@Julien/build/pong-as-a-conversation-final-code) for the 2024 version of A Conversation.
-
 
 ### Your Turn!
 
@@ -337,4 +300,4 @@ If you could use a game to have a conversation, what would you say, and who woul
 
 Extra challenge: Think of some other games that could be turned into conversations. Find existing code examples and see if you can find a way to modify them into this conversational format.
 
-Happy chatting! 
+Happy chatting!
