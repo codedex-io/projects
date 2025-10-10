@@ -13,6 +13,10 @@ versions: None
 tags:
   - intermediate
   - javascript
+courses:
+  - html
+  - css
+  - javascript
 ---
 
 ## Introduction
@@ -29,7 +33,7 @@ Some popular apps that use the Google Maps Platform include Uber and Airbnb, whi
 
 The [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) is a smaller API under the Google Maps API. It fetches location data like location names, addresses, photos, and many more attributes! It's a great tool for accessing updated data and finding multiple places without manually copying all of their information into a project. We'll be using this in our project!
 
-## Setup
+## Setting Up
 
 ### Workspace
 
@@ -287,9 +291,9 @@ We'll need a fallback in case the cafe is already saved. Write an `else` stateme
 }
 ```
 
-To check what cafes we have saved, we'll make a function called `showSaved()`. Since all the cafe information isn't saved in HTML and card form, we need to pull the saved info from `localStorage` and use \***\*DOM manipulation\*\*** to create HTML elements like each cafe's image, name, and rating of the spot when prompted.
+To check what cafes we have saved, we'll make a function called `showSaved()`. Since all the cafe information isn't saved in HTML and card form, we need to pull the saved info from `localStorage` and use DOM manipulation to create HTML elements like each cafe's image, name, and rating of the spot when prompted.
 
-DOM manipulation is a JavaScript process that changes a specific part of a webpage's content, style, or structure. In this case, we'll be inserting cafe information into `<div>` blocks onto your webpage.
+**DOM manipulation** is a JavaScript process that changes a specific part of a webpage's content, style, or structure. In this case, we'll be inserting cafe information into `<div>` blocks onto your webpage.
 
 Start by writing a function called `showSaved()`. Similar to the `displayCards()` function, we'll make a container and leave the content blank to start.
 
