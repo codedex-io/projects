@@ -8,11 +8,14 @@ description: Learn how to make a game of Pong that takes the form of two charact
 header: https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/assets%2Findex%2FCopy%20of%20Codedex%20Project%20Headers%20(Twitter%20Post).gif?alt=media&token=f1a5a667-5967-4e50-ad37-ec63f09535eb
 bannerImage: https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/assets%2Findex%2FCopy%20of%20Codedex%20Project%20Headers%20(Twitter%20Post).gif?alt=media&token=f1a5a667-5967-4e50-ad37-ec63f09535eb
 readTime: 30
-prerequisites: p5.js, JavaScript
+prerequisites: JavaScript, p5.js
 versions: p5 1.11.2
 tags:
   - intermediate
   - javascript
+courses:
+  - javascript
+  - p5js
 ---
 
 ## Introduction
@@ -25,7 +28,9 @@ tags:
   allowFullScreen
 ></iframe>
 
-Hi, my name is ✨Julien✨, and I’m the new Senior Curriculum Developer here at Codédex! I love zines, games, indie comics, park hangs, and experimental baking (holiday cookie box loading…). I’m based in Brooklyn, and am originally from Los Angeles! I’ve always made art, and didn’t consider myself a technical person until my coding journey unexpectedly began about a decade ago.
+Hi, my name is ✨Julien✨, and I’m the new Senior Curriculum Developer here at Codédex! 
+
+I love zines, games, indie comics, park hangs, and experimental baking (holiday cookie box loading…). I’m based in Brooklyn, and am originally from Los Angeles! I’ve always made art, and didn’t consider myself a technical person until my coding journey unexpectedly began about a decade ago.
 
 <div>
   <div
@@ -151,7 +156,7 @@ function preload() {
 Then, we’ll loop the soundtrack in the setup function.
 
 ```js
-function setup(){
+function setup() {
 …
   //loop the game soundtrack
   gameSoundtrack.loop();
@@ -200,7 +205,7 @@ function preload() {
 I replaced the paddle rectangles with images in the `showPaddle()` function.
 
 ```js
-function showPaddle(playerNumber){
+function showPaddle(playerNumber) {
 ...
   push();
   imageMode(CENTER);
