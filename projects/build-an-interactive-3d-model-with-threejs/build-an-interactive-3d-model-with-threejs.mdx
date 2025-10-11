@@ -8,8 +8,11 @@ header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/buil
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-an-interactive-3d-model-with-threejs/header.gif
 published: live
 readTime: 60
-prerequisites: JavaScript
+prerequisites: HTML, JavaScript
 versions: None
+courses:
+  - html
+  - javascript
 tags:
   - intermediate
   - javascript
@@ -39,9 +42,10 @@ For this project, we'll be using [Node.js](https://nodejs.org) to load and manag
 - Test if Node version 18+ is installed with `node -v` or Install [here](https://nodejs.org/en/download/package-manager).
 - [Create your Vite application](https://www.codedex.io/projects/create-a-react-app-with-vite).
 
-```
+```output
 npm create vite@latest
 ```
+
 - Name your project
 - Select the **Vanilla** framework template.
 - Select the **JavaScript** variant.
@@ -50,7 +54,7 @@ You now have your project folder set up! 🚀
 
 Let's go ahead and open this folder in your code editor of choice. In your project folder directory, run the following commands:
 
-```
+```output
 npm i 
 npm run dev 
 ```
@@ -87,7 +91,7 @@ Set up a blank slate and remove the boilerplate code provided by Vite. Replace t
 
 Your project directory should look like the following:
 
-```
+```output
 project-name/
   ├── node_modules/
   ├── public/
@@ -96,7 +100,7 @@ project-name/
   ├── main.js
   ├── package-lock.json
   ├── package.json
-  └──style.css
+  └── style.css
 ```
 
 Now, without any further delay, let's move on to all the fun 3D jazz! 
@@ -132,7 +136,7 @@ We'll add actual code values in the next section! 🤩
 
 Let's go ahead and use npm to install Three.js: 
 
-```
+```output
 npm i three
 ```
 
@@ -151,12 +155,14 @@ Let's now create a new scene that we'll call `scene`, and create the new perspec
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 ```
+
 Above, we have defined the typical default values for our field of view angle, aspect ratio, and view frustum. Once we have our model loaded later on, feel free to experiment with these values! 😀
 
 Now, we need to use the Three.js Renderer to render our model on our page, and we'll use the `document.querySelector` to render our 3D model, and set the size and color. 
 
 ```js
 const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('canvas') });
+
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(new THREE.Color(0xffffff)); // hex for white
 ```
@@ -164,6 +170,7 @@ renderer.setClearColor(new THREE.Color(0xffffff)); // hex for white
 ### GLTFLoader
 
 Inside your **/public** folder, we're going to add our Shiba GLB file. 
+
 - Click and download the Shiba [file here](https://drive.google.com/uc?export=download&id=1-AZ2VwfGrDLcha0b5HlDWwRJ9QqK3m9r) 
 - Not a Shiba fan? No worries! [Sketchfab](https://sketchfab.com/3d-models?features=downloadable&sort_by=-likeCount&cursor=bz0xJnA9MjUwMQ%3D%3D) is an online community with hundreds of 3D models for you to pick from. Be sure to download either the GLTF or GLB file for this project. 
 
@@ -175,16 +182,17 @@ Let's now create a new `GLTFLoader` object, and create a function that will load
 const loader = new GLTFLoader();
 
 let shiba;
+
 loader.load(
-    './shiba.glb', // Replace with the path to your Shiba model
-    function (gltf) {
-        shiba = gltf.scene;
-        scene.add(shiba);
-    },
-    undefined,
-    function (error) {
-        console.error(error);
-    }
+  './shiba.glb', // Replace with the path to your Shiba model
+  function (gltf) {
+    shiba = gltf.scene;
+    scene.add(shiba);
+  },
+  undefined,
+  function (error) {
+    console.error(error);
+  }
 );
 
 camera.position.z = 5;
@@ -200,6 +208,7 @@ function animate() {
 
 animate();
 ```
+
 Let's take a look at our site!
 
 <RoundedImage link="https://i.imgur.com/ZCkQvI4.png" description="3D Shiba Model on a blank webpage"/>
@@ -223,7 +232,6 @@ After the renderer variable, let's go ahead and add in a couple of lines of code
 // const renderer = new THREE.WebGLRenderer();
 // renderer.setSize(window.innerWidth, window.innerHeight);
 // document.body.appendChild(renderer.domElement);
-
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; // enable damping
@@ -318,7 +326,7 @@ CLICK ON SHIBA!
 
 ## Congrats!
  
-Woohoo! ✨Congratulations on creating your first Three.js project! 
+Woohoo! ✨ Congratulations on creating your first Three.js project! 
 
 There are no limits to how you can continue to develop your website or project. Here are a few ideas to get you inspired:
  
@@ -328,11 +336,14 @@ There are no limits to how you can continue to develop your website or project. 
 - Have two 3D objects interact with each other.
 - Create a personal portfolio with rotating objects.
 
-## More Resources
+### More Resources
 
-Check out the [live demo version](https://3d-shiba-dog.vercel.app) here! Here are some helpful resources as well to help you with your future Three.js endeavors! 
+Check out the [live demo version](https://3d-shiba-dog.vercel.app) here! 
+
+Here are some helpful resources as well to help you with your future Three.js endeavors! 
+
 - [Installing Three.js](https://threejs.org/docs/#manual/en/introduction/Installation) 
 - [Creating a Scene in Three.js](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene) 
 - [Three.js examples](https://threejs.org/examples/#webgl_depth_texture) 
 
-Feel free to also check out the [source code](https://github.com/exrlla/SHIBAAA3D) for this project! ✨We would love to see what you build with this tutorial! Tag [@codedex_io](https://twitter.com/codedex_io), [@threejs](https://twitter.com/threejs) and [@exrlla](https://x.com/exrlla) on Twitter if you make something cool! ₊˚⊹ᰔ
+Feel free to also check out the [source code](https://github.com/exrlla/SHIBAAA3D) for this project! ✨We would love to see what you build with this tutorial! Tag [@codedex_io](https://twitter.com/codedex_io), [@threejs](https://twitter.com/threejs), and [@exrlla](https://x.com/exrlla) on Twitter if you make something cool! ₊˚⊹ᰔ
