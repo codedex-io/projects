@@ -8,12 +8,15 @@ header: https://github.com/codedex-io/projects/blob/main/projects/animate-images
 bannerImage: https://github.com/codedex-io/projects/blob/main/projects/animate-images-with-keyframes-using-css/header.gif?raw=true
 published: live
 readTime: 45
-prerequisites: <a href="/css">CSS</a>
+prerequisites: HTML, CSS
 versions: None
 tags:
   - html
   - css
   - intermediate
+courses:
+  - html
+  - css
 ---
 
 ## Introduction
@@ -22,9 +25,9 @@ Images are quintessential to any website. It's the sparkle and it's the pizzaz!
 
 <RoundedImage link="https://i.imgur.com/AqxBcsJ.png" description="" />
 
-You may recall using this line to add an image to your HTML file.
+You may recall using this line to add an image to your HTML file:
 
-```
+```html
 <img src="your-path.png" alt="red chocolate chip cookie" />
 ```
 
@@ -51,7 +54,7 @@ and _this_:
   description="html review"
 />
 
-using CSS `@keyframes` !! (We'll explain more soon...) And the best part- we don't have to use JavaScript for it!
+using CSS `@keyframes`!! (We'll explain more soon...) And the best part - we don't have to use JavaScript for it!
 
 ## What are animations in CSS
 
@@ -93,7 +96,7 @@ So at 0% of the animation, the color is red, at 50% it's yellow, and at 100% or 
 
 Let's also take a look at this line of code:
 
-```
+```css
 animation: colorChange 2s infinite;
 ```
 
@@ -122,7 +125,7 @@ Some common ones you'll see:
 
 These can differ and are added right in the `animation:` of your CSS.
 
-```
+```css
 .tinker_bell {
   animation: bounce 1s linear infinite;
 }
