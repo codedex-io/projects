@@ -5,37 +5,15 @@ uid: inV9GLffvhafMJU3Le6tCezgbrZ2
 datePublished: 2023-11-17
 description: Learn to setup and use the built-in debugger for VS Code.
 header: https://raw.githubusercontent.com/codedex-io/projects/d83e6c63658c5ab93f80daa6bb00f89f7ba636e2/projects/debug-your-web-app-in-vs-code/header.png
+bannerImage: https://raw.githubusercontent.com/codedex-io/projects/d83e6c63658c5ab93f80daa6bb00f89f7ba636e2/projects/debug-your-web-app-in-vs-code/header.png
 published: live
+readTime: 60
+prerequisites: JavaScript fundamentals
+versions: VS Code 1.84
 tags:
   - javascript
   - intermediate
 ---
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/d83e6c63658c5ab93f80daa6bb00f89f7ba636e2/projects/debug-your-web-app-in-vs-code/header.png"
-  description=""
-  uid={true}
-  cl="for-sidebar"
-/>
-
-# Debug Your Web App in VS Code
-
-<AuthorAvatar
-  author_name="Michael Wiltfong"
-  author_avatar="/images/projects/authors/michael-wiltfong.png"
-  username="wiltfongmichael1116"
-  uid={true}
-/>
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/d83e6c63658c5ab93f80daa6bb00f89f7ba636e2/projects/debug-your-web-app-in-vs-code/header.png"
-  description="Title Image"
-  uid={true}
-/>
-
-**Prerequisites:** JavaScript fundamentals
-**Versions:** VS Code 1.84
-**Read Time:** 60 minutes
 
 ## Introduction
 
@@ -73,7 +51,7 @@ Now that your debugger is at a good state, you can refer to the project's [repo]
 git clone -b development https://github.com/mdwiltfong/codedex_todo.git
 ```
 
-## Beginning the Project 
+## Beginning the Project
 
 ### Project Goals
 
@@ -107,7 +85,7 @@ When a user creates a new item, the `addTodo()` function adds a new todo to the 
 
 **Note:** When a form is submitted, the page reloads by default. We want to prevent this so the todos we add with `addTodo()` aren't lost. Therefore, we used `event.preventDefault()` to stop this default behavior .
 
-A `validateCallback` parameter is used as a callback function in `addTodo()` to ensure the new todo item can be added without error. Since `validateTodo()` is the only function passed into `addTodo()` (line 84 in **script.js**), `validateTodo()` and the `validateCallback` can be thought of as being the same. 
+A `validateCallback` parameter is used as a callback function in `addTodo()` to ensure the new todo item can be added without error. Since `validateTodo()` is the only function passed into `addTodo()` (line 84 in **script.js**), `validateTodo()` and the `validateCallback` can be thought of as being the same.
 
 In order to prevent the user from entering incorrect data, the app uses `validateTodo()` to perform a variety of checks on the information the user is submitting. Notice that there is an `if`-statement that specifically checks if `todo.todoDate` is less than `Date.now()`.
 

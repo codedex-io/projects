@@ -5,36 +5,20 @@ uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
 datePublished: 2025-03-14
 description: Learn about the basics of CSS Keyframes to animate images with CSS
 header: https://github.com/codedex-io/projects/blob/main/projects/animate-images-with-keyframes-using-css/header.gif?raw=true
+bannerImage: https://github.com/codedex-io/projects/blob/main/projects/animate-images-with-keyframes-using-css/header.gif?raw=true
 published: live
+readTime: 45
+prerequisites: <a href="/css">CSS</a>
+versions: None
 tags:
   - html
   - css
   - intermediate
 ---
 
-<BannerImage 
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-images-with-keyframes-using-css/header.gif" 
-  description="Title Image" 
-  uid={true} 
-  cl="for-sidebar" 
-/>
+## Introduction
 
-# Animate Images with keyframes using CSS
-
-<AuthorAvatar
-  author_name="Ellie Popoca"
-  author_avatar="/images/projects/authors/ellie-popoca.jpg"
-  username="ellie"
-  uid={true}
-/>
-
-<BannerImage
-  link="https://raw.githubusercontent.com/codedex-io/projects/main/projects/animate-images-with-keyframes-using-css/header.gif" 
-  description="Title Image"
-  uid={true}
-/>
-
-Images are quintessential to any website. It's the sparkle and it's the pizzaz! 
+Images are quintessential to any website. It's the sparkle and it's the pizzaz!
 
 <RoundedImage link="https://i.imgur.com/AqxBcsJ.png" description="" />
 
@@ -44,15 +28,15 @@ You may recall using this line to add an image to your HTML file.
 <img src="your-path.png" alt="red chocolate chip cookie" />
 ```
 
-You may also remember that we can use CSS to add styling to our image! 
+You may also remember that we can use CSS to add styling to our image!
 
 ```css
 img {
   width: 100%;
-  max-width: 500px; 
+  max-width: 500px;
   height: auto;
   display: block;
-  margin: 20px auto; 
+  margin: 20px auto;
 }
 ```
 
@@ -60,25 +44,29 @@ Now, for something new: we can add some fun animations like _this_:
 
 <RoundedImage link="https://i.imgur.com/iqNCiye.gif" description="tedxcmu" />
 
-and _this_: 
+and _this_:
 
-<RoundedImage link="https://i.imgur.com/oYGbPkH.gif" description="html review" />
+<RoundedImage
+  link="https://i.imgur.com/oYGbPkH.gif"
+  description="html review"
+/>
 
-using CSS `@keyframes` !! (We'll explain more soon...) And the best part- we don't have to use JavaScript for it! 
+using CSS `@keyframes` !! (We'll explain more soon...) And the best part- we don't have to use JavaScript for it!
 
 ## What are animations in CSS
 
-Before we get started, it's important to note what animations are in CSS. Animations are made up of a series of frames, or in this case, HTML elements that change over time. 
+Before we get started, it's important to note what animations are in CSS. Animations are made up of a series of frames, or in this case, HTML elements that change over time.
 
 ### keyframes
 
-CSS animations have "steps" in them (also known as keyframes) to signify each moment of change in the animation. 
+CSS animations have "steps" in them (also known as keyframes) to signify each moment of change in the animation.
 
-For example, 
+For example,
 
 ```
 <div className="box"></div>
 ```
+
 ```
 @keyframes colorChange {
   0% { background-color: red; }
@@ -90,34 +78,41 @@ For example,
   width: 100px;
   height: 100px;
   background-color: red;
-  animation: colorChange 2s infinite;  
+  animation: colorChange 2s infinite;
 }
 ```
 
-would look like 
+would look like
 
-<RoundedImage link="https://i.imgur.com/bBzHFra.gif" description="flashing yellow and red box" />
+<RoundedImage
+  link="https://i.imgur.com/bBzHFra.gif"
+  description="flashing yellow and red box"
+/>
 
-So at 0% of the animation, the color is red, at 50% it's yellow, and at 100% or at the end, it's red again, hence the loop! 
+So at 0% of the animation, the color is red, at 50% it's yellow, and at 100% or at the end, it's red again, hence the loop!
 
-Let's also take a look at this line of code: 
+Let's also take a look at this line of code:
 
 ```
-animation: colorChange 2s infinite;  
+animation: colorChange 2s infinite;
 ```
 
-- `colorChange` is the name of our animation 
+- `colorChange` is the name of our animation
 - `2s` is the length in seconds of how long the animation lasts
 - `infinite` is indicating it will loop forever
 
-The line of code above is attached to the `.box` class from our HTML file! Animations can only show up if they are defined in the `animation:`. 
+The line of code above is attached to the `.box` class from our HTML file! Animations can only show up if they are defined in the `animation:`.
 
-## Easing 
-Easing in CSS animations is essential to understanding the pace in which an animation progresses over time. 
+## Easing
 
-<RoundedImage link="https://i.imgur.com/9C7DeEg.gif" description="easing demo from mdn web docs" />
+Easing in CSS animations is essential to understanding the pace in which an animation progresses over time.
 
-Some common ones you'll see: 
+<RoundedImage
+  link="https://i.imgur.com/9C7DeEg.gif"
+  description="easing demo from mdn web docs"
+/>
+
+Some common ones you'll see:
 
 - `linear`: Constant speed
 - `ease`: Starts slow, speeds up, then slows down
@@ -125,7 +120,7 @@ Some common ones you'll see:
 - `ease-out`: Starts fast, then decelerates
 - `ease-in-out`: Combines `ease-in` and `ease-out`
 
-These can differ and are added right in the `animation:` of your CSS. 
+These can differ and are added right in the `animation:` of your CSS.
 
 ```
 .tinker_bell {
@@ -133,16 +128,18 @@ These can differ and are added right in the `animation:` of your CSS.
 }
 ```
 
-**Note:** Easing can get pretty complicated based on the type of motion you want to create! You can review the open source [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function) for more information on easing and animation examples. 
-
+**Note:** Easing can get pretty complicated based on the type of motion you want to create! You can review the open source [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function) for more information on easing and animation examples.
 
 ### Spin Animation
 
-Think of the last time you saw a spinning loader: 
+Think of the last time you saw a spinning loader:
 
-<RoundedImage link="https://i.imgur.com/lW1fWrY.gif" description="spinning loader" />
+<RoundedImage
+  link="https://i.imgur.com/lW1fWrY.gif"
+  description="spinning loader"
+/>
 
-This can be recreated with a spin animation like so: 
+This can be recreated with a spin animation like so:
 
 ```
 <div className="sensei">
@@ -163,34 +160,40 @@ This can be recreated with a spin animation like so:
 
 .sensei {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
-  height: 100vh; 
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   animation: spin 1s linear infinite;
 }
 
 ```
 
-Here, we're using the CSS function `rotate()` to establish which degree we want to start and end at. In this example, we're using the keywords `from` and `to` which are shortcuts for `0%` and `100%`. 
+Here, we're using the CSS function `rotate()` to establish which degree we want to start and end at. In this example, we're using the keywords `from` and `to` which are shortcuts for `0%` and `100%`.
 
 The result of the club penguin sensei looks like this 🔥🔥
 
-<RoundedImage link="https://i.imgur.com/YVnPHFA.gif" description="spinning club penguin sensei" />
+<RoundedImage
+  link="https://i.imgur.com/YVnPHFA.gif"
+  description="spinning club penguin sensei"
+/>
 
+## Hovering Animation
 
-## Hovering Animation 
+Imagine you're playing a video game and you're choosing which character to play as, or you're in an idle mode.
 
-Imagine you're playing a video game and you're choosing which character to play as, or you're in an idle mode. 
+<RoundedImage
+  link="https://i.imgur.com/PVfHyBD.gif"
+  description="game mode idle hovering player"
+/>
 
-<RoundedImage link="https://i.imgur.com/PVfHyBD.gif" description="game mode idle hovering player" />
-
-This is a hovering animation that we can create with keyframes! 
+This is a hovering animation that we can create with keyframes!
 
 ```
 <div className="sensei">
   <img src="sensei.png" alt="club penguin gray sensei penguin" />
 </div>
 ```
+
 ```
 /* bouncing animation (floating)  */
 @keyframes bounce {
@@ -205,39 +208,44 @@ This is a hovering animation that we can create with keyframes!
 .sensei {
   animation: bounce 1s linear infinite;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
-  height: 100vh; 
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 ```
 
-Here, we're translating (aka moving) the object's Y position by 30 pixels halfway through the animation, and returning it to its original spot at the end using a `linear` ease. 
+Here, we're translating (aka moving) the object's Y position by 30 pixels halfway through the animation, and returning it to its original spot at the end using a `linear` ease.
 
-The beautiful result: 
+The beautiful result:
 
-<RoundedImage link="https://i.imgur.com/69VUqyO.gif" description="club penguin sensei hovering" />
+<RoundedImage
+  link="https://i.imgur.com/69VUqyO.gif"
+  description="club penguin sensei hovering"
+/>
 
-
-To achieve this animation speed, we set the length of time to `1s`, but you can play around with this value to get the effect you want! 
-
+To achieve this animation speed, we set the length of time to `1s`, but you can play around with this value to get the effect you want!
 
 ## Conclusion
 
 Congrats! You've learned the basics of CSS image animation, and as you can tell, it's a world of opportunities to add flair to your website or project! ✨✨✨
 
-<RoundedImage link="https://i.imgur.com/7QS4kBF.gif" description="pokemon flying" />
+<RoundedImage
+  link="https://i.imgur.com/7QS4kBF.gif"
+  description="pokemon flying"
+/>
 
 Some other ways you can animate images include:
 
 - bounce effect
-- heartbeat pulse 
+- heartbeat pulse
 - zoom in/out
 - shake or vibration
 - pop on hover
-- wave effect 
+- wave effect
 - \+ many more!
 
-Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io) and me, [@exrlla](https://www.twitter.com/exrlla)! Let us know what you come up with!  
+Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io) and me, [@exrlla](https://www.twitter.com/exrlla)! Let us know what you come up with!
+
 <span style={{ fontSize: "16px", lineHeight: 1 }}>
   <img
     src="https://i.imgur.com/FOR1yp5.gif"

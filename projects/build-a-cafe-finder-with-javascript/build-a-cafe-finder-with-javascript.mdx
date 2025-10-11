@@ -7,35 +7,17 @@ description: Learn how to build a cafe finder with JavaScript
 header: https://i.imgur.com/VKm4oPJ.gif
 bannerImage: https://i.imgur.com/lfbCFid.gif
 published: live
+readTime: 30
+prerequisites: HTML, CSS, JavaScript
+versions: None
 tags:
   - intermediate
   - javascript
+courses:
+  - html
+  - css
+  - javascript
 ---
-
-<BannerImage
-  link="https://i.imgur.com/lfbCFid.gif"
-  description=""
-  uid={false}
-  cl="for-sidebar"
-/>
-
-# Build a Cafe Finder with JavaScript and the Google Maps Platform
-
-<AuthorAvatar
-  author_name="Gabriela Banaag"
-  author_avatar=""
-  username="gabtot"
-  uid="CgUQBagDrWWBRUuoh3mkyi3aedg1"
-/>
-
-<BannerImage
-  link="https://i.imgur.com/lfbCFid.gif"
-  description=""
-  uid="CgUQBagDrWWBRUuoh3mkyi3aedg1"
-/>
-
-**Prerequisites:** HTML, CSS, JavaScript  
-**Read Time:** 30 minutes
 
 ## Introduction
 
@@ -51,7 +33,7 @@ Some popular apps that use the Google Maps Platform include Uber and Airbnb, whi
 
 The [Places API](https://developers.google.com/maps/documentation/places/web-service/overview) is a smaller API under the Google Maps API. It fetches location data like location names, addresses, photos, and many more attributes! It's a great tool for accessing updated data and finding multiple places without manually copying all of their information into a project. We'll be using this in our project!
 
-## Setup
+## Setting Up
 
 ### Workspace
 
@@ -63,15 +45,15 @@ Set up your project in the [Google Cloud Console](https://developers.google.com/
 
 ### Clone Template
 
-Head over to [this GitHub link](https://github.com/gbanaag/codedex-cafe-finder-template/tree/main) and clone the repository. The repo has all the basic HTML and CSS set up so we don't have to worry about it later and focus on API implementation. 
+Head over to [this GitHub link](https://github.com/gbanaag/codedex-cafe-finder-template/tree/main) and clone the repository. The repo has all the basic HTML and CSS set up so we don't have to worry about it later and focus on API implementation.
 
 You can clone the template in 3 different ways:
 
 - Downloading the folder and adding it to your local workspace
 - GitHub Desktop app
-- ``git clone`` with command line
+- `git clone` with command line
 
-If you don't have VS Code and don't know how to use it, head over to our [VS Code setup tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python#download-vs-code). 
+If you don't have VS Code and don't know how to use it, head over to our [VS Code setup tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python#download-vs-code).
 
 ## Accessing Locations with JavaScript
 
@@ -81,26 +63,26 @@ Time to write some back-end code!
 
 Here's how to create and protect your API key:
 
-1. Head to the [Google Cloud Console](https://console.cloud.google.com/) and open the project picker, then click on ****new project**** in the corner. 
-2. Come up with a name for your project! _Note that the name can't be changed later._ 
+1. Head to the [Google Cloud Console](https://console.cloud.google.com/) and open the project picker, then click on \***\*new project\*\*** in the corner.
+2. Come up with a name for your project! _Note that the name can't be changed later._
 3. Make sure you're on your cafe finder project and select the APIs & Services button.
-4. On the left menu, click on library. 
+4. On the left menu, click on library.
 5. Search for the Places API (new) and click on it. Make sure the Places API is enabled.
 6. Click on the hamburger menu and look for the APIs & Services button again. Then click on **create credentials**, then API key.
 7. After your key is generated, click on edit key. Restrict your application to websites.
-8. Add the domain your project is hosted on. In my case, mine is hosted on Codédex Builds. 
+8. Add the domain your project is hosted on. In my case, mine is hosted on Codédex Builds.
 
 Put your API key at the top of your JavaScript file. It should look like this:
 
 ```jsx
-const apiKey = "STRING_OF_RANDOM_CHARACTERS_HERE"; 
+const apiKey = "STRING_OF_RANDOM_CHARACTERS_HERE";
 ```
 
 **⚠️ Warning:** Make sure your API key is restricted to just your project (step 7), or else anyone can use it freely and you'll get charged for it!
 
 ### cors-anywhere
 
-Head to [https://cors-anywhere.herokuapp.com](https://cors-anywhere.herokuapp.com/). Make sure to click on the ``Request temporary access to the demo server`` button to get set up with a temporary server for your project. 
+Head to [https://cors-anywhere.herokuapp.com](https://cors-anywhere.herokuapp.com/). Make sure to click on the `Request temporary access to the demo server` button to get set up with a temporary server for your project.
 
 Then, add these lines to the top of your JavaScript file.
 
@@ -111,7 +93,7 @@ const proxy = "https://cors-anywhere.herokuapp.com";
 
 ### Geolocation
 
-To see cafes nearby, the browser needs access to your location. There's a built-in JavaScript function that takes care of that for you called ``useLocation()`` and it takes your device's latitude and longitude coordinates.
+To see cafes nearby, the browser needs access to your location. There's a built-in JavaScript function that takes care of that for you called `useLocation()` and it takes your device's latitude and longitude coordinates.
 
 ```jsx
 function getLocation() {
@@ -119,15 +101,15 @@ function getLocation() {
   const now = Date.now();
 ```
 
-Next, we'll check if any location data has been cached (saved to the browser) and is less than 10 minutes old. 
+Next, we'll check if any location data has been cached (saved to the browser) and is less than 10 minutes old.
 
 ```jsx
 if (cache.timestamp && now - cache.timestamp < 10 * 60 * 1000) {
   useLocation(cache.lat, cache.lng);
-} 
+}
 ```
 
-If there's no cached location information found, the browser pulls your current latitude and longitude from a built-in function. 
+If there's no cached location information found, the browser pulls your current latitude and longitude from a built-in function.
 
 ```jsx
 else {
@@ -148,7 +130,7 @@ We'll save the location and timestamp in `localStorage` in case we use our cafe 
 
 We'll start implementing the Google Places API to take locations and their information from Google Maps itself! We'll start by writing the `useLocation()` function.
 
-We'll create an ****endpoint****, which can send requests for specific actions and functions to an API. Our endpoint will reference the Google Places API by inserting your API key and saved latitude and longitude. 
+We'll create an \***\*endpoint\*\***, which can send requests for specific actions and functions to an API. Our endpoint will reference the Google Places API by inserting your API key and saved latitude and longitude.
 
 ```jsx
 async function useLocation(lat, lng) {
@@ -156,7 +138,7 @@ async function useLocation(lat, lng) {
   const url = useProxy ? proxy + endpoint : endpoint;
 ```
 
-We'll call the API to find nearby cafes and *_fetch_* their urls. 
+We'll call the API to find nearby cafes and _*fetch*_ their urls.
 
 ```jsx
 try {
@@ -181,17 +163,17 @@ If the API finds results for nearby cafes, we'll take that data and insert it in
 
 ## Cafe UI and Animations
 
-We're gonna create a wrapper for our cards, and inject data from the API into the wrapper as we go. To start, let's make a function called ``displayCards()`` that renders a div container whenever the website starts up. 
+We're gonna create a wrapper for our cards, and inject data from the API into the wrapper as we go. To start, let's make a function called `displayCards()` that renders a div container whenever the website starts up.
 
-We'll start by creating a container that takes the first saved cafe in our cafe options. We'll make the content of this card blank for now, and fill it in with information when we use the Places API. 
+We'll start by creating a container that takes the first saved cafe in our cafe options. We'll make the content of this card blank for now, and fill it in with information when we use the Places API.
 
 ```jsx
   function displayCards(cafes) {
     const container = document.querySelector('.cards');
-    container.innerHTML = ''; 
+    container.innerHTML = '';
 ```
 
-We'll then make a for loop that iterates through the cafe list to… 
+We'll then make a for loop that iterates through the cafe list to…
 
 - Create a new div to wrap each cafe card
 - Add a class (`swipe-wrapper`) to each card to keep card styles consistent
@@ -209,37 +191,37 @@ cafes.forEach((cafe, i) => {
 }
 ```
 
-We'll add more inside the function that inserts location information into each card by calling the Places API. Add a line that creates a card div and another line that assigns the card's class name to be ``location-card``.
+We'll add more inside the function that inserts location information into each card by calling the Places API. Add a line that creates a card div and another line that assigns the card's class name to be `location-card`.
 
-Then, add a line that takes the URL of a photo of the cafe and saves it into the ``imgUrl`` variable.
+Then, add a line that takes the URL of a photo of the cafe and saves it into the `imgUrl` variable.
 
 ```jsx
-const card = document.createElement('div');
-card.className = 'location-card';
+const card = document.createElement("div");
+card.className = "location-card";
 
 const imgUrl = cafe.photos?.[0]?.photo_reference
   ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cafe.photos[0].photo_reference}&key=${apiKey}`
-  : 'https://via.placeholder.com/250x150?text=No+Image';
+  : "https://via.placeholder.com/250x150?text=No+Image";
 ```
 
-We'll grab each cafe location's photo, place id, image URL, and rating. We'll save all the information in an object called ``cafeData``.
+We'll grab each cafe location's photo, place id, image URL, and rating. We'll save all the information in an object called `cafeData`.
 
 ```jsx
 const cafeData = {
   name: cafe.name,
   place_id: cafe.place_id,
   photo: imgUrl,
-  rating: cafe.rating || 'N/A'
+  rating: cafe.rating || "N/A",
 };
 ```
 
-Putting in tags between the ``` ``` symbol when changing an element's `innerHTML` allows you to render HTML elements when functions run. We'll append (connect) the card to its wrapper, and append its wrapper to its container. 
+Putting in tags between the ` ` symbol when changing an element's `innerHTML` allows you to render HTML elements when functions run. We'll append (connect) the card to its wrapper, and append its wrapper to its container.
 
 ```jsx
 card.innerHTML = `
   <img src="${imgUrl}" alt="${cafe.name}" />
   <h3>${cafe.name}</h3>
-  <p>⭐️ Rating: ${cafe.rating || 'N/A'}</p>
+  <p>⭐️ Rating: ${cafe.rating || "N/A"}</p>
   <p><small>Swipe right to save 💖</small></p>
 `;
 
@@ -249,11 +231,11 @@ container.appendChild(wrapper);
 
 ### Hammer
 
-[Hammer](http://hammerjs.github.io/) is a library used to recognize touch gestures in the browser! 
+[Hammer](http://hammerjs.github.io/) is a library used to recognize touch gestures in the browser!
 
-💡 A **library** is a collection of reusable resources like functions, classes, and pieces of pre-written code. An **API** is an interface that lets your code communicate with another application. 
+💡 A **library** is a collection of reusable resources like functions, classes, and pieces of pre-written code. An **API** is an interface that lets your code communicate with another application.
 
-To make sure we have swiping gestures detected on the site, we're gonna import the library by adding this line in the ``<head>`` of your HTML file:
+To make sure we have swiping gestures detected on the site, we're gonna import the library by adding this line in the `<head>` of your HTML file:
 
 ```jsx
 <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
@@ -262,25 +244,25 @@ To make sure we have swiping gestures detected on the site, we're gonna import t
 We're going to add a function that detects left and right swipes and makes each cafe card flick and fade away. Add this to the bottom of your `displayCards()` function to make it happen:
 
 ```jsx
-  const hammertime = new Hammer(wrapper);
-  hammertime.on('swipeleft', () => {
-    wrapper.style.transform = 'translateX(-150%) rotate(-15deg)';
-    wrapper.style.opacity = 0;
-    setTimeout(() => wrapper.remove(), 100);
-  });
-  hammertime.on('swiperight', () => {
-    saveCafe(JSON.stringify(cafeData));
-    wrapper.style.transform = 'translateX(150%) rotate(15deg)';
-    wrapper.style.opacity = 0;
-    setTimeout(() => wrapper.remove(), 100);
-  });
+const hammertime = new Hammer(wrapper);
+hammertime.on("swipeleft", () => {
+  wrapper.style.transform = "translateX(-150%) rotate(-15deg)";
+  wrapper.style.opacity = 0;
+  setTimeout(() => wrapper.remove(), 100);
+});
+hammertime.on("swiperight", () => {
+  saveCafe(JSON.stringify(cafeData));
+  wrapper.style.transform = "translateX(150%) rotate(15deg)";
+  wrapper.style.opacity = 0;
+  setTimeout(() => wrapper.remove(), 100);
+});
 ```
 
 ### Saving Cafes
 
 We'll be using `localStorage` to save cafes to the browser. It automatically caches (saves) specific interactions from your site to your browser that you choose to save without needing a database.
 
-**JSON Parsing** is used to take strings and save them as data structures like objects or arrays. To implement this, we'll add a line that stores the string as a cafe **object.** Then we'll save the cafe object into an array called ``saved``. 
+**JSON Parsing** is used to take strings and save them as data structures like objects or arrays. To implement this, we'll add a line that stores the string as a cafe **object.** Then we'll save the cafe object into an array called `saved`.
 
 ```jsx
 function saveCafe(cafeJSON) {
@@ -288,19 +270,19 @@ function saveCafe(cafeJSON) {
   let saved = JSON.parse(localStorage.getItem('savedCafes') || '[]');
 ```
 
-Next, write an `if` statement that searches your array of saved cafes and makes sure that the cafe hasn't been saved yet. This is done by using the ``find`` function, which sees if a cafe's `place_id` exists in the array.
+Next, write an `if` statement that searches your array of saved cafes and makes sure that the cafe hasn't been saved yet. This is done by using the `find` function, which sees if a cafe's `place_id` exists in the array.
 
-If the cafe isn't saved, the function will `push()` (insert) the cafe into the `saved` array of cafes, and alert the user that the cafe has been saved. 
+If the cafe isn't saved, the function will `push()` (insert) the cafe into the `saved` array of cafes, and alert the user that the cafe has been saved.
 
 ```jsx
-if (!saved.find(c => c.place_id === cafe.place_id)) {
+if (!saved.find((c) => c.place_id === cafe.place_id)) {
   saved.push(cafe);
-  localStorage.setItem('savedCafes', JSON.stringify(saved));
+  localStorage.setItem("savedCafes", JSON.stringify(saved));
   alert(`${cafe.name} saved!`);
 }
 ```
 
-We'll need a fallback in case the cafe is already saved. Write an `else` statement that alerts the user if a cafe has already been saved, so it doesn't get duplicated into the saved list of cafes. 
+We'll need a fallback in case the cafe is already saved. Write an `else` statement that alerts the user if a cafe has already been saved, so it doesn't get duplicated into the saved list of cafes.
 
 ```jsx
   else {
@@ -309,11 +291,11 @@ We'll need a fallback in case the cafe is already saved. Write an `else` stateme
 }
 ```
 
-To check what cafes we have saved, we'll make a function called `showSaved()`. Since all the cafe information isn't saved in HTML and card form, we need to pull the saved info from `localStorage` and use ****DOM manipulation**** to create HTML elements like each cafe's image, name, and rating of the spot when prompted. 
+To check what cafes we have saved, we'll make a function called `showSaved()`. Since all the cafe information isn't saved in HTML and card form, we need to pull the saved info from `localStorage` and use DOM manipulation to create HTML elements like each cafe's image, name, and rating of the spot when prompted.
 
-DOM manipulation is a JavaScript process that changes a specific part of a webpage's content, style, or structure. In this case, we'll be inserting cafe information into ``<div>`` blocks onto your webpage. 
+**DOM manipulation** is a JavaScript process that changes a specific part of a webpage's content, style, or structure. In this case, we'll be inserting cafe information into `<div>` blocks onto your webpage.
 
-Start by writing a function called `showSaved()`. Similar to the `displayCards()` function, we'll make a container and leave the content blank to start. 
+Start by writing a function called `showSaved()`. Similar to the `displayCards()` function, we'll make a container and leave the content blank to start.
 
 ```jsx
 function showSaved() {
@@ -324,19 +306,19 @@ function showSaved() {
 Then, add this line to parse through the list of saved cafes and save the information in a variable.
 
 ```jsx
-const saved = JSON.parse(localStorage.getItem('savedCafes') || '[]');
+const saved = JSON.parse(localStorage.getItem("savedCafes") || "[]");
 ```
 
-If the saved array is empty, it'll update the page by adding a ``<p>`` tag to say no cafes have been saved yet. 
+If the saved array is empty, it'll update the page by adding a `<p>` tag to say no cafes have been saved yet.
 
 ```jsx
 if (saved.length === 0) {
-  container.innerHTML = '<p>No saved cafes yet 😢</p>';
+  container.innerHTML = "<p>No saved cafes yet 😢</p>";
   return;
 }
 ```
 
-For each cafe in the saved array, we'll make a card div, add the `location-card` class name, and update the card's content with `innerHTML` to include the current cafe's information. 
+For each cafe in the saved array, we'll make a card div, add the `location-card` class name, and update the card's content with `innerHTML` to include the current cafe's information.
 
 ```jsx
 saved.forEach(cafe => {
@@ -362,7 +344,7 @@ Here's my final result:
 
 <ImageZoom src="https://i.imgur.com/qfYI134.gif" />
 
-You did it! Enjoy your newly built cafe finder and be sure to treat yourself to a coffee, chai, matcha, or boba to celebrate your hard work. 🍵 
+You did it! Enjoy your newly built cafe finder and be sure to treat yourself to a coffee, chai, matcha, or boba to celebrate your hard work. 🍵
 
 If you're looking for another challenge or a way to spice up your project, you could try…
 
