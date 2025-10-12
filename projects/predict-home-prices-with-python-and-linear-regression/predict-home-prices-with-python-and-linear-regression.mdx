@@ -8,8 +8,12 @@ header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/pred
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/header.png
 published: live
 readTime: 60
-prerequisites: Python fundamentals
+prerequisites: Python, NumPy, Pandas
 versions: Anaconda Online
+courses:
+  - numpy
+  - pandas
+  - machine-learning
 tags:
   - intermediate
   - python
@@ -21,10 +25,10 @@ Have you ever wanted to know how much an apartment or house costs to rent or own
 
 Machine learning is a major field that lets computers take in data and learn patterns to make predictions and decisions. We will be using Python to learn about one of the fundamentals of predictive modeling in machine learning and, more specifically, linear regression. To help us out, we will use a few data science libraries:
 
-- Scikit-learn
-- Pandas
 - NumPy
+- Pandas
 - Matplotlib
+- Scikit-learn
 
 ## Linear Regression
 
@@ -34,7 +38,7 @@ In this tutorial, we will create a linear regression model to predict house pric
 
 <img 
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/data.gif"
-  alt="Data Set for House Size and Price"
+  alt="Dataset for House Size and Price"
 />
 
 ## Getting Set Up with Anaconda
@@ -57,7 +61,7 @@ Next, sign into your account to get to the homepage. Then, select "Launch Notebo
 Libraries! Gotta love 'em. In this tutorial, we will be using the following Python libraries for data analysis, data visualization, and machine learning:
 
 - 🔢 [NumPy](https://numpy.org) offers a robust foundation for numerical operations and data analysis.
-- 📖 [Pandas](https://pandas.pydata.org/) lets you to analyze, clean, explore, and manipulate data from different sources.
+- 🐼 [Pandas](https://pandas.pydata.org/) lets you to analyze, clean, explore, and manipulate data from different sources.
 - 📈 [Matplotlib](https://matplotlib.org) transforms your data into compelling visuals like 2D graphs and bar charts.
 - 🤖 [Scikit-learn](https://scikit-learn.org), commonly known as Sklearn, provides a user-friendly interface for all kinds of machine learning.
 
@@ -72,7 +76,7 @@ After launching Notebook on Anaconda, open a new project:
 
 ## Getting Started
 
-In this tutorial, we will be using a [data set](https://drive.google.com/file/d/1cNtzy7IwR753aXvpaYQRuEoxMfUNnYHl/view?usp=sharing) that compares house size and house prices of properties recently sold in Brooklyn's Dumbo neighborhood to predict the cost of houses based on size.
+In this tutorial, we will be using a [dataset](https://drive.google.com/file/d/1cNtzy7IwR753aXvpaYQRuEoxMfUNnYHl/view?usp=sharing) that compares house size and house prices of properties recently sold in Brooklyn's Dumbo neighborhood to predict the cost of houses based on size.
 
 **Note:** This data was gathered from [Zillow](https://bit.ly/3Sawp7f).
 
@@ -94,7 +98,7 @@ For a quick refresher, we imported the following libraries:
 - `train_test_split` from `sklearn.model_selection` for training and testing the model.
 - The `LinearRegression` class from `sklearn.linear_model` for implementing linear regression.
 
-Next, let's import some data. You will need to download the [data set](https://drive.google.com/file/d/1cNtzy7IwR753aXvpaYQRuEoxMfUNnYHl/view?usp=sharing) and upload it to Anaconda.
+Next, let's import some data. You will need to download the [dataset](https://drive.google.com/file/d/1cNtzy7IwR753aXvpaYQRuEoxMfUNnYHl/view?usp=sharing) and upload it to Anaconda.
 
 <img
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/predict-home-prices-with-python-and-linear-regression/file.png"
@@ -140,7 +144,7 @@ Now that we have extracted our data and plotted on a graph, it's time for the li
 
 A [train-test](https://en.wikipedia.org/wiki/Training,_validation,_and_test_data_sets) splits the generated data into training and testing sets using the `train_test_split()` function from Sklearn.
 
-The train test split is a model validation procedure commonly used in predictive machine learning to simulate how a model will work with new/unknown data. It is commonly used with large data sets or when you need a quick estimate.
+The train test split is a model validation procedure commonly used in predictive machine learning to simulate how a model will work with new/unknown data. It is commonly used with large datasets or when you need a quick estimate.
 
 Let's now add the following:
 
@@ -199,7 +203,7 @@ With our `plt` object, we use a scatter plot to visualize the actual and predict
 
 That's it, you have now officially trained and visualized a predictive modeling algorithm!
 
-To take your skills to the next level, consider sourcing data and utilizing linear regression for visualization. [Kaggle](https://www.kaggle.com/) is a great place to find data sets that have already been proven but you can also import any data. You can use linear regression to predict so many things:
+To take your skills to the next level, consider sourcing data and utilizing linear regression for visualization. [Kaggle](https://www.kaggle.com/) is a great place to find datasets that have already been proven but you can also import any data. You can use linear regression to predict so many things:
 
 - Video game sales based on reviews.
 - Social media engagement based on follower growth.
