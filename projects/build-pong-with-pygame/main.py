@@ -25,7 +25,7 @@ def main():
   clock = pygame.time.Clock()
   
   '''
-  this is to check wheter or not to move the ball
+  this is to check whether or not to move the ball
   we will make it move after 3 seconds
   '''
   started = False
