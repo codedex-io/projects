@@ -8,10 +8,12 @@ header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/dete
 published: live
 bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/detect-hotdog-with-hugging-face/header.png
 readTime: 30
-prerequisites: Python fundamentals
+prerequisites: Python
 versions: None
 tags:
   - intermediate
+  - python
+courses:
   - python
 ---
 
@@ -20,6 +22,8 @@ tags:
 Unlock the power of innovation around detecting if an image is a hot dog or a "not hot dog" just like Jian Yang from Silicon Valley using machine learning models on hugging face.  
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ACmydtFDTGs/0.jpg)](https://www.youtube.com/watch?v=ACmydtFDTGs)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ACmydtFDTGs?si=DOJ5mtC90AYG0dkq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 To do this we will be using [Hugging Face](https://huggingface.co/), a community and platform that hosts a bunch of open source machine learning models, datasets, and more.
 
@@ -74,10 +78,9 @@ The last package we need to add is `requests` which is a library to handle http 
 pip install python-dotenv
 ```
 
-
 ## Create a templates folder for our HTML
 
-In Flask, if we are going to have HTML files we typically store them in a folder called templates so Flask is able to find them.  Create a folder called templates, which should end up looking like this: 
+In Flask, if we are going to have HTML files we typically store them in a folder called **templates** so Flask is able to find them. Create a folder called templates, which should end up looking like this: 
 
 ```
 ├── root folder
@@ -90,9 +93,9 @@ In the templates folder create a **index.html** file.
 
 ## Add the HTML code
 
-Go into the `index.html` code and copy and paste the code below. It is just a simple form that will post to an API route on our flask server.
+Go into the **index.html** code and copy and paste the code below. It is just a simple form that will post to an API route on our flask server.
 
-```php-template
+```html
 <!-- templates/index.html -->
 <html>
     <head>
@@ -111,11 +114,11 @@ It is important to note `method="post" action="{{ url_for('upload') }}"` in our 
 
 ## Create an .env file
 
-Create an `.env` file at the root of the project. This is where we will place our Hugging Face variables.
+Create an **.env** file at the root of the project. This is where we will place our Hugging Face variables.
 
 ## Add variables to the .env file
 
-Open the `.env` file and add `HUGGING_FACE_API_URL= `and `HUGGING_FACE_API_KEY=`, adding in your API key and URL. This is where we place the hugging face data to allow us to use hugging face's models. 
+Open the **.env** file and add `HUGGING_FACE_API_URL= `and `HUGGING_FACE_API_KEY=`, adding in your API key and URL. This is where we place the hugging face data to allow us to use hugging face's models. 
 
 ```shell
 HUGGING_FACE_API_URL=https://api-inference.huggingface.co/models/julien-c/hotdog-not-hotdog
@@ -132,14 +135,14 @@ Now fill your `HUGGING_FACE_API_KEY` with that value.
 
 ## Create the server file
 
-At the root of our folder create a file called `web.py`. This is where all of our Flask server code will be.
+At the root of our folder create a file called **web.py**. This is where all of our Flask server code will be.
 
 ## Import the necessary libraries
 
 We are using Flask, and a couple of built in libaries to handle file types like JSON.
 
 ```python
-#web.py
+# web.py
 
 from flask import Flask, render_template, request, jsonify
 import requests
@@ -153,7 +156,7 @@ from dotenv import load_dotenv
 Here we will load the enviroment variables that we will get from Hugging face later including the URL and the API\_KEY.
 
 ```python
-#web.py
+# web.py
 
 from flask import Flask, render_template, request, jsonify
 import requests
@@ -207,9 +210,7 @@ def query(data):
 Now the two things that are missing are the API routes in flask to host our web form and to handle the posting of image data to our server.  So to fix this we will add one route to serve our index.html template and the other will handle the form post that will receive the image file and send it to our query function.
 
 ```python
-#web.py
-
-#web.py
+# web.py
 
 from flask import Flask, render_template, request, jsonify
 import requests
@@ -287,6 +288,6 @@ You did it, you are a Silicon Valley Legend just like Jian Yang, and now we have
 
 Hope you enjoyed the tutorial. If you have any questions, reach out to me on my linkedin [andrewryanvanbeek](https://www.linkedin.com/in/andrewryanvanbeek).  Also if you are interested in following what I am personally building check out [Dev-Docs](https://dev-docs.typedream.app/).
 
-## More Resources
+### More Resources
 
 - [Discord Developer Portal](https://discord.com/developers/docs/intro)
