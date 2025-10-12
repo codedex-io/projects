@@ -10,6 +10,9 @@ bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects
 readTime: 60
 prerequisites: Python fundamentals, API usage
 versions: Python 3.11, python-dotenv 1.0.1, elevenlabs 1.54.0, elevenlabs[pyaudio]
+courses:
+  - python
+  - command-line
 tags:
   - intermediate
   - python
@@ -127,7 +130,6 @@ ElevenLabs is now set up and ready to be used in our Python script!
 
 **Note:** ElevenLabs works with a credit system. When you sign up, you get 10,000 free credits which amount to 15 minutes of conversation. You can buy more credits if needed.
 
-
 ## Building the Voice Assistant
 
 ### Load Environment Variables
@@ -160,6 +162,7 @@ from elevenlabs.types import ConversationConfig
 We will then configure the conversation with the agent's first message and system prompt. 
 
 We are going to inform the assistant that the user has a schedule and prompt it to help the user. In this part you can customize:
+
 - The **user's name**: what the assistant will call the user
 - The **schedule**: the user's schedule that the assistant will use to provide help
 - The **prompt**: the message that the assistant will receive when the conversation starts to understand the context of the conversation
@@ -180,28 +183,28 @@ Underneath in the same file, we are then going to set this configuration to our 
 
 ```py
 conversation_override = {
-    "agent": {
-        "prompt": {
-            "prompt": prompt,
-        },
-        "first_message": first_message,
+  "agent": {
+    "prompt": {
+      "prompt": prompt,
     },
+    "first_message": first_message,
+  },
 }
 
 config = ConversationConfig(
-    conversation_config_override=conversation_override,
-    extra_body={},
-    dynamic_variables={},
+  conversation_config_override=conversation_override,
+  extra_body={},
+  dynamic_variables={},
 )
 
 client = ElevenLabs(api_key=API_KEY)
 
 conversation = Conversation(
-    client,
-    AGENT_ID,
-    config=config,
-    requires_auth=True,
-    audio_interface=DefaultAudioInterface(),
+  client,
+  AGENT_ID,
+  config=config,
+  requires_auth=True,
+  audio_interface=DefaultAudioInterface(),
 )
 ```
 
@@ -211,13 +214,13 @@ We'll also need to handle assistant responses by printing the assistant's respon
 
 ```py
 def print_agent_response(response):
-    print(f"Agent: {response}")
+  print(f"Agent: {response}")
 
 def print_interrupted_response(original, corrected):
-    print(f"Agent interrupted, truncated response: {corrected}")
+  print(f"Agent interrupted, truncated response: {corrected}")
 
 def print_user_transcript(transcript):
-    print(f"User: {transcript}")
+  print(f"User: {transcript}")
 ```
 
 ### 4. Start the Voice Assistant Session
@@ -226,14 +229,14 @@ Finally, initiate the conversation session in the same file:
 
 ```py
 conversation = Conversation(
-    client,
-    AGENT_ID,
-    config=config,
-    requires_auth=True,
-    audio_interface=DefaultAudioInterface(),
-    callback_agent_response=print_agent_response,
-    callback_agent_response_correction=print_interrupted_response,
-    callback_user_transcript=print_user_transcript,
+  client,
+  AGENT_ID,
+  config=config,
+  requires_auth=True,
+  audio_interface=DefaultAudioInterface(),
+  callback_agent_response=print_agent_response,
+  callback_agent_response_correction=print_interrupted_response,
+  callback_user_transcript=print_user_transcript,
 )
 
 conversation.start_session()
@@ -261,7 +264,7 @@ You've successfully built a Voice Virtual Assistant using ElevenLabs API. You ca
 
 Stay creative and keep experimenting with AI-powered assistants!
 
-## More Resources
+### More Resources
 
 - [Source Code](https://github.com/AlexandreSajus/codedex-voice/blob/main/voice_assistant.py)
 - ElevenLabs Conversational AI [Overview](https://elevenlabs.io/docs/conversational-ai/overview)
