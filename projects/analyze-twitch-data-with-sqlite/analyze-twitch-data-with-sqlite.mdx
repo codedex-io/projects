@@ -88,7 +88,7 @@ sqlite twitch.db
 
 Inside the SQLite prompt, create a table called `streams`:
 
-```sql
+```
 CREATE TABLE streams ( 
   id TEXT PRIMARY KEY, 
   user_name TEXT, 
@@ -114,7 +114,7 @@ Make sure your CSV file is in the same folder. Then in the SQLite prompt:
 
 To make sure it’s working:
 
-```sql
+```
 SELECT *
 FROM streams
 LIMIT 10;
@@ -130,7 +130,7 @@ The data is now in a table, and we are ready to analyze it. ✅
 
 So usually, I like to start by selecting the first 10-20 rows from the table to see the column names:
 
-```sql
+```
 SELECT *
 FROM streams
 LIMIT 20;
@@ -154,7 +154,7 @@ The output should look something like this:
 
 Let’s find all the unique games in this dataset using the `DISTINCT` keyword:
 
-```sql
+```
 SELECT DISTINCT column_name 
 FROM table_name;
 ```
@@ -186,7 +186,7 @@ Let’s go through each of these one by one.
 
 To find out this one, we need to use `COUNT()` and `GROUP BY`:
 
-```sql
+```
 SELECT game, COUNT(*) 
 FROM stream 
 GROUP BY game 
@@ -195,7 +195,7 @@ ORDER BY COUNT(*) DESC;
 
 We can rewrite this using column reference numbers instead of column names: 
 
-```sql
+```
 SELECT game, COUNT(*) 
 FROM stream 
 GROUP BY 1 
@@ -212,7 +212,7 @@ Let’s pick a popular game (League of Legends), and see where people are tuning
 
 We can create a list of countries and their number of LoL viewers using `WHERE` and `GROUP BY`:
 
-```sql
+```
 SELECT country, COUNT(*) 
 FROM stream 
 WHERE game = 'League of Legends' 
@@ -264,7 +264,7 @@ One of the most common questions is (we ask this at Codédex as well): _How does
 
 Before we dive in, let’s run this query and check out the `time` column from the stream table.
 
-```sql
+```
 SELECT time 
 FROM stream 
 LIMIT 10; 
@@ -280,7 +280,7 @@ SQLite comes with a `strftime() function` – a very powerful function that allo
 
 Let’s test out this function:
 
-```sql
+```
 SELECT time, strftime('%S', time) 
 FROM stream 
 GROUP BY 1 
