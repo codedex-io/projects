@@ -37,20 +37,26 @@ Now that the MVP is out, our goal for Codédex Projects is to invite awesome con
 
 - [@bobliuuu](https://github.com/Bobliuuu)
 
-## Don't know what to write? 
+## Don't know what to write?
 
 Here are a few article ideas that we'd love for you to write:
 
 - Analyze Your Netflix Data with Python
 - Visualize Your Personal Expenses with Matplotlib
 - Visualize Your Uber Data with Matplotlib
-- Decorate Your Terminal with ______
+- Decorate Your Terminal with **\_\_**
 - Build a Minecraft Mod with Python
 - Build an Instagram Bot with Python
-- ______ with Raspberry Pi
+- **\_\_** with Raspberry Pi
 - Analyze Alone (TV Show) with Python
 - Emotions Detector with JavaScript
 - Face Recognition With Python
+
+## Publishing States
+
+- false — Not published on Vercel or the production site
+- vercel — Published on the Vercel preview environment, but not yet live on the production site
+- live — Published and visible on the production site
 
 ## Additional Notes
 
