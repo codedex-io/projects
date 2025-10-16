@@ -37,8 +37,8 @@ In this project tutorial, we will explore a dataset about top Twitch streamers a
 
 The two CSV files we have are:
 
-Top 1000 Twitch Streamers (May 2024) featuring streamers like [kaicenat](https://www.twitch.tv/kaicenat) and [jynxzi](https://www.twitch.tv/jynxzi).
-Top 1000 Twitch Streamers (2021) featuring streams like xQc, summit1g, TimTheTatMan, and DrDisrespect.
+- [Top 1000 Twitch Streamers (May 2024)](https://www.kaggle.com/datasets/hibrahimag1/top-1000-twitch-streamers-data-may-2024) featuring streamers like [kaicenat](https://www.twitch.tv/kaicenat) and [jynxzi](https://www.twitch.tv/jynxzi).
+- [Top 1000 Twitch Streamers (2021)](https://www.kaggle.com/datasets/aayushmishra1512/twitchdata) featuring streams like xQc, summit1g, TimTheTatMan, and DrDisrespect.
 
 Do you recognize any of the names? 
 
@@ -58,8 +58,8 @@ You should see a prompt that says `sqlite>`.
 
 Download one of the CSV files and open it up to make sure the CSV file is working:
 
-Top 1000 Twitch Streamers (2024)
-Twitch Streamers (2021)
+- Top 1000 Twitch Streamers (2024)
+- Twitch Streamers (2021)
 
 A **CSV** file stands for **C**omma-**S**eparated **V**alues file. It’s a simple way to store spreadsheet data in a plain text format. Each line in the file represents a row, and the columns in that row are separated by commas. 
 
@@ -139,15 +139,15 @@ LIMIT 20;
 
 `stream` has the following columns:
 
-`time` 
-`device_id` 
-`login` 
-`channel` 
-`country`
-`player`
-`game`
-`stream_format`
-`subscriber`
+- `time` 
+- `device_id` 
+- `login` 
+- `channel` 
+- `country`
+- `player`
+- `game`
+- `stream_format`
+- `subscriber`
 
 The output should look something like this:
 
@@ -162,14 +162,14 @@ FROM table_name;
 
 The results should look like: 
 
-League of Legends
-DayZ
-Dota 2 
-Heroes of the Storm 
-Counter-Strike: Global Offensive 
-Hearthstone: Heroes of Warcraft 
-The Binding of Isaac: Rebirth
-etc.
+- League of Legends
+- DayZ
+- Dota 2 
+- Heroes of the Storm 
+- Counter-Strike: Global Offensive 
+- Hearthstone: Heroes of Warcraft 
+- The Binding of Isaac: Rebirth
+- etc.
 
 ## Using Aggregate Functions
 
@@ -177,9 +177,9 @@ Now it’s a good time to write down the questions that we have.
 
 Here are some of mine:
 
-_What are the most popular games in the stream table?_
-_These are some big numbers from the game League of Legends (also known as LoL). Where are these LoL stream viewers located?_
-_The player column contains the source the user is using to view the stream (site, iPhone, Android, etc). Create a list of players and their number of streamers._
+- _What are the most popular games in the stream table?_
+- _These are some big numbers from the game League of Legends (also known as LoL). Where are these LoL stream viewers located?_
+- _The player column contains the source the user is using to view the stream (site, iPhone, Android, etc). Create a list of players and their number of streamers._
 
 Let’s go through each of these one by one.
 
@@ -205,11 +205,11 @@ ORDER BY 2 DESC;
 
 The top games are: [fill in].
 
-### League of LegendsLegend Viewers
+### League of Legends Viewers
 
 Another question I have is around Twitch’s international demographic. 🌎
 
-Let’s pick a popular game (League of Legends), and see where people are tuning in from.
+Let’s pick a popular game (League of Legends) and see where people are tuning in from.
 
 We can create a list of countries and their number of LoL viewers using `WHERE` and `GROUP BY`:
 
@@ -225,16 +225,16 @@ Very international! If you want to grab just the top 10, we can add a `LIMIT 10`
 
 The results should look something like:
 
-United States 🇺🇸
-Germany 🇩🇪
-Russia 🇷🇺
-France 🇫🇷
-Brazil 🇧🇷
-Mexico 🇲🇽
-Fill out
-Fill out
-Fill out
-Fill out
+1. United States 🇺🇸
+2. Germany 🇩🇪
+3. Russia 🇷🇺
+4. France 🇫🇷
+5. Brazil 🇧🇷
+6. Mexico 🇲🇽
+7. Fill out
+8. Fill out
+9. Fill out
+10. Fill out
 
 You can do this with any other game.
 
@@ -244,16 +244,16 @@ Create a new column named genre for each of the games.
 
 Group the games into their genres: 
 
-Multiplayer Online Battle Arena (MOBA)
-First Person Shooter (FPS), Survival, and Other. Using CASE, your logic should be: 
-If League of Legends → MOBA 
-If Dota 2 → MOBA 
-If Heroes of the Storm → MOBA 
-If Counter-Strike: Global Offensive → FPS 
-If DayZ → Survival 
-If ARK: Survival Evolved → Survival 
-Else → Other 
-Use GROUP BY and ORDER BY to showcase only the unique game titles.
+- Multiplayer Online Battle Arena (MOBA)
+- First Person Shooter (FPS), Survival, and Other. Using CASE, your logic should be: 
+  - If League of Legends → MOBA 
+  - If Dota 2 → MOBA 
+  - If Heroes of the Storm → MOBA 
+  - If Counter-Strike: Global Offensive → FPS 
+  - If DayZ → Survival 
+  - If ARK: Survival Evolved → Survival 
+  - Else → Other 
+- Use GROUP BY and ORDER BY to showcase only the unique game titles.
 
 This can be done using a `CASE` statement, which is similar to an `if`/`else if`/`else` or `switch` statement in Python, C++, or Java:
 
@@ -319,16 +319,16 @@ Feel free to keep going and try to come up with more questions.
 
 Some other ideas include:
 
-What are your favorite games? Can you find some interesting insights about them?
-Can you _compare_ the two datasets? How are streamers in 2024 different from 2021 ones? Hint: Use a `JOIN` or a `UNION`.
-Any other questions that you might have?
+- What are your favorite games? Can you find some interesting insights about them?
+- Can you _compare_ the two datasets? How are streamers in 2024 different from 2021 ones? Hint: Use a `JOIN` or a `UNION`.
+- Any other questions that you might have?
 
 Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io) and me, [@sonnynomnom](https://www.twitter.com/sonnynomnom) on Twitter/X if you find out something interesting! ✨
 
 ## More Resources
 
-Solution code
-Kaggle
+- Solution code
+- Kaggle
 
 
 
