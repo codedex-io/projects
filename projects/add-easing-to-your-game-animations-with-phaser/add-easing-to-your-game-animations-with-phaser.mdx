@@ -1,0 +1,452 @@
+---
+title: Add Easing to Your Game Animations With Phaser
+author: Julien Kris
+uid: Jps14SaCwqgdbbnYvoMpvMKv92P2
+datePublished: 2025-10-16
+published: vercel
+description: TBD
+header:
+bannerImage:
+readTime: 30
+prerequisites: JavaScript
+versions: 
+tags:
+  - intermediate
+  - javascript
+  - phaser
+  - games
+courses:
+  - javascript
+  - phaser
+---
+
+# Add Easing to Your Game Animations With Phaser
+
+## Introduction
+
+Oftentimes in introductory lessons on game animation, animation happens linearly: an object moves across the screen at a consistent rate. But in real life physics, when someone throws a ball and it bounces, that bounce has momentum, and moments when it moves quickly and then slows down.
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="red and green balls bouncing"
+/>
+
+The red ball on the left is moving at a linear rate. It’s technically moving up and down, so it *should* read as bouncing, but it doesn’t. It looks a bit lifeless and like something’s off. The green ball on the right, however, has variation in its movement and looks like it’s really bouncing with gravity, not just moving up and down like an elevator.
+
+The same applies to a character jumping, bouncing off of a wall, casting a spell, or shooting an arrow. 
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="frog game easing demo"
+/>
+
+This variation in movement is called easing. Easing brings game animation to life.
+
+In this project tutorial, you’ll learn how to apply built-in easing functions in Phaser to add personality to your animations. As a bonus challenge, you’ll also learn how to code your own custom easing functions from scratch!
+
+## Easing
+
+**Easing** is a way of using mathematical formulas to set the rate of movement in animation.
+
+[Easings.net](http://Easings.net) is a great resource that lets you test out each type of easing, and even view the mathematical formulas behind them!
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="four types of easing curves"
+/>
+
+Phaser has 32 different built-in easing functions available to use! Wanna see all of the easing functions together in action?
+
+Check out this [Build](https://www.codedex.io/L5fusA3iJ2Bg6IJsM6lz/live) of a Codédex character’s walk cycle, with all the different types of easing applied:
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="all easing curves demo with codedex sprite"
+/>
+
+All of these examples show walking, but each has an entirely different feeling.
+
+## Adding Easing to Walk Cycles
+
+Let’s add easing to a character walking across a platform! We can build the scene from scratch.
+
+Open a code editor of your choice and create a blank JavaScript file called **script.js**. We can start by setting up our `config` object:
+
+```jsx
+const config = {
+  type: Phaser.AUTO,
+  width: 800,
+  height: 600,
+  backgroundColor: "#87CEEB", // light blue sky
+  scene: { preload, create, update }
+};
+```
+
+This creates an 800 x 600 px canvas with a light blue (sky-colored) background, and loads the `preload()` and `create()` functions.
+
+We’ll be working with a sprite sheet (one image that contains many frames of animation) of one of our Codédex characters, which you can find [here](https://i.imgur.com/jT8aRa1.png).
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="codedex character spritesheet"
+/>
+
+### preload() 
+
+We can set up the `preload()` function like so:
+
+```jsx
+function preload() {
+  this.load.spritesheet("player", "https://i.imgur.com/jT8aRa1.png", {
+    frameWidth: 120,
+    frameHeight: 120
+  });
+}
+```
+
+As a reminder, `preload()` is a built-in function that loads first to make sure that graphics show up quickly once the code runs.
+
+- `this.load.spritesheet` loads the sprite sheet.
+- `"player"` is the key to reference this sprite sheet later.
+- `frameWidth` & `frameHeight` are the width and height of each individual frame in the sheet.
+
+### create()
+
+Next, we can set up the `create()` function, which runs once right after the `preload()` function.
+
+We’ll do this in parts, since it gets a bit complex.
+
+```jsx
+function create() {
+  const graphics = this.add.graphics();
+  graphics.fillStyle(0x228B22, 1); // forest green
+  graphics.fillRect(0, 450, 800, 50);
+}
+```
+
+`this.add.graphics()` creates a `graphics` object, which allows you to draw shapes (rectangles, circles, lines, etc.) directly on the screen without having to load an image.
+
+After that, we set up a rectangle that acts as a platform for the player to stand on.
+
+- `fillStyle(0x228B22, 1)` sets the rectangle’s color and opacity.
+    - `0x228B22` is written in a special format that the graphics object can understand. The `#` prefix we associate with hex codes is simply replaced by the `0x` prefix.
+    - `1` makes the rectangle fully opaque.
+- `fillRect(0, 450, 800, 50)` draws a rectangle.
+    - `x = 0, y = 450` is the top-left corner of the rectangle.
+    - `width = 800, height = 50` fills across the width of the screen, 50 pixels tall.
+
+Next, we can create the walking animation. 
+
+```jsx
+function create() {
+  const graphics = this.add.graphics();
+  graphics.fillStyle(0x228b22, 1);
+  graphics.fillRect(0, 450, 800, 50);
+  
+  // New code
+  this.anims.create({
+    key: "walk",
+    frames: this.anims.generateFrameNumbers("player", { start: 12, end: 17 }),
+    frameRate: 8,
+    repeat: -1,
+  });
+}
+```
+
+- `key: "walk"` is the name of the animation, used when we tell the sprite to play it.
+- `frames` and `this.anims.generateFrameNumbers` tells Phaser which frames of the `"player"` sprite sheet to use for this animation.
+    - `start: 12, end: 17` uses frames 12 through 17.
+- `frameRate: 8` is how fast the animation plays, 8 frames per second.
+- `repeat: -1` loops the animation indefinitely.
+
+Next, we can add the player sprite.
+
+```jsx
+function create() {
+  const graphics = this.add.graphics();
+  graphics.fillStyle(0x228b22, 1);
+  graphics.fillRect(0, 450, 800, 50);
+
+  this.anims.create({
+    key: "walk",
+    frames: this.anims.generateFrameNumbers("player", { start: 12, end: 17 }),
+    frameRate: 8,
+    repeat: -1,
+  });
+
+  // New code
+  const player = this.add.sprite(100, 423, "player").setScale(0.5);
+  player.play("walk");
+}
+```
+
+- `this.add.sprite(100, 423, "player")` adds the sprite to the scene at position `(100, 423)`. The `423` y-coordinate is just above the top of the grass rectangle (`y = 450`) so the player appears to stand on it.
+- `.setScale(0.5)` makes the sprite half its original size.
+- `player.play("walk")` starts the walking animation we defined earlier.
+
+Next, we can move the player using a tween (aka easing). We’ll start with a linear animation so you can see how it differs once we introduce easing.
+
+```jsx
+function create() {
+  const graphics = this.add.graphics();
+  graphics.fillStyle(0x228b22, 1);
+  graphics.fillRect(0, 450, 800, 50);
+
+  this.anims.create({
+    key: "walk",
+    frames: this.anims.generateFrameNumbers("player", { start: 12, end: 17 }),
+    frameRate: 8,
+    repeat: -1,
+  });
+
+  const player = this.add.sprite(100, 423, "player").setScale(0.5);
+  player.play("walk");
+
+  // New code
+  this.tweens.add({
+    targets: player,
+    x: 800,
+    duration: 3000,
+    ease: "Linear",
+  });
+}
+```
+
+This makes the player walk across the screen automatically.
+
+- `this.tweens.add` moves or changes properties of objects smoothly over time.
+    - `targets: player` is the object to animate.
+    - `x: 800` is the target x-position (moves the sprite horizontally to 800).
+    - `duration: 3000` is the time in milliseconds (3 seconds) for the movement.
+    - `ease: "Linear"` sets no acceleration, it moves at a constant speed.
+
+That wraps up our create function! 
+
+Remember to add the following code after the closing bracket of the `create()` function to make sure the scene runs.
+
+```jsx
+new Phaser.Game(config);
+```
+
+When you run the code, you should see something like this:
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="codedex character linear walk"
+/>
+
+Here’s a graph visualizing the animation curve: 
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="linear graph"
+/>
+
+This is our character running across the platform with `Linear` easing applied. `Linear` is like a default state where an object moves at a consistent rate.
+
+### Different Types of Easing
+
+As you saw above, there are 32 different types of easing we can apply to this character! Here’s a complete list you can copy and paste.
+
+```markdown
+    "Linear","Quad.easeIn","Cubic.easeIn","Quart.easeIn","Quint.easeIn",
+    "Sine.easeIn","Expo.easeIn","Circ.easeIn","Back.easeIn","Bounce.easeIn",
+    "Quad.easeOut","Cubic.easeOut","Quart.easeOut","Quint.easeOut","Sine.easeOut",
+    "Expo.easeOut","Circ.easeOut","Back.easeOut","Bounce.easeOut",
+    "Quad.easeInOut","Cubic.easeInOut","Quart.easeInOut","Quint.easeInOut",
+    "Sine.easeInOut","Expo.easeInOut","Circ.easeInOut","Back.easeInOut","Bounce.easeInOut"
+```
+
+Inside `this.tweens.add`, try changing `ease` from `Linear` to one of the options above.
+
+A nice subtle one to try is `Sine.easeInOut`:
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="codedex character sine ease in out sine walk"
+/>
+
+This one starts slow, gets fast in the middle, and ends slow. It eases in and it eases out.
+
+Here’s a graph visualizing the animation curve:
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="ease in out sine graph"
+/>
+
+They can get pretty wild. Here’s `Bounce.easeInOut` in action:
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="codedex character bounce ease in out walk"
+/>
+
+Here’s a graph visualizing that one: 
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="bounce ease in out graph"
+/>
+
+As you’re testing these out, think about how each easing changes the feeling of the walk cycle!
+
+## Bonus Challenge: Add Custom Easing
+
+If you want to customize it even further, you can actually go outside the box of built-in easing functions, and make your own. In order to do that, we need to understand exactly how the math behind easing functions works.
+
+Let’s zoom into the `this.tweens.add` function.
+
+```jsx
+  this.tweens.add({
+    targets: player,
+    x: 800,
+    duration: 3000,
+    ease: "Linear",
+  });
+```
+
+Another way of getting the same output as the built-in "Linear" easing function is to write out the math behind it instead of writing the function name, like so:
+
+```jsx
+this.tweens.add({
+  targets: player,
+  x: 800,
+  duration: 3000,
+  ease: function (t) {
+    return t;
+  },
+});
+```
+
+Try replacing the built-in function name in your code with the mathematical function above. It should behave exactly the same way as the `Linear` function.
+
+So, why does this work? Let’s break down the logic of the easing function itself.
+
+Setting values in `this.tweens.add` controls how a value changes over time. In this case, how the player’s `x` position moves `800` pixels to the right over the course of `3000` milliseconds, or 3 seconds.
+
+`t` stands for normalized time, or how far along the animation is between the start and the end, represented as a value between `0` and `1`. So, the value of `t` goes from `0` to `1` over the course of `3000` milliseconds, the tween’s duration.
+
+In a linear function like the one above, the value of t works like this:
+
+- `t = 0` means the animation is **0%** complete at **0 ms**
+- `t = 0.25` means the animation is **25%** complete at **750 ms**
+- `t = 0.5` means the animation is **50%** complete at **1500 ms**
+- `t = 0.75` means the animation is **75%** complete at **2250 ms**
+- `t = 1` means the animation is **100%** complete at **3000 ms**
+
+Just like the linear graph from before.
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="linear graph"
+/>
+
+Of course, these values are very clearcut for the `Linear` function. Let’s unpack a more complex function, like `Expo.easeIn`.
+
+```jsx
+this.tweens.add({
+  targets: player,
+  x: 800,
+  duration: 3000,
+  ease: function (t) {
+    return t === 0 ? 0 : Math.pow(2, 10 * (t - 1));
+  },
+});
+```
+
+- `t = 0` means the animation is **0%** complete at **0 ms**
+- `t = 0.25` means the animation is **5.6%** complete at **750 ms**
+- `t = 0.5` means the animation is **3.1%** complete at **1500 ms**
+- `t = 0.75` means the animation is **17.8%** complete at **2250 ms**
+- `t = 1` means the animation is **100%** complete at **3000 ms**
+
+Woah woah woah! Why is the animation only 3.1% complete at `t = 0.5`? Isn’t that halfway through the animation? Indeed! Let’s take a look at `Expo.EaseIn` animation to understand.
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="expo ease in graph"
+/>
+
+As you can see, `Expo.easeIn` starts slow, and increases at an exponential curve.
+
+So, how does all of this apply to making your own easing curve? You can try taking formulas for existing curves, and changing the values to see how they change! If you click into each of the easing functions on [easings.net](https://easings.net/), you can view all the formulas.
+
+So if we wanted to create custom easing for something being thrown with a slingshot, we could start with the formula for `Elastic.easeOut`:
+
+```jsx
+this.tweens.add({
+  targets: player,
+  x: 800,
+  duration: 3000,
+  ease: function (t) {
+    const wavePeriod = (2 * Math.PI) / 3;
+    return t === 0
+      ? 0
+      : t === 1
+      ? 1
+      : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * wavePeriod) + 1;
+  },
+});
+```
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="elastic ease out graph"
+/>
+
+And then we could adjust parameters to get different effect. Here’s a breakdown of the formula, and what will happen if you make certain adjustments.
+
+- Amplitude / decay: `Math.pow(2, -10 * t)`
+    - Increase the exponent: bounces die out faster
+    - Decrease the exponent: longer, more dramatic bounces
+- Frequency / speed of oscillation: `t * 10` inside `Math.sin`
+    - Multiply by a larger number: more bounces in the same amount of time
+    - Multiply by smaller number: fewer bounces in the same amount of time for a slower, heavier bounce
+- Phase shift: `0.75`
+    - Adjusts where the first bounce starts
+- Wave period: `(2 * Math.PI) / 3`
+    - Changes length of each oscillation
+
+You can look into how other formulas are structured and customize them to fit your needs. Or, if you’re feeling extra mathy and adventurous, you can write formulas entirely from scratch!
+
+Here are some ideas to get you started:
+
+- Spell being cast
+- Weapon being thrown
+- Projectile falling from the sky and bouncing
+- A collectible bouncing when it’s touched
+
+<ImageZoom
+  src="LINK"
+  style={{ width: "80%", height: "auto" }}
+  alt="casting fire spell example"
+/>
+
+## Conclusion
+
+Congrats! You’ve learned all about easing in Phaser.
+
+Now you know how to:
+
+- Create a simple platformer game scene with built-in easing functions
+- Customize existing easing functions
+- Build your own easing functions 
+
+## Additional Resources
+- [Easings.net](https://easings.net/)
+- [Custom Easing Functions Tutorial](https://sbcgamesdev.blogspot.com/2015/04/phaser-tutorial-custom-easing-functions.html)
+- another one
