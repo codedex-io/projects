@@ -1,0 +1,333 @@
+--- 
+title: Analyze Twitch Data with SQLite
+author: Sonny Li
+uid: 
+description: Explore and analyze real data on the top Twitch streamers from 2021 and 2024 using SQLite (directly in the terminal). Learn how to query and uncover insights about streaming trends with hands-on SQL practice.
+published: vercel
+header: 
+bannerImage: 
+readTime: 60 
+prerequisites: SQL, Command Line
+versions: SQLite 3.50.4
+courses: 
+  - sql
+  - command-line
+tags: 
+  - intermediate
+  - sql
+  - data-science
+---
+
+## Introduction
+
+[Twitch](https://www.twitch.tv) is a live streaming platform where millions of people come together every day to watch, chat, and create content in real time. Launched in 2011 as a site focused on video game streaming, Twitch has since expanded to include music, art, sports, and “just chatting” streams.
+
+For history buffs, Twitch originated as a pivot from Justin.tv, a website launched in 2007 by Justin Kan, Emmett Shear, Michael Seibel, and Kyle Vogt (household names in San Francisco and people I’ve admired for years).
+
+Very quickly, Twitch became an underground sensation. During college, my roommates and I spent countless hours watching streamers play our favorite game, Dota 2, while eating and hanging out. It was a centerpiece of our “sadboy” days and a platform that meant a lot to us.
+
+Here’s me streaming a Dota 2 match in 2014 to 13 viewers:
+
+
+
+Today, new streamers like KaiCenat, IShowSpeed, and Ludwig are taking streaming to new heights and breaking records.
+
+In this project tutorial, we will explore a dataset about top Twitch streamers and uncover insights using SQLite. These are real data from [Kaggle](https://kaggle.com), a website with 500,000+ public datasets.
+
+The two CSV files we have are:
+
+Top 1000 Twitch Streamers (May 2024) featuring streamers like [kaicenat](https://www.twitch.tv/kaicenat) and [jynxzi](https://www.twitch.tv/jynxzi).
+Top 1000 Twitch Streamers (2021) featuring streams like xQc, summit1g, TimTheTatMan, and DrDisrespect.
+
+Do you recognize any of the names? 
+
+Pick your poison (dataset) and let’s dive in!
+
+### Setting Up
+
+First, install SQLite if you haven’t done so already. Check out our [Setting Up SQLite Locally](https://www.codedex.io/sql/bonus/sqlite) bonus article if you need help.
+
+And then open your terminal and test it with: 
+
+```terminal
+sqlite3
+```
+
+You should see a prompt that says `sqlite>`. 
+
+Download one of the CSV files and open it up to make sure the CSV file is working:
+
+Top 1000 Twitch Streamers (2024)
+Twitch Streamers (2021)
+
+A **CSV** file stands for **C**omma-**S**eparated **V**alues file. It’s a simple way to store spreadsheet data in a plain text format. Each line in the file represents a row, and the columns in that row are separated by commas. 
+
+So the Top 1000 Twitch Streams data looks like:
+
+```output
+Channel, Watch Time, Stream time, peak viewers, average viewers, Followers, Mature
+xQcOW, 6196161750,215250,222720, 277163246298, 173481093036735, False
+summit1g, 6091677300,211845,310998, 2561053101, 63137018489705964, False
+Gaules, 5644590915,515280,387315,109761767635, 1023779102611607, True
+ESL_CSGO, 3970318140,517740, 300575,7714,3944850, 703986106546942, False
+Tfue, 3671000070,123660,285644, 29602, 8938903, 206842478998587, False
+... and so on
+```
+
+There are 1,001 rows in each of the datasets because there is 1 column for the headings and 1,000 streamers each!
+
+Let’s move back into our terminal and start the database.
+
+### Create SQLite Database
+
+In the terminal, type:
+
+```terminal
+sqlite twitch.db
+```
+
+Inside the SQLite prompt, create a table called `streams`:
+
+```sql
+CREATE TABLE streams ( 
+  id TEXT PRIMARY KEY, 
+  user_name TEXT, 
+  game_name TEXT, 
+  title TEXT, 
+  viewer_count INTEGER, 
+  started_at TEXT 
+);
+```
+
+These names will have to match the CSV columns as well as the data type here, or else there will be an error later.
+
+### Import CSV into SQLite
+
+It’s time to move our data from the CSV file into a SQL table.
+
+Make sure your CSV file is in the same folder. Then in the SQLite prompt:
+
+```sqlite
+.mode csv
+.import twitch_data.csv streams
+```
+
+To make sure it’s working:
+
+```sql
+SELECT *
+FROM streams
+LIMIT 10;
+```
+
+You should see something like:
+
+[screenshot image]
+
+The data is now in a table, and we are ready to analyze it. ✅
+
+### Getting a Feel for the Dataset
+
+So usually, I like to start by selecting the first 10-20 rows from the table to see the column names:
+
+```sql
+SELECT *
+FROM streams
+LIMIT 20;
+```
+
+`stream` has the following columns:
+
+`time` 
+`device_id` 
+`login` 
+`channel` 
+`country`
+`player`
+`game`
+`stream_format`
+`subscriber`
+
+The output should look something like this:
+
+[screenshot image]
+
+Let’s find all the unique games in this dataset using the `DISTINCT` keyword:
+
+```sql
+SELECT DISTINCT column_name 
+FROM table_name;
+```
+
+The results should look like: 
+
+League of Legends
+DayZ
+Dota 2 
+Heroes of the Storm 
+Counter-Strike: Global Offensive 
+Hearthstone: Heroes of Warcraft 
+The Binding of Isaac: Rebirth
+etc.
+
+## Using Aggregate Functions
+
+Now it’s a good time to write down the questions that we have. 
+
+Here are some of mine:
+
+_What are the most popular games in the stream table?_
+_These are some big numbers from the game League of Legends (also known as LoL). Where are these LoL stream viewers located?_
+_The player column contains the source the user is using to view the stream (site, iPhone, Android, etc). Create a list of players and their number of streamers._
+
+Let’s go through each of these one by one.
+
+### Top 10 Most Popular Games
+
+To find out this one, we need to use `COUNT()` and `GROUP BY`:
+
+```sql
+SELECT game, COUNT(*) 
+FROM stream 
+GROUP BY game 
+ORDER BY COUNT(*) DESC; 
+```
+
+We can rewrite this using column reference numbers instead of column names: 
+
+```sql
+SELECT game, COUNT(*) 
+FROM stream 
+GROUP BY 1 
+ORDER BY 2 DESC;
+```
+
+The top games are: [fill in].
+
+### League of LegendsLegend Viewers
+
+Another question I have is around Twitch’s international demographic. 🌎
+
+Let’s pick a popular game (League of Legends), and see where people are tuning in from.
+
+We can create a list of countries and their number of LoL viewers using `WHERE` and `GROUP BY`:
+
+```sql
+SELECT country, COUNT(*) 
+FROM stream 
+WHERE game = 'League of Legends' 
+GROUP BY 1 
+ORDER BY 2 DESC;
+```
+
+Very international! If you want to grab just the top 10, we can add a `LIMIT 10` at the bottom to cap the results.
+
+The results should look something like:
+
+United States 🇺🇸
+Germany 🇩🇪
+Russia 🇷🇺
+France 🇫🇷
+Brazil 🇧🇷
+Mexico 🇲🇽
+Fill out
+Fill out
+Fill out
+Fill out
+
+You can do this with any other game.
+
+### Grouping into Genres
+
+Create a new column named genre for each of the games. 
+
+Group the games into their genres: 
+
+Multiplayer Online Battle Arena (MOBA)
+First Person Shooter (FPS), Survival, and Other. Using CASE, your logic should be: 
+If League of Legends → MOBA 
+If Dota 2 → MOBA 
+If Heroes of the Storm → MOBA 
+If Counter-Strike: Global Offensive → FPS 
+If DayZ → Survival 
+If ARK: Survival Evolved → Survival 
+Else → Other 
+Use GROUP BY and ORDER BY to showcase only the unique game titles.
+
+This can be done using a `CASE` statement, which is similar to an `if`/`else if`/`else` or `switch` statement in Python, C++, or Java:
+
+[update code]
+
+## Best Hour to Stream
+
+One of the most common questions is (we ask this at Codédex as well): _How does view count change over the course of a day?_
+
+Before we dive in, let’s run this query and check out the `time` column from the stream table.
+
+```sql
+SELECT time 
+FROM stream 
+LIMIT 10; 
+```
+
+The data type of the time column is `DATETIME`. It is for storing a date/time value in the database. 
+
+Notice that the values are formatted like `2015-01-01 18:33:52` 
+
+So the format is: `YYYY-MM-DD HH:MM:SS`
+
+SQLite comes with a `strftime() function` – a very powerful function that allows you to return a formatted date. It takes two arguments: `strftime(format, column)`. (documentation link?)
+
+Let’s test out this function:
+
+```sql
+SELECT time, strftime('%S', time) 
+FROM stream 
+GROUP BY 1 
+LIMIT 20; 
+```
+
+What do you think this does? 
+
+Yep, this pulls out the seconds from each of these!
+
+Okay, now we understand how `strftime()` works. Let’s write a query that returns two columns: 
+
+- The hours of the time column 
+- The view count for each hour 
+
+Lastly, filter the result with only the users in your country using a `WHERE` clause.
+
+## Results
+
+So now that we have done, let’s write down everything that we found thus far:
+
+> The top games on Twitch are [fill in].
+> The top country for League is [fill in].
+> The best hour to stream is [fill in].
+
+This is a solid report. If you want to visualize it, you can use [Python](https://codedex.io/python), [NumPy](https://www.codedex.io/numpy), [Pandas](https://www.codedex.io/pandas), Matplotlib or Google Sheets / Microsoft Excel. 
+
+## Conclusion
+ 
+You’ve reached the end of the project tutorial! GGWP. 🔥
+
+We’ve taken a real-world dataset from Kaggle and imported it into SQLite, and used queries and aggregate functions to analyze the data.
+
+Feel free to keep going and try to come up with more questions.
+
+Some other ideas include:
+
+What are your favorite games? Can you find some interesting insights about them?
+Can you _compare_ the two datasets? How are streamers in 2024 different from 2021 ones? Hint: Use a `JOIN` or a `UNION`.
+Any other questions that you might have?
+
+Share your projects with the team [@codedex_io](https://www.twitter.com/codedex_io) and me, [@sonnynomnom](https://www.twitter.com/sonnynomnom) on Twitter/X if you find out something interesting! ✨
+
+## More Resources
+
+Solution code
+Kaggle
+
+
+
