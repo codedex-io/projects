@@ -27,7 +27,7 @@ courses:
 Oftentimes in introductory lessons on game animation, animation happens linearly: an object moves across the screen at a consistent rate. But in real life physics, when someone throws a ball and it bounces, that bounce has momentum, and moments when it moves quickly and then slows down.
 
 <ImageZoom
-  src="https://raw.githubusercontent.com/codedex-io/projects/tree/main/projects/add-easing-to-your-game-animations-with-phaser/assets/redGreen.gif"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/redGreen.gif"
   style={{ width: "80%", height: "auto" }}
   alt="red and green balls bouncing"
 />
@@ -37,7 +37,7 @@ The red ball on the left is moving at a linear rate. It’s technically moving u
 The same applies to a character jumping, bouncing off of a wall, casting a spell, or shooting an arrow. 
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/frogGame.gif"
   style={{ width: "80%", height: "auto" }}
   alt="frog game easing demo"
 />
@@ -53,7 +53,7 @@ In this project tutorial, you’ll learn how to apply built-in easing functions 
 [Easings.net](http://Easings.net) is a great resource that lets you test out each type of easing, and even view the mathematical formulas behind them!
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/curves.gif"
   style={{ width: "80%", height: "auto" }}
   alt="four types of easing curves"
 />
@@ -63,7 +63,7 @@ Phaser has 32 different built-in easing functions available to use! Wanna see al
 Check out this [Build](https://www.codedex.io/L5fusA3iJ2Bg6IJsM6lz/live) of a Codédex character’s walk cycle, with all the different types of easing applied:
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/allEasing.gif"
   style={{ width: "80%", height: "auto" }}
   alt="all easing curves demo with codedex sprite"
 />
@@ -91,7 +91,7 @@ This creates an 800 x 600 px canvas with a light blue (sky-colored) background, 
 We’ll be working with a sprite sheet (one image that contains many frames of animation) of one of our Codédex characters, which you can find [here](https://i.imgur.com/jT8aRa1.png).
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/spritesheet.png"
   style={{ width: "80%", height: "auto" }}
   alt="codedex character spritesheet"
 />
@@ -102,7 +102,7 @@ We can set up the `preload()` function like so:
 
 ```jsx
 function preload() {
-  this.load.spritesheet("player", "https://i.imgur.com/jT8aRa1.png", {
+  this.load.spritesheet("player", "assets/spritesheet.png", {
     frameWidth: 120,
     frameHeight: 120
   });
@@ -236,7 +236,7 @@ new Phaser.Game(config);
 When you run the code, you should see something like this:
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/linear.gif"
   style={{ width: "80%", height: "auto" }}
   alt="codedex character linear walk"
 />
@@ -244,7 +244,7 @@ When you run the code, you should see something like this:
 Here’s a graph visualizing the animation curve: 
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/linearGraph.gif"
   style={{ width: "80%", height: "auto" }}
   alt="linear graph"
 />
@@ -269,7 +269,7 @@ Inside `this.tweens.add`, try changing `ease` from `Linear` to one of the option
 A nice subtle one to try is `Sine.easeInOut`:
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/sine.gif"
   style={{ width: "80%", height: "auto" }}
   alt="codedex character sine ease in out sine walk"
 />
@@ -279,7 +279,7 @@ This one starts slow, gets fast in the middle, and ends slow. It eases in and it
 Here’s a graph visualizing the animation curve:
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/easeInOutSine.gif"
   style={{ width: "80%", height: "auto" }}
   alt="ease in out sine graph"
 />
@@ -287,7 +287,7 @@ Here’s a graph visualizing the animation curve:
 They can get pretty wild. Here’s `Bounce.easeInOut` in action:
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/bounce.gif"
   style={{ width: "80%", height: "auto" }}
   alt="codedex character bounce ease in out walk"
 />
@@ -295,7 +295,7 @@ They can get pretty wild. Here’s `Bounce.easeInOut` in action:
 Here’s a graph visualizing that one: 
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/easeInOutBounce.gif"
   style={{ width: "80%", height: "auto" }}
   alt="bounce ease in out graph"
 />
@@ -349,7 +349,7 @@ In a linear function like the one above, the value of t works like this:
 Just like the linear graph from before.
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/linearGraph.gif"
   style={{ width: "80%", height: "auto" }}
   alt="linear graph"
 />
@@ -376,7 +376,7 @@ this.tweens.add({
 Woah woah woah! Why is the animation only 3.1% complete at `t = 0.5`? Isn’t that halfway through the animation? Indeed! Let’s take a look at `Expo.EaseIn` animation to understand.
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/easeInExpo.gif"
   style={{ width: "80%", height: "auto" }}
   alt="expo ease in graph"
 />
@@ -403,7 +403,7 @@ this.tweens.add({
 });
 ```
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/easeOutElastic.gif"
   style={{ width: "80%", height: "auto" }}
   alt="elastic ease out graph"
 />
@@ -431,7 +431,7 @@ Here are some ideas to get you started:
 - A collectible bouncing when it’s touched
 
 <ImageZoom
-  src="LINK"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/spell.gif"
   style={{ width: "80%", height: "auto" }}
   alt="casting fire spell example"
 />
@@ -449,4 +449,4 @@ Now you know how to:
 ## Additional Resources
 - [Easings.net](https://easings.net/)
 - [Custom Easing Functions Tutorial](https://sbcgamesdev.blogspot.com/2015/04/phaser-tutorial-custom-easing-functions.html)
-- another one
+- [Easing Functions for Game Designers](https://www.youtube.com/watch?v=pydKWTSGMEM)
