@@ -141,10 +141,10 @@ In the terminal, type:
 sqlite twitch.db
 ```
 
-Inside the SQLite prompt, create a table called `streamers`:
+Inside the SQLite prompt, create a table called `streamers2021`:
 
 ```sql
-CREATE TABLE streamers ( 
+CREATE TABLE streamers2021 ( 
   channel TEXT PRIMARY KEY, 
   watch_time INTEGER,
   stream_time INTEGER,
@@ -181,14 +181,14 @@ Make sure your CSV file is in the same folder. Then in the SQLite prompt:
 
 ```terminal
 .mode csv
-.import streamers2021.csv streamers
+.import streamers2021.csv streamers2021
 ```
 
 To make sure it’s working:
 
 ```
 SELECT *
-FROM streamers
+FROM streamers2021
 LIMIT 10;
 ```
 
@@ -238,14 +238,41 @@ The output should look something like this:
 
 [screenshot image]
 
-Let’s find all the unique games in this dataset using the `DISTINCT` keyword:
+### Languages
+
+Let’s find all the unique languages in this dataset using the `DISTINCT` keyword:
 
 ```
-SELECT DISTINCT column_name 
-FROM table_name;
+SELECT DISTINCT language
+FROM streamers;
 ```
 
 The results should look like: 
+
+- English
+- Portuguese
+- Spanish
+- German
+- Korean
+- French
+- Russian
+- Japanese
+- Chinese
+- Czech
+- Turkish
+- Italian
+- Polish
+- Thai
+- Arabic
+- Slovak
+- Other
+- Hungarian
+- Greek
+- Finnish
+- Swedish
+
+
+For `streamers2024` table, you can do distinct games:
 
 - League of Legends
 - DayZ
@@ -255,6 +282,9 @@ The results should look like:
 - Hearthstone: Heroes of Warcraft 
 - The Binding of Isaac: Rebirth
 - etc.
+
+###
+
 
 ## Using Aggregate Functions
 
