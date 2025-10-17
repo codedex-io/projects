@@ -37,8 +37,8 @@ In this project tutorial, we will explore a dataset about top Twitch streamers a
 
 The two CSV files we have are:
 
-- [Top 1000 Twitch Streamers (2024)](https://www.kaggle.com/datasets/hibrahimag1/top-1000-twitch-streamers-data-may-2024) featuring streamers like [KaiCenat](https://www.twitch.tv/kaicenat), [Jynxzi](https://www.twitch.tv/jynxzi).
-- [Top 1000 Twitch Streamers (2021)](https://www.kaggle.com/datasets/aayushmishra1512/twitchdata) featuring streamers like [xQc](https://www.twitch.tv/xqc), [summit1g](https://www.twitch.tv/summit1g), [TimTheTatman](https://www.twitch.tv/timthetatman), [pokimane](https://www.twitch.tv/pokimane).
+- [Top 1000 Twitch Streamers (2024)](https://www.kaggle.com/datasets/hibrahimag1/top-1000-twitch-streamers-data-may-2024) featuring names like [KaiCenat](https://www.twitch.tv/kaicenat), [Jynxzi](https://www.twitch.tv/jynxzi), [shroud](https://www.twitch.tv/shroud).
+- [Top 1000 Twitch Streamers (2021)](https://www.kaggle.com/datasets/aayushmishra1512/twitchdata) featuring names like [xQc](https://www.twitch.tv/xqc), [summit1g](https://www.twitch.tv/summit1g), [TimTheTatman](https://www.twitch.tv/timthetatman), [pokimane](https://www.twitch.tv/pokimane).
 
 Do you recognize any of the names?
 
@@ -56,6 +56,8 @@ sqlite3
 
 You should see a prompt that says `sqlite>`. 
 
+![sqlite3 GIF](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-twitch-data-with-sqlite/sqlite3.gif)
+
 Download one of the CSV files and open it up to make sure the CSV file is working:
 
 - **[streamers2024.csv](https://github.com/codedex-io/projects/blob/main/projects/analyze-twitch-data-with-sqlite/streamers2024.csv)**
@@ -70,7 +72,7 @@ So the **streamers2021.csv** data looks like:
 But behind the scenes, the plain text is just:
 
 ```output
-Channel, Watch time, Stream time, Peak viewers, Average viewers, Followers, Followers gained, Views gained, Partnered, Mature, Language
+channel, watch_time, stream_time, peak_viewers, average_viewers, followers, followers_gained, views_gained, partnered, mature, language
 xQcOW, 6196161750, 215250, 222720, 27716, 3246298, 1734810, 93036735, True, False, English
 summit1g, 6091677300, 211845, 310998, 25610, 5310163, 1370184, 89705964, True, False, English
 Gaules, 5644590915, 515280, 387315, 109761767635, 1023779102611607, True
@@ -81,17 +83,17 @@ Tfue, 3671000070, 123660, 285644, 29602, 8938903, 206842478998587, False
 
 The column names are:
 
-- Channel
-- Watch time
-- Stream time
-- Peak viewers
-- Average viewers
-- Followers
-- Followers gained
-- Views gained
-- Partnered
-- Mature
-- Language
+- `channel`
+- `watch_time`
+- `stream_time`
+- `peak_viewers`
+- `average_viewers`
+- `followers`
+- `followers_gained`
+- `views_gained`
+- `partnered`
+- `mature`
+- `language`
 
 And the **streamers2024.csv** data looks like:
 
@@ -107,23 +109,25 @@ RANK, NAME, LANGUAGE, TYPE, MOST_STREAMED_GAME, 2ND_MOST_STREAMED_GAME, AVERAGE_
 
 The column names are:
 
-- RANK
-- NAME
-- LANGUAGE
-- TYPE
-- MOST_STREAMED_GAME
-- 2ND_MOST_STREAMED_GAME
-- AVERAGE_STREAM_DURATION
-- FOLLOWERS_GAINED_PER_STREAM
-- AVG_VIEWERS_PER_STREAM
-- AVG_GAMES_PER_STREAM
-- TOTAL_TIME_STREAMED
-- TOTAL_FOLLOWERS
-- TOTAL_VIEWS
-- TOTAL_GAMES_STREAMED
-- ACTIVE_DAYS_PER_WEEK
-- MOST_ACTIVE_DAY
-- DAY_WITH_MOST_FOLLOWERS_GAINED
+- `RANK`
+- `NAME`
+- `LANGUAGE`
+- `TYPE`
+- `MOST_STREAMED_GAME`
+- `2ND_MOST_STREAMED_GAME`
+- `AVERAGE_STREAM_DURATION`
+- `FOLLOWERS_GAINED_PER_STREAM`
+- `AVG_VIEWERS_PER_STREAM`
+- `AVG_GAMES_PER_STREAM`
+- `TOTAL_TIME_STREAMED`
+- `TOTAL_FOLLOWERS`
+- `TOTAL_VIEWS`
+- `TOTAL_GAMES_STREAMED`
+- `ACTIVE_DAYS_PER_WEEK`
+- `MOST_ACTIVE_DAY`
+- `DAY_WITH_MOST_FOLLOWERS_GAINED`
+
+Go in an update all the column names to lowercase.
 
 There are 1,001 rows in each of the datasets because there is 1 column for the headings and 1,000 streamers each!
 
@@ -137,7 +141,7 @@ In the terminal, type:
 sqlite twitch.db
 ```
 
-Inside the SQLite prompt, create a table called `streams`:
+Inside the SQLite prompt, create a table called `streamers`:
 
 ```sql
 CREATE TABLE streamers ( 
@@ -145,25 +149,27 @@ CREATE TABLE streamers (
   watch_time INTEGER,
   stream_time INTEGER,
   peak_viewers INTEGER,
+  average_viewers INTEGER,
   followers INTEGER,
   followers_gained INTEGER,
+  views_gained INTEGER,
   partnered TEXT,
   mature TEXT,
   language TEXT
 );
 ```
 
-- Channel
-- Watch time
-- Stream time
-- Peak viewers
-- Average viewers
-- Followers
-- Followers gained
-- Views gained
-- Partnered
-- Mature
-- Language
+- `channel`
+- `watch_time`
+- `stream_time`
+- `peak_viewers`
+- `average_viewers`
+- `followers`
+- `followers_gained`
+- `views_gained`
+- `partnered`
+- `mature`
+- `language`
 
 These names will have to match the CSV columns as well as the data type here, or else there will be an error later.
 
@@ -173,24 +179,38 @@ It’s time to move our data from the CSV file into a SQL table.
 
 Make sure your CSV file is in the same folder. Then in the SQLite prompt:
 
-```
+```terminal
 .mode csv
-.import twitch_data.csv streams
+.import streamers2021.csv streamers
 ```
 
 To make sure it’s working:
 
 ```
 SELECT *
-FROM streams
+FROM streamers
 LIMIT 10;
 ```
 
 You should see something like:
 
-[screenshot image]
+```output
+xQcOW,6196161750,215250,222720,27716,3246298,1734810,93036735,True,False,English
+summit1g,6091677300,211845,310998,25610,5310163,1370184,89705964,True,False,English
+Gaules,5644590915,515280,387315,10976,1767635,1023779,102611607,True,True,Portuguese
+ESL_CSGO,3970318140,517740,300575,7714,3944850,703986,106546942,True,False,English
+Tfue,3671000070,123660,285644,29602,8938903,2068424,78998587,True,False,English
+Asmongold,3668799075,82260,263720,42414,1563438,554201,61715781,True,False,English
+NICKMERCS,3360675195,136275,115633,24181,4074287,1089824,46084211,True,False,English
+Fextralife,3301867485,147885,68795,18985,508816,425468,670137548,True,False,English
+loltyler1,2928356940,122490,89387,22381,3530767,951730,51349926,True,False,English
+
+sqlite> 
+```
 
 The data is now in a table, and we are ready to analyze it. ✅
+
+**Note:** If you ever want to start over with a new table, you can delete a table with `DROP TABLE streamers;`
 
 ### Getting a Feel for the Dataset
 
