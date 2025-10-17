@@ -141,14 +141,29 @@ Inside the SQLite prompt, create a table called `streams`:
 
 ```sql
 CREATE TABLE streamers ( 
-  id TEXT PRIMARY KEY, 
-  user_name TEXT, 
-  game_name TEXT, 
-  title TEXT, 
-  viewer_count INTEGER, 
-  started_at TEXT 
+  channel TEXT PRIMARY KEY, 
+  watch_time INTEGER,
+  stream_time INTEGER,
+  peak_viewers INTEGER,
+  followers INTEGER,
+  followers_gained INTEGER,
+  partnered TEXT,
+  mature TEXT,
+  language TEXT
 );
 ```
+
+- Channel
+- Watch time
+- Stream time
+- Peak viewers
+- Average viewers
+- Followers
+- Followers gained
+- Views gained
+- Partnered
+- Mature
+- Language
 
 These names will have to match the CSV columns as well as the data type here, or else there will be an error later.
 
