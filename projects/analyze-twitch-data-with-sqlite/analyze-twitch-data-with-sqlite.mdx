@@ -72,7 +72,7 @@ So the **streamers2021.csv** data looks like:
 But behind the scenes, the plain text is just:
 
 ```output
-Channel, Watch time, Stream time, Peak viewers, Average viewers, Followers, Followers gained, Views gained, Partnered, Mature, Language
+channel, watch_time, stream_time, peak_viewers, average_viewers, followers, followers_gained, views_gained, partnered, mature, language
 xQcOW, 6196161750, 215250, 222720, 27716, 3246298, 1734810, 93036735, True, False, English
 summit1g, 6091677300, 211845, 310998, 25610, 5310163, 1370184, 89705964, True, False, English
 Gaules, 5644590915, 515280, 387315, 109761767635, 1023779102611607, True
@@ -83,17 +83,17 @@ Tfue, 3671000070, 123660, 285644, 29602, 8938903, 206842478998587, False
 
 The column names are:
 
-- `Channel`
-- `Watch time`
-- `Stream time`
-- `Peak viewers`
-- `Average viewers`
-- `Followers`
-- `Followers gained`
-- `Views gained`
-- `Partnered`
-- `Mature`
-- `Language`
+- `channel`
+- `watch_time`
+- `stream_time`
+- `peak_viewers`
+- `average_viewers`
+- `followers`
+- `followers_gained`
+- `views_gained`
+- `partnered`
+- `mature`
+- `language`
 
 And the **streamers2024.csv** data looks like:
 
@@ -126,6 +126,8 @@ The column names are:
 - `ACTIVE_DAYS_PER_WEEK`
 - `MOST_ACTIVE_DAY`
 - `DAY_WITH_MOST_FOLLOWERS_GAINED`
+
+Go in an update all the column names to lowercase.
 
 There are 1,001 rows in each of the datasets because there is 1 column for the headings and 1,000 streamers each!
 
