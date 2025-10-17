@@ -199,7 +199,7 @@ To make sure it’s working:
 ```
 SELECT *
 FROM streamers2021
-LIMIT 10;
+LIMIT 5;
 ```
 
 You should see something like:
@@ -210,10 +210,6 @@ summit1g,6091677300,211845,310998,25610,5310163,1370184,89705964,True,False,Engl
 Gaules,5644590915,515280,387315,10976,1767635,1023779,102611607,True,True,Portuguese
 ESL_CSGO,3970318140,517740,300575,7714,3944850,703986,106546942,True,False,English
 Tfue,3671000070,123660,285644,29602,8938903,2068424,78998587,True,False,English
-Asmongold,3668799075,82260,263720,42414,1563438,554201,61715781,True,False,English
-NICKMERCS,3360675195,136275,115633,24181,4074287,1089824,46084211,True,False,English
-Fextralife,3301867485,147885,68795,18985,508816,425468,670137548,True,False,English
-loltyler1,2928356940,122490,89387,22381,3530767,951730,51349926,True,False,English
 
 sqlite> 
 ```
@@ -248,7 +244,17 @@ To list out the column names again:
 - `mature`
 - `language`
 
-### Languages
+This is kinda hard to understand since there are so many columns, so I would do:
+
+```sql
+SELECT channel, followers
+FROM streamers2021
+LIMIT 25
+```
+
+To get the top 25 streamers in 2021.
+
+### Spoken Languages
 
 Let’s find all the unique languages in this dataset using the `DISTINCT` keyword:
 
