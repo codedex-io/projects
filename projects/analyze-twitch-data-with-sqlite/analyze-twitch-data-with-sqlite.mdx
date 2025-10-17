@@ -63,15 +63,18 @@ Download one of the CSV files and open it up to make sure the CSV file is workin
 
 A **CSV** file stands for **C**omma-**S**eparated **V**alues file. It’s a simple way to store spreadsheet data in a plain text format. Each line in the file represents a row, and the columns in that row are separated by commas. 
 
-So the Top 1000 Twitch Streams data looks like:
+So the **streamers2021.csv** data looks like:
+
+
+But behind the scenes, the plain text is just:
 
 ```output
-Channel, Watch Time, Stream time, peak viewers, average viewers, Followers, Mature
-xQcOW, 6196161750,215250,222720, 277163246298, 173481093036735, False
-summit1g, 6091677300,211845,310998, 2561053101, 63137018489705964, False
-Gaules, 5644590915,515280,387315,109761767635, 1023779102611607, True
-ESL_CSGO, 3970318140,517740, 300575,7714,3944850, 703986106546942, False
-Tfue, 3671000070,123660,285644, 29602, 8938903, 206842478998587, False
+Channel, Watch time, Stream time, Peak viewers, Average viewers, Followers, Followers gained, Views gained, Partnered, Mature, Language
+xQcOW, 6196161750, 215250, 222720, 27716, 3246298, 1734810, 93036735, True, False, English
+summit1g, 6091677300, 211845, 310998, 25610, 5310163, 1370184, 89705964, True, False, English
+Gaules, 5644590915, 515280, 387315, 109761767635, 1023779102611607, True
+ESL_CSGO, 3970318140, 517740, 300575, 7714,3944850, 703986106546942, False
+Tfue, 3671000070, 123660, 285644, 29602, 8938903, 206842478998587, False
 ... and so on
 ```
 
@@ -89,7 +92,7 @@ sqlite twitch.db
 
 Inside the SQLite prompt, create a table called `streams`:
 
-```
+```sql
 CREATE TABLE streams ( 
   id TEXT PRIMARY KEY, 
   user_name TEXT, 
