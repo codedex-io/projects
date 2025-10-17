@@ -218,25 +218,11 @@ So usually, I like to start by selecting the first 10-20 rows from the table to 
 
 ```
 SELECT *
-FROM streams
+FROM streamers2021
 LIMIT 20;
 ```
 
-`stream` has the following columns:
-
-- `time` 
-- `device_id` 
-- `login` 
-- `channel` 
-- `country`
-- `player`
-- `game`
-- `stream_format`
-- `subscriber`
-
-The output should look something like this:
-
-[screenshot image]
+Which we've already done.
 
 ### Languages
 
@@ -274,6 +260,11 @@ The results should look like:
 
 For `streamers2024` table, you can do distinct games:
 
+```sql
+SELECT DISTINCT most_streamed_game
+FROM streamers;
+```
+
 - League of Legends
 - DayZ
 - Dota 2 
@@ -282,9 +273,6 @@ For `streamers2024` table, you can do distinct games:
 - Hearthstone: Heroes of Warcraft 
 - The Binding of Isaac: Rebirth
 - etc.
-
-###
-
 
 ## Using Aggregate Functions
 
