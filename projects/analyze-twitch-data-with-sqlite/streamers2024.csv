@@ -1,4 +1,4 @@
-RANK,NAME,LANGUAGE,TYPE,MOST_STREAMED_GAME,2ND_MOST_STREAMED_GAME,AVERAGE_STREAM_DURATION,FOLLOWERS_GAINED_PER_STREAM,AVG_VIEWERS_PER_STREAM,AVG_GAMES_PER_STREAM,TOTAL_TIME_STREAMED,TOTAL_FOLLOWERS,TOTAL_VIEWS,TOTAL_GAMES_STREAMED,ACTIVE_DAYS_PER_WEEK,MOST_ACTIVE_DAY,DAY_WITH_MOST_FOLLOWERS_GAINED
+rank,name,language,type,most_streamed_game,2nd_most_streamed_game,avearge_stream_duration,followers_gained_per_stream,avg_viewers_per_stream,avg_games_per_stream,total_time_streamed,total_followers,total_views,total_games_streamed,active_days_per_week,most_active_day,day_with_most_followers_gained
 1,kaicenat,English,personality,Just Chatting,I'm Only Sleeping,7.6,18405,15852,2.3,4698,10600000,9150000,194,3.6,Friday,Saturday
 2,jynxzi,English,personality,Tom Clancy's Rainbow Six Siege,NBA 2K20,5.4,3386,1145,1.2,8407,5760000,1950000,54,5.6,Tuesday,Sunday
 3,caedrel,English,personality,League of Legends,I'm Only Sleeping,6.3,689,12331,1.3,6728,797000,14200000,111,2.8,Thursday,Sunday
@@ -998,3 +998,4 @@ RANK,NAME,LANGUAGE,TYPE,MOST_STREAMED_GAME,2ND_MOST_STREAMED_GAME,AVERAGE_STREAM
 998,buxexa_t,Portuguese,personality,Virtual Casino,Slots,9.6,2160,0,1.0,190,1300,0,2,0.4,Thursday,Thursday
 999,sweetdreams,English,personality,Apex Legends,Z1: Battle Royale,5.1,6050,1619,1.1,6827,837000,22400000,24,3.6,Tuesday,Monday
 1000,giantwaffle,English,personality,Minecraft,Just Chatting,7.9,970,21465,2.7,19426,856000,74500000,782,6.3,Tuesday,Sunday
+
