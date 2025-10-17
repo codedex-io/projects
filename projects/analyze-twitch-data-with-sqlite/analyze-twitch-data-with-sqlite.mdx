@@ -161,6 +161,30 @@ CREATE TABLE streamers2021 (
 
 These names will have to match the CSV columns as well as the data type here, or else there will be an error later.
 
+If you choose `streamers2024`: 
+
+```sql
+CREATE TABLE streamers2024 ( 
+  rank INTEGER  PRIMARY KEY,
+  name TEXT,
+  language TEXT,
+  type TEXT,
+  most_streamed_game TEXT,
+  2nd_most_streamed_game TEXT,
+  average_stream_duration REAL,
+  followers_gained_per_stream INTEGER,
+  avg_viewer_per_stream INTEGER,
+  avg_games_per_stream REAL,
+  total_time_streamed INTEGER,
+  total_followers INTEGER,
+  total_views INTEGER,
+  total_games_streamed INTEGER,
+  active_days_per_week REAL,
+  most_active_day TEXT,
+  day_with_most_followers_gained TEXT
+);
+```
+
 ### Import CSV into SQLite
 
 It’s time to move our data from the CSV file into a SQL table.
