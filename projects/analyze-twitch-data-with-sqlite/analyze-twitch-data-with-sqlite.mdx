@@ -292,11 +292,35 @@ Now it’s a good time to write down the questions that we have.
 
 Here are some of mine:
 
+- _Who were the hottest rising streamers in 2021?_
 - _What are the most popular games in the stream table?_
 - _These are some big numbers from the game League of Legends (also known as LoL). Where are these LoL stream viewers located?_
 - _The player column contains the source the user is using to view the stream (site, iPhone, Android, etc). Create a list of players and their number of streamers._
 
 Let’s go through each of these one by one.
+
+### Who are the hottest rising streamers in 2021? 
+
+Aka who gained the most followers?
+
+For this, we can use the `MAX()` function:
+
+```sql
+SELECT channel, MAX(followers_gained)
+FROM streamers
+ORDER BY followers_gained
+LIMIT 5;
+```
+
+The results are:
+
+```output
+auronplay,3966525
+Rubius,3820532
+TheGrefg,3593081
+Bugha,2220765s
+pokimane,2085831
+```
 
 ### Top 10 Most Popular Games
 
