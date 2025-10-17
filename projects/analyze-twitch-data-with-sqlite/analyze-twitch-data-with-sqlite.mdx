@@ -256,7 +256,7 @@ Let’s find all the unique languages in this dataset using the `DISTINCT` keywo
 
 ```
 SELECT DISTINCT language
-FROM streamers;
+FROM streamers2021;
 ```
 
 The results should look like: 
@@ -288,7 +288,7 @@ For `streamers2024` table, you can do distinct games:
 
 ```sql
 SELECT DISTINCT most_streamed_game
-FROM streamers;
+FROM streamers2024;
 ```
 
 - League of Legends
@@ -340,7 +340,7 @@ For this, we can use the `MAX()` function:
 
 ```sql
 SELECT channel, MAX(followers_gained)
-FROM streamers
+FROM streamers2021
 ORDER BY followers_gained
 LIMIT 5;
 ```
@@ -362,17 +362,17 @@ I just looked up all of them. All of them are still streaming in 2025!
 To find out this one, we need to use `COUNT()` and `GROUP BY`:
 
 ```
-SELECT game, COUNT(*) 
-FROM stream 
-GROUP BY game 
+SELECT most_streamed_game, COUNT(*) 
+FROM streamers2024 
+GROUP BY most_streamed_game
 ORDER BY COUNT(*) DESC; 
 ```
 
 We can rewrite this using column reference numbers instead of column names: 
 
 ```
-SELECT game, COUNT(*) 
-FROM stream 
+SELECT most_streamed_game, COUNT(*) 
+FROM streamers2024
 GROUP BY 1 
 ORDER BY 2 DESC;
 ```
