@@ -23,7 +23,7 @@ tags:
 
 [Twitch](https://www.twitch.tv) is a live streaming platform where millions of people come together every day to watch, chat, and create content in real time. Launched in 2011 as a site focused on video game streaming, Twitch has since expanded to include music, art, sports, and “just chatting” streams.
 
-For history buffs, Twitch originated as a pivot from Justin.tv, a website launched in 2007 by Justin Kan, Emmett Shear, Michael Seibel, and Kyle Vogt (household names in San Francisco and people I’ve admired for years).
+For history buffs, Twitch originated as a pivot from **Justin.tv**, a website launched in 2007 by Justin Kan, Emmett Shear, Michael Seibel, and Kyle Vogt (now household names in San Francisco).
 
 Very quickly, Twitch became an underground sensation. During college, my roommates and I spent countless hours watching streamers play our favorite game, Dota 2, while eating and hanging out. It was a centerpiece of our “sadboy” days and a platform that meant a lot to us.
 
@@ -31,16 +31,16 @@ Here’s me streaming a Dota 2 match in 2014 to 13 viewers:
 
 ![screenshot](https://i.imgur.com/sdllIwn.gif)
 
-Today, new streamers like KaiCenat, IShowSpeed, and Ludwig are taking streaming to new heights and breaking records.
+Today, new streamers like Kai, Speed, and Ludwig are taking it to new heights and breaking records.
 
 In this project tutorial, we will explore a dataset about top Twitch streamers and uncover insights using SQLite. These are real data from [Kaggle](https://kaggle.com), a website with 500,000+ public datasets.
 
 The two CSV files we have are:
 
-- [Top 1000 Twitch Streamers (May 2024)](https://www.kaggle.com/datasets/hibrahimag1/top-1000-twitch-streamers-data-may-2024) featuring streamers like [kaicenat](https://www.twitch.tv/kaicenat) and [jynxzi](https://www.twitch.tv/jynxzi).
-- [Top 1000 Twitch Streamers (2021)](https://www.kaggle.com/datasets/aayushmishra1512/twitchdata) featuring streams like xQc, summit1g, TimTheTatMan, and DrDisrespect.
+- [Top 1000 Twitch Streamers (2024)](https://www.kaggle.com/datasets/hibrahimag1/top-1000-twitch-streamers-data-may-2024) featuring streamers like [KaiCenat](https://www.twitch.tv/kaicenat), [Jynxzi](https://www.twitch.tv/jynxzi).
+- [Top 1000 Twitch Streamers (2021)](https://www.kaggle.com/datasets/aayushmishra1512/twitchdata) featuring streamers like [xQc](https://www.twitch.tv/xqc), [summit1g](https://www.twitch.tv/summit1g), [TimTheTatman](https://www.twitch.tv/timthetatman), [pokimane](https://www.twitch.tv/pokimane).
 
-Do you recognize any of the names? 
+Do you recognize any of the names?
 
 Pick your poison (dataset) and let’s dive in!
 
@@ -56,24 +56,76 @@ sqlite3
 
 You should see a prompt that says `sqlite>`. 
 
+![sqlite3 GIF](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-twitch-data-with-sqlite/sqlite3.gif)
+
 Download one of the CSV files and open it up to make sure the CSV file is working:
 
-- Top 1000 Twitch Streamers (2024)
-- Twitch Streamers (2021)
+- **[streamers2024.csv](https://github.com/codedex-io/projects/blob/main/projects/analyze-twitch-data-with-sqlite/streamers2024.csv)**
+- **[streamers2021.csv](https://github.com/codedex-io/projects/blob/main/projects/analyze-twitch-data-with-sqlite/streamers2021.csv)**
 
 A **CSV** file stands for **C**omma-**S**eparated **V**alues file. It’s a simple way to store spreadsheet data in a plain text format. Each line in the file represents a row, and the columns in that row are separated by commas. 
 
-So the Top 1000 Twitch Streams data looks like:
+So the **streamers2021.csv** data looks like:
+
+![streamers2021 screenshot](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-twitch-data-with-sqlite/streamers2021.png)
+
+But behind the scenes, the plain text is just:
 
 ```output
-Channel, Watch Time, Stream time, peak viewers, average viewers, Followers, Mature
-xQcOW, 6196161750,215250,222720, 277163246298, 173481093036735, False
-summit1g, 6091677300,211845,310998, 2561053101, 63137018489705964, False
-Gaules, 5644590915,515280,387315,109761767635, 1023779102611607, True
-ESL_CSGO, 3970318140,517740, 300575,7714,3944850, 703986106546942, False
-Tfue, 3671000070,123660,285644, 29602, 8938903, 206842478998587, False
+Channel, Watch time, Stream time, Peak viewers, Average viewers, Followers, Followers gained, Views gained, Partnered, Mature, Language
+xQcOW, 6196161750, 215250, 222720, 27716, 3246298, 1734810, 93036735, True, False, English
+summit1g, 6091677300, 211845, 310998, 25610, 5310163, 1370184, 89705964, True, False, English
+Gaules, 5644590915, 515280, 387315, 109761767635, 1023779102611607, True
+ESL_CSGO, 3970318140, 517740, 300575, 7714,3944850, 703986106546942, False
+Tfue, 3671000070, 123660, 285644, 29602, 8938903, 206842478998587, False
 ... and so on
 ```
+
+The column names are:
+
+- Channel
+- Watch time
+- Stream time
+- Peak viewers
+- Average viewers
+- Followers
+- Followers gained
+- Views gained
+- Partnered
+- Mature
+- Language
+
+And the **streamers2024.csv** data looks like:
+
+```output
+RANK, NAME, LANGUAGE, TYPE, MOST_STREAMED_GAME, 2ND_MOST_STREAMED_GAME, AVERAGE_STREAM_DURATION, FOLLOWERS_GAINED_PER_STREAM, AVG_VIEWERS_PER_STREAM, AVG_GAMES_PER_STREAM, TOTAL_TIME_STREAMED, TOTAL_FOLLOWERS, TOTAL_VIEWS, TOTAL_GAMES_STREAMED, ACTIVE_DAYS_PER_WEEK, MOST_ACTIVE_DAY, DAY_WITH_MOST_FOLLOWERS_GAINED
+1, kaicenat, English, personality, Just Chatting, I'm Only Sleeping, 7.6, 18405, 15852, 2.3, 4698, 10600000, 9150000, 194, 3.6, Friday, Saturday
+2, jynxzi, English, personality, Tom Clancy's Rainbow Six Siege, NBA 2K20, 5.4, 3386, 1145, 1.2, 8407, 5760000, 1950000, 54, 5.6, Tuesday, Sunday
+3, caedrel, English, personality, League of Legends, I'm Only Sleeping, 6.3, 689, 12331, 1.3, 6728, 797000, 14200000, 111, 2.8, Thursday, Sunday
+4, caseoh_, English, personality, NBA 2K23, Just Chatting, 4.6, 7185, 0, 3.6, 2554, 4220000, 53,385, 6.2, Friday, Monday
+5, ibai, Spanish, personality, Just Chatting, League of Legends, 4.1, 8289, 190714, 1.5, 6865, 15600000, 359000000, 149, 4.3, Wednesday, Saturday
+... and so on
+```
+
+The column names are:
+
+- RANK
+- NAME
+- LANGUAGE
+- TYPE
+- MOST_STREAMED_GAME
+- 2ND_MOST_STREAMED_GAME
+- AVERAGE_STREAM_DURATION
+- FOLLOWERS_GAINED_PER_STREAM
+- AVG_VIEWERS_PER_STREAM
+- AVG_GAMES_PER_STREAM
+- TOTAL_TIME_STREAMED
+- TOTAL_FOLLOWERS
+- TOTAL_VIEWS
+- TOTAL_GAMES_STREAMED
+- ACTIVE_DAYS_PER_WEEK
+- MOST_ACTIVE_DAY
+- DAY_WITH_MOST_FOLLOWERS_GAINED
 
 There are 1,001 rows in each of the datasets because there is 1 column for the headings and 1,000 streamers each!
 
@@ -89,16 +141,31 @@ sqlite twitch.db
 
 Inside the SQLite prompt, create a table called `streams`:
 
-```
-CREATE TABLE streams ( 
-  id TEXT PRIMARY KEY, 
-  user_name TEXT, 
-  game_name TEXT, 
-  title TEXT, 
-  viewer_count INTEGER, 
-  started_at TEXT 
+```sql
+CREATE TABLE streamers ( 
+  channel TEXT PRIMARY KEY, 
+  watch_time INTEGER,
+  stream_time INTEGER,
+  peak_viewers INTEGER,
+  followers INTEGER,
+  followers_gained INTEGER,
+  partnered TEXT,
+  mature TEXT,
+  language TEXT
 );
 ```
+
+- Channel
+- Watch time
+- Stream time
+- Peak viewers
+- Average viewers
+- Followers
+- Followers gained
+- Views gained
+- Partnered
+- Mature
+- Language
 
 These names will have to match the CSV columns as well as the data type here, or else there will be an error later.
 
