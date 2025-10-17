@@ -1,0 +1,128 @@
+---
+title: Get Started with Roblox Studio and Lua 
+author: Ellie Popoca
+uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
+datePublished: 2025-10-17
+published: beta
+description: Learn how to set up Roblox Studio and learn the basics to get started on making a game
+header: https://github.com/codedex-io/projects/blob/main/projects/get-started-with-roblox-studio-and-lua/images/banner.gif?raw=true
+bannerImage: https://github.com/codedex-io/projects/blob/main/projects/get-started-with-roblox-studio-and-lua/images/banner.gif?raw=true
+readTime: 25
+prerequisites: Lua
+versions: None
+tags:
+  - lua
+  - game-dev
+courses:
+ - lua
+---
+
+## Roblox Studio
+
+<ImageZoom src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/3/c/6/3c6c2df5e1d651ff160038d0b93f915c8fb9cb7d.gif" />
+
+[Roblox Studio](https://create.roblox.com/) is a 3D game engine (creation tool) where developers can design, script, and publish their games on the Roblox Platform. It's used by over 12 million monthly creators.
+
+Roblox Studio will be a great fit for you if:
+ 
+- 🧱 You want to build 3D games 
+- 🖥️ You want to publish your game on the Roblox platform 
+- 👩🏽‍💻 You want to learn the UI of a game engine
+- 💸 You want to monetize your games
+
+Roblox Studio is **free** to publish games on, and uses the scripting language [Lua](https://www.lua.org/about.html), specifically a version of Lua called Luau. 
+
+### Lua vs Luau
+
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-roblox-studio-and-lua/images/Luau.png?raw=true" />
+
+**Luau** (pronounced “Loo-ow”) is a custom version of Lua tailored for Roblox environments. It's even faster than Lua and has additional features like extra syntax and optional type annotations for better error checking: 
+
+```lua
+-- luau
+local function greet(name: string): string
+  return "Hello, " .. name
+end
+
+print(greet("Ellie"))  --> Works fine
+print(greet(123))      --> Type checker warns you!
+```
+
+In Luau, `print(greet(123))` would give you a warning right inside the Roblox Studio console before you run it. This helps developers find bugs a lot earlier, which comes in handy when your code becomes more complex and intertwined. You get all of these benefits and more inside Roblox Studio. 
+
+## Downloading Roblox Studio
+
+To get started, head to the [Roblox Creator Hub](https://create.roblox.com/landing) and download the Roblox Studio application. This should automatically start the download process. You can check specific [system requirements](https://create.roblox.com/docs/studio/setup) for the app if needed. 
+
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-roblox-studio-and-lua/images/peYbm5X.png?raw=true" />
+
+1. Find the Studio installer in your browser's download history and double-click the file. 
+2. Once downloaded, click the “Launch Studio” button.
+3. You'll then be promoted to sign in with your existing Roblox account or create a new account.
+
+
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-roblox-studio-and-lua/images/YIyifF4.png?raw=true" />
+
+## Inside Roblox Studio
+
+Once you've logged in, you'll see a variety of templates to choose from on the home page. You'll see options to take a tour of the creator studio and review Roblox tutorials and documentation. 
+
+<ImageZoom src="https://i.postimg.cc/LXM2fxHV/Screenshot-2025-10-10-at-8-19-48-PM.png" />
+
+Once here, you can select the **Baseplate** template to open a new experience. An **experience** or your game, is your playground to begin scripting your game and exploring the Roblox Studio engine. 
+
+<ImageZoom src="https://i.postimg.cc/MpNd94fR/Screenshot-2025-10-11-at-12-48-48-AM.png" />
+
+There are a few sections that are important to note in the Roblox Studio interface: 
+
+- 🗂️ Explorer: Shows a hierarchy of all objects in your game (like parts, scripts, and models).
+- ⚙️ Properties: Shows the settings of whichever object you've selected.
+- 💬 Output (console): Displays messages, warnings, or print statements from your code.
+
+You can toggle these from the View tab if they're not already visible.
+
+Here begins your journey inside Roblox Studio! You can head to the top options bar and click [Script]. Inside here, you can begin writing scripts for your selected objects with the Luau language! 
+
+<ImageZoom src="https://i.postimg.cc/XN9Sdfh5/Screenshot-2025-10-11-at-12-47-08-AM.png" />
+
+## Writing A Script
+Let's take a look at a basic script that you would run in Roblox Studio. Let's take a look at this script of Luau code that will change the baseplate color after 5 seconds: 
+
+```lua
+local part = workspace.Baseplate
+
+-- Print a message to the Output window
+print("Script started!")
+
+-- Change the baseplate color to red
+part.Color = Color3.fromRGB(255, 0, 0)
+
+-- Wait 2 seconds
+wait(2)
+
+-- Change to blue
+part.Color = Color3.fromRGB(0, 0, 255)
+```
+Here, we get a reference to the Baseplate part, and print a message to the Output window (View → Output). Then the baseplate changes color to red, waits 5 seconds, then changes to blue. 
+
+Paste this code into your script tab, and press the blue play button in the top left corner. You'll see the baseplate change, and by clicking “Output”, you can see the print message we wrote. 
+
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-roblox-studio-and-lua/images/Ub7OuUz.png?raw=true" />
+
+## Next Steps
+
+We've now guided you through the beginning of Roblox Studio, and we'll let you take it from here! You'll need tutorials, Roblox Studio documentation, and a game idea of your choosing to practice learning the engine. Here's some to choose from if you're stuck! 
+
+- Build an obstacle course. If your player touches the wall, they have to start over. 
+- Create a maze/labyrinth with different levels
+- Spawn enemies to attack where you gain/lose XP. 
+
+Here are some resources to help you build out all your ideas: 
+
+- [Roblox Studio Interface Guide](https://create.roblox.com/docs/studio/ui-overview) 
+- [Learn on Creator Studio](https://create.roblox.com/docs) 
+- [Roblox Learn YouTube Channel](https://www.youtube.com/@RobloxLearn) 
+
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-roblox-studio-and-lua/images/roblox-characters%20Background%20Removed.png?raw=true" />
+
+We can't wait to see what you create! Tag [@codedex_io](https://x.com/codedex_io) on Twitter/X so we can see your progress! Happy coding! 

@@ -54,9 +54,11 @@ Here are a few article ideas that we'd love for you to write:
 
 ## Publishing States
 
-- false — Not published on Vercel or the production site
-- vercel — Published on the Vercel preview environment, but not yet live on the production site
-- live — Published and visible on the production site
+Follow the publishing states given below for getting your project tutorials live on the platform. In an ideal publishing cycle, the states will move in order from top to bottom, starting with unpublished to the final state of "live".
+
+- false — Not published on Vercel or the production site; This property can also be omitted. 
+- beta — Published on the preview environment, but not yet live on the production environment.
+- live — Published and visible on the production environment.
 
 ## Additional Notes
 

@@ -1,0 +1,182 @@
+---
+title: Get Started with LÖVE2D and Lua
+author: Ellie Popoca
+uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
+datePublished: 2025-10-17
+published: beta
+description: Learn how to set up LÖVE, a popular Lua framework used to make 2D games, and learn the basics to get started.
+header: https://github.com/codedex-io/projects/blob/main/projects/get-started-with-love2d-and-lua/images/banner.gif?raw=true
+bannerImage: https://github.com/codedex-io/projects/blob/main/projects/get-started-with-love2d-and-lua/images/banner.gif?raw=true
+readTime: 30
+prerequisites: Lua
+versions: None
+tags:
+  - game-dev
+  - lua
+Courses:
+  - lua
+---
+
+## LÖVE2D
+
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-love2d-and-lua/images/ERBG554.png?raw=true" />
+
+[LÖVE2D](https://love2d.org/) is a popular [Lua](https://www.lua.org/about.html) framework that's widely used to make 2D games. It provides tools and functions to draw graphics, play sound, handle input, and manage physics, but it doesn't come with its own viewport or scene viewer like Unity or Roblox Studio. You'll use code to write game logic! 
+
+This framework will be a great option if you want to:
+
+- 🧩 Build 2D games
+- 🎱 Prototype game ideas quickly
+- 🌙 Use Lua to explore object-oriented and modular programming concepts
+- ⌨️ Make games that run on Windows, macOS, and Linux
+
+LÖVE2D is minimal and lightweight. You write code, press play, and you're done. Roblox Studio and other game engines have a steeper learning curve due to their ecosystem, physics engine, and networking systems.
+
+Let's get started with downloading LÖVE2D. 
+
+## Download LÖVE2D
+
+Lua comes included in LÖVE, and we can begin using it in our editor of choice once downloaded on our computer!
+
+Head to the [LÖVE](https://love2d.org/) website, select your device, and download. 
+
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-love2d-and-lua/images/VXC5433.png?raw=true" />
+
+### Windows/Linux
+
+You'll want to add LÖVE to your **system environment** variables this time. Open your Control Panel, and search for **environment variables**. You'll see an option that says "Edit the system environment variables"
+
+- Click on this panel, and click **Environment Variables** and select `Path` in **System Variables for YOUR_COMPUTER**, and find `Path` and click **Edit**. 
+- Click **New** and hit **Browse**
+- Browse to your program files and find where the LÖVE folder was saved when you downloaded the folder.
+- Select the folder, and press OK to exit. 
+
+Add the LÖVE application to your Desktop for easy access. 
+
+### MacOS
+
+Once downloaded, unzip the folder and click on the application. If you're unable to open it, head to System Settings > Privacy & Security > and allow LÖVE to be used on your computer. LÖVE will be blocked, and you'll have to accept an internet download. 
+
+You'll need to add the LÖVE application to your Desktop or the Dock for easy access to run your game or application. 
+
+## Running your first program
+
+To test that everything is functioning correctly, you'll run your first program
+
+- Create a folder and name it **Lua_example**, or whatever you would like! 
+- Inside it, create a file called **main.lua**. LÖVE will look for this file to run your game; Otherwise, it won't work. 
+- Open this file in your IDE of choice and type in the following lines of code: 
+
+
+```lua
+function love.draw()
+  love.graphics.print(“Hello World!!”, 300, 400)
+end
+```
+
+Save your file. 
+
+Then, return to the location where you saved your folder, and drag and drop the **Lua_example** folder into the shortcut icon on your desktop or the dock. 
+
+In the command line, you can also run your code: 
+
+On Mac, you can run:
+
+```terminal
+love /path/to/your/game/folder
+```
+
+If `love` is not recognized, run the following command in your **Terminal**:
+
+```terminal
+sudo ln -s /Applications/love.app/Contents/MacOS/love /usr/local/bin/love
+```
+
+On Windows, you'll run: 
+
+```terminal
+love C:\path\to\your\game\folder
+```
+
+You'll see your game appear! 
+
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-love2d-and-lua/images/KAKG29R.png?raw=true" />
+
+
+## Programming in LÖVE2D
+
+
+To start programming LÖVE2D, you'll need to know that in every LÖVE game, you need 3 main callback functions: 
+
+```lua
+function love.load()
+    -- Runs once at startup
+    -- Initialize variables, load assets
+end
+
+function love.update(dt)
+    -- Runs every frame
+    -- dt = delta time (time since last frame)
+    -- Update game logic here
+end
+
+function love.draw()
+    -- Runs every frame after update
+    -- Draw everything to the screen
+end 
+```
+
+The `love.load()`, `love.update()`, and `love.draw()` functions all work together to provide you with the organization you'll need to program your game. This will look similar to other built-in functions if you're familiar with Phaser or P5.js, since they both follow this structure as well. 
+
+You'll notice in our sample program that we drew some text in the `love.draw()` function. 
+
+Here's another example you can copy and paste and look at how this code will look in your output: 
+
+```lua
+function love.load()
+    x = 50
+    y = 50
+    speed = 200
+end
+
+function love.update(dt)
+    if love.keyboard.isDown("right") then
+        x = x + speed * dt
+    end
+    if love.keyboard.isDown("left") then
+        x = x - speed * dt
+    end
+    if love.keyboard.isDown("down") then
+        y = y + speed * dt
+    end
+    if love.keyboard.isDown("up") then
+        y = y - speed * dt
+    end
+end
+
+function love.draw()
+    love.graphics.circle("fill", x, y, 25)
+end 
+```
+<ImageZoom src="https://github.com/codedex-io/projects/blob/main/projects/get-started-with-love2d-and-lua/images/BWKGJ33.gif?raw=true" />
+
+- `function love.load()`: Use it to set up initial values and load resources
+- `function love.update(dt)`: Use it to update game logic, positions, check collisions, etc.
+- `function love.draw()`: Use it ONLY for drawing things to the screen
+
+
+## Next Steps
+Now that you're all set up, you can get started with programming your game ideas that you want to develop. Anything 2D: The framework is flexible. If you can imagine a 2D game, you can build it in LÖVE! 
+
+Here are some ideas to get you started:
+- **Breakout/Brick Breaker**: A paddle at the bottom bounces a ball to destroy bricks at the top. Learn about physics, bouncing, collision with multiple objects, and incrementally harder levels.
+- **Top-Down Maze Game**: A player navigates through a maze, avoiding enemies that chase them. Collect items to reach the goal. Great for learning movement, pathfinding, and enemy AI basics.
+
+
+Here are some resources for you to check out: 
+- [LÖVE Wiki](https://love2d.org/wiki/Main_Page) 
+- [LÖVE Tutorials](https://love2d.org/wiki/Category:Tutorials) 
+- [Getting Started with LÖVE](https://www.youtube.com/watch?v=tdTitF6z-UA&list=PLS9MbmO_ssyBAc9wBC85_WG9aT88KGxH8&index=14) 
+- [Loading & Drawing Images in LÖVE](https://www.youtube.com/watch?v=2U2UdD2jT5U) 
+
+Happy coding! 
