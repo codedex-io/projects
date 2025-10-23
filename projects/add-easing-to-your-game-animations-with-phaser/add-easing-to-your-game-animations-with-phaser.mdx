@@ -116,7 +116,7 @@ We’ll do this in parts, since it gets a bit complex.
 ```jsx
 function create() {
   const graphics = this.add.graphics();
-  
+
   graphics.fillStyle(0x228B22, 1); // forest green
   graphics.fillRect(0, 450, 800, 50);
 }
@@ -130,8 +130,8 @@ After that, we set up a rectangle that acts as a platform for the player to stan
     - `0x228B22` is written in a special format that the graphics object can understand. The `#` prefix we associate with hex codes is simply replaced by the `0x` prefix.
     - `1` makes the rectangle fully opaque.
 - `fillRect(0, 450, 800, 50)` draws a rectangle.
-    - `x = 0, y = 450` is the top-left corner of the rectangle.
-    - `width = 800, height = 50` fills across the width of the screen, 50 pixels tall.
+    - `0, 450` is the `x, y` coordinates of the top-left corner of the rectangle.
+    - `800, 50` is the `width, height` of the rectangle.
 
 Next, we can create the walking animation. 
 
