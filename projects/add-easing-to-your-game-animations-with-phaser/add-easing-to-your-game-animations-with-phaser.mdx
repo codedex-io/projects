@@ -212,7 +212,7 @@ function create() {
 
 This makes the player walk across the screen automatically.
 
-- `this.tweens.add` moves or changes properties of objects smoothly over time.
+- `this.tweens.add()` moves or changes properties of objects smoothly over time.
     - `targets: player` is the object to animate.
     - `x: 800` is the target x-position (moves the sprite horizontally to 800).
     - `duration: 3000` is the time in milliseconds (3 seconds) for the movement.
@@ -230,7 +230,7 @@ When you run the code, you should see something like this:
 
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/linear.gif"
-  style={{ width: "80%", height: "auto" }}
+  style={{ width: "50%", height: "auto" }}
   alt="codedex character linear walk"
 />
 
@@ -238,7 +238,7 @@ Here’s a graph visualizing the animation curve:
 
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/linearGraph.gif"
-  style={{ width: "50%", height: "auto" }}
+  style={{ width: "25%", height: "auto" }}
   alt="linear graph"
 />
 
@@ -257,13 +257,13 @@ As you saw above, there are 32 different types of easing we can apply to this ch
     "Sine.easeInOut","Expo.easeInOut","Circ.easeInOut","Back.easeInOut","Bounce.easeInOut"
 ```
 
-Inside `this.tweens.add`, try changing `ease` from `Linear` to one of the options above.
+Inside `this.tweens.add()`, try changing `ease` from `Linear` to one of the options above.
 
 A nice subtle one to try is `Sine.easeInOut`:
 
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/sine.gif"
-  style={{ width: "80%", height: "auto" }}
+  style={{ width: "50%", height: "auto" }}
   alt="codedex character sine ease in out sine walk"
 />
 
@@ -273,7 +273,7 @@ Here’s a graph visualizing the animation curve:
 
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/easeInOutSine.gif"
-  style={{ width: "50%", height: "auto" }}
+  style={{ width: "25%", height: "auto" }}
   alt="ease in out sine graph"
 />
 
@@ -281,7 +281,7 @@ They can get pretty wild. Here’s `Bounce.easeInOut` in action:
 
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/bounce.gif"
-  style={{ width: "80%", height: "auto" }}
+  style={{ width: "50%", height: "auto" }}
   alt="codedex character bounce ease in out walk"
 />
 
@@ -289,7 +289,7 @@ Here’s a graph visualizing that one:
 
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/easeInOutBounce.gif"
-  style={{ width: "50%", height: "auto" }}
+  style={{ width: "25%", height: "auto" }}
   alt="bounce ease in out graph"
 />
 
@@ -299,7 +299,7 @@ As you’re testing these out, think about how each easing changes the feeling o
 
 If you want to customize it even further, you can actually go outside the box of built-in easing functions, and make your own. In order to do that, we need to understand exactly how the math behind easing functions works.
 
-Let’s zoom into the `this.tweens.add` function.
+Let’s zoom into the `this.tweens.add()` function.
 
 ```jsx
   this.tweens.add({
@@ -327,7 +327,7 @@ Try replacing the built-in function name in your code with the mathematical func
 
 So, why does this work? Let’s break down the logic of the easing function itself.
 
-Setting values in `this.tweens.add` controls how a value changes over time. In this case, how the player’s `x` position moves `800` pixels to the right over the course of `3000` milliseconds, or 3 seconds.
+Setting values in `this.tweens.add()` controls how a value changes over time. In this case, how the player’s `x` position moves `800` pixels to the right over the course of `3000` milliseconds, or 3 seconds.
 
 `t` stands for normalized time, or how far along the animation is between the start and the end, represented as a value between `0` and `1`. So, the value of `t` goes from `0` to `1` over the course of `3000` milliseconds, the tween’s duration.
 
@@ -343,7 +343,7 @@ Just like the linear graph from before.
 
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/linearGraph.gif"
-  style={{ width: "50%", height: "auto" }}
+  style={{ width: "25%", height: "auto" }}
   alt="linear graph"
 />
 
@@ -370,7 +370,7 @@ Woah woah woah! Why is the animation only 3.1% complete at `t = 0.5`? Isn’t th
 
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/easeInExpo.gif"
-  style={{ width: "50%", height: "auto" }}
+  style={{ width: "25%", height: "auto" }}
   alt="expo ease in graph"
 />
 
@@ -397,7 +397,7 @@ this.tweens.add({
 ```
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/add-easing-to-your-game-animations-with-phaser/assets/easeOutElastic.gif"
-  style={{ width: "50%", height: "auto" }}
+  style={{ width: "25%", height: "auto" }}
   alt="elastic ease out graph"
 />
 
