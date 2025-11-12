@@ -4,9 +4,9 @@ author: Dharma Jethva
 uid: HQImLPf2Tmel6kw8hCis3vcJnLo2
 datePublished: 2025-11-13
 published: beta
-description: Learn about using WebSocket and Socket.IO to build a chat application.
-header: 
-bannerImage: 
+description: Learn to create a webcam-controlled game with TensorFlow.js and MediaPipe Hands. Real-time hand tracking and browser ML for interactive web projects.
+header:https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fbanner.png?alt=media&token=b216d786-1b40-4526-86ca-5808b36a48b0 
+bannerImage:https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fbanner.png?alt=media&token=b216d786-1b40-4526-86ca-5808b36a48b0 
 readTime: 60
 prerequisites: JavaScript, async/await, Promises
 versions: Browser JavaScript
@@ -35,7 +35,10 @@ How to use hand tracking data to create interactive experiences.
 
 By the end of this tutorial, we’ll have a fully functional gesture-controlled game that looks like this:
 
-<!-- img -->
+<img
+  src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fdemo.gif?alt=media&token=e72eaaa2-588a-45f3-aff2-63f7e6cda54a"
+  alt="Final Project Output"
+/>
 
 **Note:** The main focus of this tutorial is understanding how hand tracking works with TensorFlow.js, not building a complex game. The game mechanics are kept simple so we can focus on the machine learning concepts.
 
@@ -67,7 +70,10 @@ To sum it up, the idea of programming with traditional computer programming is t
 
 So, in summary, the idea of programming with machine learning is that the developers have some input (an image of a hand), they provide the expected output (labeled coordinates for the hand/fingers) to a model, and the model automatically generates the internal rules/patterns necessary to transform the input into that output. In this case, the model is trained with images of hands and the expected coordinates of their landmarks, and as the output, it automatically predicts the coordinates of the landmarks in a new, unseen image.
 
-<!-- img -->
+<img
+  src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Ftraditional-vs-ml.png?alt=media&token=a85a85cb-2943-4d26-aa63-708c5bfb24eb"
+  alt="Comparison of Traditional Computing vs Machine Learning"
+/>
 
 So, instead of the developers writing the rules, the machine writes the logic for us. Super cool, right?
 
@@ -87,7 +93,10 @@ This means:
 
 [MediaPipe Hands](https://mediapipe.readthedocs.io/en/latest/solutions/hands.html) is a pre-trained machine learning model created by Google that can detect hands and identify 21 key points (landmarks) on each hand:
 
-<!-- img -->
+<img
+  src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fhand-tracking-3d.gif?alt=media&token=af65e486-8ba1-46d7-b782-30e86cc0d460"
+  alt="MediaPipe model landmark demo"
+/>
 
 
 These 21 landmarks include:
@@ -363,7 +372,10 @@ const handPositions = hands.map(hand => {
 });
 ```
 
-<!-- img -->
+<img
+  src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fhand-landmarks.png?alt=media&token=0431ba4f-708c-4c5d-b931-68b474d883d2"
+  alt="Hand landmark information with indexing"
+/>
 
 
 **Why these calculations?**
@@ -499,7 +511,10 @@ if (!success) {
 - Shows friendly error message.
 - Prevent the game from starting without hand tracking.
 - 
-<!-- img -->
+<img
+  src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fdemo.gif?alt=media&token=e72eaaa2-588a-45f3-aff2-63f7e6cda54a"
+  alt="Final Project Output"
+/>
 
 ### How the Game Works (Optional)
 
