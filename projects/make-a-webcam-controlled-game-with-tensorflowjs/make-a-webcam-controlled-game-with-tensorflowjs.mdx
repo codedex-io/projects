@@ -43,8 +43,10 @@ By the end of this tutorial, we’ll have a fully functional gesture-controlled 
 **Note:** The main focus of this tutorial is understanding how hand tracking works with TensorFlow.js, not building a complex game. The game mechanics are kept simple so we can focus on the machine learning concepts.
 
 Let’s start!
+
 ## How Does Hand Tracking Work?
-Before we jump into code, we need to understand what’s happening behind the scenes when we track hands using TensorFlow.js! 
+
+Before we jump into code, we need to understand what’s happening behind the scenes when we track hands using TensorFlow.js!
 
 There are three main concepts I want to talk about: How Machine Learning is different from traditional computer programming, what TensorFlow.js and MediaPipe Hands libraries are, and how the detection process works.
 
@@ -77,10 +79,9 @@ So, in summary, the idea of programming with machine learning is that the develo
 
 So, instead of the developers writing the rules, the machine writes the logic for us. Super cool, right?
 
-
 ### What is TensorFlow.js?
 
-[TensorFlow.js](https://www.tensorflow.org/js) is a JavaScript library that lets you run machine learning models directly in the browser. 
+[TensorFlow.js](https://www.tensorflow.org/js) is a JavaScript library that lets you run machine learning models directly in the browser.
 
 This means:
 
@@ -96,10 +97,11 @@ This means:
 <img
   src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fhand-tracking-3d.gif?alt=media&token=af65e486-8ba1-46d7-b782-30e86cc0d460"
   alt="MediaPipe model landmark demo"
+  style={{ width: "250px" }}
 />
 
-
 These 21 landmarks include:
+
 - Wrist (landmark 0)
 - Thumb joints (landmarks 1-4)
 - Index finger joints (landmarks 5-8)
@@ -122,10 +124,10 @@ Here’s what happens every time a frame of the live video is processed (You can
 Okay! Now that we have a general idea of what is happening behind the scenes, let’s get onto building it!
 
 ## Setup
+
 Let’s begin with the starter code by downloading the project files from this repository: [Air Juggler using TensorFlow.js](https://github.com/Goku-kun/air-juggler-using-tensorflowjs)
 
 The folder should have the following structure:
-
 
 ```
 air-juggler-with-tensorflowjs/
@@ -146,13 +148,11 @@ air-juggler-with-tensorflowjs/
 
 We'll also load TensorFlow.js and MediaPipe Hands from CDNs, so no installation is required!
 
-
 ## Step 1: Add TensorFlow.js Libraries
 
 Open the **starter/index.html** file. You'll notice there's a TODO comment near the bottom where we need to add the TensorFlow.js libraries.
 
 Replace the TODO comment with these script tags:
-
 
 ```html
 <!-- Load TensorFlow.js and MediaPipe Hands -->
@@ -184,7 +184,9 @@ What each library does:
    - Abstracts away the complexity of working directly with tensors.
 
 **Save the file.** You now have TensorFlow.js loaded in your browser!
+
 ## Step 2: Implement Loading Progress Indicator
+
 While TensorFlow.js loads (~2-3 seconds first time), we should show a loading indicator.
 
 Open **starter/game.js** and find **Step 2** (bottom of file).
@@ -192,7 +194,6 @@ Open **starter/game.js** and find **Step 2** (bottom of file).
 Add this function before the `render()` call:
 
 ```javascript
-
 // Check if TensorFlow.js is loaded
 function checkTensorFlowLoaded() {
   if (typeof tf !== "undefined" && typeof handPoseDetection !== "undefined") {
@@ -212,7 +213,6 @@ How this works:
 - If they’re not defined, run the function again in another 100ms.
 
 ```javascript
-
 // Start checking once DOM is loaded
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", checkTensorFlowLoaded);
@@ -221,14 +221,12 @@ if (document.readyState === "loading") {
 }
 ```
 
-
 **How this works:**
 
 Once the HTML has loaded in the page, call the `checkTensorFlowLoaded` function
 This function will keep running and continue showing the loading state until both the libraries load.
 
 **Test it:** Open **starter/index.html** in your browser by double clicking on the file. You should see a loading spinner that disappears after 2-3 seconds!
-
 
 ## Step 3: Request Webcam Access
 
@@ -238,11 +236,10 @@ Open **starter/handTracking.js** and find **Step 3a and Step 3b** in the `setupH
 
 Add this code:
 
-
 ```javascript
 // Request webcam access using getUserMedia
 const stream = await navigator.mediaDevices.getUserMedia({
-    video: { width: 640, height: 480 }
+  video: { width: 640, height: 480 },
 });
 ```
 
@@ -278,19 +275,19 @@ Now we'll load the pre-trained MediaPipe Hands model. This model was trained by 
 
 At **Step 4**, configure and load the MediaPipe Hands model:
 
-
 ```javascript
 // Load MediaPipe Hands model
 const model = window.handPoseDetection.SupportedModels.MediaPipeHands;
 const detectorConfig = {
-    runtime: 'mediapipe',
-    solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/hands',
-    maxHands: 2,
-    modelType: 'full'
+  runtime: "mediapipe",
+  solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/hands",
+  maxHands: 2,
+  modelType: "full",
 };
 ```
 
 **Configuration explained:**
+
 - `runtime: 'mediapipe'` - Use MediaPipe instead of existing TensorFlow model because it is more efficient
 - `solutionPath` - CDN URL where model files are hosted
 - `maxHands: 2` - Detect up to 2 hands simultaneously
@@ -319,7 +316,6 @@ In **starter/handTracking.js**, find **Step 5** in the `detectHands` function.
 
 Add this code:
 
-
 ```javascript
 // Run hand detection on current video frame
 const hands = await detector.estimateHands(video);
@@ -333,7 +329,6 @@ const hands = await detector.estimateHands(video);
 - Each hand object contains landmark data information.
 - It looks like this object:
 
-
 ```javascript
 [
   {
@@ -342,12 +337,11 @@ const hands = await detector.estimateHands(video);
       { x: 125.1, y: 235.7, z: -4.8, name: "index_finger_mcp" },
       // ... 19 more keypoints
     ],
-    handedness: "Left",  // or "Right"
-    score: 0.98  // Confidence score (0-1)
-  }
-]
+    handedness: "Left", // or "Right"
+    score: 0.98, // Confidence score (0-1)
+  },
+];
 ```
-
 
 ## Step 6: Transform Hand Landmarks to Coordinates
 
@@ -355,20 +349,18 @@ The model gives us 21 detailed keypoints, but our game only needs one position p
 
 At **Step 6a**, process the detected landmarks:
 
-
 ```javascript
-
 // Transform hand landmarks to canvas coordinates
-const handPositions = hands.map(hand => {
-    // Get palm center (average of wrist and thumb 4 points)
-    const palmBase = [0, 5, 9, 13, 17].map(i => hand.keypoints[i]);
-    const avgX = palmBase.reduce((sum, kp) => sum + kp.x, 0) / palmBase.length;
-    const avgY = palmBase.reduce((sum, kp) => sum + kp.y, 0) / palmBase.length;
+const handPositions = hands.map((hand) => {
+  // Get palm center (average of wrist and thumb 4 points)
+  const palmBase = [0, 5, 9, 13, 17].map((i) => hand.keypoints[i]);
+  const avgX = palmBase.reduce((sum, kp) => sum + kp.x, 0) / palmBase.length;
+  const avgY = palmBase.reduce((sum, kp) => sum + kp.y, 0) / palmBase.length;
 
-    return {
-        x: 640 - avgX,  // Mirror x coordinate; 640 is our video resolution width dimension when we initialize the video feed
-        y: avgY
-    };
+  return {
+    x: 640 - avgX, // Mirror x coordinate; 640 is our video resolution width dimension when we initialize the video feed
+    y: avgY,
+  };
 });
 ```
 
@@ -376,7 +368,6 @@ const handPositions = hands.map(hand => {
   src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fhand-landmarks.png?alt=media&token=0431ba4f-708c-4c5d-b931-68b474d883d2"
   alt="Hand landmark information with indexing"
 />
-
 
 **Why these calculations?**
 
@@ -389,17 +380,18 @@ At **Step 6b**, call the function:
 ```javascript
 // Call sendHandsCallback with new hand positions
 if (sendHandsCallback) {
-    sendHandsCallback(handPositions);
+  sendHandsCallback(handPositions);
 }
 ```
 
 **Data Flow:**
-1. It is important to understand how the whole process is working together, i.e. where the data originates, how its passed around, transforming it and getting us our hand information. 
-2. Video frame made available from video gets passed to the model 
+
+1. It is important to understand how the whole process is working together, i.e. where the data originates, how its passed around, transforming it and getting us our hand information.
+2. Video frame made available from video gets passed to the model
 3. Model generates and outputs 21 landmarks per hand
 4. Landmarks are then used for the palm center calculation
 5. Palm center calculation are then used to get the mirrored coordinates
-6. These coordinates are passed to the  sendHandsCallback which in turn updates the game state.
+6. These coordinates are passed to the sendHandsCallback which in turn updates the game state.
 
 **The callback pattern:** Every 30 FPS, we call the `sendHandsCallback` function with new hand positions, updating the game in real-time!
 
@@ -410,7 +402,6 @@ Now we connect everything together! We'll initialize hand tracking when the game
 Open **starter/game.js** and find **Step 10** in the `startGame` function.
 
 Add this code:
-
 
 ```javascript
 // Initialize hand tracking if not already done
@@ -427,7 +418,7 @@ if (!window.handTrackingInitialized) {
   const success = await window.handTracking.setupHandTracking(
     webcam,
     function receiveHands(hands) {
-      gameState.hands = hands;  // Update game state with detected hands
+      gameState.hands = hands; // Update game state with detected hands
     },
   );
 
@@ -444,7 +435,6 @@ if (!window.handTrackingInitialized) {
   window.handTrackingInitialized = true;
 }
 ```
-
 
 That was a lot of code! Let’s break it down and understand what’s going on here:
 
@@ -476,15 +466,16 @@ loadingStatus.textContent = "Loading MediaPipe Hands model...";
 ```javascript
 const success = await window.handTracking.setupHandTracking(
   webcam,
-  function receiveHands (hands) {
-    gameState.hands = hands;  // This is the magic line!
+  function receiveHands(hands) {
+    gameState.hands = hands; // This is the magic line!
     // it receives updated hand positions for the game loop to use
     // [{x: 320, y: 240}, {x: 400, y: 300}] which is an array
-  }
+  },
 );
 ```
 
 // inside the handTracking.js file
+
 ```javascript
 async function setupHandTracking(videoElement, sendHands) {
   sendHandsCallback = sendHands // this function will be used to send updated hands position which will be received in the game.js file via the receiveHands function
@@ -510,11 +501,10 @@ if (!success) {
 - If camera permission is denied, setup returns `false`.
 - Shows friendly error message.
 - Prevent the game from starting without hand tracking.
-- 
-<img
-  src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fdemo.gif?alt=media&token=e72eaaa2-588a-45f3-aff2-63f7e6cda54a"
-  alt="Final Project Output"
-/>
+- <img
+    src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Fdemo.gif?alt=media&token=e72eaaa2-588a-45f3-aff2-63f7e6cda54a"
+    alt="Final Project Output"
+  />
 
 ### How the Game Works (Optional)
 
@@ -534,11 +524,12 @@ From the overall perspective of steps, this is what happens when the game is pla
 2. Game calls the `setupHandTracking()` function.
 3. Hand tracking initializes camera + model.
 4. Hand detection loop starts (30 FPS).
-5. Every frame: model detects hands, then  calls the receiveHands callback, which in turn  updates the `gameState.hands`.
+5. Every frame: model detects hands, then calls the receiveHands callback, which in turn updates the `gameState.hands`.
 6. Game loop (60 FPS) uses `gameState.hands` for rendering and collision
 7. Result: Smooth, responsive hand-controlled gameplay!
 
 ## Conclusion
+
 Congratulations! You've built a gesture-controlled game using TensorFlow.js! 🎉
 
 Let's recap what we learned:
@@ -554,7 +545,6 @@ Let's recap what we learned:
 - Drawing video to HTML5 Canvas
 - Extracting meaningful data from ML model outputs
 
-
 Now that you understand hand tracking, you can build even more exciting projects such as:
 
 - **Gesture Recognition** - Detect specific hand gestures (peace sign, thumbs up, etc.).
@@ -569,6 +559,3 @@ Now that you understand hand tracking, you can build even more exciting projects
 - [WebRTC getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
 
 Share your creations on Twitter and tag [@gokukun_io](https://twitter.com/gokukun_io) [@codedex_io](https://twitter.com/codedex_io)!
-
-
-
