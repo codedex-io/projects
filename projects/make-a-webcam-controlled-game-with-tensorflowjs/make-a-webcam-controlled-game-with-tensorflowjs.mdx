@@ -1,0 +1,559 @@
+---
+title: Make a Webcam Controlled Game with TensorFlow.js
+author: Dharma Jethva
+uid: HQImLPf2Tmel6kw8hCis3vcJnLo2
+datePublished: 2025-11-13
+published: beta
+description: Learn about using WebSocket and Socket.IO to build a chat application.
+header: 
+bannerImage: 
+readTime: 60
+prerequisites: JavaScript, async/await, Promises
+versions: Browser JavaScript
+courses:
+  - javascript
+  - intermediate-javascript
+  - nodejs
+tags:
+  - intermediate
+  - javascript
+---
+
+## Introduction
+
+Did you know that you can control a game with just your hands? No keyboard, no mouse - just waving at your webcam like you’re living in a sci-fi movie!
+
+In this project tutorial, we’ll build **Air Juggler**, a webcam gesture-controlled game that uses TensorFlow.js and MediaPipe Hands to detect your hand movements in real-time!
+
+You will learn about the following concepts in this tutorial:
+
+What TensorFlow.js is and how machine learning works in the browser.
+How MediaPipe Hands detects hand landmarks using computer vision.
+How to access your webcam using the `getUserMedia` API.
+How to process video frames in real-time and extract hand positions.
+How to use hand tracking data to create interactive experiences.
+
+By the end of this tutorial, we’ll have a fully functional gesture-controlled game that looks like this:
+
+<!-- img -->
+
+**Note:** The main focus of this tutorial is understanding how hand tracking works with TensorFlow.js, not building a complex game. The game mechanics are kept simple so we can focus on the machine learning concepts.
+
+Let’s start!
+## How Does Hand Tracking Work?
+Before we jump into code, we need to understand what’s happening behind the scenes when we track hands using TensorFlow.js! 
+
+There are three main concepts I want to talk about: How Machine Learning is different from traditional computer programming, what TensorFlow.js and MediaPipe Hands libraries are, and how the detection process works.
+
+### Traditional Computer Programming vs. Machine Learning
+
+In traditional computer vision, programmers would write explicit code with rules, as follows, to detect hands:
+
+- “Look for skin-colored pixels”
+- “Look “Find blob shaped regions”
+- “Detect finger-like protrusions”
+- “Add max-min width for the size of a finger”
+
+This approach has major problems:
+
+- What about different skin tones?
+- What if lighting conditions change in the video?
+- How do we handle different hand orientations? Should we measure the width looking down at the palm side of the hand or from the thumb side of the hand?
+- How to account for hand size when depending on the age, gender, and other factors the hands may look completely different in dimensions?
+
+To sum it up, the idea of programming with traditional computer programming is that the developers have some input that they want to process, they write the rules to process that input and the output of these rules is what they expect. In this case, they have an image(s) of a hand that they want to process, the rules determine what part of the hand is a finger, palm,etc. and as the output, they get the coordinates of these areas that they were looking for in the image.
+
+**Machine Learning** takes a completely different approach. Instead of writing rules, we train a model on thousands of images in different positions, lighting conditions, and angles. The model learns patterns that we engineers might not even consciously notice. Then, we send an image to this model and let it decide based on what it was trained upon to determine whether it was a hand or not! Computers are exceptional at spotting patterns and we’re trying to leverage that potential, by having them generate rules of what a hand looks like based on hundreds of thousands of images of hands and the coordinates of different areas on the hand.
+
+So, in summary, the idea of programming with machine learning is that the developers have some input (an image of a hand), they provide the expected output (labeled coordinates for the hand/fingers) to a model, and the model automatically generates the internal rules/patterns necessary to transform the input into that output. In this case, the model is trained with images of hands and the expected coordinates of their landmarks, and as the output, it automatically predicts the coordinates of the landmarks in a new, unseen image.
+
+<!-- img -->
+
+So, instead of the developers writing the rules, the machine writes the logic for us. Super cool, right?
+
+
+### What is TensorFlow.js?
+
+[TensorFlow.js](https://www.tensorflow.org/js) is a JavaScript library that lets you run machine learning models directly in the browser. 
+
+This means:
+
+- **No server required** - Everything runs on the user’s device.
+- **Privacy** - Your webcam video never leaves your computer.
+- **Easy Integration** - TensorFlow.js can be integrated with popular web frameworks like React, Angular, and Vue, making it simple to add machine learning features to modern web apps.
+- **Pre-trained Models** - Offers a variety of pre-trained models for tasks such as image classification, object detection, pose estimation, and natural language processing, allowing developers to quickly add ML capabilities without training from scratch.
+
+### What is MediaPipe Hands?
+
+[MediaPipe Hands](https://mediapipe.readthedocs.io/en/latest/solutions/hands.html) is a pre-trained machine learning model created by Google that can detect hands and identify 21 key points (landmarks) on each hand:
+
+<!-- img -->
+
+
+These 21 landmarks include:
+- Wrist (landmark 0)
+- Thumb joints (landmarks 1-4)
+- Index finger joints (landmarks 5-8)
+- Middle finger joints (landmarks 9-12)
+- Ring finger joints (landmarks 13-16)
+- Pinky finger joints (landmarks 17-20)
+
+The model can track up to 2 hands simultaneously and runs at about 30 frames per second on most modern devices. That’s super convenient for us!
+
+### How the Detection Process Works
+
+Here’s what happens every time a frame of the live video is processed (You can think of the frame as one image from the video):
+
+- **Capture frame** - Get the current video frame from your webcam.
+- **Run detection** - Pass the frame through the MediaPipe Hands model.
+- **Get landmarks** - The model returns the (x, y, z) coordinates of all 21 landmarks for each detected hand.
+- **Process data** - Use these coordinates to control your application.
+- **Render feedback** - Draw visual indicators showing where hands are detected.
+
+Okay! Now that we have a general idea of what is happening behind the scenes, let’s get onto building it!
+
+## Setup
+Let’s begin with the starter code by downloading the project files from this repository: [Air Juggler using TensorFlow.js](https://github.com/Goku-kun/air-juggler-using-tensorflowjs)
+
+The folder should have the following structure:
+
+
+```
+air-juggler-with-tensorflowjs/
+   ├── starter/                  # Start here - incomplete code with TODOs
+   │       ├── index.html       # HTML without TensorFlow scripts
+   │       ├── style.css        # Complete styling (provided)
+   │       ├── game.js          # Game boilerplate with TODOs
+   │       └── handTracking.js  # Hand tracking boilerplate with TODOs
+   ├── completed/                # Reference - fully working code
+   │       ├── index.html
+   │       ├── style.css
+   │       ├── game.js
+   │       └── handTracking.js
+   └── README.md
+```
+
+**Note:** We'll be working in the **starter** directory. The **completed** directory contains the finished code and can be used as reference if you get stuck.
+
+We'll also load TensorFlow.js and MediaPipe Hands from CDNs, so no installation is required!
+
+
+## Step 1: Add TensorFlow.js Libraries
+
+Open the **starter/index.html** file. You'll notice there's a TODO comment near the bottom where we need to add the TensorFlow.js libraries.
+
+Replace the TODO comment with these script tags:
+
+
+```html
+<!-- Load TensorFlow.js and MediaPipe Hands -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
+```
+
+These three libraries work together:
+`@tensorflow/tfjs` - Core TensorFlow.js library
+`@mediapipe/hands` - MediaPipe Hands solution code
+`@tensorflow-models/hand-pose-detection` - High-level API for hand detection
+
+What each library does:
+
+1. **`@tensorflow/tfjs`** - The core TensorFlow.js library
+   - Provides the infrastructure to run machine learning models in the browser.
+   - Handles tensor operations, GPU acceleration, and model execution.
+   - Makes browser-based ML possible without any server.
+
+2. **`@mediapipe/hands`** - MediaPipe Hands solution
+   - Contains the pre-trained neural network weights.
+   - Includes the hand detection and landmark prediction models.
+   - Trained by Google on millions of hand images.
+
+3. **`@tensorflow-models/hand-pose-detection`** - High-level wrapper API
+   - Provides a simple interface to use the MediaPipe Hands model.
+   - Handles video frame processing and coordinate transformations.
+   - Abstracts away the complexity of working directly with tensors.
+
+**Save the file.** You now have TensorFlow.js loaded in your browser!
+## Step 2: Implement Loading Progress Indicator
+While TensorFlow.js loads (~2-3 seconds first time), we should show a loading indicator.
+
+Open **starter/game.js** and find **Step 2** (bottom of file).
+
+Add this function before the `render()` call:
+
+```javascript
+
+// Check if TensorFlow.js is loaded
+function checkTensorFlowLoaded() {
+  if (typeof tf !== "undefined" && typeof handPoseDetection !== "undefined") {
+    // TensorFlow.js and dependencies loaded
+    loadingOverlay.classList.add("hidden");
+  } else {
+    // Check again after a short delay
+    setTimeout(checkTensorFlowLoaded, 100);
+  }
+}
+```
+
+How this works:
+
+- Create the `checkTensorFlowLoaded()` function.
+- This function checks if `tf` and `handPoseDetection` are defined (they will get defined when the libraries load).
+- If they’re not defined, run the function again in another 100ms.
+
+```javascript
+
+// Start checking once DOM is loaded
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", checkTensorFlowLoaded);
+} else {
+  checkTensorFlowLoaded();
+}
+```
+
+
+**How this works:**
+
+Once the HTML has loaded in the page, call the `checkTensorFlowLoaded` function
+This function will keep running and continue showing the loading state until both the libraries load.
+
+**Test it:** Open **starter/index.html** in your browser by double clicking on the file. You should see a loading spinner that disappears after 2-3 seconds!
+
+
+## Step 3: Request Webcam Access
+
+Now we'll access the user's webcam using the `getUserMedia` API.
+
+Open **starter/handTracking.js** and find **Step 3a and Step 3b** in the `setupHandTracking` function.
+
+Add this code:
+
+
+```javascript
+// Request webcam access using getUserMedia
+const stream = await navigator.mediaDevices.getUserMedia({
+    video: { width: 640, height: 480 }
+});
+```
+
+**The getUserMedia API:**
+
+- `navigator.mediaDevices.getUserMedia()` requests access to media devices.
+- Returns a Promise that resolves with a `MediaStream` object.
+- The browser shows a permission dialog—users must explicitly grant access.
+- If denied, the Promise rejects with an error.
+- Requests video with preferred resolution, in our case 640 x 480.
+- Browser tries to match, but may use different resolutions if unavailable.
+
+// Then at Step 3b, connect the stream to the video element:
+
+```javascript
+// Connect the stream to the video element
+
+video.srcObject = stream;
+await video.play();
+```
+
+**Connecting the Stream:**
+
+- `video.srcObject = stream` - Connects camera stream to `<video>` element.
+- `await video.play()` - Starts playing the video feed.
+- The video element now displays live webcam footage.
+
+**Note**: You will not be able to see the video stream yet because we haven't connected it out our canvas but if your webcam light turns on, the video is working!
+
+## Step 4: Load MediaPipe Hands Model
+
+Now we'll load the pre-trained MediaPipe Hands model. This model was trained by Google on millions of hand images and can detect 21 precise landmarks on each hand in real-time.
+
+At **Step 4**, configure and load the MediaPipe Hands model:
+
+
+```javascript
+// Load MediaPipe Hands model
+const model = window.handPoseDetection.SupportedModels.MediaPipeHands;
+const detectorConfig = {
+    runtime: 'mediapipe',
+    solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/hands',
+    maxHands: 2,
+    modelType: 'full'
+};
+```
+
+**Configuration explained:**
+- `runtime: 'mediapipe'` - Use MediaPipe instead of existing TensorFlow model because it is more efficient
+- `solutionPath` - CDN URL where model files are hosted
+- `maxHands: 2` - Detect up to 2 hands simultaneously
+- `modelType: 'full'` - Full accuracy model (vs 'lite' which is faster but less accurate)
+
+// Then, at **Step 4b**, create the detector:
+
+```javascript
+// Create the detector
+detector = await window.handPoseDetection.createDetector(model, detectorConfig);
+```
+
+**Creating the detector:**
+
+- Creating the detector requires 2 arguments.
+- Pass the `model` variable as an argument. This is the MediaPipeHands model seen on the previous code block.
+- Add the `detectorConfig` as the second argument.
+
+**Performance:** First load downloads ~10MB of model files, then cached. Loading takes 1-2 seconds.
+
+## Step 5: Detect Hands in Real-Time
+
+Now we'll create the detection loop that analyzes the webcam feed 30 times per second. This is where the magic happens—every frame, the model finds hands and returns their precise locations!
+
+In **starter/handTracking.js**, find **Step 5** in the `detectHands` function.
+
+Add this code:
+
+
+```javascript
+// Run hand detection on current video frame
+const hands = await detector.estimateHands(video);
+```
+
+**What happens here:**
+
+- Takes the current video frame from the `<video>` element.
+- Runs the MediaPipe Hands model on that frame.
+- Returns an array of detected hands (0 to `maxHands`).
+- Each hand object contains landmark data information.
+- It looks like this object:
+
+
+```javascript
+[
+  {
+    keypoints: [
+      { x: 120.5, y: 240.3, z: -5.2, name: "wrist" },
+      { x: 125.1, y: 235.7, z: -4.8, name: "index_finger_mcp" },
+      // ... 19 more keypoints
+    ],
+    handedness: "Left",  // or "Right"
+    score: 0.98  // Confidence score (0-1)
+  }
+]
+```
+
+
+## Step 6: Transform Hand Landmarks to Coordinates
+
+The model gives us 21 detailed keypoints, but our game only needs one position per hand—the palm center. Let's transform this complex data into simple (x, y) coordinates.
+
+At **Step 6a**, process the detected landmarks:
+
+
+```javascript
+
+// Transform hand landmarks to canvas coordinates
+const handPositions = hands.map(hand => {
+    // Get palm center (average of wrist and thumb 4 points)
+    const palmBase = [0, 5, 9, 13, 17].map(i => hand.keypoints[i]);
+    const avgX = palmBase.reduce((sum, kp) => sum + kp.x, 0) / palmBase.length;
+    const avgY = palmBase.reduce((sum, kp) => sum + kp.y, 0) / palmBase.length;
+
+    return {
+        x: 640 - avgX,  // Mirror x coordinate; 640 is our video resolution width dimension when we initialize the video feed
+        y: avgY
+    };
+});
+```
+
+<!-- img -->
+
+
+**Why these calculations?**
+
+- We use the 5 keypoints (wrist + base of index, middle, ring and pinky fingers) to find the approximate palm center. Look at the points: 0, 5, 9, 13 and 17 in the image above.
+- Calculate average X and Y position.
+- **Mirror X coordinate** (`640 - avgX`) so controls feel natural, like looking in a mirror (640 is our video resolution width that we specified when enabling the video feed).
+
+At **Step 6b**, call the function:
+
+```javascript
+// Call sendHandsCallback with new hand positions
+if (sendHandsCallback) {
+    sendHandsCallback(handPositions);
+}
+```
+
+**Data Flow:**
+1. It is important to understand how the whole process is working together, i.e. where the data originates, how its passed around, transforming it and getting us our hand information. 
+2. Video frame made available from video gets passed to the model 
+3. Model generates and outputs 21 landmarks per hand
+4. Landmarks are then used for the palm center calculation
+5. Palm center calculation are then used to get the mirrored coordinates
+6. These coordinates are passed to the  sendHandsCallback which in turn updates the game state.
+
+**The callback pattern:** Every 30 FPS, we call the `sendHandsCallback` function with new hand positions, updating the game in real-time!
+
+## Step 7: Integrate Hand Tracking with Game
+
+Now we connect everything together! We'll initialize hand tracking when the game starts and set up a function to be passed a callback function to receive real-time hand positions.
+
+Open **starter/game.js** and find **Step 10** in the `startGame` function.
+
+Add this code:
+
+
+```javascript
+// Initialize hand tracking if not already done
+if (!window.handTrackingInitialized) {
+  // Show loading overlay
+  loadingOverlay.classList.remove("hidden");
+  loadingStatus.textContent = "Requesting camera access...";
+
+  const webcam = document.getElementById("webcam");
+
+  // Update loading status
+  loadingStatus.textContent = "Loading MediaPipe Hands model...";
+
+  const success = await window.handTracking.setupHandTracking(
+    webcam,
+    function receiveHands(hands) {
+      gameState.hands = hands;  // Update game state with detected hands
+    },
+  );
+
+  // Hide loading overlay
+  loadingOverlay.classList.add("hidden");
+
+  if (!success) {
+    endGame();
+    overlayMessage.textContent = "Camera access required to play!";
+    return;
+  }
+
+  window.handTracking.startDetection();
+  window.handTrackingInitialized = true;
+}
+```
+
+
+That was a lot of code! Let’s break it down and understand what’s going on here:
+
+### Understanding the Integration
+
+**One-Time Initialization:**
+
+```javascript
+if (!window.handTrackingInitialized) { ... }
+```
+
+- Only initialize once, even if the user plays multiple games.
+- Model loading takes 1-2 seconds—don't repeat it!
+- Global flag prevents redundant initialization.
+
+**Progressive Loading UI:**
+
+```javascript
+loadingStatus.textContent = "Requesting camera access...";
+// ... camera code ...
+loadingStatus.textContent = "Loading MediaPipe Hands model...";
+```
+
+- Keep the user informed at each stage of loading.
+- Shows progress instead of generic "Loading...".
+
+**The Callback Connection:**
+
+```javascript
+const success = await window.handTracking.setupHandTracking(
+  webcam,
+  function receiveHands (hands) {
+    gameState.hands = hands;  // This is the magic line!
+    // it receives updated hand positions for the game loop to use
+    // [{x: 320, y: 240}, {x: 400, y: 300}] which is an array
+  }
+);
+```
+
+// inside the handTracking.js file
+```javascript
+async function setupHandTracking(videoElement, sendHands) {
+  sendHandsCallback = sendHands // this function will be used to send updated hands position which will be received in the game.js file via the receiveHands function
+...
+```
+
+- We pass a JavaScript function `receiveHands()` as the callback.
+- This gets assigned to `sendHands` in the `setupHandTracking()` function as a parameter.
+- Every 30 FPS, this function receives updated hand positions.
+- We store them in `gameState.hands` for the game loop to use.
+- This is how ML data flows into game logic!
+
+**Error Handling:**
+
+```javascript
+if (!success) {
+  endGame();
+  overlayMessage.textContent = "Camera access required to play!";
+  return;
+}
+```
+
+- If camera permission is denied, setup returns `false`.
+- Shows friendly error message.
+- Prevent the game from starting without hand tracking.
+- 
+<!-- img -->
+
+### How the Game Works (Optional)
+
+While the focus of this project tutorial is not building a game, let’s go over how the ‘machine learning’ part actually connects to the game and how the final code comes together.
+
+I’ve separated all the machine learning code and the camera related logic to be in the `handTracking.js` file, while the game code and rendering the game as well the video on the screen is part of the `game.js` file.
+
+There are 3 key functions that handle all the game logic. These functions are available in the game.js file. While you can take a deep dive into the function logic line by line, I want to provide an overview of what the purpose of each function is, in order to paint the picture about how the game is being set up, run and cleaned up once it exits.
+
+- `startGame()` - sets up the ball assets, game state, prepares the canvas. This function is attached to the “Start” button of the game or the “Try again” button of the game.
+- `gameLoop()` - runs 60 times in one second to render where the ball is, where the hands are, render the video and control the game.
+- `endGame()` - cleans up when the game ends. Shows the score, and resets the game state, allowing the user to start the game again.
+
+From the overall perspective of steps, this is what happens when the game is played:
+
+1. User clicks “Start Game”.
+2. Game calls the `setupHandTracking()` function.
+3. Hand tracking initializes camera + model.
+4. Hand detection loop starts (30 FPS).
+5. Every frame: model detects hands, then  calls the receiveHands callback, which in turn  updates the `gameState.hands`.
+6. Game loop (60 FPS) uses `gameState.hands` for rendering and collision
+7. Result: Smooth, responsive hand-controlled gameplay!
+
+## Conclusion
+Congratulations! You've built a gesture-controlled game using TensorFlow.js! 🎉
+
+Let's recap what we learned:
+
+### Learning Concepts
+
+- **TensorFlow.js** runs ML models directly in the browser
+- **MediaPipe Hands** provides pre-trained hand detection
+- **Keypoint detection** identifies 21 landmarks on each hand
+- Accessing webcam with `getUserMedia` API
+- Loading and running TensorFlow.js models
+- Processing video frames in real-time
+- Drawing video to HTML5 Canvas
+- Extracting meaningful data from ML model outputs
+
+
+Now that you understand hand tracking, you can build even more exciting projects such as:
+
+- **Gesture Recognition** - Detect specific hand gestures (peace sign, thumbs up, etc.).
+- **Sign Language Translator** - Recognize sign language alphabet.
+- Or build on this game by adding paddles using specific fingers such as index finger paddle, adding a high score system that saves the highest score of all the games, and more!
+
+### More Resources
+
+- [TensorFlow.js Documentation](https://www.tensorflow.org/js)
+- [MediaPipe Hands Guide](https://mediapipe.readthedocs.io/en/latest/solutions/hands.html)
+- [Hand Pose Detection API](https://github.com/tensorflow/tfjs-models/tree/master/hand-pose-detection)
+- [WebRTC getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
+
+Share your creations on Twitter and tag [@gokukun_io](https://twitter.com/gokukun_io) [@codedex_io](https://twitter.com/codedex_io)!
+
+
+
