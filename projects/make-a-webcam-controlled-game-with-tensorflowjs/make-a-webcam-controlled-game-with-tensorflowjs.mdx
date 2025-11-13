@@ -27,11 +27,11 @@ In this project tutorial, we’ll build **Air Juggler**, a webcam gesture-contro
 
 You will learn about the following concepts in this tutorial:
 
-What TensorFlow.js is and how machine learning works in the browser.
-How MediaPipe Hands detects hand landmarks using computer vision.
-How to access your webcam using the `getUserMedia` API.
-How to process video frames in real-time and extract hand positions.
-How to use hand tracking data to create interactive experiences.
+- What TensorFlow.js is and how machine learning works in the browser.
+- How MediaPipe Hands detects hand landmarks using computer vision.
+- How to access your webcam using the `getUserMedia` API.
+- How to process video frames in real-time and extract hand positions.
+- How to use hand tracking data to create interactive experiences.
 
 By the end of this tutorial, we’ll have a fully functional gesture-controlled game that looks like this:
 
@@ -66,11 +66,17 @@ This approach has major problems:
 - How do we handle different hand orientations? Should we measure the width looking down at the palm side of the hand or from the thumb side of the hand?
 - How to account for hand size when depending on the age, gender, and other factors the hands may look completely different in dimensions?
 
-To sum it up, the idea of programming with traditional computer programming is that the developers have some input that they want to process, they write the rules to process that input and the output of these rules is what they expect. In this case, they have an image(s) of a hand that they want to process, the rules determine what part of the hand is a finger, palm,etc. and as the output, they get the coordinates of these areas that they were looking for in the image.
+To sum it up, the idea of programming with traditional computer programming is that the developers have some input that they want to process, they write the rules to process that input and the output of these rules is what they expect.
 
-**Machine Learning** takes a completely different approach. Instead of writing rules, we train a model on thousands of images in different positions, lighting conditions, and angles. The model learns patterns that we engineers might not even consciously notice. Then, we send an image to this model and let it decide based on what it was trained upon to determine whether it was a hand or not! Computers are exceptional at spotting patterns and we’re trying to leverage that potential, by having them generate rules of what a hand looks like based on hundreds of thousands of images of hands and the coordinates of different areas on the hand.
+In this case, they have an image(s) of a hand that they want to process, the rules determine what part of the hand is a finger, palm, etc. and as the output, they get the coordinates of these areas that they were looking for in the image.
 
-So, in summary, the idea of programming with machine learning is that the developers have some input (an image of a hand), they provide the expected output (labeled coordinates for the hand/fingers) to a model, and the model automatically generates the internal rules/patterns necessary to transform the input into that output. In this case, the model is trained with images of hands and the expected coordinates of their landmarks, and as the output, it automatically predicts the coordinates of the landmarks in a new, unseen image.
+**Machine Learning** takes a completely different approach. Instead of writing rules, we train a model on thousands of images in different positions, lighting conditions, and angles. The model learns patterns that we engineers might not even consciously notice.
+
+Then, we send an image to this model and let it decide based on what it was trained upon to determine whether it was a hand or not! Computers are exceptional at spotting patterns and we’re trying to leverage that potential, by having them generate rules of what a hand looks like based on hundreds of thousands of images of hands and the coordinates of different areas on the hand.
+
+So, in summary, the idea of programming with machine learning is that the developers have some input (an image of a hand), they provide the expected output (labeled coordinates for the hand/fingers) to a model, and the model automatically generates the internal rules/patterns necessary to transform the input into that output.
+
+In this case, the model is trained with images of hands and the expected coordinates of their landmarks, and as the output, it automatically predicts the coordinates of the landmarks in a new, unseen image.
 
 <img
   src="https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fmake-a-webcam-controlled-game-with-tensorflowjs%2Ftraditional-vs-ml.png?alt=media&token=a85a85cb-2943-4d26-aa63-708c5bfb24eb"
@@ -252,7 +258,7 @@ const stream = await navigator.mediaDevices.getUserMedia({
 - Requests video with preferred resolution, in our case 640 x 480.
 - Browser tries to match, but may use different resolutions if unavailable.
 
-// Then at Step 3b, connect the stream to the video element:
+Then at Step 3b, connect the stream to the video element:
 
 ```javascript
 // Connect the stream to the video element
@@ -300,9 +306,9 @@ const detectorConfig = {
 detector = await window.handPoseDetection.createDetector(model, detectorConfig);
 ```
 
-**Creating the detector:**
+**Creating the hand detector:**
 
-- Creating the detector requires 2 arguments.
+- `createDetector` function requires 2 arguments.
 - Pass the `model` variable as an argument. This is the MediaPipeHands model seen on the previous code block.
 - Add the `detectorConfig` as the second argument.
 
@@ -548,8 +554,8 @@ Let's recap what we learned:
 
 Now that you understand hand tracking, you can build even more exciting projects such as:
 
-- **Gesture Recognition** - Detect specific hand gestures (peace sign, thumbs up, etc.).
-- **Sign Language Translator** - Recognize sign language alphabet.
+- **Gesture Recognition** - Detect specific hand gestures (peace sign, thumbs up, etc.). You can use the same model as this project to build this!
+- **Sign Language Translator** - Recognize sign language alphabet. After building the gesture recognition, assign it meanings in your code.
 - Or build on this game by adding paddles using specific fingers such as index finger paddle, adding a high score system that saves the highest score of all the games, and more!
 
 ### More Resources
