@@ -37,7 +37,7 @@ export class ConfigValidator {
       type: "service_account",
       projectId: "codedex-io",
       privateKeyId: process.env.PRIVATE_KEY_ID!,
-      privateKey: process.env.PRIVATE_KEY!.replace(/\\n/g, "\n"),
+      privateKey: process.env.PRIVATE_KEY!,
       clientEmail: process.env.CLIENT_EMAIL!,
       clientId: process.env.CLIENT_ID!,
       authUri: "https://accounts.google.com/o/oauth2/auth",
