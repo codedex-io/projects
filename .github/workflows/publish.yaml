@@ -15,8 +15,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20"
-      - name: install dependencies
+      - name: install root dependencies
         run: npm install
+      - name: install publish dependencies
+        run: cd publish && npm install
       - name: publish
         run: npm run publish
 
@@ -28,4 +30,3 @@ jobs:
           client_cert_url: ${{ secrets.CLIENT_CERT_URL }}
           MEILISEARCH_API_KEY: ${{ secrets.MEILISEARCH_API_KEY }}
           MEILISEARCH_HOST: ${{ secrets.MEILISEARCH_HOST }}
-
