@@ -20,11 +20,11 @@ export class ConfigValidator {
 
   private static validateFirebaseConfig(): FirebaseConfig {
     const required = [
-      "CLIENT_ID",
-      "PRIVATE_KEY",
-      "CLIENT_EMAIL",
-      "PRIVATE_KEY_ID",
-      "CLIENT_CERT_URL",
+      "client_id",
+      "private_key",
+      "client_email",
+      "private_key_id",
+      "client_cert_url",
     ];
 
     for (const key of required) {
