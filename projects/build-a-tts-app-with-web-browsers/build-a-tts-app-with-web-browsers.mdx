@@ -1,0 +1,496 @@
+---
+title: Build a Text-to-Speech App with Web Browsers
+author: Dharma Jethva
+uid: HQImLPf2Tmel6kw8hCis3vcJnLo2
+datePublished: 2025-11-26
+description: Learn how browsers can read text aloud using the Web Speech API. Build a complete TTS app with voice selection, speed, and pitch controls.
+published: beta
+header: https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fbuild-a-tts-app-with-web-browsers%2Ftts_banner.png?alt=media&token=f95affc5-45c5-4361-8e3a-7e4800a8a7ed
+bannerImage: https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fbuild-a-tts-app-with-web-browsers%2Ftts_banner.png?alt=media&token=f95affc5-45c5-4361-8e3a-7e4800a8a7ed
+readTime: 45
+prerequisites: JavaScript fundamentals, HTML/CSS basics
+versions: Any modern browser
+courses:
+  - javascript
+  - intermediate-javascript
+tags:
+  - beginner
+  - javascript
+---
+
+Build a Text to Speech App with Web Browsers
+
+## Introduction
+
+Did you know your browser has a built-in voice that can read any text aloud? No API keys, no external services, no setup required - it's already there, available to everyone for free!
+
+In this tutorial, we'll build a complete **Text-to-Speech Application** that:
+
+- Converts any text to spoken audio
+- Lets users choose from available system voices
+- Provides speed and pitch controls
+- Shows real-time status updates
+- Includes a character counter
+
+By the end, you'll understand how TTS works and know how to use it on your own platforms!
+
+[TODO: add demo video here]
+
+Let's start!
+
+## How Does Text-to-Speech Work?
+
+Before we dive into code, let's understand what we're building.
+
+### Traditional TTS
+
+**Traditional text-to-speech** (like what your browser uses) works by:
+
+The Web Speech API's Speech Synthesis interface works by breaking text into phonemes (individual sounds), then concatenating pre-recorded sound clips and applying pitch and speed adjustments. While it won't sound like a professional voice actor, it's instant, free, and works offline! So, three steps:
+
+1. Breaking text into phonemes (individual sounds)
+2. Concatenating pre-recorded sound clips
+3. Applying basic pitch and speed adjustments
+
+The result? It sounds robotic and mechanical - like a GPS navigation system. AI systems today make this approach sound trivial. However, this is an incredible piece of technology that runs without AI.
+
+Think of it this way: Traditional TTS is like reading individual words from a dictionary.
+
+### What is the Web Speech API?
+
+The [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) is built directly into modern browsers. It provides two capabilities:
+
+**Speech Synthesis** - Convert text to speech (what we're building!)
+**Speech Recognition** - Convert speech to text (not covered here but easily buildable)
+
+The best part? **Zero setup required** - it just works!
+
+## Text To Speech using Web Speech API
+
+Let's start with the simplest approach - using your browser's built-in speech capabilities. No API keys, no backend server, just pure JavaScript!
+
+Start by [cloning this GitHub repository](https://github.com/Goku-kun/tts-app-codedex-project)
+
+### Project Structure
+
+We'll build this with three files:
+
+```
+README.md 		# Readme
+starter/
+├── index.html    # Structure and content
+├── style.css     # Dark theme styling
+└── app.js        # Speech synthesis logic
+completed/
+├── index.html
+├── style.css
+└── app.js        # Completed app code
+
+```
+
+You can find the complete starter files in the **starter/** folder of this project.
+
+### Step 1: HTML Structure
+
+The starter file already has the complete HTML structure ready for you. The **index.html** file contains all the UI elements we need:
+
+- **Text input**: A textarea for entering text to convert to speech
+- **Voice select**: A dropdown that will be populated with available browser voices
+- **Speed and pitch controls**: Range sliders for adjusting speech parameters
+- **Action buttons**: "Speak" and "Stop" buttons
+- **Status indicator**: Shows current state (Ready/Speaking/Stopped)
+
+Open **starter/index.html** and review the structure. The interesting logic is all in JavaScript - let's get to that next!
+
+### Step 2: Styles
+
+The starter file includes all the styling you need. The **style.css** file uses CSS variables to create a modern dark theme with card containers, gradient buttons, and status animations.
+
+Open **starter/style.cs** to see the complete styling. It includes responsive design, form element styling, and hover effects - but the real magic happens in JavaScript!
+
+Take a look at the image below for your reference about what the starter code looks like when rendered in the browser:
+
+[TODO: add image here]
+
+### Step 3: Load Available Voices
+
+Now let's write the JavaScript! Create **app.js** and we'll build it up step by step.
+
+First, we need to access the browser's speech synthesis API. This is built into all modern browsers - no libraries needed:
+
+```javascript
+const synth = window.speechSynthesis;
+let voices = [];
+```
+
+The `synth` object is our gateway to text-to-speech. We also create an empty `voices` array that we'll populate with available voices.
+
+Now let's create a function to load the available voice. The first thing we do is call `getVoices()` to get an array of all voices on the your system:
+
+```javascript
+function loadVoices() {
+  voices = synth.getVoices();
+
+  if (voices.length === 0) {
+    return;
+  }
+}
+```
+
+Why check if it's empty? Some browsers (especially **Chrome**) load voices asynchronously, so the first time we call this function, the array might be empty. We'll handle that in a moment.
+
+Next, we need to get our dropdown element and clear out any existing options:
+
+```javascript
+const voiceSelect = document.getElementById("voice-select");
+voiceSelect.innerHTML = "";
+```
+
+Now we loop through each voice and create an option element for it. We store the index as the value (so we can look it up later) and display the voice name with its language:
+
+```javascript
+voices.forEach((voice, index) => {
+  const option = document.createElement("option");
+  option.value = index;
+  option.textContent = `${voice.name} (${voice.lang})`;
+  voiceSelect.appendChild(option);
+});
+```
+
+Here's the complete `loadVoices()` function:
+
+```javascript
+function loadVoices() {
+  voices = synth.getVoices();
+
+  if (voices.length === 0) {
+    return;
+  }
+
+  const voiceSelect = document.getElementById("voice-select");
+  voiceSelect.innerHTML = "";
+
+  voices.forEach((voice, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = `${voice.name} (${voice.lang})`;
+    voiceSelect.appendChild(option);
+  });
+
+  console.log(`Loaded ${voices.length} voices`);
+}
+```
+
+Finally, we need to set up initialization. Here's the key part - because Chrome loads voices asynchronously, we need to listen for the `voiceschanged` event. This fires when the voices become available:
+
+```javascript
+function init() {
+  loadVoices();
+  synth.addEventListener("voiceschanged", loadVoices);
+}
+
+document.addEventListener("DOMContentLoaded", init);
+```
+
+We call `loadVoices()` immediately (works in Firefox/Safari), and also listen for `voiceschanged` (needed for Chrome). This way it works across all browsers.
+
+[TODO: add image here]
+
+### Step 4: Implement Character Counter
+
+Let's add a character counter so users know how much text they've entered. This is a nice UX touch that's simple to implement.
+
+First, get references to the textarea and the counter display element:
+
+```javascript
+const textInput = document.getElementById("text-input");
+const charCount = document.getElementById("char-count");
+```
+
+The counter function itself is straightforward - just get the length of the text and update the display:
+
+```javascript
+function updateCharCount() {
+  const count = textInput.value.length;
+  charCount.textContent = count;
+}
+```
+
+Now we need to call this function whenever the user types. The `input` event fires on every keystroke, paste, or deletion:
+
+```javascript
+textInput.addEventListener("input", updateCharCount);
+```
+
+We also want to initialize the display when the page loads (to show "0 characters"), so update your `init()` function:
+
+```javascript
+function init() {
+  loadVoices();
+  synth.addEventListener("voiceschanged", loadVoices);
+
+  textInput.addEventListener("input", updateCharCount);
+  updateCharCount();
+}
+```
+
+That's it for the character counter! It's a small feature but makes the app feel more polished. If you implement this in your personal apps after learning from this tutorial, your users can see at a glance how much text they're about to convert to speech.
+
+### Step 5: Implement Speech Synthesis
+
+Now for the main feature - converting text to speech! We'll build this up piece by piece.
+
+First, let's get references to all the DOM elements we need. Add these at the top of your **app.js**:
+
+```javascript
+const speakBtn = document.getElementById("speak-btn");
+const stopBtn = document.getElementById("stop-btn");
+const speedSlider = document.getElementById("speed-slider");
+const pitchSlider = document.getElementById("pitch-slider");
+const status = document.getElementById("status");
+const statusText = document.getElementById("status-text");
+```
+
+Now let's start building the `speak()` function. The first thing we need to do is get the text and make sure something was entered:
+
+```javascript
+function speak() {
+  const text = textInput.value.trim();
+
+  if (!text) {
+    alert("Please enter some text to speak");
+    return;
+  }
+}
+```
+
+Next, we create a `SpeechSynthesisUtterance` - this is the object that represents the text we want spoken. Think of it as a "speech request" that we'll configure and then send to the browser:
+
+```javascript
+const utterance = new SpeechSynthesisUtterance(text);
+```
+
+Now we configure the utterance with the user's selected voice. We get the index from our dropdown and use it to look up the actual voice object:
+
+```javascript
+const selectedVoiceIndex = voiceSelect.value;
+if (selectedVoiceIndex !== "") {
+  utterance.voice = voices[selectedVoiceIndex];
+}
+```
+
+We also need to set the speech parameters from our sliders. The `rate` controls speed (1 is normal, 2 is double speed), and `pitch` controls how high or low the voice sounds:
+
+```javascript
+utterance.rate = parseFloat(speedSlider.value);
+utterance.pitch = parseFloat(pitchSlider.value);
+utterance.volume = 1.0;
+```
+
+Here's where it gets interesting - we need to handle events. When speech starts, we want to update the UI to show it's speaking and disable the speak button:
+
+```javascript
+utterance.onstart = () => {
+  status.classList.add("speaking");
+  statusText.textContent = "Speaking...";
+  speakBtn.disabled = true;
+  stopBtn.disabled = false;
+};
+```
+
+When speech ends naturally, we reset everything back to the ready state:
+
+```javascript
+utterance.onend = () => {
+  status.classList.remove("speaking");
+  statusText.textContent = "Ready";
+  speakBtn.disabled = false;
+  stopBtn.disabled = true;
+};
+```
+
+And we should handle errors gracefully - sometimes the browser can't synthesize certain text:
+
+```javascript
+utterance.onerror = (event) => {
+  console.error("Speech synthesis error:", event);
+  statusText.textContent = "Error occurred";
+  speakBtn.disabled = false;
+  stopBtn.disabled = true;
+};
+```
+
+Finally, we actually start speaking! But first, we should cancel any ongoing speech to avoid overlap:
+
+```javascript
+if (synth.speaking) {
+  synth.cancel();
+}
+
+synth.speak(utterance);
+```
+
+Here's the complete `speak()` function with everything together:
+
+```javascript
+function speak() {
+  if (synth.speaking) {
+    synth.cancel();
+  }
+
+  const text = textInput.value.trim();
+  if (!text) {
+    alert("Please enter some text to speak");
+    return;
+  }
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  const selectedVoiceIndex = voiceSelect.value;
+  if (selectedVoiceIndex !== "") {
+    utterance.voice = voices[selectedVoiceIndex];
+  }
+
+  utterance.rate = parseFloat(speedSlider.value);
+  utterance.pitch = parseFloat(pitchSlider.value);
+  utterance.volume = 1.0;
+
+  utterance.onstart = () => {
+    status.classList.add("speaking");
+    statusText.textContent = "Speaking...";
+    speakBtn.disabled = true;
+    stopBtn.disabled = false;
+  };
+
+  utterance.onend = () => {
+    status.classList.remove("speaking");
+    statusText.textContent = "Ready";
+    speakBtn.disabled = false;
+    stopBtn.disabled = true;
+  };
+
+  utterance.onerror = (event) => {
+    console.error("Speech synthesis error:", event);
+    statusText.textContent = "Error occurred";
+    speakBtn.disabled = false;
+    stopBtn.disabled = true;
+  };
+
+  synth.speak(utterance);
+}
+```
+
+The `stop()` function is much simpler - we just cancel the speech and update the UI:
+
+```javascript
+function stop() {
+  synth.cancel();
+  status.classList.remove("speaking");
+  statusText.textContent = "Stopped";
+  speakBtn.disabled = false;
+  stopBtn.disabled = true;
+}
+```
+
+Finally, wire everything up in your `init()` function by adding the button event listeners:
+
+```javascript
+function init() {
+  loadVoices();
+  synth.addEventListener("voiceschanged", loadVoices);
+  textInput.addEventListener("input", updateCharCount);
+
+  speakBtn.addEventListener("click", speak);
+  stopBtn.addEventListener("click", stop);
+
+  updateCharCount();
+  stopBtn.disabled = true;
+}
+```
+
+That's it! The key insight here is that `SpeechSynthesisUtterance` is just a configuration object - you set all your options on it, attach event handlers, and then pass it to `synth.speak()` to actually start the speech
+
+### Step 6: Test It Out
+
+You're ready to test! Here's how:
+
+1. **Open the HTML file** in your browser (just double-click **index.html**)
+2. **Type some text** in the textarea - try: "Hello! This is my AI audiobook narrator."
+3. **Select a voice** from the dropdown (you'll see different options depending on your OS)
+4. **Adjust speed and pitch** to your liking
+5. **Click "Speak"** and listen!
+
+[TODO: add demo video here]
+
+You can also [try out the demo](https://goku-kun.github.io/tts-app-codedex-project/completed/).
+
+**What to expect:**
+
+- On **macOS**: You'll get voices like "Alex", "Samantha", "Victoria"
+- On **Windows**: You'll get "Microsoft David", "Microsoft Zira", etc.
+- On **Chrome/Edge**: You may see additional Google voices
+- The speech will sound robotic compared to modern AI voices
+
+**Common issues:**
+
+- **No voices loading?** Try refreshing the page - some browsers need a moment
+- **Can't hear anything?** Check your system volume and browser permissions
+- **Speech cuts off?** Some browsers limit how much text can be spoken at once
+
+The completed version of this projects can be tried out here: [Web Speech API - Text to Speech App](https://goku-kun.github.io/tts-app-codedex-project/completed/)
+
+## Conclusion
+
+Congratulations! You've built a fully functional text-to-speech application using just the browser's built-in capabilities.
+
+### What You've Built
+
+Your app now:
+
+- Converts any text to spoken audio instantly.
+- Offers multiple voice options from the user's system.
+- Provides speed and pitch controls for customization.
+- Shows real-time status feedback.
+- Works entirely client-side with no dependencies.
+
+### Key Concepts You've Learned
+
+**Web Speech API fundamentals:**
+
+- Accessing the `speechSynthesis` interface
+- Loading and selecting from available voices
+- Handling the asynchronous `voiceschanged` event
+
+**SpeechSynthesisUtterance:**
+
+- Creating utterance objects to represent speech requests
+- Configuring voice, rate, pitch, and volume
+- Attaching event handlers for `onstart`, `onend`, and `onerror`
+
+**Browser compatibility:**
+
+- Why we listen for both immediate load and `voiceschanged`
+- How different browsers and operating systems provide different voices
+
+### Next Steps
+
+Want to take this further? Here are some ideas:
+
+1. **Experiment with voices**: Try all the voices on your system - some sound surprisingly natural!
+2. **Add a pause button**: Use `synth.pause()` and `synth.resume()` for longer texts
+3. **Save settings**: Use localStorage to remember the user's preferred voice and settings
+4. **Add word highlighting**: Use the `onboundary` event to highlight words as they're spoken
+5. **Build a reading assistant**: Combine with a PDF reader or text extraction tool
+
+### Going Further with AI Voices
+
+While the Web Speech API is great for quick implementations and offline use, you may want more natural-sounding voices for professional applications. Cloud services like Azure Speech Service offer neural AI voices that sound genuinely human, with support for emotions, multiple languages, and consistent quality across devices. These services typically offer generous free tiers for experimentation. I’ll talk about this in my next project tutorial. Stay tuned!
+
+### Resources
+
+- [Web Speech API Documentation (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+- [SpeechSynthesis Interface](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis)
+- [SpeechSynthesisUtterance](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance)
+- [Can I Use: Speech Synthesis](https://caniuse.com/speech-synthesis)
+
+You now understand how browser-based text-to-speech works from the ground up. Use this knowledge to add voice capabilities to your web applications!
