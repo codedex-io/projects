@@ -34,7 +34,7 @@ In this tutorial, we'll build a complete **Text-to-Speech Application** that:
 
 By the end, you'll understand how TTS works and know how to use it on your own platforms!
 
-[TODO: add demo video here]
+[Take a sneak peek](https://goku-kun.github.io/tts-app-codedex-project/completed/) at what you'll building here.
 
 Let's start!
 
@@ -85,7 +85,6 @@ completed/
 ├── index.html
 ├── style.css
 └── app.js        # Completed app code
-
 ```
 
 You can find the complete starter files in the **starter/** folder of this project.
@@ -110,7 +109,7 @@ Open **starter/style.cs** to see the complete styling. It includes responsive de
 
 Take a look at the image below for your reference about what the starter code looks like when rendered in the browser:
 
-[TODO: add image here]
+[App view](https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fbuild-a-tts-app-with-web-browsers%2Fimage_1.png?alt=media&token=4882f4ea-5871-4eaa-962e-4cb713f95080)
 
 ### Step 3: Load Available Voices
 
@@ -194,7 +193,7 @@ document.addEventListener("DOMContentLoaded", init);
 
 We call `loadVoices()` immediately (works in Firefox/Safari), and also listen for `voiceschanged` (needed for Chrome). This way it works across all browsers.
 
-[TODO: add image here]
+[browser voices](https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fbuild-a-tts-app-with-web-browsers%2Fvoices.png?alt=media&token=fd929bb8-1259-4676-996e-83bb92111c66)
 
 ### Step 4: Implement Character Counter
 
@@ -420,8 +419,6 @@ You're ready to test! Here's how:
 4. **Adjust speed and pitch** to your liking
 5. **Click "Speak"** and listen!
 
-[TODO: add demo video here]
-
 You can also [try out the demo](https://goku-kun.github.io/tts-app-codedex-project/completed/).
 
 **What to expect:**
@@ -452,25 +449,6 @@ Your app now:
 - Provides speed and pitch controls for customization.
 - Shows real-time status feedback.
 - Works entirely client-side with no dependencies.
-
-### Key Concepts You've Learned
-
-**Web Speech API fundamentals:**
-
-- Accessing the `speechSynthesis` interface
-- Loading and selecting from available voices
-- Handling the asynchronous `voiceschanged` event
-
-**SpeechSynthesisUtterance:**
-
-- Creating utterance objects to represent speech requests
-- Configuring voice, rate, pitch, and volume
-- Attaching event handlers for `onstart`, `onend`, and `onerror`
-
-**Browser compatibility:**
-
-- Why we listen for both immediate load and `voiceschanged`
-- How different browsers and operating systems provide different voices
 
 ### Next Steps
 
