@@ -20,8 +20,10 @@ courses:
   - phaser
 ---
 
-# Introduction
-For December 2025’s [Game Jam 2025](https://https://www.codedex.io/community/monthly-challenge/SyGFUPnD7myNHfEmzoJr.com), we're challenging you to develop games within the theme of The Changing of Time! This can mean so many different things, and we figured it's a perfect opportunity to give y'all some ideas and inspiration for how to mess with time in Phaser!
+## Introduction
+
+For December 2025’s [Game Jam](https://www.codedex.io/community/monthly-challenge/SyGFUPnD7myNHfEmzoJr), we're challenging you to develop games within the theme of "The Changing of Time"! This can mean so many different things, and we figured it's a perfect opportunity to give y'all some ideas and inspiration for how to mess with time in Phaser!
+
 There are tons of games out there that you can check out for inspo, including [Braid](https://en.wikipedia.org/wiki/Braid_(video_game)), [Superhot](https://en.wikipedia.org/wiki/Superhot), [Prince of Persia: The Sands of Time](https://en.wikipedia.org/wiki/Prince_of_Persia:_The_Sands_of_Time), and soooo many more.
 
 <ImageZoom
@@ -43,7 +45,7 @@ So how do we add a time element in our game? Here are a few that come to mind:
 - Time moves only when you move (like in the game Superhot)
 - Time works differently in different rooms/environments
 - Difficulty increasing over time
-- Gardening or environmental games (plant/harvest crops, changing seasons, restore ecosystems, terraform planets) 
+- Gardening or environmental games (plant/harvest crops, restore ecosystems, terraform planets) 
 - Adding immortality/invincibility to certain characters/elements but not others
 
 ## Phaser's Arcade Physics Engine
@@ -53,6 +55,7 @@ In order to access most of the options we're about to discuss, you'll need to ma
 `"arcade"` is Phaser's lightweight physics system. It handles gravity, collisions, and other physics properties for two different types of physics shapes: rectangles and circles. It's made for arcade/retro-style games like platformers, top-down games, or puzzle games.
 
 Here's what that'll look like:
+
 ```js
 const config = {
   type: Phaser.AUTO,
@@ -69,11 +72,12 @@ const config = {
   scene: { preload, create, update }
 };
 ```
+
 Let's zoom into a few of the options from the list we made earlier.
 
 ## Time Slowing Down & Speeding Up
 
-Phaser contains a property called `.timeScale` that allows us to slow down, speed up, and even freeze time. It takes in values like 0.0001 (this makes time feel frozen without setting timeScale to 0, which would break the physics engine), 0.5 (half-speed), 1 (normal speed), and 2 (speed up).
+Phaser contains a property called `.timeScale` that allows us to slow down, speed up, and even freeze time. It takes in values like 0.0001 (this makes time feel frozen without setting `.timeScale` to 0, which would break the physics engine), 0.5 (half-speed), 1 (normal speed), and 2 (speed up).
 
 ```js
 // freeze
@@ -88,7 +92,8 @@ this.physics.world.timeScale = 1;
 // speed up
 this.physics.world.timeScale = 2;
 ```
-`timeScale` is a property from Phaser's arcade physics engine. As long as Phaser's physics mode is set to `"arcade"` in the `config` object, you'll be able to access `timeScale`.
+
+`.timeScale` is a property from Phaser's arcade physics engine. As long as Phaser's physics mode is set to `"arcade"` in the `config` object, you'll be able to access `.timeScale`.
 
 ## Time Moves Only When You Move 
 
@@ -97,22 +102,23 @@ this.physics.world.timeScale = 2;
   style={{ width: "100%", height: "auto" }}
   alt="superhot video game"
 />
+
 In the game [Superhot](https://en.wikipedia.org/wiki/Superhot) (2016), time only moves when you move. Wild, right?
 
 Here's how we could achieve that with Phaser:
 
 ```js
 if (!cursors.left.isDown && !cursors.right.isDown && !cursors.up.isDown) {
-
-    // if NONE of the keys are pressed, freeze time
-    this.physics.world.timeScale = .0001;
+  // if NONE of the keys are pressed, freeze time
+  this.physics.world.timeScale = .0001;
 } else {
-
-    // if AT LEAST one key is pressed, time passes as normal
-    this.physics.world.timeScale = 1;
+  // if AT LEAST one key is pressed, time passes as normal
+  this.physics.world.timeScale = 1;
 }
 ```
-Here, we're using the same `timeScale` property as before. This time, we're checking to see if any of the keys are being pressed to determine whether time freezes or moves.
+
+Here, we're using the same `.timeScale` property as before. This time, we're checking to see if any of the keys are being pressed to determine whether time freezes or moves.
+
 <ImageZoom
   src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-time-travel-to-games-with-phaser/assets/timescale.gif"
   style={{ width: "100%", height: "auto" }}
@@ -126,19 +132,21 @@ Here, we're using the same `timeScale` property as before. This time, we're chec
 For example, time might work differently in different environments, or in different coordinates in a 2D platformer game.
 
 ```js
-if(player.y < 300) {
-    this.physics.world.gravity.y = 200; // floaty room
+if (player.y < 300) {
+  this.physics.world.gravity.y = 200;   // floaty room
 } else {
-    this.physics.world.gravity.y = 600; // normal room
+  this.physics.world.gravity.y = 600;   // normal room
 }
 ```
+
 Here, the player's movement feels floaty and slow if their y-position is less than 300, and otherwise their movement is at a normal gravity and speed.
 
-# Building a Platformer Game with Time Travel
+## Building a Platformer Game with Time Travel
 
 Now that we've gone over some examples for manipulating time in games, let's build a simple platformer game from scratch, incorporating the concept of time travel, as well as the ability to slow down and speed up the player's movement.
 
 As with any Phaser scene, we'll need to set up our `config` object.
+
 ```js
 const config = {
   type: Phaser.AUTO,
@@ -153,6 +161,7 @@ const config = {
 };
 new Phaser.Game(config);
 ```
+
 `Phaser.AUTO` picks `WebGL` or `Canvas` automatically, based on what the browser or device can handle. It tells Phaser to use `WebGL` if possible since it's faster, GPU-powered and can render more complex elements. It'll fall back to `Canvas` if on an older device, since it's slower, but compatible with a wider range of devices.
 
 Some other properties of the `config` object include:
@@ -171,6 +180,7 @@ let platforms = [];
 let currentPeriodIndex = 1;
 let timePeriods = ["Past", "Present", "Future"];
 ```
+
 We created an empty `platforms` array to keep references to the rectangular platform `GameObjects` so the code can add colliders and later change their colors. 
 
 `currentPeriodIndex = 1` is so that the game starts in `"Present"` (we'll map this later in the code).
@@ -195,6 +205,7 @@ function create() {
   this.physics.world.gravity.y = 500;
 }
 ```
+
 This sets a global gravity in the physics world, which pulls objects downward on the y-axis.
 
  ```js
@@ -208,6 +219,7 @@ function create() {
   player.body.setOffset(player.width * 0.1, player.height * 0.1);
 }
 ```
+
 This adds a physics-enabled sprite at `(400, 200)` and scales it down to `0.4`, or 40%.
 - `setCollideWorldBounds(true)` prevents the player from leaving the game bounds.
 - `body.setSize()` shrinks the physics body so collisions are tighter than the raw sprite image.
@@ -237,6 +249,7 @@ function create() {
   platforms.forEach(p => this.physics.add.collider(player, p));
 }
 ```
+
 - `this.add.rectangle()` draws a filled rectangle `GameObject` (a shape, not an image).
 - `this.physics.add.existing(p, true)` turns that rectangle into a static physics body, so it won’t move when collided with. The rectangle object is pushed into platforms for later use (colliders and color changes).
 - `makePlatform` makes four platforms, including ground and floating ones.
@@ -264,7 +277,7 @@ function create() {
   makePlatform(350, 450, 200, 20);
   
   platforms.forEach(p => this.physics.add.collider(player, p));
-
+  
   // New code
   cursors = this.input.keyboard.createCursorKeys();
   cursors.speedUp = this.input.keyboard.addKey('S'); // speed up
@@ -275,6 +288,7 @@ function create() {
   speedText = this.add.text(10, 40, `Speed: Normal`, { font: "20px Arial", fill: "#000" });
 }
 ```
+
 - `createCursorKeys()` provides input for the left, right, up, down, and custom keys. S, D, and T are added as custom keys for additional inputs.
 - `periodText` and `speedText` show the current time period and speed label.
 
@@ -397,7 +411,8 @@ Here's what time travel should look like!
   alt="time travel example"
 />
 
-# Conclusion
+## Conclusion
+
 Congrats! You've learned some strategies to incorporate The Changing of Time into your Phaser games!
 
 Now you know:
@@ -405,8 +420,8 @@ Now you know:
 - Some strategies you can use to play with time in Phaser
 - How to make a complete platformer with Phaser with time travel and speeding up/slowing down time. 
 
-# Resources
+## More Resources
 - [Intro to Phaser with Julien Workshop Recording](https://www.youtube.com/watch?v=5zUyJJrC3B4)
 - [Phaser Time Examples](https://phaser.io/examples/v3.85.0/time)
 
-Share your projects with the team @codedex_io and [@phaser_](https://x.com/phaser_) on Twitter/X! Happy gaming! 
+Share your projects with the team [@codedex_io](https://x.com/codedex_io) and [@phaser_](https://x.com/phaser_) on Twitter/X! Happy gaming! 
