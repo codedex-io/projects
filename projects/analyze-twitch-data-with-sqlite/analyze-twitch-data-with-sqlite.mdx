@@ -186,7 +186,7 @@ CREATE TABLE streamers2024 (
   language TEXT,
   type TEXT,
   most_streamed_game TEXT,
-  2nd_most_streamed_game TEXT,
+  second_most_streamed_game TEXT,
   average_stream_duration REAL,
   followers_gained_per_stream INTEGER,
   avg_viewer_per_stream INTEGER,
@@ -201,6 +201,8 @@ CREATE TABLE streamers2024 (
 );
 ```
 
+I made sure it's not `2nd_most_streamd_game`, but instead `second_most_streamed_game` because column names cannot start with a number.
+
 ### Import CSV into SQLite
 
 It’s time to move our data from the CSV file into a SQL table.
@@ -213,6 +215,8 @@ Then in the SQLite prompt:
 .mode csv
 .import streamers2021.csv streamers2021
 ```
+
+And of course if you are using the 2024 dataset, it's `.import streamers2024.csv streamers2024`.
 
 To make sure it’s working:
 
