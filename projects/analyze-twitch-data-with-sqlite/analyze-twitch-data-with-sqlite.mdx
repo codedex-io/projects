@@ -333,10 +333,11 @@ Now it’s a good time to write down the questions that we have.
 
 Here are some of mine:
 
-- _How many people on average watches these streamers?_
+- _How many people on average watches these streamers in 2021?_
 - _Who were the hottest rising streamers in 2021?_
-- _What are the most popular games in the stream table?_
+- _What are the most popular games in the stream table in 2024?_
 - _These are some big numbers from the game League of Legends (also known as LoL). Where are these LoL stream viewers located?_
+- _What is the best day to stream in 2024?_
 
 Let’s go through each of these one by one.
 
@@ -466,6 +467,31 @@ Japanese,7
 ```
 
 You can do this with any other game.
+
+### Best Day to Stream in 2024
+
+So in the `streamers2024` table, there's a `day_with_most_followers_gained` which is super interesting. My guess is that people tune in more on the weekend but let's see:
+
+```sql
+SELECT day_with_most_followers_gained, COUNT(*) 
+FROM streamers2024
+GROUP BY 1 
+ORDER BY 2 DESC;
+```
+
+Wow:
+
+```output
+Sunday,358
+Saturday,159
+Monday,138
+Tuesday,127
+Friday,78
+Wednesday,74
+Thursday,65
+```
+
+Sunday is DEFINITELY the winner! Noted. 🤔📝
 
 ### Grouping into Genres
 
