@@ -327,7 +327,7 @@ Let’s go through each of these one by one.
 
 In 2021, Twitch had about 8.46 million unique streamers active each month. That means, to be in the top 1,000, you are literally in the 0.01% of the all streamers in the world. So how many people actually watches these people each time?
 
-For this, we can use the `AVG()` function:
+For this, we can use the `AVG()` aggregate function:
 
 ```sql
 SELECT AVG(average_viewers)
@@ -365,7 +365,7 @@ Bugha,2220765s
 pokimane,2085831
 ```
 
-I just looked up all of them. All of them are still streaming in 2025!
+I just looked up all of them. All of them are still streaming even in 2026!
 
 ### Top 10 Most Popular Games
 
@@ -387,17 +387,17 @@ GROUP BY 1
 ORDER BY 2 DESC;
 ```
 
-The top games are: [fill in].
+The top games are: [let me know in the comments!].
 
-### League of Legends Viewers
+### League of Legends Viewers: Demographic
 
 Another question I have is around Twitch’s international demographic. 🌎
 
-Let’s pick a popular game (League of Legends) and see where people are tuning in from.
+Let’s pick a popular game like League of Legends and see where people are tuning in from.
 
 We can create a list of countries and their number of LoL viewers using `WHERE` and `GROUP BY`:
 
-```
+```sql
 SELECT country, COUNT(*) 
 FROM stream 
 WHERE game = 'League of Legends' 
@@ -405,7 +405,16 @@ GROUP BY 1
 ORDER BY 2 DESC;
 ```
 
-Very international! If you want to grab just the top 10, we can add a `LIMIT 10` at the bottom to cap the results.
+Very international! If you want to grab just the top 10, we can add a `LIMIT 10` to cap the results:
+
+```sql
+SELECT country, COUNT(*) 
+FROM stream 
+WHERE game = 'League of Legends' 
+GROUP BY 1 
+ORDER BY 2 DESC
+LIMIT 10;
+```
 
 The results should look something like:
 
@@ -415,10 +424,10 @@ The results should look something like:
 4. France 🇫🇷
 5. Brazil 🇧🇷
 6. Mexico 🇲🇽
-7. Fill out
-8. Fill out
-9. Fill out
-10. Fill out
+7. [Fill out]
+8. [Fill out]
+9. [Fill out]
+10. [Fill out]
 
 You can do this with any other game.
 
@@ -488,32 +497,29 @@ Lastly, filter the result with only the users in your country using a `WHERE` cl
 So now that we have done, let’s write down everything that we found thus far:
 
 - The average viewers per stream for the top 1,000 streamers in 2021 is 4,776 viewers.
-- The rising stars in 2021 are auronplay, Rubius, TheGrefg, Bugha, and pokimane.
-- The top country for League is [fill in].
+- The top rising stars in 2021 are [auronplay](https://www.twitch.tv/auronplay), [Rubius](https://www.twitch.tv/rubius), [TheGrefg](https://www.twitch.tv/thegrefg), [Bugha](https://www.twitch.tv/bugha), and [pokimane](https://www.twitch.tv/pokimane).
+- The top country for League of Legends is [fill in].
 - The best hour to stream is [fill in].
 
-This is a solid report. If you want to visualize it, you can use [Python](https://codedex.io/python), [NumPy](https://www.codedex.io/numpy), [Pandas](https://www.codedex.io/pandas), Matplotlib or Google Sheets / Microsoft Excel. 
+This is a solid report. If you want to visualize it, you can use [Python](https://codedex.io/python), [NumPy](https://www.codedex.io/numpy), [Pandas](https://www.codedex.io/pandas), Matplotlib or Google Sheets / Microsoft Excel to create line graphs, scatter plots, pie charts, etc.
 
 ## Conclusion
  
 You’ve reached the end of the project tutorial! GGWP. 🔥
 
-We’ve taken a real-world dataset from Kaggle and imported it into SQLite, and used queries and aggregate functions to analyze the data.
+We’ve taken a real-world Twitch dataset from Kaggle and imported it into SQLite, and used queries and aggregate functions to analyze the data.
 
 Feel free to keep going and try to come up with more questions.
 
 Some other ideas include:
 
 - What are your favorite games? Can you find some interesting insights about them?
-- Can you _compare_ the two datasets? How are streamers in 2024 different from 2021 ones? Hint: Use a `JOIN` or a `UNION`.
+- Can you _connect_ the two datasets? How are streamers in 2024 different from 2021 ones? Hint: Use a `JOIN` or a `UNION`.
 - Any other questions that you might have?
 
-Share your projects on GitHub or a video format in Project Showcase if you find out something even more interesting! ✨
+Share your projects on GitHub or a video format in Project Showcase if you find out something even more interesting! Let me know in the comments. ✨
 
-## More Resources
+### More Resources
 
 - Solution code (coming soon)
 - [Kaggle](https://www.kaggle.com)
-
-
-
