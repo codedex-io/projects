@@ -345,6 +345,8 @@ FROM streamers2024;
 - Hearthstone
 - etc.
 
+Notice how some of the games like Valorant appear twice as `VALORANT` and `Valorant`. This means that the data could be cleaned better. We'll come back to this in a bit.
+
 ## Using Aggregate Functions
 
 Now it’s a good time to write down the questions that we have. 
@@ -440,11 +442,19 @@ Minecraft,24
 Virtual Casino,23
 ```
 
-Woah! "Just Chatting" is the most popular game by far and it's not even a game.
+Woah! "Just Chatting" is the most popular game by far and it's not even a game. Also surprised to see "Casino" and "Virtual Casino" appearing in the top 10, I think Twitch had a gambling problem in 2024. 😂
 
 ![top 10 games](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-twitch-data-with-sqlite/top-10-games.png)
 
-Also, I think Twitch had a gambling problem in 2024. 😂
+Also, since Valorant appeared as both "VALORANT" and "Valorant", let's just make sure it's not wayyy higher:
+
+```sql
+SELECT most_streamed_game, COUNT(*)
+FROM streamers2024
+WHERE most_streamed_game = 'VALORANT' or most_streamed_game = 'Valorant';
+```
+
+Okay, it's 63 instead of 60, so still fourth place. Good to double check just in case!
 
 ### League of Legends Viewers: Demographic
 
