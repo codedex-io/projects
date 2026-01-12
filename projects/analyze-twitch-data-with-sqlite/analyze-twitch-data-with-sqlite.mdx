@@ -161,9 +161,9 @@ CREATE TABLE streamers2021 (
 );
 ```
 
-These names will have to match the CSV columns as well as the data type here, or else there will be an error later.
+These names (and the data types) have to match the CSV columns, or else there will be an error later.
 
-If you choose `streamers2024`: 
+If you choose the other dataset, create a table called `streamers2024`: 
 
 ```sql
 CREATE TABLE streamers2024 ( 
@@ -191,7 +191,9 @@ CREATE TABLE streamers2024 (
 
 It’s time to move our data from the CSV file into a SQL table.
 
-Make sure your CSV file is in the same folder. Then in the SQLite prompt:
+Suppose we are working on the 2021 dataset, make sure the CSV file is in the same computer folder.
+
+Then in the SQLite prompt:
 
 ```terminal
 .mode csv
@@ -232,7 +234,7 @@ FROM streamers2021
 LIMIT 20;
 ```
 
-Which we've already done.
+Which we've already done. This also let's use get a feel for the data.
 
 To list out the column names again:
 
