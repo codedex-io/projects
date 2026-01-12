@@ -389,7 +389,7 @@ These streams all gained 2-3 million followers in 2021. Wow. And I just looked u
 
 To find out this one, we need to use `COUNT()` and `GROUP BY`:
 
-```
+```sql
 SELECT most_streamed_game, COUNT(*) 
 FROM streamers2024 
 GROUP BY most_streamed_game
@@ -398,54 +398,72 @@ ORDER BY COUNT(*) DESC;
 
 We can rewrite this using column reference numbers instead of column names: 
 
-```
+```sql
 SELECT most_streamed_game, COUNT(*) 
 FROM streamers2024
 GROUP BY 1 
-ORDER BY 2 DESC;
+ORDER BY 2 DESC
+LIMIT 10;
 ```
 
-The top games are: [let me know in the comments!].
+The top games are: 
+
+```output
+Just Chatting,257
+League of Legends,84
+Grand Theft Auto V,74
+VALORANT,60
+Casino,36
+Fortnite,35
+Dota 2,35
+Counter-Strike,31
+Minecraft,24
+Virtual Casino,23
+```
+
+Woah! "Just Chatting" is the most popular game by far and it's not even a game.
 
 ### League of Legends Viewers: Demographic
 
-Another question I have is around Twitch’s international demographic. 🌎
+Another question I have is around League’s international demographic. 🌎
 
 Let’s pick a popular game like League of Legends and see where people are tuning in from.
 
 We can create a list of countries and their number of LoL viewers using `WHERE` and `GROUP BY`:
 
 ```sql
-SELECT country, COUNT(*) 
-FROM stream 
-WHERE game = 'League of Legends' 
+SELECT language, COUNT(*) 
+FROM streamers2024
+WHERE most_streamed_game = 'League of Legends' 
 GROUP BY 1 
 ORDER BY 2 DESC;
 ```
 
-Very international! If you want to grab just the top 10, we can add a `LIMIT 10` to cap the results:
-
-```sql
-SELECT country, COUNT(*) 
-FROM stream 
-WHERE game = 'League of Legends' 
-GROUP BY 1 
-ORDER BY 2 DESC
-LIMIT 10;
-```
-
 The results should look something like:
 
-1. United States 🇺🇸
-2. Germany 🇩🇪
-3. Russia 🇷🇺
-4. France 🇫🇷
-5. Brazil 🇧🇷
-6. Mexico 🇲🇽
-7. [Fill out]
-8. [Fill out]
-9. [Fill out]
-10. [Fill out]
+```output
+English,28
+Portuguese,12
+French,12
+Spanish,9
+Japanese,7
+Chinese,7
+Polish,4
+German,2
+Turkish,1
+Czech,1
+Cantonese,1
+```
+
+Very international! If you want to grab just the top 5, we can add a `LIMIT 5` to cap the results:
+
+```output
+English,28
+Portuguese,12
+French,12
+Spanish,9
+Japanese,7
+```
 
 You can do this with any other game.
 
