@@ -430,16 +430,16 @@ LIMIT 10;
 The top games are: 
 
 ```plaintext
-Just Chatting,257
-League of Legends,84
-Grand Theft Auto V,74
-VALORANT,60
-Casino,36
-Fortnite,35
-Dota 2,35
-Counter-Strike,31
-Minecraft,24
-Virtual Casino,23
+Just Chatting|257
+League of Legends|84
+Grand Theft Auto V|74
+VALORANT|60
+Casino|36
+Fortnite|35
+Dota 2|35
+Counter-Strike|31
+Minecraft|24
+Virtual Casino|23
 ```
 
 Woah! "Just Chatting" is the most popular game by far and it's not even a game. Also surprised to see "Casino" and "Virtual Casino" appearing in the top 10, I think Twitch had a gambling problem in 2024. 😂
@@ -524,11 +524,42 @@ Thursday,65
 
 Sunday is BY FAR the best day to stream and gain followers! Noted. 🤔📝
 
-### Grouping into Genres
+## Grouping Top Into Genres in 2024
 
-Create a new column named genre for each of the games. 
+So earlier, we found out the most popular games in 2024. Let's do it with a `LIMIT 25` this time:
+
+```sql
+SELECT most_streamed_game, COUNT(*)
+FROM streamers2024
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 25;
+```
+
+Let's try to figure out the different genres of games, and each of its viewer counts.
 
 Group the games into their genres: 
+
+- Multiplayer Online Battle Arena (MOBA)
+- First Person Shooter (FPS)
+- Survival
+- Gambling
+
+Just Chatting|257
+
+
+
+Grand Theft Auto V|74
+Sports|14
+FIFA 23|9
+
+Hearthstone|14
+Teamfight Tactics|10
+Street Fighter 6|10
+FIFA 23|9
+Dead by Daylight|9
+Tom Clancy's Rainbow Six Siege|8
+Rocket League|7
 
 - Multiplayer Online Battle Arena (MOBA)
 - First Person Shooter (FPS), Survival, and Other. Using CASE, your logic should be: 
@@ -541,10 +572,42 @@ Group the games into their genres:
   - Else → Other 
 - Use GROUP BY and ORDER BY to showcase only the unique game titles.
 
-This can be done using a `CASE` statement, which is similar to an `if`/`else if`/`else` or `switch` statement in Python, C++, or Java:
+This can be done using a `CASE` statement, which is similar to an `if`/`else if`/`else` or `switch` statement in Python, C++, or Java.
 
-[update code]
-
+```sql
+SELECT
+  CASE
+    WHEN most_streamed_game = "Just Chatting"
+      THEN 'Just Chatting'
+    WHEN most_streamed_game = 'League of Legends' OR most_streamed_game = 'Dota 2'
+      THEN 'MOBA'
+    WHEN most_streamed_game = 'VALORANT' OR most_streamed_game = 'Valorant' OR most_streamed_game = 'Counter-Strike'
+      THEN 'FPS'
+    WHEN most_streamed_game = 'Overwatch'
+      THEN 'FPS'
+    WHEN most_streamed_game = 'Escape from Tarkov'
+      THEN 'FPS'
+    WHEN most_streamed_game = 'Minecraft'
+      THEN 'Survival'
+    WHEN most_streamed_game = 'Fortnite'
+      THEN 'Battle Royale'
+    WHEN most_streamed_game = 'Apex Legends'
+      THEN 'Battle Royale'
+    WHEN most_streamed_game = 'Call of Duty: Warzone'
+      THEN 'Battle Royale'
+    WHEN most_streamed_game = 'PUBG: BATTLEGROUNDS'
+      THEN 'Battle Royale'
+    WHEN most_streamed_game = 'World of Warcraft'
+      THEN 'MMORPG'
+    WHEN most_streamed_game = 'Casino' OR most_streamed_game = 'Virtual Casino' OR most_streamed_game = 'Slots'
+      THEN 'Gambling'
+  ELSE 'Other'
+  END AS 'genre',
+  COUNT(*)
+FROM streamers2024
+GROUP BY 1
+ORDER BY 2 DESC;
+```
 
 ## The Results
 
