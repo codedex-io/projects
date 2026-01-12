@@ -548,27 +548,25 @@ Group the games into their genres:
 - MMORPG: [Massively Multiplyaer Online Role-Playing Game](https://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game)
 - Gambling
 
-Grand Theft Auto V|74
-Sports|14
-FIFA 23|9
-Hearthstone|14
-Teamfight Tactics|10
-Street Fighter 6|10
-Dead by Daylight|9
-Tom Clancy's Rainbow Six Siege|8
-Rocket League|7
-
-Using CASE, your logic should be: 
-  - If League of Legends → MOBA 
-  - If Dota 2 → MOBA 
-  - If Heroes of the Storm → MOBA 
-  - If Counter-Strike: Global Offensive → FPS 
-  - If DayZ → Survival 
-  - If ARK: Survival Evolved → Survival 
-  - Else → Other 
-- Use GROUP BY and ORDER BY to showcase only the unique game titles.
+Grand Theft Auto V
+Hearthstone
+Teamfight Tactics
+Street Fighter 6
+Dead by Daylight
+Tom Clancy's Rainbow Six Siege
+Rocket League
 
 This can be done using a `CASE` statement, which is similar to an `if`/`else if`/`else` or `switch` statement in Python, C++, or Java.
+
+Using `CASE`, your logic should be: 
+
+  - If League of Legends → MOBA 
+  - If Dota 2 → MOBA 
+  - If Counter-Strike → FPS 
+  - If Minecraft → Survival 
+  - Else → Other 
+
+Use `GROUP BY` and `ORDER BY` to showcase only the unique game titles.
 
 ```sql
 SELECT
@@ -597,6 +595,8 @@ SELECT
       THEN 'MMORPG'
     WHEN most_streamed_game = 'Casino' OR most_streamed_game = 'Virtual Casino' OR most_streamed_game = 'Slots'
       THEN 'Gambling'
+    WHEN most_streamed_game = 'Sports' OR most_streamed_game = 'FIFA 23'
+      THEN 'Sports'
   ELSE 'Other'
   END AS 'genre',
   COUNT(*)
@@ -604,6 +604,22 @@ FROM streamers2024
 GROUP BY 1
 ORDER BY 2 DESC;
 ```
+
+The result should look something like:
+
+```plaintext
+Other|279
+Just Chatting|257
+FPS|123
+MOBA|119
+Battle Royale|88
+Gambling|68
+Survival|24
+Sports|23
+MMORPG|18
+```
+
+Wild to see "Just Chatting" still so ahead!
 
 # Quit SQLite
 
