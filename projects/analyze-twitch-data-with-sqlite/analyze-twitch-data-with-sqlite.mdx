@@ -451,7 +451,8 @@ Since Valorant appeared as both "VALORANT" and "Valorant", let's just make sure 
 ```sql
 SELECT most_streamed_game, COUNT(*)
 FROM streamers2024
-WHERE most_streamed_game = 'VALORANT' or most_streamed_game = 'Valorant';
+WHERE most_streamed_game = 'VALORANT' 
+  OR most_streamed_game = 'Valorant';
 ```
 
 Okay, it's 63 instead of 60, so still fourth place. Good to double check just in case!
