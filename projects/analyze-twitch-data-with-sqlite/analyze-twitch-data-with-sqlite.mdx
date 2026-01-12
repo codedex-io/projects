@@ -514,45 +514,6 @@ This can be done using a `CASE` statement, which is similar to an `if`/`else if`
 
 [update code]
 
-## Best Hour to Stream
-
-One of the most common questions is (we ask this at Codédex as well): _How does view count change over the course of a day?_
-
-Before we dive in, let’s run this query and check out the `time` column from the stream table.
-
-```
-SELECT time 
-FROM stream 
-LIMIT 10; 
-```
-
-The data type of the time column is `DATETIME`. It is for storing a date/time value in the database. 
-
-Notice that the values are formatted like `2015-01-01 18:33:52` 
-
-So the format is: `YYYY-MM-DD HH:MM:SS`
-
-SQLite comes with a `strftime() function` – a very powerful function that allows you to return a formatted date. It takes two arguments: `strftime(format, column)`. (documentation link?)
-
-Let’s test out this function:
-
-```
-SELECT time, strftime('%S', time) 
-FROM stream 
-GROUP BY 1 
-LIMIT 20; 
-```
-
-What do you think this does? 
-
-Yep, this pulls out the seconds from each of these!
-
-Okay, now we understand how `strftime()` works. Let’s write a query that returns two columns: 
-
-- The hours of the time column 
-- The view count for each hour 
-
-Lastly, filter the result with only the users in your country using a `WHERE` clause.
 
 ## Results
 
@@ -560,8 +521,8 @@ So now that we have done, let’s write down everything that we found thus far:
 
 - The average viewers per stream for the top 1,000 streamers in 2021 is 4,776 viewers.
 - The top rising stars in 2021 are [auronplay](https://www.twitch.tv/auronplay), [Rubius](https://www.twitch.tv/rubius), [TheGrefg](https://www.twitch.tv/thegrefg), [Bugha](https://www.twitch.tv/bugha), and [pokimane](https://www.twitch.tv/pokimane).
-- The top country for League of Legends is [fill in].
-- The best hour to stream is [fill in].
+- The top language for League of Legends streamers are English, Portugese, French, Spanish, and Japanese.
+- The best day to stream is Sunday.
 
 This is a solid report. If you want to visualize it, you can use [Python](https://codedex.io/python), [NumPy](https://www.codedex.io/numpy), [Pandas](https://www.codedex.io/pandas), Matplotlib or Google Sheets / Microsoft Excel to create line graphs, scatter plots, pie charts, etc.
 
