@@ -307,7 +307,6 @@ The results should look like:
 - Finnish
 - Swedish
 
-
 For `streamers2024` table, you can do distinct games:
 
 ```sql
@@ -360,12 +359,13 @@ The average would be:
 
 Aka who gained the most followers?
 
-For this, we can use the `MAX()` function:
+For this, we can use the `MAX()` function with teh `GROUP BY` & `ORDER BY`:
 
 ```sql
 SELECT channel, MAX(followers_gained)
 FROM streamers2021
-ORDER BY followers_gained
+GROUP BY channel
+ORDER BY MAX(followers_gained) DESC
 LIMIT 5;
 ```
 
@@ -379,7 +379,7 @@ Bugha,2220765s
 pokimane,2085831
 ```
 
-I just looked up all of them. All of them are still streaming even in 2026!
+These streams all gained 2-3 million followers in 2021. Wow. And I just looked up all of them. They are still streaming in 2026!
 
 ### Top 10 Most Popular Games
 
