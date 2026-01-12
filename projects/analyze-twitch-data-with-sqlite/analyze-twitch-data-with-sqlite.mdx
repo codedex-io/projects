@@ -105,8 +105,8 @@ The column names are:
 
 And the **streamers2024.csv** data looks like:
 
-```output
-rank, name, language, type, most_streamed_game, 2nd_most_streamed_game, average_stream_duration, followers_gained_per_stream, avg_viewer_per_stream, avg_games_per_stream, total_time_streamed, total_followers, total_views, TOTAL_GAMES_STREAMED, ACTIVE_DAYS_PER_WEEK, MOST_ACTIVE_DAY, DAY_WITH_MOST_FOLLOWERS_GAINED
+```
+rank, name, language, type, most_streamed_game, 2nd_most_streamed_game, average_stream_duration, followers_gained_per_stream, avg_viewers_per_stream, avg_games_per_stream, total_time_streamed, total_followers, total_views, TOTAL_GAMES_STREAMED, ACTIVE_DAYS_PER_WEEK, MOST_ACTIVE_DAY, DAY_WITH_MOST_FOLLOWERS_GAINED
 1, kaicenat, English, personality, Just Chatting, I'm Only Sleeping, 7.6, 18405, 15852, 2.3, 4698, 10600000, 9150000, 194, 3.6, Friday, Saturday
 2, jynxzi, English, personality, Tom Clancy's Rainbow Six Siege, NBA 2K20, 5.4, 3386, 1145, 1.2, 8407, 5760000, 1950000, 54, 5.6, Tuesday, Sunday
 3, caedrel, English, personality, League of Legends, I'm Only Sleeping, 6.3, 689, 12331, 1.3, 6728, 797000, 14200000, 111, 2.8, Thursday, Sunday
@@ -189,7 +189,7 @@ CREATE TABLE streamers2024 (
   second_most_streamed_game TEXT,
   average_stream_duration REAL,
   followers_gained_per_stream INTEGER,
-  avg_viewer_per_stream INTEGER,
+  avg_viewers_per_stream INTEGER,
   avg_games_per_stream REAL,
   total_time_streamed INTEGER,
   total_followers INTEGER,
@@ -364,7 +364,7 @@ The average would be:
 
 Aka who gained the most followers?
 
-For this, we can use the `MAX()` function with teh `GROUP BY` & `ORDER BY`:
+For this, we can use the `MAX()` function with the `GROUP BY` & `ORDER BY`:
 
 ```sql
 SELECT channel, MAX(followers_gained)
@@ -380,7 +380,7 @@ The results are:
 auronplay,3966525
 Rubius,3820532
 TheGrefg,3593081
-Bugha,2220765s
+Bugha,2220765
 pokimane,2085831
 ```
 
