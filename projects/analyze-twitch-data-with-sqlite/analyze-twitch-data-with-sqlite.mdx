@@ -524,46 +524,41 @@ Thursday,65
 
 Sunday is BY FAR the best day to stream and gain followers! Noted. 🤔📝
 
-## Grouping Top Into Genres in 2024
+## Grouping Top Games Into Genres in 2024
 
-So earlier, we found out the most popular games in 2024. Let's do it with a `LIMIT 25` this time:
+So earlier, we found the most popular games in 2024. Let's do it with a `LIMIT 25` this time:
 
 ```sql
 SELECT most_streamed_game, COUNT(*)
 FROM streamers2024
 GROUP BY 1
 ORDER BY 2 DESC
-LIMIT 25;
+LIMIT 30;
 ```
+
+With "Just Chatting" ended up so high up, I wonder if we group some of the top games, that it would come close.
 
 Let's try to figure out the different genres of games, and each of its viewer counts.
 
 Group the games into their genres: 
 
-- Just Chatting
-- MOBA: [Multiplayer Online Battle Arena](https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena)
-- FPS: [First-Person Shooter](https://en.wikipedia.org/wiki/First-person_shooter)
+- [IRL](https://en.wikipedia.org/wiki/Real_life)
+- [MOBA: Multiplayer Online Battle Arena](https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena)
+- [FPS: First-Person Shooter](https://en.wikipedia.org/wiki/First-person_shooter)
 - [Battle Royale](https://en.wikipedia.org/wiki/Battle_royale_game)
-- Survival
-- MMORPG: [Massively Multiplyaer Online Role-Playing Game](https://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game)
+- MMO: [Massively Multiplayer Online](https://en.wikipedia.org/wiki/Massively_multiplayer_online_game)
+- Simulation
+- Action
 - Gambling
-
-Grand Theft Auto V
-Hearthstone
-Teamfight Tactics
-Street Fighter 6
-Dead by Daylight
-Tom Clancy's Rainbow Six Siege
-Rocket League
 
 This can be done using a `CASE` statement, which is similar to an `if`/`else if`/`else` or `switch` statement in Python, C++, or Java.
 
 Using `CASE`, your logic should be: 
 
-  - If League of Legends → MOBA 
-  - If Dota 2 → MOBA 
-  - If Counter-Strike → FPS 
-  - If Minecraft → Survival 
+  - If League of Legends or Dota 2 → MOBA 
+  - If Valorant or Counter-Strike or Overwatch or Escape from Tarkov → FPS 
+  - If Minecraft → Simulation
+  - etc. etc.
   - Else → Other 
 
 Use `GROUP BY` and `ORDER BY` to showcase only the unique game titles.
@@ -571,32 +566,24 @@ Use `GROUP BY` and `ORDER BY` to showcase only the unique game titles.
 ```sql
 SELECT
   CASE
-    WHEN most_streamed_game = "Just Chatting"
-      THEN 'Just Chatting'
+    WHEN most_streamed_game = 'Just Chatting'
+      THEN 'IRL'
     WHEN most_streamed_game = 'League of Legends' OR most_streamed_game = 'Dota 2'
       THEN 'MOBA'
-    WHEN most_streamed_game = 'VALORANT' OR most_streamed_game = 'Valorant' OR most_streamed_game = 'Counter-Strike'
+    WHEN most_streamed_game = 'VALORANT' OR most_streamed_game = 'Valorant' OR most_streamed_game = 'Counter-Strike' OR most_streamed_game = 'Overwatch' OR most_streamed_game = 'Escape from Tarkov'
       THEN 'FPS'
-    WHEN most_streamed_game = 'Overwatch'
-      THEN 'FPS'
-    WHEN most_streamed_game = 'Escape from Tarkov'
-      THEN 'FPS'
-    WHEN most_streamed_game = 'Minecraft'
-      THEN 'Survival'
-    WHEN most_streamed_game = 'Fortnite'
-      THEN 'Battle Royale'
-    WHEN most_streamed_game = 'Apex Legends'
-      THEN 'Battle Royale'
-    WHEN most_streamed_game = 'Call of Duty: Warzone'
-      THEN 'Battle Royale'
-    WHEN most_streamed_game = 'PUBG: BATTLEGROUNDS'
+    WHEN most_streamed_game = 'Minecraft' or most_streamed_game = 'Dead by Daylight'
+      THEN 'Simulation'
+    WHEN most_streamed_game = 'Fortnite' OR most_streamed_game = 'Apex Legends' OR most_streamed_game = 'Call of Duty: Warzone' OR most_streamed_game = 'PUBG: BATTLEGROUNDS'
       THEN 'Battle Royale'
     WHEN most_streamed_game = 'World of Warcraft'
-      THEN 'MMORPG'
+      THEN 'MMO'
     WHEN most_streamed_game = 'Casino' OR most_streamed_game = 'Virtual Casino' OR most_streamed_game = 'Slots'
       THEN 'Gambling'
-    WHEN most_streamed_game = 'Sports' OR most_streamed_game = 'FIFA 23'
+    WHEN most_streamed_game = 'Sports' OR most_streamed_game = 'FIFA 23' OR most_streamed_game = 'Rocket League'
       THEN 'Sports'
+    WHEN most_streamed_game = 'Hearthstone' OR most_streamed_game = 'Teamfight Tactics' or most_streamed_game = 'Chess'
+      THEN 'Strategy'
   ELSE 'Other'
   END AS 'genre',
   COUNT(*)
@@ -608,15 +595,16 @@ ORDER BY 2 DESC;
 The result should look something like:
 
 ```plaintext
-Other|279
-Just Chatting|257
+IRL|257
+Other|234
 FPS|123
 MOBA|119
 Battle Royale|88
 Gambling|68
-Survival|24
-Sports|23
-MMORPG|18
+Simulation|33
+Sports|30
+Strategy|29
+MMO|18
 ```
 
 Wild to see "Just Chatting" still so ahead!
