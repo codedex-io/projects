@@ -1,0 +1,523 @@
+---
+title: Create an RPG Map with Love2D and Lua
+author: Ellie Popoca
+uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
+datePublished: 2026-01-13
+published: false
+description: Learn how to make an RPG map with Love2D and Lua.
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/header.png
+bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/header.png
+readTime: 45
+prerequisites: Lua fundamentals
+versions: Love2D 11.4, Lua 5.4
+tags:
+  - intermediate    
+  - lua
+courses:
+  - lua
+  - phaser
+---
+
+# Introduction
+
+Think about your favorite RPG game! Is it The Legend of Zelda, Stardew Valley, or Pokémon? What all these games have in common is that they all have a robust tilemap that was created by code, so you're able to use code to navigate through the world itself! 
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/001.gif" />
+
+
+And believe it or not, we'll be able to create our own tilemap today with Lua and the LOVE2D framework. 
+
+If you're unfamiliar with LÖVE (Love2D is a common shorthand), take a look at the [Get Started with LÖVE and Lua](https://www.codedex.io/projects/get-started-with-love2d-and-lua) project tutorial to download Lua/LÖVE and set up your IDE. 
+
+Once you're ready, we can get started with creating a map of the world of your very own game! 
+
+## How Do Tilemaps Work?
+
+Before we dive into the code, let's understand what a tilemap actually is. 
+
+A tilemap is made up of:
+
+- Tiles: Small, reusable square images (like grass, water, or stone) that act as building blocks
+- Tileset: A single image file containing all your different tile types arranged in a grid
+- Map Grid: A 2D array (think of it like a spreadsheet) where each cell contains a number that points to which tile should appear there
+
+For example, if you have a tileset where a flower is tile `1` and water is tile `2`, your map grid might look like:
+
+```output
+1 1 2 2
+1 1 2 2
+1 1 1 1
+```
+Your visual would look like this: 
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/002.png" style={{ width: "80%", height: "auto" }} />
+
+When the game renders, it looks up each number, finds the corresponding tile image in the tileset, and draws it at that position on screen.
+
+Now that you understand the mental model, let's build our own tilemap system from scratch! 
+
+## Set Up
+
+Create a folder of your game, and open the file in your IDE. For this example, our folder file is called **lua-fiesta-game**. 
+
+Before coding, you'll need at least 2 images:
+
+- Your obstacle/wall image 
+- Your character sprite
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/003.gif" style={{ width: "80%", height: "auto" }} />
+
+In this example, we're using a tree pixel art sprite as the obstacle image and the axolotl pixel art sprite for the character. You can download them by [clicking here](https://drive.google.com/drive/folders/17j2791iEMI_eHGxu4RXQspvvT9c2jll0?usp=sharing). 
+
+**Note:** If you're using your own images, remember to keep your images small to around 32x32 or 64x64 pixels. Add these images to your project folder. 
+
+Now, create three different lua files:
+- **main.lua**, 
+- **player.lua**
+- **map.lua**
+
+These three files will help us organize different functionalities that will all work together in **main.lua**. 
+
+Your project folder should now contain the following files:
+
+```output
+lua-fiesta-game/
+    ├── main.lua                     (Main game loop)
+    ├── player.lua                   (Player logic and movement)
+    ├── map.lua                      (Map creation and collision)
+    ├── hungry-dino.png       (Player sprite)
+    └── tree.png                      (Wall sprite)
+```
+
+## Creating the Map
+
+Let's begin with making our tilemap!
+
+<ImageZoom src="https://img.itch.zone/aW1hZ2UvMzk3MzM3LzE5NjgzOTMucG5n/original/KYjoXD.png" style={{ width: "80%", height: "auto" }} />
+
+Your map will always be a grid. For this example, we'll be making a 10x9 grid map. 
+
+In **map.lua**, we're going to create a metatable. This will be our blueprint. 
+
+```lua
+local Map = {}
+Map.__index = Map
+
+function Map.new()
+  local self = setmetatable({}, Map)
+end
+```
+
+Now, let's create our grid inside our function: 
+
+```lua
+function Map.new()
+  local self = setmetatable({}, Map)
+
+  self.tiles = {
+    {1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,1,1,0,0,0,1},
+    {1,0,0,0,0,0,0,1,0,1},
+    {1,0,1,1,0,0,0,1,0,1},
+    {1,0,0,1,0,0,0,0,0,1},
+    {1,0,0,0,0,1,1,0,0,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1},
+  }
+end
+```
+
+These lines of code will create the 10x9 grid of tiles, where each row is a line in the map. The `1` represents an obstacle, and the `0` will be our floor (nothing). 
+
+
+The grid above is an enclosed box with a border and a few obstacles placed throughout the scene. 
+
+We now need to turn the `1`s into rendered images in our game and close our function. 
+
+```lua
+  self.tileSize = 32
+  self.treeImage = love.graphics.newImage("tree.png")
+  self.treeScaleX = self.tileSize / self.treeImage:getWidth()
+  self.treeScaleY = self.tileSize / self.treeImage:getHeight()
+  return self
+end
+```
+
+The `32` stands for 32 pixels. Replace this number with `64` if you have another sized pixel image. `treeScaleX/Y` will calculate how much to stretch/shrink the image to fit exactly 32x32 pixels. 
+
+Now, let's draw our map. 
+
+```lua
+function Map:draw()
+  for y = 1, #self.tiles do
+    for x = 1, #self.tiles[y] do
+      local tile = self.tiles[y][x]
+      local drawX = (x - 1) * self.tileSize
+      local drawY = (y - 1) * self.tileSize
+
+      if tile == 1 then
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.draw(
+          self.treeImage,
+          drawX,
+          drawY,
+          0,
+          self.treeScaleX,
+          self.treeScaleY
+        )
+      end
+    end
+  end
+
+  love.graphics.setColor(1,1,1)
+end
+```
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/005.png" style={{ width: "80%", height: "auto" }} />
+
+We are creating a nested for loop to iterate through every tile in the map, and will calculate where to draw each tile in pixels. 
+- If the tile is a wall (`tile == 1`), draw the tree image there
+- `.setColor(1, 1, 1)` means white (don't tint the image)
+
+Let's now create the collision logic. The `1`s are drawn, but we need to make sure the player can't go through an obstacle and bumps into it instead. 
+
+```lua
+function Map:collides(px, py, size)
+  local half = size / 2
+  local left = px - half
+  local right = px + half
+  local top = py - half
+  local bottom = py + half
+
+  local tileSize = self.tileSize
+
+  local function tileAt(px, py)
+    local tx = math.floor(px / tileSize) + 1
+    local ty = math.floor(py / tileSize) + 1
+    return self.tiles[ty] and self.tiles[ty][tx]
+  end
+
+  return
+    tileAt(left, top) == 1 or
+    tileAt(right, top) == 1 or
+    tileAt(left, bottom) == 1 or
+    tileAt(right, bottom) == 1
+end
+```
+
+This collide function checks if the player would hit a wall at position (`px, py`). `tileAt()` converts pixel position to tile position (which square they're in). 
+
+Now at the very end, return `Map`. 
+
+Your final file should look like this:
+
+```lua
+local Map = {}
+Map.__index = Map
+
+function Map.new()
+  local self = setmetatable({}, Map)
+
+  -- 1 = wall, 0 = floor
+  self.tiles = {
+    {1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,1,1,0,0,0,1},
+    {1,0,0,0,0,0,0,1,0,1},
+    {1,0,1,1,0,0,0,1,0,1},
+    {1,0,0,1,0,0,0,0,0,1},
+    {1,0,0,0,0,1,1,0,0,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1},
+  }
+
+  self.tileSize = 32
+  self.treeImage = love.graphics.newImage("tree.png")
+  self.treeScaleX = self.tileSize / self.treeImage:getWidth()
+  self.treeScaleY = self.tileSize / self.treeImage:getHeight()
+  return self
+end
+
+function Map:draw()
+  for y = 1, #self.tiles do
+    for x = 1, #self.tiles[y] do
+      local tile = self.tiles[y][x]
+      local drawX = (x - 1) * self.tileSize
+      local drawY = (y - 1) * self.tileSize
+
+      if tile == 1 then
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.draw(
+          self.treeImage,
+          drawX,
+          drawY,
+          0,
+          self.treeScaleX,
+          self.treeScaleY
+        )
+      end
+    end
+  end
+
+  love.graphics.setColor(1,1,1)
+end
+
+function Map:collides(px, py, size)
+  local half = size / 2
+  local left = px - half
+  local right = px + half
+  local top = py - half
+  local bottom = py + half
+
+  local tileSize = self.tileSize
+
+  -- Convert pixel position to tile indices
+  local function tileAt(px, py)
+    local tx = math.floor(px / tileSize) + 1
+    local ty = math.floor(py / tileSize) + 1
+    return self.tiles[ty] and self.tiles[ty][tx]
+  end
+
+  -- Check all 4 corners
+  return
+    tileAt(left, top) == 1 or
+    tileAt(right, top) == 1 or
+    tileAt(left, bottom) == 1 or
+    tileAt(right, bottom) == 1
+end
+
+return Map
+```
+
+## Creating the Player
+
+The player needs to be created in order to play your game! Let's set up our `Player` object similarly to how we did it with the `Map`. 
+
+```lua
+local Player = {}
+Player.__index = Player
+
+function Player.new(x, y)
+  local self = setmetatable({}, Player)
+  self.x = x
+  self.y = y
+  self.speed = 120
+  self.size = 20
+  -- more code later
+end
+```
+
+We create a starting position `x` and `y`, as well as the speed, and the player itself will be contained within a 20x20 pixel box for collision detection. 
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/006.png" style={{ width: "80%", height: "auto" }} />
+
+Now, let's add in our player image to close our `Player` object. 
+
+```lua
+function Player.new(x, y)
+  local self = setmetatable({}, Player)
+  self.x = x
+  self.y = y
+  self.speed = 120
+  self.size = 20
+  
+  -- new code
+  self.sprite = love.graphics.newImage("hungry-dino.png")
+  local maxDim = math.max(self.sprite:getWidth(), self.sprite:getHeight())
+  self.spriteScale = self.size / maxDim
+  return self
+end
+```
+
+These lines of code find the largest dimension (width or height) of the sprite, and calculate a scale factor so the image fits the collision size (20 pixels). 
+
+Here, we can now create an update function where we create the movement for our player. We'll need this function to take in the map, and the changing of time since the last frame. We also need to add in our keyboard input to use the <kbd>w</kbd> <kbd>a</kbd> <kbd>s</kbd> <kbd>d</kbd> keys so our player can move up, down, left and right. 
+
+```lua
+function Player:update(dt, map)
+  local moveX, moveY = 0, 0
+
+  if love.keyboard.isDown("w", "up") then moveY = -1 end
+  if love.keyboard.isDown("s", "down") then moveY = 1 end
+  if love.keyboard.isDown("a", "left") then moveX = -1 end
+  if love.keyboard.isDown("d", "right") then moveX = 1 end
+```
+
+For diagonal movement, let's also change the speed so that moving in two directions at once doesn't speed up the character. Outside of the function, we're going to calculate the new position of the player as well. 
+
+```lua
+  if moveX ~= 0 and moveY ~= 0 then
+    moveX = moveX * 0.7071
+    moveY = moveY * 0.7071
+  end 
+
+  local newX = self.x + moveX * self.speed * dt
+  local newY = self.y + moveY * self.speed * dt
+```
+
+For example, if `moveX`=1, `speed`=120, and `dt`=0.016 (60fps), then `newX` = `x` + 1 * 120 * 0.016 = `x` + 1.92 pixels. 
+
+Now, checking for collisions! If the player runs into an object on the map, it must detect it from both the `x` and `y` direction. If the player doesn't collide, then it keeps moving and updating its position. We check both the `x` and `y` direction because if you check both together and hit a corner, you'd stop completely. Separate checks let you slide along walls! 
+
+```lua
+  if not map:collides(newX, self.y, self.size) then
+    self.x = newX
+  end
+  if not map:collides(self.x, newY, self.size) then
+    self.y = newY
+  end
+```
+
+Let's create our draw function. Here, we're going to tell the program what to draw (the sprite), where to draw it (`self.x`,`self.y`), the rotation angle (`0`), the scale factor for width and height, and we're offsetting the image so that it's centered on `x,y`. 
+
+```lua
+function Player:draw()
+  love.graphics.setColor(1,1,1)
+  love.graphics.draw(
+    self.sprite,
+    self.x,
+    self.y,
+    0,
+    self.spriteScale,
+    self.spriteScale,
+    self.sprite:getWidth()/2,
+    self.sprite:getHeight()/2
+  )
+end
+```
+
+Now, return the player so that we can use it in our **main.lua** file! 
+
+```lua
+return Player
+```
+
+## Main Game Code
+
+Now, let's bring this all together in **main.lua**. 
+
+First, load of all your code files
+
+```lua
+local Player = require("player")
+local Map = require("map")
+```
+
+Then, let's set our game title and our background color (RGB values). For this example, we'll be using a light green for grass. 
+
+```lua
+function love.load()
+  love.window.setTitle("Lua Game!")
+  love.graphics.setBackgroundColor(0.85, 1, 0.85)
+  
+  map = Map.new()
+  player = Player.new(64, 64)
+end
+```
+
+Note that `Player.new(64, 64)` creates our player at position X=64, Y=64. 
+
+Next, create an update function. We're going to use our `Player` object and run that update function here so that the player moves! 
+
+```lua
+function love.update(dt)
+  player:update(dt, map)
+end
+```
+
+Finally, let's create our draw function. Here we need to actually place our player and map on the canvas. 
+
+```lua
+function love.draw()
+  -- Camera offset: center the player on screen
+  local camX = love.graphics.getWidth() / 2 - player.x
+  local camY = love.graphics.getHeight() / 2 - player.y
+```
+
+To begin, we're creating a camera offset. This means that our player will always be centered on the screen no matter which direction you move in. 
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/007.gif" style={{ width: "80%", height: "auto" }} />
+
+This means that you'll always be able to move around and explore the map while your character is centered (left). A static map will have the character move around the map without camera movement (right). If you want a static map, feel free to remove this part. 
+
+Then, we're going to draw our map and our player. We're going to use `love.graphics.push()` and `love.graphics.pop()` to save our current canvas in a “snapshot”. 
+
+```lua    
+  love.graphics.push()
+
+  love.graphics.translate(camX, camY)
+  map:draw()
+  player:draw()
+  
+  love.graphics.pop()
+  
+  love.graphics.print("Arrows / WASD to move", 10, 10)
+end
+```
+
+In our example, we have UI instructions for the players at `(10,10)` on the canvas. This pattern is common when you want some things in world space (map, player) and other things in screen space, like your UI, for example. 
+
+If we didn't add this, our text would also move with the camera, which we don't want! 
+
+Save all of your files, and you're done with coding! 
+
+## Running your Game
+
+Do a quick check of your code. As a reminder, your game directory should look something like this:
+
+```output
+lua-fiesta-game/
+    ├── main.lua              (Main game loop)
+    ├── player.lua            (Player logic and movement)
+    ├── map.lua               (Map creation and collision)
+    ├── Hungry-dino.png       (Player sprite)
+    └── tree.png              (Wall sprite)
+```
+
+For now, see that everything runs smoothly, and you can come back to add in more and your details. 
+
+
+On Windows:
+- Find where you installed LÖVE (usually **C:\Program Files\LOVE\love.exe**)
+- Drag your **game** FOLDER onto the **love.exe** application icon
+
+Alternative (Windows):
+- Hold <kbd>shift</kbd> and right-click your **game** folder
+- Click "Open PowerShell window here" or "Open command window here"
+- Type: "C:\Program Files\LOVE\love.exe" . and press <kbd>enter</kbd>
+
+On Mac:
+- Drag your **game** folder onto the LÖVE application icon
+- You can also use the terminal and run `love /Users/your-computer/game-folder-name`instead of dragging and dropping. 
+
+You'll then see your game working like this! 
+
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/008.gif" style={{ width: "80%", height: "auto" }} />
+
+
+## Conclusion
+
+Congratulations! You finished your Tiled RPG map. This is the fundamental part of your upcoming game. There are endless possibilities to improve and add on! 
+
+Here are some ideas that could inspire you to keep going: 
+- Add a second map
+- Add other objects like collectibles or gold coins 
+- Display a score
+- Simple enemies that move randomly
+- Sprite animation
+- Expand the map to go beyond the confines of the original map 
+
+
+### More Resources
+- [Love2D Documentation](https://love2d.org/wiki/Main_Page)
+- [Lua Documentation](https://www.lua.org/docs.html)
+- [Love2D Examples](https://love2d.org/wiki/Category:Examples)
+- [Lua Examples](https://www.lua.org/examples.html)
+- [Codédex Discord](https://discord.com/invite/HCShtBqbfV)
+
+Share your projects! We would love to see what you built, so make sure to tag us [@codedex_io on Twitter](https://x.com/codedex_io) ✍️
+
+
+
