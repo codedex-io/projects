@@ -530,7 +530,7 @@ Sunday is BY FAR the best day to stream and gain followers! Noted. 🤔📝
 
 ## Grouping Top Games Into Genres in 2024
 
-So earlier, we found the most popular games in 2024. Let's do it with a `LIMIT 25` this time:
+So earlier, we found the most popular games in 2024. Let's do it with a `LIMIT 30` this time:
 
 ```sql
 SELECT most_streamed_game, COUNT(*)
@@ -540,7 +540,7 @@ ORDER BY 2 DESC
 LIMIT 30;
 ```
 
-With "Just Chatting" ended up so high up, I wonder if we group some of the top games, that it would come close.
+With "Just Chatting" ended so high up, I wonder if we group the top games, that it would come closer.
 
 Let's try to figure out the different genres of games, and each of its viewer counts.
 
@@ -554,16 +554,20 @@ Group the games into their genres:
 - Simulation
 - Action
 - Gambling
+- etc.
 
-This can be done using a `CASE` statement, which is similar to an `if`/`else if`/`else` or `switch` statement in Python, C++, or Java.
+This can be done using a `CASE` statement, which is similar to an `if`/`else if`/`else` or `switch` statement in Python, C++, or Java. The logic should be something like: 
 
-Using `CASE`, your logic should be: 
-
-  - If League of Legends or Dota 2 → MOBA 
-  - If Valorant or Counter-Strike or Overwatch or Escape from Tarkov → FPS 
-  - If Minecraft → Simulation
-  - etc. etc.
-  - Else → Other 
+- If Just Chatting → IRL
+- If League of Legends or Dota 2 → MOBA 
+- If Valorant or Counter-Strike or Overwatch or Escape from Tarkov → FPS 
+- If Minecraft → Simulation
+- If Fortnite or Apex Legends or Call of Duty: Warzone or PUBG: BATTLEGROUNDS → Battle Royale
+- If World of Warcraft → MMO
+- If Casino or Virtual Casino or Slots → Gambling
+- If Sports or FIFA 23 or Rocket League → Sports
+- If Hearthstone or Teamfight Tactics or Chess → Strategy
+- Else → Other
 
 Use `GROUP BY` and `ORDER BY` to showcase only the unique game titles.
 
@@ -613,7 +617,7 @@ MMO|18
 
 Wild to see "Just Chatting" still so ahead!
 
-# Quit SQLite
+## Quit SQLite
 
 To exit SQLite anytime, we can do either:
 
