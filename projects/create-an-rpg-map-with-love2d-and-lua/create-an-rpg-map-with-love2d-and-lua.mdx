@@ -71,7 +71,7 @@ In this example, we're using a tree pixel art sprite as the obstacle image and t
 **Note:** If you're using your own images, remember to keep your images small to around 32x32 or 64x64 pixels. Add these images to your project folder. 
 
 Now, create three different lua files:
-- **main.lua**, 
+- **main.lua**
 - **player.lua**
 - **map.lua**
 
@@ -81,16 +81,16 @@ Your project folder should now contain the following files:
 
 ```output
 lua-fiesta-game/
-    ├── main.lua                     (Main game loop)
-    ├── player.lua                   (Player logic and movement)
-    ├── map.lua                      (Map creation and collision)
+    ├── main.lua              (Main game loop)
+    ├── player.lua            (Player logic and movement)
+    ├── map.lua               (Map creation and collision)
     ├── hungry-dino.png       (Player sprite)
-    └── tree.png                      (Wall sprite)
+    └── tree.png              (Wall sprite)
 ```
 
 ## Creating the Map
 
-Let's begin with making our tilemap!
+Let's begin with making our tilemap! Below is a sample map where you can see the grid and the tiles. 
 
 <ImageZoom src="https://img.itch.zone/aW1hZ2UvMzk3MzM3LzE5NjgzOTMucG5n/original/KYjoXD.png" style={{ width: "80%", height: "auto" }} />
 
@@ -107,8 +107,9 @@ function Map.new()
 end
 ```
 
-Now, let's create our grid inside our function: 
+Now, let's create our grid inside our function. We'll be using a 2D array to represent the grid. Each element in the array will represent a tile in the grid. The `1` represents an obstacle, and the `0` will be our floor (nothing). 
 
+Below is a sample grid that you can use to create your own map using two images: a tree and a grass tile. The process of creating a grid with more than one image is the same, you just need to add more numbers to the array.
 ```lua
 function Map.new()
   local self = setmetatable({}, Map)
@@ -127,10 +128,9 @@ function Map.new()
 end
 ```
 
-These lines of code will create the 10x9 grid of tiles, where each row is a line in the map. The `1` represents an obstacle, and the `0` will be our floor (nothing). 
+These lines of code will create the 10x9 grid of tiles, where each row is a line in the map.
 
-
-The grid above is an enclosed box with a border and a few obstacles placed throughout the scene. 
+The grid above for this example is an enclosed box with a border and a few obstacles placed throughout the scene. 
 
 We now need to turn the `1`s into rendered images in our game and close our function. 
 
@@ -173,12 +173,9 @@ function Map:draw()
 end
 ```
 
-<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/005.png" style={{ width: "80%", height: "auto" }} />
-
-We are creating a nested for loop to iterate through every tile in the map, and will calculate where to draw each tile in pixels. 
+This code will iterate through every tile in the map, and will calculate where to draw each tile in pixels. 
 - If the tile is a wall (`tile == 1`), draw the tree image there
 - `.setColor(1, 1, 1)` means white (don't tint the image)
-
 Let's now create the collision logic. The `1`s are drawn, but we need to make sure the player can't go through an obstacle and bumps into it instead. 
 
 ```lua
@@ -218,7 +215,7 @@ Map.__index = Map
 function Map.new()
   local self = setmetatable({}, Map)
 
-  -- 1 = wall, 0 = floor
+  -- 1 = wall, 0 = grass
   self.tiles = {
     {1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,1},
@@ -291,7 +288,7 @@ return Map
 
 ## Creating the Player
 
-The player needs to be created in order to play your game! Let's set up our `Player` object similarly to how we did it with the `Map`. 
+The player needs to be created in order to play the game! Let's set up our `Player` object similarly to how we did it with the `Map`. 
 
 ```lua
 local Player = {}
@@ -311,7 +308,7 @@ We create a starting position `x` and `y`, as well as the speed, and the player 
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/006.png" style={{ width: "80%", height: "auto" }} />
 
-Now, let's add in our player image to close our `Player` object. 
+Let's add in our player image to close our `Player` object. 
 
 ```lua
 function Player.new(x, y)
@@ -386,7 +383,7 @@ function Player:draw()
 end
 ```
 
-Now, return the player so that we can use it in our **main.lua** file! 
+Return the player so that we can use it in the **main.lua** file! 
 
 ```lua
 return Player
@@ -394,9 +391,9 @@ return Player
 
 ## Main Game Code
 
-Now, let's bring this all together in **main.lua**. 
+Let's bring this all together in **main.lua**. 
 
-First, load of all your code files
+First, load of all the code files we created.
 
 ```lua
 local Player = require("player")
@@ -434,13 +431,13 @@ function love.draw()
   local camY = love.graphics.getHeight() / 2 - player.y
 ```
 
-To begin, we're creating a camera offset. This means that our player will always be centered on the screen no matter which direction you move in. 
+We're creating a camera offset. This means that our player will always be centered on the screen no matter which direction you move in. 
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/007.gif" style={{ width: "80%", height: "auto" }} />
 
-This means that you'll always be able to move around and explore the map while your character is centered (left). A static map will have the character move around the map without camera movement (right). If you want a static map, feel free to remove this part. 
+You'll always be able to move around and explore the map while your character is centered (left). A static map will have the character move around the map without camera movement (right). If you want a static map, feel free to remove this part. 
 
-Then, we're going to draw our map and our player. We're going to use `love.graphics.push()` and `love.graphics.pop()` to save our current canvas in a “snapshot”. 
+Now we'regoing to draw our map and our player. We're going to use `love.graphics.push()` and `love.graphics.pop()` to save our current canvas in a “snapshot”. 
 
 ```lua    
   love.graphics.push()
@@ -455,7 +452,7 @@ Then, we're going to draw our map and our player. We're going to use `love.graph
 end
 ```
 
-In our example, we have UI instructions for the players at `(10,10)` on the canvas. This pattern is common when you want some things in world space (map, player) and other things in screen space, like your UI, for example. 
+In our example, we have UI instructions for the players at `(10,10)` on the canvas. This pattern is common when you want some things in world space (map, player) and other things in screen space (UI).
 
 If we didn't add this, our text would also move with the camera, which we don't want! 
 
@@ -512,11 +509,8 @@ Here are some ideas that could inspire you to keep going:
 ### More Resources
 - [Love2D Documentation](https://love2d.org/wiki/Main_Page)
 - [Lua Documentation](https://www.lua.org/docs.html)
-- [Love2D Examples](https://love2d.org/wiki/Category:Examples)
-- [Lua Examples](https://www.lua.org/examples.html)
-- [Codédex Discord](https://discord.com/invite/HCShtBqbfV)
+- [Source Code](https://github.com/exrlla/love-fiesta-game)
 
-Share your projects! We would love to see what you built, so make sure to tag us [@codedex_io on Twitter](https://x.com/codedex_io) ✍️
-
+Share your projects! We would love to see what you built, so make sure to tag us [@codedex_io on Twitter](https://x.com/codedex_io) and [@exrlla](https://x.com/exrlla) on Twitter! ✍️
 
 
