@@ -1,0 +1,175 @@
+--- 
+title: Build a Minecraft Mod with Java
+author: Daniel Li
+uid: 
+description: Explore and analyze real data on the top Twitch streamers from 2021 and 2024 using SQLite (directly in the terminal). Learn how to query and uncover insights about streaming trends with hands-on SQL practice.
+datePublished: 2026-01-16
+published: live
+header: 
+bannerImage: 
+readTime: 60 
+prerequisites: Java, 
+versions: Java JDK Version 21, IntelliJ Idea
+courses: 
+  - java
+  - command-line
+tags: 
+  - intermediate
+  - java
+  - game-dev
+---
+
+## Introduction
+
+Minecraft was one of the first games that made me curious about how software actually works. I grew up playing it as a sandbox where creativity and logic overlapped. 
+
+This project tutorial comes from that curiosity. Instead of just playing Minecraft, we are going to extend it by writing our own Java code and adding a custom item to the game. If you have ever wanted to understand how mods work under the hood or take your first step into game modding, this project is designed to make that process approachable and concrete.
+
+This project tutorial requires a setup of the Forge MDK’s project structure and parchment. Minecraft was not built to be changed easily. The Forge MDK acts like a _translator and helper_ that lets your code talk to Minecraft safely.
+
+Without it, Minecraft would not know:
+
+- What your mod is
+- When to load it
+- How to show your item in the game
+
+The Forge MDK gives you:
+
+- Folders that tell you where to put your code and images
+- Tools that run Minecraft with your mod installed
+- Readable names for Minecraft code so it is easier to understand
+- Rules so your mod does not break the game or other mods
+- This can be very tedious to follow, so I have included the Forge MDK folder with the setup done. Make sure you have all the other prerequisites. 
+
+We are going to build a mod that creates a custom item in Minecraft.
+
+<video width="100%" controls>
+  <source src="https://i.imgur.com/SnS2WA1.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+## Downloading IntelliJ
+
+IntelliJ IDEA is an IDE that helps you write, organize, and run Java code more easily by giving you tools like syntax highlighting, error checking, and one-click project running.
+
+Download it here: https://www.jetbrains.com/idea/download
+
+[image]
+
+
+## Setting Up
+
+The first thing we will do in this tutorial is make sure the folders are able to be accessed easily. This can be done through going to the three dots on the project, like this:
+
+<video width="100%" controls>
+  <source src="https://i.imgur.com/m8fuXuR.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+And ensuring the “Flatten Modules”, “Flatten Packages”, and “Compact Middle Packages” are all turned off. If they were on, they would make adding directionaries and files to existing ones harder.
+
+
+Right-click the **itemmod** folder under the **codedex** folder (can be accessed through src -> main -> java -> com ->  codedex) and press new. We will be creating a new Package. You should see a popup, just add “item” to the end of the line like so.
+
+![screenshot](https://i.imgur.com/4r25NPl.png)
+
+When the package is created, right click the item package, press new, and create a new class. We will name this “ModItems”. At this point, there should only be one file within the item package. 
+
+Your **itemmod** folder should look like the following:
+
+![screenshot2](https://i.imgur.com/DDzpUXJ.png)
+
+
+Open ModItems, we will begin to write some code in here:
+
+
+![screenshot3](https://i.imgur.com/5x38mEM.png)
+
+
+In IntelliJ IDEA, you can use autocomplete to automatically add `import` statements. This is convenient and prevents typos, but for the sake of uniformity in this curriculum, we are listing all imports explicitly at the top of the file. 
+
+Below the first line, add the following `import` statements:
+
+
+```java
+package com.codedex.itemmod.item;
+import com.codedex.itemmod.ItemMod;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+```
+
+Our first line of code will tell Minecraft that we are attempting to register a new item. This should be inside the ModItems class with correct indentation.
+
+
+```java
+Public static final DeferredRegister<Item> ITEMS = 
+    DeferredRegister.create(ForgeRegistries.ITEMS, ItemMod.MOD_ID);
+```
+
+
+`DeferredRegister<Item>` is a Forge helper class that allows you to register game objects (like items) in a safe way. The `<Item>` tells Forge that we are specifically registering an item, as opposed to other things like monsters. `ItemMod.MOD_ID` tells Forge which mod namespace the item belongs to (prevents conflicts with other mods).
+
+Next, we need to define the item’s identity in the game and ensure it is safely registered at the correct point in the mod loading process.
+
+```java
+public static final RegistryObject<Item> Codedex = ITEMS.register(name."codedex", () -> new Item(new Item.Properties()));
+```
+
+`RegistryObject<Item>` is a special container that holds a reference to the item once it is registered, acting like a “promise” that the item will exist after the registration process completes. The ITEMS.register method adds the item name "codedex", which **must be all lowercase to comply with Minecraft’s naming rules**. The second argument is a lambda expression, () -> new Item(new Item.Properties()), which tells Forge how to construct the item when it is time to register it, with Item.Properties() allowing you to define its characteristics, such as stack size or creative tab placement. 
+
+For our last code within this file, we need to link our item definition to Forge’s event system, so that they appear at the correct time during Minecraft’s initialization. 
+
+```java
+public static void register(IEventBus eventBus) 
+    ITEMS.register(eventBus);
+}
+```
+
+The register method takes an IEventBus as a parameter, which is a pipeline that handles mod-related events. Inside the method, ITEMS.register(eventBus) tells Forge, “When it’s time to register items, run the registration code for everything in this DeferredRegister.”
+
+Congrats! The first file is done. Your ModItems class should now look similar to this:
+
+
+Since we are adding an item into the game, we need to make sure it’s accessible in creative. Go to the itemmod class within the item folder, and find the addCreative method. It should be empty and look like this.
+
+
+
+
+
+
+## The Results
+
+So now that we have done, let’s write down everything that we found thus far:
+
+- The average viewers per stream for the top 1,000 streamers in 2021 is 4,776 viewers.
+- The hottest rising stars in 2021 are [auronplay](https://www.twitch.tv/auronplay), [Rubius](https://www.twitch.tv/rubius), [TheGrefg](https://www.twitch.tv/thegrefg), [Bugha](https://www.twitch.tv/bugha), and [pokimane](https://www.twitch.tv/pokimane).
+- The most popular games are Just Chatting, League of Legends, GTA V, VALORANT, and Casino.
+- The top languages for LoL streamers are English, Portugese, French, Spanish, and Japanese.
+- The best day of the week to stream is Sunday!
+
+This is a solid report. If you want to visualize it, you can use [Python](https://codedex.io/python), [NumPy](https://www.codedex.io/numpy), [Pandas](https://www.codedex.io/pandas), Matplotlib or Google Sheets / Microsoft Excel to create line graphs, scatter plots, pie charts, etc.
+
+## Conclusion
+ 
+You’ve reached the end of the project tutorial! GGWP. 🔥
+
+We’ve taken a real-world Twitch dataset from Kaggle and imported it into SQLite, and used queries and aggregate functions to analyze the data.
+
+Feel free to keep going and try to come up with more questions. Some other ideas:
+
+- What are your favorite games? Can you find some interesting insights about them?
+- Can you _connect_ the two datasets? How are streamers in 2024 different from 2021 ones? How many top streamers in 2021 are still in the top in 2024? Hint: Use a `JOIN` or a `UNION`.
+- Any other questions that you might have?
+
+Share your projects on GitHub or a video format in [Project Showcase](https://www.codedex.io/community/project-showcase) if you find out something even more interesting! Let me know in the comments. ✨
+
+### More Resources
+
+- Solution code (coming soon)
+- [Kaggle](https://www.kaggle.com)
+- [Codédex's Twitch](https://www.twitch.tv/codedex_io)
