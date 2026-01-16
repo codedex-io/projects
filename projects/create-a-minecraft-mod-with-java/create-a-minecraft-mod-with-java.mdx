@@ -27,7 +27,7 @@ This project tutorial comes from that curiosity. Instead of just playing Minecra
 
 **Mods** (short for modifications) are a way of writing code to alter graphics or gameplay of a game.
 
-There are 200k+ Minecraft mods on mod hosting sites. It's the most modded game of all-time (by downloads).
+There are 200k+ Minecraft mods on mod hosting sites. It's the most modded game of all-time by downloads.
 
 We are going to build a mod that creates a **custom item** in Minecraft:
 
@@ -61,21 +61,19 @@ This can be very tedious to follow, so I have included a Forge MDK folder with t
 
 Download it here: [Codédex's Forge MDK Template](https://link.com)
 
-Let's get started.
-
 ## Downloading IntelliJ & Java
 
-[IntelliJ IDEA](https://www.jetbrains.com/idea) is an IDE by JetBrains that helps us write, organize, and run Java code more easily by giving you tools like syntax highlighting, error checking, and one-click project running. It is widely considered to be the best Java IDE for professional use.
-
-I am using this, but you can also use Eclipse and VS Code.
+[IntelliJ IDEA](https://www.jetbrains.com/idea) is an IDE by JetBrains that helps us write, organize, and run Java code more easily by giving us tools like syntax highlighting, error checking, and one-click project running. It is widely considered to be the best Java IDE for professional use. I am using this for Java, but you can also use Eclipse and VS Code.
 
 <img src="https://i.imgur.com/eUxTQt0.png" alt="closing ceremony image" width="10%"/>
 
-Download it here: https://jetbrains.com/idea/download (scroll down to Community version so it's free)
+**Download here:** https://jetbrains.com/idea/download (scroll down to Community version so it's free)
 
 Also, make sure you have the Java JDK Version 21 installed for your operating system (Linux/macOS/Windows).
 
-Download it here: https://oracle.com/java/technologies/javase/jdk21-archive-downloads.html 
+**Download here:** https://oracle.com/java/technologies/javase/jdk21-archive-downloads.html 
+
+Let's get started.
 
 ## Setting Up
 
@@ -100,7 +98,7 @@ Your **itemmod** folder should look like the following:
 
 ![screenshot2](https://i.imgur.com/DDzpUXJ.png)
 
-Open ModItems, we will begin to write some code in here:
+Open **ModItems**, we will begin to write some code in here:
 
 ![screenshot3](https://i.imgur.com/5x38mEM.png)
 
@@ -122,7 +120,7 @@ Our first line of code will tell Minecraft that we are attempting to register a 
 
 ```java
 Public static final DeferredRegister<Item> ITEMS = 
-    DeferredRegister.create(ForgeRegistries.ITEMS, ItemMod.MOD_ID);
+  DeferredRegister.create(ForgeRegistries.ITEMS, ItemMod.MOD_ID);
 ```
 
 `DeferredRegister<Item>` is a Forge helper class that allows you to register game objects (like items) in a safe way. The `<Item>` tells Forge that we are specifically registering an item, as opposed to other things like monsters. `ItemMod.MOD_ID` tells Forge which mod namespace the item belongs to (prevents conflicts with other mods).
@@ -133,19 +131,21 @@ Next, we need to define the item’s identity in the game and ensure it is safel
 public static final RegistryObject<Item> Codedex = ITEMS.register(name."codedex", () -> new Item(new Item.Properties()));
 ```
 
-`RegistryObject<Item>` is a special container that holds a reference to the item once it is registered, acting like a “promise” that the item will exist after the registration process completes. The ITEMS.register method adds the item name "codedex", which **must be all lowercase to comply with Minecraft’s naming rules**. The second argument is a lambda expression, () -> new Item(new Item.Properties()), which tells Forge how to construct the item when it is time to register it, with Item.Properties() allowing you to define its characteristics, such as stack size or creative tab placement. 
+`RegistryObject<Item>` is a special container that holds a reference to the item once it is registered, acting like a “promise” that the item will exist after the registration process completes. 
+
+The `.register()` method adds the item name `"codedex"`, which **must be all lowercase to comply with Minecraft’s naming rules**. The second argument is a lambda expression, `() -> new Item(new Item.Properties())`, which tells Forge how to construct the item when it is time to register it, with `Item.Properties()` allowing you to define its characteristics, such as stack size or creative tab placement. 
 
 For our last code within this file, we need to link our item definition to Forge’s event system, so that they appear at the correct time during Minecraft’s initialization. 
 
 ```java
 public static void register(IEventBus eventBus) 
-    ITEMS.register(eventBus);
+  ITEMS.register(eventBus);
 }
 ```
 
-The register method takes an IEventBus as a parameter, which is a pipeline that handles mod-related events. Inside the method, ITEMS.register(eventBus) tells Forge, “When it’s time to register items, run the registration code for everything in this DeferredRegister.”
+The `.register()` method takes an IEventBus as a parameter, which is a pipeline that handles mod-related events. Inside the method, `ITEMS.register(eventBus)` tells Forge, “When it’s time to register items, run the registration code for everything in this DeferredRegister.”
 
-Congrats! The first file is done. Your ModItems class should now look similar to this:
+Congrats! The first file is done. Your `ModItems` class should now look similar to this:
 
 ```java
 package com.codedex.itemmod.item;
@@ -168,7 +168,7 @@ public class ModItem {
 }
 ```
 
-Since we are adding an item into the game, we need to make sure it’s accessible in creative. Go to the itemmod class within the item folder, and find the addCreative method. It should be empty and look like this.
+Since we are adding an item into the game, we need to make sure it’s accessible in creative. Go to the **itemmod** class within the **item** folder, and find the `.addCreative()` method. It should be empty and look like this.
 
 ```java
 // Add the example block item to the building blocks tab
@@ -201,7 +201,7 @@ ModItems.register(modEventBus);
 
 We are almost done! This next section covers how we set up the item’s assets (such as how it appears in-game), make sure you follow closely. 
 
-Within the resources folder, we will create a folder called **assets**. 
+Within the **resources** folder, we will create a folder called **assets**. 
 
 Within **assets**, we need to create the folder **itemmod**. 
 
@@ -246,21 +246,19 @@ Inside of that, we write:
 }
 ```
 
-Lastly, in textures, we create a folder called **item**, and inside it, we add a file called **codedex.png**. 
+Lastly, in **textures**, we create a folder called **item**, and inside it, we add a file called **codedex.png**. 
 
-You can add a photo yourself of whatever you want this item to look like, but here's a photo of Codedex logo:
+You can add a photo yourself of whatever you want this item to look like, but here's a photo of Codedex Bot logo:
 
-Insert logo
-
+<img src="https://i.imgur.com/yA845P4.png" alt="closing ceremony image" width="30%"/>
 
 We are finished! Click “run” at the top of the IDE, and Minecraft should load within a few minutes. 
 
-Create a new single-player world in creative, and search up Codedex.
-
+Create a new single-player world in creative, and search up "Codedex". 🔎
 
 ## Congrats!
 
-We have just built a Minecraft mod using Java. 
+Bruh, we just built your first Minecraft mod using Java. Not too bad, right?
 
 ### Common Mistakes to Watch Out For
 
