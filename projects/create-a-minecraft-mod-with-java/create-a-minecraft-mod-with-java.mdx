@@ -36,7 +36,7 @@ We are going to build a mod that creates a **custom item** in Minecraft:
   Your browser does not support the video tag.
 </video>
 
-### But first... What is Forge MDK?
+## But first... What is Forge MDK?
 
 This project tutorial requires a setup of the Forge MDK’s project structure and parchment. 
 
@@ -69,11 +69,11 @@ This can be very tedious to follow, so I have included a Forge MDK folder with t
 
 **Download here:** https://jetbrains.com/idea/download (scroll down to Community version so it's free)
 
-Also, make sure you have the Java JDK Version 21 installed for your operating system (Linux/macOS/Windows).
+Also, make sure you have the Java JDK 21 for your operating system (Linux/macOS/Windows).
 
 **Download here:** https://oracle.com/java/technologies/javase/jdk21-archive-downloads.html 
 
-Let's get started.
+Let's get started!
 
 ## Setting Up
 
@@ -178,7 +178,7 @@ private void addCreative(BuildCreativeModeTabContentsEvent event)
 }
 ```
 
-Within the method, we need to ensure that when Minecraft is loading up and processing the Creative Mode code, it adds the Codedex item we had registered before. This will allow it to be accessible within the Creative Menu. Basically, we are saying “put Codedex into the COMBAT tab.” You can also change where the item will appear, such as changing COMBAT into INGREDIENTS. 
+Within the method, we need to ensure that when Minecraft is loading up and processing the Creative Mode code, it adds the Codedex item we had registered before. This will allow it to be accessible within the Creative Menu. Basically, we are saying “put Codedex into the COMBAT tab.” You can also change where the item will appear, such as changing `.COMBAT` into `.INGREDIENTS`. 
 
 ```java
 private void addCreative(BuildCreativeModeTabContentsEvent event)
@@ -250,7 +250,7 @@ Lastly, in **textures**, we create a folder called **item**, and inside it, we a
 
 You can add a photo yourself of whatever you want this item to look like, but here's the [Codedex Bot logo](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/create-a-minecraft-mod-with-java/bot-logo.png):
 
-<img src="https://i.imgur.com/yA845P4.png" alt="closing ceremony image" width="30%"/>
+<img src="https://i.imgur.com/yA845P4.png" alt="closing ceremony image" width="25%"/>
 
 We are finished! Click “run” at the top of the IDE, and Minecraft should load within a few minutes. 
 
