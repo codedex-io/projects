@@ -96,10 +96,9 @@ Open ModItems, we will begin to write some code in here:
 
 ![screenshot3](https://i.imgur.com/5x38mEM.png)
 
-In IntelliJ IDEA, you can use autocomplete to automatically add `import` statements. This is convenient and prevents typos, but for the sake of uniformity in this curriculum, we are listing all imports explicitly at the top of the file. 
+In IntelliJ IDEA, you can use autocomplete to automatically add `import` statements. While this is convenient and prevents typos, let's list all imports explicitly at the top of the file to maintain consistency.
 
 Below the first line, add the following `import` statements:
-
 
 ```java
 package com.codedex.itemmod.item;
@@ -113,12 +112,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 Our first line of code will tell Minecraft that we are attempting to register a new item. This should be inside the ModItems class with correct indentation.
 
-
 ```java
 Public static final DeferredRegister<Item> ITEMS = 
     DeferredRegister.create(ForgeRegistries.ITEMS, ItemMod.MOD_ID);
 ```
-
 
 `DeferredRegister<Item>` is a Forge helper class that allows you to register game objects (like items) in a safe way. The `<Item>` tells Forge that we are specifically registering an item, as opposed to other things like monsters. `ItemMod.MOD_ID` tells Forge which mod namespace the item belongs to (prevents conflicts with other mods).
 
