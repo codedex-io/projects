@@ -162,38 +162,120 @@ Since we are adding an item into the game, we need to make sure it’s accessibl
 private void addCreative(BuildCreativeModeTabContentsEvent event)
 
 }
+```
+
+Within the method, we need to ensure that when Minecraft is loading up and processing the Creative Mode code, it adds the Codedex item we had registered before. This will allow it to be accessible within the Creative Menu. Basically, we are saying “put Codedex into the COMBAT tab.” You can also change where the item will appear, such as changing COMBAT into INGREDIENTS. 
+
+```java
+private void addCreative(BuildCreativeModeTabContentsEvent event)
+{
+  if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+    event.accept(ModItems.Codedex);
+  }
+}
+```
+
+This code checks if Minecraft is currently building the Ingredients creative tab, and if so, it adds your registered item (Codedex) to that tab so it appears in the creative inventory. In short: “If Minecraft is currently building the combat creative tab, put Codedex into the Ingredients tab.” 
+
+We will also need a line in the ItemMod class:
+
+```java
+ModItems.register(modEventBus);
+```
+
+![screenshot](https://i.imgur.com/i8aaon3.png)
+
+We are almost done! This next section covers how we set up the item’s assets (such as how it appears in-game), make sure you follow closely. 
+
+Within the resources folder, we will create a folder called **assets**. 
+
+Within **assets**, we need to create the folder **itemmod**. 
+
+Finally, within **itemmod**, we need to create three folders: 
+
+- **lang** which holds language files that define the names and text shown in Minecraft.
+- **models** which defines the 3D models or item/block shapes for your mod.
+- **Textures** which contains image files used for your items and blocks.
+
+At the end, the file structure within resources should look like this:
+
+```
+resources
+  |__ assets
+       |___ itemmod
+              |__ lang
+              |__ models
+              |__ textures
+```
+
+In the **lang** folder, we will create a new file, called **en_us.json**. 
+
+Inside it we will write:
+
+```json
+{
+ "item.itemmod.codedex": "Codedex"
+}
+```
 
 
+In the **models** folder, we will create another folder called **item**, and inside it, we create a file called **codedex.json**. 
+
+Inside of that, we write:
+
+```json
+{
+ "parent": "minecraft:item/generated",
+ "textures": {
+   "layer0": "tutorialmod:item/codedex"
+ }
+}
+```
+
+Lastly, in textures, we create a folder called **item**, and inside it, we add a file called **codedex.png**. 
+
+You can add a photo yourself of whatever you want this item to look like, but here's a photo of Codedex logo:
+
+Insert logo
 
 
-## The Results
+We are finished! Click “run” at the top of the IDE, and Minecraft should load within a few minutes. 
 
-So now that we have done, let’s write down everything that we found thus far:
+Create a new single-player world in creative, and search up Codedex.
 
-- The average viewers per stream for the top 1,000 streamers in 2021 is 4,776 viewers.
-- The hottest rising stars in 2021 are [auronplay](https://www.twitch.tv/auronplay), [Rubius](https://www.twitch.tv/rubius), [TheGrefg](https://www.twitch.tv/thegrefg), [Bugha](https://www.twitch.tv/bugha), and [pokimane](https://www.twitch.tv/pokimane).
-- The most popular games are Just Chatting, League of Legends, GTA V, VALORANT, and Casino.
-- The top languages for LoL streamers are English, Portugese, French, Spanish, and Japanese.
-- The best day of the week to stream is Sunday!
 
-This is a solid report. If you want to visualize it, you can use [Python](https://codedex.io/python), [NumPy](https://www.codedex.io/numpy), [Pandas](https://www.codedex.io/pandas), Matplotlib or Google Sheets / Microsoft Excel to create line graphs, scatter plots, pie charts, etc.
+## Congrats!
 
-## Conclusion
- 
-You’ve reached the end of the project tutorial! GGWP. 🔥
+We have just built a Minecraft mod using Java. 
 
-We’ve taken a real-world Twitch dataset from Kaggle and imported it into SQLite, and used queries and aggregate functions to analyze the data.
+### Common Mistakes to Watch Out For
 
-Feel free to keep going and try to come up with more questions. Some other ideas:
+When modding with Forge, beginners often run into issues like:
 
-- What are your favorite games? Can you find some interesting insights about them?
-- Can you _connect_ the two datasets? How are streamers in 2024 different from 2021 ones? How many top streamers in 2021 are still in the top in 2024? Hint: Use a `JOIN` or a `UNION`.
-- Any other questions that you might have?
+- Item names using uppercase letters (Minecraft requires lowercase IDs)
+- Folder names not matching the mod ID exactly
+- Missing registration calls in the main mod class
+- Textures not appearing because of incorrect file paths
 
-Share your projects on GitHub or a video format in [Project Showcase](https://www.codedex.io/community/project-showcase) if you find out something even more interesting! Let me know in the comments. ✨
+### How to Debug Your Mod
+
+If your mod does not load or your item does not appear:
+- Check the console log for red error messages
+- Make sure Minecraft reaches the “Done” stage during loading
+- Verify that your texture file name matches the JSON model exactly
+- Confirm your mod ID is consistent across code and resources
+
+### Going Further with Forge
+
+Once you are comfortable with items, you can explore:
+- Adding custom blocks
+- Creating entities or mobs
+- Using Forge events to react to things happening in the world
+- Saving data with capabilities
+- Making your mod configurable with config files
 
 ### More Resources
 
-- Solution code (coming soon)
-- [Kaggle](https://www.kaggle.com)
-- [Codédex's Twitch](https://www.twitch.tv/codedex_io)
+- MinecraftForge Official Documentation (guides and API reference): https://docs.minecraftforge.net
+- Forge Getting Started Guide (how to use the MDK step-by-step) https://docs.minecraftforge.net/en/latest/gettingstarted
+- Parchment Mappings / Documentation (better readable names for Minecraft code) https://parchmentmc.org
