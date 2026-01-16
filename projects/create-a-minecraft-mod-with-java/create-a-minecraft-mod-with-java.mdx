@@ -1,8 +1,8 @@
 --- 
 title: Build a Minecraft Mod with Java
 author: Daniel Li
-uid: 
-description: Explore and analyze real data on the top Twitch streamers from 2021 and 2024 using SQLite (directly in the terminal). Learn how to query and uncover insights about streaming trends with hands-on SQL practice.
+uid: 5k5WC31oPvcUQmaDCgK38v6Et133
+description: Add a custom item in Minecraft using Java code.
 datePublished: 2026-01-16
 published: live
 header: 
@@ -134,10 +134,34 @@ The register method takes an IEventBus as a parameter, which is a pipeline that 
 
 Congrats! The first file is done. Your ModItems class should now look similar to this:
 
+```java
+package com.codedex.itemmod.item;
+import com.codedex.itemmod.ItemMod;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgetRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+public class ModItem {
+  public static final DefferedRigester<item> ITEMS = 
+    DefferedRegister.create(ForegeRegistres.ITEMS, ItemMod.MOD_ID);
+
+  public static final RegistryObject<Item> Codedex = ITEMS.register(name: "codedex", () -> new Item(new Item.Properties()));
+
+  public static void register(IEventBus eventBus) {
+    ITEMS.register(eventBus);
+  }
+}
+```
 
 Since we are adding an item into the game, we need to make sure it’s accessible in creative. Go to the itemmod class within the item folder, and find the addCreative method. It should be empty and look like this.
 
+```java
+// Add the example block item to the building blocks tab
+private void addCreative(BuildCreativeModeTabContentsEvent event)
 
+}
 
 
 
