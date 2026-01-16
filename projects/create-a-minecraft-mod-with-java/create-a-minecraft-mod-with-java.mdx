@@ -84,7 +84,7 @@ This can be done through clicking the three dots "⋮" on the project, like this
 
 And in "Appearance", ensure “Flatten Modules”, “Flatten Packages”, and “Compact Middle Packages” are all turned off (not checked). If they were on, they would make adding directories and files to existing ones harder.
 
-Right-click the **itemmod** folder under the **codedex** folder (can be accessed through src -> main -> java -> com ->  codedex) and press new. We will be creating a new Package. You should see a popup, just add “item” to the end of the line, like so:
+Right-click the **itemmod** folder under the **codedex** folder (can be accessed through **src** -> **main** -> **java** -> **com** -> **codedex**) and press new. We will be creating a new Package. You should see a popup, just add “item” to the end of the line, like so:
 
 ![screenshot](https://i.imgur.com/4r25NPl.png)
 
@@ -94,12 +94,9 @@ Your **itemmod** folder should look like the following:
 
 ![screenshot2](https://i.imgur.com/DDzpUXJ.png)
 
-
 Open ModItems, we will begin to write some code in here:
 
-
 ![screenshot3](https://i.imgur.com/5x38mEM.png)
-
 
 In IntelliJ IDEA, you can use autocomplete to automatically add `import` statements. This is convenient and prevents typos, but for the sake of uniformity in this curriculum, we are listing all imports explicitly at the top of the file. 
 
@@ -173,6 +170,7 @@ Since we are adding an item into the game, we need to make sure it’s accessibl
 ```java
 // Add the example block item to the building blocks tab
 private void addCreative(BuildCreativeModeTabContentsEvent event)
+{
 
 }
 ```
