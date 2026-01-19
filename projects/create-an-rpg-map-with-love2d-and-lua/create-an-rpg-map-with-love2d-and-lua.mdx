@@ -19,13 +19,13 @@ courses:
   - phaser
 ---
 
-# Introduction
+## Introduction
 
 Think about your favorite RPG game! Is it The Legend of Zelda, Stardew Valley, or Pokémon? What all these games have in common is that they all have a robust tilemap that was created by code, so you're able to use code to navigate through the world itself! 
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-an-rpg-map-with-love2d-and-lua/images/001.gif" />
 
-And believe it or not, we'll be able to create our own tilemap today with Lua and the LOVE2D framework. 
+And believe it or not, we'll be able to create our own tilemap today with Lua and the LÖVE framework. 
 
 If you're unfamiliar with LÖVE (Love2D is a common shorthand), take a look at the [Get Started with LÖVE and Lua](https://www.codedex.io/projects/get-started-with-love2d-and-lua) project tutorial to download Lua/LÖVE and set up your IDE. 
 
@@ -37,9 +37,9 @@ Before we dive into the code, let's understand what a tilemap actually is.
 
 A tilemap is made up of:
 
-- Tiles: Small, reusable square images (like grass, water, or stone) that act as building blocks
-- Tileset: A single image file containing all your different tile types arranged in a grid
-- Map Grid: A 2D array (think of it like a spreadsheet) where each cell contains a number that points to which tile should appear there
+- **Tiles**: Small, reusable square images (like grass, water, or stone) that act as building blocks
+- **Tileset**: A single image file containing all your different tile types arranged in a grid
+- **Map Grid**: A 2D array (think of it like a spreadsheet) where each cell contains a number that points to which tile should appear there
 
 For example, if you have a tileset where a flower is tile `1` and water is tile `2`, your map grid might look like:
 
@@ -71,7 +71,8 @@ In this example, we're using a tree pixel art sprite as the obstacle image and t
 
 **Note:** If you're using your own images, remember to keep your images small to around 32x32 or 64x64 pixels. Add these images to your project folder. 
 
-Now, create three different lua files:
+Now, create three different Lua files:
+
 - **main.lua**
 - **player.lua**
 - **map.lua**
@@ -486,7 +487,7 @@ Alternative (Windows):
 
 On Mac:
 - Drag your **game** folder onto the LÖVE application icon
-- You can also use the terminal and run `love /Users/your-computer/game-folder-name`instead of dragging and dropping. 
+- You can also use the terminal and run `love /Users/your-computer/game-folder-name` instead of dragging and dropping. 
 
 You'll then see your game working like this! 
 
@@ -512,6 +513,6 @@ Here are some ideas that could inspire you to keep going:
 - [Lua Documentation](https://www.lua.org/docs.html)
 - [Source Code](https://github.com/exrlla/love-fiesta-game)
 
-Share your projects! We would love to see what you built, so make sure to tag us [@codedex_io on Twitter](https://x.com/codedex_io) and [@exrlla](https://x.com/exrlla) on Twitter! ✍️
+Share your projects! We would love to see what you built, so make sure to tag us [@codedex_io](https://x.com/codedex_io) and [@exrlla](https://x.com/exrlla) on Twitter! ✍️
 
 
