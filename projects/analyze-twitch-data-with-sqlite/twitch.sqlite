@@ -1,1 +1,37 @@
+-- Analyze Twitch Data with SQLite
 
+-- Create a table
+
+CREATE TABLE streamers2021 ( 
+  channel TEXT PRIMARY KEY, 
+  watch_time INTEGER,
+  stream_time INTEGER,
+  peak_viewers INTEGER,
+  average_viewers INTEGER,
+  followers INTEGER,
+  followers_gained INTEGER,
+  views_gained INTEGER,
+  partnered TEXT,
+  mature TEXT,
+  language TEXT
+);
+
+CREATE TABLE streamers2024 ( 
+  rank INTEGER  PRIMARY KEY,
+  name TEXT,
+  language TEXT,
+  type TEXT,
+  most_streamed_game TEXT,
+  second_most_streamed_game TEXT,
+  average_stream_duration REAL,
+  followers_gained_per_stream INTEGER,
+  avg_viewers_per_stream INTEGER,
+  avg_games_per_stream REAL,
+  total_time_streamed INTEGER,
+  total_followers INTEGER,
+  total_views INTEGER,
+  total_games_streamed INTEGER,
+  active_days_per_week REAL,
+  most_active_day TEXT,
+  day_with_most_followers_gained TEXT
+);
