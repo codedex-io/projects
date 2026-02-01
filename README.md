@@ -1,7 +1,7 @@
 <div align="center">
   <h1>🚀 Codédex Project Tutorials</h1>
   <strong>The best programming tutorials on the web.</strong><br>
-  <strong>Built by developers, for developers.</strong>
+  <strong>Built by technologists. For technologists.</strong>
 </div>
 <br>
 
