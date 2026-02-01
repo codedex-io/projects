@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🚀 Codédex Projects</h1>
+  <h1>🚀 Codédex Project Tutorials</h1>
   <strong>The best programming tutorials on the web.</strong><br>
   <strong>Built by developers, for developers.</strong>
 </div>
