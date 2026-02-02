@@ -196,7 +196,7 @@ Because baseball has such a long history, it can be interesting to see how the g
 First, let's find the total number of home runs per year. This will look very familiar to what we just did, except we're now grouping by `yearID`:
 
 ```py
-avg_hr_by_year = batting.groupby('yearID')['HR'].sum()
+total_hr_by_year = batting.groupby('yearID')['HR'].sum()
 ```
 
 We can now plot this using Matplotlib's `.plot()` function. This function needs a list of X and Y values. In our case, we want the year to be on the X axis and the total number of home runs to be on the Y axis:
@@ -205,12 +205,12 @@ We can now plot this using Matplotlib's `.plot()` function. This function needs 
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(10,6))
-plt.plot(avg_hr_by_year.index, avg_hr_by_year.values)
+plt.plot(total_hr_by_year.index, total_hr_by_year.values)
 
 # Adding labels
-plt.title('Average Home Runs per Player Over Time')
+plt.title('Total Home Runs Over Time')
 plt.xlabel('Year')
-plt.ylabel('Avg Home Runs')
+plt.ylabel('Total Home Runs')
 
 plt.grid(True)
 plt.show()
