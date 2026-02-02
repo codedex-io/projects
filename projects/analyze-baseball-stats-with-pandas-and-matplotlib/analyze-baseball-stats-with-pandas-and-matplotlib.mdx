@@ -104,6 +104,7 @@ active_players = batting[batting['AB'] > 0]
 active_players.describe()
 ```
 
+![At least one at bat](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/at-least-one-at-bat.png)
 
 As expected, the average number of runs scored by a player shot up to `20.88` after filtering out all of the players who were always on the bench.
 
@@ -117,13 +118,30 @@ If we use `.groupby()` we can find statistics for a particular player, year, or 
 batting.groupby('playerID')['HR'].sum().sort_values(ascending=False)
 ```
 
+The output:
 
-You might recognize some familiar names here! These are the all time home run hitters: Barry Bonds, Hank Arron, Babe Ruth, and so on.
+```text
+playerID
+bondsba01    762
+aaronha01    755
+ruthba01     714
+pujola101    703
+rodria101    696
+            ...
+abadijo01      0
+abadfe01       0
+zmiched01      0
+abbotky01      0
+zettlege01     0
+Name: HR, Length: 24011, dtype: int64
+```
+
+You might recognize some familiar names here! These are the all-time home run leaders: Barry Bonds, Hank Arron, Babe Ruth, and so on.
 
 This line of code chains four operations together, so let’s break it down step by step:
 
 - `.groupby('playerID')` groups all rows that belong to the same player. Since each row represents one season, this grouping effectively collects every season of a player’s career together. If you print this object by itself, Pandas will show a `DataFrameGroupBy object`, because it doesn’t yet know how you want to summarize the data.
-['HR'] selects only the home runs column from each group.
+- `['HR']` selects only the home runs column from each group.
 - `.sum()` is an aggregate function. It adds up the home runs within each player’s group, giving us each player’s career total. We could use other aggregate functions if we wanted other statistics. For example, if we wanted the average number of home runs per year, we could use `.mean()`.
 - `.sort_values(ascending=False)` sorts the results so the players with the most home runs appear first.
 
@@ -131,24 +149,39 @@ If we wanted to filter our dataset by some condition, we could do that before fi
 
 ```py
 # Filtering for only Babe Ruth's rows
-babe_ruth = batting[batting["playerID"] == "ruthba01"]
+babe_ruth = batting[batting['playerID'] == 'ruthba01']
 
 # Finding the starting and ending years
-start_year = babe_ruth["yearID"].min()
-end_year = babe_ruth["yearID"].max()
+start_year = babe_ruth['yearID'].min()
+end_year = babe_ruth['yearID'].max()
 ```
 Now we can use these years a filter for our entire dataset and find the total number of home runs per player for just those years:
 
 ```py
 # Filtering for players that played the same years as Babe
-ruth_years = batting[(batting["yearID"] >= start_year) & (batting["yearID"] <= end_year)]
+ruth_years = batting[(batting['yearID'] >= start_year) & (batting['yearID'] <= end_year)]
 
 # Finding the home run leaders during that time
 ruth_years.groupby('playerID')['HR'].sum().sort_values(ascending=False)
 ```
 
+The output:
 
-Wow, Babe Ruth had almost twice the number of home runs as the next best player!
+```text
+playerID
+ruthba01     714
+gehrilo01    378
+foxxji01     302
+            ...
+zapusjo01      0
+zahnipa01      0
+zabelzi01      0
+youngch02      0
+youngch01      0
+Name: HR, Length: 4689, dtype: int64
+```
+
+Wow, Babe Ruth had almost twice the number of home runs as the next best player! 😮
 
 ## Graphing Data By Year
 
@@ -169,75 +202,76 @@ plt.figure(figsize=(10,6))
 plt.plot(avg_hr_by_year.index, avg_hr_by_year.values)
 
 # Adding labels
-plt.title('Average Home Runs per Player by Year')
+plt.title('Average Home Runs per Player Over Time')
 plt.xlabel('Year')
 plt.ylabel('Avg Home Runs')
+
 plt.show()
 ```
 
 It's interesting that you can see the abbreviated 2020 season in this graph! They played about half as many games that year due to COVID.
 
-## Your Favorite Team Vs. The League
+## Your Favorite Team vs. The League
 
-Another fun visualization that you can create is a comparison of your favorite team's stats to the rest of the league. I grew up in Denver, so my team is the Colorado Rockies, who have been laughably bad for the majority of my life 😅. 
+Another fun visualization that you can create is a comparison of your favorite team's stats to the rest of the league. I grew up in Denver, so my team is the Colorado Rockies, who have been laughably bad for the majority of my life. 😅
 
 That being said, there is an interesting phenomenon with the Rockies: it is very easy to hit home runs in Denver because of the altitude. As a result, even though the Rockies are generally a fairly weak team, they end up hitting more home runs than their competitors. Let's graph the Rockies' home runs every year against the league average!
 
 First, we can group the data by year and team to find each team's home runs for a given year:
 
-```
+```py
 team_hr_per_year = (
-    batting
-    .groupby(["yearID", "teamID"])["HR"]
-    .sum()
-    .reset_index()
+  batting
+  .groupby(['yearID', 'teamID'])['HR']
+  .sum()
+  .reset_index()
 )
 ```
 
 Then, to find the Rockies specifically, we can filter by `teamID`:
 
-```
+```py
 rockies_hr = (
-    team_hr_per_year
-    [team_hr_per_year["teamID"] == "COL"]
-    .set_index("yearID")["HR"]
+  team_hr_per_year
+  [team_hr_per_year['teamID"] == 'COL']
+  .set_index('yearID')['HR']
 )
 ```
 
 We can also find the league average for each year. We'll also filter out anything before 1993, since that is the year the Rockies were created:
 
-```
+```py
 league_avg_hr = (
-    team_hr_per_year
-    .groupby("yearID")["HR"]
-    .mean()
+  team_hr_per_year
+  .groupby('yearID')['HR']
+  .mean()
 )
-league_avg_hr = league_avg_hr[league_avg_hr.index >= 1993]
 
+league_avg_hr = league_avg_hr[league_avg_hr.index >= 1993]
 ```
 
 Finally, we can put this all together by graphing these two lines:
 
-```
+```py
 plt.figure(figsize=(10, 6))
 
-plt.plot(
-    league_avg_hr.index,
-    league_avg_hr.values,
-    label="League Average",
-    linestyle="--"
+plt.plot(league_avg_hr.index,
+  league_avg_hr.values,
+  label='League Average',
+  linestyle='--'
 )
 
 plt.plot(
-    rockies_hr.index,
-    rockies_hr.values,
-    label="Colorado Rockies"
+  rockies_hr.index,
+  rockies_hr.values,
+  label='Colorado Rockies'
 )
 
-plt.title("Colorado Rockies Home Runs vs League Average")
-plt.xlabel("Year")
-plt.ylabel("Home Runs")
+plt.title('Colorado Rockies Home Runs vs League Average')
+plt.xlabel('Year')
+plt.ylabel('Home Runs')
 plt.legend()
+
 plt.show()
 ``
 
@@ -248,9 +282,10 @@ As expected, the altitude in Denver has caused some pretty high home run numbers
 Finally, let's take on a challenge of replicating the work Billy Bean and Peter Brand did for the Oakland A's in _Moneyball_. While they almost certainly considered many statistics, they are most famous for finding players with a high **on-base percentage** (OBP) relative to their cost.
 
 Let's try to identify some of those players! Here's how we'll tackle this problem:
-OBP is not currently listed in the Batting table, but we can calculate that value ourselves based on other information and add a new OBP column to the table.
-We can find a player's salary for a given year in the Salaries table. We'll need to use a join to combine the Batting and Salaries tables.
-Once OBP and salary are in the same table, we can find the ratio of those two values. If we sort by that ratio, we can find the players who have the best OBP for their cost!
+
+- OBP is not currently listed in the Batting table, but we can calculate that value ourselves based on other information and add a new OBP column to the table.
+- We can find a player's salary for a given year in the Salaries table. We'll need to use a join to combine the Batting and Salaries tables.
+- Once OBP and salary are in the same table, we can find the ratio of those two values. If we sort by that ratio, we can find the players who have the best OBP for their cost!
 
 ### Calculating OBP
 
@@ -262,21 +297,21 @@ Let's add a new column to our Batting table:
 
 ```py
 # Fill missing values to avoid NaN issues
-batting[["BB", "HBP", "SF"]] = batting[["BB", "HBP", "SF"]].fillna(0)
+batting[['BB', 'HBP', 'SF']] = batting[['BB', 'HBP', 'SF']].fillna(0)
 
 # Create OBP column
-batting["OBP"] = (
-    (batting["H"] + batting["BB"] + batting["HBP"]) /
-    (batting["AB"] + batting["BB"] + batting["HBP"] + batting["SF"])
+batting['OBP'] = (
+    (batting['H'] + batting['BB'] + batting['HBP']) /
+    (batting['AB'] + batting['BB'] + batting['HBP'] + batting['SF'])
 )
 
 # If we got NaN due to no plate appearances, then fill with 0.
-batting["OBP"] = batting["OBP"].fillna(0)
+batting['OBP'] = batting['OBP'].fillna(0)
 ```
 A decent OBP is around `.3` to `.4`, and if we do a quick scan of the data, we can see values around that range:
 
 
-#### Joining with the Salaries Table
+### Joining with the Salaries Table
 
 Every row in the Batting table contains information about a player (`playerID`) in a given year (`yearID`) on a given team (`teamID`). We'll want to match all three of those pieces of information with the rows in the Salaries table.
 
@@ -285,28 +320,29 @@ We'll also want to consider what to do in the case that we can't find a salary f
 We'll use a left join so that we get all of the rows from the first table (in this case, Batting) regardless of whether we find a matching player in the Salaries table.
 
 ```py
-
 # Load data
-salaries = pd.read_csv("Salaries.csv")
+salaries = pd.read_csv('Salaries.csv')
 
 # Merge salary data into batting data
 batting_with_salary = batting.merge(
-    salaries,
-    on=["playerID", "yearID", "teamID"],
-    how="left"
+  salaries,
+  on=['playerID', 'yearID', 'teamID'],
+  how='left'
 )
 
 batting_with_salary.head()
 ```
+
 As expected, after performing this join, we're missing salary data about some of the more old-school players.
 
 
 
-#### Calculating Value
+### Calculating Value
 
 We can now find the "value" of a player by calculating their OBP divided by their salary. There are a few edge cases to consider before finding our final values:
-We'll want to remove anyone with a salary or OBP of `0`
-We'll want to remove anyone with under 200 at bats. This will help us filter out any players who are outliers due to lack of playtime.
+
+- We'll want to remove anyone with a salary or OBP of `0`
+- We'll want to remove anyone with under 200 at bats. This will help us filter out any players who are outliers due to lack of playtime.
 
 ```py
 value_df = batting_with_salary[
