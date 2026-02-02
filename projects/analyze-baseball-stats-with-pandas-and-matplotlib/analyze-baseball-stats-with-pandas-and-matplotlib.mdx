@@ -242,7 +242,7 @@ Then, to find the Rockies specifically, we can filter by `teamID`:
 ```py
 rockies_hr = (
   team_hr_per_year
-  [team_hr_per_year['teamID"] == 'COL']
+  [team_hr_per_year['teamID'] == 'COL']
   .set_index('yearID')['HR']
 )
 ```
