@@ -373,12 +373,15 @@ value_df = batting_with_salary[
 We now have a DataFrame named `value_df` that contains only the rows we're interested in. Let's calculate each player's value and sort by the highest value players! We'll display only the columns that are relevant to us.
 
 ```py
+# Calculate OBP per dollar
+value_df['OBP_per_dollar'] = value_df['OBP'] / value_df['salary']
+
 value_df_sorted = value_df.sort_values(
   by='OBP_per_dollar',
   ascending=False
 )
 
-value_df_sorted [[
+value_df_sorted[[
   'playerID',
   'yearID',
   'teamID',
@@ -420,7 +423,7 @@ Clearly there is a _ton_ that you can do with this dataset.
 To recap, in this project tutorial, we practiced the following skills in Pandas:
 
 - Initial data exploration using `.describe()` to see summary statistics.
-- Filtering the dataset by boolean values (for example, `[value_df_sorted['yearID'] == 2010`)
+- Filtering the dataset by boolean values (for example, `value_df_sorted['yearID'] == 2010`)
 - Grouping rows together and using aggregate functions like `.sum()` or `.mean()`.
 - Using Matplotlib to graph the results of Pandas operations.
 - Using `.merge()` to join two tables together.
