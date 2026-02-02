@@ -44,7 +44,11 @@ Download here: https://sabr.app.box.com/s/y1prhc795jk8zvmelfd3jq7tl389y6cd
 
 In a moment, we'll introduce some questions that we want to answer, but for now, it can be helpful to click into a few files to get a sense of what data we're working with. 
 
-We'll primarily use the files **Batting.csv**, **People.csv**, and **Teams.csv**, but feel free to check out other files that might be interesting to you!
+We'll primarily use three files:
+
+- **Batting.csv**
+- **People.csv**
+- **Teams.csv**
 
 As a brief example, this is what the top of the **Batting.csv** file looks like:
 
@@ -93,7 +97,9 @@ Alternatively, we could use `batting['playerID'].nunique()` to get the number im
 
 ## Filtering Out Inactive Players
 
-It can be helpful to look through your data before jumping into any heavy analysis because there are often quirks to the data that can be hard to spot without subject matter expertise. For example, when we looked at `batting.head()`, the very first row showed the player `aardsda01` from the year `2004` had 0 at bats, 0 runs, 0 hits, 0 strike outs, and so on. It seems like this player was on the team, but never actually played in any games.
+It can be helpful to look through your data before jumping into any heavy analysis because there are often quirks to the data that can be hard to spot without subject matter expertise. 
+
+For example, when we looked at `batting.head()`, the very first row showed the player `aardsda01` from the year `2004` had 0 at bats, 0 runs, 0 hits, 0 strike outs, and so on. It seems like this player was on the team, but never actually played in any games.
 
 If this is a common occurrence, then that might drastically alter some of these summary statistics. If there are a ton of players that are in the database but have `0`s for all their stats, then that will drag down all of the averages that we're looking at.
 
@@ -193,7 +199,7 @@ First, let's find the total number of home runs per year. This will look very fa
 avg_hr_by_year = batting.groupby('yearID')['HR'].sum()
 ```
 
-We can now plot this using Matplotlib's `plot()` function. This function needs a list of X and Y values. In our case, we want the year to be on the X axis and the total number of home runs to be on the Y axis:
+We can now plot this using Matplotlib's `.plot()` function. This function needs a list of X and Y values. In our case, we want the year to be on the X axis and the total number of home runs to be on the Y axis:
 
 ```py
 import matplotlib.pyplot as plt
@@ -273,7 +279,7 @@ plt.ylabel('Home Runs')
 plt.legend()
 
 plt.show()
-``
+```
 
 As expected, the altitude in Denver has caused some pretty high home run numbers!
 
