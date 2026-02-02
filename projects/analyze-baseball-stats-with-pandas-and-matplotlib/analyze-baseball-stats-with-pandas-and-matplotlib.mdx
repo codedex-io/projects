@@ -222,7 +222,7 @@ It's interesting that you can see the abbreviated 2020 season in this graph! The
 
 ## Your Favorite Team vs. The League
 
-Another fun visualization that you can create is a comparison of your favorite team's stats to the rest of the league. I grew up in Denver, so my team is the Colorado Rockies, who have been laughably bad for the majority of my life. 😅
+Another fun visualization that you can create is a comparison of your favorite team's stats to the rest of the league. I grew up in Denver, so my team is the [Colorado Rockies](https://en.wikipedia.org/wiki/Colorado_Rockies), who have been laughably bad for the majority of my life. 😅
 
 That being said, there is an interesting phenomenon with the Rockies: it is very easy to hit home runs in Denver because of the altitude. As a result, even though the Rockies are generally a fairly weak team, they end up hitting more home runs than their competitors. Let's graph the Rockies' home runs every year against the league average!
 
@@ -304,7 +304,8 @@ Let's try to identify some of those players! Here's how we'll tackle this proble
 
 Let's begin by calculating OBP. This is the formula that we'll use. It takes into account not just hits, but walks, sacrifice flies, etc.
 
-$OBP = H + BB + HBP / AB + BB + HBP + SF$
+$OBP = \frac{H + BB + HBP}{AB + BB + HBP + SF}$
+H + BB + HBP / AB + BB + HBP + SF$
 
 Let's add a new column to our Batting table:
 
@@ -318,7 +319,7 @@ batting['OBP'] = (
   (batting['AB'] + batting['BB'] + batting['HBP'] + batting['SF'])
 )
 
-# If we got NaN due to no plate appearances, then fill with 0.
+# If we got NaN due to no plate appearances, then fill with 0
 batting['OBP'] = batting['OBP'].fillna(0)
 ```
 
