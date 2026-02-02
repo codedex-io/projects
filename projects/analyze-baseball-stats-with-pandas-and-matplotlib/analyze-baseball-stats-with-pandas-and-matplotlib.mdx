@@ -284,6 +284,10 @@ plt.legend()
 plt.show()
 ```
 
+The graph should look like:
+
+![The graph](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/colorado-rockies.png)
+
 As expected, the altitude in Denver has caused some pretty high home run numbers!
 
 ## Replicating Moneyball
@@ -310,13 +314,14 @@ batting[['BB', 'HBP', 'SF']] = batting[['BB', 'HBP', 'SF']].fillna(0)
 
 # Create OBP column
 batting['OBP'] = (
-    (batting['H'] + batting['BB'] + batting['HBP']) /
-    (batting['AB'] + batting['BB'] + batting['HBP'] + batting['SF'])
+  (batting['H'] + batting['BB'] + batting['HBP']) /
+  (batting['AB'] + batting['BB'] + batting['HBP'] + batting['SF'])
 )
 
 # If we got NaN due to no plate appearances, then fill with 0.
 batting['OBP'] = batting['OBP'].fillna(0)
 ```
+
 A decent OBP is around `.3` to `.4`, and if we do a quick scan of the data, we can see values around that range:
 
 
