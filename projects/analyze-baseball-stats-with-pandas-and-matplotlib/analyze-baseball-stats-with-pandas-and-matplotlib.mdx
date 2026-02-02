@@ -52,7 +52,7 @@ As a brief example, this is what the top of the **Batting.csv** file looks like:
 
 Each row represents the batting information for a player for a given year. For example, the first row shows that the player with the ID of `aardsda01` only played in 11 games in 2004 and had no hits or runs!
 
-When looking at new data, it can also be helpful to look for the official data dictionary for the dataset. It can often be hard to interpret column names - for example, if you're not a baseball fan, you might not know what the column `AB` represents. Looking at the documentation file can help clear up any questions. In this case, we can look at **readme2025.txt** to learn that `AB` is "At Bats" (the number of times the player was up to the plate).
+When looking at new data, it can also be helpful to look for the official data dictionary for the dataset. It can often be hard to interpret column names – for example, if you're not a baseball fan, you might not know what the column `AB` represents. Looking at the documentation file can help clear up any questions. In this case, we can look at **readme2025.txt** to learn that `AB` is "At Bats" (the number of times the player was up to the plate).
 
 So with all of that setup out of the way, let's start diving into some data analysis!
 
@@ -66,9 +66,9 @@ Let's answer questions like:
 - _What years are covered?_
 - _What is the average number of runs a player scores in a single year?_
 
-To begin, we'll load the players dataset into Pandas. To do so, first download the Dataset and save it into the same directory as your Python script. 
+To begin, we'll load the players dataset into Pandas. To do so, first download the dataset and save it into the same directory as your Python script. 
 
-Then, we can simply use `pd.read_csv('Batting.csv')` to get our DataFrame:
+Then, we can simply use `pd.read_csv()` to get our DataFrame:
 
 ```py
 import pandas as pd
