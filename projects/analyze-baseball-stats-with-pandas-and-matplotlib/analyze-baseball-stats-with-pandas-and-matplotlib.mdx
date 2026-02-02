@@ -22,9 +22,11 @@ tags:
 
 ## Introduction
 
-In the early 2000s, the Oakland A's changed baseball forever. 
+In the early 2000s, the [Oakland A's](https://en.wikipedia.org/wiki/Athletics_(baseball)) changed baseball forever. 
 
-As seen in the movie _Moneyball_, general manager Billy Bean and advisor Peter Brand, used a new strategy of data analysis to find players that were hidden gems. By diving deep into often overlooked statistics, like on-base percentage, the team was able to sign undervalued players and make a deep run into the 2002 playoffs on a shoestring budget.
+As seen in the movie _Moneyball_ (2011), general manager Billy Bean and advisor Peter Brand, used a new strategy of data analysis to find players that were hidden gems. By diving deep into often overlooked statistics, like on-base percentage, the team was able to sign undervalued players and make a deep run into the 2002 playoffs on a shoestring budget.
+
+<Quote text="It's about getting things down to one number. Using stats to reread them, we'll find the value of players that nobody else can see. - Peter Brand, Moneyball" />
 
 The success of the A's helped usher in an era of advanced data analysis in baseball. Every year, more and more stats about the game are being collected, and every club is hungry for a team of statisticians to help them crack the code.
 
@@ -50,14 +52,15 @@ When looking at new data, it can also be helpful to look for the official data d
 
 So with all of that setup out of the way, let's start diving into some data analysis!
 
-### Initial Data Exploration
+## Initial Data Exploration
 
 Let's begin exploring our data about individual players by getting a sense of the total scale. 
 
 Let's answer questions like:
-How many unique players are there?
-What years are covered?
-What is the average number of runs a player scores in a single year?
+
+- _How many unique players are there?_
+- _What years are covered?_
+- _What is the average number of runs a player scores in a single year?_
 
 To begin, we'll load the players dataset into Pandas. To do so, first download the Dataset and save it into the same directory as your Python script. 
 
@@ -84,7 +87,7 @@ To find the number of unique players in the dataset, we can use `batting['player
 
 Alternatively, we could use `batting['playerID'].nunique()` to get the number immediately without having to use `.size`. There are usually multiple ways to achieve the same goal with Pandas!
 
-### Filtering Out Inactive Players
+## Filtering Out Inactive Players
 
 It can be helpful to look through your data before jumping into any heavy analysis because there are often quirks to the data that can be hard to spot without subject matter expertise. For example, when we looked at `batting.head()`, the very first row showed the player `aardsda01` from the year `2004` had 0 at bats, 0 runs, 0 hits, 0 strike outs, and so on. It seems like this player was on the team, but never actually played in any games.
 
@@ -102,7 +105,7 @@ As expected, the average number of runs scored by a player shot up to `20.88` af
 
 Now, is this the "correct" thing to do? Well, it entirely depends on what question you're trying to answer. In some cases, it might be very important to filter out all of 0s, and in others you'll want to leave them in. This is where it is critical to have true knowledge about the dataset that you're working with so you can understand the consequences of the decisions you make during analysis.
 
-### Finding Top Performers Using Group By
+## Finding Top Performers Using Group By
 
 If we use `.groupby()` we can find statistics for a particular player, year, or even team. For example, we can find the total number of career home runs for each player with this line of code:
 
@@ -115,10 +118,10 @@ You might recognize some familiar names here! These are the all time home run hi
 
 This line of code chains four operations together, so let’s break it down step by step:
 
-`.groupby('playerID')` groups all rows that belong to the same player. Since each row represents one season, this grouping effectively collects every season of a player’s career together. If you print this object by itself, Pandas will show a `DataFrameGroupBy object`, because it doesn’t yet know how you want to summarize the data.
+- `.groupby('playerID')` groups all rows that belong to the same player. Since each row represents one season, this grouping effectively collects every season of a player’s career together. If you print this object by itself, Pandas will show a `DataFrameGroupBy object`, because it doesn’t yet know how you want to summarize the data.
 ['HR'] selects only the home runs column from each group.
-.sum() is an aggregate function. It adds up the home runs within each player’s group, giving us each player’s career total. We could use other aggregate functions if we wanted other statistics. For example, if we wanted the average number of home runs per year, we could use `.mean()`.
-.sort_values(ascending=False) sorts the results so the players with the most home runs appear first.
+- `.sum()` is an aggregate function. It adds up the home runs within each player’s group, giving us each player’s career total. We could use other aggregate functions if we wanted other statistics. For example, if we wanted the average number of home runs per year, we could use `.mean()`.
+- `.sort_values(ascending=False)` sorts the results so the players with the most home runs appear first.
 
 If we wanted to filter our dataset by some condition, we could do that before filtering. For example, if we wanted to see how dominant Babe Ruth was compared to his peers, we could filter for only players that played the same years as him. To do this, we'll need to find what years he started and ended his career:
 
@@ -143,7 +146,7 @@ ruth_years.groupby('playerID')['HR'].sum().sort_values(ascending=False)
 
 Wow, Babe Ruth had almost twice the number of home runs as the next best player!
 
-### Graphing Data By Year
+## Graphing Data By Year
 
 Because baseball has such a long history, it can be interesting to see how the game changed over time. If we use `.groupby()` to group years together, we can then use the graphing library Matplotlib to visualize some interesting stats. Let's give it a shot by plotting how the total number of home runs have changed over time!
 
@@ -170,7 +173,7 @@ plt.show()
 
 It's interesting that you can see the abbreviated 2020 season in this graph! They played about half as many games that year due to COVID.
 
-### Your Favorite Team Vs. The League
+## Your Favorite Team Vs. The League
 
 Another fun visualization that you can create is a comparison of your favorite team's stats to the rest of the league. I grew up in Denver, so my team is the Colorado Rockies, who have been laughably bad for the majority of my life 😅. 
 
@@ -236,7 +239,7 @@ plt.show()
 
 As expected, the altitude in Denver has caused some pretty high home run numbers!
 
-### Replicating Moneyball
+## Replicating Moneyball
 
 Finally, let's take on a challenge of replicating the work Billy Bean and Peter Brand did for the Oakland A's in _Moneyball_. While they almost certainly considered many statistics, they are most famous for finding players with a high **on-base percentage** (OBP) relative to their cost.
 
@@ -245,7 +248,7 @@ OBP is not currently listed in the Batting table, but we can calculate that valu
 We can find a player's salary for a given year in the Salaries table. We'll need to use a join to combine the Batting and Salaries tables.
 Once OBP and salary are in the same table, we can find the ratio of those two values. If we sort by that ratio, we can find the players who have the best OBP for their cost!
 
-#### Calculating OBP
+### Calculating OBP
 
 Let's begin by calculating OBP. This is the formula that we'll use. It takes into account not just hits, but walks, sacrifice flies, etc.
 
@@ -345,13 +348,14 @@ value_df_sorted[value_df_sorted['yearID'] == 2010][[
 I went to look up `heywaja01` on baseball-reference.com, and it turns out that this data was from a player named Jason Heyward. In 2010, he was an All Star and got 2nd place in voting for Rookie of the Year! It certainly sounds like a player that was high value. You can also confirm that our calculation of OBP was correct!
 
 
-### Recap
+## Recap
 
 Clearly there is a _ton_ that you can do with this dataset. In this project, we practiced the following skills in Pandas:
-Initial data exploration using `.describe()` to see summary statistics.
-Filtering the dataset by boolean values (for example, `[value_df_sorted['yearID'] == 2010`)
-Grouping rows together and using aggregate functions like `.sum()` or `.mean()`.
-Using Matplotlib to graph the results of Pandas operations.
-Using `.merge()` to join two tables together.
+
+- Initial data exploration using `.describe()` to see summary statistics.
+- Filtering the dataset by boolean values (for example, `[value_df_sorted['yearID'] == 2010`)
+- Grouping rows together and using aggregate functions like `.sum()` or `.mean()`.
+- Using Matplotlib to graph the results of Pandas operations.
+- Using `.merge()` to join two tables together.
 
 Do you have any favorite players or teams? Shohei Ohtani? Aaron Judge? The Chicago Cubs? We hope that you come up with your own questions about baseball and use your Python and Pandas skills to answer those questions!
