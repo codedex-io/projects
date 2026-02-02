@@ -346,9 +346,9 @@ We can now find the "value" of a player by calculating their OBP divided by thei
 
 ```py
 value_df = batting_with_salary[
-    (batting_with_salary["salary"] > 0) &
-    (batting_with_salary["OBP"] > 0) &
-    (batting_with_salary["AB"] >= 200)
+  (batting_with_salary['salary'] > 0) &
+  (batting_with_salary['OBP'] > 0) &
+  (batting_with_salary['AB'] >= 200)
 ].copy()
 ```
 
@@ -356,17 +356,17 @@ We now have a DataFrame named `value_df` that contains only the rows we're inter
 
 ```py
 value_df_sorted = value_df.sort_values(
-    by="OBP_per_dollar",
-    ascending=False
+  by='OBP_per_dollar',
+  ascending=False
 )
 
 value_df_sorted [[
-    "playerID",
-    "yearID",
-    "teamID",
-    "OBP",
-    "salary",
-    "OBP_per_dollar"
+  'playerID',
+  'yearID',
+  'teamID',
+  'OBP',
+  'salary',
+  'OBP_per_dollar'
 ]].head()
 ```
 
@@ -376,21 +376,25 @@ If we wanted to see if our calculations were working correctly, we could choose 
 
 ```py
 value_df_sorted[value_df_sorted['yearID'] == 2010][[
-    "playerID",
-    "yearID",
-    "teamID", 'AB',
-    "OBP",
-    "salary",
-    "OBP_per_dollar"
+  'playerID',
+  'yearID',
+  'teamID', 'AB',
+  'OBP',
+  'salary',
+  'OBP_per_dollar'
 ]].head()
 ```
 
-I went to look up `heywaja01` on baseball-reference.com, and it turns out that this data was from a player named Jason Heyward. In 2010, he was an All Star and got 2nd place in voting for Rookie of the Year! It certainly sounds like a player that was high value. You can also confirm that our calculation of OBP was correct!
+I went to look up `heywaja01` on [baseball-reference.com](https://baseball-reference.com), and it turns out that this data was from a player named Jason Heyward. In 2010, he was an All Star and got 2nd place in voting for Rookie of the Year! It certainly sounds like a player that was high value. You can also confirm that our calculation of OBP was correct!
 
 
 ## Recap
 
-Clearly there is a _ton_ that you can do with this dataset. In this project, we practiced the following skills in Pandas:
+Congrats on making it to the end!
+
+Clearly there is a _ton_ that you can do with this dataset. 
+
+To recap, in this project tutorial, we practiced the following skills in Pandas:
 
 - Initial data exploration using `.describe()` to see summary statistics.
 - Filtering the dataset by boolean values (for example, `[value_df_sorted['yearID'] == 2010`)
@@ -399,3 +403,6 @@ Clearly there is a _ton_ that you can do with this dataset. In this project, we 
 - Using `.merge()` to join two tables together.
 
 Do you have any favorite players or teams? Shohei Ohtani? Aaron Judge? The Chicago Cubs? We hope that you come up with your own questions about baseball and use your Python and Pandas skills to answer those questions!
+
+### More Resources
+
