@@ -351,6 +351,7 @@ batting_with_salary.head()
 
 As expected, after performing this join, we're missing salary data about some of the more old-school players.
 
+![salary](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/salary.png)
 
 
 ### Calculating Value
@@ -386,6 +387,8 @@ value_df_sorted [[
 ]].head()
 ```
 
+![OBP per dollar 1](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/obp-per-dollar.png)
+
 Our results are a handful of players from the 1980s. This makes sense; salaries were likely much lower in the 80s, but OBP stayed roughly the same. So those players will seemingly be much more "valuable" than modern day players.
 
 If we wanted to see if our calculations were working correctly, we could choose to only look at players from a single year. For example, this gives us the most "valuable" players from 2010.:
@@ -401,8 +404,11 @@ value_df_sorted[value_df_sorted['yearID'] == 2010][[
 ]].head()
 ```
 
+![OBP per dollar 2](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/obp-per-dollar2.png)
+
 I went to look up `heywaja01` on [baseball-reference.com](https://baseball-reference.com), and it turns out that this data was from a player named Jason Heyward. In 2010, he was an All Star and got 2nd place in voting for Rookie of the Year! It certainly sounds like a player that was high value. You can also confirm that our calculation of OBP was correct!
 
+![heywaja01](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/heywaja01.png)
 
 ## Recap
 
