@@ -54,8 +54,6 @@ As a brief example, this is what the top of the **Batting.csv** file looks like:
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/batting-table.png" style={{ width: "100%", height: "auto" }} />
 
-![Batting table](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/batting-table.png)
-
 Each row represents the batting information for a player for a given year. For example, the first row shows that the player with the ID of `aardsda01` only played in 11 games in 2004 and had no hits or runs!
 
 When looking at new data, it can also be helpful to look for the official data dictionary for the dataset. It can often be hard to interpret column names – for example, if you're not a baseball fan, you might not know what the column `AB` represents. Looking at the documentation file can help clear up any questions. In this case, we can look at **readme2025.txt** to learn that `AB` is "At Bats" (the number of times the player was up to the plate).
@@ -85,7 +83,7 @@ batting = pd.read_csv('Batting.csv')
 
 It's a good idea to look at `batting.head()` to make sure the import worked as you expect, as well as `batting.describe()` to see some initial information:
 
-![Batting head and describe](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/batting-head-describe.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/batting-head-describe.png" style={{ width: "100%", height: "auto" }} />
 
 You'll notice that `batting.describe()` gives us the answer to one of our questions! The dataset begins in the year 1871 and goes all the way to 2025!
 
@@ -112,7 +110,7 @@ active_players = batting[batting['AB'] > 0]
 active_players.describe()
 ```
 
-![At least one at bat](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/at-least-one-at-bat.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/at-least-one-at-bat.png" style={{ width: "100%", height: "auto" }} />
 
 As expected, the average number of runs scored by a player shot up to `20.88` after filtering out all of the players who were always on the bench.
 
@@ -328,9 +326,9 @@ batting['OBP'] = (
 batting['OBP'] = batting['OBP'].fillna(0)
 ```
 
-A decent OBP is around 0.3 to 0.4, and if we do a quick scan of the data, we can see values around that range:
+A decent OBP is around 0.3 to. If we do a quick scan of the data, we can see values around that range:
 
-![OBP](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/obp.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/obp.png" style={{ width: "100%", height: "auto" }} />
 
 ### Joining with the Salaries Table
 
@@ -356,8 +354,7 @@ batting_with_salary.head()
 
 As expected, after performing this join, we're missing salary data about some of the more OG players.
 
-![salary](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/salary.png)
-
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/salary.png" style={{ width: "100%", height: "auto" }} />
 
 ### Calculating Value
 
@@ -416,7 +413,7 @@ value_df_sorted[value_df_sorted['yearID'] == 2010][[
 
 I went to look up `heywaja01` on [baseball-reference.com](https://baseball-reference.com), and it turns out that this data was from a player named Jason Heyward. In 2010, he was an All Star and got 2nd place in voting for Rookie of the Year! It certainly sounds like a player that was high value. You can also confirm that our calculation of OBP was correct!
 
-![heywaja01](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/heywaja01.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/heywaja01.png" style={{ width: "100%", height: "auto" }} />
 
 ## Recap
 
