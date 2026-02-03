@@ -41,11 +41,10 @@ Now that the MVP is out, our goal for Codédex Projects is to invite awesome con
 
 Here are a few article ideas that we'd love for you to write:
 
-- Analyze Your Netflix Data with Python
+- Analyze Your Netflix/HBO/Disney+ Data with Python
 - Visualize Your Personal Expenses with Matplotlib
-- Visualize Your Uber Data with Matplotlib
+- Visualize Your Uber/Lyft Data with Pandas & Matplotlib
 - Decorate Your Terminal with **\_\_**
-- Build a Minecraft Mod with Python
 - Build an Instagram Bot with Python
 - **\_\_** with Raspberry Pi
 - Analyze Alone (TV Show) with Python
