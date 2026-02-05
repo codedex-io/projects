@@ -269,6 +269,7 @@ plt.figure(figsize=(10, 6))
 plt.plot(league_avg_hr.index,
   league_avg_hr.values,
   label='League Average',
+  color='orange',
   linestyle='--'
 )
 
@@ -276,19 +277,23 @@ plt.plot(
   rockies_hr.index,
   rockies_hr.values,
   label='Colorado Rockies'
+  color='#33006F'
 )
 
-plt.title('Colorado Rockies Home Runs vs League Average')
+plt.title('Colorado Rockies Home Runs vs. League Average')
 plt.xlabel('Year')
 plt.ylabel('Home Runs')
 plt.legend()
 
+plt.grid(True)
 plt.show()
 ```
 
+The official purple for the Colorado Rockies is `##33006F`, so we used that above. 💜
+
 The graph should look like:
 
-![The graph](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/colorado-rockies.png)
+![The graph](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/colorado-rockies-vs-league-average.png)
 
 As expected, the altitude in Denver has caused some pretty high home run numbers!
 
