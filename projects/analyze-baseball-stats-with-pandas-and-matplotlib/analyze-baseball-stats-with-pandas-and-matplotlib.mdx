@@ -52,11 +52,11 @@ We'll primarily use three files:
 
 As a brief example, this is what the top of the **Batting.csv** file looks like:
 
-![Batting table](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/batting-table.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/batting-table.png" style={{ width: "100%", height: "auto" }} />
 
 Each row represents the batting information for a player for a given year. For example, the first row shows that the player with the ID of `aardsda01` only played in 11 games in 2004 and had no hits or runs!
 
-When looking at new data, it can also be helpful to look for the official data dictionary for the dataset. It can often be hard to interpret column names – for example, if you're not a baseball fan, you might not know what the column `AB` represents. Looking at the documentation file can help clear up any questions. In this case, we can look at **readme2025.txt** to learn that `AB` is "At Bats" (the number of times the player was up to the plate).
+When looking at new data, it can also be helpful to look for the official data dictionary for the dataset. It can often be hard to interpret column names – for example, if you're not a baseball fan, you might not know what the column `AB` represents. Looking at the documentation file can help clear up any questions. In this case, we can look at **[readme2025.txt](https://sabr.app.box.com/s/y1prhc795jk8zvmelfd3jq7tl389y6cd/file/2084259918153)** to learn that `AB` is "At Bats" (the number of times the player was up to the plate).
 
 So with all of that setup out of the way, let's start diving into some data analysis!
 
@@ -83,7 +83,7 @@ batting = pd.read_csv('Batting.csv')
 
 It's a good idea to look at `batting.head()` to make sure the import worked as you expect, as well as `batting.describe()` to see some initial information:
 
-![Batting head and describe](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/batting-head-describe.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/batting-head-describe.png" style={{ width: "100%", height: "auto" }} />
 
 You'll notice that `batting.describe()` gives us the answer to one of our questions! The dataset begins in the year 1871 and goes all the way to 2025!
 
@@ -110,7 +110,7 @@ active_players = batting[batting['AB'] > 0]
 active_players.describe()
 ```
 
-![At least one at bat](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/at-least-one-at-bat.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/at-least-one-at-bat.png" style={{ width: "100%", height: "auto" }} />
 
 As expected, the average number of runs scored by a player shot up to `20.88` after filtering out all of the players who were always on the bench.
 
@@ -224,7 +224,9 @@ It's interesting that you can see the abbreviated 2020 season in this graph! The
 
 Another fun visualization that you can create is a comparison of your favorite team's stats to the rest of the league. I grew up in Denver, so my team is the [Colorado Rockies](https://en.wikipedia.org/wiki/Colorado_Rockies), who have been laughably bad for the majority of my life. 😅
 
-That being said, there is an interesting phenomenon with the Rockies: it is very easy to hit home runs in Denver because of the altitude. As a result, even though the Rockies are generally a fairly weak team, they end up hitting more home runs than their competitors. Let's graph the Rockies' home runs every year against the league average!
+That being said, there is an interesting phenomenon with the Rockies: **it is very easy to hit home runs in Denver because of the high altitude**. The city sits 5,280 feet (1,609 meters) above sea level. The lower air pressure means fewer air molecules to slow the ball down. As a result, even though the Rockies are generally a fairly weak team, they end up hitting more home runs than their competitors. 
+
+Let's graph the Rockies' home runs every year against the league average!
 
 First, we can group the data by year and team to find each team's home runs for a given year:
 
@@ -267,26 +269,31 @@ plt.figure(figsize=(10, 6))
 plt.plot(league_avg_hr.index,
   league_avg_hr.values,
   label='League Average',
+  color='orange',
   linestyle='--'
 )
 
 plt.plot(
   rockies_hr.index,
   rockies_hr.values,
-  label='Colorado Rockies'
+  label='Colorado Rockies',
+  color='#33006F'
 )
 
-plt.title('Colorado Rockies Home Runs vs League Average')
+plt.title('Colorado Rockies Home Runs vs. League Average')
 plt.xlabel('Year')
 plt.ylabel('Home Runs')
 plt.legend()
 
+plt.grid(True)
 plt.show()
 ```
 
+The official purple for the Colorado Rockies is `#33006F`, so we used that above. 💜
+
 The graph should look like:
 
-![The graph](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/colorado-rockies.png)
+![The graph](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/colorado-rockies-vs-league-average.png)
 
 As expected, the altitude in Denver has caused some pretty high home run numbers!
 
@@ -296,6 +303,8 @@ Now that we've explored some basic data analysis and visualization, let's put ou
 
 Finally, let's take on a challenge of replicating the work Billy Bean and Peter Brand did for the Oakland A's in _Moneyball_. While they almost certainly considered many statistics, they are most famous for finding players with a high **on-base percentage** (OBP) relative to their cost.
 
+<iframe width="100%" height="458px" src="https://www.youtube.com/embed/2ar61DyL4Xo?si=34_O3lw_RJ0_8aMs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 Let's try to identify some of those players! Here's how we'll tackle this problem:
 
 - OBP is not currently listed in the Batting table, but we can calculate that value ourselves based on other information and add a new OBP column to the table.
@@ -304,7 +313,9 @@ Let's try to identify some of those players! Here's how we'll tackle this proble
 
 ### Calculating OBP
 
-Let's begin by calculating OBP. This is the formula that we'll use. It takes into account not just hits, but walks, sacrifice flies, etc.
+Let's begin by calculating OBP. 
+
+This is the formula that we'll use. It takes into account not just hits, but walks, sacrifice flies, etc.
 
 $$
 OBP = {H + BB + HBP \over AB + BB + HBP + SF}
@@ -326,9 +337,9 @@ batting['OBP'] = (
 batting['OBP'] = batting['OBP'].fillna(0)
 ```
 
-A decent OBP is around 0.3 to 0.4, and if we do a quick scan of the data, we can see values around that range:
+A decent OBP is around 0.3 to 0.4. If we do a quick scan of the data, we can see values around that range:
 
-![OBP](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/obp.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/obp.png" style={{ width: "100%", height: "auto" }} />
 
 ### Joining with the Salaries Table
 
@@ -354,8 +365,7 @@ batting_with_salary.head()
 
 As expected, after performing this join, we're missing salary data about some of the more OG players.
 
-![salary](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/salary.png)
-
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/salary.png" style={{ width: "100%", height: "auto" }} />
 
 ### Calculating Value
 
@@ -412,9 +422,9 @@ value_df_sorted[value_df_sorted['yearID'] == 2010][[
 
 ![OBP per dollar 2](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/obp-per-dollar2.png)
 
-I went to look up `heywaja01` on [baseball-reference.com](https://baseball-reference.com), and it turns out that this data was from a player named Jason Heyward. In 2010, he was an All Star and got 2nd place in voting for Rookie of the Year! It certainly sounds like a player that was high value. You can also confirm that our calculation of OBP was correct!
+I went to look up `heywaja01` on [baseball-reference.com](https://baseball-reference.com), and it turns out that this data was from a player named Jason Heyward. In 2010, he was an All-Star and got 2nd place in voting for Rookie of the Year! It certainly sounds like a player that was high value. You can also confirm that our calculation of OBP was correct!
 
-![heywaja01](https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/heywaja01.png)
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/heywaja01.png" style={{ width: "100%", height: "auto" }} />
 
 ## Recap
 
@@ -434,6 +444,8 @@ Do you have any favorite players or teams? Shohei Ohtani? Aaron Judge? The Chica
 
 ### More Resources
 
+- [Project Solution](https://github.com/codedex-io/projects/blob/main/projects/analyze-baseball-stats-with-pandas-and-matplotlib/baseball_analysis.ipynb)
 - [Moneyball on Netflix](https://www.netflix.com/title/70201437)
+- [Baseball 101: Glossary](https://www.nbcolympics.com/news/baseball-101-glossary)
 
 ![Final meme](https://i.imgur.com/Z0S1OzP.gif)
