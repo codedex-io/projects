@@ -13,7 +13,38 @@ import rehypeKatex from "rehype-katex";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings";
 import rehypeRewrite from "rehype-rewrite";
 import { h } from "hastscript";
+import { visit } from "unist-util-visit";
 import type { ProjectFrontmatter } from "../types/index.js";
+
+/**
+ * Rehype plugin that converts string `style` properties to objects in HAST nodes.
+ * Required because rehype-katex (and other plugins) generate HAST nodes with CSS
+ * string styles, but MDX v3's hast-util-to-jsx-runtime expects style objects.
+ */
+function rehypeStringifyStyles() {
+  return (tree: any) => {
+    visit(tree, "element", (node: any) => {
+      if (node.properties?.style && typeof node.properties.style === "string") {
+        const styleObj: Record<string, string> = {};
+        node.properties.style
+          .split(";")
+          .filter((s: string) => s.trim())
+          .forEach((declaration: string) => {
+            const colonIndex = declaration.indexOf(":");
+            if (colonIndex === -1) return;
+            const prop = declaration.slice(0, colonIndex).trim();
+            const value = declaration.slice(colonIndex + 1).trim();
+            // Convert CSS property to camelCase (e.g., font-size -> fontSize)
+            const camelProp = prop.replace(/-([a-z])/g, (_: string, c: string) =>
+              c.toUpperCase(),
+            );
+            styleObj[camelProp] = value;
+          });
+        node.properties.style = styleObj;
+      }
+    });
+  };
+}
 
 interface ProcessedMDX {
   frontmatter: ProjectFrontmatter;
@@ -24,36 +55,42 @@ interface ProcessedMDX {
 export class MDXProcessor {
   private readonly remarkPlugins = [
     remarkMath,
-    remarkPresetLintRecommended,
-    remarkBreaks,
     remarkGfm,
+    remarkBreaks,
+    remarkPresetLintRecommended,
     remarkPresetLintConsistent,
   ];
 
   private readonly rehypePlugins = [
-    rehypeSlug,
     [rehypeHighlight, { aliases: { markdown: ["output", "terminal"] } }],
+    rehypeSlug,
     [
       rehypeExternalLinks,
       { target: "_blank", rel: ["nofollow", "noreferrer", "noopener"] },
     ],
-    rehypeKatex,
     [
       rehypeRewrite,
       {
-        rewrite(node: any) {
+        rewrite(node: any, index: number, parent: any) {
           if (
             node.tagName === "h2" ||
             node.tagName === "h3" ||
             node.tagName === "h4"
           ) {
-            if (node.children[0]) {
+            if (node.children && node.children[0]) {
               node.children[0].value = " " + node.children[0].value;
             }
+          }
+          if (node.tagName === "table") {
+            const tableContainer = h("div", { class: "table-container" }, [
+              node,
+            ]);
+            parent.children.splice(index, 1, tableContainer);
           }
         },
       },
     ],
+    [rehypeKatex, { throwOnError: true, strict: true }],
     [
       rehypeAutoLinkHeadings,
       {
@@ -76,6 +113,7 @@ export class MDXProcessor {
         },
       },
     ],
+    rehypeStringifyStyles,
   ];
 
   async process(content: string): Promise<ProcessedMDX> {
@@ -86,7 +124,9 @@ export class MDXProcessor {
         mdxOptions: {
           remarkPlugins: this.remarkPlugins as any,
           rehypePlugins: this.rehypePlugins as any,
+          format: "mdx",
         },
+        blockJS: false,
       });
 
       return {
