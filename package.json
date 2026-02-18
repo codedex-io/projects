@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "cd publish && npm run start"
+    "publish": "NODE_ENV=production cd publish && npm run start"
   },
   "repository": {
     "type": "git",
