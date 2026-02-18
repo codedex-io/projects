@@ -21,8 +21,8 @@ jobs:
         run: cd publish && npm install
       - name: publish
         run: npm run publish
-
         env:
+          NODE_ENV: production
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}

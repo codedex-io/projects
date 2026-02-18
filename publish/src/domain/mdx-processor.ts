@@ -120,6 +120,11 @@ export class MDXProcessor {
     try {
       const { data, content: rawContent } = matter(content);
 
+      // next-mdx-remote ignores mdxOptions.development and uses process.env.NODE_ENV.
+      // Force production so compiled output uses jsx/jsxs (not jsxDEV) and works on the site.
+      const prevNodeEnv = process.env.NODE_ENV;
+      process.env.NODE_ENV = "production";
+
       const source = await serialize(rawContent, {
         mdxOptions: {
           remarkPlugins: this.remarkPlugins as any,
@@ -128,6 +133,8 @@ export class MDXProcessor {
         },
         blockJS: false,
       });
+
+      process.env.NODE_ENV = prevNodeEnv;
 
       return {
         frontmatter: data as ProjectFrontmatter,
