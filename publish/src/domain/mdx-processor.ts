@@ -125,6 +125,7 @@ export class MDXProcessor {
           remarkPlugins: this.remarkPlugins as any,
           rehypePlugins: this.rehypePlugins as any,
           format: "mdx",
+          development: false, // use production jsx/jsxs so consumers don't get TypeError: jsxDEV
         },
         blockJS: false,
       });
