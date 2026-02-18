@@ -7,6 +7,7 @@ import { ProjectPublisher } from "./domain/project-publisher.js";
 
 async function main() {
   console.log("🚀 Starting Codédex Projects Publisher\n");
+  console.log("NODE_ENV:", process.env.NODE_ENV ?? "(undefined)");
 
   try {
     // Validate configuration
