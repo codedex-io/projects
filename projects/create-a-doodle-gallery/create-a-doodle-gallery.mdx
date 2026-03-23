@@ -23,8 +23,6 @@ courses:
 
 I miss the days of the internet when people built cool stuff for the sake of making fun things. There were a lot of random sites that were heavily in circulation during my younger years, like [Google Doodles](https://doodles.google/search/?form_tags=interactive%20game), that embraced creativity and play. [insert an image of some examples here] Here’s a project tutorial that might help bring us back to these days — you’ll be building a website where anyone can draw a doodle for a public virtual museum exhibit! 
 
-<img src="">
-
 To make this project, we’ll be using the classic web dev tools HTML, CSS, and JavaScript, and will be storing our drawings in [Supabase](http://supabase.com/). We’ll also be using [Vite](https://vite.dev/) to get a local server running our website,  that way you can run local servers with Node.js. I picked Vite because it handles imports  cleanly, refreshes your website automatically with any changes, and is structured  to better handle a project with a realtime database! 
 
 # # About Supabase
@@ -43,7 +41,7 @@ I’ll be using [VS Code](https://code.visualstudio.com/) for this project, but
 2. Find the Storage Menu and click on it. Then create a new bucket, and name it "drawings". Make sure this bucket is set to public so your gallery is viewable!
 3. Open up the SQL Editor on the lefthand menu (it pops up when you hover on it), and run this code:
 
-```sql
+```
 create table if not exists public.drawings (
   id uuid primary key default gen_random_uuid(),
   path text not null,
@@ -90,15 +88,11 @@ Make sure you have the latest version of [Node.js](https://nodejs.org/en/downloa
 
 Run this command in the terminal: `npm create vite@latest`, and then answer the prompts as follows. You can name your project however you like. When prompted, pick `Vanilla` as your framework and `JavaScript` as your variant. Your terminal should look like this at the end of completing the steps:
 
-<img src="">
-
 This might look different depending on what kind of computer you’re using — in my case, I’m on a Macbook.
 
 ## ## Running your server
 
 To start up a server with your webpage running, type `npm run dev` in the Terminal. It’ll give you a url that looks something like: `http://localhost:3000/`  — but the numbers in the URL can vary. Copy the link and paste it in your browser, and you should see something like this:
-
-<img src="">
 
 ## ## **.env File and API Keys**
 
@@ -106,7 +100,7 @@ In your root folder, create a new file called `.env`. An `.env` file is used to 
 
 Create two variables, `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` and set their values to the URL and API values you found in your Supabase Project Settings. 
 
-```sql
+```
 VITE_SUPABASE_URL=https://[string of characters].supabase.co
 VITE_SUPABASE_ANON_KEY=another_string_of_random_characters
 ```
@@ -358,8 +352,6 @@ We want our big gallery to load random drawings, so everyone’s drawings have a
 ```
 
 Then we’re going to add our batch of drawings to our marquee. If you don’t know what a marquee is, it’s a scrolling gallery, or set of text that seems to scroll infinitely!
-
-<img src="">
 
 We’ll write out our function header for `repeatMarquee()`, limiting the number of drawings picked to 200. Our marquee has two rows, and if neither of them render, it’ll stop the function through the `if` statement.
 
