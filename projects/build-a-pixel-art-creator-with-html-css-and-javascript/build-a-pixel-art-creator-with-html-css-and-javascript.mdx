@@ -5,8 +5,8 @@ uid: HQImLPf2Tmel6kw8hCis3vcJnLo2
 datePublished: 2026-03-25
 published: false
 description: Learn to build a browser-based pixel art editor using HTML Canvas, 2D arrays, and vanilla JavaScript. Draw, erase, flood fill, and export your pixel art as PNG.
-header: TBD
-bannerImage: TBD
+header: https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fbuild-a-pixel-art-creator-with-html-css-and-javascript%2Fbanner.gif?alt=media&token=024ec787-541b-456f-b82b-76eda7ed7657
+bannerImage: https://firebasestorage.googleapis.com/v0/b/codedex-io.appspot.com/o/projects%2Fbuild-a-pixel-art-creator-with-html-css-and-javascript%2Fbanner.gif?alt=media&token=024ec787-541b-456f-b82b-76eda7ed7657
 readTime: 75
 prerequisites: HTML, CSS, JavaScript fundamentals
 versions: None
@@ -61,7 +61,7 @@ A pixel art canvas is just a grid of colored squares. In code, we represent this
   ["#ffffff", "#ff0000", "#ffffff"],
   ["#ff0000", "#ff0000", "#ff0000"],
   ["#ffffff", "#ff0000", "#ffffff"],
-]
+];
 ```
 
 Each value is a hex color string. The position in the array corresponds to a cell on the grid: `grid[row][col]` gives us the color at that position.
@@ -134,7 +134,7 @@ Find the `init()` function in the starter code and add the following code:
 ```javascript
 function init() {
   grid = Array.from({ length: gridSize }, () =>
-    Array(gridSize).fill("#ffffff")
+    Array(gridSize).fill("#ffffff"),
   );
 
   cellSize = Math.floor(480 / gridSize);
@@ -371,7 +371,9 @@ function buildPalette() {
     swatch.addEventListener("click", () => {
       currentColor = color;
       document.getElementById("custom-color").value = color;
-      document.querySelectorAll(".color-swatch").forEach((s) => s.classList.remove("active"));
+      document
+        .querySelectorAll(".color-swatch")
+        .forEach((s) => s.classList.remove("active"));
       swatch.classList.add("active");
     });
     palette.appendChild(swatch);
@@ -392,7 +394,9 @@ Find the TODO marked `Step 4-b` and add the custom color picker handler:
 ```javascript
 document.getElementById("custom-color").addEventListener("input", (e) => {
   currentColor = e.target.value;
-  document.querySelectorAll(".color-swatch").forEach((s) => s.classList.remove("active"));
+  document
+    .querySelectorAll(".color-swatch")
+    .forEach((s) => s.classList.remove("active"));
 });
 ```
 
@@ -406,7 +410,9 @@ Find the TODO marked `Step 4-c` and wire up the tool buttons:
 document.querySelectorAll(".tool-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     currentTool = btn.dataset.tool;
-    document.querySelectorAll(".tool-btn").forEach((b) => b.classList.remove("active"));
+    document
+      .querySelectorAll(".tool-btn")
+      .forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
   });
 });
@@ -427,7 +433,7 @@ Find the TODO marked `Step 5` and wire up the grid size dropdown:
 ```javascript
 document.getElementById("grid-size").addEventListener("change", (e) => {
   const confirmed = confirm(
-    "Changing grid size will clear your canvas. Continue?"
+    "Changing grid size will clear your canvas. Continue?",
   );
   if (confirmed) {
     gridSize = parseInt(e.target.value);
@@ -470,7 +476,7 @@ document.getElementById("export-btn").addEventListener("click", () => {
         col * exportCellSize,
         row * exportCellSize,
         exportCellSize,
-        exportCellSize
+        exportCellSize,
       );
     }
   }
