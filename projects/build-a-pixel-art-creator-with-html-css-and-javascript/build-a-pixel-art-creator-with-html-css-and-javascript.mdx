@@ -15,14 +15,13 @@ courses:
   - javascript
 tags:
   - intermediate
-  - html
   - css
   - javascript
 ---
 
 ## Introduction
 
-Ever wanted to make your own pixel art like the sprites in classic video games? What if you could build the entire drawing tool yourself, right in the browser?
+Ever wanted to make your own pixel art like the sprites in classic video games like Super Mario and indie games like Stardew Valley? What if you could build the entire drawing tool yourself, right in the browser?
 
 In this project tutorial, we'll build a **Pixel Art Creator**, a fully functional drawing app where you can paint pixel art on a grid canvas, pick colors, fill regions, and export your creation as a PNG image!
 
@@ -32,7 +31,7 @@ You will learn about the following concepts in this tutorial:
 - How to use **2D arrays** to represent a grid of pixels in memory.
 - How to handle **mouse events** and map screen coordinates to grid cells.
 - How **flood fill** works (the algorithm behind the paint bucket tool).
-- How to **export a canvas** as a downloadable PNG image.
+- How to **export a canvas** as a downloadable **.png** image.
 
 By the end of this tutorial, we'll have a fully functional pixel art editor that looks like this:
 
@@ -53,15 +52,16 @@ Before we jump into code, let's understand the core ideas behind any pixel art e
 
 ### The Grid as a 2D Array
 
-A pixel art canvas is just a grid of colored squares. In code, we represent this grid as a **2D array**, an array of arrays:
+A pixel art canvas is just a grid of colored squares. In code, we represent this grid as a **2D array** which is an array of arrays like so:
 
 ```javascript
 // A 3x3 grid example
+
 [
   ["#ffffff", "#ff0000", "#ffffff"],
   ["#ff0000", "#ff0000", "#ff0000"],
   ["#ffffff", "#ff0000", "#ffffff"],
-];
+]
 ```
 
 Each value is a hex color string. The position in the array corresponds to a cell on the grid: `grid[row][col]` gives us the color at that position.
@@ -70,8 +70,8 @@ Each value is a hex color string. The position in the array corresponds to a cel
 
 The HTML5 `<canvas>` element gives us a drawing surface. We use its 2D rendering context to draw rectangles, one per grid cell:
 
-- `fillRect(x, y, width, height)` draws a filled rectangle.
-- `strokeRect(x, y, width, height)` draws a rectangle outline (our grid lines).
+- `.fillRect(x, y, width, height)` draws a filled rectangle.
+- `.strokeRect(x, y, width, height)` draws a rectangle outline (our grid lines).
 
 ### Coordinate Mapping
 
@@ -86,15 +86,15 @@ Download the starter code from this repository: [Pixel Art Creator Starter Code]
 The folder should have the following structure:
 
 ```
-build-a-pixel-art-creator-with-html-css-and-javascript/
-  ├── starter/           # Start here: has TODOs to fill in
-  │   ├── index.html
-  │   ├── style.css
-  │   └── script.js
-  └── completed/         # Reference: fully working code
-      ├── index.html
-      ├── style.css
-      └── script.js
+pixel-art-creator-with-html-css-and-javascript/
+   ├── starter/             # Start here - has TODOs to fill in
+   │        ├── index.html
+   │        ├── style.css
+   │        └── script.js
+   └── completed/           # Reference - fully working code
+             ├── index.html
+             ├── style.css
+             └── script.js
 ```
 
 **Note:** We'll be working in the **starter** directory. The **completed** directory contains the finished code you can use as reference if you get stuck.
@@ -105,7 +105,7 @@ Let's take a look at what the starter code gives us:
 - **style.css** - All the styling is done. Dark theme, flexbox sidebar layout, tool button styles with active/hover states, a CSS Grid color palette, and responsive rules for mobile. No changes needed here.
 - **script.js** - This is where we'll spend our time. The starter has variable declarations and function stubs with TODO comments. We'll implement each function step by step.
 
-Open **starter/index.html** in your browser. You should see a dark-themed layout with a toolbar on the left and an empty canvas area:
+Open **starter/index.html** in your browser. You should see a dark-themed layout with a toolbar on the left and an empty canvas area. Nothing is interactive yet - that's what JavaScript is for!
 
 <img
   src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-creator-with-html-css-and-javascript/assets/empty-grid.png"
@@ -134,16 +134,19 @@ Find the `init()` function in the starter code and add the following code:
 ```javascript
 function init() {
   grid = Array.from({ length: gridSize }, () =>
-    Array(gridSize).fill("#ffffff"),
+    Array(gridSize).fill("#ffffff")
   );
+
   cellSize = Math.floor(480 / gridSize);
+
   canvas.width = gridSize * cellSize;
   canvas.height = gridSize * cellSize;
+
   render();
 }
 ```
 
-**How this works:**
+How this works:
 
 - `Array.from({ length: gridSize }, () => Array(gridSize).fill("#ffffff"))` creates a 2D array where every cell starts as white (`#ffffff`). For a 16x16 grid, that's 256 cells.
 - `cellSize = Math.floor(480 / gridSize)` calculates the pixel size of each cell. We target roughly 480 pixels total, so for a 16x16 grid each cell is 30px, for a 32x32 grid each cell is 15px, and so on.
@@ -170,6 +173,7 @@ function render() {
   if (hoveredCell && !isDrawing) {
     const { row, col } = hoveredCell;
     const previewColor = currentTool === "eraser" ? "#ffffff" : currentColor;
+
     ctx.fillStyle = previewColor;
     ctx.globalAlpha = 0.4;
     ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
@@ -181,11 +185,11 @@ function render() {
 **How this works:**
 
 - The nested loop goes through every cell in the grid, row by row, column by column.
-- For each cell, we set `fillStyle` to that cell's color and draw a filled rectangle at the correct position.
+- For each cell, we set `.fillStyle` to that cell's color and draw a filled rectangle at the correct position.
 - We then draw a thin gray outline (`strokeRect`) to show the grid lines.
 - The `hoveredCell` block draws a semi-transparent preview of the current color on whatever cell the mouse is hovering over. We use `globalAlpha = 0.4` to make it translucent, then reset it to `1.0` so future drawing isn't affected.
 
-**Note:** We don't render the hover preview while actively drawing (`!isDrawing`) - it would be distracting during fast drawing.
+**Note:** We don't render the hover preview while actively drawing (`!isDrawing`). It would be distracting during fast drawing.
 
 The `init()` call is already at the bottom of the starter file, so once we implement these functions, they'll work right away!
 
@@ -195,7 +199,7 @@ Now let's make the canvas interactive. We need to figure out which cell the mous
 
 ### Step 2-a: Map Mouse Position to Grid Cell
 
-Find the `getCellFromMouse` function and add this:
+Find the `getCellFromMouse` function and add the following code:
 
 ```javascript
 function getCellFromMouse(e) {
@@ -212,16 +216,16 @@ function getCellFromMouse(e) {
 }
 ```
 
-**How this works:**
+How this works:
 
-- `canvas.getBoundingClientRect()` tells us where the canvas is on the page.
-- We subtract the canvas position from the mouse position to get coordinates _relative to the canvas_.
+- `canvas.getBoundingClientRect()` tells us where the canvas is on the web page.
+- We subtract the canvas position from the mouse position to get coordinates relative to the canvas.
 - Dividing by `cellSize` and using `Math.floor` converts pixel coordinates to grid coordinates.
 - If the position is outside the grid, we return `null` to avoid errors.
 
 ### Step 2-b: Paint a Single Cell
 
-Now find `paintCell` and add:
+Now find `paintCell` and implement it:
 
 ```javascript
 function paintCell(row, col) {
@@ -324,7 +328,7 @@ function floodFill(row, col, newColor) {
 }
 ```
 
-**Let's break this down:**
+Let's break this down:
 
 - First, we check what color the clicked cell is (`targetColor`). If it's already the new color, we do nothing - this prevents an infinite loop!
 - We use a **stack** (a regular JavaScript array used as a stack with `push` and `pop`) to track which cells to check next.
@@ -343,6 +347,8 @@ function floodFill(row, col, newColor) {
   alt="Flood fill tool filling a smiley face with yellow"
 />
 
+Phew… that was a little tough to implement! But, we're now through the most difficult part. 😤
+
 ## Step 4: Build the Color Palette and Tool Switching
 
 Now let's make the toolbar interactive - generating color swatches, handling color selection, and switching between tools.
@@ -357,14 +363,15 @@ function buildPalette() {
   PRESET_COLORS.forEach((color) => {
     const swatch = document.createElement("div");
     swatch.classList.add("color-swatch");
+
     if (color === currentColor) swatch.classList.add("active");
+
     swatch.style.backgroundColor = color;
+
     swatch.addEventListener("click", () => {
       currentColor = color;
       document.getElementById("custom-color").value = color;
-      document
-        .querySelectorAll(".color-swatch")
-        .forEach((s) => s.classList.remove("active"));
+      document.querySelectorAll(".color-swatch").forEach((s) => s.classList.remove("active"));
       swatch.classList.add("active");
     });
     palette.appendChild(swatch);
@@ -372,7 +379,7 @@ function buildPalette() {
 }
 ```
 
-**How this works:**
+How this works:
 
 - We loop through `PRESET_COLORS` and create a `<div>` for each one.
 - Each swatch gets its background color set and a click handler.
@@ -380,14 +387,12 @@ function buildPalette() {
 
 ### Step 4-b: Custom Color Picker
 
-Find the comment marked `Step 4-b` and add the custom color picker handler:
+Find the TODO marked `Step 4-b` and add the custom color picker handler:
 
 ```javascript
 document.getElementById("custom-color").addEventListener("input", (e) => {
   currentColor = e.target.value;
-  document
-    .querySelectorAll(".color-swatch")
-    .forEach((s) => s.classList.remove("active"));
+  document.querySelectorAll(".color-swatch").forEach((s) => s.classList.remove("active"));
 });
 ```
 
@@ -395,21 +400,19 @@ When the user picks a custom color, we update `currentColor` and deselect all pr
 
 ### Step 4-c: Tool Button Switching
 
-Next, go to `Step 4-c` and wire up the tool buttons:
+Find the TODO marked `Step 4-c` and wire up the tool buttons:
 
 ```javascript
 document.querySelectorAll(".tool-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     currentTool = btn.dataset.tool;
-    document
-      .querySelectorAll(".tool-btn")
-      .forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll(".tool-btn").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
   });
 });
 ```
 
-**How this works:**
+How this works:
 
 - We select all buttons with class `.tool-btn` and add a click handler to each.
 - `btn.dataset.tool` reads the `data-tool` attribute we set in the HTML - this gives us `"pen"`, `"eraser"`, or `"fill"`.
@@ -419,12 +422,12 @@ The `buildPalette()` call is already in the starter code, so save and refresh - 
 
 ## Step 5: Add Grid Size Switching
 
-For `Step 5`, add the grid size dropdown:
+Find the TODO marked `Step 5` and wire up the grid size dropdown:
 
 ```javascript
 document.getElementById("grid-size").addEventListener("change", (e) => {
   const confirmed = confirm(
-    "Changing grid size will clear your canvas. Continue?",
+    "Changing grid size will clear your canvas. Continue?"
   );
   if (confirmed) {
     gridSize = parseInt(e.target.value);
@@ -435,7 +438,7 @@ document.getElementById("grid-size").addEventListener("change", (e) => {
 });
 ```
 
-**How this works:**
+How this works:
 
 - When the dropdown value changes, we show a confirmation dialog - because changing the grid size resets everything.
 - If confirmed, we parse the new value (`"16"`, `"32"`, or `"64"` - these are strings from the HTML, so we need `parseInt`), update `gridSize`, and call `init()` to rebuild the grid from scratch.
@@ -450,7 +453,7 @@ document.getElementById("grid-size").addEventListener("change", (e) => {
 
 ## Step 6: Export as PNG
 
-The last feature! Find `Step 6` and add the export handler:
+The last feature! Find the TODO marked `Step 6` and add the export handler:
 
 ```javascript
 document.getElementById("export-btn").addEventListener("click", () => {
@@ -467,7 +470,7 @@ document.getElementById("export-btn").addEventListener("click", () => {
         col * exportCellSize,
         row * exportCellSize,
         exportCellSize,
-        exportCellSize,
+        exportCellSize
       );
     }
   }
@@ -479,11 +482,11 @@ document.getElementById("export-btn").addEventListener("click", () => {
 });
 ```
 
-**Why a separate canvas?**
+So why a separate canvas? 🤔
 
 We don't export the visible canvas directly because it has grid lines drawn on it. Instead, we create a new, invisible canvas and draw only the colored cells - no grid lines. This gives us a clean exported image.
 
-**How the export works:**
+How the export works:
 
 - `Math.max(16, Math.floor(512 / gridSize))` ensures the exported image is at least 512px wide. A 16x16 grid exports at 32px per cell (512px total), while a 64x64 grid exports at 8px per cell.
 - We loop through the grid and draw each cell's color using `fillRect`, same as rendering, but without the `strokeRect` grid lines.
@@ -503,11 +506,9 @@ Test everything:
 
 ## Conclusion
 
-Congratulations! You've built a pixel art editor from scratch using only HTML, CSS, and JavaScript!
+Congratulations! You've built a pixel art editor from scratch using only HTML, CSS, and JavaScript! 🎉
 
 Let's recap what we learned:
-
-### Concepts Covered
 
 - **Canvas API** - Using `fillRect`, `strokeRect`, `toDataURL`, and `getContext("2d")` to draw and export graphics.
 - **2D Arrays** - Representing grid state in memory and keeping it in sync with the visual canvas.
@@ -517,7 +518,7 @@ Let's recap what we learned:
 - **File Downloads** - Programmatically creating download links with `toDataURL()`.
 - **Responsive CSS** - Using `@media` queries to adapt layouts for different screen sizes.
 
-### Next Steps
+### Ideas to Keep Building
 
 Now that you have a working pixel art editor, here are some ways to extend it:
 
@@ -534,4 +535,4 @@ Now that you have a working pixel art editor, here are some ways to extend it:
 - [Mouse Events (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent)
 - [CSS Grid Layout (MDN)](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)
 
-Share your pixel art creations on Instagram and tag [@gokucodes](https://www.instagram.com/gokucodes/) and [@codedex_io](https://www.instagram.com/codedex.io/)!
+Share your pixel art creations on Instagram and LinkedIn and tag [@gokucodes](https://www.instagram.com/gokucodes) and [@codedex_io](https://www.instagram.com/codedex.io/)!
