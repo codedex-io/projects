@@ -21,13 +21,20 @@ courses:
 
 # # Introduction
 
-I miss the days of the internet when people built cool stuff for the sake of making fun things. There were a lot of random sites that were heavily in circulation during my younger years, like [Google Doodles](https://doodles.google/search/?form_tags=interactive%20game), that embraced creativity and play. [insert an image of some examples here] Here’s a project tutorial that might help bring us back to these days — you’ll be building a website where anyone can draw a doodle for a public virtual museum exhibit! 
+I miss the days of the internet when people built cool stuff for the sake of making fun things. There were a lot of random sites that were heavily in circulation during my younger years, like [Google Doodles](https://doodles.google/search/?form_tags=interactive%20game), that embraced creativity and play. 
+![Google doodles]("https://www.pcworld.com/wp-content/uploads/2025/06/baseball-100900643-orig.jpg?quality=50&strip=all")
 
-To make this project, we’ll be using the classic web dev tools HTML, CSS, and JavaScript, and will be storing our drawings in [Supabase](http://supabase.com/). We’ll also be using [Vite](https://vite.dev/) to get a local server running our website,  that way you can run local servers with Node.js. I picked Vite because it handles imports  cleanly, refreshes your website automatically with any changes, and is structured  to better handle a project with a realtime database! 
+Here’s a project tutorial that might help bring us back to these days — you’ll be building a website where anyone can draw a doodle for a public virtual museum exhibit! 
+
+![](./images/ezgif-509d613e7e5e8ca6.gif)
+
+To make this project, we’ll be using the classic web dev tools HTML, CSS, and JavaScript, and will be storing our drawings in [Supabase](http://supabase.com/). 
+
+We’ll also be using [Vite](https://vite.dev/) to get a local server running our website,  that way you can run local servers with Node.js. I picked Vite because it handles imports  cleanly, refreshes your website automatically with any changes, and is structured  to better handle a project with a realtime database! 
 
 # # About Supabase
 
-[Supabase](https://supabase.com/) is a PostgreSQL development platform. In other words, it’s a database system that takes care of everything from setup, deployment, and application scaling, perfect for what we'll be creating today!  Whenever a user draws a picture or types out text, we’re going to use Supabase to store all that information in real time, and fetch them from a bucket (aka a type of storage container) of our image-text pairs to display drawings in a public gallery! 
+[Supabase](https://supabase.com/) is a PostgreSQL (Post-Ingres Structured Query Language) development platform. In other words, it’s a database system that takes care of everything from setup, deployment, and application scaling, perfect for what we'll be creating today!  Whenever a user draws a picture or types out text, we’re going to use Supabase to store all that information in real time, and fetch them from a bucket (aka a type of storage container) of our image-text pairs to display drawings in a public gallery! 
 
 # # **Setting Up**
 
@@ -49,12 +56,11 @@ create table if not exists public.drawings (
   created_at timestamptz not null default now()
 );
 ```
-The interface should look like this:
-
 ## ## **Adding your API Keys**
 We need to add API keys to our project for it to connect to our storage bucket - API keys authenticate the usage of coding tools like Supabase.
 
-1. Go to the API menu under Project Settings. Find your Project URL and API key. They should look something like this:
+Go to the API menu under Project Settings. Find your Project URL and API key. They should look something like this:
+![](./images/key-url-example.png)
 
 ## ## **Clone Template**
 
@@ -62,19 +68,19 @@ Head over to [this GitHub link](https://github.com/gbanaag/codedex-doodle-proje
 
 You can clone the template in 3 different ways:
 
-- Downloading the folder and adding it to your local workspace
-- GitHub Desktop app
-- `git clone` with command line
+1. Downloading the folder and adding it to your local workspace
+2. GitHub Desktop app
+3. `git clone` with command line
 
-If you’re curious to know what’s been coded for you already, here’s what’s already set up:The canvas interface where users can create their drawings (JavaScript)
+If you’re curious to know what’s been coded for you already, here’s what’s already set up: The canvas interface where users can create their drawings (JavaScript)
 
-- An input box to collect captions (HTML)
-- Fonts, colors, the frame images, measurements (for the frames), animations, and layout choices (CSS)
-- Picking random frames for each drawing (JavaScript)
+- An input box to collect captions (HTML, `index.html`)
+- Fonts, colors, the frame images, measurements (for the frames), animations, and layout choices (CSS, `style.css`)
+- Picking random frames for each drawing (JavaScript, `main.js`)
 
 You’ll be focusing on: 
 - Creating a storage container
--Setting up your website so that it can collect data 
+- Setting up your website so that it can collect data 
 - Displaying the data (user-created drawings and text) that’s been collected in a scrolling gallery 
 
 Let’s get into it! ⚡
@@ -85,28 +91,33 @@ Make sure you have the latest version of [Node.js](https://nodejs.org/en/downloa
 
 Run this command in the terminal: `npm create vite@latest`, and then answer the prompts as follows. You can name your project however you like. When prompted, pick `Vanilla` as your framework and `JavaScript` as your variant. Your terminal should look like this at the end of completing the steps:
 
+![](./images/vite-setup.png)
+
 This might look different depending on what kind of computer you’re using — in my case, I’m on a Macbook.
 
 ## ## Running your server
 
 To start up a server with your webpage running, type `npm run dev` in the Terminal. It’ll give you a url that looks something like: `http://localhost:3000/`  — but the numbers in the URL can vary. Copy the link and paste it in your browser, and you should see something like this:
 
+![](./images/vite-startup-template-screen.png)
+
 ## ## **.env File and API Keys**
 
-In your root folder, create a new file called `.env`. An `.env` file is used to keep sensitive information like API keys and credentials secret, and use substitute names in your code instead of the actual keys or data. This is helpful if your code is publicly shared, like on GitHub for example, since it hides the API keys automatically!
+In your root folder, create a new file called `.env`. An `.env` file is used to keep sensitive information like API keys and credentials secret, and uses substitute names in your code instead of the actual keys or data. This is helpful if your code is publicly shared, like on GitHub for example, since it hides the API keys automatically!
 
 Create two variables, `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` and set their values to the URL and API values you found in your Supabase Project Settings. 
 
 ```
-VITE_SUPABASE_URL=https://[string of characters].supabase.co
-VITE_SUPABASE_ANON_KEY=another_string_of_random_characters
+VITE_SUPABASE_URL=https://bfhrXDG80CyFxqqt.supabase.co
+VITE_SUPABASE_ANON_KEY=uvoNOTCBo2l7KE4mIHpdbfhrXDG80CyFxqqtLAB8RMv
 ```
+(These are just examples of what API keys and URLs can look like - the ones above don't actually work!)
 
 # # Submitting Drawings
 
 Right now, you can draw on the canvas of the website, but you can't save or send the drawings anywhere. Once the page refreshes, the drawing disappears. We'll be coding a `submitDrawing()` function that packages up the canvas image and caption text, sends them to Supabase, and then immediately adds them to the gallery so the user can see their doodle appear in real time.
 
-Start by creating the function. We’re making an `async` function —  a special type of function that handles tasks external to the code we already have. In our case, we’re submitting data to container outside of the codebase. 
+We'll start by creating the function. We’re making an `async` function —  a special type of function that handles tasks external to the code we already have. In our case, we’re submitting data to container outside of the codebase. 
 
 ```jsx
 async function submitDrawing() {
@@ -349,6 +360,8 @@ We want our big gallery to load random drawings, so everyone’s drawings have a
 ```
 
 Then we’re going to add our batch of drawings to our marquee. If you don’t know what a marquee is, it’s a scrolling gallery, or set of text that seems to scroll infinitely!
+
+![](./images/webflow-marquee-example.gif)
 
 We’ll write out our function header for `repeatMarquee()`, limiting the number of drawings picked to 200. Our marquee has two rows, and if neither of them render, it’ll stop the function through the `if` statement.
 
