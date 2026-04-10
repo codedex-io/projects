@@ -1,5 +1,5 @@
 ---
-title: Build a Pixel Art Creator with HTML, CSS, and JavaScript
+title: Build a Pixel Art Maker with HTML, CSS, and JavaScript
 author: Dharma Jethva
 uid: HQImLPf2Tmel6kw8hCis3vcJnLo2
 datePublished: 2026-03-25
@@ -23,7 +23,7 @@ tags:
 
 Have you ever wondered what it's like to make your own pixel art like the sprites in classic video games like Super Mario and indie games like Stardew Valley? What if you could build the entire drawing tool yourself, right in the browser?
 
-In this project tutorial, we'll build a **Pixel Art Creator**, a fully functional drawing app where you can paint pixel art on a grid canvas, pick colors, fill regions, and export your creation as a PNG image!
+In this project tutorial, we'll build a **Pixel Art Maker**, a fully functional drawing app where you can paint pixel art on a grid canvas, pick colors, fill regions, and export your creation as a PNG image!
 
 You will learn about the following concepts:
 
@@ -36,11 +36,11 @@ You will learn about the following concepts:
 By the end of this tutorial, we'll have a fully functional pixel art editor that looks like this:
 
 <img
-  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-creator-with-html-css-and-javascript/assets/empty-grid.png"
-  alt="Final Pixel Art Creator"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-maker-with-html-css-and-javascript/assets/empty-grid.png"
+  alt="Final Pixel Art Maker"
 />
 
-You can try the [live demo here](https://goku-kun.github.io/build-a-pixel-art-creator-with-html-css-and-javascript/completed/) to see what we're building!
+You can try the [live demo here](https://goku-kun.github.io/build-a-pixel-art-maker-with-html-css-and-javascript/completed/) to see what we're building!
 
 **Note:** This tutorial focuses on learning Canvas API fundamentals and event handling. No libraries or frameworks needed.
 
@@ -81,12 +81,12 @@ Now that we have a general idea of what's happening, let's get to building it!
 
 ## Setup
 
-Download the starter code from this repository: [Pixel Art Creator Starter Code](https://github.com/Goku-kun/build-a-pixel-art-creator-with-html-css-and-javascript)
+Download the starter code from this repository: [Pixel Art Maker Starter Code](https://github.com/Goku-kun/build-a-pixel-art-maker-with-html-css-and-javascript)
 
 The folder should have the following structure:
 
 ```
-pixel-art-creator-with-html-css-and-javascript/
+pixel-art-maker-with-html-css-and-javascript/
    ├── starter/             # Start here - has TODOs to fill in
    │        ├── index.html
    │        ├── style.css
@@ -108,8 +108,8 @@ Let's take a look at what the starter code gives us:
 Open **starter/index.html** in your browser. You should see a dark-themed layout with a toolbar on the left and an empty canvas area. Nothing is interactive yet - that's what JavaScript is for!
 
 <img
-  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-creator-with-html-css-and-javascript/assets/empty-grid.png"
-  alt="Pixel Art Creator with empty 16x16 grid"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-maker-with-html-css-and-javascript/assets/empty-grid.png"
+  alt="Pixel Art Maker with empty 16x16 grid"
 />
 
 Nothing is interactive yet. We'll soon add JavaScript for that!
@@ -291,7 +291,7 @@ canvas.addEventListener("mouseleave", () => {
 **Test it:** Save the file and refresh `index.html` in the browser. You should be able to click and drag on the grid to draw black pixels! You'll also see a translucent preview when hovering.
 
 <img
-  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-creator-with-html-css-and-javascript/assets/pen-drawing.png"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-maker-with-html-css-and-javascript/assets/pen-drawing.png"
   alt="Drawing a smiley face with the pen tool"
 />
 
@@ -343,7 +343,7 @@ Let's break this down:
 **Test it:** Draw a closed shape with the pen, select the fill tool (🪣), pick a color, and click inside the shape. The region fills without crossing the border!
 
 <img
-  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-creator-with-html-css-and-javascript/assets/flood-fill.png"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-maker-with-html-css-and-javascript/assets/flood-fill.png"
   alt="Flood fill tool filling a smiley face with yellow"
 />
 
@@ -453,7 +453,7 @@ How this works:
 **Test it:** Switch to 32x32 - the grid resets with much smaller cells, giving you more detail to work with:
 
 <img
-  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-creator-with-html-css-and-javascript/assets/grid-32x32.png"
+  src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-pixel-art-maker-with-html-css-and-javascript/assets/grid-32x32.png"
   alt="Grid switched to 32x32 with smaller cells"
 />
 
@@ -499,7 +499,7 @@ How the export works:
 - `canvas.toDataURL("image/png")` converts the canvas content into a PNG image encoded as a data URL.
 - We create a temporary `<a>` element with the `download` attribute set to `"pixel-art.png"` and programmatically click it to trigger the browser's download dialog.
 
-**Save the file** and refresh your browser. Your Pixel Art Creator should now be fully functional!
+**Save the file** and refresh your browser. Your Pixel Art Maker should now be fully functional!
 
 Test everything:
 
