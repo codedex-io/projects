@@ -7,7 +7,7 @@ description: Learn how to build a gallery of drawings that any user can contribu
 header: https://github.com/codedex-io/projects/blob/6c55e0553d4d94c26add4bdf0a78afac3c4988fc/projects/create-a-doodle-gallery/images/doodle-gallery-banner.gif?raw=true
 bannerImage: https://github.com/codedex-io/projects/blob/6c55e0553d4d94c26add4bdf0a78afac3c4988fc/projects/create-a-doodle-gallery/images/doodle-gallery-banner.gif?raw=true
 published: live
-readTime: 2 hours
+readTime: 80
 prerequisites: JavaScript, Node.js, SQL 
 versions: None
 tags:
@@ -21,37 +21,39 @@ courses:
 
 ## Introduction
 
-I miss the days of the internet when people built cool stuff for the sake of making fun things. There were a lot of random sites that were heavily in circulation during my younger years, like [Google Doodles](https://doodles.google/), that embraced creativity and play. 
+I miss the days of the internet when people built cool stuff for the sake of making fun things. There were a lot of random sites that everyone visited during my younger years, like [Google Doodles](https://doodles.google/), that embraced creativity and play. 
 
 ![Google doodles](https://www.pcworld.com/wp-content/uploads/2025/06/baseball-100900643-orig.jpg?quality=50&strip=all)
 
-Here’s a project tutorial that might help bring us back to these days – you’ll be building a website where anyone can draw a doodle for a public virtual museum exhibit! 
+Here's a project tutorial that might help bring us back to these days - you'll be building a website where anyone can draw a doodle for a public virtual museum exhibit! 
 
-![](./images/ezgif-509d613e7e5e8ca6.gif)
+![Doodle gallery](./images/ezgif-509d613e7e5e8ca6.gif)
 
-To make this project, we’ll be using the classic web dev tools HTML, CSS, and JavaScript, and will be storing our drawings in [Supabase](http://supabase.com/). 
+To make this project, we'll be using the classic web dev tools HTML, CSS, and JavaScript, and will be storing our drawings in [Supabase](http://supabase.com/). 
 
-We’ll also be using [Vite](https://vite.dev/) to get a local server running our website,  that way you can run local servers with Node.js. I picked Vite because it handles imports  cleanly, refreshes your website automatically with any changes, and is structured  to better handle a project with a realtime database! 
+We'll also be using [Vite](https://vite.dev/) to get a local server running our website,  that way you can see your changes immediately. I picked Vite because it handles imports  cleanly, refreshes your website automatically with any changes, and is structured to better handle a project with a realtime database! 
 
 ## About Supabase
 
-[Supabase](https://supabase.com/) is a PostgreSQL (Post-Ingres Structured Query Language) development platform. In other words, it’s a database system that takes care of everything from setup, deployment, and application scaling, perfect for what we'll be creating today!  
+[Supabase](https://supabase.com/) is a PostgreSQL (Post-Ingres Structured Query Language) development platform. In other words, it's a database system that takes care of everything from setup, deployment, and application scaling - perfect for what we'll be creating today!  
 
 ![Supabase](https://nocodestartup.io/wp-content/uploads/2024/09/supabase-02-edited.png)
 
-Whenever a user draws a picture or types out text, we’re going to use Supabase to store all that information in real time, and fetch them from a bucket (aka a type of storage container) of our image-text pairs to display drawings in a public gallery! 
+Whenever a user draws a picture or types out text, we're going to use Supabase to store all that information in real time, and fetch them from a bucket (aka a type of storage container) of our image-text pairs to display drawings in a public gallery! 
 
-## **Setting Up**
+## Setting Up
 
-#### **Workspace**
+### Workspace
 
-I’ll be using [VS Code](https://code.visualstudio.com/) for this project, but you can use any IDE you want. If you’ve never used VS Code before, you can get set up with the help of [our VS Code tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python#download-vs-code). 
+I'll be using [VS Code](https://code.visualstudio.com/) for this project, but you can use any IDE you want. If you've never used VS Code before, you can get set up with the help of [our VS Code tutorial](https://www.codedex.io/projects/set-up-your-local-environment-in-python#download-vs-code). 
 
-#### Supabase setup
-Make sure to create a Supabase account if you haven't already!
+### Supabase setup
+Make sure to create a [Supabase account](https://supabase.com/sign-up) if you haven't already!
 
 1. Create a project by clicking on **New Project**. Name it whatever you'd like.
+
 ![](https://dcv19h61vib2d.cloudfront.net/thumbs/egghead-create-a-new-supabase-project-lEG2O_feW/egghead-create-a-new-supabase-project-lEG2O_feW.jpg)
+
 
 2. Find the Storage Menu and click on it. Then create a new bucket, and name it "drawings". Make sure this bucket is set to public so your gallery is viewable!
 3. Open up the SQL Editor on the lefthand menu (it pops up when you hover on it), and run this code:
@@ -64,55 +66,62 @@ create table if not exists public.drawings (
   created_at timestamptz not null default now()
 );
 ```
-#### **Adding your API Keys**
+### Adding your API Keys
 We need to add API keys to our project for it to connect to our storage bucket - API keys authenticate the usage of coding tools like Supabase.
 
 Go to the API menu under Project Settings. Find your Project URL and API key. They should look something like this:
-![](./images/key-url-example.png)
 
-#### **Clone Template**
+![API keys](./images/key-url-example.png)
 
-Head over to [this GitHub link](https://github.com/gbanaag/codedex-doodle-project-template#) and clone the repository. The repository takes care of all the visual and front-end work, so you can put your full focus on working with your database.
+### Clone Template
+
+Head over to [this GitHub link](https://github.com/gbanaag/codedex-doodle-project-template#) and clone the repository. The repository takes care of all the visual and front-end work, so you can put your full focus on working with your database.
 
 You can clone the template in 3 different ways:
 
 1. Downloading the folder and adding it to your local workspace
 2. GitHub Desktop app
-3. `git clone` with command line
+3. `git clone` with command line
 
-If you’re curious to know what’s been coded for you already, here’s what’s already set up: The canvas interface where users can create their drawings (JavaScript)
+If you're curious to know what's been coded for you already, here's what's already set up: 
 
-- An input box to collect captions (HTML, **`index.html`**)
+- The canvas interface where users can create their drawings (JavaScript)
+- An input box to collect captions (HTML, **index.html**)
 - Fonts, colors, the frame images, measurements (for the frames), animations, and layout choices (CSS, **`style.css`**)
-- Picking random frames for each drawing (JavaScript, **`main.js`**)
+- Picking random frames for each drawing (JavaScript, **main.js**)
 
-You’ll be focusing on: 
+You'll be focusing on: 
 - Creating a storage container
 - Setting up your website so that it can collect data 
-- Displaying the data (user-created drawings and text) that’s been collected in a scrolling gallery 
+- Displaying the data (user-created drawings and text) that's been collected in a scrolling gallery 
 
-Let’s get into it! ⚡
+Let's get into it! ⚡
 
-#### Installing Vite
+### Installing Vite
 
-Make sure you have the latest version of [Node.js](https://nodejs.org/en/download) installed. Head to the Terminal menu at the top of your screen, and click on "New terminal". Make sure you’re in the root directory (your project’s top most folder) before running any commands in your Terminal. 
+Make sure you have the latest version of [Node.js](https://nodejs.org/en/download) installed. 
+
+Head to the Terminal menu at the top of your screen, and click on "New terminal". Make sure you're in the root directory (your project's top most folder) before running any commands in your Terminal. 
 
 Run this command in the terminal: 
-`npm create vite@latest`
+
+```terminal
+npm create vite@latest
+```
 
 Then, answer the prompts as follows. You can name your project however you like. When prompted, pick `Vanilla` as your framework and `JavaScript` as your variant. Your terminal should look like this at the end of completing the steps:
 
-![](./images/vite-setup.png)
+![Vite setup](./images/vite-setup.png)
 
-This might look different depending on what kind of computer you’re using — in my case, I’m on a Macbook. If you're struggling with Vite, you can check out our [Vite project tutorial](https://www.codedex.io/projects/create-a-react-app-with-vite)!
+This might look different depending on what kind of computer you're using — in my case, I'm on a Macbook. If you're struggling with Vite, you can check out our [Vite project tutorial](https://www.codedex.io/projects/create-a-react-app-with-vite)!
 
-#### Running your server
+### Running your server
 
-To start up a server with your webpage running, type `npm run dev` in the Terminal. It’ll give you a URL that looks something like: `http://localhost:3000/` – but the numbers in the URL can vary. Copy the link and paste it in your browser, and you should see something like this:
+To start up a server with your webpage running, type `npm run dev` in the Terminal. It'll give you a URL that looks something like: `http://localhost:3000/` - but the numbers in the URL can vary. Copy the link and paste it in your browser, and you should see something like this:
 
 ![](./images/vite-startup-template-screen.png)
 
-#### **.env** File and API Keys**
+### .env file and API keys
 
 In your root folder, create a new file called **.env**. An **.env** file is used to keep sensitive information like API keys and credentials secret, and uses substitute names in your code instead of the actual keys or data. This is helpful if your code is publicly shared, like on GitHub for example, since it hides the API keys automatically!
 
@@ -128,7 +137,7 @@ VITE_SUPABASE_ANON_KEY=uvoNOTCBo2l7KE4mIHpdbfhrXDG80CyFxqqtLAB8RMv
 
 Right now, you can draw on the canvas of the website, but you can't save or send the drawings anywhere. Once the page refreshes, the drawing disappears. We'll be coding a `submitDrawing()` function that packages up the canvas image and caption text, sends them to Supabase, and then immediately adds them to the gallery so the user can see their doodle appear in real time.
 
-We'll start by creating the function. We’re making an `async` function – a special type of function that handles tasks external to the code we already have. In our case, we’re submitting data to container outside of the codebase. 
+We'll start by creating the function. We're making an `async` function - a special type of function that handles tasks external to the code we already have. In our case, we're submitting data to container outside of the codebase. 
 
 ```jsx
 async function submitDrawing() {
@@ -136,7 +145,7 @@ async function submitDrawing() {
 }
 ```
 
-Make sure these next few lines are nested (written inside) `submitDrawing()`. First, we’ll make sure the canvas is actually set up and prevents errors if it isn’t:
+Make sure these next few lines are nested (written inside) `submitDrawing()`. First, we'll make sure the canvas is actually set up and prevents errors if it isn't:
 
 ```jsx
 if (!canvas || !ctx) {
@@ -144,7 +153,7 @@ if (!canvas || !ctx) {
 }
 ```
 
-Then we’ll enclose it in a try / catch statement, to return an error if something goes wrong. We’ll start by writing out variables to collect caption data (that gets limited to 140 characters), taking the drawing data from the canvas, and checking if the canvas is empty and flagging it if it is.
+Then we'll enclose it in a `try / catch` statement, to return an error if something goes wrong. We'll start by writing out variables to collect caption data (that gets limited to 140 characters), taking the drawing data from the canvas, and checking if the canvas is empty and flagging it if it is.
 
 ```jsx
 try {
@@ -154,9 +163,9 @@ try {
     const flagged = decideFlagging(imageData.data);
 ```
 
-Then we’ll crop the drawing into a square and center it, adding 32px of padding around it so that it fits nicely in each frame. `exportCanvas.toBlob` converts the canvas into a binary **.png** file, aka a blob, for easy storage in our bucket.
+Then we'll crop the drawing into a square and center it, adding 32px of padding around it so that it fits nicely in each frame. `exportCanvas.toBlob` converts the canvas into a binary **.png** file, aka a blob, for easy storage in our bucket.
 
-Then we’ll create a unique filename for our drawing with the a timestamp and a randomly generated id.
+Then we'll create a unique filename for our drawing with the a timestamp and a randomly generated id.
 
 ```jsx
 const exportCanvas = makeCenteredSquarePng(canvas, 32);
@@ -168,7 +177,7 @@ const exportCanvas = makeCenteredSquarePng(canvas, 32);
     const path = `public/${filename}`;
 ```
 
-We’ll manage any errors uploading images to Supabase here: 
+We'll manage any errors uploading images to Supabase here: 
 
 ```jsx
 const { error: uploadError } = await supabase.storage
@@ -196,7 +205,7 @@ if (insertError) throw insertError;
  } 
 ```
 
-Lastly, we’ll make sure to handle errors in a `catch` statement:
+Lastly, we'll make sure to handle errors in a `catch` statement:
 
 ```jsx
 catch (err) {
@@ -208,7 +217,7 @@ Time to make our next function!
 ## Loading your Gallery
 When the page first loads, we want to populate the gallery with existing drawings from the database. The `loadGallery()` function reads rows from the drawings table, fetches each drawing's public image URL from the storage bucket, and renders them on the page.
 
-We’ll start by writing out the header of our `loadGallery` function and limiting the number of entries to 40. If the gallery element (stored in `galleryEl`) doesn’t exist, we stop running the `loadGallery()` function entirely to save time.
+We'll start by writing out the header of our `loadGallery` function and limiting the number of entries to 40. If the gallery element (stored in `galleryEl`) doesn't exist, we stop running the `loadGallery()` function entirely to save time.
 
 ```jsx
 async function loadGallery(limit = 40, randomize = true) {
@@ -216,7 +225,7 @@ async function loadGallery(limit = 40, randomize = true) {
 }
 ```
 
-We open a query on the drawings table (`.from(TABLE)`), select what data we want to reflect in our gallery (in our case, the drawing path, caption, whether or not the drawing is flagged, and a timestamp), order it based on recency (`ascending: false`), and limit the number of drawings fetched to the pool size (which we set as 500 to keep things moving smoothly – if it’s less then we don’t need to worry about that since 500 is the limit).
+We open a query on the drawings table (`.from(TABLE)`), select what data we want to reflect in our gallery (in our case, the drawing path, caption, whether or not the drawing is flagged, and a timestamp), order it based on recency (`ascending: false`), and limit the number of drawings fetched to the pool size (which we set as 500 to keep things moving smoothly - if it's less then we don't need to worry about that since 500 is the limit).
 
 Once again, the next few lines will be contained inside the function we just defined, `loadGallery()`.
 
@@ -230,7 +239,7 @@ const { data, error } = await supabase
   if (error) throw error;
 ```
 
-Then, we’ll iterate over all the rows we just pulled from the bucket, and add each individual one to the gallery until we hit the maximum number of drawings in `rows`. Since our bucket is public, we’ll grab the public URL of the drawing data and add it to our gallery with the `addToGallery()` function, which we’ll write shortly after this.
+Then, we'll iterate over all the rows we just pulled from the bucket, and add each individual one to the gallery until we hit the maximum number of drawings in `rows`. Since our bucket is public, we'll grab the public URL of the drawing data and add it to our gallery with the `addToGallery()` function, which we'll write shortly after this.
 
 ```jsx
  for (const row of rows) {
@@ -241,7 +250,7 @@ Then, we’ll iterate over all the rows we just pulled from the bucket, and add 
 }
 ```
 
-Don’t forget to close out your `try` with a `catch` statement:
+Don't forget to close out your `try` with a `catch` statement:
 
 ```jsx
 catch (err) {
@@ -251,9 +260,9 @@ catch (err) {
 
 ## Adding Submitted Doodles to the Gallery
 
-#### Function and variable setup
+### Function and variable setup
 
-We’ll start by creating an `addToGallery()` function with four parameters. We’ll be collecting the url of user created drawings, a caption for text to associate with the drawing, a `flagged` boolean to check if the user has left the canvas mostly blank, and a timestamp (`createdAt`). 
+We'll start by creating an `addToGallery()` function with four parameters. We'll be collecting the url of user created drawings, a caption for text to associate with the drawing, a `flagged` boolean to check if the user has left the canvas mostly blank, and a timestamp (`createdAt`). 
 
 ```jsx
 function addToGallery(publicUrl, caption, flagged, createdAt) {
@@ -261,19 +270,19 @@ function addToGallery(publicUrl, caption, flagged, createdAt) {
 }
 ```
 
-Next up inside the function, we’ll pick a random frame and store it in a variable for each drawing that gets rendered on the website. The `pickRandomFrame();` function is already coded for you!
+Next up inside the function, we'll pick a random frame and store it in a variable for each drawing that gets rendered on the website. The `pickRandomFrame();` function is already coded for you!
 
 ```jsx
 const frame = pickRandomFrame();
 ```
 
-We’ll store user inputted text into a variable called title. The `?` symbol is a shorthand version of an `if-else` statement. If the caption isn’t blank, it removes excess whitespace at the start and end of the string of text. Else, if the user doesn’t input any text, the title becomes “Untitled” automatically. 
+We'll store user inputted text into a variable called title. The `?` symbol is a shorthand version of an `if-else` statement. If the caption isn't blank, it removes excess whitespace at the start and end of the string of text. Else, if the user doesn't input any text, the title becomes “Untitled” automatically. 
 
 ```jsx
 const title = caption?.trim() || "Untitled";
 ```
 
-Then we’ll collect information about the month and year each drawing was made. We’re formatting it with the US version of date and time formatting, and making sure the month is the short version of each month (e.g. Feb instead of February) while the year stays numeric. 
+Then we'll collect information about the month and year each drawing was made. We're formatting it with the US version of date and time formatting, and making sure the month is the short version of each month (e.g. Feb instead of February) while the year stays numeric. 
 
 ```jsx
 const date = createdAt
@@ -286,18 +295,18 @@ const date = createdAt
 
 #### DOM Manipulation
 
-Whenever we have a new drawing to add to our collection of drawings, we’ll be generating a `<div>` on the spot for the drawing and caption to live in. This is so we don’t have to make many `<div>s` to fill in later, just creating them whenever a user submits a drawing. We’re putting each generated `<div>` in a function scoped variable, and assigning the class name “artCard”, which has pre-set CSS properties, to the `<div>`. 
+Whenever we have a new drawing to add to our collection of drawings, we'll be generating a `<div>` on the spot for the drawing and caption to live in. This is so we don't have to make many `<div>s` to fill in later, just creating them whenever a user submits a drawing. We're putting each generated `<div>` in a function scoped variable, and assigning the class name “artCard”, which has pre-set CSS properties, to the `<div>`. 
 
-Make sure you’re still including this under the `addToGallery()` function!
+Make sure you're still including this under the `addToGallery()` function!
 
 ```jsx
 const wrap = document.createElement("div");
 wrap.className = "artCard";
 ```
 
-Then, we’ll add tags inside of the element by using `.innerHTML` to change the `<div>`’s HTML content. We’ll be encapsulating more `<div>`s inside of the wrap `<div>` we created in the step above, and adding our new drawing, a randomly chosen frame, and a placard (informational cards see in galleries and art exhibits) with information about our drawing, like the month and year. 
+Then, we'll add tags inside of the element by using `.innerHTML` to change the `<div>`'s HTML content. We'll be encapsulating more `<div>`s inside of the wrap `<div>` we created in the step above, and adding our new drawing, a randomly chosen frame, and a placard (informational cards see in galleries and art exhibits) with information about our drawing, like the month and year. 
 
-If you’re curious about what `escapeHtml` does, it makes sure that any characters regularly used in code such as `<>&\`;’?` aren’t accidentally interpreted as code – this could mess with your website being able to run at all if users include it in their drawing titles!
+If you're curious about what `escapeHtml` does, it makes sure that any characters regularly used in code such as `<>&\`;'?` aren't accidentally interpreted as code - this could mess with your website being able to run at all if users include it in their drawing titles!
 
 ```jsx
 wrap.innerHTML = `
@@ -315,7 +324,7 @@ wrap.innerHTML = `
 `;
 ```
 
-We’ll add ways to make sure that the frame orients properly (horizontally or vertically), and add the finished card to the top of our homepage gallery, with `.prepend(wrap)`.
+We'll add ways to make sure that the frame orients properly (horizontally or vertically), and add the finished card to the top of our homepage gallery, with `.prepend(wrap)`.
 
 ```jsx
 const stage = wrap.querySelector(".frameStage");
@@ -336,9 +345,9 @@ async function fetchRandomRows(count = 200) {
   const poolSize = Math.max(600, count * 3);
 ```
 
-Supabase will destructure, which means it’ll pull out specific values from an object and assign them by finding their keys in the storage bucket and assigning them to `data` and `error`. We add `await` so that the function pauses while your code tries to connect to Supabase online – since network requests can take a bit of time sometimes! 
+Supabase will destructure, which means it'll pull out specific values from an object and assign them by finding their keys in the storage bucket and assigning them to `data` and `error`. We add `await` so that the function pauses while your code tries to connect to Supabase online - since network requests can take a bit of time sometimes! 
 
-We’ll pull our drawings from our table again – we worked on this earlier in the `loadGallery()` function, and it writes out the same:
+We'll pull our drawings from our table again - we worked on this earlier in the `loadGallery()` function, and it writes out the same:
 
 ```jsx
 const { data, error } = await supabase
@@ -350,11 +359,11 @@ const { data, error } = await supabase
 if (error) throw error;
 ```
 
-We want our big gallery to load random drawings, so everyone’s drawings have a shot at being seen. Supabase can’t shuffle the data it pulls, so we’re going to do it ourselves! 
+We want our big gallery to load random drawings, so everyone's drawings have a shot at being seen. Supabase can't shuffle the data it pulls, so we're going to do it ourselves! 
 
-`shuffled` will store the data from our bucket. If the bucket is empty, we’ll leave `rows` empty. The template you cloned includes a prewritten `shuffleArray()` function, so we’ll shuffle `rows` and take in `data` – aka the drawings. We’ll iterate through the first `count` number of our set of shuffled drawings, and store those drawings in the `picked` array by `push()`-ing them in.
+`shuffled` will store the data from our bucket. If the bucket is empty, we'll leave `rows` empty. The template you cloned includes a prewritten `shuffleArray()` function, so we'll shuffle `rows` and take in `data` - aka the drawings. We'll iterate through the first `count` number of our set of shuffled drawings, and store those drawings in the `picked` array by `push()`-ing them in.
 
-`seenPaths` is already declared when you clone the GitHub template, and is used to make sure any data isn’t repeated when rendering your gallery.
+`seenPaths` is already declared when you clone the GitHub template, and is used to make sure any data isn't repeated when rendering your gallery.
 
 ```jsx
   const shuffled = shuffleArray(data ?? []);
@@ -372,11 +381,11 @@ We want our big gallery to load random drawings, so everyone’s drawings have a
 }
 ```
 
-Then we’re going to add our batch of drawings to our marquee. If you don’t know what a marquee is, it’s a scrolling gallery, or set of text that seems to scroll infinitely!
+Then we're going to add our batch of drawings to our marquee. If you don't know what a marquee is, it's a scrolling gallery, or set of text that seems to scroll infinitely!
 
-![](./images/webflow-marquee-example.gif)
+![Marquee example](./images/webflow-marquee-example.gif)
 
-We’ll write out our function header for `repeatMarquee()`, limiting the number of drawings picked to 200. Our marquee has two rows, and if neither of them render, it’ll stop the function through the `if` statement.
+We'll write out our function header for `repeatMarquee()`, limiting the number of drawings picked to 200. Our marquee has two rows, and if neither of them render, it'll stop the function through the `if` statement.
 
 ```jsx
 async function repeatMarquee(count = 200) {
@@ -386,7 +395,7 @@ async function repeatMarquee(count = 200) {
     }
 ```
 
-We don’t want the gallery to just end after we go through all 200 drawings, so we’re going to make the same 200 drawings cycle on a loop. To start this process, count how many cards have been rendered across both rows in the marquee, so we know if we should start pulling up the old ones. If none have been rendered yet, we grab them from Superbase. If Superbase doesn’t return anything `(!rows.length)`, we stop the function.
+We don't want the gallery to just end after we go through all 200 drawings, so we're going to make the same 200 drawings cycle on a loop. To start this process, count how many cards have been rendered across both rows in the marquee, so we know if we should start pulling up the old ones. If none have been rendered yet, we grab them from Superbase. If Superbase doesn't return anything `(!rows.length)`, we stop the function.
 
 ```jsx
  const existing =
@@ -400,7 +409,7 @@ We don’t want the gallery to just end after we go through all 200 drawings, so
 		    }
 ```
 
-Then we’ll go through each table entry through a loop, and create a card for the drawing to live in:
+Then we'll go through each table entry through a loop, and create a card for the drawing to live in:
 
 ```jsx
 
@@ -430,27 +439,27 @@ Then we’ll go through each table entry through a loop, and create a card for t
 
 ## Deployment
 
-We’re almost done! 🌟
+We're almost done! 🌟
 
-I used [Vercel](https://vercel.com/) to deploy (host my code and server on a working webpage) my work because it’s free and it connects to your GitHub repository really easily when you log into Vercel through GitHub. If you’re lost on what to do, head to [Ellie’s tutorial on how to deploy a website with Vercel](https://www.codedex.io/projects/deploy-a-website-with-vercel). 
+I used [Vercel](https://vercel.com/) to deploy (host my code and server on a working webpage) my work because it's free and it connects to your GitHub repository really easily when you log into Vercel through GitHub. If you're lost on what to do, head to [Ellie's tutorial on how to deploy a website with Vercel](https://www.codedex.io/projects/deploy-a-website-with-vercel). 
 
 Congrats on finishing your gallery! This was a long read, so you should be proud of yourself for making it this far. 
 
-If you make your own gallery, be sure to drop a link to your project in the comments so the Codédex team can leave doodles on your website. 😉 And if you’ve made your own variation, tag us with what you made on Instagram, X, or your favorite social media platform.
+If you make your own gallery, be sure to drop a link to your project in the comments so the Codédex team can leave doodles on your website. 😉 And if you've made your own variation, tag us with what you made on Instagram, X, or your favorite social media platform.
 
 Want to take this project up a notch? You can try…
 
-- Making a whole different theme for this project – [this garden themed doodle gallery](https://annasgarden.dev/) is the project that inspired me to make this tutorial!
+- Making a whole different theme for this project - [this garden themed doodle gallery](https://annasgarden.dev/) is the project that inspired me to make this tutorial!
 - Analyzing drawings with an ML model to filter drawings (if you only want to have certain types of objects or drawings on your website)
 
-###### **Troubleshooting**
+### Troubleshooting
 
-- Make sure you’ve installed all your dependencies – you can do this by going to your root folder in the terminal, and running `npm install`.
+- Make sure you've installed all your dependencies - you can do this by going to your root folder in the terminal, and running `npm install`.
 - Check that your API keys are accurate and you didn't accidentally remove any characters. Make sure that your variable names are spelled exactly as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`, and restart your dev server after editing your **.env** file.
-- If your drawings aren't submitting to the database, disable RLS in the Supabase dashboard for that table. A bucket not found error means the bucket name in your code doesn't match what you created in Supabase – it should be called "drawings".
+- If your drawings aren't submitting to the database, disable RLS in the Supabase dashboard for that table. A bucket not found error means the bucket name in your code doesn't match what you created in Supabase - it should be called "drawings".
 - Any other issues? Make sure to inspect element in your browser and check the console for any errors.
 
-###### **Additional Resources**
+#### Additional Resources
 
 - [Supabase documentation](https://supabase.com/docs)
 - [Supabase storage guide](https://supabase.com/docs/guides/storage)
