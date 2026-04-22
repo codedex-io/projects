@@ -4,8 +4,8 @@ author: Gabriela Banaag
 uid: CgUQBagDrWWBRUuoh3mkyi3aedg1
 datePublished: 2026-03-26
 description: Learn how to build a gallery of drawings that any user can contribute to
-header: https://github.com/codedex-io/projects/blob/6c55e0553d4d94c26add4bdf0a78afac3c4988fc/projects/create-a-doodle-gallery/images/doodle-gallery-banner.gif?raw=true
-bannerImage: https://github.com/codedex-io/projects/blob/6c55e0553d4d94c26add4bdf0a78afac3c4988fc/projects/create-a-doodle-gallery/images/doodle-gallery-banner.gif?raw=true
+header: https://github.com/codedex-io/projects/blob/6c55e0553d4d94c26add4bdf0a78afac3c4988fc/projects/create-a-doodle-gallery-with-supabase/images/doodle-gallery-banner.gif?raw=true
+bannerImage: https://github.com/codedex-io/projects/blob/6c55e0553d4d94c26add4bdf0a78afac3c4988fc/projects/create-a-doodle-gallery-with-supabase/images/doodle-gallery-banner.gif?raw=true
 published: live
 readTime: 80
 prerequisites: JavaScript, Node.js, SQL 
@@ -27,7 +27,7 @@ I miss the days of the internet when people built cool stuff for the sake of mak
 
 Here's a project tutorial that might help bring us back to these days - you'll be building a website where anyone can draw a doodle for a public virtual museum exhibit! 
 
-<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery/images/ezgif-509d613e7e5e8ca6.gif" alt="Doodle gallery" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery-with-supabase/images/ezgif-509d613e7e5e8ca6.gif" alt="Doodle gallery" />
 
 To make this project, we'll be using the classic web dev tools HTML, CSS, and JavaScript, and will be storing our drawings in [Supabase](http://supabase.com/). 
 
@@ -71,7 +71,7 @@ We need to add API keys to our project for it to connect to our storage bucket -
 
 Go to the API menu under Project Settings. Find your Project URL and API key. They should look something like this:
 
-<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery/images/key-url-example.png" alt="API keys" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery-with-supabase/images/key-url-example.png" alt="API keys" />
 
 ### Clone Template
 
@@ -111,7 +111,7 @@ npm create vite@latest
 
 Then, answer the prompts as follows. You can name your project however you like. When prompted, pick `Vanilla` as your framework and `JavaScript` as your variant. Your terminal should look like this at the end of completing the steps:
 
-<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery/images/vite-setup.png" alt="Vite setup" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery-with-supabase/images/vite-setup.png" alt="Vite setup" />
 
 This might look different depending on what kind of computer you're using — in my case, I'm on a Macbook. If you're struggling with Vite, you can check out our [Vite project tutorial](https://www.codedex.io/projects/create-a-react-app-with-vite)!
 
@@ -119,7 +119,7 @@ This might look different depending on what kind of computer you're using — in
 
 To start up a server with your webpage running, type `npm run dev` in the Terminal. It'll give you a URL that looks something like: `http://localhost:3000/` - but the numbers in the URL can vary. Copy the link and paste it in your browser, and you should see something like this:
 
-<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery/images/vite-startup-template-screen.png" alt="Vite startup template screen" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery-with-supabase/images/vite-startup-template-screen.png" alt="Vite startup template screen" />
 
 ### .env file and API keys
 
@@ -383,7 +383,7 @@ We want our big gallery to load random drawings, so everyone's drawings have a s
 
 Then we're going to add our batch of drawings to our marquee. If you don't know what a marquee is, it's a scrolling gallery, or set of text that seems to scroll infinitely!
 
-<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery/images/webflow-marquee-example.gif" alt="Marquee example" />
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-doodle-gallery-with-supabase/images/webflow-marquee-example.gif" alt="Marquee example" />
 
 We'll write out our function header for `repeatMarquee()`, limiting the number of drawings picked to 200. Our marquee has two rows, and if neither of them render, it'll stop the function through the `if` statement.
 
