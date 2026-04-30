@@ -1,0 +1,376 @@
+---
+title: Build a Canvas Typography Layout with Pretext
+author: Ellie Popoca
+uid: 11zhRKeJCWWcD7IkTJBtuK3Mkvo1
+datePublished: 
+published: false
+description: Learn how to build a canvas typography layout with the Pretext library.
+header: https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-caesar-cipher-with-java/header.gif
+bannerImage: https://raw.githubusercontent.com/codedex-io/projects/main/projects/create-a-caesar-cipher-with-java/header.gif
+readTime: 30
+prerequisites: JavaScript, HTML, CSS
+versions: Node.js 20.13.0
+tags:
+  - intermediate
+  - javascript
+courses:
+  - javascript
+  - html
+  - css
+---
+
+## About Pretext
+
+In March of 2026, @_chenglou on X shared a tweet that went viral about the new changes in the world of UI engineering. 
+
+https://x.com/_chenglou/status/2037713766205608234 (embed) 
+
+Pretext is a library that is described as a “fast, accurate & comprehensive text measurement & layout” tool created by Cheng Lou. But what does this mean?
+
+When you display text on a webpage, the browser needs to figure out: "How tall will this paragraph be?” and “How many lines does it wrap into?" This would be for example a blog post, or text content for a news article you're reading. 
+
+The traditional way to find out is to literally render the text to the screen (even if it's hidden), then ask the browser to measure it. This is called a DOM measurement, and it's painfully slow, especially if you're doing it for hundreds of items at once.
+
+Pretext solves the problem of calculating the height of a paragraph of line-wrapped text without touching the DOM at all.
+
+
+View demos of pretext here: https://chenglou.me/pretext/ 
+
+## Introduction 
+
+In this project, you'll build a dynamic typography layout using the HTML `<canvas>` element and the `@chenglou/pretext` library to experiment and explore with dynamic text layouts. 
+
+Instead of normal HTML text flow, you'll:
+
+- Render text manually on a canvas
+- Make it wrap around floating images
+- Reflow dynamically on scroll and resize
+
+
+
+This project is a starting point for you to explore the possibilities of the pretext library and learn
+
+- How to render text with `<canvas>`
+- How to detect and avoid overlapping elements
+- How to reflow layouts on scroll
+
+Let's get started! ✨
+
+## Project Setup
+
+For this project, we'll be using Vanilla JS using Vite to set up our files. I'll be using the Cursor IDE, but use any you would like. 
+
+```terminal
+npm create vite@latest
+```
+
+Follow the steps to set up a Vanilla framework, JavaScript variant. 
+
+
+Next, Install pretext: 
+
+```terminal
+npm install @chenglou/pretext
+```
+
+Once you have your files set up, make sure to remove any unnecessary boilerplate code, and make sure your project structure matches the one below:
+```output
+project/
+├── index.html
+├── style.css
+└── src/
+    └── main.js
+```
+
+## File Setup
+
+Inside your **index.html** file, we'll create a `<canvas>` for the text, and include our **fixed** position images that the text will wrap around. For this example, I'm using two images. 
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My pretext project!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    
+<!-- Fixed images -->
+    <img
+      id="img1"
+      class="fixed-image"
+      src="https://picsum.photos/id/1015/260/200"
+      alt="Mountain landscape"
+    />
+    <img
+      id="img2"
+      class="fixed-image"
+      src="https://picsum.photos/id/1025/220/180"
+      alt="Dog portrait"
+    />
+
+    <div id="container">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+```
+
+Next, we'll create a CSS file to design our layout. This can be changed and designed to your liking! For this project example, we're setting up a white background behind our text to a specific width. 
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f0ece4;
+  font-family: Georgia, serif;
+}
+
+#container {
+  width: 720px;
+  margin: 0 auto;
+  padding: 5;
+}
+
+canvas {
+  display: block;
+  width: 720px;
+}
+
+/* Fixed images */
+.fixed-image {
+  position: fixed;
+  z-index: 10;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* Right image */
+#img1 {
+  top: 120px;
+  right: calc(50% - 340px);
+  width: 260px;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Left image */
+#img2 {
+  top: 420px;
+  left: calc(50% - 340px);
+  width: 220px;
+  height: 180px;
+  object-fit: cover;
+}
+```
+Each image that you include should have its own `id` to make its own CSS changes (width, height, and padding). You're encouraged to change this based on your own desired CSS layout. 
+
+## Pretext
+
+`@chenglou/pretext` helps us:
+
+- Measure text
+- Break it into lines
+- Respect width constraints
+
+We'll use three pretext functions to do just that: `prepareWithSegments()`, `layoutNextLineRange()`, and `materializeLineRange()`.
+
+
+
+We'll import the three functions from the library, and set up our `main.js` file: 
+
+```js
+import {
+  prepareWithSegments,
+  layoutNextLineRange,
+  materializeLineRange,
+} from "@chenglou/pretext";
+
+const FONT = "18px Georgia";
+const LINE_HEIGHT = 28;
+const CANVAS_WIDTH = 720;
+const PADDING = 30;
+const TEXT_WIDTH = CANVAS_WIDTH - PADDING * 2;
+const IMAGE_GAP = 20;
+```
+
+After the setup, create a `const` variable called `ARTICLE`, and in quotes, paste your article or text. If you want some sample text you can use text from this repo [here](). 
+
+Now, let's connect the JavaScript to the HTML elements we have:
+
+```js
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const container = document.getElementById("container");
+const img1El = document.getElementById("img1");
+const img2El = document.getElementById("img2");
+```
+
+This is so that we are able to draw directly onto our canvas the text and image elements. 
+
+Then, we'll load our article text using `prepareWithSegments()` using the text and the font for the text. This is only run once. 
+
+```js
+const prepared = prepareWithSegments(ARTICLE, FONT);
+```
+
+### Rendering
+
+Now, we'll start building out the main logic of the project; our render function. 
+
+```js
+function render() {
+  const dpr = window.devicePixelRatio || 1;
+  const containerRect = container.getBoundingClientRect();
+```
+
+- `dpr` makes the canvas sharp on high-DPI screens
+- `containerRect` helps convert positions correctly
+
+
+Our next step is to detect our image obstacles, and convert our image positions into canvas coordinates. This will help us treat our images like collisions. In the same `render()` function, add the following:
+
+```js
+const obstacles = [img1El, img2El].map((el) => {
+  const r = el.getBoundingClientRect();
+  return {
+    top: r.top - containerRect.top,
+    bottom: r.bottom - containerRect.top,
+    left: r.left - containerRect.left,
+    right: r.right - containerRect.left,
+    width: r.width,
+  };
+});
+```
+
+Now we generate each line of text dynamically, and loop until all the text is laid out: 
+
+```js
+let cursor = { segmentIndex: 0, graphemeIndex: 0 };
+let y = PADDING;
+const lines = [];
+
+while (true) {
+  let lineWidth = TEXT_WIDTH;
+  let xOffset = PADDING;
+```
+
+We'll then check if each line overlaps an image.
+
+```js
+  for (const obs of obstacles) {
+    const lineTop = y;
+    const lineBottom = y + LINE_HEIGHT;
+
+    if (lineBottom > obs.top && lineTop < obs.bottom) {
+      const obsCenter = (obs.left + obs.right) / 2;
+      const canvasCenter = CANVAS_WIDTH / 2;
+```
+
+For the following lines of code, we're asking to detect if the image is on the right to then shrink line width, and If image is on the left to push text to the right. Depending on your desired layout or behaviour you want to execute, this could change. 
+
+```js
+      if (obsCenter > canvasCenter) {
+        // Image on right → shrink width
+        const availableRight = obs.left - IMAGE_GAP;
+        lineWidth = Math.max(50, availableRight - PADDING);
+      } else {
+        // Image on left → push text right
+        const imgRight = obs.right + IMAGE_GAP;
+        xOffset = Math.max(PADDING, imgRight);
+        lineWidth = Math.max(50, CANVAS_WIDTH - PADDING - xOffset);
+      }
+    }
+  }
+```
+
+Now, we'll ask pretext for the next line that fits using `layoutNextLineRange()` and `materializeLineRange()` to then store it. 
+
+
+```js
+  const range = layoutNextLineRange(prepared, cursor, lineWidth);
+  if (range === null) break;
+
+  const line = materializeLineRange(prepared, range);
+
+  lines.push({ text: line.text, x: xOffset, y });
+
+  cursor = range.end;
+  y += LINE_HEIGHT;
+}
+```
+
+After the layout is adjusted, we'll resize the canvas to fit all the text: 
+```js
+ const totalHeight = y + PADDING;
+
+  canvas.width = CANVAS_WIDTH * dpr;
+  canvas.height = totalHeight * dpr;
+
+  canvas.style.width = CANVAS_WIDTH + "px";
+  canvas.style.height = totalHeight + "px";
+
+  ctx.scale(dpr, dpr);
+```
+
+We'll then draw the background and the text. This can be your creative choice. 
+
+```js
+  ctx.fillStyle = "#fffdf8";
+  ctx.fillRect(0, 0, CANVAS_WIDTH, totalHeight);
+
+  ctx.font = FONT;
+  ctx.fillStyle = "#2a2a2a";
+  ctx.textBaseline = "top";
+
+  for (const line of lines) {
+    ctx.fillText(line.text, line.x, line.y + 4);
+  }
+}
+```
+Note that this is the end of the `render()` function.
+
+### Re-rendering on Scroll
+
+Because the images are fixed, we're building the project so that the position of the images changes relative to the text when you scroll. We'll use `window.addEventListener()` for this: 
+
+```js
+let ticking = false;
+
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      render();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+```
+
+Finally, add the last two lines of code to re-render based on size, and call the `render()` function to display everything. 
+```js
+window.addEventListener("resize", () => render());
+render();
+```
+
+## Congrats! 
+
+You now have a fully working Canvas-based typography system that dynamically wraps text around images using pretext. The possibilities to explore this library are quite endless! 🤯
+
+Huge shoutout to [Cheng Lou](https://chenglou.me/) for pioneering this engineering feat, and with the world of AI starting to quickly challenge traditional software, it's come at a perfect time! 
+
+Feel free to take a look at these resources and some ideas to expand on this current pretext project! 
+
+- [pretext GitHub](https://github.com/chenglou/pretext#js-repo-pjax-container) from @_chenglou
+- [pretext demos](https://chenglou.me/pretext/)
+- [more! pretext demos](https://somnai-dreams.github.io/pretext-demos/)
+- [this](https://github.com/exrlla/pretext-scrollabe-project) project demo repo on GitHub
+- [x thread on pretext projects](https://x.com/_chenglou/status/2038497396033012131) 
