@@ -258,11 +258,11 @@ let y = PADDING;
 const lines = [];
 
 while (true) {
-  let lineWidth = TEXT_WIDTH;
-  let xOffset = PADDING;
+  let leftCut = PADDING;
+  let rightCut = CANVAS_WIDTH - PADDING;
 ```
 
-We'll then check if each line overlaps an image.
+We track the left and right edges of the available text band separately so multiple images on the same line can each tighten one side without overwriting each other. We'll then check if each line overlaps an image.
 
 ```js
   for (const obs of obstacles) {
@@ -274,21 +274,21 @@ We'll then check if each line overlaps an image.
       const canvasCenter = CANVAS_WIDTH / 2;
 ```
 
-For the following lines of code, we're asking to detect if the image is on the right to then shrink line width, and If image is on the left to push text to the right. Depending on your desired layout or behaviour you want to execute, this could change. 
+For the following lines of code, we're asking to detect if the image is on the right to then tighten the right edge, and if the image is on the left to push the left edge inward. Depending on your desired layout or behaviour you want to execute, this could change. 
 
 ```js
       if (obsCenter > canvasCenter) {
-        // Image on right → shrink width
-        const availableRight = obs.left - IMAGE_GAP;
-        lineWidth = Math.max(50, availableRight - PADDING);
+        // Image on right → tighten the right edge
+        rightCut = Math.min(rightCut, obs.left - IMAGE_GAP);
       } else {
-        // Image on left → push text right
-        const imgRight = obs.right + IMAGE_GAP;
-        xOffset = Math.max(PADDING, imgRight);
-        lineWidth = Math.max(50, CANVAS_WIDTH - PADDING - xOffset);
+        // Image on left → push the left edge inward
+        leftCut = Math.max(leftCut, obs.right + IMAGE_GAP);
       }
     }
   }
+
+  const xOffset = leftCut;
+  const lineWidth = Math.max(50, rightCut - leftCut);
 ```
 
 Now, we'll ask pretext for the next line that fits using `layoutNextLineRange()` and `materializeLineRange()` to then store it. 
