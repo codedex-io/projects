@@ -23,8 +23,11 @@ courses:
 
 In March of 2026, [Cheng Lou](https://x.com/_chenglou) on X shared a tweet that went viral about the new changes in the world of UI engineering. 
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">My dear front-end developers (and anyone who's interested in the future of interfaces):<br></br>I have crawled through depths of hell to bring you, for the foreseeable years, one of the more important foundational pieces of UI engineering (if not in implementation then certainly at… <a href="https://t.co/BKnwCDIp75">pic.twitter.com/BKnwCDIp75</a></p>&mdash; Cheng Lou (@_chenglou) <a href="https://twitter.com/_chenglou/status/2037713766205608234?ref_src=twsrc%5Etfw">March 28, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-canvas-typography-layout-with-pretext/images/006.png" alt="Pretext tweet" style={{ width: "100%", height: "auto" }} />
 
+<a href="https://twitter.com/_chenglou/status/2037713766205608234?ref_src=twsrc%5Etfw">The tweet</a>
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-canvas-typography-layout-with-pretext/images/004.gif" alt="Pretext demo" style={{ width: "80%", height: "auto" }} />
 Pretext is a library that is described as a “fast, accurate & comprehensive text measurement & layout” tool created by Cheng Lou. But what does this mean?
 
 When you display text on a webpage, the browser needs to figure out: "How tall will this paragraph be?” and “How many lines does it wrap into?" This would be for example a blog post, or text content for a news article you're reading. 
@@ -33,8 +36,9 @@ The traditional way to find out is to literally render the text to the screen (e
 
 Pretext solves the problem of calculating the height of a paragraph of line-wrapped text without touching the DOM at all.
 
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-canvas-typography-layout-with-pretext/images/002.gif" alt="Pretext diagram" style={{ width: "100%", height: "auto" }} />
 
-View demos of pretext here: [Pretext](https://www.pretext.cool/)
+View more demos of pretext here: [Pretext](https://www.pretext.cool/)
 
 ## Introduction 
 
@@ -46,7 +50,7 @@ Instead of normal HTML text flow, you'll:
 - Make it wrap around floating images
 - Reflow dynamically on scroll and resize
 
-
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-canvas-typography-layout-with-pretext/images/001.gif" alt="Pretext demo" style={{ width: "100%", height: "auto" }} />
 
 This project is a starting point for you to explore the possibilities of the pretext library and learn
 
@@ -58,7 +62,7 @@ Let's get started! ✨
 
 ## Project Setup
 
-For this project, we'll be using Vanilla JS using Vite to set up our files. I'll be using the Cursor IDE, but use any you would like. 
+For this project, we'll be using Vanilla JS using Vite to set up our files. Be sure to have Node.js installed on your machine, and use any code editor you like. 
 
 ```terminal
 npm create vite@latest
@@ -74,6 +78,7 @@ npm install @chenglou/pretext
 ```
 
 Once you have your files set up, make sure to remove any unnecessary boilerplate code, and make sure your project structure matches the one below:
+
 ```output
 project/
 ├── index.html
@@ -97,7 +102,7 @@ Inside your **index.html** file, we'll create a `<canvas>` for the text, and inc
   </head>
   <body>
     
-<!-- Fixed images -->
+    <!-- Fixed images -->
     <img
       id="img1"
       class="fixed-image"
@@ -220,6 +225,8 @@ Then, we'll load our article text using `prepareWithSegments()` using the text a
 ```js
 const prepared = prepareWithSegments(ARTICLE, FONT);
 ```
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-canvas-typography-layout-with-pretext/images/005.png" alt="Code example" style={{ width: "100%", height: "auto" }} />
 
 ### Rendering
 
@@ -361,8 +368,41 @@ window.addEventListener("resize", () => render());
 render();
 ```
 
-## Congrats! 
+## Bonus: Create an Image Spinner
 
+You're techncially done with the project! But you can add some extra flair by making the images spin! 
+
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-canvas-typography-layout-with-pretext/images/007.gif" alt="Image spinner demo" style={{ width: "100%", height: "auto" }} />
+In **main.js**, you'll need to add a `addSpinFadeOnClick()` function to the `img1El` and `img2El` elements. This function will add a `spin` animation to the images when they are clicked.
+
+```js
+function addSpinFadeOnClick(imgEl) {
+  if (!imgEl) return;
+  imgEl.style.pointerEvents = "auto";
+
+  imgEl.addEventListener("click", () => {
+    imgEl.animate(
+      [
+        { transform: "rotate(0deg)" },
+        { transform: "rotate(1440deg)" },
+      ],
+      {
+        duration: 5000,
+        easing: "ease-out",
+        fill: "forwards",
+      }
+    );
+  });
+}
+
+addSpinFadeOnClick(img1El);
+addSpinFadeOnClick(img2El);
+```
+
+This will add a `spin` animation to the images when they are clicked. The animation will start at 0 degrees and end at 1440 degrees, and will take 5 seconds to complete. The easing is set to `ease-out`, which means the animation will start slow, speed up, and then slow down.
+
+
+## Congrats! 
 You now have a fully working Canvas-based typography system that dynamically wraps text around images using pretext. The possibilities to explore this library are quite endless! 🤯
 
 Huge shoutout to [Cheng Lou](https://chenglou.me/) for pioneering this engineering feat, and with the world of AI starting to quickly challenge traditional software, it's come at a perfect time! 
