@@ -89,7 +89,7 @@ project/
 
 ## File Setup
 
-Inside your **index.html** file, we'll create a `<canvas>` for the text, and include our **fixed** position images that the text will wrap around. For this example, I'm using two images. 
+Inside your **index.html** file, we'll create a `<canvas>` for the text and two images that the text will wrap around. The images go inside `#container` because absolute positioning later resolves against the nearest positioned ancestor.
 
 ```html
 <!doctype html>
@@ -101,23 +101,22 @@ Inside your **index.html** file, we'll create a `<canvas>` for the text, and inc
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    
-    <!-- Fixed images -->
-    <img
-      id="img1"
-      class="fixed-image"
-      src="https://picsum.photos/id/1015/260/200"
-      alt="Mountain landscape"
-    />
-    <img
-      id="img2"
-      class="fixed-image"
-      src="https://picsum.photos/id/1025/220/180"
-      alt="Dog portrait"
-    />
-
     <div id="container">
       <canvas id="canvas"></canvas>
+      <img
+        id="img1"
+        class="fixed-image"
+        src="https://picsum.photos/id/1015/260/200"
+        alt="Mountain landscape"
+        draggable="false"
+      />
+      <img
+        id="img2"
+        class="fixed-image"
+        src="https://picsum.photos/id/1025/220/180"
+        alt="Dog portrait"
+        draggable="false"
+      />
     </div>
 
     <script type="module" src="/src/main.js"></script>
@@ -141,7 +140,7 @@ body {
 #container {
   width: 720px;
   margin: 0 auto;
-  padding: 5;
+  position: relative;
 }
 
 canvas {
@@ -149,18 +148,24 @@ canvas {
   width: 720px;
 }
 
-/* Fixed images */
+/* Images sit on top of the canvas */
 .fixed-image {
-  position: fixed;
+  position: absolute;
   z-index: 10;
   border-radius: 6px;
-  pointer-events: none;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.fixed-image:active {
+  cursor: grabbing;
 }
 
 /* Right image */
 #img1 {
-  top: 120px;
-  right: calc(50% - 340px);
+  top: 60px;
+  left: 400px;
   width: 260px;
   height: 200px;
   object-fit: cover;
@@ -168,8 +173,8 @@ canvas {
 
 /* Left image */
 #img2 {
-  top: 420px;
-  left: calc(50% - 340px);
+  top: 340px;
+  left: 60px;
   width: 220px;
   height: 180px;
   object-fit: cover;
@@ -344,9 +349,9 @@ We'll then draw the background and the text. This can be your creative choice.
 ```
 Note that this is the end of the `render()` function.
 
-### Re-rendering on Scroll
+### Re-rendering on Scroll and Resize
 
-Because the images are fixed, we're building the project so that the position of the images changes relative to the text when you scroll. We'll use `window.addEventListener()` for this: 
+When the user scrolls or resizes the window, we re-run `render()` so pretext can fit the text to the new constraints. We'll use `window.addEventListener()` for this: 
 
 ```js
 let ticking = false;
@@ -367,6 +372,67 @@ Finally, add the last two lines of code to re-render based on size, and call the
 window.addEventListener("resize", () => render());
 render();
 ```
+
+## Drag the Images
+
+Scrolling already reflows the text, but you can't really feel how fast pretext is until you drag an image around. Grab an image, move it, and every line rewraps as it moves.
+
+The HTML and CSS we set up earlier already cover the visual side of this. The images are absolutely positioned inside `#container`, `cursor: grab` invites the user to grab them, and `touch-action: none` tells the browser not to interpret a touch on the image as a scroll. The rest is JavaScript.
+
+Add this `makeDraggable` helper to **main.js**, then call it on each image:
+
+```js
+function makeDraggable(el) {
+  let dragging = false;
+  let curX = null;
+  let curY = null;
+
+  el.addEventListener("pointerdown", (e) => {
+    if (curX === null) {
+      const cs = getComputedStyle(el);
+      curX = parseFloat(cs.left);
+      curY = parseFloat(cs.top);
+    }
+    dragging = true;
+    el.setPointerCapture(e.pointerId);
+  });
+
+  el.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    curX += e.movementX;
+    curY += e.movementY;
+    el.style.left = curX + "px";
+    el.style.top = curY + "px";
+    render();
+  });
+
+  el.addEventListener("pointerup", (e) => {
+    dragging = false;
+    el.releasePointerCapture(e.pointerId);
+  });
+}
+
+makeDraggable(img1El);
+makeDraggable(img2El);
+```
+
+A few of the choices inside this helper are worth pulling apart.
+
+`pointerdown`, `pointermove`, and `pointerup` are the unified events that fire for mouse, touch, and stylus, so the same handlers work on every device without any branching. The `touch-action: none` rule in CSS is the partner setting. It stops the browser from interpreting a touch on the image as a scroll gesture and swallowing our `pointerdown`.
+
+The `draggable="false"` attribute on each image is doing its own quiet work. Without it, the browser starts its built-in image drag-and-drop the moment you press, which eats every `pointermove` and `pointerup` that should reach our handler. The drag would feel broken in two ways at once: a ghost image would float under the cursor, and our `dragging` flag would stay stuck at `true` after the press because no `pointerup` ever arrives.
+
+The `dragging` flag exists because `pointermove` fires whenever the pointer is over the image, even when no button is pressed. The flag gates the handler so it only does work between a matched `pointerdown` and `pointerup`. Without it, the image would jump every time the cursor passed over it.
+
+For position, we read the CSS value once and cache it. The first time you grab an image, it has no inline `style.left` yet, only the position from the CSS rules. We read that with `getComputedStyle`, parse the pixel string into a number, and store it in `curX` and `curY`. From then on, we maintain our own state and write back to `style.left` and `style.top`. We avoid re-reading the DOM on every move because calls like `getBoundingClientRect` force the browser to flush pending style and layout work, which makes drags feel sticky. Reading a cached JavaScript number is free by comparison.
+
+`setPointerCapture` is what keeps the drag alive when the cursor moves faster than the image can follow. Without it, the pointer leaves the image's bounding box and pointer events stop firing on the element; the drag silently dies. Calling `setPointerCapture(pointerId)` tells the browser to route every event from that pointer to the image until `pointerup`, when we hand it back with `releasePointerCapture`.
+
+Using `e.movementX` and `e.movementY` rather than absolute coordinates is the choice that matters most here. The tempting approach is to compute the new position from `e.clientX` and the container's bounding rect, but that breaks the moment anything throws the math off, like a scrolled page or a CSS transform on an ancestor. `movementX` and `movementY` report how far the pointer moved since the last event, in raw pixels. We add the delta to the cached position, write it back, and the image moves the same distance the cursor did. There is no coordinate translation to get wrong.
+
+The `render()` call inside `pointermove` is what reflows the text. On every move event, the layout gets rebuilt from scratch: pretext re-walks the article, the obstacle code re-reads the image's new `getBoundingClientRect`, and the canvas gets repainted. Because pretext never measures text through the DOM, doing this per frame stays fast enough to feel instant.
+
+Refresh and drag an image. The text rewraps in real time.
 
 ## Bonus: Create an Image Spinner
 
