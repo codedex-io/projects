@@ -1,0 +1,182 @@
+---
+title: Caption Generator From Audio
+author: Saurav Singh Rauthan
+datePublished: 2022-10-31
+description: Learn how to make a QR code using the qrcode library in this project tutorial
+header:
+tags:
+  - intermediate
+  - python
+---
+
+# Caption Generator From Audio
+
+<AuthorAvatar author_name="Saurav Singh Rauthan" author_avatar="/images/projects/authors/saurav_singh_rauthan.jpg" />
+
+![Header image](URL)
+
+**Prerequisites:** Python fundamentals, Code editor  
+**Versions:** Python 3.10, Wav2vec 2.0  
+**Read Time:** 40 minutes
+
+## [#](#-introduction) Introduction
+
+Whenever we watch a video on youtube / a movie on any ott platform we have an option of enabling captions, which basically provides us the **transcipt** of the video i.e. a written copy of what is being spoken in the video.
+
+Now the fun thing is that with the help of python we can generate this **transcipt** automatically 🤯 .
+
+At the end of this tutorial we'll be able to generate captions/transcipt like this :
+
+![result](output.gif)
+
+Exciting 😎  ? let's code it!!!!
+
+## [#](#-folder-structure) Folder Structure
+
+To be in the same boat let's setup up our project with a basic folder structure.
+
+create a `.py` or `.ipynb` file which will contain our code and name it accordingly. I'll name my `.ipynb` file `captionGenerator.ipynb`.
+
+next we need to create a folder called `Audio` in our root directory which will contain the audio files that we will provide as input further in this tutorial
+
+after creating these files the folder structure will look something like this :
+
+![folder-structure](folder-structure.jpg)
+
+
+_Note : the .vscode folder contains the settings for vscode editor such as identations and formatter used for prettier and is not required for this tutorial_
+
+## [#](#-installing-packages) Installing Packages
+
+now we will install the packages that are required for the tutorial and can read more about them in the [resources](#-more-resources) section
+
+since i am using `ipynb` file i will install the packages with the following code :
+
+```py
+! pip install pydub
+! pip install static_ffmpeg
+! pip install pyaudio
+! pip install librosa
+! pip install torch
+! pip install transformers
+```
+
+if you are facing error while installing packages you can follow [this tutorial](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+
+## [#](#-audio-preprocessing) Audio Pre-processing
+
+The audio is available in various formats (ex : .mp3, .wav, .aac, .ogg) and the input can be any in of such format, but since our model takes input as a .wav audio file and also if the input file is very lengthy for example a 20 minutes audio file just imagine the amount the computational power required to process such audio 🤯 . So in this section we'll perform some audio pre-processing.
+
+Lets start with splitting the audio into sub-parts so that we can process such sub-parts once at a time instead of feeding the entire 20 minutes audio to the model.
+
+imports :
+
+```py
+from pydub import AudioSegment
+from pydub.playback import play
+import static_ffmpeg
+static_ffmpeg.add_paths()
+```
+
+importing the audio file :
+
+```py
+audio = AudioSegment.from_file(r"<Path to the input file>")
+
+# if you want to convert the audio as whole use the code below
+# audio.export("audio export path here", format="wav")
+```
+
+splitting audio into 3 minutes parts :
+
+```py
+# we'll split the audio in 3 minutes each to minimize the computational power used by model
+audio_length = len(audio) / (60 * 1000)
+
+split_marker = 180
+split_audio = [audio[:180 * 1000]]
+
+for i in range(round(audio_length / (180 * 1000))):
+  split_audio.append(audio[split_marker * 1000:(split_marker + 180) * 1000])
+  split_marker += 180
+
+#it will create the file in audio dir, make sure to create audio dir in root folder
+
+count = 0
+for count, audio_sample in enumerate(split_audio):
+  count += 1
+  with open(f'audio/{count}_audi_file.wav', 'wb') as out_f:
+    audio_sample.export(out_f, format='wav')
+```
+
+remember we made audio directory in [folder-structure](#-folder-structure) section, this directory will contains all the splitted audio files generated from our input file. Also since we require these files to be in .wav format so that we can feed it to the model which is performed by this line of code : ` audio_sample.export(out_f, format='wav')`
+
+## [#](#-loading-model) Loading Model
+
+Now we have our required audio file splitted and converted into .wav format. So let's now load our model.
+
+imports :
+
+```py
+import librosa
+import torch
+from transformers import Wav2Vec2ForCTC, Wav2Vec2Tokenizer
+```
+
+loading model and tokenizer :
+
+```py
+# loading model and tokenizer
+
+tokenizer = Wav2Vec2Tokenizer.from_pretrained('facebook/wav2vec2-base-960h')
+model = Wav2Vec2ForCTC.from_pretrained('facebook/wav2vec2-base-960h')
+
+print('model loaded working on audio with length :', f'{"{0:.2f}".format(audio_length)}s')
+```
+
+feeding splitted audio to model :
+
+```py
+text_arr = []
+for i in range(len(split_audio)):
+  # loading audio in model from the audio dir
+  speech, rate = librosa.load(f'audio/{i+1}_audi_file.wav', sr=16000)
+
+  input_values = tokenizer(speech, return_tensors='pt').input_values
+  with torch.no_grad():
+      logits = model(input_values).logits
+
+  predicted_ids = torch.argmax(logits, dim=-1)
+  transcription = tokenizer.batch_decode(predicted_ids)[0]
+  text_arr.append(transcription)
+```
+
+and finally generating the transcript :
+
+```py
+final_speech = ''
+for speech in text_arr:
+  final_speech += speech
+print(final_speech)
+```
+
+Tada 🧙🎉  the transcript is ready.
+
+## [#](#-conclusion) Conclusion
+
+In this tutorial we explored on how to generate the caption (transcript) from an audio file for producing thee steps mentioned in the tutorial above.
+
+As for next steps we can use this transcript and generate the important keywords from it using libraries like bert or spacy and use natural language processing for extraction from the produced transcript 👨‍💻
+
+You can also explore various other models than Wav2vec and also implement your own model for the same.
+
+## [#](#-more-resources) More Resources
+
+- [Solution on GitHub](finalCode.ipynb)
+- [Documentation: Wav2vec 2.0](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)
+- [Documentation: pydub](https://pypi.org/project/pydub/)
+- [Documentation: librosa](https://librosa.org/doc/latest/index.html)
+- [Documentation: pyaudio](https://pypi.org/project/PyAudio/)
+- [Documentation: transformers](https://pypi.org/project/transformers/)
+- [Documentation: static_ffmpeg](https://pypi.org/project/static-ffmpeg/)
+- [Documentation: torch](https://pypi.org/project/torch/)
