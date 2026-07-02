@@ -1,0 +1,339 @@
+---
+title: Build a Dawn to Dusk Cycle with Unity and C#
+author: Julien Kris
+uid: TBD
+description: Create a dawn to dusk light cycle using Unity and C#
+datePublished: 2026-07-02
+published: beta
+header: TBD
+bannerImage: TBD
+readTime: 60
+prerequisites: C#
+versions:
+courses:
+  - c-sharp
+tags:
+  - game-development
+---
+
+# Introduction
+
+Unity is one of the world's most popular game engines, and developers use C# to bring their games to life. Popular indie games like *[Hollow Knight](https://en.wikipedia.org/wiki/Hollow_Knight)*, *[Cuphead](https://en.wikipedia.org/wiki/Cuphead)*, and *[Among Us](https://en.wikipedia.org/wiki/Among_Us)* were all built with Unity and C#.
+
+In this project tutorial, you'll build a small 3D world and write your first Unity script to create a simple dawn (sunrise) to dusk (sunset) cycle. By the end, you'll have a scene where the sun automatically moves across the sky, bringing your world to life. 🌅
+
+<ImageZoom
+  src="https://i.imgur.com/h5RxdLf.gif"
+  style={{ width: "100%", height: "auto" }}
+  alt="Final project"
+/>
+
+
+**Before you start:** Make sure to install [Unity Hub](https://unity.com/download), a Unity Editor version set up, and a new **Universal 3D** project ready to go. If you haven't done that yet, follow [Unity's setup guide](https://learn.unity.com/tutorial/install-the-unity-hub-and-editor) first, then come back here.
+
+<ImageZoom
+  src="https://i.imgur.com/No5mqp3.png"
+  style={{ width: "100%", height: "auto" }}
+  alt="Unity Hub New 3D Project"
+/>
+
+## What You'll Build
+
+You'll build a simple 3D scene featuring:
+
+- 🌱 A grassy ground
+- 🏛️ A centerpiece object
+- ☀️ A moving sun
+- 🌅 A full day and night cycle
+
+Along the way, you'll learn how to:
+
+- Navigate the Unity Editor
+- Create and customize 3D objects
+- Attach scripts to GameObjects
+- Animate objects using C#
+
+# Creating a World
+
+Open your project in the Unity Editor.
+
+<ImageZoom
+  src="https://i.imgur.com/ah7LSot.png"
+  style={{ width: "100%", height: "auto" }}
+  alt="Unity Editor with Scene View, Hierarchy, Inspector, and Project Window labeled"
+/>
+
+You'll see a few panels. Here's what they do:
+
+- **Scene View** — where you build your world
+- **Hierarchy** — every object currently in your scene
+- **Inspector** — settings for the selected object
+- **Project Window** — where your project's files live
+
+Let's start by creating some terrain.
+
+From the top menu, choose **GameObject → 3D Object → Plane**.
+
+This will become the ground for your world.
+
+<ImageZoom
+  src="https://i.imgur.com/7gu7D71.png"
+  style={{ width: "100%", height: "auto" }}
+  alt="Creating a Plane"
+/>
+
+## Add Some Color
+
+In the **Project Window**, click the `+` and choose:
+
+**Create → Material**
+
+Name it **Grass**.
+
+With the material selected, change the **Base Map** in the Inspector to any shade of green.
+
+<ImageZoom
+  src="https://i.imgur.com/Dmp1Kw6.gif"
+  style={{ width: "100%", height: "auto" }}
+  alt="Creating a Material"
+/>
+
+Drag the **Grass** material onto your Plane.
+
+<ImageZoom
+  src="https://i.imgur.com/dQ3vfUL.gif"
+  style={{ width: "100%", height: "auto" }}
+  alt="Dragging the material onto the Plane"
+/>
+
+Now your world has some grass! 🌱
+
+## Add a Centerpiece
+
+Every world needs something interesting for the sun to shine on.
+
+Go to:
+
+**GameObject → 3D Object**
+
+Choose one of Unity's built-in shapes:
+
+- Cube 🧊
+- Sphere ⚪
+- Capsule 💊
+- Cylinder 🛢️
+
+Place it on top of your Plane.
+
+<ImageZoom
+  src="https://i.imgur.com/UnlKkz9.gif"
+  style={{ width: "100%", height: "auto" }}
+  alt="Adding a cylinder"
+/>
+
+Feel free to move, rotate, and scale it using Unity's tools. You can also create a new material, and apply it to your shape.
+
+This object will become the centerpiece of your world. As the sun moves throughout the day, you'll notice how the lighting and shadows change across its surface.
+
+The scene already includes a **Directional Light** in the Hierarchy.
+
+This is going to be your sun.
+
+# Watching the Sun Move
+
+Before writing any code, let's see what we're trying to automate.
+
+Select the **Directional Light** in the Hierarchy.
+
+Then grab the **Rotate Tool** from the toolbar (or press <kbd>E</kbd>) and drag the red rotation ring.
+
+<ImageZoom
+  src="https://i.imgur.com/D7ag76u.gif"
+  style={{ width: "100%", height: "auto" }}
+  alt="Rotating the Directional Light"
+ />
+
+Notice what happens:
+
+- Shadows move across the ground.
+- The scene becomes brighter and darker.
+- The mood of your world changes.
+
+Right now you're rotating the sun by hand.
+
+Next, we'll write code that does this automatically.
+
+# Your First Unity Script
+
+In the **Project Window**, click the `+` and choose:
+
+**Scripting → Create MonoBehaviour Script**
+
+Name it:
+
+```text
+DayCycle
+```
+
+<ImageZoom
+  src="https://i.imgur.com/hZvOhu0.gif"
+  style={{ width: "100%", height: "auto" }}
+  alt="Creating the C# Script"
+ />
+
+Open the script and replace everything with:
+
+```cs
+using UnityEngine;
+
+public class DayCycle : MonoBehaviour
+{
+    public float rotationSpeed = 10f;
+
+    void Update()
+    {
+        transform.Rotate(rotationSpeed * Time.deltaTime, 0, 0);
+    }
+}
+```
+
+A few things to notice:
+
+- `rotationSpeed` controls how quickly the sun moves. Because it's `public`, Unity automatically displays it in the Inspector.
+- `Update()` is a Unity method that runs once every frame.
+- `transform.Rotate()` rotates the object a tiny amount every frame.
+- `Time.deltaTime` keeps the movement smooth and consistent, even if the game's frame rate changes.
+- `MonoBehaviour` is a Unity-specific class that allows your script to be attached to GameObjects and use Unity features like `Update()`.
+
+Select the **Directional Light** in the Hierarchy.
+
+Then drag **DayCycle.cs** onto the Inspector to attach it.
+
+<ImageZoom
+  src="https://i.imgur.com/xFdf93R.gif"
+  style={{ width: "100%", height: "auto" }}
+  alt="Attaching a script to the Directional Light"
+ />
+
+
+Press **Play**.
+
+Your sun now rotates automatically, creating a simple day and night cycle. ☀️
+
+<ImageZoom
+  src="https://i.imgur.com/b3xRb9c.gif"
+  style={{ width: "100%", height: "auto" }}
+  alt="Finished day/night cycle"
+/>
+
+# Customize Your World
+
+Now it's your turn to experiment.
+
+## Change the Speed
+
+Select the **Directional Light**.
+
+In the Inspector, you'll see your **Rotation Speed** variable.
+
+Try changing it:
+
+| Rotation Speed | Effect |
+| -------------- | ------ |
+| 5 | Slow, peaceful sunrise |
+| 10 | Default |
+| 25 | Fast-moving day |
+| 50 | Time is flying! |
+
+How does each speed change the feeling of your world?
+
+## Try Different Colors
+
+Create a few more Materials and experiment with different colors.
+
+Try afjusting the sliders for Metallic Map and Smoothness.
+
+How does the sunlight look as it moves across each material?
+
+## Build Something Bigger
+
+Instead of using just one object, build a small scene.
+
+Can you make:
+
+- 🏛️ A tiny temple
+- 🌲 A forest
+- 🗿 A mysterious monument
+- 🏠 A little house
+
+Watch how the shadows change throughout the day.
+
+# Bonus Challenge: Announce the Time of Day
+
+Right now, your sun moves silently across the sky.
+
+Can you make your program announce each phase of the day as the sun moves?
+
+Your Console should print messages like:
+
+```text
+🌅 Sunrise
+☀️ Morning
+🏞️ Afternoon
+🌇 Sunset
+🌙 Night
+```
+
+Try to print each phase **only once** as the sun enters it. For example, once you've printed `"Morning"`, it shouldn't print `"Morning"` again until the next cycle.
+
+### Hints
+
+- Use `transform.eulerAngles.x` to check the sun's current rotation.
+- Divide the rotation into ranges using `if` and `else if` statements.
+- Store the phase names in an array.
+
+```cs
+string[] timesOfDay =
+{
+    "Sunrise",
+    "Morning",
+    "Afternoon",
+    "Sunset",
+    "Night"
+};
+```
+
+- You may need an extra variable to remember the last phase you printed.
+
+# Conclusion
+
+Congratulations! 🎉
+
+You've just written your first Unity behavior.
+
+With only a few lines of C#, you've created a world where time passes automatically. The same idea can power spinning planets, moving platforms, weather systems, dynamic lighting, and countless other game mechanics.
+
+Keep experimenting! Add more objects, create new materials, adjust the speed of the sun, and build a world that's uniquely yours.
+
+# Resources
+
+- [Unity Manual: Directional Light](https://docs.unity3d.com/Manual/Lighting.html)
+- [Unity Manual: Materials](https://docs.unity3d.com/6000.0/Documentation/Manual/materials-introduction.html)
+- [Unity Manual: Time.deltaTime](https://docs.unity3d.com/ScriptReference/Time-deltaTime.html)
+- [Unity Hub Setup Guide](https://docs.unity3d.com/hub/manual/index.html)
+
+## Optional: Import Your Own Model
+
+Want to personalize your world even more?
+
+Try downloading a free 3D model from websites like [Kenney](https://kenney.nl/) or [Poly Pizza](https://poly.pizza/).
+
+When choosing a model, keep these tips in mind:
+
+- 🎮 Look for models labeled **Unity** or **FBX**, since they're commonly supported by Unity.
+- 📦 Start with a single object, like a tree, statue, or house, instead of a large environment.
+- ✨ Simpler models are easier to work with and keep your scene organized.
+
+Once you've downloaded a model, drag it into your **Project Window**. Unity will import it automatically. Then drag it from the Project Window into your Scene to add it to your world.
+
+Have fun experimenting and making your world your own!
