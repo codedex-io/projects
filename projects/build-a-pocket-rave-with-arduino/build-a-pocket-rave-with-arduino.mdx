@@ -70,16 +70,26 @@ At the very top of our code, we write things like:
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
 ```
 
 Think of these like giving the Arduino a dictionary. Instead of teaching the Arduino what a "screen" is from scratch, we just hand it a book that says, "Here is how you talk to the tiny TV."
 
+The `#define` lines are just us giving the computer some simple nicknames. Instead of typing the number "128" a hundred times, we just tell the computer: "Whenever I say SCREEN_WIDTH, I mean 128."
+
+
 ### 2. Drawing with 1s and 0s
+
+If you squint your eyes and look at the 1s in that block of code, you can actually see the shape of a heart! A 1 tells the screen to turn a tiny lightbulb on, and a 0 tells it to leave it dark. We save this picture under the name heart_bmp so we can stamp it on the screen later.
 
 ```cpp
 const unsigned char heart_bmp[] PROGMEM = {
   0b01010000,
-  0b11111000, ...
+  0b11111000, 
+  0b11111000,
+  0b01110000,
+  0b00100000
 };
 ```
 
