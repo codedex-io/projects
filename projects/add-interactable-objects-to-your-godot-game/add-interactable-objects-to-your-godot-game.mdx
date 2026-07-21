@@ -195,7 +195,7 @@ Now, a pop-up menu will appear, and in it, click create.
 Once that is done, let’s add some starting code to the script.
 
 ```python
-extends Area2D //Allows the use of Area2D-specific features
+extends Area2D // Allows the use of Area2D-specific features
 var player_inside := false
 ```
 
@@ -204,7 +204,7 @@ Here we created a boolean variable to flag if our player is inside an `Area2D`.
 Next let’s add two functions to our script:
 
 ```python
-func _ready(): //runs ONCE at the start of a scene
+func _ready(): // runs ONCE at the start of a scene
   body_entered.connect(_on_body_entered)
   body_exited.connect(_on_body_exited)
 
