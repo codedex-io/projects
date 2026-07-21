@@ -59,7 +59,6 @@ Now right click on the resources folder in the bottom left of your screen and th
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/folderCreationGodot.png" />
 
-
 Name this folder **assets**, then copy all the files from the Google Drive folder you downloaded earlier into it. This is where we'll store all of our game artwork.
 
 Now, in the left panel, click on the "+" icon:
@@ -110,7 +109,8 @@ With that setup, you can watch [this video](https://www.youtube.com/watch?v=3M3o
 
 Drag your character in like you have been doing for everything else, and bam, we’re done setting up the project. Now let’s move on to adding our interactive feature!
 
-## Collision shapes
+## Collision Shapes
+
 Let’s discuss how to handle collisions using collision shapes in Godot. But first, what is a collision shape and what is it used for?
 
 - `StaticBody2D` - An element you can use to create barriers, walls that characters can’t walk through
@@ -135,7 +135,9 @@ Getting the placement of the collision shapes to feel just right is a very trial
 
 Now, if you try playing your game, you won’t be able to walk into these objects anymore and will have to navigate around them!
 
-## Adding interactivity
+
+## Adding Interactivity
+
 Now, let's move on to the fun part, adding the ability to interact with objects in your game! 
 
 To start, add an `Area2D` node to each of the objects that require an interaction. (these are the same objects we added `StaticBody2D`s to. )
@@ -151,7 +153,9 @@ For example, as you can see, the collision shapes in orange are much larger than
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/area2dExample.png" />
 
-## Input setup
+
+## Input Setup
+
 Before we get into the code, here’s a brief guide on how to set up a new input in Godot, so we can gain the ability to interact with objects by pressing “E” on our keyboard.
 
 Now, let’s create some user input actions. Click on the project tab in the top bar, and to project settings
@@ -166,7 +170,9 @@ It should look like this once you have followed all the steps:
 
 Now we have our input set up to be the letter “E” key press on the keyboard!
 
+
 ## Code
+
 Now that everything is set up, we can move on to the brain of the interaction: Code!
 
 Click on one of the objects we have set up in the left panel, for example, bloodBlanket, and attach an empty script to its `Area2D`. You can do this by clicking the button I have shown in the image below.
@@ -239,6 +245,7 @@ Now we are checking for two new conditions:
 Now, when I walk into an object's `Area2D` and press E, I see a description about that object in the game!
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/interactGif.gif" />
+
 
 ## Conclusion
 
