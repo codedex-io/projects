@@ -195,8 +195,8 @@ func _ready(): //runs ONCE at the start of a scene
 
 func _on_body_entered(body):
   if body.name == "blobGhostPlayer":
-  player_inside = true
-  $"../E".visible = true
+    player_inside = true
+    $"../E".visible = true
 ```
 
 The ```_on_body_entered``` function receives a signal when a body enters that `Area2D` node’s collision shape and triggers the code inside the function. 
@@ -214,22 +214,22 @@ Isn’t that cool? With just a few lines of code, you can set up an interaction 
 ```python
 func _on_body_exited(body):
   if body.name == "blobGhostPlayer":
-  player_inside = false
-  $"../E".visible = false
+    player_inside = false
+    $"../E".visible = false
 ```
 
 This function is very similar to the ```_on_body_entered()``` from earlier, except now it's checking if the player exited the `Area2D`. If it does, then the ```player_inside``` variable gets set to false, and the E image hides.
 
 Moving onto the final bit of code. This is where things get interesting. Instead of triggering an event solely by detecting if the character walked into an `Area2D`, we add another level of interaction requiring the character to press a key while standing in the area.
 
-```
+```python
   func _process(delta: float) -> void:  //_process() runs every frame
-  if player_inside and Input.is_action_pressed("interact"):
-  print("interact pressed on area")
-  $"../Label".visible=true
-  $"../../Box2/Label".visible=false
-  $"../../Box7/Label".visible=false
-  $"../../Bloodblanket/Label".visible=false
+    if player_inside and Input.is_action_pressed("interact"):
+      print("interact pressed on area")
+      $"../Label".visible=true
+      $"../../Box2/Label".visible=false
+      $"../../Box7/Label".visible=false
+      $"../../Bloodblanket/Label".visible=false
 ```
 
 Now we are checking for two new conditions:
