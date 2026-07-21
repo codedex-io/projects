@@ -240,13 +240,13 @@ This function is very similar to the ```_on_body_entered()``` from earlier, exce
 Moving on to the final bit of code. This is where things get interesting. Instead of triggering an event solely by detecting if the character walked into an `Area2D`, we add another level of interaction requiring the character to press a key while standing in the area.
 
 ```python
-  func _process(delta: float) -> void:  //_process() runs every frame
-    if player_inside and Input.is_action_pressed("interact"):
-      print("interact pressed on area")
-      $"../Label".visible=true
-      $"../../Box2/Label".visible=false
-      $"../../Box7/Label".visible=false
-      $"../../Bloodblanket/Label".visible=false
+func _process(delta: float) -> void:  //_process() runs every frame
+  if player_inside and Input.is_action_pressed("interact"):
+    print("interact pressed on area")
+    $"../Label".visible=true
+    $"../../Box2/Label".visible=false
+    $"../../Box7/Label".visible=false
+    $"../../Bloodblanket/Label".visible=false
 ```
 
 Now we are checking for two new conditions:
