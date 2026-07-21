@@ -155,6 +155,7 @@ Once you have that, add a collision shape to each `Area2D` node. Make sure these
 A helpful hint: To help you differentiate which collision shape belongs to StaticBody2D or `Area2D` is to click on your collision shape in the left panel, then change the debug color of it in the right panel to help differentiate between the group of collision shapes.
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/debugColor.png" />
+
 For example, as you can see, the collision shapes in orange are much larger than the ones for the blue collision shapes for `StaticBody2D`:
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/area2dExample.png" />
@@ -166,7 +167,7 @@ Before we jump into the code, let's first set up a new input action in Godot. Th
 
 To create a new input action:
 
-1. Click on the "Project" tab in the top bar, and select "Project Settings".
+1. Click "Project" tab in the top menu, then select "Project Settings".
 2. Go to the "Input Map" tab, enter a name in the “Add new action” field, and then press "Add". The name I gave was “interact.” Your new input should show up under that field. 
 3. Click the plus to the right of your new input, type the letter “E” and then click OK.
 
@@ -200,7 +201,7 @@ var player_inside := false
 
 Here we created a boolean variable to flag if our player is inside an `Area2D`.
 
-Next let’s add 2 functions to our script:
+Next let’s add two functions to our script:
 
 ```python
 func _ready(): //runs ONCE at the start of a scene
@@ -213,13 +214,13 @@ func _on_body_entered(body):
     $"../E".visible = true
 ```
 
-The ```_on_body_entered``` function receives a signal when a body enters that `Area2D` node’s collision shape and triggers the code inside the function. 
+The `_on_body_entered()` function receives a signal when a body enters that `Area2D` node’s collision shape and triggers the code inside the function. 
 
-In ```ready()```, a signal is connected to the ```_on_body_entered``` function. Without this connection, the game doesn’t know how to call ```_on_body_entered()``` when a body enters the area, so the player detection and “E” prompt wouldn’t work.
+In `_ready()`, a signal is connected to the `_on_body_entered()` function. Without this connection, the game doesn’t know how to call `_on_body_entered()` when a body enters the area, so the player detection and “E” prompt wouldn’t work.
 
-Right now, that function will trigger for any body entering it, not just the player. The ```body``` parameter allows the function to access information about the object that entered, like the name we gave it in the left panel.
+Right now, that function will trigger for any body entering it, not just the player. The `body` parameter allows the function to access information about the object that entered, like the name we gave it in the left panel.
 
-This is then used in``` _on_body_entered(body)``` to check if the player entered the `Area2D`. If this condition is met, the variable ```player_inside``` is set to true, and the “E” image becomes visible!
+This is then used in ` _on_body_entered(body)` to check if the player entered the `Area2D`. If this condition is met, the variable `player_inside` is set to true, and the “E” image becomes visible!
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/interactDemo.png" />
 
@@ -234,7 +235,7 @@ func _on_body_exited(body):
 
 This function is very similar to the ```_on_body_entered()``` from earlier, except now it's checking if the player exited the `Area2D`. If it does, then the ```player_inside``` variable gets set to false, and the E image hides.
 
-Moving onto the final bit of code. This is where things get interesting. Instead of triggering an event solely by detecting if the character walked into an `Area2D`, we add another level of interaction requiring the character to press a key while standing in the area.
+Moving on to the final bit of code. This is where things get interesting. Instead of triggering an event solely by detecting if the character walked into an `Area2D`, we add another level of interaction requiring the character to press a key while standing in the area.
 
 ```python
   func _process(delta: float) -> void:  //_process() runs every frame
@@ -261,7 +262,7 @@ Congratulations on building your own interactive feature! I know it wasn’t eas
 
 We used different collision types: `StaticBody2D` to create physical barriers and `Area2D` for receiving and emitting signals, and looked at how these signals could be used to create different interactions in our game!
 
-Pretty cool, huh? Well, this is only the tip of the iceberg, and you can do so much more with this. 
+Pretty cool, right? This is only the tip of the iceberg, and there are countless ways you can build on this system.
 
 Here are a few ideas you could try out:
 
