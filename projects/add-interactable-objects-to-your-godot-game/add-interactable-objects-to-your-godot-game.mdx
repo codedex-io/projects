@@ -63,7 +63,7 @@ Your project is now ready! Click "2D" at the top center of the editor, because w
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/Godot2DprojectScreen.png" />
 
-Now right-click on the resources folder in the bottom left and then click on "Create New" → "Folder...":
+Now right-click on the Resources folder in the bottom left and then click on "Create New" → "Folder...":
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/folderCreationGodot.png" />
 
@@ -77,7 +77,7 @@ Now add a node component and name it whatever you like (you can do this by doubl
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/addNode2.png" />
 
-Create a new folder inside the resources folder and name it **scenes**. 
+Create a new folder inside the Resources folder and name it **scenes**. 
 
 Now press <kbd>ctrl</kbd> + <kbd>s</kbd> on your keyboard to bring up the Save menu and click on the **scenes** folder, then "Save" to save your new scene to the **scenes** folder.
 
@@ -86,22 +86,26 @@ Now press <kbd>ctrl</kbd> + <kbd>s</kbd> on your keyboard to bring up the Save m
 Now we have all the groundwork set up, your file manager in the bottom left should look something like:
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/fileSystemGodot.png" />
-Now drag and drop the **Background.png** file into the editor screen:
+Now we'll setup the game's environment, drag and drop the **Background.png** file into the editor screen:
 
 <video width="100%" controls>
   <source src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/backgroundImageAddition.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
 
-We can do the same thing with the rest of the assets, you can even drag in the same asset multiple times, and it’ll be numbered accordingly. Here’s mine; try to get yours somewhat similar, as it will make it easier to follow along:
+We can do the same thing with the rest of the assets and build a simple room like I've shown in the video below.
+
+{/* mapBuilding.mp4 */}
+
+If you encounter an issue where you can't see the item you placed, make sure that it is either below or attached to the background image. Below is the room I made, but as long as you have some items in your room like in the video above, you should be good!
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/sceneSetup.png" />
 
-Make sure to also drag in the asset called “E”, next to each of the objects you have placed. Make sure to drag the Es under the object you are placing them next to in the left panel, Here’s how I have it setup:
+Make sure to also drag in the asset called “E”, next to each of the objects you have placed. Make sure each E is a child of the object it belongs to in the Scene panel, Here’s how I have it setup:
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/ESetup.png" />
 
-Now, we also need to add labels for the text that will appear when we interact with an object. Click on an object in the left panel, then press <kbd>ctrl</kbd> + <kbd>a</kbd>, search for “label” and add it. Now click on your new label node, and in its right panel you should see a box to type text. Add whatever text you want to see when you interact with that object, and move the text on top of the black bar.
+Now, we also need to add labels for the text that will appear when we interact with an object. Click on an object in the left panel, then press <kbd>Ctrl</kbd> + <kbd>A</kbd> (Add Child Node), search for “label” and add it. Now click on your new label node, and in its right panel you should see a box to type text. Add whatever text you want to see when you interact with that object, and move the text on top of the black bar.
 
 It should look something like this:
 
@@ -114,6 +118,36 @@ You can also edit font size, color, and more by scrolling down in the right pane
 Make sure to add a label for the other objects, so you can have different text for each one! With that done, we have one last step in this section. In the left panel, next to each item, you should see a symbol that looks like an eye, click on it for every E object and label. This will turn off their visibility.
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/EAndLabelVisibility.png" />
+
+## Character creation
+
+Before I move on to collision shapes, I will quickly go over making a simple character in Godot.
+
+First make a new scene by clicking the plus icon near the tabs at the top.
+
+{/* addingNewScene.png */}
+
+Now press <kbd>Ctrl</kbd> + <kbd>A</kbd> and search for CharacterBody2D and select it.
+
+{/* addCharacterBody2D.png */}
+
+Now click on the CharacterBody2D you added in the left panel, and add a CollisionShape2D and a Sprite2D to it. They will appear as child nodes to the character body as shown below.
+
+{/* charHierarchy.png */}
+
+With that done, follow the video below to setup the collision shape and sprite for your character. The image I'm using for the character sprite is **boyGhostSingle.png**.
+
+{/* characterMaking.mp4 */}
+
+Now the last thing we need to do is add a movement script to the character. Click the button shown below.
+
+{/* scriptAttach */}
+
+Then make sure that the basic movement script is selected, then press create.
+
+{/* moveScript */}
+
+Now save it to the scenes folder, and name it "blobGhostPlayer" as it will be easy to follow along when we get to the code section.
 
 With that set up, you can watch [this video](https://www.youtube.com/watch?v=3M3olvGE-EI) to set up a simple character in Godot, you can use the **boyGhostSingle.png** file for the texture. Make sure to save your character into the scenes folder. 
 
@@ -254,8 +288,8 @@ func _process(delta: float) -> void:  //_process() runs every frame
 ```
 
 Now we are checking for two new conditions:
-- If the player is inside an `Area2D` using the player_inside variable that we have been turning on and off
-- The "interact" keyboard input
+- Whether the player is inside the Area2D (tracked using the player_inside variable)
+- Whether the player presses the interact action
 
 Now, when I walk into an object's `Area2D` and press E, I see a description about that object in the game!
 
@@ -282,4 +316,6 @@ Thanks for following along, and I can’t wait to see the interactions you creat
 
 ### More Resources
 
-- 
+- If you want to learn more about the cool stuff Area2D can do check out [this link](https://docs.godotengine.org/en/stable/classes/class_area2d.html)
+- Here's a [short video](https://www.youtube.com/watch?v=3M3olvGE-EI) on character creation if you have trouble with any part of it
+- The Github for Before I fade, the game this tutorial is based on is [here](https://github.com/vishyyyyyyyyy/before-i-fade), feel free to use the assets and try out your own mods and changes to practice your new skills
