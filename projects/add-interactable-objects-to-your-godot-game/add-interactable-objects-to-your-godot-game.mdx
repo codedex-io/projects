@@ -93,9 +93,12 @@ Now we'll setup the game's environment, drag and drop the **Background.png** fil
   Your browser does not support the video tag.
 </video>
 
-We can do the same thing with the rest of the assets and build a simple room like I've shown below.
+We can do the same thing with the rest of the assets and build a simple room like I've shown in the video below.
 
-{/* mapBuilding.mp4 */}
+<video width="100%" controls>
+  <source src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/mapBuilding.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
 If you encounter an issue where you can't see the item you placed, make sure that it is either below or attached to the background image. Below is the room I made, but as long as you have some items in your room like in the video above, you should be good!
 
@@ -119,33 +122,36 @@ Make sure to add a label for the other objects, so you can have different text f
 
 <ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/EAndLabelVisibility.png" />
 
-## Character creation
+## Character Creation
 
 Before I move on to collision shapes, I will quickly go over making a simple character in Godot.
 
 First make a new scene by clicking the plus icon near the tabs at the top.
 
-{/* addingNewScene.png */}
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/addingNewScene.png" />
 
 Now press <kbd>Ctrl</kbd> + <kbd>A</kbd> and search for CharacterBody2D and select it.
 
-{/* addCharacterBody2D.png */}
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/addCharacterBody2D.png" />
 
 Now click on the CharacterBody2D you added in the left panel, and add a CollisionShape2D and a Sprite2D to it. They will appear as child nodes to the character body as shown below.
 
-{/* charHierarchy.png */}
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/charHierarchy.png" />
 
 With that done, follow the video below to setup the collision shape and sprite for your character. The image I'm using for the character sprite is **boyGhostSingle.png**.
 
-{/* characterMaking.mp4 */}
+<video width="100%" controls>
+  <source src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/characterMaking.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
 Now the last thing we need to do is add a movement script to the character. Click the button shown below.
 
-{/* scriptAttach */}
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/scriptAttach.png" />
 
 Then make sure that the basic movement script is selected, then press create.
 
-{/* moveScript */}
+<ImageZoom src="https://raw.githubusercontent.com/codedex-io/projects/refs/heads/main/projects/add-interactable-objects-to-your-godot-game/assets/moveScript.png" />
 
 Now save it to the scenes folder, and name it "blobGhostPlayer" as it will be easy to follow along when we get to the code section.
 
